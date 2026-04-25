@@ -1,0 +1,151 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "clio": "https://app.clio.com/api/v4/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Matter": {
+      "@id": "clio:Matter",
+      "@context": {
+        "id": "clio:id",
+        "displayNumber": "clio:display_number",
+        "description": "schema:description",
+        "status": "clio:status",
+        "client": "clio:client",
+        "openDate": {
+          "@id": "clio:open_date",
+          "@type": "xsd:date"
+        },
+        "closeDate": {
+          "@id": "clio:close_date",
+          "@type": "xsd:date"
+        },
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updatedAt": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Contact": {
+      "@id": "clio:Contact",
+      "@context": {
+        "id": "clio:id",
+        "name": "schema:name",
+        "type": "clio:contact_type",
+        "primaryEmail": "schema:email",
+        "primaryPhone": "schema:telephone"
+      }
+    },
+
+    "Activity": {
+      "@id": "clio:Activity",
+      "@context": {
+        "id": "clio:id",
+        "type": "clio:activity_type",
+        "date": {
+          "@id": "clio:date",
+          "@type": "xsd:date"
+        },
+        "quantityInSeconds": "clio:quantity_in_seconds",
+        "rate": "clio:rate",
+        "total": "clio:total",
+        "matter": "clio:matter",
+        "user": "clio:user",
+        "billable": "clio:billable"
+      }
+    },
+
+    "Bill": {
+      "@id": "clio:Bill",
+      "@context": {
+        "id": "clio:id",
+        "number": "clio:number",
+        "issuedAt": {
+          "@id": "clio:issued_at",
+          "@type": "xsd:date"
+        },
+        "dueAt": {
+          "@id": "clio:due_at",
+          "@type": "xsd:date"
+        },
+        "state": "clio:state",
+        "subject": "clio:subject",
+        "total": "clio:total"
+      }
+    },
+
+    "TrustAccount": {
+      "@id": "clio:TrustAccount",
+      "@context": {
+        "id": "clio:id",
+        "name": "schema:name",
+        "balance": "clio:balance"
+      }
+    },
+
+    "CalendarEntry": {
+      "@id": "clio:CalendarEntry",
+      "@context": {
+        "id": "clio:id",
+        "summary": "schema:name",
+        "description": "schema:description",
+        "startAt": {
+          "@id": "schema:startTime",
+          "@type": "xsd:dateTime"
+        },
+        "endAt": {
+          "@id": "schema:endTime",
+          "@type": "xsd:dateTime"
+        },
+        "location": "schema:location"
+      }
+    },
+
+    "Task": {
+      "@id": "clio:Task",
+      "@context": {
+        "id": "clio:id",
+        "name": "schema:name",
+        "description": "schema:description",
+        "dueAt": {
+          "@id": "clio:due_at",
+          "@type": "xsd:dateTime"
+        },
+        "status": "clio:status",
+        "priority": "clio:priority"
+      }
+    },
+
+    "Document": {
+      "@id": "clio:Document",
+      "@context": {
+        "id": "clio:id",
+        "name": "schema:name",
+        "filename": "clio:filename",
+        "contentType": "schema:encodingFormat",
+        "size": "schema:contentSize",
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "User": {
+      "@id": "clio:User",
+      "@context": {
+        "id": "clio:id",
+        "name": "schema:name",
+        "email": "schema:email",
+        "enabled": "clio:enabled"
+      }
+    }
+  }
+}

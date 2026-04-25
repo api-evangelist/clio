@@ -1,0 +1,111 @@
+extends:
+  - spectral:oas
+
+# Spectral linting rules for the Clio Manage API v4.
+# https://docs.developers.clio.com/ — OAuth 2.0 secured REST API at
+# https://app.clio.com/api/v4 with regional variants for CA/EU/AU.
+rules:
+  clio-info-contact:
+    description: API contact information must be present.
+    severity: error
+    given: "$.info"
+    then:
+      field: contact
+      function: truthy
+
+  clio-info-license:
+    description: API license must be declared.
+    severity: warn
+    given: "$.info"
+    then:
+      field: license
+      function: truthy
+
+  clio-server-https:
+    description: All server URLs must use HTTPS.
+    severity: error
+    given: "$.servers[*].url"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://"
+
+  clio-server-versioned:
+    description: Manage API server URLs must include /api/v4.
+    severity: warn
+    given: "$.servers[?(@.url && @.url.indexOf('clio.com') > -1)].url"
+    then:
+      function: pattern
+      functionOptions:
+        match: "/api/v4$"
+
+  clio-oauth-security:
+    description: OAuth 2.0 must be the declared security scheme.
+    severity: error
+    given: "$.components.securitySchemes[*].type"
+    then:
+      function: enumeration
+      functionOptions:
+        values:
+          - oauth2
+
+  clio-operation-tags:
+    description: Every operation must declare at least one tag.
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          minItems: 1
+
+  clio-operation-summary:
+    description: Every operation must include a short summary.
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: summary
+      function: truthy
+
+  clio-operation-id:
+    description: Every operation must declare a unique operationId.
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: operationId
+      function: truthy
+
+  clio-error-responses:
+    description: Mutating operations should declare 4xx error responses.
+    severity: warn
+    given: "$.paths[*][post,put,patch,delete].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          anyOf:
+            - required: ["400"]
+            - required: ["401"]
+            - required: ["403"]
+            - required: ["404"]
+            - required: ["422"]
+
+  clio-pagination-fields:
+    description: List endpoints should support page, limit, fields, and order parameters.
+    severity: info
+    given: "$.paths[?(@property.match(/matters$|contacts$|activities$|tasks$|bills$/))].get.parameters[*].name"
+    then:
+      function: enumeration
+      functionOptions:
+        values:
+          - page
+          - limit
+          - fields
+          - order
+          - query
+          - created_since
+          - updated_since
+          - ids
