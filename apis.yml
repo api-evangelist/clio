@@ -1,22 +1,17 @@
 aid: clio
 name: Clio
 description: >-
-  Clio is a cloud-based legal practice management platform used by
-  law firms for matter management, contacts, calendaring, time and
-  billing, trust accounting, document management, tasks, and
-  communications. The Clio Manage API is a REST/JSON API at
-  app.clio.com/api/v4 that uses OAuth 2.0 for authentication and
-  exposes the full data model behind Clio Manage. Webhooks deliver
-  real-time event notifications, and the Clio App Directory hosts
-  certified third-party integrations. Regional endpoints are provided
-  for the U.S., Canada, EU/UK, and Australia.
+  Clio is a cloud-based legal practice management platform used by law
+  firms for matter management, contacts, calendaring, time and billing,
+  trust accounting, document management, tasks, and client communications.
+  The Clio Manage API is a REST/JSON API at app.clio.com/api/v4 that uses
+  OAuth 2.0 (authorization code flow) for authentication and exposes the
+  full data model behind Clio Manage, with regional endpoints for the
+  U.S., Canada, EU/UK, and Australia. Webhooks deliver near real-time
+  event notifications, and the Clio App Directory hosts certified
+  third-party integrations.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-url: https://raw.githubusercontent.com/api-evangelist/clio/refs/heads/main/apis.yml
-created: '2024-01-01'
-modified: '2026-04-23'
-specificationVersion: '0.19'
-x-type: company
 tags:
   - Billing
   - Calendaring
@@ -28,101 +23,105 @@ tags:
   - Practice Management
   - Time Tracking
   - Trust Accounting
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/clio/refs/heads/main/apis.yml
+created: '2026-05-11'
+modified: '2026-05-11'
+specificationVersion: '0.19'
 apis:
   - aid: clio:manage-api-v4
     name: Clio Manage API v4
+    description: >-
+      The Clio Manage API v4 is a JSON REST API that gives developers
+      programmatic access to Clio's legal practice management data model
+      — matters, contacts, activities, bills, trust accounts, documents,
+      tasks, calendar entries, custom fields, and users. Authentication
+      is OAuth 2.0 (authorization code flow). Regional endpoints exist
+      for the U.S. (app.clio.com), Canada (ca.app.clio.com), EU/UK
+      (eu.app.clio.com), and Australia (au.app.clio.com). Standard
+      pagination, filtering, sparse fieldsets, and ETag-based caching
+      are supported.
+    humanURL: https://docs.developers.clio.com/
+    baseURL: https://app.clio.com/api/v4
     tags:
       - Legal
       - Matter Management
       - OAuth 2.0
       - Practice Management
       - REST
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-    baseURL: https://app.clio.com/api/v4
-    humanURL: https://docs.developers.clio.com/
     properties:
-      - url: https://docs.developers.clio.com/
-        type: Documentation
-      - url: https://docs.developers.clio.com/api-docs/
-        type: Reference
-      - url: https://app.clio.com/oauth/authorize
-        type: Authentication
-      - url: openapi/clio-manage-api-v4-openapi.yml
-        type: OpenAPI
-    description: >-
-      The Clio Manage API v4 is a JSON REST API that gives developers
-      programmatic access to Clio's legal practice management data
-      model — matters, contacts, activities, bills, trust accounts,
-      documents, tasks, calendar entries, custom fields, and users.
-      Authentication is OAuth 2.0 (authorization code flow). Regional
-      endpoints exist for the U.S. (app.clio.com), Canada
-      (ca.app.clio.com), EU/UK (eu.app.clio.com), and Australia
-      (au.app.clio.com). Standard pagination, filtering, sparse
-      fieldsets, and ETag-based caching are supported.
+      - type: Documentation
+        url: https://docs.developers.clio.com/
+      - type: Reference
+        url: https://docs.developers.clio.com/api-docs/
+      - type: Authentication
+        url: https://app.clio.com/oauth/authorize
+      - type: OpenAPI
+        url: openapi/clio-manage-api-v4-openapi.yml
   - aid: clio:webhooks
     name: Clio Webhooks
+    description: >-
+      Clio Webhooks deliver near real-time notifications when matters,
+      contacts, activities, tasks, calendar entries, bills, and other
+      Clio resources are created, updated, or deleted. Subscriptions are
+      managed through the Webhooks endpoints in the Manage API and
+      payloads are delivered to the integrator's HTTPS endpoint with an
+      X-API-V4-Signature header for verification.
+    humanURL: https://docs.developers.clio.com/api-docs/webhooks/
     tags:
       - Events
       - Legal
       - Notifications
       - Webhooks
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.developers.clio.com/api-docs/webhooks/
     properties:
-      - url: https://docs.developers.clio.com/api-docs/webhooks/
-        type: Documentation
-      - url: asyncapi/clio-webhooks-asyncapi.yml
-        type: AsyncAPI
-    description: >-
-      Clio Webhooks deliver near real-time notifications when matters,
-      contacts, activities, tasks, calendar entries, bills, and other
-      Clio resources are created, updated, or deleted. Subscriptions
-      are managed through the Webhooks endpoints in the Manage API
-      and payloads are delivered to the integrator's HTTPS endpoint
-      with an X-API-V4-Signature header for verification.
+      - type: Documentation
+        url: https://docs.developers.clio.com/api-docs/webhooks/
+      - type: AsyncAPI
+        url: asyncapi/clio-webhooks-asyncapi.yml
   - aid: clio:app-directory
     name: Clio App Directory
+    description: >-
+      The Clio App Directory is the integration marketplace for certified
+      third-party apps that connect to Clio Manage. Apps listed in the
+      directory are reviewed by Clio's developer partnerships team and
+      made discoverable to Clio's customer base.
+    humanURL: https://app.clio.com/companion
     tags:
       - Integrations
       - Marketplace
       - Partners
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-    humanURL: https://app.clio.com/companion
     properties:
-      - url: https://app.clio.com/companion
-        type: Marketplace
-      - url: https://docs.developers.clio.com/getting-started/listing-your-app/
-        type: Listing Guide
-    description: >-
-      The Clio App Directory is the integration marketplace for
-      certified third-party apps that connect to Clio Manage. Apps
-      listed in the directory are reviewed by Clio's developer
-      partnerships team and made discoverable to Clio's customer base.
+      - type: Marketplace
+        url: https://app.clio.com/companion
+      - type: Listing Guide
+        url: https://docs.developers.clio.com/getting-started/listing-your-app/
 common:
   - type: Website
     url: https://www.clio.com/
-  - type: Portal
-    url: https://docs.developers.clio.com/
   - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Pricing
+    url: https://www.clio.com/pricing/
+  - type: SignUp
+    url: https://app.clio.com/sign-up
+  - type: Portal
     url: https://docs.developers.clio.com/
   - type: Reference
     url: https://docs.developers.clio.com/api-docs/
   - type: Authentication
     url: https://docs.developers.clio.com/api-docs/authorization/
-  - type: Status
-    url: https://status.clio.com/
+  - type: Login
+    url: https://app.clio.com/login
   - type: Support
     url: https://support.clio.com/
+  - type: Status
+    url: https://status.clio.com/
   - type: Blog
     url: https://www.clio.com/blog/
   - type: Privacy Policy
     url: https://www.clio.com/privacy/
   - type: Terms of Service
     url: https://www.clio.com/terms/
-  - type: Login
-    url: https://app.clio.com/login
-  - type: Sign Up
-    url: https://app.clio.com/sign-up
   - type: App Directory
     url: https://app.clio.com/companion
   - type: GitHub
@@ -135,4 +134,4 @@ common:
     url: capabilities/clio.yaml
 maintainers:
   - FN: Kin Lane
-    email: kinlane@gmail.com
+    email: kin@apievangelist.com
