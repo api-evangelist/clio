@@ -1,0 +1,72 @@
+aid: clio:websocket-review
+name: Clio WebSocket / Streaming Surface Review
+date: '2026-05-29'
+reviewer: API Evangelist
+subject: Clio Manage developer platform
+question: >-
+  Does Clio publish a public WebSocket, Server-Sent Events (SSE), or
+  other persistent streaming API surface that warrants an AsyncAPI 2.6
+  specification?
+finding: >-
+  No. As of this review, Clio's public developer platform exposes a
+  REST/JSON API (Clio Manage API v4) and an HTTP-callback Webhooks
+  system. There is no documented WebSocket (ws/wss), Server-Sent Events
+  (text/event-stream), gRPC stream, MQTT, or other persistent socket
+  channel offered to integrators. Event delivery is exclusively a
+  push-over-HTTPS model: integrators register a webhook subscription
+  via the Manage API and Clio POSTs JSON payloads to the integrator's
+  HTTPS endpoint, signed with an HMAC-SHA256 X-API-V4-Signature header.
+  Because webhooks are HTTP request/response — not a bidirectional or
+  long-lived streaming channel — they are correctly modeled as the
+  existing webhooks AsyncAPI document and not as a WebSocket binding.
+decision: >-
+  Do not produce asyncapi/clio-asyncapi.yml. Creating a WebSocket
+  AsyncAPI 2.6 document for Clio would require fabricating channels,
+  servers, and messages that do not exist in Clio's published
+  contract. The existing asyncapi/clio-webhooks-asyncapi.yml already
+  captures Clio's real event surface.
+evidence:
+  - source: Clio Developer Portal (landing)
+    url: https://docs.developers.clio.com/
+    observation: >-
+      The portal describes REST APIs (Clio Manage, Clio Grow), "Add to
+      Clio", and Single Sign-on. Webhooks appear in the navigation. No
+      mention of WebSocket, SSE, or streaming protocols.
+  - source: Clio Manage API reference index
+    url: https://docs.developers.clio.com/clio-manage/api-reference/
+    observation: >-
+      Lists REST resources only — Authorization, Permissions, Rate
+      Limits, Pagination, ETags, and per-resource endpoints. No
+      WebSocket or streaming endpoints are documented.
+  - source: Clio Manage API documentation root (redirect target)
+    url: https://docs.developers.clio.com/clio-manage/api-reference/
+    observation: >-
+      Confirmed event delivery is via Webhooks (HTTPS POST) with HMAC
+      SHA-256 signatures, retries, and exponential backoff. Described
+      as a replacement for polling — not as a streaming channel.
+  - source: Clio Developer Portal API docs index
+    url: https://docs.developers.clio.com/api-docs/
+    observation: >-
+      No references to WebSocket, WSS, streaming, SSE, server-sent
+      events, real-time push, or socket-based APIs.
+mechanisms_offered:
+  - name: REST/JSON API
+    protocol: HTTPS
+    base_url: https://app.clio.com/api/v4
+    spec: openapi/clio-manage-api-v4-openapi.yml
+  - name: Webhooks
+    protocol: HTTPS POST callback
+    direction: Clio -> integrator
+    spec: asyncapi/clio-webhooks-asyncapi.yml
+mechanisms_not_offered:
+  - WebSocket (ws/wss)
+  - Server-Sent Events (text/event-stream)
+  - gRPC streaming
+  - MQTT / AMQP / Kafka public broker
+  - Long-poll streaming endpoint
+recommendation: >-
+  Maintain only the existing OpenAPI (REST) and webhooks AsyncAPI
+  artifacts. Re-run this review if Clio announces a streaming or
+  WebSocket surface (e.g., for live matter collaboration, document
+  co-editing presence, or AI assistant streaming) on the developer
+  portal or in release notes.
