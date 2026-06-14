@@ -1,0 +1,1441 @@
+"""
+Clio Manage API v4 — Conceptual GraphQL Schema
+Source: https://docs.developers.clio.com/api-docs/
+REST base: https://app.clio.com/api/v4
+Authentication: OAuth 2.0 Authorization Code Flow
+"""
+
+scalar DateTime
+scalar Date
+scalar JSON
+scalar Decimal
+
+# ─────────────────────────────────────────────
+# Enumerations
+# ─────────────────────────────────────────────
+
+enum MatterStatusEnum {
+  OPEN
+  CLOSED
+  PENDING
+}
+
+enum ContactTypeEnum {
+  PERSON
+  COMPANY
+}
+
+enum TaskStatusEnum {
+  PENDING
+  COMPLETE
+}
+
+enum ActivityTypeEnum {
+  TIME_ENTRY
+  EXPENSE
+  FEE
+}
+
+enum BillStatusEnum {
+  DRAFT
+  AWAITING_APPROVAL
+  APPROVED
+  SENT
+  PAID
+  VOID
+}
+
+enum TrustTransactionTypeEnum {
+  DEPOSIT
+  WITHDRAWAL
+  TRANSFER
+}
+
+enum BankTransactionTypeEnum {
+  DEPOSIT
+  WITHDRAWAL
+}
+
+enum WebhookStatusEnum {
+  ACTIVE
+  INACTIVE
+}
+
+enum CustomFieldTypeEnum {
+  TEXT
+  DATE
+  NUMBER
+  CHECKBOX
+  PICKLIST
+  CONTACT
+  MATTER
+  URL
+  TEXTAREA
+}
+
+enum ESignatureStatusEnum {
+  DRAFT
+  SENT
+  COMPLETED
+  DECLINED
+  VOIDED
+}
+
+enum CommunicationTypeEnum {
+  EMAIL
+  PHONE
+  LETTER
+}
+
+enum DocumentCategoryEnum {
+  GENERAL
+  CORRESPONDENCE
+  PLEADINGS
+  DISCOVERY
+  CONTRACTS
+  CLOSING
+}
+
+# ─────────────────────────────────────────────
+# Interfaces
+# ─────────────────────────────────────────────
+
+interface Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+interface Communication {
+  id: ID!
+  subject: String
+  body: String
+  date: DateTime
+  matter: Matter
+  sender: Contact
+  recipients: [Contact!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+interface Account {
+  id: ID!
+  name: String!
+  currency: String!
+  balance: Decimal!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ─────────────────────────────────────────────
+# Firm and User types
+# ─────────────────────────────────────────────
+
+"""The law firm (top-level Clio account)."""
+type Firm implements Node {
+  id: ID!
+  name: String!
+  logoUrl: String
+  currency: String!
+  timeZone: String
+  address: Address
+  phone: String
+  website: String
+  users: [User!]
+  practiceAreas: [PracticeArea!]
+  customFields: [CustomField!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""An individual Clio user (attorney, paralegal, staff)."""
+type User implements Node {
+  id: ID!
+  name: String!
+  email: String!
+  role: String
+  enabled: Boolean!
+  rate: Decimal
+  profile: UserProfile
+  firm: Firm!
+  matters: [Matter!]
+  timeEntries: [TimeEntry!]
+  tasks: [Task!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""Extended profile information for a user."""
+type UserProfile implements Node {
+  id: ID!
+  user: User!
+  firstName: String
+  lastName: String
+  initials: String
+  phoneNumber: String
+  bio: String
+  avatarUrl: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A practice (team or department) within the firm."""
+type Practice implements Node {
+  id: ID!
+  name: String!
+  firm: Firm!
+  users: [User!]
+  practiceAreas: [PracticeArea!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""An area of legal practice (e.g., Family Law, Corporate)."""
+type PracticeArea implements Node {
+  id: ID!
+  name: String!
+  code: String
+  category: String
+  practice: Practice
+  matters: [Matter!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ─────────────────────────────────────────────
+# Matter types
+# ─────────────────────────────────────────────
+
+"""A legal matter (case or client engagement)."""
+type Matter implements Node {
+  id: ID!
+  displayNumber: String!
+  description: String
+  status: MatterStatus!
+  practiceArea: MatterPracticeArea
+  client: Contact!
+  responsibleAttorney: User
+  originatingAttorney: User
+  firm: Firm!
+  openDate: Date
+  closeDate: Date
+  pendingDate: Date
+  billable: Boolean!
+  billingMethod: String
+  contingencyFee: Decimal
+  customRate: Decimal
+  currency: String
+  group: String
+  notes: [Note!]
+  tasks: [Task!]
+  documents: [Document!]
+  timeEntries: [TimeEntry!]
+  expenses: [Expense!]
+  bills: [Bill!]
+  calendarEntries: [CalendarEntry!]
+  communications: [EmailMessage!]
+  relationships: [Relationship!]
+  tags: [Tag!]
+  customFieldValues: [CustomFieldValue!]
+  originalMatter: OriginalMatter
+  relatedMatters: [RelatedMatter!]
+  splitBillingMatters: [RelatedMatter!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""The status of a matter."""
+type MatterStatus implements Node {
+  id: ID!
+  name: String!
+  status: MatterStatusEnum!
+  color: String
+  matters: [Matter!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A practice area assignment on a specific matter."""
+type MatterPracticeArea implements Node {
+  id: ID!
+  matter: Matter!
+  practiceArea: PracticeArea!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""Reference to the original matter in a split or transferred matter."""
+type OriginalMatter implements Node {
+  id: ID!
+  matter: Matter!
+  originalMatter: Matter!
+  transferDate: Date
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A link between two related matters."""
+type RelatedMatter implements Node {
+  id: ID!
+  matter: Matter!
+  relatedMatter: Matter!
+  relationship: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A conflict check result for a matter or contact."""
+type ConflictCheck implements Node {
+  id: ID!
+  query: String!
+  status: String!
+  results: JSON
+  checkedBy: User
+  checkedAt: DateTime
+  matter: Matter
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ─────────────────────────────────────────────
+# Contact types
+# ─────────────────────────────────────────────
+
+"""A person or company in the Clio contact database."""
+type Contact implements Node {
+  id: ID!
+  name: String!
+  type: ContactTypeEnum!
+  firstName: String
+  middleName: String
+  lastName: String
+  prefix: String
+  suffix: String
+  title: String
+  company: Contact
+  email: String
+  phone: String
+  addresses: [Address!]
+  relationships: [Relationship!]
+  matters: [Matter!]
+  notes: [Note!]
+  tags: [Tag!]
+  customFieldValues: [CustomFieldValue!]
+  clioConnect: ClioConnect
+  clientPortal: ClientPortal
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""The type or role of a contact."""
+type ContactType implements Node {
+  id: ID!
+  name: String!
+  category: ContactTypeEnum!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A postal or physical address."""
+type Address implements Node {
+  id: ID!
+  street: String
+  city: String
+  province: String
+  postalCode: String
+  country: String
+  primary: Boolean!
+  addressType: String
+  contact: Contact
+  firm: Firm
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A relationship between two contacts."""
+type Relationship implements Node {
+  id: ID!
+  contact: Contact!
+  relatedContact: Contact!
+  description: String
+  matter: Matter
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""Clio Connect sharing settings for a contact."""
+type ClioConnect implements Node {
+  id: ID!
+  contact: Contact!
+  enabled: Boolean!
+  status: String
+  sharedMatters: [Matter!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""The client portal configuration for a contact."""
+type ClientPortal implements Node {
+  id: ID!
+  contact: Contact!
+  enabled: Boolean!
+  portalUrl: String
+  lastLogin: DateTime
+  sharedDocuments: [Document!]
+  sharedBills: [Bill!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ─────────────────────────────────────────────
+# Calendar and Task types
+# ─────────────────────────────────────────────
+
+"""A calendar entry (appointment, court date, deadline)."""
+type CalendarEntry implements Node {
+  id: ID!
+  summary: String!
+  description: String
+  startAt: DateTime!
+  endAt: DateTime!
+  allDay: Boolean!
+  location: String
+  matter: Matter
+  owner: User!
+  attendees: [User!]
+  calendarEvent: CalendarEvent
+  reminders: [Reminder!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A recurring calendar event definition."""
+type CalendarEvent implements Node {
+  id: ID!
+  summary: String!
+  recurrence: String
+  startAt: DateTime!
+  endAt: DateTime!
+  entries: [CalendarEntry!]
+  owner: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A task assigned to a user on a matter."""
+type Task implements Node {
+  id: ID!
+  name: String!
+  description: String
+  status: TaskStatusEnum!
+  priority: String
+  dueAt: DateTime
+  completedAt: DateTime
+  matter: Matter
+  assignee: User
+  assignor: User
+  reminders: [Reminder!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""The status of a task."""
+type TaskStatus implements Node {
+  id: ID!
+  name: String!
+  status: TaskStatusEnum!
+  tasks: [Task!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A reminder attached to a task or calendar entry."""
+type Reminder implements Node {
+  id: ID!
+  subject: String
+  dueAt: DateTime!
+  duration: Int
+  triggered: Boolean!
+  task: Task
+  calendarEntry: CalendarEntry
+  user: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ─────────────────────────────────────────────
+# Document types
+# ─────────────────────────────────────────────
+
+"""A document or file stored in Clio."""
+type Document implements Node {
+  id: ID!
+  name: String!
+  size: Int
+  contentType: String
+  documentCategory: DocumentCategory
+  folder: DocumentFolder
+  matter: Matter
+  contact: Contact
+  latestVersion: DocumentVersion
+  versions: [DocumentVersion!]
+  tags: [Tag!]
+  createdBy: User
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A folder used to organize documents."""
+type DocumentFolder implements Node {
+  id: ID!
+  name: String!
+  parent: DocumentFolder
+  matter: Matter
+  contact: Contact
+  children: [DocumentFolder!]
+  documents: [Document!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A category label for documents."""
+type DocumentCategory implements Node {
+  id: ID!
+  name: String!
+  documents: [Document!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A versioned revision of a document."""
+type DocumentVersion implements Node {
+  id: ID!
+  document: Document!
+  versionNumber: Int!
+  size: Int
+  contentType: String
+  filename: String
+  createdBy: User
+  downloadUrl: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""An external web URL linked to a matter or contact."""
+type WebLink implements Node {
+  id: ID!
+  name: String!
+  url: String!
+  matter: Matter
+  contact: Contact
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ─────────────────────────────────────────────
+# Communication types
+# ─────────────────────────────────────────────
+
+"""An email message (inbound or outbound) linked to a matter."""
+type EmailMessage implements Node {
+  id: ID!
+  subject: String
+  body: String
+  date: DateTime
+  matter: Matter
+  sender: Contact
+  recipients: [Contact!]
+  direction: String
+  attachments: [Document!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""An inbound email received from a client or party."""
+type InboundEmail implements Node {
+  id: ID!
+  subject: String!
+  body: String
+  receivedAt: DateTime!
+  from: String!
+  to: [String!]!
+  matter: Matter
+  contact: Contact
+  attachments: [Document!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""An outbound email sent from the firm."""
+type OutboundEmail implements Node {
+  id: ID!
+  subject: String!
+  body: String
+  sentAt: DateTime!
+  from: String!
+  to: [String!]!
+  matter: Matter
+  contact: Contact
+  attachments: [Document!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A phone call record."""
+type PhoneCall implements Node {
+  id: ID!
+  date: DateTime!
+  duration: Int
+  description: String
+  matter: Matter
+  contact: Contact
+  user: User
+  direction: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A phone log entry."""
+type PhoneLog implements Node {
+  id: ID!
+  date: DateTime!
+  callerName: String
+  callerPhone: String
+  message: String
+  matter: Matter
+  contact: Contact
+  takenBy: User
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ─────────────────────────────────────────────
+# Time and Billing types
+# ─────────────────────────────────────────────
+
+"""An active timer being run against a matter."""
+type TimerEntry implements Node {
+  id: ID!
+  startTime: DateTime!
+  elapsed: Int!
+  matter: Matter!
+  user: User!
+  activityDescription: ActivityDescription
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A completed time entry billed to a matter."""
+type TimeEntry implements Node {
+  id: ID!
+  date: Date!
+  quantity: Decimal!
+  price: Decimal!
+  total: Decimal!
+  note: String
+  billable: Boolean!
+  billed: Boolean!
+  matter: Matter!
+  user: User!
+  activityDescription: ActivityDescription
+  bill: Bill
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A description template for an activity (time or expense)."""
+type ActivityDescription implements Node {
+  id: ID!
+  name: String!
+  activityType: ActivityTypeEnum!
+  defaultRate: Decimal
+  taxable: Boolean!
+  visibleToClient: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A fee charged to a matter."""
+type Fee implements Node {
+  id: ID!
+  date: Date!
+  quantity: Decimal!
+  rate: Decimal!
+  total: Decimal!
+  description: String
+  billable: Boolean!
+  billed: Boolean!
+  matter: Matter!
+  user: User!
+  bill: Bill
+  activityDescription: ActivityDescription
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""An expense charged to a matter."""
+type Expense implements Node {
+  id: ID!
+  date: Date!
+  quantity: Decimal!
+  price: Decimal!
+  total: Decimal!
+  note: String
+  billable: Boolean!
+  billed: Boolean!
+  matter: Matter!
+  user: User!
+  bill: Bill
+  activityDescription: ActivityDescription
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""An unbilled fee awaiting inclusion in a bill."""
+type UnbilledFee implements Node {
+  id: ID!
+  fee: Fee!
+  matter: Matter!
+  total: Decimal!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""An unbilled expense awaiting inclusion in a bill."""
+type UnbilledExpense implements Node {
+  id: ID!
+  expense: Expense!
+  matter: Matter!
+  total: Decimal!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A bill issued to a client for a matter."""
+type Bill implements Node {
+  id: ID!
+  number: String
+  issueDate: Date
+  dueDate: Date
+  status: BillStatusEnum!
+  total: Decimal!
+  tax: Decimal
+  discount: Decimal
+  balance: Decimal!
+  matter: Matter!
+  client: Contact!
+  timeEntries: [TimeEntry!]
+  expenses: [Expense!]
+  fees: [Fee!]
+  lineItems: [InvoiceLineItem!]
+  payments: [Payment!]
+  credits: [Credit!]
+  adjustments: [Adjustment!]
+  writeOffs: [WriteOff!]
+  invoice: Invoice
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""The rendered invoice representation of a bill."""
+type Invoice implements Node {
+  id: ID!
+  bill: Bill!
+  number: String
+  pdfUrl: String
+  sentAt: DateTime
+  viewedAt: DateTime
+  matter: Matter!
+  client: Contact!
+  lineItems: [InvoiceLineItem!]
+  discounts: [Discount!]
+  taxRates: [TaxRate!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A single line item on an invoice."""
+type InvoiceLineItem implements Node {
+  id: ID!
+  invoice: Invoice!
+  description: String!
+  quantity: Decimal!
+  rate: Decimal!
+  total: Decimal!
+  taxable: Boolean!
+  activityType: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A discount applied to a bill or invoice."""
+type Discount implements Node {
+  id: ID!
+  amount: Decimal
+  percent: Decimal
+  note: String
+  bill: Bill
+  invoice: Invoice
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A tax rate applied to billed items."""
+type TaxRate implements Node {
+  id: ID!
+  name: String!
+  rate: Decimal!
+  compound: Boolean!
+  appliesTo: String
+  firm: Firm!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A payment received against a bill."""
+type Payment implements Node {
+  id: ID!
+  date: Date!
+  amount: Decimal!
+  description: String
+  paymentType: String
+  reference: String
+  bill: Bill!
+  matter: Matter!
+  bankAccount: BankAccount
+  trustTransaction: TrustTransaction
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A credit applied to a client's account or bill."""
+type Credit implements Node {
+  id: ID!
+  date: Date!
+  amount: Decimal!
+  description: String
+  matter: Matter
+  contact: Contact!
+  bill: Bill
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A manual adjustment applied to a bill."""
+type Adjustment implements Node {
+  id: ID!
+  date: Date!
+  amount: Decimal!
+  description: String
+  bill: Bill!
+  matter: Matter!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A write-off applied to reduce the balance of a bill."""
+type WriteOff implements Node {
+  id: ID!
+  date: Date!
+  amount: Decimal!
+  description: String
+  bill: Bill!
+  matter: Matter!
+  writtenOffBy: User
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ─────────────────────────────────────────────
+# Account types
+# ─────────────────────────────────────────────
+
+"""A general operating bank account for the firm."""
+type BankAccount implements Node {
+  id: ID!
+  name: String!
+  currency: String!
+  balance: Decimal!
+  accountNumber: String
+  routingNumber: String
+  institution: String
+  firm: Firm!
+  transactions: [BankTransaction!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A client trust account (IOLTA or similar)."""
+type TrustAccount implements Node {
+  id: ID!
+  name: String!
+  currency: String!
+  balance: Decimal!
+  accountNumber: String
+  institution: String
+  firm: Firm!
+  trustBalances: [TrustBalance!]
+  trustTransactions: [TrustTransaction!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A transaction recorded in an operating bank account."""
+type BankTransaction implements Node {
+  id: ID!
+  date: Date!
+  amount: Decimal!
+  transactionType: BankTransactionTypeEnum!
+  description: String
+  reference: String
+  bankAccount: BankAccount!
+  matter: Matter
+  contact: Contact
+  payment: Payment
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A transaction recorded in a trust account."""
+type TrustTransaction implements Node {
+  id: ID!
+  date: Date!
+  amount: Decimal!
+  transactionType: TrustTransactionTypeEnum!
+  description: String
+  reference: String
+  trustAccount: TrustAccount!
+  matter: Matter
+  contact: Contact
+  payment: Payment
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""The overall balance for an operating account."""
+type Balance implements Node {
+  id: ID!
+  bankAccount: BankAccount!
+  balance: Decimal!
+  asOf: DateTime!
+  currency: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""The trust balance for a specific matter/client in a trust account."""
+type TrustBalance implements Node {
+  id: ID!
+  trustAccount: TrustAccount!
+  matter: Matter
+  contact: Contact
+  balance: Decimal!
+  currency: String!
+  asOf: DateTime!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ─────────────────────────────────────────────
+# Annotation types
+# ─────────────────────────────────────────────
+
+"""A free-text note attached to a matter or contact."""
+type Note implements Node {
+  id: ID!
+  subject: String
+  detail: String
+  date: Date
+  matter: Matter
+  contact: Contact
+  author: User
+  type: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A tag used for ad-hoc labeling of matters, contacts, or documents."""
+type Tag implements Node {
+  id: ID!
+  name: String!
+  etag: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A firm-defined custom field schema."""
+type CustomField implements Node {
+  id: ID!
+  name: String!
+  fieldType: CustomFieldTypeEnum!
+  displayedToContacts: Boolean!
+  required: Boolean!
+  options: [String!]
+  parentType: String!
+  firm: Firm!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A value for a custom field on a specific matter or contact."""
+type CustomFieldValue implements Node {
+  id: ID!
+  customField: CustomField!
+  value: JSON
+  matter: Matter
+  contact: Contact
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ─────────────────────────────────────────────
+# Other types
+# ─────────────────────────────────────────────
+
+"""A funding grant tracked within Clio (used by legal aid firms)."""
+type Grant implements Node {
+  id: ID!
+  name: String!
+  amount: Decimal!
+  currency: String!
+  startDate: Date
+  endDate: Date
+  grantor: String
+  status: String
+  matters: [Matter!]
+  notes: [Note!]
+  firm: Firm!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A Clio-generated report."""
+type Report implements Node {
+  id: ID!
+  name: String!
+  category: String
+  generatedAt: DateTime
+  downloadUrl: String
+  parameters: JSON
+  requestedBy: User
+  firm: Firm!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A webhook subscription for real-time event delivery."""
+type Webhook implements Node {
+  id: ID!
+  url: String!
+  events: [String!]!
+  status: WebhookStatusEnum!
+  sharedSecret: String
+  fields: JSON
+  model: String
+  firm: Firm!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""An electronic signature request for a document."""
+type ESignature implements Node {
+  id: ID!
+  document: Document!
+  status: ESignatureStatusEnum!
+  requester: User!
+  signers: [Contact!]!
+  sentAt: DateTime
+  completedAt: DateTime
+  voidedAt: DateTime
+  matter: Matter
+  externalId: String
+  providerName: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ─────────────────────────────────────────────
+# Pagination
+# ─────────────────────────────────────────────
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+  totalCount: Int
+}
+
+type MatterConnection {
+  nodes: [Matter!]!
+  pageInfo: PageInfo!
+}
+
+type ContactConnection {
+  nodes: [Contact!]!
+  pageInfo: PageInfo!
+}
+
+type DocumentConnection {
+  nodes: [Document!]!
+  pageInfo: PageInfo!
+}
+
+type TimeEntryConnection {
+  nodes: [TimeEntry!]!
+  pageInfo: PageInfo!
+}
+
+type BillConnection {
+  nodes: [Bill!]!
+  pageInfo: PageInfo!
+}
+
+type TaskConnection {
+  nodes: [Task!]!
+  pageInfo: PageInfo!
+}
+
+# ─────────────────────────────────────────────
+# Filter input types
+# ─────────────────────────────────────────────
+
+input MatterFilter {
+  status: MatterStatusEnum
+  clientId: ID
+  responsibleAttorneyId: ID
+  practiceAreaId: ID
+  openDateAfter: Date
+  openDateBefore: Date
+  billable: Boolean
+  query: String
+}
+
+input ContactFilter {
+  type: ContactTypeEnum
+  query: String
+  tagIds: [ID!]
+}
+
+input TimeEntryFilter {
+  matterId: ID
+  userId: ID
+  dateAfter: Date
+  dateBefore: Date
+  billable: Boolean
+  billed: Boolean
+}
+
+input DocumentFilter {
+  matterId: ID
+  contactId: ID
+  folderId: ID
+  categoryId: ID
+  query: String
+}
+
+input BillFilter {
+  matterId: ID
+  clientId: ID
+  status: BillStatusEnum
+  issueDateAfter: Date
+  issueDateBefore: Date
+}
+
+input TaskFilter {
+  matterId: ID
+  assigneeId: ID
+  status: TaskStatusEnum
+  dueDateAfter: Date
+  dueDateBefore: Date
+}
+
+# ─────────────────────────────────────────────
+# Mutation input types
+# ─────────────────────────────────────────────
+
+input CreateMatterInput {
+  description: String!
+  clientId: ID!
+  responsibleAttorneyId: ID
+  originatingAttorneyId: ID
+  practiceAreaId: ID
+  statusId: ID
+  openDate: Date
+  billable: Boolean
+  billingMethod: String
+  customRate: Decimal
+}
+
+input UpdateMatterInput {
+  description: String
+  responsibleAttorneyId: ID
+  practiceAreaId: ID
+  statusId: ID
+  closeDate: Date
+  billable: Boolean
+}
+
+input CreateContactInput {
+  name: String!
+  type: ContactTypeEnum!
+  firstName: String
+  lastName: String
+  email: String
+  phone: String
+  companyId: ID
+}
+
+input UpdateContactInput {
+  name: String
+  firstName: String
+  lastName: String
+  email: String
+  phone: String
+}
+
+input CreateTimeEntryInput {
+  date: Date!
+  quantity: Decimal!
+  price: Decimal!
+  note: String
+  billable: Boolean!
+  matterId: ID!
+  userId: ID!
+  activityDescriptionId: ID
+}
+
+input UpdateTimeEntryInput {
+  date: Date
+  quantity: Decimal
+  price: Decimal
+  note: String
+  billable: Boolean
+}
+
+input CreateTaskInput {
+  name: String!
+  description: String
+  dueAt: DateTime
+  priority: String
+  matterId: ID
+  assigneeId: ID
+  reminders: [CreateReminderInput!]
+}
+
+input UpdateTaskInput {
+  name: String
+  description: String
+  status: TaskStatusEnum
+  dueAt: DateTime
+  priority: String
+  assigneeId: ID
+}
+
+input CreateReminderInput {
+  dueAt: DateTime!
+  duration: Int
+}
+
+input CreateNoteInput {
+  subject: String
+  detail: String!
+  date: Date
+  matterId: ID
+  contactId: ID
+  type: String
+}
+
+input UpdateNoteInput {
+  subject: String
+  detail: String
+  date: Date
+}
+
+input CreateDocumentInput {
+  name: String!
+  matterId: ID
+  contactId: ID
+  folderId: ID
+  categoryId: ID
+}
+
+input CreateWebhookInput {
+  url: String!
+  events: [String!]!
+  model: String
+  fields: JSON
+}
+
+input UpdateWebhookInput {
+  url: String
+  events: [String!]
+  status: WebhookStatusEnum
+}
+
+input CreateBillInput {
+  matterId: ID!
+  issueDate: Date
+  dueDate: Date
+  timeEntryIds: [ID!]
+  expenseIds: [ID!]
+  feeIds: [ID!]
+}
+
+input CreatePaymentInput {
+  date: Date!
+  amount: Decimal!
+  billId: ID!
+  description: String
+  paymentType: String
+  reference: String
+  bankAccountId: ID
+}
+
+# ─────────────────────────────────────────────
+# Root types
+# ─────────────────────────────────────────────
+
+type Query {
+  """The currently authenticated user."""
+  me: User!
+
+  """Retrieve a single matter by ID."""
+  matter(id: ID!): Matter
+
+  """List matters with optional filtering and pagination."""
+  matters(filter: MatterFilter, page: Int, perPage: Int): MatterConnection!
+
+  """Retrieve a single contact by ID."""
+  contact(id: ID!): Contact
+
+  """List contacts with optional filtering and pagination."""
+  contacts(filter: ContactFilter, page: Int, perPage: Int): ContactConnection!
+
+  """Retrieve a single user by ID."""
+  user(id: ID!): User
+
+  """List all users in the firm."""
+  users(page: Int, perPage: Int): [User!]!
+
+  """Retrieve a single document by ID."""
+  document(id: ID!): Document
+
+  """List documents with optional filtering and pagination."""
+  documents(filter: DocumentFilter, page: Int, perPage: Int): DocumentConnection!
+
+  """Retrieve a single time entry by ID."""
+  timeEntry(id: ID!): TimeEntry
+
+  """List time entries with optional filtering and pagination."""
+  timeEntries(filter: TimeEntryFilter, page: Int, perPage: Int): TimeEntryConnection!
+
+  """Retrieve a single bill by ID."""
+  bill(id: ID!): Bill
+
+  """List bills with optional filtering and pagination."""
+  bills(filter: BillFilter, page: Int, perPage: Int): BillConnection!
+
+  """Retrieve a single task by ID."""
+  task(id: ID!): Task
+
+  """List tasks with optional filtering and pagination."""
+  tasks(filter: TaskFilter, page: Int, perPage: Int): TaskConnection!
+
+  """Retrieve a single calendar entry by ID."""
+  calendarEntry(id: ID!): CalendarEntry
+
+  """List calendar entries."""
+  calendarEntries(matterId: ID, startAfter: DateTime, endBefore: DateTime, page: Int, perPage: Int): [CalendarEntry!]!
+
+  """Retrieve a single note by ID."""
+  note(id: ID!): Note
+
+  """List notes."""
+  notes(matterId: ID, contactId: ID, page: Int, perPage: Int): [Note!]!
+
+  """Retrieve a single trust account by ID."""
+  trustAccount(id: ID!): TrustAccount
+
+  """List trust accounts."""
+  trustAccounts(page: Int, perPage: Int): [TrustAccount!]!
+
+  """Retrieve trust balance for a matter/contact in a trust account."""
+  trustBalance(trustAccountId: ID!, matterId: ID, contactId: ID): TrustBalance
+
+  """Retrieve a single bank account by ID."""
+  bankAccount(id: ID!): BankAccount
+
+  """List operating bank accounts."""
+  bankAccounts(page: Int, perPage: Int): [BankAccount!]!
+
+  """Retrieve a single practice area by ID."""
+  practiceArea(id: ID!): PracticeArea
+
+  """List practice areas."""
+  practiceAreas: [PracticeArea!]!
+
+  """Retrieve a single custom field by ID."""
+  customField(id: ID!): CustomField
+
+  """List custom fields."""
+  customFields(parentType: String): [CustomField!]!
+
+  """Retrieve a single webhook by ID."""
+  webhook(id: ID!): Webhook
+
+  """List webhook subscriptions."""
+  webhooks: [Webhook!]!
+
+  """Retrieve a single report by ID."""
+  report(id: ID!): Report
+
+  """List generated reports."""
+  reports(page: Int, perPage: Int): [Report!]!
+
+  """Run a conflict check."""
+  conflictCheck(query: String!, matterId: ID): ConflictCheck
+
+  """Retrieve the firm."""
+  firm: Firm!
+}
+
+type Mutation {
+  createMatter(input: CreateMatterInput!): Matter!
+  updateMatter(id: ID!, input: UpdateMatterInput!): Matter!
+  deleteMatter(id: ID!): Boolean!
+
+  createContact(input: CreateContactInput!): Contact!
+  updateContact(id: ID!, input: UpdateContactInput!): Contact!
+  deleteContact(id: ID!): Boolean!
+
+  createTimeEntry(input: CreateTimeEntryInput!): TimeEntry!
+  updateTimeEntry(id: ID!, input: UpdateTimeEntryInput!): TimeEntry!
+  deleteTimeEntry(id: ID!): Boolean!
+
+  createTask(input: CreateTaskInput!): Task!
+  updateTask(id: ID!, input: UpdateTaskInput!): Task!
+  deleteTask(id: ID!): Boolean!
+
+  createNote(input: CreateNoteInput!): Note!
+  updateNote(id: ID!, input: UpdateNoteInput!): Note!
+  deleteNote(id: ID!): Boolean!
+
+  createDocument(input: CreateDocumentInput!): Document!
+  deleteDocument(id: ID!): Boolean!
+
+  createCalendarEntry(summary: String!, startAt: DateTime!, endAt: DateTime!, allDay: Boolean, matterId: ID, description: String): CalendarEntry!
+  updateCalendarEntry(id: ID!, summary: String, startAt: DateTime, endAt: DateTime): CalendarEntry!
+  deleteCalendarEntry(id: ID!): Boolean!
+
+  createBill(input: CreateBillInput!): Bill!
+  updateBill(id: ID!, status: BillStatusEnum): Bill!
+  deleteBill(id: ID!): Boolean!
+
+  createPayment(input: CreatePaymentInput!): Payment!
+  deletePayment(id: ID!): Boolean!
+
+  createWebhook(input: CreateWebhookInput!): Webhook!
+  updateWebhook(id: ID!, input: UpdateWebhookInput!): Webhook!
+  deleteWebhook(id: ID!): Boolean!
+}
