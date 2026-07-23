@@ -1,0 +1,762 @@
+openapi: 3.0.0
+info:
+  title: Clio API Documentation Activities Conversation Messages API
+  contact:
+    name: Clio API Support
+    email: api@clio.com
+  description: "# Developer Support and Feedback\n* Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio's API Support team at [api@clio.com](mailto:api@clio.com).\n* For business and partnership inquiries, contact our API Partnerships team at [api.partnerships@clio.com](mailto:api.partnerships@clio.com).\n* For best practices and tips from the Clio development community, join the conversation in the [Clio Developer Slack Channel](https://join.slack.com/t/clio-public/shared_invite/zt-36i0eqgo1-7POORPtMJpp2N0~_auL2IQ).\n\nA community-driven [Clio Developers Stack Overflow Group](https://stackoverflow.com/questions/tagged/clio-api) also exists where you can connect and ask questions from other Clio API users.\n# Getting Started\n> **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).\n>\n> Likewise, the developer portal is available at region-specific links for the [Australia](https://au.developers.clio.com), [Canada](https://ca.developers.clio.com), [EU](https://eu.developers.clio.com), and [US](https://developers.clio.com) regions.\n>\n> This document assumes the US region is being used (app.clio.com). If you're building in one of the other regions, you should adapt the links and examples as necessary.\n\nTo start building on the Clio API, you’ll need a Clio account – you can review our [Developer Handbook](https://docs.developers.clio.com/) and follow the steps to sign up for an account.\n\nOnce you have an account, you can [create a developer application](https://docs.developers.clio.com/api-docs/applications) from the [Developer Portal](https://developers.clio.com) and start building!\n# Authorization with OAuth 2.0\nSee our [Authorization documentation →](https://docs.developers.clio.com/api-docs/authorization)\n# Permissions\nSee our [Permissions documentation →](https://docs.developers.clio.com/api-docs/permissions)\n# Fields\nSee our [Fields documentation →](https://docs.developers.clio.com/api-docs/fields)\n# Rate Limiting\nSee our [Rate Limits documentation →](https://docs.developers.clio.com/api-docs/rate-limits)\n# Paging\nSee our [Pagination documentation →](https://docs.developers.clio.com/api-docs/paging)\n# ETags\nSee our [ETags documentation →](https://docs.developers.clio.com/api-docs/etags)\n# Minor Versions\nAPI v4 supports multiple minor versions. Versions are of the form '4.X.Y'. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you're requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.\n\nAn `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.\n\nYou can find our [API Versioning Policy and Guidelines](https://docs.developers.clio.com/api-docs/api-versioning-policy) in our documentation hub.\n\nThe [API Changelog](https://docs.developers.clio.com/api-docs/api-changelog) explains each version's changes in further detail.\n### [4.0.4](https://docs.developers.clio.com/api-docs/api-changelog#404)\n\n  * Update `quantity` field to return values in seconds rather than hours for Activities\n\n### [4.0.5](https://docs.developers.clio.com/api-docs/api-changelog#405)\n\n  * Remove `matter_balances` field from Bills\n* Standardize status/state enum values\n* Add a Document association to completed DocumentAutomations\n* Add rate visibility handling for Activity's price and total\n\n### [4.0.6](https://docs.developers.clio.com/api-docs/api-changelog#406)\n\n  * Remove `document_versions` collection field from Documents\n\n### [4.0.7](https://docs.developers.clio.com/api-docs/api-changelog#407)\n\n  * Change secure link format\n\n### [4.0.8](https://docs.developers.clio.com/api-docs/api-changelog#408)\n\n  * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user\n  * Add `quantity_redacted` field to activities\n\n### [4.0.9](https://docs.developers.clio.com/api-docs/api-changelog#409)\n\n  * Contacts are filtered and redacted in the response based on the new 'Contacts Visibility' user permission setting.\n\n### [4.0.10](https://docs.developers.clio.com/api-docs/api-changelog#4010)\n\n  * Fixed validation of `type` query parameter when querying Notes\n\n### [4.0.12](https://docs.developers.clio.com/api-docs/api-changelog#4012)\n\n  * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers\n\n### [4.0.13](https://docs.developers.clio.com/api-docs/api-changelog#4013)\n\n  **This is the default version**\n\n  * Add association limits to Contacts\n* Returns 422 Unprocessable Entity when association limits are exceeded\n\n\n"
+  version: v4
+  x-logo:
+    url: https://www.clio.com/wp-content/uploads/2015/05/Container-5-Logo.png
+servers:
+- url: https://app.clio.com/api/v4
+  description: US region Production Server
+- url: https://eu.app.clio.com/api/v4
+  description: Europe region Production Server
+- url: https://ca.app.clio.com/api/v4
+  description: Canada region Production Server
+- url: https://au.app.clio.com/api/v4
+  description: Australia region Production Server
+tags:
+- name: Conversation Messages
+  description: ''
+paths:
+  /conversation_messages.json:
+    get:
+      tags:
+      - Conversation Messages
+      summary: Return the data for all ConversationMessages
+      operationId: ConversationMessage#index
+      description: Outlines the parameters, optional and required, used when requesting the data for all ConversationMessages
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: conversation_id
+        in: query
+        description: The unique identifier for a single Conversation. Use the keyword `null` to match those without a ConversationMessage. The list will be filtered to include only the ConversationMessage records with the matching property.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: created_since
+        in: query
+        description: Filter ConversationMessage records to those having the `created_at` field on the related Conversation after a specific time. (Expects an ISO-8601 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: ids[]
+        in: query
+        description: Filter ConversationMessage records to those having the specified unique identifiers.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: 'A limit on the number of ConversationMessage records to be returned. Limit can range between 1 and 200. Default: `200`.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: order
+        in: query
+        description: 'Orders the ConversationMessage records by the given field. Default: `id(asc)`.'
+        required: false
+        schema:
+          type: string
+          enum:
+          - id(asc)
+          - id(desc)
+      - name: page_token
+        in: query
+        description: A token specifying which page to return.
+        required: false
+        schema:
+          type: string
+      - name: query
+        in: query
+        description: Wildcard search for `body` matching a given string.
+        required: false
+        schema:
+          type: string
+      - name: updated_since
+        in: query
+        description: Filter ConversationMessage records to those having the `updated_at` field on the related Conversation after a specific time. (Expects an ISO-8601 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ConversationMessage_List'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+      - Conversation Messages
+      summary: Create a new ConversationMessage
+      operationId: ConversationMessage#create
+      description: Outlines the parameters and data fields used when creating a new ConversationMessage
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ConversationMessage_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        description: Request Body for Conversation Messages
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    attachment:
+                      type: object
+                      properties:
+                        document_id:
+                          type: integer
+                          format: int64
+                          description: The document id of the attached document.
+                        document_version_id:
+                          type: integer
+                          format: int64
+                          description: The document version id of the attached document.
+                    body:
+                      type: string
+                      description: The body value.
+                    conversation:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Conversation associated with this ConversationMessage.
+                    matter:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Matter associated with the ConversationMessage. The keyword `null` is not valid for this field.
+                    receivers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single receiver for this ConversationMessage.
+                          type:
+                            type: string
+                            enum:
+                            - Contact
+                            - User
+                            description: The type for a single receiver for this ConversationMessage, could be `Contact` or `User`.
+                        required:
+                        - id
+                        - type
+                    subject:
+                      type: string
+                      description: The subject value.
+                  required:
+                  - body
+                  - subject
+                  - receivers
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    attachment:
+                      type: object
+                      properties:
+                        document_id:
+                          type: integer
+                          format: int64
+                          description: The document id of the attached document.
+                        document_version_id:
+                          type: integer
+                          format: int64
+                          description: The document version id of the attached document.
+                    body:
+                      type: string
+                      description: The body value.
+                    conversation:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Conversation associated with this ConversationMessage.
+                    matter:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Matter associated with the ConversationMessage. The keyword `null` is not valid for this field.
+                    receivers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single receiver for this ConversationMessage.
+                          type:
+                            type: string
+                            enum:
+                            - Contact
+                            - User
+                            description: The type for a single receiver for this ConversationMessage, could be `Contact` or `User`.
+                        required:
+                        - id
+                        - type
+                    subject:
+                      type: string
+                      description: The subject value.
+                  required:
+                  - body
+                  - subject
+                  - receivers
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    attachment:
+                      type: object
+                      properties:
+                        document_id:
+                          type: integer
+                          format: int64
+                          description: The document id of the attached document.
+                        document_version_id:
+                          type: integer
+                          format: int64
+                          description: The document version id of the attached document.
+                    body:
+                      type: string
+                      description: The body value.
+                    conversation:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Conversation associated with this ConversationMessage.
+                    matter:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Matter associated with the ConversationMessage. The keyword `null` is not valid for this field.
+                    receivers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single receiver for this ConversationMessage.
+                          type:
+                            type: string
+                            enum:
+                            - Contact
+                            - User
+                            description: The type for a single receiver for this ConversationMessage, could be `Contact` or `User`.
+                        required:
+                        - id
+                        - type
+                    subject:
+                      type: string
+                      description: The subject value.
+                  required:
+                  - body
+                  - subject
+                  - receivers
+        required: false
+  /conversation_messages/{id}.json:
+    get:
+      tags:
+      - Conversation Messages
+      summary: Return the data for a single ConversationMessage
+      operationId: ConversationMessage#show
+      description: Outlines the parameters, optional and required, used when requesting the data for a single ConversationMessage
+      parameters:
+      - name: IF-MODIFIED-SINCE
+        in: header
+        description: The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: IF-NONE-MATCH
+        in: header
+        description: The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.
+        required: false
+        schema:
+          type: string
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The unique identifier for the ConversationMessage.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ConversationMessage_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '304':
+          description: Not Modified
+components:
+  schemas:
+    ConversationMessage_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ConversationMessage*
+        etag:
+          type: string
+          description: ETag for the *ConversationMessage*
+        date:
+          type: string
+          description: The creation date of the message in the current user's time zone
+        body:
+          type: string
+          description: The main content of the *ConversationMessage*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ConversationMessage* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ConversationMessage* was last updated (as a ISO-8601 timestamp)
+    Document_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Document*
+        etag:
+          type: string
+          description: ETag for the *Document*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Document* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Document* was last updated (as a ISO-8601 timestamp)
+        deleted_at:
+          type: string
+          format: date-time
+          description: The time the *Document* was deleted (as a ISO-8601 timestamp)
+        type:
+          type: string
+          enum:
+          - Document
+          description: The type of the *Document*
+        locked:
+          type: boolean
+          description: Whether or not the Document is locked. Locked Document cannot be modified
+        name:
+          type: string
+          description: The name of the Document
+        received_at:
+          type: string
+          format: date-time
+          description: The time the last document version was received (as an ISO-8601 timestamp)
+        filename:
+          type: string
+          description: The uploaded file name of the latest document version.
+        size:
+          type: integer
+          format: int32
+          description: The file size
+        content_type:
+          type: string
+          description: The uploaded file content type
+    ConversationMessage:
+      allOf:
+      - $ref: '#/components/schemas/ConversationMessage_base'
+      - type: object
+        properties:
+          sender:
+            $ref: '#/components/schemas/UnredactedParticipant_base'
+            description: UnredactedParticipant
+          document:
+            $ref: '#/components/schemas/Document_base'
+            description: Document
+          conversation:
+            $ref: '#/components/schemas/Conversation_base'
+            description: Conversation
+          receivers:
+            type: array
+            items:
+              $ref: '#/components/schemas/UnredactedParticipant_base'
+            description: UnredactedParticipant
+    ConversationMessage_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: ConversationMessage List Response
+          items:
+            $ref: '#/components/schemas/ConversationMessage'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    Conversation_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Conversation*
+        etag:
+          type: string
+          description: ETag for the *Conversation*
+        archived:
+          type: boolean
+          description: Whether the conversation has been archived
+        read_only:
+          type: boolean
+          description: Whether the conversation is read only
+        current_user_is_member:
+          type: boolean
+          description: Whether the current user is a member of this conversation
+        subject:
+          type: string
+          description: The subject of the *Conversation*
+        message_count:
+          type: integer
+          format: int64
+          description: The number of messages in this conversation
+        time_entries_count:
+          type: integer
+          format: int64
+          description: The number of time entries applied to this conversation
+        read:
+          type: boolean
+          description: Whether any messages in this conversation have been viewed
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Conversation* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Conversation* was last updated (as a ISO-8601 timestamp)
+    UnredactedParticipant_base:
+      type: object
+      properties: {}
+    ConversationMessage_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ConversationMessage'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+x-tagGroups:
+- name: Api
+  tags:
+  - Custom Actions
+  - Webhooks
+- name: Activities
+  tags:
+  - Activities
+  - Activity Descriptions
+  - Activity Rates
+  - Expense Categories
+  - Timers
+  - Utbms Codes
+  - Utbms Sets
+- name: Accounting
+  tags:
+  - Bank Accounts
+  - Bank Transactions
+  - Bank Transfers
+- name: Billing
+  tags:
+  - Bills
+  - Billable Clients
+  - Billable Matters
+  - Bill Themes
+  - Interest Charges
+  - Line Items
+  - Outstanding Client Balances
+- name: Calendars
+  tags:
+  - Calendars
+  - Calendar Entries
+  - Calendar Entry Event Types
+  - Calendar Visibilities
+  - Reminders
+- name: Clio Payments
+  tags:
+  - Clio Payments Links
+  - Clio Payments Payments
+- name: Communications
+  tags:
+  - Communications
+  - Conversations
+  - Conversation Messages
+- name: Contacts
+  tags:
+  - Contacts
+  - Email Addresses
+  - Phone Numbers
+  - Notes
+  - Log Entries
+- name: Court Rules
+  tags:
+  - Jurisdictions To Triggers
+  - Jurisdictions
+  - Matter Dockets
+  - Service Types
+- name: Custom Fields
+  tags:
+  - Custom Fields
+  - Custom Field Sets
+- name: Documents
+  tags:
+  - Documents
+  - Document Versions
+  - Folders
+  - Document Archives
+  - Document Automations
+  - Document Categories
+  - Document Templates
+  - Comments
+- name: In-app Notifications
+  tags:
+  - My Events
+  - Event Metrics
+- name: Matters
+  tags:
+  - Matters
+  - Relationships
+  - Clients
+  - Related Contacts
+  - Matter Contacts
+  - Notes
+  - Practice Areas
+  - Log Entries
+  - Matter Stages
+  - Medical Records Details
+  - Medical Records
+  - Medical Bills
+  - Damages
+- name: Payments
+  tags:
+  - Allocations
+  - Credit Memos
+- name: Reporting
+  tags:
+  - Reports
+  - Report Presets
+  - Report Schedules
+- name: Settings
+  tags:
+  - Text Snippets
+  - Billing Settings
+  - Currencies
+  - Tax Rate Configurations
+- name: Tasks
+  tags:
+  - Tasks
+  - Task Templates
+  - Task Template Lists
+  - Task Types
+- name: Trust
+  tags:
+  - Trust Line Items
+  - Trust Requests
+- name: Users
+  tags:
+  - Users
+  - Groups
+- name: Legal Aid US
+  tags:
+  - Grants
+  - Grant Funding Sources
+- name: Legal Aid England & Wales
+  tags:
+  - Civil Controlled Rates
+  - Civil Certificated Rates
+  - Criminal Controlled Rates
+  - Expense Categories

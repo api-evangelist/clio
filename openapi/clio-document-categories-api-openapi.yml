@@ -1,0 +1,665 @@
+openapi: 3.0.0
+info:
+  title: Clio API Documentation Activities Document Categories API
+  contact:
+    name: Clio API Support
+    email: api@clio.com
+  description: "# Developer Support and Feedback\n* Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio's API Support team at [api@clio.com](mailto:api@clio.com).\n* For business and partnership inquiries, contact our API Partnerships team at [api.partnerships@clio.com](mailto:api.partnerships@clio.com).\n* For best practices and tips from the Clio development community, join the conversation in the [Clio Developer Slack Channel](https://join.slack.com/t/clio-public/shared_invite/zt-36i0eqgo1-7POORPtMJpp2N0~_auL2IQ).\n\nA community-driven [Clio Developers Stack Overflow Group](https://stackoverflow.com/questions/tagged/clio-api) also exists where you can connect and ask questions from other Clio API users.\n# Getting Started\n> **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).\n>\n> Likewise, the developer portal is available at region-specific links for the [Australia](https://au.developers.clio.com), [Canada](https://ca.developers.clio.com), [EU](https://eu.developers.clio.com), and [US](https://developers.clio.com) regions.\n>\n> This document assumes the US region is being used (app.clio.com). If you're building in one of the other regions, you should adapt the links and examples as necessary.\n\nTo start building on the Clio API, you’ll need a Clio account – you can review our [Developer Handbook](https://docs.developers.clio.com/) and follow the steps to sign up for an account.\n\nOnce you have an account, you can [create a developer application](https://docs.developers.clio.com/api-docs/applications) from the [Developer Portal](https://developers.clio.com) and start building!\n# Authorization with OAuth 2.0\nSee our [Authorization documentation →](https://docs.developers.clio.com/api-docs/authorization)\n# Permissions\nSee our [Permissions documentation →](https://docs.developers.clio.com/api-docs/permissions)\n# Fields\nSee our [Fields documentation →](https://docs.developers.clio.com/api-docs/fields)\n# Rate Limiting\nSee our [Rate Limits documentation →](https://docs.developers.clio.com/api-docs/rate-limits)\n# Paging\nSee our [Pagination documentation →](https://docs.developers.clio.com/api-docs/paging)\n# ETags\nSee our [ETags documentation →](https://docs.developers.clio.com/api-docs/etags)\n# Minor Versions\nAPI v4 supports multiple minor versions. Versions are of the form '4.X.Y'. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you're requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.\n\nAn `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.\n\nYou can find our [API Versioning Policy and Guidelines](https://docs.developers.clio.com/api-docs/api-versioning-policy) in our documentation hub.\n\nThe [API Changelog](https://docs.developers.clio.com/api-docs/api-changelog) explains each version's changes in further detail.\n### [4.0.4](https://docs.developers.clio.com/api-docs/api-changelog#404)\n\n  * Update `quantity` field to return values in seconds rather than hours for Activities\n\n### [4.0.5](https://docs.developers.clio.com/api-docs/api-changelog#405)\n\n  * Remove `matter_balances` field from Bills\n* Standardize status/state enum values\n* Add a Document association to completed DocumentAutomations\n* Add rate visibility handling for Activity's price and total\n\n### [4.0.6](https://docs.developers.clio.com/api-docs/api-changelog#406)\n\n  * Remove `document_versions` collection field from Documents\n\n### [4.0.7](https://docs.developers.clio.com/api-docs/api-changelog#407)\n\n  * Change secure link format\n\n### [4.0.8](https://docs.developers.clio.com/api-docs/api-changelog#408)\n\n  * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user\n  * Add `quantity_redacted` field to activities\n\n### [4.0.9](https://docs.developers.clio.com/api-docs/api-changelog#409)\n\n  * Contacts are filtered and redacted in the response based on the new 'Contacts Visibility' user permission setting.\n\n### [4.0.10](https://docs.developers.clio.com/api-docs/api-changelog#4010)\n\n  * Fixed validation of `type` query parameter when querying Notes\n\n### [4.0.12](https://docs.developers.clio.com/api-docs/api-changelog#4012)\n\n  * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers\n\n### [4.0.13](https://docs.developers.clio.com/api-docs/api-changelog#4013)\n\n  **This is the default version**\n\n  * Add association limits to Contacts\n* Returns 422 Unprocessable Entity when association limits are exceeded\n\n\n"
+  version: v4
+  x-logo:
+    url: https://www.clio.com/wp-content/uploads/2015/05/Container-5-Logo.png
+servers:
+- url: https://app.clio.com/api/v4
+  description: US region Production Server
+- url: https://eu.app.clio.com/api/v4
+  description: Europe region Production Server
+- url: https://ca.app.clio.com/api/v4
+  description: Canada region Production Server
+- url: https://au.app.clio.com/api/v4
+  description: Australia region Production Server
+tags:
+- name: Document Categories
+  description: 'Clio users can add Document Categories to their account to help organize their Documents. When a Document is uploaded or edited, a Document Category can be assigned. Users can filter by Document Category to show all Documents in a certain category across all of the account’s Matters.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/14983647053339-Document-Categories)
+
+
+    [Document Categories in Clio Manage](https://app.clio.com/nc/#/documents/categories)
+
+    '
+paths:
+  /document_categories.json:
+    get:
+      tags:
+      - Document Categories
+      summary: Return the data for all DocumentCategories
+      operationId: DocumentCategory#index
+      description: Outlines the parameters, optional and required, used when requesting the data for all DocumentCategories
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: created_since
+        in: query
+        description: Filter DocumentCategory records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: ids[]
+        in: query
+        description: Filter DocumentCategory records to those having the specified unique identifiers.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: 'A limit on the number of DocumentCategory records to be returned. Limit can range between 1 and 200. Default: `200`.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: order
+        in: query
+        description: 'Orders the DocumentCategory records by the given field. Default: `id(asc)`.'
+        required: false
+        schema:
+          type: string
+          enum:
+          - id(asc)
+          - id(desc)
+          - name(asc)
+          - name(desc)
+      - name: page_token
+        in: query
+        description: A token specifying which page to return.
+        required: false
+        schema:
+          type: string
+      - name: query
+        in: query
+        description: Wildcard search for `name` matching a given string.
+        required: false
+        schema:
+          type: string
+          enum:
+          - name
+      - name: updated_since
+        in: query
+        description: Filter DocumentCategory records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/DocumentCategory_List'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+      - Document Categories
+      summary: Create a new DocumentCategory
+      operationId: DocumentCategory#create
+      description: Outlines the parameters and data fields used when creating a new DocumentCategory
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/DocumentCategory_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        description: Request Body for Document Categories
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: What the DocumentCategory should be called.
+                  required:
+                  - name
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: What the DocumentCategory should be called.
+                  required:
+                  - name
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: What the DocumentCategory should be called.
+                  required:
+                  - name
+        required: false
+  /document_categories/{id}.json:
+    get:
+      tags:
+      - Document Categories
+      summary: Return the data for a single DocumentCategory
+      operationId: DocumentCategory#show
+      description: Outlines the parameters, optional and required, used when requesting the data for a single DocumentCategory
+      parameters:
+      - name: IF-MODIFIED-SINCE
+        in: header
+        description: The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: IF-NONE-MATCH
+        in: header
+        description: The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.
+        required: false
+        schema:
+          type: string
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The unique identifier for the DocumentCategory.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/DocumentCategory_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '304':
+          description: Not Modified
+    patch:
+      tags:
+      - Document Categories
+      summary: Update a single DocumentCategory
+      operationId: DocumentCategory#update
+      description: Outlines the parameters and data fields used when updating a single DocumentCategory
+      parameters:
+      - name: IF-MATCH
+        in: header
+        description: The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).
+        required: false
+        schema:
+          type: string
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The unique identifier for the DocumentCategory.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/DocumentCategory_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '412':
+          description: Precondition Failed
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        description: Request Body for Document Categories
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: What the DocumentCategory should be called.
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: What the DocumentCategory should be called.
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: What the DocumentCategory should be called.
+        required: false
+    delete:
+      tags:
+      - Document Categories
+      summary: Delete a single DocumentCategory
+      operationId: DocumentCategory#destroy
+      description: Outlines the parameters, optional and required, used when deleting the record for a single DocumentCategory
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The unique identifier for the DocumentCategory.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '204':
+          description: No Content
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    DocumentCategory:
+      allOf:
+      - $ref: '#/components/schemas/DocumentCategory_base'
+      - type: object
+        properties: {}
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    DocumentCategory_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/DocumentCategory'
+    DocumentCategory_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: DocumentCategory List Response
+          items:
+            $ref: '#/components/schemas/DocumentCategory'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    DocumentCategory_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *DocumentCategory*
+        etag:
+          type: string
+          description: ETag for the *DocumentCategory*
+        name:
+          type: string
+          description: The name of the *DocumentCategory*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentCategory* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentCategory* was last updated (as a ISO-8601 timestamp)
+x-tagGroups:
+- name: Api
+  tags:
+  - Custom Actions
+  - Webhooks
+- name: Activities
+  tags:
+  - Activities
+  - Activity Descriptions
+  - Activity Rates
+  - Expense Categories
+  - Timers
+  - Utbms Codes
+  - Utbms Sets
+- name: Accounting
+  tags:
+  - Bank Accounts
+  - Bank Transactions
+  - Bank Transfers
+- name: Billing
+  tags:
+  - Bills
+  - Billable Clients
+  - Billable Matters
+  - Bill Themes
+  - Interest Charges
+  - Line Items
+  - Outstanding Client Balances
+- name: Calendars
+  tags:
+  - Calendars
+  - Calendar Entries
+  - Calendar Entry Event Types
+  - Calendar Visibilities
+  - Reminders
+- name: Clio Payments
+  tags:
+  - Clio Payments Links
+  - Clio Payments Payments
+- name: Communications
+  tags:
+  - Communications
+  - Conversations
+  - Conversation Messages
+- name: Contacts
+  tags:
+  - Contacts
+  - Email Addresses
+  - Phone Numbers
+  - Notes
+  - Log Entries
+- name: Court Rules
+  tags:
+  - Jurisdictions To Triggers
+  - Jurisdictions
+  - Matter Dockets
+  - Service Types
+- name: Custom Fields
+  tags:
+  - Custom Fields
+  - Custom Field Sets
+- name: Documents
+  tags:
+  - Documents
+  - Document Versions
+  - Folders
+  - Document Archives
+  - Document Automations
+  - Document Categories
+  - Document Templates
+  - Comments
+- name: In-app Notifications
+  tags:
+  - My Events
+  - Event Metrics
+- name: Matters
+  tags:
+  - Matters
+  - Relationships
+  - Clients
+  - Related Contacts
+  - Matter Contacts
+  - Notes
+  - Practice Areas
+  - Log Entries
+  - Matter Stages
+  - Medical Records Details
+  - Medical Records
+  - Medical Bills
+  - Damages
+- name: Payments
+  tags:
+  - Allocations
+  - Credit Memos
+- name: Reporting
+  tags:
+  - Reports
+  - Report Presets
+  - Report Schedules
+- name: Settings
+  tags:
+  - Text Snippets
+  - Billing Settings
+  - Currencies
+  - Tax Rate Configurations
+- name: Tasks
+  tags:
+  - Tasks
+  - Task Templates
+  - Task Template Lists
+  - Task Types
+- name: Trust
+  tags:
+  - Trust Line Items
+  - Trust Requests
+- name: Users
+  tags:
+  - Users
+  - Groups
+- name: Legal Aid US
+  tags:
+  - Grants
+  - Grant Funding Sources
+- name: Legal Aid England & Wales
+  tags:
+  - Civil Controlled Rates
+  - Civil Certificated Rates
+  - Criminal Controlled Rates
+  - Expense Categories

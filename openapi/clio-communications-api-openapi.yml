@@ -1,0 +1,1789 @@
+openapi: 3.0.0
+info:
+  title: Clio API Documentation Activities Communications API
+  contact:
+    name: Clio API Support
+    email: api@clio.com
+  description: "# Developer Support and Feedback\n* Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio's API Support team at [api@clio.com](mailto:api@clio.com).\n* For business and partnership inquiries, contact our API Partnerships team at [api.partnerships@clio.com](mailto:api.partnerships@clio.com).\n* For best practices and tips from the Clio development community, join the conversation in the [Clio Developer Slack Channel](https://join.slack.com/t/clio-public/shared_invite/zt-36i0eqgo1-7POORPtMJpp2N0~_auL2IQ).\n\nA community-driven [Clio Developers Stack Overflow Group](https://stackoverflow.com/questions/tagged/clio-api) also exists where you can connect and ask questions from other Clio API users.\n# Getting Started\n> **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).\n>\n> Likewise, the developer portal is available at region-specific links for the [Australia](https://au.developers.clio.com), [Canada](https://ca.developers.clio.com), [EU](https://eu.developers.clio.com), and [US](https://developers.clio.com) regions.\n>\n> This document assumes the US region is being used (app.clio.com). If you're building in one of the other regions, you should adapt the links and examples as necessary.\n\nTo start building on the Clio API, you’ll need a Clio account – you can review our [Developer Handbook](https://docs.developers.clio.com/) and follow the steps to sign up for an account.\n\nOnce you have an account, you can [create a developer application](https://docs.developers.clio.com/api-docs/applications) from the [Developer Portal](https://developers.clio.com) and start building!\n# Authorization with OAuth 2.0\nSee our [Authorization documentation →](https://docs.developers.clio.com/api-docs/authorization)\n# Permissions\nSee our [Permissions documentation →](https://docs.developers.clio.com/api-docs/permissions)\n# Fields\nSee our [Fields documentation →](https://docs.developers.clio.com/api-docs/fields)\n# Rate Limiting\nSee our [Rate Limits documentation →](https://docs.developers.clio.com/api-docs/rate-limits)\n# Paging\nSee our [Pagination documentation →](https://docs.developers.clio.com/api-docs/paging)\n# ETags\nSee our [ETags documentation →](https://docs.developers.clio.com/api-docs/etags)\n# Minor Versions\nAPI v4 supports multiple minor versions. Versions are of the form '4.X.Y'. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you're requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.\n\nAn `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.\n\nYou can find our [API Versioning Policy and Guidelines](https://docs.developers.clio.com/api-docs/api-versioning-policy) in our documentation hub.\n\nThe [API Changelog](https://docs.developers.clio.com/api-docs/api-changelog) explains each version's changes in further detail.\n### [4.0.4](https://docs.developers.clio.com/api-docs/api-changelog#404)\n\n  * Update `quantity` field to return values in seconds rather than hours for Activities\n\n### [4.0.5](https://docs.developers.clio.com/api-docs/api-changelog#405)\n\n  * Remove `matter_balances` field from Bills\n* Standardize status/state enum values\n* Add a Document association to completed DocumentAutomations\n* Add rate visibility handling for Activity's price and total\n\n### [4.0.6](https://docs.developers.clio.com/api-docs/api-changelog#406)\n\n  * Remove `document_versions` collection field from Documents\n\n### [4.0.7](https://docs.developers.clio.com/api-docs/api-changelog#407)\n\n  * Change secure link format\n\n### [4.0.8](https://docs.developers.clio.com/api-docs/api-changelog#408)\n\n  * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user\n  * Add `quantity_redacted` field to activities\n\n### [4.0.9](https://docs.developers.clio.com/api-docs/api-changelog#409)\n\n  * Contacts are filtered and redacted in the response based on the new 'Contacts Visibility' user permission setting.\n\n### [4.0.10](https://docs.developers.clio.com/api-docs/api-changelog#4010)\n\n  * Fixed validation of `type` query parameter when querying Notes\n\n### [4.0.12](https://docs.developers.clio.com/api-docs/api-changelog#4012)\n\n  * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers\n\n### [4.0.13](https://docs.developers.clio.com/api-docs/api-changelog#4013)\n\n  **This is the default version**\n\n  * Add association limits to Contacts\n* Returns 422 Unprocessable Entity when association limits are exceeded\n\n\n"
+  version: v4
+  x-logo:
+    url: https://www.clio.com/wp-content/uploads/2015/05/Container-5-Logo.png
+servers:
+- url: https://app.clio.com/api/v4
+  description: US region Production Server
+- url: https://eu.app.clio.com/api/v4
+  description: Europe region Production Server
+- url: https://ca.app.clio.com/api/v4
+  description: Canada region Production Server
+- url: https://au.app.clio.com/api/v4
+  description: Australia region Production Server
+tags:
+- name: Communications
+  description: 'Users can view all logged phone calls and emails under the Communications tab in Clio. This is also where they can use [Clio internal messages](https://help.clio.com/hc/en-us/articles/9125264015259-Internal-Messages).
+
+
+    Communications can be filtered to show those attached to certain Matters or dates, or to show those with or without time entries.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/sections/9036030931739-Communication)
+
+    '
+paths:
+  /communications.json:
+    get:
+      tags:
+      - Communications
+      summary: Return the data for all Communications
+      operationId: Communication#index
+      description: Outlines the parameters, optional and required, used when requesting the data for all Communications
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: contact_id
+        in: query
+        description: The unique identifier for a single Contact. The keyword `null` is not valid for this field. The list will be filtered to include only the Communication records with the matching property.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: created_since
+        in: query
+        description: Filter Communication records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: date
+        in: query
+        description: Filter Communication records to those that occur on the specified date (Expects an ISO-8601 date).
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: external_property_name
+        in: query
+        description: 'Filter records to only those with the given external property(s) name set.
+
+
+          e.g. `?external_property_name=Name`
+
+          '
+        required: false
+        schema:
+          type: string
+      - name: external_property_value
+        in: query
+        description: 'Filter records to only those with the given external property(s) value set. Requires external property name as well.
+
+
+          e.g. `?external_property_name=Name&external_property_value=Value`
+
+          '
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: having_time_entries
+        in: query
+        description: Filter Communication records to those that do or do not have time entries.
+        required: false
+        schema:
+          type: boolean
+      - name: ids[]
+        in: query
+        description: Filter Communication records to those having the specified unique identifiers.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: 'A limit on the number of Communication records to be returned. Limit can range between 1 and 200. Default: `200`.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: matter_id
+        in: query
+        description: The unique identifier for a single Matter. Use the keyword `null` to match those without a Communication. The list will be filtered to include only the Communication records with the matching property.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: order
+        in: query
+        description: 'Orders the Communication records by the given field. Default: `date(asc)`.'
+        required: false
+        schema:
+          type: string
+          enum:
+          - id(asc)
+          - id(desc)
+          - date(asc)
+          - date(desc)
+          - received_at(asc)
+          - received_at(desc)
+          - matter(asc)
+          - matter(desc)
+      - name: page_token
+        in: query
+        description: A token specifying which page to return.
+        required: false
+        schema:
+          type: string
+      - name: query
+        in: query
+        description: Wildcard search for `body` or `subject` matching a given string.
+        required: false
+        schema:
+          type: string
+      - name: received_at
+        in: query
+        description: Filter Communication records to those that occur on the specified date (Expects an ISO-8601 date-time).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: received_before
+        in: query
+        description: Filter Communication records to those whose `date` is on or before the date provided (Expects an ISO-8601 date).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: received_since
+        in: query
+        description: Filter Communication records to those whose `date` is on or after the date provided (Expects an ISO-8601 date).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: type
+        in: query
+        description: Filter Communication records to those of the specified type.
+        required: false
+        schema:
+          type: string
+          enum:
+          - EmailCommunication
+          - PhoneCommunication
+      - name: updated_since
+        in: query
+        description: Filter Communication records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: user_id
+        in: query
+        description: The unique identifier for a single User. The keyword `null` is not valid for this field. The list will be filtered to include only the Communication records with the matching property.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Communication_List'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+      - Communications
+      summary: Create a new Communication
+      operationId: Communication#create
+      description: Outlines the parameters and data fields used when creating a new Communication
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Communication_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        description: Request Body for Communications
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    body:
+                      type: string
+                      description: The body value.
+                    external_properties:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            description: 'The ExternalProperty name. Note: **there is a limit of 5 external_properties per Communication**'
+                          value:
+                            type: string
+                            description: The ExternalProperty value.
+                    matter:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Matter associated with the Communication. The keyword `null` is not valid for this field.
+                    notification_event_subscribers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          user_id:
+                            type: string
+                            description: 'The unique identifier for a User to be added as a notification event subscriber to the Phone Log Communication. Note: Only applicable to Phone Log Communications, invalid for other communication types.'
+                        required:
+                        - user_id
+                    received_at:
+                      type: string
+                      description: The date-time for the Communication. (Expects an ISO-8601 date-time.)
+                    receivers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          _deleted:
+                            type: boolean
+                            description: Whether or not the receivers should be deleted.
+                          id:
+                            type: integer
+                            format: int64
+                            description: Unique ids for the receivers of this Communication.
+                          type:
+                            type: string
+                            enum:
+                            - User
+                            - Contact
+                            description: Types of the receivers of this Communication.
+                    senders:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          _deleted:
+                            type: boolean
+                            description: Whether or not the senders should be deleted.
+                          id:
+                            type: integer
+                            format: int64
+                            description: Unique ids for the senders of this Communication.
+                          type:
+                            type: string
+                            enum:
+                            - User
+                            - Contact
+                            description: Types of the senders of this Communication.
+                    subject:
+                      type: string
+                      description: The subject value.
+                    type:
+                      type: string
+                      enum:
+                      - PhoneCommunication
+                      - EmailCommunication
+                      description: Type of the Communication.
+                  required:
+                  - body
+                  - received_at
+                  - subject
+                  - type
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    body:
+                      type: string
+                      description: The body value.
+                    external_properties:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            description: 'The ExternalProperty name. Note: **there is a limit of 5 external_properties per Communication**'
+                          value:
+                            type: string
+                            description: The ExternalProperty value.
+                    matter:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Matter associated with the Communication. The keyword `null` is not valid for this field.
+                    notification_event_subscribers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          user_id:
+                            type: string
+                            description: 'The unique identifier for a User to be added as a notification event subscriber to the Phone Log Communication. Note: Only applicable to Phone Log Communications, invalid for other communication types.'
+                        required:
+                        - user_id
+                    received_at:
+                      type: string
+                      description: The date-time for the Communication. (Expects an ISO-8601 date-time.)
+                    receivers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          _deleted:
+                            type: boolean
+                            description: Whether or not the receivers should be deleted.
+                          id:
+                            type: integer
+                            format: int64
+                            description: Unique ids for the receivers of this Communication.
+                          type:
+                            type: string
+                            enum:
+                            - User
+                            - Contact
+                            description: Types of the receivers of this Communication.
+                    senders:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          _deleted:
+                            type: boolean
+                            description: Whether or not the senders should be deleted.
+                          id:
+                            type: integer
+                            format: int64
+                            description: Unique ids for the senders of this Communication.
+                          type:
+                            type: string
+                            enum:
+                            - User
+                            - Contact
+                            description: Types of the senders of this Communication.
+                    subject:
+                      type: string
+                      description: The subject value.
+                    type:
+                      type: string
+                      enum:
+                      - PhoneCommunication
+                      - EmailCommunication
+                      description: Type of the Communication.
+                  required:
+                  - body
+                  - received_at
+                  - subject
+                  - type
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    body:
+                      type: string
+                      description: The body value.
+                    external_properties:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            description: 'The ExternalProperty name. Note: **there is a limit of 5 external_properties per Communication**'
+                          value:
+                            type: string
+                            description: The ExternalProperty value.
+                    matter:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Matter associated with the Communication. The keyword `null` is not valid for this field.
+                    notification_event_subscribers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          user_id:
+                            type: string
+                            description: 'The unique identifier for a User to be added as a notification event subscriber to the Phone Log Communication. Note: Only applicable to Phone Log Communications, invalid for other communication types.'
+                        required:
+                        - user_id
+                    received_at:
+                      type: string
+                      description: The date-time for the Communication. (Expects an ISO-8601 date-time.)
+                    receivers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          _deleted:
+                            type: boolean
+                            description: Whether or not the receivers should be deleted.
+                          id:
+                            type: integer
+                            format: int64
+                            description: Unique ids for the receivers of this Communication.
+                          type:
+                            type: string
+                            enum:
+                            - User
+                            - Contact
+                            description: Types of the receivers of this Communication.
+                    senders:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          _deleted:
+                            type: boolean
+                            description: Whether or not the senders should be deleted.
+                          id:
+                            type: integer
+                            format: int64
+                            description: Unique ids for the senders of this Communication.
+                          type:
+                            type: string
+                            enum:
+                            - User
+                            - Contact
+                            description: Types of the senders of this Communication.
+                    subject:
+                      type: string
+                      description: The subject value.
+                    type:
+                      type: string
+                      enum:
+                      - PhoneCommunication
+                      - EmailCommunication
+                      description: Type of the Communication.
+                  required:
+                  - body
+                  - received_at
+                  - subject
+                  - type
+        required: false
+  /communications/{id}.json:
+    get:
+      tags:
+      - Communications
+      summary: Return the data for a single Communication
+      operationId: Communication#show
+      description: Outlines the parameters, optional and required, used when requesting the data for a single Communication
+      parameters:
+      - name: IF-MODIFIED-SINCE
+        in: header
+        description: The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: IF-NONE-MATCH
+        in: header
+        description: The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.
+        required: false
+        schema:
+          type: string
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The unique identifier for the Communication.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Communication_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '304':
+          description: Not Modified
+    patch:
+      tags:
+      - Communications
+      summary: Update a single Communication
+      operationId: Communication#update
+      description: Outlines the parameters and data fields used when updating a single Communication
+      parameters:
+      - name: IF-MATCH
+        in: header
+        description: The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).
+        required: false
+        schema:
+          type: string
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The unique identifier for the Communication.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Communication_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '412':
+          description: Precondition Failed
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        description: Request Body for Communications
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    body:
+                      type: string
+                      description: The body value.
+                    external_properties:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single ExternalProperty associated with the Communication. The keyword `null` is not valid for this field.
+                          name:
+                            type: string
+                            description: 'The ExternalProperty name. Note: **there is a limit of 5 external_properties per Communication**'
+                          value:
+                            type: string
+                            description: The ExternalProperty value.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated ExternalProperty is present, the ExternalProperty is deleted from the Communication.
+                    matter:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Matter associated with the Communication. The keyword `null` is not valid for this field.
+                    notification_event_subscribers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          user_id:
+                            type: string
+                            description: 'The unique identifier for a User to be added as a notification event subscriber to the Phone Log Communication. Note: Only applicable to Phone Log Communications, invalid for other communication types.'
+                          id:
+                            type: integer
+                            format: int64
+                            description: 'Unique id of this Communication. Note: Only applicable to Phone Log Communications, invalid for other communication types.'
+                          _destroy:
+                            type: boolean
+                            description: 'Whether or not the notification event subscriber should be deleted. Note: Only applicable to Phone Log Communications, invalid for other communication types.'
+                    received_at:
+                      type: string
+                      description: The date-time for the Communication. (Expects an ISO-8601 date-time.)
+                    receivers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          _deleted:
+                            type: boolean
+                            description: Whether or not the receivers should be deleted.
+                          id:
+                            type: integer
+                            format: int64
+                            description: Unique ids for the receivers of this Communication.
+                          type:
+                            type: string
+                            enum:
+                            - User
+                            - Contact
+                            description: Types of the receivers of this Communication.
+                    senders:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          _deleted:
+                            type: boolean
+                            description: Whether or not the senders should be deleted.
+                          id:
+                            type: integer
+                            format: int64
+                            description: Unique ids for the senders of this Communication.
+                          type:
+                            type: string
+                            enum:
+                            - User
+                            - Contact
+                            description: Types of the senders of this Communication.
+                    subject:
+                      type: string
+                      description: The subject value.
+                    type:
+                      type: string
+                      enum:
+                      - PhoneCommunication
+                      - EmailCommunication
+                      description: Type of the Communication.
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    body:
+                      type: string
+                      description: The body value.
+                    external_properties:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single ExternalProperty associated with the Communication. The keyword `null` is not valid for this field.
+                          name:
+                            type: string
+                            description: 'The ExternalProperty name. Note: **there is a limit of 5 external_properties per Communication**'
+                          value:
+                            type: string
+                            description: The ExternalProperty value.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated ExternalProperty is present, the ExternalProperty is deleted from the Communication.
+                    matter:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Matter associated with the Communication. The keyword `null` is not valid for this field.
+                    notification_event_subscribers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          user_id:
+                            type: string
+                            description: 'The unique identifier for a User to be added as a notification event subscriber to the Phone Log Communication. Note: Only applicable to Phone Log Communications, invalid for other communication types.'
+                          id:
+                            type: integer
+                            format: int64
+                            description: 'Unique id of this Communication. Note: Only applicable to Phone Log Communications, invalid for other communication types.'
+                          _destroy:
+                            type: boolean
+                            description: 'Whether or not the notification event subscriber should be deleted. Note: Only applicable to Phone Log Communications, invalid for other communication types.'
+                    received_at:
+                      type: string
+                      description: The date-time for the Communication. (Expects an ISO-8601 date-time.)
+                    receivers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          _deleted:
+                            type: boolean
+                            description: Whether or not the receivers should be deleted.
+                          id:
+                            type: integer
+                            format: int64
+                            description: Unique ids for the receivers of this Communication.
+                          type:
+                            type: string
+                            enum:
+                            - User
+                            - Contact
+                            description: Types of the receivers of this Communication.
+                    senders:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          _deleted:
+                            type: boolean
+                            description: Whether or not the senders should be deleted.
+                          id:
+                            type: integer
+                            format: int64
+                            description: Unique ids for the senders of this Communication.
+                          type:
+                            type: string
+                            enum:
+                            - User
+                            - Contact
+                            description: Types of the senders of this Communication.
+                    subject:
+                      type: string
+                      description: The subject value.
+                    type:
+                      type: string
+                      enum:
+                      - PhoneCommunication
+                      - EmailCommunication
+                      description: Type of the Communication.
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    body:
+                      type: string
+                      description: The body value.
+                    external_properties:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single ExternalProperty associated with the Communication. The keyword `null` is not valid for this field.
+                          name:
+                            type: string
+                            description: 'The ExternalProperty name. Note: **there is a limit of 5 external_properties per Communication**'
+                          value:
+                            type: string
+                            description: The ExternalProperty value.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated ExternalProperty is present, the ExternalProperty is deleted from the Communication.
+                    matter:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Matter associated with the Communication. The keyword `null` is not valid for this field.
+                    notification_event_subscribers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          user_id:
+                            type: string
+                            description: 'The unique identifier for a User to be added as a notification event subscriber to the Phone Log Communication. Note: Only applicable to Phone Log Communications, invalid for other communication types.'
+                          id:
+                            type: integer
+                            format: int64
+                            description: 'Unique id of this Communication. Note: Only applicable to Phone Log Communications, invalid for other communication types.'
+                          _destroy:
+                            type: boolean
+                            description: 'Whether or not the notification event subscriber should be deleted. Note: Only applicable to Phone Log Communications, invalid for other communication types.'
+                    received_at:
+                      type: string
+                      description: The date-time for the Communication. (Expects an ISO-8601 date-time.)
+                    receivers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          _deleted:
+                            type: boolean
+                            description: Whether or not the receivers should be deleted.
+                          id:
+                            type: integer
+                            format: int64
+                            description: Unique ids for the receivers of this Communication.
+                          type:
+                            type: string
+                            enum:
+                            - User
+                            - Contact
+                            description: Types of the receivers of this Communication.
+                    senders:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          _deleted:
+                            type: boolean
+                            description: Whether or not the senders should be deleted.
+                          id:
+                            type: integer
+                            format: int64
+                            description: Unique ids for the senders of this Communication.
+                          type:
+                            type: string
+                            enum:
+                            - User
+                            - Contact
+                            description: Types of the senders of this Communication.
+                    subject:
+                      type: string
+                      description: The subject value.
+                    type:
+                      type: string
+                      enum:
+                      - PhoneCommunication
+                      - EmailCommunication
+                      description: Type of the Communication.
+        required: false
+    delete:
+      tags:
+      - Communications
+      summary: Delete a single Communication
+      operationId: Communication#destroy
+      description: Outlines the parameters, optional and required, used when deleting the record for a single Communication
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The unique identifier for the Communication.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '204':
+          description: No Content
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Avatar_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Avatar*
+        etag:
+          type: string
+          description: ETag for the *Avatar*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Avatar* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Avatar* was last updated (as a ISO-8601 timestamp)
+        url:
+          type: string
+          description: The URL for the *Avatar*
+        _destroy:
+          type: boolean
+          description: Whether to destroy the *Avatar*
+    Communication:
+      allOf:
+      - $ref: '#/components/schemas/Communication_base'
+      - type: object
+        properties:
+          user:
+            $ref: '#/components/schemas/User_base'
+            description: User
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          communication_eml_file:
+            $ref: '#/components/schemas/CommunicationEmlFile_base'
+            description: CommunicationEmlFile
+          senders:
+            type: array
+            items:
+              $ref: '#/components/schemas/Participant'
+            description: Participant
+          receivers:
+            type: array
+            items:
+              $ref: '#/components/schemas/Participant'
+            description: Participant
+          external_properties:
+            type: array
+            items:
+              $ref: '#/components/schemas/ExternalProperty_base'
+            description: ExternalProperty
+          time_entries:
+            type: array
+            items:
+              $ref: '#/components/schemas/Activity_base'
+            description: Activity
+          documents:
+            type: array
+            items:
+              $ref: '#/components/schemas/Document_base'
+            description: Document
+          notification_event_subscribers:
+            type: array
+            items:
+              $ref: '#/components/schemas/NotificationEventSubscriber_base'
+            description: NotificationEventSubscriber
+    Participant:
+      allOf:
+      - $ref: '#/components/schemas/Participant_base'
+      - type: object
+        properties:
+          avatar:
+            $ref: '#/components/schemas/Avatar_base'
+            description: Avatar
+    Document_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Document*
+        etag:
+          type: string
+          description: ETag for the *Document*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Document* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Document* was last updated (as a ISO-8601 timestamp)
+        deleted_at:
+          type: string
+          format: date-time
+          description: The time the *Document* was deleted (as a ISO-8601 timestamp)
+        type:
+          type: string
+          enum:
+          - Document
+          description: The type of the *Document*
+        locked:
+          type: boolean
+          description: Whether or not the Document is locked. Locked Document cannot be modified
+        name:
+          type: string
+          description: The name of the Document
+        received_at:
+          type: string
+          format: date-time
+          description: The time the last document version was received (as an ISO-8601 timestamp)
+        filename:
+          type: string
+          description: The uploaded file name of the latest document version.
+        size:
+          type: integer
+          format: int32
+          description: The file size
+        content_type:
+          type: string
+          description: The uploaded file content type
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    CommunicationEmlFile_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *CommunicationEmlFile*
+    Matter_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Matter*
+        etag:
+          type: string
+          description: ETag for the *Matter*
+        number:
+          type: integer
+          format: int32
+          description: The number given to the *Matter* within an account
+        display_number:
+          type: string
+          description: The reference and label of the *Matter*. Depending on the account's manual_matter_numbering setting, this is either read only (generated) or customizable.
+        custom_number:
+          type: string
+          description: User defined custom number of the *Matter*
+        currency:
+          type: object
+          description: Currency of the matter
+        description:
+          type: string
+          description: The detailed description of the *Matter*
+        status:
+          type: string
+          enum:
+          - Pending
+          - Open
+          - Closed
+          description: The current status of the *Matter*
+        location:
+          type: string
+          description: The location of the *Matter*
+        client_reference:
+          type: string
+          description: Client Reference string for external uses
+        client_id:
+          type: integer
+          format: int64
+          description: Client ID
+        billable:
+          type: boolean
+          description: Whether this matter is billable
+        maildrop_address:
+          type: string
+          description: A unique Maildrop email address for the matter
+        billing_method:
+          type: string
+          enum:
+          - flat
+          - contingency
+          - hourly
+          description: Billing method of this matter
+        open_date:
+          type: string
+          format: date
+          description: The date the matter was set to open (as a ISO-8601 date)
+        close_date:
+          type: string
+          format: date
+          description: The date the matter was set to closed (as a ISO-8601 date)
+        pending_date:
+          type: string
+          format: date
+          description: The date the matter was set to pending (as a ISO-8601 date)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Matter* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Matter* was last updated (as a ISO-8601 timestamp)
+        shared:
+          type: boolean
+          description: Whether the matter is currently shared with Clio Connect
+        has_tasks:
+          type: boolean
+          description: Whether or not the matter has any tasks.
+        last_activity_date:
+          type: string
+          format: date
+          description: The greatest date out of all of the activities on the matter (as a ISO-8601 date)
+        matter_stage_updated_at:
+          type: string
+          format: date-time
+          description: The date the matter stage was last updated (as a ISO-8601 date)
+    ExternalProperty_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ExternalProperty*
+        etag:
+          type: string
+          description: ETag for the *ExternalProperty*
+        name:
+          type: string
+          description: The name of the *ExternalProperty*
+        value:
+          type: string
+          description: The value of the *ExternalProperty*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ExternalProperty* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ExternalProperty* was last updated (as a ISO-8601 timestamp)
+    Participant_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Participant*
+        etag:
+          type: string
+          description: ETag for the *Participant*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Participant* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Participant* was last updated (as a ISO-8601 timestamp)
+        type:
+          type: string
+          enum:
+          - Person
+          - Company
+          - User
+          description: The type of the Participant. Person and Company are subtypes of Contact
+        identifier:
+          type: string
+          description: A string to identify the *Participant*
+        secondary_identifier:
+          type: string
+          description: A secondary string to identify the *Participant*
+        enabled:
+          type: boolean
+          description: The enabled state of the *Participant* record. Always 'null' if *Participant* type is Contact
+        name:
+          type: string
+          description: The name of the *Participant* record
+        initials:
+          type: string
+          description: A  string with the participant initials
+        job_title_name:
+          type: string
+          description: the job title name of the participant if they are a firm user and have one
+    User_base:
+      type: object
+      properties:
+        account_owner:
+          type: boolean
+          description: Whether the *User* is the owner of the account
+        clio_connect:
+          type: boolean
+          description: Whether the *User* is a Clio Connect user
+        court_rules_default_attendee:
+          type: boolean
+          description: Whether the *User* is a default attendee for court rules events
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *User* was created (as a ISO-8601 timestamp)
+        default_calendar_id:
+          type: integer
+          format: int64
+          description: Default calendar id for *User*.
+        email:
+          type: string
+          description: The email of the *User*
+        enabled:
+          type: boolean
+          description: Whether the *User* is allowed to log in
+        etag:
+          type: string
+          description: ETag for the *User*
+        first_name:
+          type: string
+          description: The first name of the *User*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *User*
+        initials:
+          type: string
+          description: The initials of the *User*
+        last_name:
+          type: string
+          description: The last name of the *User*
+        name:
+          type: string
+          description: The full name of the *User*
+        phone_number:
+          type: string
+          description: The primary phone number for the *User*.
+        rate:
+          type: number
+          format: float
+          description: Default user activity rate for *User*.
+        roles:
+          type: array
+          items:
+            type: string
+          description: An array of roles assigned to this *User*
+        subscription_type:
+          type: string
+          enum:
+          - Attorney
+          - NonAttorney
+          description: The subscription type of the *User*
+        time_zone:
+          type: string
+          description: The selected time zone of the *User*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *User* was last updated (as a ISO-8601 timestamp)
+    Communication_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Communication'
+    NotificationEventSubscriber_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *NotificationEventSubscriber*
+        etag:
+          type: string
+          description: ETag for the *NotificationEventSubscriber*
+        user_id:
+          type: integer
+          format: int64
+          description: The unique identifier for a User added as a notification event subscriber to the NotificationEventSubscriber
+        name:
+          type: string
+          description: The User name added as a notification event subscriber to the NotificationEventSubscriber
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *NotificationEventSubscriber* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *NotificationEventSubscriber* was last updated (as a ISO-8601 timestamp)
+    Activity_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Activity*
+        etag:
+          type: string
+          description: ETag for the *Activity*
+        type:
+          type: string
+          enum:
+          - TimeEntry
+          - ExpenseEntry
+          - HardCostEntry
+          - SoftCostEntry
+          description: The type of the *Activity*
+        date:
+          type: string
+          format: date
+          description: The date the *Activity* was performed (as a ISO-8601 date)
+        quantity_in_hours:
+          type: number
+          format: double
+          description: The number of hours the TimeEntry took.
+        rounded_quantity_in_hours:
+          type: number
+          format: double
+          description: 'The number of hours rounded accordingly to the billing settings.
+
+            The rounded value is used to calculate the total.
+
+            '
+        quantity:
+          type: number
+          format: double
+          description: 'The field is applicable to TimeEntry, ExpenseEntry, and SoftCostEntry.
+
+
+            **Version <= 4.0.3:**
+
+            The number of hours the TimeEntry took.
+
+
+            **Latest version:**
+
+            The number of seconds the TimeEntry took.
+
+            '
+        rounded_quantity:
+          type: number
+          format: double
+          description: 'The field is applicable to time entries only.
+
+
+            **Version <= 4.0.3:**
+
+            The number of hours rounded accordingly to the billing settings.
+
+            The rounded value is used to calculate the total.
+
+
+            **Latest version:**
+
+            The number of seconds rounded accordingly to the billing settings.
+
+            The rounded value is used to calculate the total.
+
+            '
+        quantity_redacted:
+          type: boolean
+          description: 'Is `true` if any of the following fields are redacted:
+
+            `quantity`, `rounded_quantity`, `rounded_quantity_in_hours`, `quantity_in_hours`, `total`, `non_billable_total`
+
+            '
+        price:
+          type: number
+          format: double
+          description: The hourly or flat rate of the *Activity*
+        note:
+          type: string
+          description: The details about the *Activity*
+        flat_rate:
+          type: boolean
+          description: Whether the *Activity* is a flat rate
+        billed:
+          type: boolean
+          description: Whether the *Activity* has been added to an active bill that is in the state of `awaiting_payment` or `paid`
+        on_bill:
+          type: boolean
+          description: Whether the *Activity* has been added to an active bill that is in the state of `draft`, `awaiting_approval`, `awaiting_payment` or `paid`
+        total:
+          type: number
+          format: double
+          description: The total cost of draft, billable and billed items in the *Activity*
+        contingency_fee:
+          type: boolean
+          description: Whether or not the *Activity* is a contingency fee
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Activity* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Activity* was last updated (as a ISO-8601 timestamp)
+        reference:
+          type: string
+          description: A check reference for a HardCostEntry.
+        non_billable:
+          type: boolean
+          description: Whether the *Activity* is non-billable
+        non_billable_total:
+          type: number
+          format: double
+          description: The total cost of non-billable items in the *Activity*
+        no_charge:
+          type: boolean
+          description: Whether the non-billable *Activity* is shown on the bill.
+        tax_setting:
+          type: string
+          enum:
+          - no_tax
+          - tax_1_only
+          - tax_2_only
+          - tax_1_and_tax_2
+          description: The option denoting whether primary tax, secondary tax, or both is applied to an expense entry.
+        tax_settings:
+          type: array
+          items:
+            type: object
+          description: Array of objects, with each object representing a tax setting that is applied to an expense entry with 'tax_rate_configuration_id', 'order', and 'rule' as the object properties.
+        currency:
+          type: object
+          description: The currency of the *Activity*
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    Communication_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: Communication List Response
+          items:
+            $ref: '#/components/schemas/Communication'
+    Communication_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Communication*
+        etag:
+          type: string
+          description: ETag for the *Communication*
+        subject:
+          type: string
+          description: The subject line of the *Communication*
+        body:
+          type: string
+          description: The main content of the *Communication*
+        type:
+          type: string
+          enum:
+          - EmailCommunication
+          - PhoneCommunication
+          description: The type of the *Communication*
+        date:
+          type: string
+          format: date
+          description: The date of the *Communication* (as a ISO-8601 datestamp)
+        time_entries_count:
+          type: integer
+          format: int32
+          description: The number of time_entries associated with the *Communication*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Communication* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Communication* was last updated (as a ISO-8601 timestamp)
+        received_at:
+          type: string
+          format: date-time
+          description: The date-time of the *Communication* (in ISO-8601 format)
+x-tagGroups:
+- name: Api
+  tags:
+  - Custom Actions
+  - Webhooks
+- name: Activities
+  tags:
+  - Activities
+  - Activity Descriptions
+  - Activity Rates
+  - Expense Categories
+  - Timers
+  - Utbms Codes
+  - Utbms Sets
+- name: Accounting
+  tags:
+  - Bank Accounts
+  - Bank Transactions
+  - Bank Transfers
+- name: Billing
+  tags:
+  - Bills
+  - Billable Clients
+  - Billable Matters
+  - Bill Themes
+  - Interest Charges
+  - Line Items
+  - Outstanding Client Balances
+- name: Calendars
+  tags:
+  - Calendars
+  - Calendar Entries
+  - Calendar Entry Event Types
+  - Calendar Visibilities
+  - Reminders
+- name: Clio Payments
+  tags:
+  - Clio Payments Links
+  - Clio Payments Payments
+- name: Communications
+  tags:
+  - Communications
+  - Conversations
+  - Conversation Messages
+- name: Contacts
+  tags:
+  - Contacts
+  - Email Addresses
+  - Phone Numbers
+  - Notes
+  - Log Entries
+- name: Court Rules
+  tags:
+  - Jurisdictions To Triggers
+  - Jurisdictions
+  - Matter Dockets
+  - Service Types
+- name: Custom Fields
+  tags:
+  - Custom Fields
+  - Custom Field Sets
+- name: Documents
+  tags:
+  - Documents
+  - Document Versions
+  - Folders
+  - Document Archives
+  - Document Automations
+  - Document Categories
+  - Document Templates
+  - Comments
+- name: In-app Notifications
+  tags:
+  - My Events
+  - Event Metrics
+- name: Matters
+  tags:
+  - Matters
+  - Relationships
+  - Clients
+  - Related Contacts
+  - Matter Contacts
+  - Notes
+  - Practice Areas
+  - Log Entries
+  - Matter Stages
+  - Medical Records Details
+  - Medical Records
+  - Medical Bills
+  - Damages
+- name: Payments
+  tags:
+  - Allocations
+  - Credit Memos
+- name: Reporting
+  tags:
+  - Reports
+  - Report Presets
+  - Report Schedules
+- name: Settings
+  tags:
+  - Text Snippets
+  - Billing Settings
+  - Currencies
+  - Tax Rate Configurations
+- name: Tasks
+  tags:
+  - Tasks
+  - Task Templates
+  - Task Template Lists
+  - Task Types
+- name: Trust
+  tags:
+  - Trust Line Items
+  - Trust Requests
+- name: Users
+  tags:
+  - Users
+  - Groups
+- name: Legal Aid US
+  tags:
+  - Grants
+  - Grant Funding Sources
+- name: Legal Aid England & Wales
+  tags:
+  - Civil Controlled Rates
+  - Civil Certificated Rates
+  - Criminal Controlled Rates
+  - Expense Categories

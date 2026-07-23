@@ -1,0 +1,1347 @@
+openapi: 3.0.0
+info:
+  title: Clio API Documentation Activities Task Templates API
+  contact:
+    name: Clio API Support
+    email: api@clio.com
+  description: "# Developer Support and Feedback\n* Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio's API Support team at [api@clio.com](mailto:api@clio.com).\n* For business and partnership inquiries, contact our API Partnerships team at [api.partnerships@clio.com](mailto:api.partnerships@clio.com).\n* For best practices and tips from the Clio development community, join the conversation in the [Clio Developer Slack Channel](https://join.slack.com/t/clio-public/shared_invite/zt-36i0eqgo1-7POORPtMJpp2N0~_auL2IQ).\n\nA community-driven [Clio Developers Stack Overflow Group](https://stackoverflow.com/questions/tagged/clio-api) also exists where you can connect and ask questions from other Clio API users.\n# Getting Started\n> **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).\n>\n> Likewise, the developer portal is available at region-specific links for the [Australia](https://au.developers.clio.com), [Canada](https://ca.developers.clio.com), [EU](https://eu.developers.clio.com), and [US](https://developers.clio.com) regions.\n>\n> This document assumes the US region is being used (app.clio.com). If you're building in one of the other regions, you should adapt the links and examples as necessary.\n\nTo start building on the Clio API, you’ll need a Clio account – you can review our [Developer Handbook](https://docs.developers.clio.com/) and follow the steps to sign up for an account.\n\nOnce you have an account, you can [create a developer application](https://docs.developers.clio.com/api-docs/applications) from the [Developer Portal](https://developers.clio.com) and start building!\n# Authorization with OAuth 2.0\nSee our [Authorization documentation →](https://docs.developers.clio.com/api-docs/authorization)\n# Permissions\nSee our [Permissions documentation →](https://docs.developers.clio.com/api-docs/permissions)\n# Fields\nSee our [Fields documentation →](https://docs.developers.clio.com/api-docs/fields)\n# Rate Limiting\nSee our [Rate Limits documentation →](https://docs.developers.clio.com/api-docs/rate-limits)\n# Paging\nSee our [Pagination documentation →](https://docs.developers.clio.com/api-docs/paging)\n# ETags\nSee our [ETags documentation →](https://docs.developers.clio.com/api-docs/etags)\n# Minor Versions\nAPI v4 supports multiple minor versions. Versions are of the form '4.X.Y'. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you're requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.\n\nAn `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.\n\nYou can find our [API Versioning Policy and Guidelines](https://docs.developers.clio.com/api-docs/api-versioning-policy) in our documentation hub.\n\nThe [API Changelog](https://docs.developers.clio.com/api-docs/api-changelog) explains each version's changes in further detail.\n### [4.0.4](https://docs.developers.clio.com/api-docs/api-changelog#404)\n\n  * Update `quantity` field to return values in seconds rather than hours for Activities\n\n### [4.0.5](https://docs.developers.clio.com/api-docs/api-changelog#405)\n\n  * Remove `matter_balances` field from Bills\n* Standardize status/state enum values\n* Add a Document association to completed DocumentAutomations\n* Add rate visibility handling for Activity's price and total\n\n### [4.0.6](https://docs.developers.clio.com/api-docs/api-changelog#406)\n\n  * Remove `document_versions` collection field from Documents\n\n### [4.0.7](https://docs.developers.clio.com/api-docs/api-changelog#407)\n\n  * Change secure link format\n\n### [4.0.8](https://docs.developers.clio.com/api-docs/api-changelog#408)\n\n  * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user\n  * Add `quantity_redacted` field to activities\n\n### [4.0.9](https://docs.developers.clio.com/api-docs/api-changelog#409)\n\n  * Contacts are filtered and redacted in the response based on the new 'Contacts Visibility' user permission setting.\n\n### [4.0.10](https://docs.developers.clio.com/api-docs/api-changelog#4010)\n\n  * Fixed validation of `type` query parameter when querying Notes\n\n### [4.0.12](https://docs.developers.clio.com/api-docs/api-changelog#4012)\n\n  * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers\n\n### [4.0.13](https://docs.developers.clio.com/api-docs/api-changelog#4013)\n\n  **This is the default version**\n\n  * Add association limits to Contacts\n* Returns 422 Unprocessable Entity when association limits are exceeded\n\n\n"
+  version: v4
+  x-logo:
+    url: https://www.clio.com/wp-content/uploads/2015/05/Container-5-Logo.png
+servers:
+- url: https://app.clio.com/api/v4
+  description: US region Production Server
+- url: https://eu.app.clio.com/api/v4
+  description: Europe region Production Server
+- url: https://ca.app.clio.com/api/v4
+  description: Canada region Production Server
+- url: https://au.app.clio.com/api/v4
+  description: Australia region Production Server
+tags:
+- name: Task Templates
+  description: 'Task Templates are the individual [Tasks](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Tasks) which comprise a [Task Template List](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Task-Template-Lists).
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9206286672155-Task-Lists)
+
+    '
+paths:
+  /task_templates.json:
+    get:
+      tags:
+      - Task Templates
+      summary: Return the data for all TaskTemplates
+      operationId: TaskTemplate#index
+      description: Outlines the parameters, optional and required, used when requesting the data for all TaskTemplates
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: created_since
+        in: query
+        description: Filter TaskTemplate records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: ids[]
+        in: query
+        description: Filter TaskTemplate records to those having the specified unique identifiers.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: 'A limit on the number of TaskTemplate records to be returned. Limit can range between 1 and 200. Default: `200`.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: order
+        in: query
+        description: 'Orders the TaskTemplate records by the given field. Default: `id(asc)`.'
+        required: false
+        schema:
+          type: string
+          enum:
+          - assignee.name(asc)
+          - assignee.name(desc)
+          - days_from_assignment(asc)
+          - days_from_assignment(desc)
+          - id(asc)
+          - id(desc)
+          - name(asc)
+          - name(desc)
+          - permission(asc)
+          - permission(desc)
+          - priority(asc)
+          - priority(desc)
+      - name: page_token
+        in: query
+        description: A token specifying which page to return.
+        required: false
+        schema:
+          type: string
+      - name: priority
+        in: query
+        description: Filter TaskTemplate records to those with the given priority.
+        required: false
+        schema:
+          type: string
+          enum:
+          - high
+          - normal
+          - low
+      - name: query
+        in: query
+        description: Wildcard search for `name` matching a given string.
+        required: false
+        schema:
+          type: string
+      - name: task_template_list_id
+        in: query
+        description: The unique identifier for a single TaskTemplateList. The keyword `null` is not valid for this field. The list will be filtered to include only the TaskTemplate records with the matching property.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: updated_since
+        in: query
+        description: Filter TaskTemplate records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/TaskTemplate_List'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+      - Task Templates
+      summary: Create a new TaskTemplate
+      operationId: TaskTemplate#create
+      description: Outlines the parameters and data fields used when creating a new TaskTemplate
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/TaskTemplate_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        description: Request Body for Task Templates
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    cascading:
+                      type: boolean
+                      description: Determines if the TaskTemplate has a due date that is derived from another TaskTemplate. (Note that if false, no other cascading information will be checked)
+                    cascading_offset:
+                      type: integer
+                      format: int32
+                      description: The amount of time that will differentiate the cascaded TaskTemplate from its parent.
+                    cascading_offset_polarity:
+                      type: string
+                      enum:
+                      - Before
+                      - After
+                      description: Determines whether or not the cascading_offset occurs before or after its parent.
+                    cascading_offset_type:
+                      type: string
+                      enum:
+                      - CalendarDays
+                      - CalendarWeeks
+                      - CalendarMonths
+                      - CalendarYears
+                      - BusinessDays
+                      description: Determines the quantity of the cascading offset (e.g. CalendarDays, CalendarWeeks etc.)
+                    cascading_source:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int32
+                          description: The unique identifier for a single TaskTemplate associated with the TaskTemplate. The keyword `null` is not valid for this field.
+                    description:
+                      type: string
+                      description: Longer description of the TaskTemplate. This TaskTemplate supports rich text when the `description_text_type` field is set to `rich_text`. With supported tags such as `<a>`, `<b>`, `<br>`, `<div>`, `<em>`, `<i>` `<li>`, `<ol>`, `<p>`, `<s>`, `<strong>`, `<u>` and `<ul>`. This TaskTemplate also supports attributes such as `href`, `rel`, `type`, and `target`.
+                    description_text_type:
+                      type: string
+                      default: plain_text
+                      enum:
+                      - plain_text
+                      - rich_text
+                      description: The type of text in the description field.
+                    name:
+                      type: string
+                      description: Short name for the TaskTemplate.
+                    priority:
+                      type: string
+                      default: Normal
+                      enum:
+                      - High
+                      - Normal
+                      - Low
+                      description: Priority of the task.
+                    private:
+                      type: boolean
+                      description: Whether or not this TaskTemplate should be private.
+                    reminder_templates:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          duration_value:
+                            type: integer
+                            format: int32
+                            description: Time measured in `duration_unit` to remind user before the subject.
+                          duration_unit:
+                            type: string
+                            description: Unit to measure the duration value in.
+                          notification_type:
+                            type: string
+                            enum:
+                            - Email
+                            - Popup
+                            description: Notification method.
+                        required:
+                        - duration_value
+                        - duration_unit
+                        - notification_type
+                    task_template_list:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single TaskTemplateList associated with the TaskTemplate. The keyword `null` is not valid for this field.
+                  required:
+                  - name
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    cascading:
+                      type: boolean
+                      description: Determines if the TaskTemplate has a due date that is derived from another TaskTemplate. (Note that if false, no other cascading information will be checked)
+                    cascading_offset:
+                      type: integer
+                      format: int32
+                      description: The amount of time that will differentiate the cascaded TaskTemplate from its parent.
+                    cascading_offset_polarity:
+                      type: string
+                      enum:
+                      - Before
+                      - After
+                      description: Determines whether or not the cascading_offset occurs before or after its parent.
+                    cascading_offset_type:
+                      type: string
+                      enum:
+                      - CalendarDays
+                      - CalendarWeeks
+                      - CalendarMonths
+                      - CalendarYears
+                      - BusinessDays
+                      description: Determines the quantity of the cascading offset (e.g. CalendarDays, CalendarWeeks etc.)
+                    cascading_source:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int32
+                          description: The unique identifier for a single TaskTemplate associated with the TaskTemplate. The keyword `null` is not valid for this field.
+                    description:
+                      type: string
+                      description: Longer description of the TaskTemplate. This TaskTemplate supports rich text when the `description_text_type` field is set to `rich_text`. With supported tags such as `<a>`, `<b>`, `<br>`, `<div>`, `<em>`, `<i>` `<li>`, `<ol>`, `<p>`, `<s>`, `<strong>`, `<u>` and `<ul>`. This TaskTemplate also supports attributes such as `href`, `rel`, `type`, and `target`.
+                    description_text_type:
+                      type: string
+                      default: plain_text
+                      enum:
+                      - plain_text
+                      - rich_text
+                      description: The type of text in the description field.
+                    name:
+                      type: string
+                      description: Short name for the TaskTemplate.
+                    priority:
+                      type: string
+                      default: Normal
+                      enum:
+                      - High
+                      - Normal
+                      - Low
+                      description: Priority of the task.
+                    private:
+                      type: boolean
+                      description: Whether or not this TaskTemplate should be private.
+                    reminder_templates:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          duration_value:
+                            type: integer
+                            format: int32
+                            description: Time measured in `duration_unit` to remind user before the subject.
+                          duration_unit:
+                            type: string
+                            description: Unit to measure the duration value in.
+                          notification_type:
+                            type: string
+                            enum:
+                            - Email
+                            - Popup
+                            description: Notification method.
+                        required:
+                        - duration_value
+                        - duration_unit
+                        - notification_type
+                    task_template_list:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single TaskTemplateList associated with the TaskTemplate. The keyword `null` is not valid for this field.
+                  required:
+                  - name
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    cascading:
+                      type: boolean
+                      description: Determines if the TaskTemplate has a due date that is derived from another TaskTemplate. (Note that if false, no other cascading information will be checked)
+                    cascading_offset:
+                      type: integer
+                      format: int32
+                      description: The amount of time that will differentiate the cascaded TaskTemplate from its parent.
+                    cascading_offset_polarity:
+                      type: string
+                      enum:
+                      - Before
+                      - After
+                      description: Determines whether or not the cascading_offset occurs before or after its parent.
+                    cascading_offset_type:
+                      type: string
+                      enum:
+                      - CalendarDays
+                      - CalendarWeeks
+                      - CalendarMonths
+                      - CalendarYears
+                      - BusinessDays
+                      description: Determines the quantity of the cascading offset (e.g. CalendarDays, CalendarWeeks etc.)
+                    cascading_source:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int32
+                          description: The unique identifier for a single TaskTemplate associated with the TaskTemplate. The keyword `null` is not valid for this field.
+                    description:
+                      type: string
+                      description: Longer description of the TaskTemplate. This TaskTemplate supports rich text when the `description_text_type` field is set to `rich_text`. With supported tags such as `<a>`, `<b>`, `<br>`, `<div>`, `<em>`, `<i>` `<li>`, `<ol>`, `<p>`, `<s>`, `<strong>`, `<u>` and `<ul>`. This TaskTemplate also supports attributes such as `href`, `rel`, `type`, and `target`.
+                    description_text_type:
+                      type: string
+                      default: plain_text
+                      enum:
+                      - plain_text
+                      - rich_text
+                      description: The type of text in the description field.
+                    name:
+                      type: string
+                      description: Short name for the TaskTemplate.
+                    priority:
+                      type: string
+                      default: Normal
+                      enum:
+                      - High
+                      - Normal
+                      - Low
+                      description: Priority of the task.
+                    private:
+                      type: boolean
+                      description: Whether or not this TaskTemplate should be private.
+                    reminder_templates:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          duration_value:
+                            type: integer
+                            format: int32
+                            description: Time measured in `duration_unit` to remind user before the subject.
+                          duration_unit:
+                            type: string
+                            description: Unit to measure the duration value in.
+                          notification_type:
+                            type: string
+                            enum:
+                            - Email
+                            - Popup
+                            description: Notification method.
+                        required:
+                        - duration_value
+                        - duration_unit
+                        - notification_type
+                    task_template_list:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single TaskTemplateList associated with the TaskTemplate. The keyword `null` is not valid for this field.
+                  required:
+                  - name
+        required: false
+  /task_templates/{id}.json:
+    get:
+      tags:
+      - Task Templates
+      summary: Return the data for a single TaskTemplate
+      operationId: TaskTemplate#show
+      description: Outlines the parameters, optional and required, used when requesting the data for a single TaskTemplate
+      parameters:
+      - name: IF-MODIFIED-SINCE
+        in: header
+        description: The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: IF-NONE-MATCH
+        in: header
+        description: The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.
+        required: false
+        schema:
+          type: string
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The unique identifier for the TaskTemplate.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/TaskTemplate_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '304':
+          description: Not Modified
+    patch:
+      tags:
+      - Task Templates
+      summary: Update a single TaskTemplate
+      operationId: TaskTemplate#update
+      description: Outlines the parameters and data fields used when updating a single TaskTemplate
+      parameters:
+      - name: IF-MATCH
+        in: header
+        description: The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).
+        required: false
+        schema:
+          type: string
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The unique identifier for the TaskTemplate.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/TaskTemplate_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '412':
+          description: Precondition Failed
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        description: Request Body for Task Templates
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    cascading:
+                      type: boolean
+                      description: Determines if the TaskTemplate has a due date that is derived from another TaskTemplate. (Note that if false, no other cascading information will be checked)
+                    cascading_offset:
+                      type: integer
+                      format: int32
+                      description: The amount of time that will differentiate the cascaded TaskTemplate from its parent.
+                    cascading_offset_polarity:
+                      type: string
+                      enum:
+                      - Before
+                      - After
+                      description: Determines whether or not the cascading_offset occurs before or after its parent.
+                    cascading_offset_type:
+                      type: string
+                      enum:
+                      - CalendarDays
+                      - CalendarWeeks
+                      - CalendarMonths
+                      - CalendarYears
+                      - BusinessDays
+                      description: Determines the quantity of the cascading offset (e.g. CalendarDays, CalendarWeeks etc.)
+                    cascading_source:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int32
+                          description: The unique identifier for a single TaskTemplate associated with the TaskTemplate. The keyword `null` is not valid for this field.
+                    description:
+                      type: string
+                      description: Longer description of the TaskTemplate. This TaskTemplate supports rich text when the `description_text_type` field is set to `rich_text`. With supported tags such as `<a>`, `<b>`, `<br>`, `<div>`, `<em>`, `<i>` `<li>`, `<ol>`, `<p>`, `<s>`, `<strong>`, `<u>` and `<ul>`. This TaskTemplate also supports attributes such as `href`, `rel`, `type`, and `target`.
+                    description_text_type:
+                      type: string
+                      default: plain_text
+                      enum:
+                      - plain_text
+                      - rich_text
+                      description: The type of text in the description field.
+                    name:
+                      type: string
+                      description: Short name for the TaskTemplate.
+                    priority:
+                      type: string
+                      default: Normal
+                      enum:
+                      - High
+                      - Normal
+                      - Low
+                      description: Priority of the task.
+                    private:
+                      type: boolean
+                      description: Whether or not this TaskTemplate should be private.
+                    reminder_templates:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          duration_value:
+                            type: integer
+                            format: int32
+                            description: Time measured in `duration_unit` to remind user before the subject.
+                          duration_unit:
+                            type: string
+                            description: Unit to measure the duration value in.
+                          notification_type:
+                            type: string
+                            enum:
+                            - Email
+                            - Popup
+                            description: Notification method.
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single ReminderTemplate associated with the TaskTemplate. The keyword `null` is not valid for this field.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated ReminderTemplate is present, the ReminderTemplate is deleted from the TaskTemplate.
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    cascading:
+                      type: boolean
+                      description: Determines if the TaskTemplate has a due date that is derived from another TaskTemplate. (Note that if false, no other cascading information will be checked)
+                    cascading_offset:
+                      type: integer
+                      format: int32
+                      description: The amount of time that will differentiate the cascaded TaskTemplate from its parent.
+                    cascading_offset_polarity:
+                      type: string
+                      enum:
+                      - Before
+                      - After
+                      description: Determines whether or not the cascading_offset occurs before or after its parent.
+                    cascading_offset_type:
+                      type: string
+                      enum:
+                      - CalendarDays
+                      - CalendarWeeks
+                      - CalendarMonths
+                      - CalendarYears
+                      - BusinessDays
+                      description: Determines the quantity of the cascading offset (e.g. CalendarDays, CalendarWeeks etc.)
+                    cascading_source:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int32
+                          description: The unique identifier for a single TaskTemplate associated with the TaskTemplate. The keyword `null` is not valid for this field.
+                    description:
+                      type: string
+                      description: Longer description of the TaskTemplate. This TaskTemplate supports rich text when the `description_text_type` field is set to `rich_text`. With supported tags such as `<a>`, `<b>`, `<br>`, `<div>`, `<em>`, `<i>` `<li>`, `<ol>`, `<p>`, `<s>`, `<strong>`, `<u>` and `<ul>`. This TaskTemplate also supports attributes such as `href`, `rel`, `type`, and `target`.
+                    description_text_type:
+                      type: string
+                      default: plain_text
+                      enum:
+                      - plain_text
+                      - rich_text
+                      description: The type of text in the description field.
+                    name:
+                      type: string
+                      description: Short name for the TaskTemplate.
+                    priority:
+                      type: string
+                      default: Normal
+                      enum:
+                      - High
+                      - Normal
+                      - Low
+                      description: Priority of the task.
+                    private:
+                      type: boolean
+                      description: Whether or not this TaskTemplate should be private.
+                    reminder_templates:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          duration_value:
+                            type: integer
+                            format: int32
+                            description: Time measured in `duration_unit` to remind user before the subject.
+                          duration_unit:
+                            type: string
+                            description: Unit to measure the duration value in.
+                          notification_type:
+                            type: string
+                            enum:
+                            - Email
+                            - Popup
+                            description: Notification method.
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single ReminderTemplate associated with the TaskTemplate. The keyword `null` is not valid for this field.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated ReminderTemplate is present, the ReminderTemplate is deleted from the TaskTemplate.
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    cascading:
+                      type: boolean
+                      description: Determines if the TaskTemplate has a due date that is derived from another TaskTemplate. (Note that if false, no other cascading information will be checked)
+                    cascading_offset:
+                      type: integer
+                      format: int32
+                      description: The amount of time that will differentiate the cascaded TaskTemplate from its parent.
+                    cascading_offset_polarity:
+                      type: string
+                      enum:
+                      - Before
+                      - After
+                      description: Determines whether or not the cascading_offset occurs before or after its parent.
+                    cascading_offset_type:
+                      type: string
+                      enum:
+                      - CalendarDays
+                      - CalendarWeeks
+                      - CalendarMonths
+                      - CalendarYears
+                      - BusinessDays
+                      description: Determines the quantity of the cascading offset (e.g. CalendarDays, CalendarWeeks etc.)
+                    cascading_source:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int32
+                          description: The unique identifier for a single TaskTemplate associated with the TaskTemplate. The keyword `null` is not valid for this field.
+                    description:
+                      type: string
+                      description: Longer description of the TaskTemplate. This TaskTemplate supports rich text when the `description_text_type` field is set to `rich_text`. With supported tags such as `<a>`, `<b>`, `<br>`, `<div>`, `<em>`, `<i>` `<li>`, `<ol>`, `<p>`, `<s>`, `<strong>`, `<u>` and `<ul>`. This TaskTemplate also supports attributes such as `href`, `rel`, `type`, and `target`.
+                    description_text_type:
+                      type: string
+                      default: plain_text
+                      enum:
+                      - plain_text
+                      - rich_text
+                      description: The type of text in the description field.
+                    name:
+                      type: string
+                      description: Short name for the TaskTemplate.
+                    priority:
+                      type: string
+                      default: Normal
+                      enum:
+                      - High
+                      - Normal
+                      - Low
+                      description: Priority of the task.
+                    private:
+                      type: boolean
+                      description: Whether or not this TaskTemplate should be private.
+                    reminder_templates:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          duration_value:
+                            type: integer
+                            format: int32
+                            description: Time measured in `duration_unit` to remind user before the subject.
+                          duration_unit:
+                            type: string
+                            description: Unit to measure the duration value in.
+                          notification_type:
+                            type: string
+                            enum:
+                            - Email
+                            - Popup
+                            description: Notification method.
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single ReminderTemplate associated with the TaskTemplate. The keyword `null` is not valid for this field.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated ReminderTemplate is present, the ReminderTemplate is deleted from the TaskTemplate.
+        required: false
+    delete:
+      tags:
+      - Task Templates
+      summary: Delete a single TaskTemplate
+      operationId: TaskTemplate#destroy
+      description: Outlines the parameters, optional and required, used when deleting the record for a single TaskTemplate
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The unique identifier for the TaskTemplate.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '204':
+          description: No Content
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    TaskTemplate_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *TaskTemplate*
+        etag:
+          type: string
+          description: ETag for the *TaskTemplate*
+        name:
+          type: string
+          description: The name of the *TaskTemplate*
+        description:
+          type: string
+          description: The text body of the *TaskTemplate*. This TaskTemplate supports rich text when setting the field `detail_text_type` to `rich_text`. With supported tags such as `<a>`, `<b>`, `<br>`, `<div>`, `<em>`, `<i>` `<li>`, `<ol>`, `<p>`, `<s>`, `<strong>`, `<u>` and `<ul>`. This TaskTemplate also supports attributes such as `href`, `rel`, `type`, and `target`.
+        description_text_type:
+          type: string
+          enum:
+          - plain_text
+          - rich_text
+          description: The type of text in the description field.
+        priority:
+          type: string
+          enum:
+          - High
+          - Normal
+          - Low
+          description: '*TaskTemplate* priority'
+        private:
+          type: boolean
+          description: Whether the *TaskTemplate* is private.
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *TaskTemplate* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *TaskTemplate* was last updated (as a ISO-8601 timestamp)
+    TaskTemplateList_base:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *TaskTemplateList* was created (as a ISO-8601 timestamp)
+        description:
+          type: string
+          description: A detailed description of the *TaskTemplateList*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *TaskTemplateList*
+        etag:
+          type: string
+          description: ETag for the *TaskTemplateList*
+        name:
+          type: string
+          description: The name of the *TaskTemplateList*
+        templates_count:
+          type: integer
+          format: int32
+          description: How many task templates exist as an association to the *TaskTemplateList*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *TaskTemplateList* was last updated (as a ISO-8601 timestamp)
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    TaskType_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *TaskType*
+        etag:
+          type: string
+          description: ETag for the *TaskType*
+        name:
+          type: string
+          description: The name of the *TaskType*
+        deleted_at:
+          type: string
+          format: date-time
+          description: The time the *TaskType* was deleted (as a ISO-8601 timestamp)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *TaskType* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *TaskType* was last updated (as a ISO-8601 timestamp)
+    CascadingTaskTemplate_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *TaskTemplate*
+        name:
+          type: string
+          description: The name of the *TaskTemplate*
+    TaskTemplate_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: TaskTemplate List Response
+          items:
+            $ref: '#/components/schemas/TaskTemplate'
+    User_base:
+      type: object
+      properties:
+        account_owner:
+          type: boolean
+          description: Whether the *User* is the owner of the account
+        clio_connect:
+          type: boolean
+          description: Whether the *User* is a Clio Connect user
+        court_rules_default_attendee:
+          type: boolean
+          description: Whether the *User* is a default attendee for court rules events
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *User* was created (as a ISO-8601 timestamp)
+        default_calendar_id:
+          type: integer
+          format: int64
+          description: Default calendar id for *User*.
+        email:
+          type: string
+          description: The email of the *User*
+        enabled:
+          type: boolean
+          description: Whether the *User* is allowed to log in
+        etag:
+          type: string
+          description: ETag for the *User*
+        first_name:
+          type: string
+          description: The first name of the *User*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *User*
+        initials:
+          type: string
+          description: The initials of the *User*
+        last_name:
+          type: string
+          description: The last name of the *User*
+        name:
+          type: string
+          description: The full name of the *User*
+        phone_number:
+          type: string
+          description: The primary phone number for the *User*.
+        rate:
+          type: number
+          format: float
+          description: Default user activity rate for *User*.
+        roles:
+          type: array
+          items:
+            type: string
+          description: An array of roles assigned to this *User*
+        subscription_type:
+          type: string
+          enum:
+          - Attorney
+          - NonAttorney
+          description: The subscription type of the *User*
+        time_zone:
+          type: string
+          description: The selected time zone of the *User*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *User* was last updated (as a ISO-8601 timestamp)
+    ReminderTemplate_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ReminderTemplate*
+        etag:
+          type: string
+          description: ETag for the *ReminderTemplate*
+        duration:
+          type: integer
+          format: int32
+          description: The time in minutes to remind user before the subject.
+        notification_type:
+          type: string
+          enum:
+          - Email
+          - Popup
+          description: The type of method to be notified by
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ReminderTemplate* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ReminderTemplate* was last updated (as a ISO-8601 timestamp)
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    TaskTemplate_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/TaskTemplate'
+    TaskTemplate:
+      allOf:
+      - $ref: '#/components/schemas/TaskTemplate_base'
+      - type: object
+        properties:
+          cascading_source:
+            $ref: '#/components/schemas/CascadingTaskTemplate_base'
+            description: CascadingTaskTemplate
+          assignee:
+            $ref: '#/components/schemas/User_base'
+            description: User
+          task_template_list:
+            $ref: '#/components/schemas/TaskTemplateList_base'
+            description: TaskTemplateList
+          task_type:
+            $ref: '#/components/schemas/TaskType_base'
+            description: TaskType
+          template_creator:
+            $ref: '#/components/schemas/User_base'
+            description: User
+          reminder_templates:
+            type: array
+            items:
+              $ref: '#/components/schemas/ReminderTemplate_base'
+            description: ReminderTemplate
+x-tagGroups:
+- name: Api
+  tags:
+  - Custom Actions
+  - Webhooks
+- name: Activities
+  tags:
+  - Activities
+  - Activity Descriptions
+  - Activity Rates
+  - Expense Categories
+  - Timers
+  - Utbms Codes
+  - Utbms Sets
+- name: Accounting
+  tags:
+  - Bank Accounts
+  - Bank Transactions
+  - Bank Transfers
+- name: Billing
+  tags:
+  - Bills
+  - Billable Clients
+  - Billable Matters
+  - Bill Themes
+  - Interest Charges
+  - Line Items
+  - Outstanding Client Balances
+- name: Calendars
+  tags:
+  - Calendars
+  - Calendar Entries
+  - Calendar Entry Event Types
+  - Calendar Visibilities
+  - Reminders
+- name: Clio Payments
+  tags:
+  - Clio Payments Links
+  - Clio Payments Payments
+- name: Communications
+  tags:
+  - Communications
+  - Conversations
+  - Conversation Messages
+- name: Contacts
+  tags:
+  - Contacts
+  - Email Addresses
+  - Phone Numbers
+  - Notes
+  - Log Entries
+- name: Court Rules
+  tags:
+  - Jurisdictions To Triggers
+  - Jurisdictions
+  - Matter Dockets
+  - Service Types
+- name: Custom Fields
+  tags:
+  - Custom Fields
+  - Custom Field Sets
+- name: Documents
+  tags:
+  - Documents
+  - Document Versions
+  - Folders
+  - Document Archives
+  - Document Automations
+  - Document Categories
+  - Document Templates
+  - Comments
+- name: In-app Notifications
+  tags:
+  - My Events
+  - Event Metrics
+- name: Matters
+  tags:
+  - Matters
+  - Relationships
+  - Clients
+  - Related Contacts
+  - Matter Contacts
+  - Notes
+  - Practice Areas
+  - Log Entries
+  - Matter Stages
+  - Medical Records Details
+  - Medical Records
+  - Medical Bills
+  - Damages
+- name: Payments
+  tags:
+  - Allocations
+  - Credit Memos
+- name: Reporting
+  tags:
+  - Reports
+  - Report Presets
+  - Report Schedules
+- name: Settings
+  tags:
+  - Text Snippets
+  - Billing Settings
+  - Currencies
+  - Tax Rate Configurations
+- name: Tasks
+  tags:
+  - Tasks
+  - Task Templates
+  - Task Template Lists
+  - Task Types
+- name: Trust
+  tags:
+  - Trust Line Items
+  - Trust Requests
+- name: Users
+  tags:
+  - Users
+  - Groups
+- name: Legal Aid US
+  tags:
+  - Grants
+  - Grant Funding Sources
+- name: Legal Aid England & Wales
+  tags:
+  - Civil Controlled Rates
+  - Civil Certificated Rates
+  - Criminal Controlled Rates
+  - Expense Categories

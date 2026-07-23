@@ -1,0 +1,3181 @@
+openapi: 3.0.0
+info:
+  title: Clio API Documentation Activities Contacts API
+  contact:
+    name: Clio API Support
+    email: api@clio.com
+  description: "# Developer Support and Feedback\n* Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio's API Support team at [api@clio.com](mailto:api@clio.com).\n* For business and partnership inquiries, contact our API Partnerships team at [api.partnerships@clio.com](mailto:api.partnerships@clio.com).\n* For best practices and tips from the Clio development community, join the conversation in the [Clio Developer Slack Channel](https://join.slack.com/t/clio-public/shared_invite/zt-36i0eqgo1-7POORPtMJpp2N0~_auL2IQ).\n\nA community-driven [Clio Developers Stack Overflow Group](https://stackoverflow.com/questions/tagged/clio-api) also exists where you can connect and ask questions from other Clio API users.\n# Getting Started\n> **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).\n>\n> Likewise, the developer portal is available at region-specific links for the [Australia](https://au.developers.clio.com), [Canada](https://ca.developers.clio.com), [EU](https://eu.developers.clio.com), and [US](https://developers.clio.com) regions.\n>\n> This document assumes the US region is being used (app.clio.com). If you're building in one of the other regions, you should adapt the links and examples as necessary.\n\nTo start building on the Clio API, you’ll need a Clio account – you can review our [Developer Handbook](https://docs.developers.clio.com/) and follow the steps to sign up for an account.\n\nOnce you have an account, you can [create a developer application](https://docs.developers.clio.com/api-docs/applications) from the [Developer Portal](https://developers.clio.com) and start building!\n# Authorization with OAuth 2.0\nSee our [Authorization documentation →](https://docs.developers.clio.com/api-docs/authorization)\n# Permissions\nSee our [Permissions documentation →](https://docs.developers.clio.com/api-docs/permissions)\n# Fields\nSee our [Fields documentation →](https://docs.developers.clio.com/api-docs/fields)\n# Rate Limiting\nSee our [Rate Limits documentation →](https://docs.developers.clio.com/api-docs/rate-limits)\n# Paging\nSee our [Pagination documentation →](https://docs.developers.clio.com/api-docs/paging)\n# ETags\nSee our [ETags documentation →](https://docs.developers.clio.com/api-docs/etags)\n# Minor Versions\nAPI v4 supports multiple minor versions. Versions are of the form '4.X.Y'. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you're requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.\n\nAn `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.\n\nYou can find our [API Versioning Policy and Guidelines](https://docs.developers.clio.com/api-docs/api-versioning-policy) in our documentation hub.\n\nThe [API Changelog](https://docs.developers.clio.com/api-docs/api-changelog) explains each version's changes in further detail.\n### [4.0.4](https://docs.developers.clio.com/api-docs/api-changelog#404)\n\n  * Update `quantity` field to return values in seconds rather than hours for Activities\n\n### [4.0.5](https://docs.developers.clio.com/api-docs/api-changelog#405)\n\n  * Remove `matter_balances` field from Bills\n* Standardize status/state enum values\n* Add a Document association to completed DocumentAutomations\n* Add rate visibility handling for Activity's price and total\n\n### [4.0.6](https://docs.developers.clio.com/api-docs/api-changelog#406)\n\n  * Remove `document_versions` collection field from Documents\n\n### [4.0.7](https://docs.developers.clio.com/api-docs/api-changelog#407)\n\n  * Change secure link format\n\n### [4.0.8](https://docs.developers.clio.com/api-docs/api-changelog#408)\n\n  * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user\n  * Add `quantity_redacted` field to activities\n\n### [4.0.9](https://docs.developers.clio.com/api-docs/api-changelog#409)\n\n  * Contacts are filtered and redacted in the response based on the new 'Contacts Visibility' user permission setting.\n\n### [4.0.10](https://docs.developers.clio.com/api-docs/api-changelog#4010)\n\n  * Fixed validation of `type` query parameter when querying Notes\n\n### [4.0.12](https://docs.developers.clio.com/api-docs/api-changelog#4012)\n\n  * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers\n\n### [4.0.13](https://docs.developers.clio.com/api-docs/api-changelog#4013)\n\n  **This is the default version**\n\n  * Add association limits to Contacts\n* Returns 422 Unprocessable Entity when association limits are exceeded\n\n\n"
+  version: v4
+  x-logo:
+    url: https://www.clio.com/wp-content/uploads/2015/05/Container-5-Logo.png
+servers:
+- url: https://app.clio.com/api/v4
+  description: US region Production Server
+- url: https://eu.app.clio.com/api/v4
+  description: Europe region Production Server
+- url: https://ca.app.clio.com/api/v4
+  description: Canada region Production Server
+- url: https://au.app.clio.com/api/v4
+  description: Australia region Production Server
+tags:
+- name: Contacts
+  description: "All clients, prospective clients, companies, and external co-counsels can be viewed as Contacts under the Contacts tab in Clio Manage.\n\n[Support Link](https://help.clio.com/hc/en-us/articles/9290486281627-Clio-Manage-Contacts-Overview)\n\n## Contact Name\nWhen creating a contact of type \"Person\" you must provide at least a first name or a last name. This can be done in one of two ways:\n\n1. Providing the name components explicitly (preferred): Using the `first_name` and `last_name` parameters.\n2. Providing the full name (discouraged): Using the `name` parameter, you can provide the person's full name (e.g. \"John Smith\") and Clio will attempt to infer the individual components of the name. If it is unable to do so, you will receive a \"422 Unprocessable Entity: At least one of first name or last name must be provided\" Error.\n\n**We recommend using the individual name fields when possible to avoid any ambiguities.**\n\n## Associations\nA Contact can be persisted with its associations in a single request. The followings detail the nested attributes to persist the associations.\n\n### Addresses\nCheckout the sample request to update the Addresses of a Contact:\n```json\nRequest\n  PATCH /api/v4/contacts/1.json\n  {\n    data: {\n      addresses: [\n        // update\n        { id: 1, name: \"Work\", country: \"Canada\" },\n        // create\n        { name: \"Home\", street: \"1234 Main Street\", city: \"Burnaby\", province: \"BC\", country: \"Canada\", postal_code: \"V1A 1A1\" },\n        // destroy\n        { id: 2, _destroy: true }\n      ]\n    }\n```\n\n### Custom Field Values\nA CustomFieldValue contains the value of a CustomField for a Contact.\nBelow are some examples of how to create, read, update, and destroy the CustomFieldValues of a Contact:\n#### Create\nNote: The value of `id` used here is the value of the `id` parameter in the response received when [creating a new CustomField](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Custom-Fields/operation/CustomField#create) or one returned in a [query of an existing CustomField](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Custom-Fields/operation/CustomField#show).\n```json\nRequest\n  PATCH /api/v4/contacts/1.json\n  {\n    data: {\n      custom_field_values: [\n        { custom_field: { id: 2 }, value: \"Initial value\" }\n      ]\n    }\n  }\n```\n#### Read\nNote: The `id` of the CustomFieldValue is a composite value including the custom field type. Use this `id` to update and destroy the CustomFieldValue.\nThe `id` of the associated Custom Field can be found by querying the `custom_field` for all CustomFieldValues related to the Contact, e.g.: `/api/v4/contacts/1?fields=id,display_number,custom_field_values{id,value,custom_field}`\n\nNote: The `id` may be `NULL` when the CustomField is displayed by default but has not yet been given a value.\n```json\nRequest\n  GET /api/v4/contacts/1.json?fields=custom_field_values{id,value,custom_field}\n  {\n    data: {\n      custom_field_values: [\n        {\n          id: \"text_line-1\",\n          value: \"Current value\",\n          custom_field: { id: 2 }\n        }\n      ]\n    }\n  }\n```\n#### Update\nNote: The value of the CustomFieldValue `id` used here is a composite value and can be found by querying for all CustomFieldValues related to the Contact, e.g.: `/api/v4/contacts/1?fields=id,name,custom_field_values{id,value,custom_field}`\n\nNote: If the `id` is `NULL`, you must provide `custom_field{id}` to create the CustomFieldValue and assign a value (see **Create**).\n```json\nRequest\n  PATCH /api/v4/contacts/1.json\n  {\n    data: {\n      custom_field_values: [\n        { id: \"text_line-1\", value: \"Updated value\" }\n      ]\n    }\n  }\n```\n#### Destroy\nNote: The value of the CustomFieldValue `id` used here is a composite value and can be found by querying for all CustomFieldValues related to the Contact, e.g.: `/api/v4/contacts/1?fields=id,name,custom_field_values{id,value}`\n```json\nRequest\n  PATCH /api/v4/contacts/1.json\n  {\n    data: {\n      custom_field_values: [\n        { id: \"picklist-2\", _destroy: true }\n      ]\n    }\n  }\n```\n\n### Email Addresses\nCheckout the sample request to update the Email Addresses of a Contact:\n```json\nRequest\n  PATCH /api/v4/contacts/1.json\n  {\n    data: {\n      email_addresses: [\n        // update\n        { id: 1, name: \"Work\", address: \"demo@clio.com\" },\n        // create\n        { name: \"Home\", address: \"home@clio.com\" },\n        // destroy\n        { id: 2, _destroy: true }\n      ]\n    }\n```\n\n### Instant Messengers\nCheckout the sample request to update the Instant Messengers of a Contact:\n```json\nRequest\n  PATCH /api/v4/contacts/1.json\n  {\n    data: {\n      instant_messengers: [\n        // update\n        { id: 1, name: \"Work\", address: \"https://twitter.com/goclio\" },\n        // create\n        { name: \"Other\", address: \"https://www.facebook.com/GoClio/\" },\n        // destroy\n        { id: 2, _destroy: true }\n      ]\n    }\n```\n\n### Phone Numbers\nCheckout the sample request to update the Phone Numbers of a Contact:\n```json\nRequest\n  PATCH /api/v4/contacts/1.json\n  {\n    data: {\n      phone_numbers: [\n        // update\n        { id: 1, name: \"Work\", number: \"123-456-7890\" },\n        // create\n        { name: \"Other\", number: \"000-000-0000\" },\n        // destroy\n        { id: 2, _destroy: true }\n      ]\n    }\n```\n\n### Web Site\nCheckout the sample request to update the Web Site of a Contact:\n```json\nRequest\n  PATCH /api/v4/contacts/1.json\n  {\n    data: {\n      web_sites: [\n        // update\n        { id: 1, name: \"Work\", address: \"https://help.clio.com/\" },\n        // create\n        { name: \"Other\", address: \"https://www.clio.com/about/careers/\" },\n        // destroy\n        { id: 2, _destroy: true }\n      ]\n    }\n```\n"
+paths:
+  /contacts.json:
+    get:
+      tags:
+      - Contacts
+      summary: Return the data for all Contacts
+      operationId: Contact#index
+      description: Outlines the parameters, optional and required, used when requesting the data for all Contacts
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: client_only
+        in: query
+        description: Filter Contact records to those that are clients.
+        required: false
+        schema:
+          type: boolean
+      - name: clio_connect_only
+        in: query
+        description: Filter Contact records to those that are Clio Connect users.
+        required: false
+        schema:
+          type: boolean
+      - name: created_since
+        in: query
+        description: Filter Contact records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: custom_field_ids[]
+        in: query
+        description: Filter Contact's custom_field_values to only include values for the given custom field unique identifiers.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: custom_field_values
+        in: query
+        description: 'Filter records to only those with the given custom field(s) set. The value is compared using the operator provided, or,
+
+          if the value type only supports one operator, the supported operator is used. In the latter case, no check for operator is performed on the input string.
+
+          The key for the custom field value filter is the custom_field.id. e.g. `custom_field_values[12345]`
+
+          If an operator is used for a type that does not support it, an `400 Bad Request` is returned.
+
+
+          *Supported operators:*
+
+          * `checkbox`, `contact`, `matter`, `picklist` : `=`
+
+
+          e.g. `?custom_field_values[1]=42`
+
+
+          * `currency`, `date`, `time`, `numeric` : `=`, `<`, `>`, `<=`, `>=`
+
+
+          e.g. `?custom_field_values[1]=>=105.4`
+
+
+          * `email`, `text_area`, `text_line`, `url` : `=`
+
+
+          e.g. `?custom_field_values[1]=url_encoded`
+
+
+          *Multiple conditions for the same custom field:*
+
+
+          If you want to use more than one operator to filter a custom field, you can do so by passing in an array of values.
+
+          e.g. `?custom_field_values[1]=[<=50, >=45]`
+
+          '
+        required: false
+        schema:
+          type: string
+          enum:
+          - '='
+          - <
+          - '>'
+          - <=
+          - '>='
+      - name: email_only
+        in: query
+        description: Filter Contact records to those that have email addresses.
+        required: false
+        schema:
+          type: boolean
+      - name: exclude_ids[]
+        in: query
+        description: Filter Contact records to those who are not included in the given list of unique identifiers.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: ids[]
+        in: query
+        description: Filter Contact records to those having the specified unique identifiers.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: initial
+        in: query
+        description: Filter Contact records to those where the last name or company name start with the given initial.
+        required: false
+        schema:
+          type: string
+          enum:
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+          - H
+          - I
+          - J
+          - K
+          - L
+          - M
+          - N
+          - O
+          - P
+          - Q
+          - R
+          - S
+          - T
+          - U
+          - V
+          - W
+          - X
+          - Y
+          - Z
+      - name: limit
+        in: query
+        description: 'A limit on the number of Contact records to be returned. Limit can range between 1 and 200. Default: `200`.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: order
+        in: query
+        description: 'Orders the Contact records by the given field. Default: `id(asc)`.'
+        required: false
+        schema:
+          type: string
+          enum:
+          - id(asc)
+          - id(desc)
+          - name(asc)
+          - name(desc)
+          - shared_at(asc)
+          - shared_at(desc)
+      - name: page_token
+        in: query
+        description: A token specifying which page to return.
+        required: false
+        schema:
+          type: string
+      - name: query
+        in: query
+        description: 'Wildcard search for name, title, email address, address, phone number, web site, instant messenger address,
+
+          custom fields, related matter name, or company name matching a given string.
+
+          '
+        required: false
+        schema:
+          type: string
+      - name: shared_resource_id
+        in: query
+        description: Filter Contact records to those that currently have access to a given shared resource.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        description: Filter Contact records to those that match the given type.
+        required: false
+        schema:
+          type: string
+          enum:
+          - Company
+          - Person
+      - name: updated_since
+        in: query
+        description: Filter Contact records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Contact_List'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+      - Contacts
+      summary: Create a new Contact
+      operationId: Contact#create
+      description: Outlines the parameters and data fields used when creating a new Contact
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: custom_field_ids[]
+        in: query
+        description: Filter Contact's custom_field_values to only include values for the given custom field unique identifiers.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Contact_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        description: Request Body for Contacts
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    addresses:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Home
+                            - Billing
+                            - Other
+                            description: Name of the Address.
+                          street:
+                            type: string
+                            description: Street.
+                          city:
+                            type: string
+                            description: City.
+                          province:
+                            type: string
+                            description: Province or state.
+                          postal_code:
+                            type: string
+                            description: Postal code or zip code.
+                          country:
+                            type: string
+                            description: Country
+                    avatar:
+                      type: object
+                      properties:
+                        image:
+                          type: string
+                          description: The avatar image for the *Contact*, base64-encoded. Must be a valid GIF, JPG, or PNG image of less than 2 megabytes in size.
+                        _destroy:
+                          type: boolean
+                          description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated Avatar is present, the Avatar is deleted from the Contact.
+                    clio_connect_email:
+                      type: string
+                      description: Notifications will be sent to this email when a resource is shared.
+                    co_counsel_rate:
+                      type: object
+                      properties:
+                        rate:
+                          type: number
+                          format: double
+                          description: 'Billing rate if the Contact is a co-counsel.
+
+
+                            Note: this value can only be provided during PATCH requests. It cannot be provided at the time a Contact is created (i.e. POST requests).
+
+                            '
+                    company:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Company associated with the Contact. The keyword `null` is not valid for this field.
+                    currency:
+                      type: object
+                      description: The Currency the contact is associated with.
+                    custom_field_set_associations:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          display_order:
+                            type: integer
+                            format: int32
+                            description: The order to display the CustomFieldSet in a Contact. If not specified, it is added as the last CustomFieldSet of the Contact.
+                          custom_field_set:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                format: int64
+                                description: The unique identifier for a single CustomFieldSet associated with the CustomFieldSetAssociation. The keyword `null` is not valid for this field.
+                            required:
+                            - id
+                        required:
+                        - custom_field_set
+                    custom_field_values:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                            description: The value of the CustomFieldValue.
+                          custom_field:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                format: int64
+                                description: The unique identifier for a single CustomField associated with the CustomFieldValue. The keyword `null` is not valid for this field.
+                            required:
+                            - id
+                        required:
+                        - value
+                        - custom_field
+                    date_of_birth:
+                      type: string
+                      format: date
+                      description: Date of birth of the Contact.
+                    email_addresses:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Home
+                            - Other
+                            description: Name of the EmailAddress.
+                          address:
+                            type: string
+                            description: Email address.
+                          default_email:
+                            type: boolean
+                            description: Whether or not the Contact should be the default email for the Contact.
+                    first_name:
+                      type: string
+                      description: First name of the Contact.
+                    instant_messengers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Personal
+                            - Other
+                            description: Name of the InstantMessenger.
+                          address:
+                            type: string
+                            description: Address of the InstantMessenger.
+                    kyc_field_values:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          field_name:
+                            type: string
+                            description: The name of the KYC/KYB field. KYC/KYB fields are available for eligible accounts in Australia, Canada, Channel Islands, Ireland, Isle of Man, New Zealand, and United Kingdom.
+                          field_type:
+                            type: string
+                            enum:
+                            - date
+                            - text
+                            - picklist
+                            description: 'The type of the KYC/KYB field. Must be one of: date, text, picklist.'
+                          field_value:
+                            type: string
+                            description: The value of the KYC/KYB field.
+                        required:
+                        - field_name
+                        - field_type
+                        - field_value
+                    last_name:
+                      type: string
+                      description: Last name of the Contact.
+                    ledes_client_id:
+                      type: string
+                      description: LEDES client id of the Contact.
+                    middle_name:
+                      type: string
+                      description: Middle name of the Contact.
+                    name:
+                      type: string
+                      description: Full name of the Contact. For requirements, see [Contact Name](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Contacts/Contact-Name).
+                    phone_numbers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Home
+                            - Mobile
+                            - Fax
+                            - Pager
+                            - Skype
+                            - Other
+                            description: Name of the PhoneNumber.
+                          number:
+                            type: string
+                            description: Phone number.
+                          default_number:
+                            type: boolean
+                            description: Whether or not the PhoneNumber should be the default number for the Contact.
+                    prefix:
+                      type: string
+                      description: Personal title of the Contact.
+                    sales_tax_number:
+                      type: string
+                      description: A contact's sales tax number will appear on invoices generated for the Contact.
+                    title:
+                      type: string
+                      description: Professional title of the Contact.
+                    type:
+                      type: string
+                      enum:
+                      - Person
+                      - Company
+                      description: Type of the Contact.
+                    web_sites:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Personal
+                            - Twitter
+                            - Facebook
+                            - LinkedIn
+                            - Instant Messenger
+                            - Other
+                            description: Name of the WebSite.
+                          address:
+                            type: string
+                            description: URL of the WebSite.
+                          default_web_site:
+                            type: boolean
+                            description: Whether or not the Contact should be the default website for the Contact.
+                  required:
+                  - name
+                  - type
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    addresses:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Home
+                            - Billing
+                            - Other
+                            description: Name of the Address.
+                          street:
+                            type: string
+                            description: Street.
+                          city:
+                            type: string
+                            description: City.
+                          province:
+                            type: string
+                            description: Province or state.
+                          postal_code:
+                            type: string
+                            description: Postal code or zip code.
+                          country:
+                            type: string
+                            description: Country
+                    avatar:
+                      type: object
+                      properties:
+                        image:
+                          type: string
+                          description: The avatar image for the *Contact*, base64-encoded. Must be a valid GIF, JPG, or PNG image of less than 2 megabytes in size.
+                        _destroy:
+                          type: boolean
+                          description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated Avatar is present, the Avatar is deleted from the Contact.
+                    clio_connect_email:
+                      type: string
+                      description: Notifications will be sent to this email when a resource is shared.
+                    co_counsel_rate:
+                      type: object
+                      properties:
+                        rate:
+                          type: number
+                          format: double
+                          description: 'Billing rate if the Contact is a co-counsel.
+
+
+                            Note: this value can only be provided during PATCH requests. It cannot be provided at the time a Contact is created (i.e. POST requests).
+
+                            '
+                    company:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Company associated with the Contact. The keyword `null` is not valid for this field.
+                    currency:
+                      type: object
+                      description: The Currency the contact is associated with.
+                    custom_field_set_associations:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          display_order:
+                            type: integer
+                            format: int32
+                            description: The order to display the CustomFieldSet in a Contact. If not specified, it is added as the last CustomFieldSet of the Contact.
+                          custom_field_set:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                format: int64
+                                description: The unique identifier for a single CustomFieldSet associated with the CustomFieldSetAssociation. The keyword `null` is not valid for this field.
+                            required:
+                            - id
+                        required:
+                        - custom_field_set
+                    custom_field_values:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                            description: The value of the CustomFieldValue.
+                          custom_field:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                format: int64
+                                description: The unique identifier for a single CustomField associated with the CustomFieldValue. The keyword `null` is not valid for this field.
+                            required:
+                            - id
+                        required:
+                        - value
+                        - custom_field
+                    date_of_birth:
+                      type: string
+                      format: date
+                      description: Date of birth of the Contact.
+                    email_addresses:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Home
+                            - Other
+                            description: Name of the EmailAddress.
+                          address:
+                            type: string
+                            description: Email address.
+                          default_email:
+                            type: boolean
+                            description: Whether or not the Contact should be the default email for the Contact.
+                    first_name:
+                      type: string
+                      description: First name of the Contact.
+                    instant_messengers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Personal
+                            - Other
+                            description: Name of the InstantMessenger.
+                          address:
+                            type: string
+                            description: Address of the InstantMessenger.
+                    kyc_field_values:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          field_name:
+                            type: string
+                            description: The name of the KYC/KYB field. KYC/KYB fields are available for eligible accounts in Australia, Canada, Channel Islands, Ireland, Isle of Man, New Zealand, and United Kingdom.
+                          field_type:
+                            type: string
+                            enum:
+                            - date
+                            - text
+                            - picklist
+                            description: 'The type of the KYC/KYB field. Must be one of: date, text, picklist.'
+                          field_value:
+                            type: string
+                            description: The value of the KYC/KYB field.
+                        required:
+                        - field_name
+                        - field_type
+                        - field_value
+                    last_name:
+                      type: string
+                      description: Last name of the Contact.
+                    ledes_client_id:
+                      type: string
+                      description: LEDES client id of the Contact.
+                    middle_name:
+                      type: string
+                      description: Middle name of the Contact.
+                    name:
+                      type: string
+                      description: Full name of the Contact. For requirements, see [Contact Name](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Contacts/Contact-Name).
+                    phone_numbers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Home
+                            - Mobile
+                            - Fax
+                            - Pager
+                            - Skype
+                            - Other
+                            description: Name of the PhoneNumber.
+                          number:
+                            type: string
+                            description: Phone number.
+                          default_number:
+                            type: boolean
+                            description: Whether or not the PhoneNumber should be the default number for the Contact.
+                    prefix:
+                      type: string
+                      description: Personal title of the Contact.
+                    sales_tax_number:
+                      type: string
+                      description: A contact's sales tax number will appear on invoices generated for the Contact.
+                    title:
+                      type: string
+                      description: Professional title of the Contact.
+                    type:
+                      type: string
+                      enum:
+                      - Person
+                      - Company
+                      description: Type of the Contact.
+                    web_sites:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Personal
+                            - Twitter
+                            - Facebook
+                            - LinkedIn
+                            - Instant Messenger
+                            - Other
+                            description: Name of the WebSite.
+                          address:
+                            type: string
+                            description: URL of the WebSite.
+                          default_web_site:
+                            type: boolean
+                            description: Whether or not the Contact should be the default website for the Contact.
+                  required:
+                  - name
+                  - type
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    addresses:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Home
+                            - Billing
+                            - Other
+                            description: Name of the Address.
+                          street:
+                            type: string
+                            description: Street.
+                          city:
+                            type: string
+                            description: City.
+                          province:
+                            type: string
+                            description: Province or state.
+                          postal_code:
+                            type: string
+                            description: Postal code or zip code.
+                          country:
+                            type: string
+                            description: Country
+                    avatar:
+                      type: object
+                      properties:
+                        image:
+                          type: string
+                          description: The avatar image for the *Contact*, base64-encoded. Must be a valid GIF, JPG, or PNG image of less than 2 megabytes in size.
+                        _destroy:
+                          type: boolean
+                          description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated Avatar is present, the Avatar is deleted from the Contact.
+                    clio_connect_email:
+                      type: string
+                      description: Notifications will be sent to this email when a resource is shared.
+                    co_counsel_rate:
+                      type: object
+                      properties:
+                        rate:
+                          type: number
+                          format: double
+                          description: 'Billing rate if the Contact is a co-counsel.
+
+
+                            Note: this value can only be provided during PATCH requests. It cannot be provided at the time a Contact is created (i.e. POST requests).
+
+                            '
+                    company:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Company associated with the Contact. The keyword `null` is not valid for this field.
+                    currency:
+                      type: object
+                      description: The Currency the contact is associated with.
+                    custom_field_set_associations:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          display_order:
+                            type: integer
+                            format: int32
+                            description: The order to display the CustomFieldSet in a Contact. If not specified, it is added as the last CustomFieldSet of the Contact.
+                          custom_field_set:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                format: int64
+                                description: The unique identifier for a single CustomFieldSet associated with the CustomFieldSetAssociation. The keyword `null` is not valid for this field.
+                            required:
+                            - id
+                        required:
+                        - custom_field_set
+                    custom_field_values:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                            description: The value of the CustomFieldValue.
+                          custom_field:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                format: int64
+                                description: The unique identifier for a single CustomField associated with the CustomFieldValue. The keyword `null` is not valid for this field.
+                            required:
+                            - id
+                        required:
+                        - value
+                        - custom_field
+                    date_of_birth:
+                      type: string
+                      format: date
+                      description: Date of birth of the Contact.
+                    email_addresses:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Home
+                            - Other
+                            description: Name of the EmailAddress.
+                          address:
+                            type: string
+                            description: Email address.
+                          default_email:
+                            type: boolean
+                            description: Whether or not the Contact should be the default email for the Contact.
+                    first_name:
+                      type: string
+                      description: First name of the Contact.
+                    instant_messengers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Personal
+                            - Other
+                            description: Name of the InstantMessenger.
+                          address:
+                            type: string
+                            description: Address of the InstantMessenger.
+                    kyc_field_values:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          field_name:
+                            type: string
+                            description: The name of the KYC/KYB field. KYC/KYB fields are available for eligible accounts in Australia, Canada, Channel Islands, Ireland, Isle of Man, New Zealand, and United Kingdom.
+                          field_type:
+                            type: string
+                            enum:
+                            - date
+                            - text
+                            - picklist
+                            description: 'The type of the KYC/KYB field. Must be one of: date, text, picklist.'
+                          field_value:
+                            type: string
+                            description: The value of the KYC/KYB field.
+                        required:
+                        - field_name
+                        - field_type
+                        - field_value
+                    last_name:
+                      type: string
+                      description: Last name of the Contact.
+                    ledes_client_id:
+                      type: string
+                      description: LEDES client id of the Contact.
+                    middle_name:
+                      type: string
+                      description: Middle name of the Contact.
+                    name:
+                      type: string
+                      description: Full name of the Contact. For requirements, see [Contact Name](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Contacts/Contact-Name).
+                    phone_numbers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Home
+                            - Mobile
+                            - Fax
+                            - Pager
+                            - Skype
+                            - Other
+                            description: Name of the PhoneNumber.
+                          number:
+                            type: string
+                            description: Phone number.
+                          default_number:
+                            type: boolean
+                            description: Whether or not the PhoneNumber should be the default number for the Contact.
+                    prefix:
+                      type: string
+                      description: Personal title of the Contact.
+                    sales_tax_number:
+                      type: string
+                      description: A contact's sales tax number will appear on invoices generated for the Contact.
+                    title:
+                      type: string
+                      description: Professional title of the Contact.
+                    type:
+                      type: string
+                      enum:
+                      - Person
+                      - Company
+                      description: Type of the Contact.
+                    web_sites:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Personal
+                            - Twitter
+                            - Facebook
+                            - LinkedIn
+                            - Instant Messenger
+                            - Other
+                            description: Name of the WebSite.
+                          address:
+                            type: string
+                            description: URL of the WebSite.
+                          default_web_site:
+                            type: boolean
+                            description: Whether or not the Contact should be the default website for the Contact.
+                  required:
+                  - name
+                  - type
+        required: false
+  /contacts/{id}.json:
+    get:
+      tags:
+      - Contacts
+      summary: Return the data for a single Contact
+      operationId: Contact#show
+      description: Outlines the parameters, optional and required, used when requesting the data for a single Contact
+      parameters:
+      - name: IF-MODIFIED-SINCE
+        in: header
+        description: The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: IF-NONE-MATCH
+        in: header
+        description: The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.
+        required: false
+        schema:
+          type: string
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: custom_field_ids[]
+        in: query
+        description: Filter Contact's custom_field_values to only include values for the given custom field unique identifiers.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The unique identifier for the Contact.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Contact_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '304':
+          description: Not Modified
+    patch:
+      tags:
+      - Contacts
+      summary: Update a single Contact
+      operationId: Contact#update
+      description: Outlines the parameters and data fields used when updating a single Contact
+      parameters:
+      - name: IF-MATCH
+        in: header
+        description: The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).
+        required: false
+        schema:
+          type: string
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: custom_field_ids[]
+        in: query
+        description: Filter Contact's custom_field_values to only include values for the given custom field unique identifiers.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The unique identifier for the Contact.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Contact_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '412':
+          description: Precondition Failed
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        description: Request Body for Contacts
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    addresses:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Home
+                            - Billing
+                            - Other
+                            description: Name of the Address.
+                          street:
+                            type: string
+                            description: Street.
+                          city:
+                            type: string
+                            description: City.
+                          province:
+                            type: string
+                            description: Province or state.
+                          postal_code:
+                            type: string
+                            description: Postal code or zip code.
+                          country:
+                            type: string
+                            description: Country
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single Address associated with the Contact. The keyword `null` is not valid for this field.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated Address is present, the Address is deleted from the Contact.
+                    avatar:
+                      type: object
+                      properties:
+                        image:
+                          type: string
+                          description: The avatar image for the *Contact*, base64-encoded. Must be a valid GIF, JPG, or PNG image of less than 2 megabytes in size.
+                        _destroy:
+                          type: boolean
+                          description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated Avatar is present, the Avatar is deleted from the Contact.
+                    clio_connect_email:
+                      type: string
+                      description: Notifications will be sent to this email when a resource is shared.
+                    co_counsel_rate:
+                      type: object
+                      properties:
+                        rate:
+                          type: number
+                          format: double
+                          description: 'Billing rate if the Contact is a co-counsel.
+
+
+                            Note: this value can only be provided during PATCH requests. It cannot be provided at the time a Contact is created (i.e. POST requests).
+
+                            '
+                    company:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Company associated with the Contact. The keyword `null` is not valid for this field.
+                    currency:
+                      type: object
+                      description: The Currency the contact is associated with.
+                    custom_field_set_associations:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single CustomFieldSetAssociation associated with the Contact. The keyword `null` is not valid for this field.
+                          display_order:
+                            type: integer
+                            format: int32
+                            description: The order to display the CustomFieldSet in a Contact. If not specified, it is added as the last CustomFieldSet of the Contact.
+                          custom_field_set:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                format: int64
+                                description: The unique identifier for a single CustomFieldSet associated with the CustomFieldSetAssociation. The keyword `null` is not valid for this field.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated CustomFieldSetAssociation is present, the CustomFieldSetAssociation is deleted from the Contact.
+                    custom_field_values:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                            description: The value of the CustomFieldValue.
+                          custom_field:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                format: int64
+                                description: The unique identifier for a single CustomField associated with the CustomFieldValue. The keyword `null` is not valid for this field.
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single CustomFieldValue associated with the Contact. The keyword `null` is not valid for this field.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated CustomFieldValue is present, the CustomFieldValue is deleted from the Contact.
+                    date_of_birth:
+                      type: string
+                      format: date
+                      description: Date of birth of the Contact.
+                    email_addresses:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single EmailAddress associated with the Contact. The keyword `null` is not valid for this field.
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Home
+                            - Other
+                            description: Name of the EmailAddress.
+                          address:
+                            type: string
+                            description: Email address.
+                          default_email:
+                            type: boolean
+                            description: Whether or not the Contact should be the default email for the Contact.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated EmailAddress is present, the EmailAddress is deleted from the Contact.
+                    first_name:
+                      type: string
+                      description: First name of the Contact.
+                    instant_messengers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Personal
+                            - Other
+                            description: Name of the InstantMessenger.
+                          address:
+                            type: string
+                            description: Address of the InstantMessenger.
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single InstantMessenger associated with the Contact. The keyword `null` is not valid for this field.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated InstantMessenger is present, the InstantMessenger is deleted from the Contact.
+                    kyc_field_values:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single KycFieldValue associated with the Contact. The keyword `null` is not valid for this field.
+                          field_name:
+                            type: string
+                            description: The name of the KYC/KYB field. KYC/KYB fields are available for eligible accounts in Australia, Canada, Channel Islands, Ireland, Isle of Man, New Zealand, and United Kingdom.
+                          field_type:
+                            type: string
+                            enum:
+                            - date
+                            - text
+                            - picklist
+                            description: 'The type of the KYC/KYB field. Must be one of: date, text, picklist.'
+                          field_value:
+                            type: string
+                            description: The value of the KYC/KYB field.
+                    last_name:
+                      type: string
+                      description: Last name of the Contact.
+                    ledes_client_id:
+                      type: string
+                      description: LEDES client id of the Contact.
+                    middle_name:
+                      type: string
+                      description: Middle name of the Contact.
+                    name:
+                      type: string
+                      description: Full name of the Contact. For requirements, see [Contact Name](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Contacts/Contact-Name).
+                    phone_numbers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Home
+                            - Mobile
+                            - Fax
+                            - Pager
+                            - Skype
+                            - Other
+                            description: Name of the PhoneNumber.
+                          number:
+                            type: string
+                            description: Phone number.
+                          default_number:
+                            type: boolean
+                            description: Whether or not the PhoneNumber should be the default number for the Contact.
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single PhoneNumber associated with the Contact. The keyword `null` is not valid for this field.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated PhoneNumber is present, the PhoneNumber is deleted from the Contact.
+                    prefix:
+                      type: string
+                      description: Personal title of the Contact.
+                    sales_tax_number:
+                      type: string
+                      description: A contact's sales tax number will appear on invoices generated for the Contact.
+                    title:
+                      type: string
+                      description: Professional title of the Contact.
+                    type:
+                      type: string
+                      enum:
+                      - Person
+                      - Company
+                      description: Type of the Contact.
+                    web_sites:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Personal
+                            - Twitter
+                            - Facebook
+                            - LinkedIn
+                            - Instant Messenger
+                            - Other
+                            description: Name of the WebSite.
+                          address:
+                            type: string
+                            description: URL of the WebSite.
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single WebSite associated with the Contact. The keyword `null` is not valid for this field.
+                          default_web_site:
+                            type: boolean
+                            description: Whether or not the Contact should be the default website for the Contact.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated WebSite is present, the WebSite is deleted from the Contact.
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    addresses:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Home
+                            - Billing
+                            - Other
+                            description: Name of the Address.
+                          street:
+                            type: string
+                            description: Street.
+                          city:
+                            type: string
+                            description: City.
+                          province:
+                            type: string
+                            description: Province or state.
+                          postal_code:
+                            type: string
+                            description: Postal code or zip code.
+                          country:
+                            type: string
+                            description: Country
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single Address associated with the Contact. The keyword `null` is not valid for this field.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated Address is present, the Address is deleted from the Contact.
+                    avatar:
+                      type: object
+                      properties:
+                        image:
+                          type: string
+                          description: The avatar image for the *Contact*, base64-encoded. Must be a valid GIF, JPG, or PNG image of less than 2 megabytes in size.
+                        _destroy:
+                          type: boolean
+                          description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated Avatar is present, the Avatar is deleted from the Contact.
+                    clio_connect_email:
+                      type: string
+                      description: Notifications will be sent to this email when a resource is shared.
+                    co_counsel_rate:
+                      type: object
+                      properties:
+                        rate:
+                          type: number
+                          format: double
+                          description: 'Billing rate if the Contact is a co-counsel.
+
+
+                            Note: this value can only be provided during PATCH requests. It cannot be provided at the time a Contact is created (i.e. POST requests).
+
+                            '
+                    company:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Company associated with the Contact. The keyword `null` is not valid for this field.
+                    currency:
+                      type: object
+                      description: The Currency the contact is associated with.
+                    custom_field_set_associations:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single CustomFieldSetAssociation associated with the Contact. The keyword `null` is not valid for this field.
+                          display_order:
+                            type: integer
+                            format: int32
+                            description: The order to display the CustomFieldSet in a Contact. If not specified, it is added as the last CustomFieldSet of the Contact.
+                          custom_field_set:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                format: int64
+                                description: The unique identifier for a single CustomFieldSet associated with the CustomFieldSetAssociation. The keyword `null` is not valid for this field.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated CustomFieldSetAssociation is present, the CustomFieldSetAssociation is deleted from the Contact.
+                    custom_field_values:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                            description: The value of the CustomFieldValue.
+                          custom_field:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                format: int64
+                                description: The unique identifier for a single CustomField associated with the CustomFieldValue. The keyword `null` is not valid for this field.
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single CustomFieldValue associated with the Contact. The keyword `null` is not valid for this field.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated CustomFieldValue is present, the CustomFieldValue is deleted from the Contact.
+                    date_of_birth:
+                      type: string
+                      format: date
+                      description: Date of birth of the Contact.
+                    email_addresses:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single EmailAddress associated with the Contact. The keyword `null` is not valid for this field.
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Home
+                            - Other
+                            description: Name of the EmailAddress.
+                          address:
+                            type: string
+                            description: Email address.
+                          default_email:
+                            type: boolean
+                            description: Whether or not the Contact should be the default email for the Contact.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated EmailAddress is present, the EmailAddress is deleted from the Contact.
+                    first_name:
+                      type: string
+                      description: First name of the Contact.
+                    instant_messengers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Personal
+                            - Other
+                            description: Name of the InstantMessenger.
+                          address:
+                            type: string
+                            description: Address of the InstantMessenger.
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single InstantMessenger associated with the Contact. The keyword `null` is not valid for this field.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated InstantMessenger is present, the InstantMessenger is deleted from the Contact.
+                    kyc_field_values:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single KycFieldValue associated with the Contact. The keyword `null` is not valid for this field.
+                          field_name:
+                            type: string
+                            description: The name of the KYC/KYB field. KYC/KYB fields are available for eligible accounts in Australia, Canada, Channel Islands, Ireland, Isle of Man, New Zealand, and United Kingdom.
+                          field_type:
+                            type: string
+                            enum:
+                            - date
+                            - text
+                            - picklist
+                            description: 'The type of the KYC/KYB field. Must be one of: date, text, picklist.'
+                          field_value:
+                            type: string
+                            description: The value of the KYC/KYB field.
+                    last_name:
+                      type: string
+                      description: Last name of the Contact.
+                    ledes_client_id:
+                      type: string
+                      description: LEDES client id of the Contact.
+                    middle_name:
+                      type: string
+                      description: Middle name of the Contact.
+                    name:
+                      type: string
+                      description: Full name of the Contact. For requirements, see [Contact Name](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Contacts/Contact-Name).
+                    phone_numbers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Home
+                            - Mobile
+                            - Fax
+                            - Pager
+                            - Skype
+                            - Other
+                            description: Name of the PhoneNumber.
+                          number:
+                            type: string
+                            description: Phone number.
+                          default_number:
+                            type: boolean
+                            description: Whether or not the PhoneNumber should be the default number for the Contact.
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single PhoneNumber associated with the Contact. The keyword `null` is not valid for this field.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated PhoneNumber is present, the PhoneNumber is deleted from the Contact.
+                    prefix:
+                      type: string
+                      description: Personal title of the Contact.
+                    sales_tax_number:
+                      type: string
+                      description: A contact's sales tax number will appear on invoices generated for the Contact.
+                    title:
+                      type: string
+                      description: Professional title of the Contact.
+                    type:
+                      type: string
+                      enum:
+                      - Person
+                      - Company
+                      description: Type of the Contact.
+                    web_sites:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Personal
+                            - Twitter
+                            - Facebook
+                            - LinkedIn
+                            - Instant Messenger
+                            - Other
+                            description: Name of the WebSite.
+                          address:
+                            type: string
+                            description: URL of the WebSite.
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single WebSite associated with the Contact. The keyword `null` is not valid for this field.
+                          default_web_site:
+                            type: boolean
+                            description: Whether or not the Contact should be the default website for the Contact.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated WebSite is present, the WebSite is deleted from the Contact.
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    addresses:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Home
+                            - Billing
+                            - Other
+                            description: Name of the Address.
+                          street:
+                            type: string
+                            description: Street.
+                          city:
+                            type: string
+                            description: City.
+                          province:
+                            type: string
+                            description: Province or state.
+                          postal_code:
+                            type: string
+                            description: Postal code or zip code.
+                          country:
+                            type: string
+                            description: Country
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single Address associated with the Contact. The keyword `null` is not valid for this field.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated Address is present, the Address is deleted from the Contact.
+                    avatar:
+                      type: object
+                      properties:
+                        image:
+                          type: string
+                          description: The avatar image for the *Contact*, base64-encoded. Must be a valid GIF, JPG, or PNG image of less than 2 megabytes in size.
+                        _destroy:
+                          type: boolean
+                          description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated Avatar is present, the Avatar is deleted from the Contact.
+                    clio_connect_email:
+                      type: string
+                      description: Notifications will be sent to this email when a resource is shared.
+                    co_counsel_rate:
+                      type: object
+                      properties:
+                        rate:
+                          type: number
+                          format: double
+                          description: 'Billing rate if the Contact is a co-counsel.
+
+
+                            Note: this value can only be provided during PATCH requests. It cannot be provided at the time a Contact is created (i.e. POST requests).
+
+                            '
+                    company:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Company associated with the Contact. The keyword `null` is not valid for this field.
+                    currency:
+                      type: object
+                      description: The Currency the contact is associated with.
+                    custom_field_set_associations:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single CustomFieldSetAssociation associated with the Contact. The keyword `null` is not valid for this field.
+                          display_order:
+                            type: integer
+                            format: int32
+                            description: The order to display the CustomFieldSet in a Contact. If not specified, it is added as the last CustomFieldSet of the Contact.
+                          custom_field_set:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                format: int64
+                                description: The unique identifier for a single CustomFieldSet associated with the CustomFieldSetAssociation. The keyword `null` is not valid for this field.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated CustomFieldSetAssociation is present, the CustomFieldSetAssociation is deleted from the Contact.
+                    custom_field_values:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                            description: The value of the CustomFieldValue.
+                          custom_field:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                format: int64
+                                description: The unique identifier for a single CustomField associated with the CustomFieldValue. The keyword `null` is not valid for this field.
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single CustomFieldValue associated with the Contact. The keyword `null` is not valid for this field.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated CustomFieldValue is present, the CustomFieldValue is deleted from the Contact.
+                    date_of_birth:
+                      type: string
+                      format: date
+                      description: Date of birth of the Contact.
+                    email_addresses:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single EmailAddress associated with the Contact. The keyword `null` is not valid for this field.
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Home
+                            - Other
+                            description: Name of the EmailAddress.
+                          address:
+                            type: string
+                            description: Email address.
+                          default_email:
+                            type: boolean
+                            description: Whether or not the Contact should be the default email for the Contact.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated EmailAddress is present, the EmailAddress is deleted from the Contact.
+                    first_name:
+                      type: string
+                      description: First name of the Contact.
+                    instant_messengers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Personal
+                            - Other
+                            description: Name of the InstantMessenger.
+                          address:
+                            type: string
+                            description: Address of the InstantMessenger.
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single InstantMessenger associated with the Contact. The keyword `null` is not valid for this field.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated InstantMessenger is present, the InstantMessenger is deleted from the Contact.
+                    kyc_field_values:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single KycFieldValue associated with the Contact. The keyword `null` is not valid for this field.
+                          field_name:
+                            type: string
+                            description: The name of the KYC/KYB field. KYC/KYB fields are available for eligible accounts in Australia, Canada, Channel Islands, Ireland, Isle of Man, New Zealand, and United Kingdom.
+                          field_type:
+                            type: string
+                            enum:
+                            - date
+                            - text
+                            - picklist
+                            description: 'The type of the KYC/KYB field. Must be one of: date, text, picklist.'
+                          field_value:
+                            type: string
+                            description: The value of the KYC/KYB field.
+                    last_name:
+                      type: string
+                      description: Last name of the Contact.
+                    ledes_client_id:
+                      type: string
+                      description: LEDES client id of the Contact.
+                    middle_name:
+                      type: string
+                      description: Middle name of the Contact.
+                    name:
+                      type: string
+                      description: Full name of the Contact. For requirements, see [Contact Name](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Contacts/Contact-Name).
+                    phone_numbers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Home
+                            - Mobile
+                            - Fax
+                            - Pager
+                            - Skype
+                            - Other
+                            description: Name of the PhoneNumber.
+                          number:
+                            type: string
+                            description: Phone number.
+                          default_number:
+                            type: boolean
+                            description: Whether or not the PhoneNumber should be the default number for the Contact.
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single PhoneNumber associated with the Contact. The keyword `null` is not valid for this field.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated PhoneNumber is present, the PhoneNumber is deleted from the Contact.
+                    prefix:
+                      type: string
+                      description: Personal title of the Contact.
+                    sales_tax_number:
+                      type: string
+                      description: A contact's sales tax number will appear on invoices generated for the Contact.
+                    title:
+                      type: string
+                      description: Professional title of the Contact.
+                    type:
+                      type: string
+                      enum:
+                      - Person
+                      - Company
+                      description: Type of the Contact.
+                    web_sites:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            default: Other
+                            enum:
+                            - Work
+                            - Personal
+                            - Twitter
+                            - Facebook
+                            - LinkedIn
+                            - Instant Messenger
+                            - Other
+                            description: Name of the WebSite.
+                          address:
+                            type: string
+                            description: URL of the WebSite.
+                          id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier for a single WebSite associated with the Contact. The keyword `null` is not valid for this field.
+                          default_web_site:
+                            type: boolean
+                            description: Whether or not the Contact should be the default website for the Contact.
+                          _destroy:
+                            type: boolean
+                            description: The destroy flag. If the flag is set to `true` and the unique identifier of the associated WebSite is present, the WebSite is deleted from the Contact.
+        required: false
+    delete:
+      tags:
+      - Contacts
+      summary: Delete a single Contact
+      operationId: Contact#destroy
+      description: Outlines the parameters, optional and required, used when deleting the record for a single Contact
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The unique identifier for the Contact.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '204':
+          description: No Content
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    AccountBalance_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *AccountBalance*
+        balance:
+          type: number
+          format: double
+          description: The current balance of the bank account available to the matter or contact
+        type:
+          type: string
+          description: The bank account type. Either Operating or Trust
+        name:
+          type: string
+          description: The name of the bank account
+        currency_id:
+          type: integer
+          format: int64
+          description: The currency ID of the bank account
+    PaymentProfile_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *PaymentProfile*
+        etag:
+          type: string
+          description: ETag for the *PaymentProfile*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *PaymentProfile* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *PaymentProfile* was last updated (as a ISO-8601 timestamp)
+        billing_setting_id:
+          type: integer
+          format: int64
+          description: The unique identifier for the *PaymentProfile
+        name:
+          type: string
+          description: The name of the *PaymentProfile
+        terms:
+          type: integer
+          format: int32
+          description: The total grace period for the *PaymentProfile
+        discount_rate:
+          type: number
+          format: float
+          description: The early payment discount rate for the *PaymentProfile
+        discount_period:
+          type: integer
+          format: int32
+          description: The early payment discount period for the *PaymentProfile
+        interest_rate:
+          type: number
+          format: float
+          description: The interest rate for the *PaymentProfile
+        interest_period:
+          type: integer
+          format: int32
+          description: The interest period interval for the *PaymentProfile
+        interest_type:
+          type: string
+          enum:
+          - simple
+          - compound
+          description: The type of interest to be calculated for the *PaymentProfile (Simple or Compound)
+    PicklistOption_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *PicklistOption*
+        etag:
+          type: string
+          description: ETag for the *PicklistOption*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *PicklistOption* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *PicklistOption* was last updated (as a ISO-8601 timestamp)
+        option:
+          type: string
+          description: The value of the *PicklistOption*
+        deleted_at:
+          type: string
+          format: date-time
+          description: The time the *PicklistOption* was deleted (as a ISO-8601 timestamp)
+    NotificationMethod_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *NotificationMethod*
+        etag:
+          type: string
+          description: ETag for the *NotificationMethod*
+        type:
+          type: string
+          enum:
+          - Email
+          - Popup
+          - SMS
+          description: Human readable description of the type of notification
+        email_address:
+          type: string
+          description: Email address to send the notification to (only for email type)
+        is_default_email_address:
+          type: boolean
+          description: A boolean that is returned only on notification method objects that are relevant e.g. Email notification or Alternative Email
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *NotificationMethod* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *NotificationMethod* was last updated (as a ISO-8601 timestamp)
+    Currency_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Currency*
+        etag:
+          type: string
+          description: ETag for the *Currency*
+        code:
+          type: string
+          description: ISO 4217 code for the *Currency*
+        sign:
+          type: string
+          description: Symbol used to denote monetary values using this *Currency*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Currency* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
+    CustomFieldMatterSelection_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *CustomFieldMatterSelection*
+        display_number:
+          type: string
+          description: The reference and label of the *CustomFieldMatterSelection*. Depending on the account's manual_matter_numbering setting, this is either read only (generated) or customizable.
+    Contact:
+      allOf:
+      - $ref: '#/components/schemas/Contact_base'
+      - type: object
+        properties:
+          activity_rates:
+            type: array
+            items:
+              $ref: '#/components/schemas/ActivityRate_base'
+            description: ActivityRate
+          addresses:
+            type: array
+            items:
+              $ref: '#/components/schemas/Address_base'
+            description: Address
+          custom_field_values:
+            type: array
+            items:
+              $ref: '#/components/schemas/CustomFieldValue'
+            description: CustomFieldValue
+          custom_field_set_associations:
+            type: array
+            items:
+              $ref: '#/components/schemas/CustomFieldSetAssociation_base'
+            description: CustomFieldSetAssociation
+          email_addresses:
+            type: array
+            items:
+              $ref: '#/components/schemas/EmailAddress_base'
+            description: EmailAddress
+          instant_messengers:
+            type: array
+            items:
+              $ref: '#/components/schemas/InstantMessenger_base'
+            description: InstantMessenger
+          phone_numbers:
+            type: array
+            items:
+              $ref: '#/components/schemas/PhoneNumber_base'
+            description: PhoneNumber
+          web_sites:
+            type: array
+            items:
+              $ref: '#/components/schemas/WebSite_base'
+            description: WebSite
+          notification_methods:
+            type: array
+            items:
+              $ref: '#/components/schemas/NotificationMethod_base'
+            description: NotificationMethod
+          account_balances:
+            type: array
+            items:
+              $ref: '#/components/schemas/AccountBalance_base'
+            description: AccountBalance
+          related_contacts:
+            type: array
+            items:
+              $ref: '#/components/schemas/Contact_base'
+            description: Contact
+          kyc_field_values:
+            type: array
+            items:
+              $ref: '#/components/schemas/KycFieldValue_base'
+            description: KycFieldValue
+          primary_work_address:
+            $ref: '#/components/schemas/Address_base'
+            description: Address
+          primary_address:
+            $ref: '#/components/schemas/Address_base'
+            description: Address
+          secondary_address:
+            $ref: '#/components/schemas/Address_base'
+            description: Address
+          company:
+            $ref: '#/components/schemas/Contact_base'
+            description: Contact
+          avatar:
+            $ref: '#/components/schemas/Avatar_base'
+            description: Avatar
+          payment_profile:
+            $ref: '#/components/schemas/PaymentProfile_base'
+            description: PaymentProfile
+          folder:
+            $ref: '#/components/schemas/Folder_base'
+            description: Folder
+          co_counsel_rate:
+            $ref: '#/components/schemas/ActivityRate_base'
+            description: ActivityRate
+          primary_web_site:
+            $ref: '#/components/schemas/WebSite_base'
+            description: WebSite
+          legal_aid_uk_contact:
+            $ref: '#/components/schemas/LegalAidUkContact_base'
+            description: LegalAidUkContact
+          currency:
+            $ref: '#/components/schemas/Currency_base'
+            description: Currency
+    ActivityRate_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ActivityRate*
+        etag:
+          type: string
+          description: ETag for the *ActivityRate*
+        rate:
+          type: number
+          format: double
+          description: Monetary value of this rate. Either hourly value or flat rate value
+        flat_rate:
+          type: boolean
+          description: Whether this is a flat rate
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ActivityRate* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ActivityRate* was last updated (as a ISO-8601 timestamp)
+        contact_id:
+          type: integer
+          format: int64
+          description: Filter ActivityRate records for the contact.
+        co_counsel_contact_id:
+          type: integer
+          format: int64
+          description: Filter ActivityRate records for the co-counsel.
+    Folder_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Folder*
+        etag:
+          type: string
+          description: ETag for the *Folder*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Folder* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Folder* was last updated (as a ISO-8601 timestamp)
+        deleted_at:
+          type: string
+          format: date-time
+          description: The time the *Folder* was deleted (as a ISO-8601 timestamp)
+        type:
+          type: string
+          enum:
+          - Folder
+          description: The type of the *Folder*
+        locked:
+          type: boolean
+          description: Whether or not the Folder is locked. Locked Folder cannot be modified
+        name:
+          type: string
+          description: The name of the Folder
+        root:
+          type: boolean
+          description: Whether or not the Folder is the root folder. There is only one root folder per account
+    InstantMessenger_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *InstantMessenger*
+        etag:
+          type: string
+          description: ETag for the *InstantMessenger*
+        address:
+          type: string
+          description: The address of the *InstantMessenger*
+        name:
+          type: string
+          enum:
+          - Work
+          - Personal
+          - Other
+          description: The type of *InstantMessenger* it is
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *InstantMessenger* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *InstantMessenger* was last updated (as a ISO-8601 timestamp)
+    Contact_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Contact*
+        etag:
+          type: string
+          description: ETag for the *Contact*
+        name:
+          type: string
+          description: The full name of the *Contact*
+        first_name:
+          type: string
+          description: First name of the Person
+        middle_name:
+          type: string
+          description: Middle name of the Person
+        last_name:
+          type: string
+          description: Last name of the Person
+        date_of_birth:
+          type: string
+          format: date
+          description: Date of birth
+        type:
+          type: string
+          enum:
+          - Company
+          - Person
+          description: The type of the *Contact*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Contact* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Contact* was last updated (as a ISO-8601 timestamp)
+        prefix:
+          type: string
+          description: The prefix of the *Contact* (Mr, Mrs, etc)
+        title:
+          type: string
+          description: The designated title of the *Contact*
+        initials:
+          type: string
+          description: The initials of the *Contact*
+        clio_connect_email:
+          type: string
+          description: Clio Connect email if the *Contact* is a ClioConnect User
+        locked_clio_connect_email:
+          type: boolean
+          description: A boolean indicating if the ability to modify this *Contacts Clio connect email is locked.
+        client_connect_user_id:
+          type: integer
+          format: int64
+          description: The ID for the Clio Connect user associated with this *Contact*
+        primary_email_address:
+          type: string
+          description: The primary email address associated with this *Contact*.
+        secondary_email_address:
+          type: string
+          description: The secondary email address associated with this *Contact*.
+        primary_phone_number:
+          type: string
+          description: The primary phone number associated with this *Contact*.
+        secondary_phone_number:
+          type: string
+          description: The secondary phone number of the *Contact*.
+        ledes_client_id:
+          type: string
+          description: LEDES client id of the Contact
+        has_clio_for_clients_permission:
+          type: boolean
+          description: True if at least one resource has been shared with the contact using Clio for Clients.
+        is_client:
+          type: boolean
+          description: Whether or not the Contact is a client
+        is_clio_for_client_user:
+          type: boolean
+          description: Whether or not this contact has client_login and client_user (can be created due to addition to client portal or client_share_permissions)
+        is_co_counsel:
+          type: boolean
+          description: Whether or not the Contact has matters shared as co-counsel
+        is_bill_recipient:
+          type: boolean
+          description: Whether the Contact is a bill recipient on at least one matter.
+        sales_tax_number:
+          type: string
+          description: The sales tax number of the *Contact*
+        currency:
+          type: object
+          description: Currency of the *Contact*
+    CustomFieldValue_base:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the *CustomFieldValue*
+        etag:
+          type: string
+          description: ETag for the *CustomFieldValue*
+        field_name:
+          type: string
+          description: The name of the custom field
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *CustomFieldValue* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *CustomFieldValue* was last updated (as a ISO-8601 timestamp)
+        field_type:
+          type: string
+          enum:
+          - checkbox
+          - contact
+          - currency
+          - date
+          - time
+          - email
+          - matter
+          - numeric
+          - picklist
+          - text_area
+          - text_line
+          - url
+          description: The type of the *CustomFieldValue*
+        field_required:
+          type: boolean
+          description: Whether the *CustomFieldValue* requires a value
+        field_displayed:
+          type: boolean
+          description: Whether the *CustomFieldValue* is displayed by default
+        field_display_order:
+          type: integer
+          format: int32
+          description: The display position of the *CustomFieldValue*
+        value:
+          type: string
+          description: The value of the *CustomFieldValue*
+        soft_deleted:
+          type: boolean
+          description: Whether the value is associated with a deleted custom field
+    PicklistOption:
+      allOf:
+      - $ref: '#/components/schemas/PicklistOption_base'
+      - type: object
+        properties: {}
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    CustomField:
+      allOf:
+      - $ref: '#/components/schemas/CustomField_base'
+      - type: object
+        properties:
+          picklist_options:
+            type: array
+            items:
+              $ref: '#/components/schemas/PicklistOption_base'
+            description: PicklistOption
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    WebSite_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *WebSite*
+        etag:
+          type: string
+          description: ETag for the *WebSite*
+        address:
+          type: string
+          description: The address of the *WebSite*
+        name:
+          type: string
+          enum:
+          - Work
+          - Personal
+          - Twitter
+          - Facebook
+          - LinkedIn
+          - Instant Messenger
+          - Other
+          description: The type of *WebSite* it is
+        default_web_site:
+          type: boolean
+          description: Whether it is the default for this contact
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *WebSite* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *WebSite* was last updated (as a ISO-8601 timestamp)
+    EmailAddress_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *EmailAddress*
+        etag:
+          type: string
+          description: ETag for the *EmailAddress*
+        address:
+          type: string
+          description: The address of the *EmailAddress*
+        name:
+          type: string
+          description: A descriptive name for the *EmailAddress. Common values include `Home`, `Work`, and `Other`, as these are the only selectable options within Clio Manage, but other values may be returned for this field.
+        primary:
+          type: boolean
+          description: Whether it is the default for this contact
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *EmailAddress* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *EmailAddress* was last updated (as a ISO-8601 timestamp)
+    Address_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Address*
+        etag:
+          type: string
+          description: ETag for the *Address*
+        street:
+          type: string
+          description: Street of the *Address*
+        city:
+          type: string
+          description: City of the *Address*
+        province:
+          type: string
+          description: Province or state of the *Address*
+        postal_code:
+          type: string
+          description: Postal code of the *Address*
+        country:
+          type: string
+          description: Country of the *Address*
+        name:
+          type: string
+          enum:
+          - Work
+          - Home
+          - Billing
+          - Other
+          description: The name of the *Address*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Address* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Address* was last updated (as a ISO-8601 timestamp)
+        primary:
+          type: boolean
+          description: Whether it is the default for this contact
+    CustomFieldValue:
+      allOf:
+      - $ref: '#/components/schemas/CustomFieldValue_base'
+      - type: object
+        properties:
+          custom_field:
+            $ref: '#/components/schemas/CustomField'
+            description: CustomField
+          picklist_option:
+            $ref: '#/components/schemas/PicklistOption'
+            description: PicklistOption
+          matter:
+            $ref: '#/components/schemas/CustomFieldMatterSelection_base'
+            description: CustomFieldMatterSelection
+          contact:
+            $ref: '#/components/schemas/Contact_base'
+            description: Contact
+    Avatar_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Avatar*
+        etag:
+          type: string
+          description: ETag for the *Avatar*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Avatar* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Avatar* was last updated (as a ISO-8601 timestamp)
+        url:
+          type: string
+          description: The URL for the *Avatar*
+        _destroy:
+          type: boolean
+          description: Whether to destroy the *Avatar*
+    Contact_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Contact'
+    KycFieldValue_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *KycFieldValue*
+        etag:
+          type: string
+          description: ETag for the *KycFieldValue*
+        field_name:
+          type: string
+          description: The name of the KYC/KYB field. KYC/KYB fields are available for eligible accounts in Australia, Canada, Channel Islands, Ireland, Isle of Man, New Zealand, and United Kingdom.
+        field_label:
+          type: string
+          description: The display label of the KYC/KYB field
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *KycFieldValue* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *KycFieldValue* was last updated (as a ISO-8601 timestamp)
+        field_type:
+          type: string
+          enum:
+          - date
+          - picklist
+          - text
+          description: The type of the *KycFieldValue*
+        field_value:
+          type: string
+          description: The value of the *KycFieldValue*
+        field_possible_values:
+          type: array
+          items:
+            type: string
+          description: The possible values for the *KycFieldValue* if the field is of the type picklist
+        group:
+          type: string
+          description: The group the *KycFieldValue* belongs to
+    Contact_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: Contact List Response
+          items:
+            $ref: '#/components/schemas/Contact'
+    LegalAidUkContact_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *LegalAidUkContact*
+        disability:
+          type: integer
+          format: int32
+          description: The disability of the LegalAidUkContact
+        disability_code:
+          type: string
+          description: The disability code of the LegalAidUkContact
+        ethnicity:
+          type: integer
+          format: int32
+          description: The ethnicity of the LegalAidUkContact
+        ethnicity_title:
+          type: string
+          description: The ethnicity title of the LegalAidUkContact
+        financially_eligible:
+          type: boolean
+          description: The financial eligibility of the LegalAidUkContact
+        gender:
+          type: integer
+          format: int32
+          description: The gender of the LegalAidUkContact
+        gender_title:
+          type: string
+          description: The gender title of the LegalAidUkContact
+        national_insurance_number:
+          type: string
+          description: National Insurance Number
+    CustomField_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *CustomField*
+        etag:
+          type: string
+          description: ETag for the *CustomField*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *CustomField* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *CustomField* was last updated (as a ISO-8601 timestamp)
+        name:
+          type: string
+          description: The name of the *CustomField*
+        parent_type:
+          type: string
+          enum:
+          - Contact
+          - Matter
+          description: Type of object the *CustomField* is for
+        field_type:
+          type: string
+          enum:
+          - checkbox
+          - contact
+          - currency
+          - date
+          - time
+          - email
+          - matter
+          - numeric
+          - picklist
+          - text_area
+          - text_line
+          - url
+          description: Field type of the *CustomField*
+        displayed:
+          type: boolean
+          description: Whether the *CustomField* is displayed by default
+        deleted:
+          type: boolean
+          description: Whether the *CustomField* is deleted for future use
+        required:
+          type: boolean
+          description: Whether the *CustomField* requires a value
+        display_order:
+          type: integer
+          format: int32
+          description: The display position of the *CustomField*
+    PhoneNumber_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *PhoneNumber*
+        etag:
+          type: string
+          description: ETag for the *PhoneNumber*
+        number:
+          type: string
+          description: Contact's Phone Number
+        name:
+          type: string
+          enum:
+          - Work
+          - Personal
+          - Other
+          description: The type of *PhoneNumber* it is
+        primary:
+          type: boolean
+          description: Whether it is default for this contact
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *PhoneNumber* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *PhoneNumber* was last updated (as a ISO-8601 timestamp)
+    CustomFieldSetAssociation_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *CustomFieldSetAssociation*
+        etag:
+          type: string
+          description: ETag for the *CustomFieldSetAssociation*
+        display_order:
+          type: integer
+          format: int32
+          description: The display position of the *CustomFieldSetAssociation*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *CustomFieldSetAssociation* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *CustomFieldSetAssociation* was last updated (as a ISO-8601 timestamp)
+x-tagGroups:
+- name: Api
+  tags:
+  - Custom Actions
+  - Webhooks
+- name: Activities
+  tags:
+  - Activities
+  - Activity Descriptions
+  - Activity Rates
+  - Expense Categories
+  - Timers
+  - Utbms Codes
+  - Utbms Sets
+- name: Accounting
+  tags:
+  - Bank Accounts
+  - Bank Transactions
+  - Bank Transfers
+- name: Billing
+  tags:
+  - Bills
+  - Billable Clients
+  - Billable Matters
+  - Bill Themes
+  - Interest Charges
+  - Line Items
+  - Outstanding Client Balances
+- name: Calendars
+  tags:
+  - Calendars
+  - Calendar Entries
+  - Calendar Entry Event Types
+  - Calendar Visibilities
+  - Reminders
+- name: Clio Payments
+  tags:
+  - Clio Payments Links
+  - Clio Payments Payments
+- name: Communications
+  tags:
+  - Communications
+  - Conversations
+  - Conversation Messages
+- name: Contacts
+  tags:
+  - Contacts
+  - Email Addresses
+  - Phone Numbers
+  - Notes
+  - Log Entries
+- name: Court Rules
+  tags:
+  - Jurisdictions To Triggers
+  - Jurisdictions
+  - Matter Dockets
+  - Service Types
+- name: Custom Fields
+  tags:
+  - Custom Fields
+  - Custom Field Sets
+- name: Documents
+  tags:
+  - Documents
+  - Document Versions
+  - Folders
+  - Document Archives
+  - Document Automations
+  - Document Categories
+  - Document Templates
+  - Comments
+- name: In-app Notifications
+  tags:
+  - My Events
+  - Event Metrics
+- name: Matters
+  tags:
+  - Matters
+  - Relationships
+  - Clients
+  - Related Contacts
+  - Matter Contacts
+  - Notes
+  - Practice Areas
+  - Log Entries
+  - Matter Stages
+  - Medical Records Details
+  - Medical Records
+  - Medical Bills
+  - Damages
+- name: Payments
+  tags:
+  - Allocations
+  - Credit Memos
+- name: Reporting
+  tags:
+  - Reports
+  - Report Presets
+  - Report Schedules
+- name: Settings
+  tags:
+  - Text Snippets
+  - Billing Settings
+  - Currencies
+  - Tax Rate Configurations
+- name: Tasks
+  tags:
+  - Tasks
+  - Task Templates
+  - Task Template Lists
+  - Task Types
+- name: Trust
+  tags:
+  - Trust Line Items
+  - Trust Requests
+- name: Users
+  tags:
+  - Users
+  - Groups
+- name: Legal Aid US
+  tags:
+  - Grants
+  - Grant Funding Sources
+- name: Legal Aid England & Wales
+  tags:
+  - Civil Controlled Rates
+  - Civil Certificated Rates
+  - Criminal Controlled Rates
+  - Expense Categories

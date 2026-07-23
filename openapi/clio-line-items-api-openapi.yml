@@ -1,0 +1,1410 @@
+openapi: 3.0.0
+info:
+  title: Clio API Documentation Activities Line Items API
+  contact:
+    name: Clio API Support
+    email: api@clio.com
+  description: "# Developer Support and Feedback\n* Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio's API Support team at [api@clio.com](mailto:api@clio.com).\n* For business and partnership inquiries, contact our API Partnerships team at [api.partnerships@clio.com](mailto:api.partnerships@clio.com).\n* For best practices and tips from the Clio development community, join the conversation in the [Clio Developer Slack Channel](https://join.slack.com/t/clio-public/shared_invite/zt-36i0eqgo1-7POORPtMJpp2N0~_auL2IQ).\n\nA community-driven [Clio Developers Stack Overflow Group](https://stackoverflow.com/questions/tagged/clio-api) also exists where you can connect and ask questions from other Clio API users.\n# Getting Started\n> **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).\n>\n> Likewise, the developer portal is available at region-specific links for the [Australia](https://au.developers.clio.com), [Canada](https://ca.developers.clio.com), [EU](https://eu.developers.clio.com), and [US](https://developers.clio.com) regions.\n>\n> This document assumes the US region is being used (app.clio.com). If you're building in one of the other regions, you should adapt the links and examples as necessary.\n\nTo start building on the Clio API, you’ll need a Clio account – you can review our [Developer Handbook](https://docs.developers.clio.com/) and follow the steps to sign up for an account.\n\nOnce you have an account, you can [create a developer application](https://docs.developers.clio.com/api-docs/applications) from the [Developer Portal](https://developers.clio.com) and start building!\n# Authorization with OAuth 2.0\nSee our [Authorization documentation →](https://docs.developers.clio.com/api-docs/authorization)\n# Permissions\nSee our [Permissions documentation →](https://docs.developers.clio.com/api-docs/permissions)\n# Fields\nSee our [Fields documentation →](https://docs.developers.clio.com/api-docs/fields)\n# Rate Limiting\nSee our [Rate Limits documentation →](https://docs.developers.clio.com/api-docs/rate-limits)\n# Paging\nSee our [Pagination documentation →](https://docs.developers.clio.com/api-docs/paging)\n# ETags\nSee our [ETags documentation →](https://docs.developers.clio.com/api-docs/etags)\n# Minor Versions\nAPI v4 supports multiple minor versions. Versions are of the form '4.X.Y'. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you're requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.\n\nAn `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.\n\nYou can find our [API Versioning Policy and Guidelines](https://docs.developers.clio.com/api-docs/api-versioning-policy) in our documentation hub.\n\nThe [API Changelog](https://docs.developers.clio.com/api-docs/api-changelog) explains each version's changes in further detail.\n### [4.0.4](https://docs.developers.clio.com/api-docs/api-changelog#404)\n\n  * Update `quantity` field to return values in seconds rather than hours for Activities\n\n### [4.0.5](https://docs.developers.clio.com/api-docs/api-changelog#405)\n\n  * Remove `matter_balances` field from Bills\n* Standardize status/state enum values\n* Add a Document association to completed DocumentAutomations\n* Add rate visibility handling for Activity's price and total\n\n### [4.0.6](https://docs.developers.clio.com/api-docs/api-changelog#406)\n\n  * Remove `document_versions` collection field from Documents\n\n### [4.0.7](https://docs.developers.clio.com/api-docs/api-changelog#407)\n\n  * Change secure link format\n\n### [4.0.8](https://docs.developers.clio.com/api-docs/api-changelog#408)\n\n  * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user\n  * Add `quantity_redacted` field to activities\n\n### [4.0.9](https://docs.developers.clio.com/api-docs/api-changelog#409)\n\n  * Contacts are filtered and redacted in the response based on the new 'Contacts Visibility' user permission setting.\n\n### [4.0.10](https://docs.developers.clio.com/api-docs/api-changelog#4010)\n\n  * Fixed validation of `type` query parameter when querying Notes\n\n### [4.0.12](https://docs.developers.clio.com/api-docs/api-changelog#4012)\n\n  * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers\n\n### [4.0.13](https://docs.developers.clio.com/api-docs/api-changelog#4013)\n\n  **This is the default version**\n\n  * Add association limits to Contacts\n* Returns 422 Unprocessable Entity when association limits are exceeded\n\n\n"
+  version: v4
+  x-logo:
+    url: https://www.clio.com/wp-content/uploads/2015/05/Container-5-Logo.png
+servers:
+- url: https://app.clio.com/api/v4
+  description: US region Production Server
+- url: https://eu.app.clio.com/api/v4
+  description: Europe region Production Server
+- url: https://ca.app.clio.com/api/v4
+  description: Canada region Production Server
+- url: https://au.app.clio.com/api/v4
+  description: Australia region Production Server
+tags:
+- name: Line Items
+  description: ''
+paths:
+  /line_items.json:
+    get:
+      tags:
+      - Line Items
+      summary: Return the data for all LineItems
+      operationId: LineItem#index
+      description: Outlines the parameters, optional and required, used when requesting the data for all LineItems
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: activity_id
+        in: query
+        description: The unique identifier for a single Activity. Use the keyword `null` to match those without a LineItem. The list will be filtered to include only the LineItem records with the matching property.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: bill_id
+        in: query
+        description: The unique identifier for a single Bill. The keyword `null` is not valid for this field. The list will be filtered to include only the LineItem records with the matching property.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: created_since
+        in: query
+        description: Filter LineItem records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: display
+        in: query
+        description: Set this flag to true to return only LineItems displayed on the bill.
+        required: false
+        schema:
+          type: boolean
+      - name: exclude_ids[]
+        in: query
+        description: Array containing LineItem identifiers that should be excluded from the query.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: group_ordering
+        in: query
+        description: Filters LineItem records to match given group ordering.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: ids[]
+        in: query
+        description: Filter LineItem records to those having the specified unique identifiers.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: kind
+        in: query
+        description: The kind of LineItem.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: 'A limit on the number of LineItem records to be returned. Limit can range between 1 and 200. Default: `200`.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: matter_id
+        in: query
+        description: The unique identifier for a single Matter. Use the keyword `null` to match those without a LineItem. The list will be filtered to include only the LineItem records with the matching property.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: page_token
+        in: query
+        description: A token specifying which page to return.
+        required: false
+        schema:
+          type: string
+      - name: query
+        in: query
+        description: Wildcard search for `description` or `note` matching a given string.
+        required: false
+        schema:
+          type: string
+      - name: updated_since
+        in: query
+        description: Filter LineItem records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/LineItem_List'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /line_items/{id}.json:
+    patch:
+      tags:
+      - Line Items
+      summary: Update a single LineItem
+      operationId: LineItem#update
+      description: Outlines the parameters and data fields used when updating a single LineItem
+      parameters:
+      - name: IF-MATCH
+        in: header
+        description: The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).
+        required: false
+        schema:
+          type: string
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The unique identifier for the LineItem.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/LineItem_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '412':
+          description: Precondition Failed
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        description: Request Body for Line Items
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    activity:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Activity associated with the LineItem. The keyword `null` is not valid for this field.
+                    bill:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Bill associated with the LineItem. The keyword `null` is not valid for this field.
+                    date:
+                      type: string
+                      format: date
+                      description: The LineItem date.
+                    description:
+                      type: string
+                      description: Description of the LineItem.
+                    discount:
+                      type: object
+                      properties:
+                        rate:
+                          type: number
+                          format: double
+                          description: Discount rate for the LineItem.
+                        type:
+                          type: boolean
+                          description: 'Discount type. This should be set to one of: ''percentage'' or ''money''.'
+                    group_ordering:
+                      type: integer
+                      format: int32
+                      description: The LineItem group ordering.
+                    kind:
+                      type: string
+                      enum:
+                      - Expense
+                      - Service
+                      - Product
+                      description: The specific type of activity which is associated with the LineItem.
+                    matter:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Matter associated with the LineItem. The keyword `null` is not valid for this field.
+                    note:
+                      type: string
+                      description: The note attached to the LineItem.
+                    price:
+                      type: number
+                      format: double
+                      description: The price of the LineItem.
+                    quantity:
+                      type: number
+                      format: double
+                      description: Quantity of the LineItem.
+                    secondary_taxable:
+                      type: boolean
+                      description: Whether the LineItem is secondary taxable.
+                    tax_settings:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          tax_rate_configuration_id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier of the tax rate configuration associated with the tax setting.
+                          order:
+                            type: integer
+                            format: int32
+                            description: The order that the tax setting should be applied in.
+                          rule:
+                            type: string
+                            enum:
+                            - Pre
+                            - Post
+                            description: The rule that the tax setting should be applied in.
+                      description: Array of objects, with each object representing a tax setting with 'tax_rate_configuration_id', 'order', and 'rule' properties.
+                    taxable:
+                      type: boolean
+                      description: Whether the LineItem taxable.
+                    update_original_record:
+                      type: boolean
+                      description: Whether the associated activity will be updated.
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    activity:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Activity associated with the LineItem. The keyword `null` is not valid for this field.
+                    bill:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Bill associated with the LineItem. The keyword `null` is not valid for this field.
+                    date:
+                      type: string
+                      format: date
+                      description: The LineItem date.
+                    description:
+                      type: string
+                      description: Description of the LineItem.
+                    discount:
+                      type: object
+                      properties:
+                        rate:
+                          type: number
+                          format: double
+                          description: Discount rate for the LineItem.
+                        type:
+                          type: boolean
+                          description: 'Discount type. This should be set to one of: ''percentage'' or ''money''.'
+                    group_ordering:
+                      type: integer
+                      format: int32
+                      description: The LineItem group ordering.
+                    kind:
+                      type: string
+                      enum:
+                      - Expense
+                      - Service
+                      - Product
+                      description: The specific type of activity which is associated with the LineItem.
+                    matter:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Matter associated with the LineItem. The keyword `null` is not valid for this field.
+                    note:
+                      type: string
+                      description: The note attached to the LineItem.
+                    price:
+                      type: number
+                      format: double
+                      description: The price of the LineItem.
+                    quantity:
+                      type: number
+                      format: double
+                      description: Quantity of the LineItem.
+                    secondary_taxable:
+                      type: boolean
+                      description: Whether the LineItem is secondary taxable.
+                    tax_settings:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          tax_rate_configuration_id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier of the tax rate configuration associated with the tax setting.
+                          order:
+                            type: integer
+                            format: int32
+                            description: The order that the tax setting should be applied in.
+                          rule:
+                            type: string
+                            enum:
+                            - Pre
+                            - Post
+                            description: The rule that the tax setting should be applied in.
+                      description: Array of objects, with each object representing a tax setting with 'tax_rate_configuration_id', 'order', and 'rule' properties.
+                    taxable:
+                      type: boolean
+                      description: Whether the LineItem taxable.
+                    update_original_record:
+                      type: boolean
+                      description: Whether the associated activity will be updated.
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    activity:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Activity associated with the LineItem. The keyword `null` is not valid for this field.
+                    bill:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Bill associated with the LineItem. The keyword `null` is not valid for this field.
+                    date:
+                      type: string
+                      format: date
+                      description: The LineItem date.
+                    description:
+                      type: string
+                      description: Description of the LineItem.
+                    discount:
+                      type: object
+                      properties:
+                        rate:
+                          type: number
+                          format: double
+                          description: Discount rate for the LineItem.
+                        type:
+                          type: boolean
+                          description: 'Discount type. This should be set to one of: ''percentage'' or ''money''.'
+                    group_ordering:
+                      type: integer
+                      format: int32
+                      description: The LineItem group ordering.
+                    kind:
+                      type: string
+                      enum:
+                      - Expense
+                      - Service
+                      - Product
+                      description: The specific type of activity which is associated with the LineItem.
+                    matter:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single Matter associated with the LineItem. The keyword `null` is not valid for this field.
+                    note:
+                      type: string
+                      description: The note attached to the LineItem.
+                    price:
+                      type: number
+                      format: double
+                      description: The price of the LineItem.
+                    quantity:
+                      type: number
+                      format: double
+                      description: Quantity of the LineItem.
+                    secondary_taxable:
+                      type: boolean
+                      description: Whether the LineItem is secondary taxable.
+                    tax_settings:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          tax_rate_configuration_id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier of the tax rate configuration associated with the tax setting.
+                          order:
+                            type: integer
+                            format: int32
+                            description: The order that the tax setting should be applied in.
+                          rule:
+                            type: string
+                            enum:
+                            - Pre
+                            - Post
+                            description: The rule that the tax setting should be applied in.
+                      description: Array of objects, with each object representing a tax setting with 'tax_rate_configuration_id', 'order', and 'rule' properties.
+                    taxable:
+                      type: boolean
+                      description: Whether the LineItem taxable.
+                    update_original_record:
+                      type: boolean
+                      description: Whether the associated activity will be updated.
+        required: false
+    delete:
+      tags:
+      - Line Items
+      summary: Delete a single LineItem
+      operationId: LineItem#destroy
+      description: A LineItem can not be deleted if it's Bill is not editable
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The unique identifier for the LineItem.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '204':
+          description: No Content
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    LineItem_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *LineItem*
+        etag:
+          type: string
+          description: ETag for the *LineItem*
+        type:
+          type: string
+          enum:
+          - ActivityLineItem
+          - LineItem
+          - NoChargeLineItem
+          - SummaryLineItem
+          description: The type of the *LineItem*
+        description:
+          type: string
+          description: The description for the *LineItem*
+        date:
+          type: string
+          format: date
+          description: The *LineItem* date (as a ISO-8601 date)
+        price:
+          type: number
+          format: double
+          description: The price of the *LineItem*
+        taxable:
+          type: boolean
+          description: Whether the *LineItem* is taxable
+        kind:
+          type: string
+          enum:
+          - Service
+          - Expense
+          description: The kind of *LineItem*
+        note:
+          type: string
+          description: The note attached to the *LineItem*
+        secondary_taxable:
+          type: boolean
+          description: Whether the *LineItem* is secondary taxable
+        total:
+          type: number
+          format: double
+          description: The total amount for the *LineItem*
+        tax:
+          type: number
+          format: double
+          description: The tax amount for the *LineItem*
+        secondary_tax:
+          type: number
+          format: double
+          description: The secondary tax amount for the *LineItem*
+        sub_total:
+          type: number
+          format: double
+          description: The subtotal amount for the *LineItem*
+        quantity:
+          type: number
+          format: double
+          description: The amount of hours for the *LineItem*
+        group_ordering:
+          type: integer
+          format: int32
+          description: The value to specify the ordering of the *LineItem* on a bill
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *LineItem* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *LineItem* was last updated (as a ISO-8601 timestamp)
+        tax_settings:
+          type: array
+          items:
+            type: object
+          description: Array of objects, with each object representing the line item tax that is associated with the *LineItem*
+    LineItem:
+      allOf:
+      - $ref: '#/components/schemas/LineItem_base'
+      - type: object
+        properties:
+          bill:
+            $ref: '#/components/schemas/Bill_base'
+            description: Bill
+          activity:
+            $ref: '#/components/schemas/Activity_base'
+            description: Activity
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          user:
+            $ref: '#/components/schemas/User_base'
+            description: User
+          discount:
+            $ref: '#/components/schemas/Discount_base'
+            description: Discount
+          included_line_item_totals:
+            $ref: '#/components/schemas/LineItemTotals_base'
+            description: LineItemTotals
+          tax_settings:
+            type: array
+            items:
+              $ref: '#/components/schemas/LineItemTax_base'
+            description: LineItemTax
+    LineItem_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/LineItem'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    Discount_base:
+      type: object
+      properties:
+        rate:
+          type: number
+          format: double
+          description: The rate of the *Discount%*
+        type:
+          type: string
+          enum:
+          - percentage
+          - money
+          description: The type of *Discount* being applied in your *Discount* rate.
+        note:
+          type: string
+          description: A note for your *Discount*
+        early_payment_rate:
+          type: integer
+          format: int32
+          description: The % discount that will be applied if your *Discount* is paid within the early payment period.
+        early_payment_period:
+          type: integer
+          format: int32
+          description: The number of days for your *Discount* period. If your bill is paid within this time, apply your *Discount* rate to the bill.
+    Bill_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Bill*
+        etag:
+          type: string
+          description: ETag for the *Bill*
+        number:
+          type: string
+          description: The *Bill* identifier (not necessarily numeric)'
+        issued_at:
+          type: string
+          format: date
+          description: The time the *Bill* was issued (as a ISO-8601 date)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Bill* was created (as a ISO-8601 timestamp)
+        due_at:
+          type: string
+          format: date
+          description: The date the *Bill* is due (as a ISO-8601 date)
+        tax_rate:
+          type: number
+          format: double
+          description: The tax rate to the *Bill*
+        secondary_tax_rate:
+          type: number
+          format: double
+          description: A secondary tax rate applied to the *Bill*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Bill* was last updated (as a ISO-8601 timestamp)
+        subject:
+          type: string
+          description: The subject of the *Bill*
+        purchase_order:
+          type: string
+          description: The purchase order of the *Bill*
+        type:
+          type: string
+          enum:
+          - MatterBill
+          - ClientBill
+          description: The type of the *Bill*
+        memo:
+          type: string
+          description: A memo for the *Bill*
+        start_at:
+          type: string
+          format: date
+          description: The time the billing period starts (as a ISO-8601 date)
+        end_at:
+          type: string
+          format: date
+          description: The time the billing period ends (as a ISO-8601 date)
+        balance:
+          type: number
+          format: double
+          description: The outstanding balance of the *Bill*
+        state:
+          type: string
+          enum:
+          - draft
+          - awaiting_approval
+          - awaiting_payment
+          - paid
+          - void
+          - deleted
+          description: The billing state the *Bill* is in
+        kind:
+          type: string
+          enum:
+          - revenue_kind
+          - summary_kind
+          - trust_kind
+          - aggregate_all
+          - aggregate_split
+          - aggregate_services
+          - aggregate_expenses
+          description: The kind of the *Bill*
+        total:
+          type: number
+          format: double
+          description: The total with interest of the *Bill*
+        paid:
+          type: number
+          format: double
+          description: The total amount paid for the *Bill*
+        paid_at:
+          type: string
+          format: date-time
+          description: The date of the last payment on the *Bill*
+        pending:
+          type: number
+          format: double
+          description: The amount of pending credit card payments on the *Bill*
+        due:
+          type: number
+          format: double
+          description: The total amount of the *Bill* with interest and less discounts
+        discount_services_only:
+          type: string
+          description: The selected discount is applied to services only.
+        can_update:
+          type: boolean
+          description: This value indicates if your *Bill*'s line items and information can be updated.
+        credits_issued:
+          type: number
+          format: double
+          description: The total credits issued for the *Bill*
+        shared:
+          type: boolean
+          description: Whether the *Bill* is a shared
+        last_sent_at:
+          type: string
+          format: date-time
+          description: The last time the *Bill* was sent (as a ISO-8601 date)
+        services_secondary_tax:
+          type: number
+          format: double
+          description: The total secondary tax of the bill's line items of a service kind
+        services_sub_total:
+          type: number
+          format: double
+          description: The sub total of all the bill's line items of a service kind
+        services_tax:
+          type: number
+          format: double
+          description: The total tax of the bill's line items of a service kind
+        services_taxable_sub_total:
+          type: integer
+          format: int64
+          description: The services portion of the bill's primary tax
+        services_secondary_taxable_sub_total:
+          type: integer
+          format: int64
+          description: The services portion of the bill's secondary tax
+        taxable_sub_total:
+          type: integer
+          format: int64
+          description: The total taxable bill amount
+        secondary_taxable_sub_total:
+          type: integer
+          format: int64
+          description: The subtotal of the bill's secondary tax
+        sub_total:
+          type: number
+          format: double
+          description: Sub total for the *Bill*
+        tax_sum:
+          type: number
+          format: double
+          description: Sum of primary tax for the model
+        secondary_tax_sum:
+          type: number
+          format: double
+          description: Sum of secondary tax for the model
+        total_tax:
+          type: number
+          format: double
+          description: The total amount of tax for the bill.
+        available_state_transitions:
+          type: array
+          items:
+            type: string
+            enum:
+            - awaiting_approval
+            - awaiting_payment
+            - paid
+            - void
+            - deleted
+          description: The available *Bill* state transitions.
+    LineItemTotals_base:
+      type: object
+      properties:
+        quantity:
+          type: number
+          format: double
+          description: Sum of quantity for included line items.
+        price:
+          type: number
+          format: double
+          description: Sum of price for included line items.
+        discount_percent:
+          type: number
+          format: double
+          description: Sum of discount as percentage for included line items.
+        total:
+          type: number
+          format: double
+          description: Sum of total for included line items.
+        sub_total:
+          type: number
+          format: double
+          description: Sum of total before discount and tax is applied.
+    Matter_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Matter*
+        etag:
+          type: string
+          description: ETag for the *Matter*
+        number:
+          type: integer
+          format: int32
+          description: The number given to the *Matter* within an account
+        display_number:
+          type: string
+          description: The reference and label of the *Matter*. Depending on the account's manual_matter_numbering setting, this is either read only (generated) or customizable.
+        custom_number:
+          type: string
+          description: User defined custom number of the *Matter*
+        currency:
+          type: object
+          description: Currency of the matter
+        description:
+          type: string
+          description: The detailed description of the *Matter*
+        status:
+          type: string
+          enum:
+          - Pending
+          - Open
+          - Closed
+          description: The current status of the *Matter*
+        location:
+          type: string
+          description: The location of the *Matter*
+        client_reference:
+          type: string
+          description: Client Reference string for external uses
+        client_id:
+          type: integer
+          format: int64
+          description: Client ID
+        billable:
+          type: boolean
+          description: Whether this matter is billable
+        maildrop_address:
+          type: string
+          description: A unique Maildrop email address for the matter
+        billing_method:
+          type: string
+          enum:
+          - flat
+          - contingency
+          - hourly
+          description: Billing method of this matter
+        open_date:
+          type: string
+          format: date
+          description: The date the matter was set to open (as a ISO-8601 date)
+        close_date:
+          type: string
+          format: date
+          description: The date the matter was set to closed (as a ISO-8601 date)
+        pending_date:
+          type: string
+          format: date
+          description: The date the matter was set to pending (as a ISO-8601 date)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Matter* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Matter* was last updated (as a ISO-8601 timestamp)
+        shared:
+          type: boolean
+          description: Whether the matter is currently shared with Clio Connect
+        has_tasks:
+          type: boolean
+          description: Whether or not the matter has any tasks.
+        last_activity_date:
+          type: string
+          format: date
+          description: The greatest date out of all of the activities on the matter (as a ISO-8601 date)
+        matter_stage_updated_at:
+          type: string
+          format: date-time
+          description: The date the matter stage was last updated (as a ISO-8601 date)
+    User_base:
+      type: object
+      properties:
+        account_owner:
+          type: boolean
+          description: Whether the *User* is the owner of the account
+        clio_connect:
+          type: boolean
+          description: Whether the *User* is a Clio Connect user
+        court_rules_default_attendee:
+          type: boolean
+          description: Whether the *User* is a default attendee for court rules events
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *User* was created (as a ISO-8601 timestamp)
+        default_calendar_id:
+          type: integer
+          format: int64
+          description: Default calendar id for *User*.
+        email:
+          type: string
+          description: The email of the *User*
+        enabled:
+          type: boolean
+          description: Whether the *User* is allowed to log in
+        etag:
+          type: string
+          description: ETag for the *User*
+        first_name:
+          type: string
+          description: The first name of the *User*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *User*
+        initials:
+          type: string
+          description: The initials of the *User*
+        last_name:
+          type: string
+          description: The last name of the *User*
+        name:
+          type: string
+          description: The full name of the *User*
+        phone_number:
+          type: string
+          description: The primary phone number for the *User*.
+        rate:
+          type: number
+          format: float
+          description: Default user activity rate for *User*.
+        roles:
+          type: array
+          items:
+            type: string
+          description: An array of roles assigned to this *User*
+        subscription_type:
+          type: string
+          enum:
+          - Attorney
+          - NonAttorney
+          description: The subscription type of the *User*
+        time_zone:
+          type: string
+          description: The selected time zone of the *User*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *User* was last updated (as a ISO-8601 timestamp)
+    LineItemTax_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *LineItemTax*
+        etag:
+          type: string
+          description: ETag for the *LineItemTax*
+        tax_rate_configuration_id:
+          type: integer
+          format: int64
+          description: The unique identifier of the tax rate configuration
+        name:
+          type: string
+          description: The tax name
+        rate:
+          type: number
+          format: decimal
+          description: The tax rate
+        formatted_rate:
+          type: string
+          description: The formatted tax rate as a percentage
+        rule:
+          type: string
+          description: The tax rule
+        amount:
+          type: number
+          format: decimal
+          description: The tax amount
+        order:
+          type: integer
+          format: int32
+          description: The tax order
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *LineItemTax* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *LineItemTax* was last updated (as a ISO-8601 timestamp)
+    LineItem_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: LineItem List Response
+          items:
+            $ref: '#/components/schemas/LineItem'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    Activity_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Activity*
+        etag:
+          type: string
+          description: ETag for the *Activity*
+        type:
+          type: string
+          enum:
+          - TimeEntry
+          - ExpenseEntry
+          - HardCostEntry
+          - SoftCostEntry
+          description: The type of the *Activity*
+        date:
+          type: string
+          format: date
+          description: The date the *Activity* was performed (as a ISO-8601 date)
+        quantity_in_hours:
+          type: number
+          format: double
+          description: The number of hours the TimeEntry took.
+        rounded_quantity_in_hours:
+          type: number
+          format: double
+          description: 'The number of hours rounded accordingly to the billing settings.
+
+            The rounded value is used to calculate the total.
+
+            '
+        quantity:
+          type: number
+          format: double
+          description: 'The field is applicable to TimeEntry, ExpenseEntry, and SoftCostEntry.
+
+
+            **Version <= 4.0.3:**
+
+            The number of hours the TimeEntry took.
+
+
+            **Latest version:**
+
+            The number of seconds the TimeEntry took.
+
+            '
+        rounded_quantity:
+          type: number
+          format: double
+          description: 'The field is applicable to time entries only.
+
+
+            **Version <= 4.0.3:**
+
+            The number of hours rounded accordingly to the billing settings.
+
+            The rounded value is used to calculate the total.
+
+
+            **Latest version:**
+
+            The number of seconds rounded accordingly to the billing settings.
+
+            The rounded value is used to calculate the total.
+
+            '
+        quantity_redacted:
+          type: boolean
+          description: 'Is `true` if any of the following fields are redacted:
+
+            `quantity`, `rounded_quantity`, `rounded_quantity_in_hours`, `quantity_in_hours`, `total`, `non_billable_total`
+
+            '
+        price:
+          type: number
+          format: double
+          description: The hourly or flat rate of the *Activity*
+        note:
+          type: string
+          description: The details about the *Activity*
+        flat_rate:
+          type: boolean
+          description: Whether the *Activity* is a flat rate
+        billed:
+          type: boolean
+          description: Whether the *Activity* has been added to an active bill that is in the state of `awaiting_payment` or `paid`
+        on_bill:
+          type: boolean
+          description: Whether the *Activity* has been added to an active bill that is in the state of `draft`, `awaiting_approval`, `awaiting_payment` or `paid`
+        total:
+          type: number
+          format: double
+          description: The total cost of draft, billable and billed items in the *Activity*
+        contingency_fee:
+          type: boolean
+          description: Whether or not the *Activity* is a contingency fee
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Activity* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Activity* was last updated (as a ISO-8601 timestamp)
+        reference:
+          type: string
+          description: A check reference for a HardCostEntry.
+        non_billable:
+          type: boolean
+          description: Whether the *Activity* is non-billable
+        non_billable_total:
+          type: number
+          format: double
+          description: The total cost of non-billable items in the *Activity*
+        no_charge:
+          type: boolean
+          description: Whether the non-billable *Activity* is shown on the bill.
+        tax_setting:
+          type: string
+          enum:
+          - no_tax
+          - tax_1_only
+          - tax_2_only
+          - tax_1_and_tax_2
+          description: The option denoting whether primary tax, secondary tax, or both is applied to an expense entry.
+        tax_settings:
+          type: array
+          items:
+            type: object
+          description: Array of objects, with each object representing a tax setting that is applied to an expense entry with 'tax_rate_configuration_id', 'order', and 'rule' as the object properties.
+        currency:
+          type: object
+          description: The currency of the *Activity*
+x-tagGroups:
+- name: Api
+  tags:
+  - Custom Actions
+  - Webhooks
+- name: Activities
+  tags:
+  - Activities
+  - Activity Descriptions
+  - Activity Rates
+  - Expense Categories
+  - Timers
+  - Utbms Codes
+  - Utbms Sets
+- name: Accounting
+  tags:
+  - Bank Accounts
+  - Bank Transactions
+  - Bank Transfers
+- name: Billing
+  tags:
+  - Bills
+  - Billable Clients
+  - Billable Matters
+  - Bill Themes
+  - Interest Charges
+  - Line Items
+  - Outstanding Client Balances
+- name: Calendars
+  tags:
+  - Calendars
+  - Calendar Entries
+  - Calendar Entry Event Types
+  - Calendar Visibilities
+  - Reminders
+- name: Clio Payments
+  tags:
+  - Clio Payments Links
+  - Clio Payments Payments
+- name: Communications
+  tags:
+  - Communications
+  - Conversations
+  - Conversation Messages
+- name: Contacts
+  tags:
+  - Contacts
+  - Email Addresses
+  - Phone Numbers
+  - Notes
+  - Log Entries
+- name: Court Rules
+  tags:
+  - Jurisdictions To Triggers
+  - Jurisdictions
+  - Matter Dockets
+  - Service Types
+- name: Custom Fields
+  tags:
+  - Custom Fields
+  - Custom Field Sets
+- name: Documents
+  tags:
+  - Documents
+  - Document Versions
+  - Folders
+  - Document Archives
+  - Document Automations
+  - Document Categories
+  - Document Templates
+  - Comments
+- name: In-app Notifications
+  tags:
+  - My Events
+  - Event Metrics
+- name: Matters
+  tags:
+  - Matters
+  - Relationships
+  - Clients
+  - Related Contacts
+  - Matter Contacts
+  - Notes
+  - Practice Areas
+  - Log Entries
+  - Matter Stages
+  - Medical Records Details
+  - Medical Records
+  - Medical Bills
+  - Damages
+- name: Payments
+  tags:
+  - Allocations
+  - Credit Memos
+- name: Reporting
+  tags:
+  - Reports
+  - Report Presets
+  - Report Schedules
+- name: Settings
+  tags:
+  - Text Snippets
+  - Billing Settings
+  - Currencies
+  - Tax Rate Configurations
+- name: Tasks
+  tags:
+  - Tasks
+  - Task Templates
+  - Task Template Lists
+  - Task Types
+- name: Trust
+  tags:
+  - Trust Line Items
+  - Trust Requests
+- name: Users
+  tags:
+  - Users
+  - Groups
+- name: Legal Aid US
+  tags:
+  - Grants
+  - Grant Funding Sources
+- name: Legal Aid England & Wales
+  tags:
+  - Civil Controlled Rates
+  - Civil Certificated Rates
+  - Criminal Controlled Rates
+  - Expense Categories
