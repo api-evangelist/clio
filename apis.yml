@@ -8,7 +8,18 @@ description: Clio is a cloud-based legal practice management platform used by la
   endpoints for the U.S., Canada, EU/UK, and Australia. Webhooks deliver near real-time
   event notifications, and the Clio App Directory hosts certified third-party integrations.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/clio.png
 tags:
 - Billing
 - Calendaring
@@ -25,41 +36,13 @@ created: '2026-05-11'
 modified: '2026-05-11'
 specificationVersion: '0.19'
 apis:
-- aid: clio:manage-api-v4
-  name: Clio Manage API v4
-  description: The Clio Manage API v4 is a JSON REST API that gives developers programmatic
-    access to Clio's legal practice management data model — matters, contacts, activities,
-    bills, trust accounts, documents, tasks, calendar entries, custom fields, and
-    users. Authentication is OAuth 2.0 (authorization code flow). Regional endpoints
-    exist for the U.S. (app.clio.com), Canada (ca.app.clio.com), EU/UK (eu.app.clio.com),
-    and Australia (au.app.clio.com). Standard pagination, filtering, sparse fieldsets,
-    and ETag-based caching are supported.
-  humanURL: https://docs.developers.clio.com/
-  baseURL: https://app.clio.com/api/v4
-  tags:
-  - Legal
-  - Matter Management
-  - OAuth 2.0
-  - Practice Management
-  - REST
-  properties:
-  - type: Documentation
-    url: https://docs.developers.clio.com/
-  - type: Reference
-    url: https://docs.developers.clio.com/api-docs/
-  - type: Authentication
-    url: https://app.clio.com/oauth/authorize
-  - type: OpenAPI
-    url: openapi/clio-manage-api-v4-openapi.yml
-  - url: graphql/clio-graphql.md
-    type: GraphQL
 - aid: clio:webhooks
   name: Clio Webhooks
-  description: Clio Webhooks deliver near real-time notifications when matters, contacts,
-    activities, tasks, calendar entries, bills, and other Clio resources are created,
-    updated, or deleted. Subscriptions are managed through the Webhooks endpoints
-    in the Manage API and payloads are delivered to the integrator's HTTPS endpoint
-    with an X-API-V4-Signature header for verification.
+  description: >-
+    Clio Webhooks deliver near real-time notifications when matters, contacts, activities, tasks, calendar
+    entries, bills, and other Clio resources are created, updated, or deleted. Subscriptions are managed
+    through the Webhooks endpoints in the Manage API and payloads are delivered to the integrator's HTTPS
+    endpoint with an X-API-V4-Signature header for verification.
   humanURL: https://docs.developers.clio.com/api-docs/webhooks/
   tags:
   - Events
@@ -73,10 +56,10 @@ apis:
     url: asyncapi/clio-webhooks-asyncapi.yml
 - aid: clio:app-directory
   name: Clio App Directory
-  description: The Clio App Directory is the integration marketplace for certified
-    third-party apps that connect to Clio Manage. Apps listed in the directory are
-    reviewed by Clio's developer partnerships team and made discoverable to Clio's
-    customer base.
+  description: >-
+    The Clio App Directory is the integration marketplace for certified third-party apps that connect
+    to Clio Manage. Apps listed in the directory are reviewed by Clio's developer partnerships team and
+    made discoverable to Clio's customer base.
   humanURL: https://app.clio.com/companion
   tags:
   - Integrations
@@ -87,6 +70,3546 @@ apis:
     url: https://app.clio.com/companion
   - type: Listing Guide
     url: https://docs.developers.clio.com/getting-started/listing-your-app/
+- aid: clio:clio-activities-api
+  name: Clio Activities API
+  description: >-
+    Activities (Time Entries and Expense Entries) track work done at a firm. Activities are recorded in
+    Clio and then posted on bills to clients.
+
+
+    Time Entries can be either be hourly-billable or flat-rate. An hourly-billable Time Entry is valued
+    at the billing rate multiplied by the time entered. Examples could be a phone call, or a research
+    session. A flat-rate Time Entry has a set value. Examples could be a visa application, or a contract
+    review.
+
+
+    Expenses are reimbursable costs the firm pays on behalf of a client (for example, postage, copy fees,
+    etc.).
+
+
+    [Support Link](https://help.clio.com/hc/en-us/sections/9036198517915-Activities)
+
+
+    [Activities in Clio](http://app.clio.com/activities)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Activities
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-activities-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-activity-descriptions-api
+  name: Clio Activity Descriptions API
+  description: >-
+    Activity Descriptions are custom Time Entry templates. Activity Descriptions help firms expedite their
+    process for recording Time Entries, and ensure that their Time Entry descriptions are consistent.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9289744400667-Activity-Categories)
+
+
+    [Activity Descriptions in Clio](https://app.clio.com/nc/#/activity_categories)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Activity Descriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-activity-descriptions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-activity-rates-api
+  name: Clio Activity Rates API
+  description: The Activity Rates API from Clio — 2 operation(s) for activity rates.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Activity Rates
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-activity-rates-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-allocations-api
+  name: Clio Allocations API
+  description: >-
+    Once a [Payment](https://help.clio.com/hc/articles/9285641955355-Record-Edit-and-Delete-Payments)
+    or [Credit Note](https://help.clio.com/hc/en-us/articles/9285299888539-Credit-Notes) has been recorded,
+    an Allocation links it to a Bill.
+
+
+    It's possible for interest Allocations ("interest" = "true") to not be linked to a Bill. This can
+    happen if the linked interest Bill is deleted (something the system allows.)
+
+
+    [Support Link](https://help.clio.com/hc/articles/9285641955355-Record-Edit-and-Delete-Payments)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Allocations
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-allocations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-bank-accounts-api
+  name: Clio Bank Accounts API
+  description: >-
+    These accounts are meant to mirror the firm’s accounts at their financial institution. Users can add
+    a bank account to Clio to use with [Clio Payments](https://help.clio.com/hc/articles/9285631748507-Payments-and-Bank-Accounts),
+    and for use as an audit and [reconciliation](https://help.clio.com/hc/en-us/articles/9290138047899)
+    tool.
+
+
+    [Support Link](https://help.clio.com/hc/articles/9285631748507-Payments-and-Bank-Accounts)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Bank Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-bank-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-bank-transactions-api
+  name: Clio Bank Transactions API
+  description: The Bank Transactions API from Clio — 2 operation(s) for bank transactions.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Bank Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-bank-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-bank-transfers-api
+  name: Clio Bank Transfers API
+  description: The Bank Transfers API from Clio — 1 operation(s) for bank transfers.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Bank Transfers
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-bank-transfers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-bill-themes-api
+  name: Clio Bill Themes API
+  description: The Bill Themes API from Clio — 2 operation(s) for bill themes.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Bill Themes
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-bill-themes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-billable-clients-api
+  name: Clio Billable Clients API
+  description: >-
+    Users can view all Billable Clients, or clients with outstanding [Bills](https://help.clio.com/hc/en-us/articles/9285169278747-Generate-Bills),
+    on the Billable Clients page, located under the Bills tab.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Billable Clients
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-billable-clients-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-billable-matters-api
+  name: Clio Billable Matters API
+  description: >-
+    Users can see all [Matters with outstanding bills](https://help.clio.com/hc/en-us/articles/9286116462747#filter-matters-clio-manage-0-0)
+    attached to them by filtering out all non-billable Matters under the Matters tab.
+
+
+    Users can [disable billing](https://help.clio.com/hc/en-us/articles/9285959663131-Create-Matters#h_01GEK791XBF1JJ0VYC8BQTG9MW)
+    for certain Matters. They can still enter Activities on these Matters, but those Activities will not
+    appear in the [Bills page](https://help.clio.com/hc/en-us/articles/9285169278747-Generate-Bills).
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Billable Matters
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-billable-matters-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-billing-settings-api
+  name: Clio Billing Settings API
+  description: The Billing Settings API from Clio — 1 operation(s) for billing settings.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Billing Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-billing-settings-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-bills-api
+  name: Clio Bills API
+  description: >-
+    Bills are statements of what a user’s client owes for their services over a particular billing period,
+    including legal fees, expenses, and taxes.
+
+
+    Users customize, preview, edit, and approve bills before sending them to a client.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9285169278747-Generate-Bills)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Bills
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-bills-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-calendar-entries-api
+  name: Clio Calendar Entries API
+  description: >-
+    Calendar Entries are used to track appointments or deadlines. Users can view Calendar Entries on any
+    Calendar that they have “Viewer” or “Editor” permission for. Users can create Calendar Entries on
+    any Calendar that they have “Editor” permission for.
+
+    ### Only supports dates on or after January 01 1900 00:00 UTC
+
+    * If you attempt to create a date before 1900, the year of that date will be pulled forward to 1900
+    before it's persisted.
+
+
+    ### Calendar Update/Deletion Best Practices
+
+    * Prior to updating or deleting a calendar entry, check for recurrence.
+
+    * If the recurrence_rule parameter is not equal to `null`, offer the following 3 options for the update/deletion,
+    as well as the note:
+        1. Only this instance: Update/Delete this event, but leave all future events unchanged.
+        2. All following: Updates/Deletes this event and all the future events.
+        3. All events in the series: Updates/Deletes all events in the series.
+        * Note: If you've modified any future events in this series, those edits will be lost once you
+    make this change.
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9289905071387-Calendar-Events)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Calendar Entries
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-calendar-entries-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-calendar-entry-event-types-api
+  name: Clio Calendar Entry Event Types API
+  description: >-
+    The Calendar Entry Event Types API from Clio — 2 operation(s) for calendar entry event types.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Calendar Entry Event Types
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-calendar-entry-event-types-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-calendar-visibilities-api
+  name: Clio Calendar Visibilities API
+  description: The Calendar Visibilities API from Clio — 2 operation(s) for calendar visibilities.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Calendar Visibilities
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-calendar-visibilities-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-calendars-api
+  name: Clio Calendars API
+  description: >-
+    Calendars contain Calendar Entries. All Clio accounts contain one firm Calendar ("AccountCalendar"),
+    personal Calendars for each user ("UserCalendar"), and any number of manually created Calendars ("AdhocCalendar").
+    [Calendar sharing](https://help.clio.com/hc/en-us/articles/9289973325467-Calendar-Sharing-and-Permissions)
+    settings determine if a Calendar is visible to a User, and if that User is able to create or edit
+    Calendar Entries on that Calendar.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9290016489883-Calendar-Set-Up-and-Settings)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Calendars
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-calendars-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-civil-certificated-rates-api
+  name: Clio Civil Certificated Rates API
+  description: >-
+    This endpoint provides the Legal Aid civil certificated rates, which are the prescribed reimbursement
+    rates for legal services provided under the Legal Aid Scheme.
+
+
+    [Support Link](https://help.clio.com/hc/en-150/sections/9591010772379-Legal-Aid)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Civil Certificated Rates
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-civil-certificated-rates-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-civil-controlled-rates-api
+  name: Clio Civil Controlled Rates API
+  description: >-
+    This endpoint provides the Legal Aid civil controlled rates, which are the prescribed reimbursement
+    rates for legal services provided under the Legal Aid Scheme.
+
+
+    [Support Link](https://help.clio.com/hc/en-150/sections/9591010772379-Legal-Aid)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Civil Controlled Rates
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-civil-controlled-rates-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-clients-api
+  name: Clio Clients API
+  description: The Clients API from Clio — 1 operation(s) for clients.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Clients
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-clients-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-clio-payments-links-api
+  name: Clio Clio Payments Links API
+  description: The Clio Payments Links API from Clio — 2 operation(s) for clio payments links.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Clio Payments Links
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-clio-payments-links-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-clio-payments-payments-api
+  name: Clio Clio Payments Payments API
+  description: >-
+    Payments allow users to record that funds (from checks, cash, credit cards, etc.) have been transferred
+    from a client to the firm. In order to pay Bills, Payments must be [allocated](https://help.clio.com/hc/articles/9285641955355-Record-Edit-and-Delete-Payments).
+
+
+    [Support Link](https://help.clio.com/hc/articles/9285641955355-Record-Edit-and-Delete-Payments)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Clio Payments Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-clio-payments-payments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-comments-api
+  name: Clio Comments API
+  description: >-
+    Comments are short text messages which can be associated with either Documents or Folders.
+
+
+    If the Comment is created in association with a Document, it will also be associated with the Document's
+    latest Document Version.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Comments
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-comments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-communications-api
+  name: Clio Communications API
+  description: >-
+    Users can view all logged phone calls and emails under the Communications tab in Clio. This is also
+    where they can use [Clio internal messages](https://help.clio.com/hc/en-us/articles/9125264015259-Internal-Messages).
+
+
+    Communications can be filtered to show those attached to certain Matters or dates, or to show those
+    with or without time entries.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/sections/9036030931739-Communication)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Communications
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-communications-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-contacts-api
+  name: Clio Contacts API
+  description: >-
+    All clients, prospective clients, companies, and external co-counsels can be viewed as Contacts under
+    the Contacts tab in Clio Manage.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9290486281627-Clio-Manage-Contacts-Overview)
+
+
+    ## Contact Name
+
+    When creating a contact of type "Person" you must provide at least a first name or a last name. This
+    can be done in one of two ways:
+
+
+    1. Providing the name components explicitly (preferred): Using the `first_name` and `last_name` parameters.
+
+    2. Providing the full name (discouraged): Using the `name` parameter, you can provide the person's
+    full name (e.g. "John Smith") and Clio will attempt to infer the individual components of the name.
+    If it is unable to do so, you will receive a "422 Unprocessable Entity: At least one of first name
+    or last name must be provided" Error.
+
+
+    **We recommend using the individual name fields when possible to avoid any ambiguities.**
+
+
+    ## Associations
+
+    A Contact can be persisted with its associations in a single request. The followings detail the nested
+    attributes to persist the associations.
+
+
+    ### Addresses
+
+    Checkout the sample request to update the Addresses of a Contact:
+
+    ```json
+
+    Request
+      PATCH /api/v4/contacts/1.json
+      {
+        data: {
+          addresses: [
+            // update
+            { id: 1, name: "Work", country: "Canada" },
+            // create
+            { name: "Home", street: "1234 Main Street", city: "Burnaby", province: "BC", country: "Canada",
+    postal_code: "V1A 1A1" },
+            // destroy
+            { id: 2, _destroy: true }
+          ]
+        }
+    ```
+
+
+    ### Custom Field Values
+
+    A CustomFieldValue contains the value of a CustomField for a Contact.
+
+    Below are some examples of how to create, read, update, and destroy the CustomFieldValues of a Contact:
+
+    #### Create
+
+    Note: The value of `id` used here is the value of the `id` parameter in the response received when
+    [creating a new CustomField](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Custom-Fields/operation/CustomField#create)
+    or one returned in a [query of an existing CustomField](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Custom-Fields/operation/CustomField#show).
+
+    ```json
+
+    Request
+      PATCH /api/v4/contacts/1.json
+      {
+        data: {
+          custom_field_values: [
+            { custom_field: { id: 2 }, value: "Initial value" }
+          ]
+        }
+      }
+    ```
+
+    #### Read
+
+    Note: The `id` of the CustomFieldValue is a composite value including the custom field type. Use this
+    `id` to update and destroy the CustomFieldValue.
+
+    The `id` of the associated Custom Field can be found by querying the `custom_field` for all CustomFieldValues
+    related to the Contact, e.g.: `/api/v4/contacts/1?fields=id,display_number,custom_field_values{id,value,custom_field}`
+
+
+    Note: The `id` may be `NULL` when the CustomField is displayed by default but has not yet been given
+    a value.
+
+    ```json
+
+    Request
+      GET /api/v4/contacts/1.json?fields=custom_field_values{id,value,custom_field}
+      {
+        data: {
+          custom_field_values: [
+            {
+              id: "text_line-1",
+              value: "Current value",
+              custom_field: { id: 2 }
+            }
+          ]
+        }
+      }
+    ```
+
+    #### Update
+
+    Note: The value of the CustomFieldValue `id` used here is a composite value and can be found by querying
+    for all CustomFieldValues related to the Contact, e.g.: `/api/v4/contacts/1?fields=id,name,custom_field_values{id,value,custom_field}`
+
+
+    Note: If the `id` is `NULL`, you must provide `custom_field{id}` to create the CustomFieldValue and
+    assign a value (see **Create**).
+
+    ```json
+
+    Request
+      PATCH /api/v4/contacts/1.json
+      {
+        data: {
+          custom_field_values: [
+            { id: "text_line-1", value: "Updated value" }
+          ]
+        }
+      }
+    ```
+
+    #### Destroy
+
+    Note: The value of the CustomFieldValue `id` used here is a composite value and can be found by querying
+    for all CustomFieldValues related to the Contact, e.g.: `/api/v4/contacts/1?fields=id,name,custom_field_values{id,value}`
+
+    ```json
+
+    Request
+      PATCH /api/v4/contacts/1.json
+      {
+        data: {
+          custom_field_values: [
+            { id: "picklist-2", _destroy: true }
+          ]
+        }
+      }
+    ```
+
+
+    ### Email Addresses
+
+    Checkout the sample request to update the Email Addresses of a Contact:
+
+    ```json
+
+    Request
+      PATCH /api/v4/contacts/1.json
+      {
+        data: {
+          email_addresses: [
+            // update
+            { id: 1, name: "Work", address: "demo@clio.com" },
+            // create
+            { name: "Home", address: "home@clio.com" },
+            // destroy
+            { id: 2, _destroy: true }
+          ]
+        }
+    ```
+
+
+    ### Instant Messengers
+
+    Checkout the sample request to update the Instant Messengers of a Contact:
+
+    ```json
+
+    Request
+      PATCH /api/v4/contacts/1.json
+      {
+        data: {
+          instant_messengers: [
+            // update
+            { id: 1, name: "Work", address: "https://twitter.com/goclio" },
+            // create
+            { name: "Other", address: "https://www.facebook.com/GoClio/" },
+            // destroy
+            { id: 2, _destroy: true }
+          ]
+        }
+    ```
+
+
+    ### Phone Numbers
+
+    Checkout the sample request to update the Phone Numbers of a Contact:
+
+    ```json
+
+    Request
+      PATCH /api/v4/contacts/1.json
+      {
+        data: {
+          phone_numbers: [
+            // update
+            { id: 1, name: "Work", number: "123-456-7890" },
+            // create
+            { name: "Other", number: "000-000-0000" },
+            // destroy
+            { id: 2, _destroy: true }
+          ]
+        }
+    ```
+
+
+    ### Web Site
+
+    Checkout the sample request to update the Web Site of a Contact:
+
+    ```json
+
+    Request
+      PATCH /api/v4/contacts/1.json
+      {
+        data: {
+          web_sites: [
+            // update
+            { id: 1, name: "Work", address: "https://help.clio.com/" },
+            // create
+            { name: "Other", address: "https://www.clio.com/about/careers/" },
+            // destroy
+            { id: 2, _destroy: true }
+          ]
+        }
+    ```
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-contacts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-conversation-messages-api
+  name: Clio Conversation Messages API
+  description: The Conversation Messages API from Clio — 2 operation(s) for conversation messages.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Conversation Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-conversation-messages-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-conversations-api
+  name: Clio Conversations API
+  description: The Conversations API from Clio — 2 operation(s) for conversations.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Conversations
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-conversations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-credit-memos-api
+  name: Clio Credit Memos API
+  description: >-
+    Credit Memos allow users to write off amounts that clients owe on approved Bills. They can be added
+    in two "ways": when viewing a Bill, or when making a payment on a Bill.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9285299888539-Credit-Notes)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Credit Memos
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-credit-memos-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-criminal-controlled-rates-api
+  name: Clio Criminal Controlled Rates API
+  description: >-
+    This endpoint provides the Legal Aid criminal controlled rates, which are the prescribed reimbursement
+    rates for legal services provided under the Legal Aid Scheme.
+
+
+    [Support Link](https://help.clio.com/hc/en-150/sections/9591010772379-Legal-Aid)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Criminal Controlled Rates
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-criminal-controlled-rates-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-currencies-api
+  name: Clio Currencies API
+  description: The Currencies API from Clio — 1 operation(s) for currencies.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Currencies
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-currencies-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-custom-actions-api
+  name: Clio Custom Actions API
+  description: >-
+    In Clio, applications can create custom actions in our interface. Links are unique across an application,
+    user, location in the UI (`ui_reference`) and label. When the user clicks on a custom action, Clio
+    will open a new browser tab at the `target_url`.
+
+
+    Clio will add a few URL parameters to the `target_url`, including the custom action ID, the ID of
+    the user who clicked the link and the URL of the object(s) which the link was clicked on. The third
+    party application must then look up the relevant OAuth token associated with the user and custom action,
+    and make an authenticated request to the `subject_url`. This request both lets you validate the request
+    was made by who you expected, that they have access to the record and lets you pull down any extra
+    information you may need.
+
+
+    Currently supported for: Activities, Contacts, Documents and Matters
+
+
+    ## Security
+
+
+    ### Confirming a User's Action
+
+
+    As custom actions require an unauthorized GET request, which can be faked, Clio has provided a way
+    to validate that a user has actually performed an action.
+
+
+    When a request is sent to the URL specified on the custom action, we will include a `custom_action_nonce`
+    parameter. If you send us back the `custom_action_nonce` in your next request to the API, Clio will
+    use it to validate that the user who clicked the custom action matches your oauth token request. If
+    no match is made, an error will be returned.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Custom Actions
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-custom-actions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-custom-field-sets-api
+  name: Clio Custom Field Sets API
+  description: The Custom Field Sets API from Clio — 2 operation(s) for custom field sets.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Custom Field Sets
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-custom-field-sets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-custom-fields-api
+  name: Clio Custom Fields API
+  description: The Custom Fields API from Clio — 2 operation(s) for custom fields.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Custom Fields
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-custom-fields-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-damages-api
+  name: Clio Damages API
+  description: The Damages API from Clio — 2 operation(s) for damages.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Damages
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-damages-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-document-archives-api
+  name: Clio Document Archives API
+  description: The Document Archives API from Clio — 3 operation(s) for document archives.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Document Archives
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-document-archives-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-document-automations-api
+  name: Clio Document Automations API
+  description: >-
+    Document Automation uses Document Templates to create standardized documents. Users select a Document
+    Template (that they have created and uploaded) and a Matter to automatically create a document using
+    information from that Matter (such as addresses, account balances, Matter names, etc.).
+
+
+    Documents made from templates are created using Nintex, an authorized Clio sub-processor. For further
+    information, please refer to Clio’s Privacy Policy and Terms of Service.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9290238939163-Document-Templates#create-document-templates-in-clio-manage-0-4)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Document Automations
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-document-automations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-document-categories-api
+  name: Clio Document Categories API
+  description: >-
+    Clio users can add Document Categories to their account to help organize their Documents. When a Document
+    is uploaded or edited, a Document Category can be assigned. Users can filter by Document Category
+    to show all Documents in a certain category across all of the account’s Matters.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/14983647053339-Document-Categories)
+
+
+    [Document Categories in Clio Manage](https://app.clio.com/nc/#/documents/categories)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Document Categories
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-document-categories-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-document-templates-api
+  name: Clio Document Templates API
+  description: >-
+    Document Templates are files used to create standardized documents using Clio’s Document Automation
+    feature. Document Templates contain merge fields, which are used to pull information from Clio into
+    the document being generated by Document Automation.
+
+
+    The supported formats are doc, docx, ppt, pptx, xls, xlsx, pdf and xml.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9290238939163-Document-Templates#create-document-templates-in-clio-manage-0-4)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Document Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-document-templates-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-document-versions-api
+  name: Clio Document Versions API
+  description: >-
+    Versions contain information about the version history of a document. Versioning allows users to track
+    changes made to a document over time.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9290308200091-Generate-Manage-and-Share-Documents#manage-documents-in-clio-manage-0-4)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Document Versions
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-document-versions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-documents-api
+  name: Clio Documents API
+  description: >-
+    Clio Documents are files uploaded to Clio. Files uploaded to Clio’s document integrations (e.g. Google
+    Drive and Office365) are inaccessible through the API.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9290308200091-Generate-Manage-and-Share-Documents#create-upload-and-share-documents-in-clio-manage-0-3)
+
+
+    ## Uploading a new document
+
+    [Create a document](#operation/Document%23create) to a parent that can refer to a `Matter` or a `Folder`.
+    Ensure to ask for the fields, `id` and `latest_document_version{uuid,put_url,put_headers}`. The `put_url`
+    is a signed URL with security credentials for uploading the document. The `put_headers` are required
+    request headers for uploading the document. Check out the example to upload a new document to the
+    matter folder of `Matter` with id `1`:
+
+    ```json
+
+    Request
+      POST api/v4/documents?fields=id,latest_document_version{uuid,put_url,put_headers}
+        "data": {
+          "name": "file.jpg",
+          "parent": {
+            "id": 1,
+            "type": "Matter"
+          }
+        }
+
+    Response
+      {
+        "data": {
+          "id": 1234,
+          "latest_document_version": {
+            "uuid": "a51faa2c-859e-4c08-a996-2d0bb385df90",
+            "put_url": "https://s3.us-west-2.amazonaws.com/iris-production/uploads/document_version/file/a51faa2c-859e-4c08-a996-2d0bb385df90/file.jpg?X-Amz-Expires=28800&X-Amz-Date=20171024T214532Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential={aws_access_key}/20171024/us-west-2/s3/aws4_request&X-Amz-SignedHeaders=content-type%3Bhost%3Bx-amz-server-side-encryption&X-Amz-Signature=afe5000df0972d02884a2219f913bfa62fe2531c75b4fcd1edbcb84d267d2b8e",
+            "put_headers": [
+              {
+                "name": "x-amz-server-side-encryption",
+                "value": "AES256"
+              },
+              {
+                "name": "Content-Type",
+                "value": "image/jpeg"
+              }
+            ]
+          }
+        }
+      }
+    ```
+
+    If the extension is listed in the [IANA Media Types registry](https://www.iana.org/assignments/media-types/media-types.xhtml)
+    Clio will apply the corresponding content type as determined by the file extension when `content_type`
+    is blank. One of the nine possible content types  `content_type` = “text” / “image” / “audio” / “video”
+    / “application” / “font” / “model” / “message” / “multipart” must be submitted if the file type is
+    uncommon, not listed in the [IANA Media Types registry](https://www.iana.org/assignments/media-types/media-types.xhtml)
+    or not obvious from the extension.
+
+
+    ### Upload the document
+
+    Upload the document to the `put_url` with the headers from `puts_headers` given in the response of
+    the previous step. Typically the headers include `Content-Type` and `x-amz-server-side-encryption`
+    to match with the signature in the `put_url`. Check out the example to upload the file content using
+    curl:
+
+    ```bash
+
+    curl -X PUT -T file.jpg
+      -H "Content-Type: image/jpeg"
+      -H "x-amz-server-side-encryption: AES256"
+      "https://s3.us-west-2.amazonaws.com/iris-production/uploads/document_version/file/a51faa2c-859e-4c08-a996-2d0bb385df90/file.jpg?X-Amz-Expires=28800&X-Amz-Date=20171024T214532Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential={aws_access_key}/20171024/us-west-2/s3/aws4_request&X-Amz-SignedHeaders=content-type%3Bhost%3Bx-amz-server-side-encryption&X-Amz-Signature=afe5000df0972d02884a2219f913bfa62fe2531c75b4fcd1edbcb84d267d2b8e"
+    ```
+
+    If you need MD5 checksum, you should use multipart upload.
+
+
+    ### Mark the document as fully-uploaded
+
+    After successfully completing the upload, [mark the document fully uploaded](#operation/Document%23update)
+    with `fully_uploaded` as `true`, and `uuid` given in the first step. Clio will verify if the file
+    is uploaded successfully. If not, it raises `UploadNotFoundError` error. It is possible for the verification
+    to time out, which will return an `UploadTimeoutError` error. When that happens, you will need to
+    retry the request.
+
+    ```json
+
+    Request
+      PATCH api/v4/documents/1234?fields=id,latest_document_version{fully_uploaded}
+        "data": {
+          "uuid": "a51faa2c-859e-4c08-a996-2d0bb385df90",
+          "fully_uploaded": "true"
+        }
+      }
+
+    Response (success)
+      {
+        "data": {
+          "id": 12345,
+          "latest_document_version": {
+              "fully_uploaded": true
+          }
+        }
+      }
+    Response (error)
+      {
+        "error": {
+          "type": "UploadNotFoundError",
+          "message": "A matching remote file was not found for the file named file.jpg with UUID a51faa2c-859e-4c08-a996-2d0bb385df90"
+        }
+      }
+    Response (timeout)
+      {
+        "error": {
+          "type": "UploadTimeoutError",
+          "message": "A timeout occurred verifying the remote file. Please try the request again."
+        }
+      }
+    ```
+
+    The file is now visible in Clio documents and is available to the user for download.
+
+
+    ## Uploading a new document version
+
+    It is same as uploading a new document to Clio except setting the `parent` to an existing `Document`.
+    Check out the example to upload a new document version for the document with id `1234`:
+
+    ```json
+
+    Request
+      POST api/v4/documents?fields=id,latest_document_version{uuid,put_url,put_headers}
+        "data": {
+          "name": "file.jpg",
+          "parent": {
+            "id": 1234,
+            "type": "Document"
+          }
+        }
+      }
+    ```
+
+    The remaining steps are same as uploading a new document to Clio.
+
+
+    ## Uploading a document using multipart upload
+
+    In general, when a file reaches 100 MB, you should consider using multipart upload instead of uploading
+    in a single operation. Except the last part, each part should be at least 5 MB. Determine the number
+    of file parts and split the file. Optionally, you may compute the base64-encoded 128-bit MD5 mechanism
+    as an end-to-end integrity check for each file part. To determine the base64 MD5 checksum for a file
+    part, you may use `openssl`. Check out the example to split a big pdf and get the checksums of the
+    file parts:
+
+    ```bash
+
+    split -b 31457280 big.pdf big.pdf.        # break the file to max. 30MB size
+
+    openssl md5 -binary big.pdf.aa | base64   # F16pda4G0h4lzH7d2/Jbdw==
+
+    openssl md5 -binary big.pdf.ab | base64   # cRbxEG//GK9rIze5tdYzcg==
+
+    openssl md5 -binary big.pdf.ac | base64   # Tck0KKU4SrmSp8hsSCuSYg==
+
+    openssl md5 -binary big.pdf.ad | base64   # CrIt7lbZzVhMV7JzVTkUvw==
+
+    ```
+
+    ### Create the document
+
+    [Create a document](#operation/Document%23create), specify `multiparts` for multipart upload, and
+    ensure to ask for the fields, `id`, and `latest_document_version{uuid,multiparts}`. A `multipart`
+    consists of `part_number`, `content_length`, and optional `content_md5`. In the response, a `put_url`
+    is appended to the `multipart`. A `put_url` is a signed URL with security credentials for uploading
+    a file part. The signed URL expires in 8 hours. The API can handle maximum 50 `multiparts` in one
+    request. If the upload is split to more than 50 parts, [make a PUT request](#operation/Document%23update)
+    with `uuid`, `fully_uploaded` as `false`, and another set of `multiparts`. It returns a set of `put_url`
+    for the specified `multiparts`. Check out the example to upload a new document to the matter folder
+    of `Matter` with id `1`:
+
+    ```json
+
+    Request
+      POST api/v4/documents?fields=id,latest_document_version{uuid,put_headers,multiparts}
+        "data": {
+          "name": "big.pdf",
+          "parent": {
+            "id": 1,
+            "type": "Matter"
+          }
+          "multiparts": [
+            {
+              "part_number": 1,
+              "content_length": 31457280,
+              "content_md5": "F16pda4G0h4lzH7d2/Jbdw=="
+            },
+            {
+              "part_number": 2,
+              "content_length": 31457280,
+              "content_md5": "cRbxEG//GK9rIze5tdYzcg=="
+            },
+            {
+              "part_number": 3,
+              "content_length": 31457280,
+              "content_md5": "Tck0KKU4SrmSp8hsSCuSYg=="
+            },
+            {
+              "part_number": 4,
+              "content_length": 7316647,
+              "content_md5": "CrIt7lbZzVhMV7JzVTkUvw=="
+            }
+          ]
+        }
+
+    Response
+      {
+        "data": {
+          "id": 1234,
+          "latest_document_version": {
+            "uuid": "eba78724-31e8-4529-b6e2-0f2eef6feeec",
+            "put_headers": [
+                {
+                    "name": "x-amz-server-side-encryption",
+                    "value": "AES256"
+                },
+                {
+                    "name": "Content-Type",
+                    "value": "application/pdf"
+                }
+              ],
+            "multiparts": [
+              {
+                "part_number": 1,
+                "put_url": "https://s3.us-west-2.amazonaws.com/iris-production/uploads/document_version/file/eba78724-31e8-4529-b6e2-0f2eef6feeec/big.pdf?uploadId=XG9arnSRfpXVFj4NYCoj66e.iUtET050CFds7GGwb4_J6J26Ysgn_fLCK7pI5KRzJRmBOB_Oa.dle.nn4JLKos_cdRXN6f6Hb0IACkgiN6Wa2XGNv9fZQwgfqmMey1DN&partNumber=1&X-Amz-Expires=28800&X-Amz-Date=20171024T231538Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential={aws_access_token}/20171024/us-west-2/s3/aws4_request&X-Amz-SignedHeaders=content-length%3Bcontent-md5%3Bhost&X-Amz-Signature=f7b3f29e4aee3abfa93fb42a7969557a2a0d305d223dde641c78421b5a6d62e0",
+                "put_headers": [
+                  {
+                      "name": "Content-Length",
+                      "value": "31457280"
+                  },
+                  {
+                      "name": "Content-MD5",
+                      "value": "F16pda4G0h4lzH7d2/Jbdw=="
+                  }
+                ]
+              },
+              {
+                "part_number": 2,
+                "put_url": "https://s3.us-west-2.amazonaws.com/iris-production/uploads/document_version/file/eba78724-31e8-4529-b6e2-0f2eef6feeec/big.pdf?uploadId=XG9arnSRfpXVFj4NYCoj66e.iUtET050CFds7GGwb4_J6J26Ysgn_fLCK7pI5KRzJRmBOB_Oa.dle.nn4JLKos_cdRXN6f6Hb0IACkgiN6Wa2XGNv9fZQwgfqmMey1DN&partNumber=2&X-Amz-Expires=28800&X-Amz-Date=20171024T231538Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential={aws_access_token}/20171024/us-west-2/s3/aws4_request&X-Amz-SignedHeaders=content-length%3Bcontent-md5%3Bhost&X-Amz-Signature=47dc30f90202654c13030ccce87e43622bb47e0ad155ae61f6b41e8097803950",
+                "put_headers": [
+                  {
+                      "name": "Content-Length",
+                      "value": "31457280"
+                  },
+                  {
+                      "name": "Content-MD5",
+                      "value": "cRbxEG//GK9rIze5tdYzcg=="
+                  }
+                ]
+              },
+              {
+                "part_number": 3,
+                "put_url": "https://s3.us-west-2.amazonaws.com/iris-production/uploads/document_version/file/eba78724-31e8-4529-b6e2-0f2eef6feeec/big.pdf?uploadId=XG9arnSRfpXVFj4NYCoj66e.iUtET050CFds7GGwb4_J6J26Ysgn_fLCK7pI5KRzJRmBOB_Oa.dle.nn4JLKos_cdRXN6f6Hb0IACkgiN6Wa2XGNv9fZQwgfqmMey1DN&partNumber=3&X-Amz-Expires=28800&X-Amz-Date=20171024T231538Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential={aws_access_token}/20171024/us-west-2/s3/aws4_request&X-Amz-SignedHeaders=content-length%3Bcontent-md5%3Bhost&X-Amz-Signature=13ca827a73fb2c50e8062ef7e437cfe9158944d998e2770a2ffcd034be6c2fc7",
+                "put_headers": [
+                  {
+                      "name": "Content-Length",
+                      "value": "31457280"
+                  },
+                  {
+                      "name": "Content-MD5",
+                      "value": "Tck0KKU4SrmSp8hsSCuSYg=="
+                  }
+                ]
+              },
+              {
+                "part_number": 4,
+                "put_url": "https://s3.us-west-2.amazonaws.com/iris-production/uploads/document_version/file/eba78724-31e8-4529-b6e2-0f2eef6feeec/big.pdf?uploadId=XG9arnSRfpXVFj4NYCoj66e.iUtET050CFds7GGwb4_J6J26Ysgn_fLCK7pI5KRzJRmBOB_Oa.dle.nn4JLKos_cdRXN6f6Hb0IACkgiN6Wa2XGNv9fZQwgfqmMey1DN&partNumber=4&X-Amz-Expires=28800&X-Amz-Date=20171024T231538Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential={aws_access_token}/20171024/us-west-2/s3/aws4_request&X-Amz-SignedHeaders=content-length%3Bcontent-md5%3Bhost&X-Amz-Signature=25773f971c4c663b3a87f4d35c5b4c5192c3c999c7efdd69a49bc5bc40677078",
+                "put_headers": [
+                  {
+                      "name": "Content-Length",
+                      "value": "7316647"
+                  },
+                  {
+                      "name": "Content-MD5",
+                      "value": "CrIt7lbZzVhMV7JzVTkUvw=="
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ```
+
+
+    ### Upload the document
+
+    Upload each multipart to the corresponding `put_url`. You can upload the parts independently and in
+    any order. If transmission of any part fails, you can re-transmit that part without affecting other
+    parts. Make sure to include the headers from `puts_headers`. Typically the headers include `Content-Length`,
+    to match with the signature in the `put_url`. Check out the example using curl:
+
+    ```bash
+
+    curl -X PUT -T big.pdf.part1
+      -H "Content-Length: 31457280"
+      "https://s3.us-west-2.amazonaws.com/iris-production/uploads/document_version/file/eba78724-31e8-4529-b6e2-0f2eef6feeec/big.pdf?uploadId=XG9arnSRfpXVFj4NYCoj66e.iUtET050CFds7GGwb4_J6J26Ysgn_fLCK7pI5KRzJRmBOB_Oa.dle.nn4JLKos_cdRXN6f6Hb0IACkgiN6Wa2XGNv9fZQwgfqmMey1DN&partNumber=1&X-Amz-Expires=28800&X-Amz-Date=20171024T231538Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential={aws_access_token}/20171024/us-west-2/s3/aws4_request&X-Amz-SignedHeaders=content-length%3Bcontent-md5%3Bhost&X-Amz-Signature=f7b3f29e4aee3abfa93fb42a7969557a2a0d305d223dde641c78421b5a6d62e0"
+    ```
+
+    If you use MD5 checksum to validate the integrity of upload, include `Content-MD5` in the header:
+
+    ```bash
+
+    curl -X PUT -T big.pdf.part1
+      -H "Content-Length: 31457280"
+      -H "Content-MD5: F16pda4G0h4lzH7d2/Jbdw=="
+      "https://s3.us-west-2.amazonaws.com/iris-production/uploads/document_version/file/eba78724-31e8-4529-b6e2-0f2eef6feeec/big.pdf?uploadId=XG9arnSRfpXVFj4NYCoj66e.iUtET050CFds7GGwb4_J6J26Ysgn_fLCK7pI5KRzJRmBOB_Oa.dle.nn4JLKos_cdRXN6f6Hb0IACkgiN6Wa2XGNv9fZQwgfqmMey1DN&partNumber=1&X-Amz-Expires=28800&X-Amz-Date=20171024T231538Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential={aws_access_token}/20171024/us-west-2/s3/aws4_request&X-Amz-SignedHeaders=content-length%3Bcontent-md5%3Bhost&X-Amz-Signature=f7b3f29e4aee3abfa93fb42a7969557a2a0d305d223dde641c78421b5a6d62e0"
+    ```
+
+    If the file is invalid or the MD5 is invalid, you may get the following response:
+
+    ```bash
+
+    <Error>
+      <Code>BadDigest</Code>
+      <Message>The Content-MD5 you specified did not match what we received.</Message>
+      <ExpectedDigest>F16pda4G0h4lzH7d2/Jbdw==</ExpectedDigest>
+      <CalculatedDigest>Tck0KKU4SrmSp8hsSCuSYg==</CalculatedDigest>
+      <RequestId>85918626116672DD</RequestId>
+      <HostId>AbAoiqYqn8tKwS6gxwI3pc4u02B6u6ORa6MPEJH7IYljBweZp0M8L7Lg2AFOvHxdHz5TwlQpkVs=</HostId>
+    </Error>
+
+    ```
+
+    After the issue is corrected, try to upload to the file part to the `put_url` again.
+
+
+    ### Mark the document as fully-uploaded
+
+    After successfully completing the upload of all the file parts, [mark the document fully uploaded](#operation/Document%23update)
+    with `fully_uploaded` as `true`, and `uuid` given in the first step. Clio will verify if the file
+    is uploaded successfully. If not, it raises `UploadNotFoundError` error. It is possible for the verification
+    to time out, which will return an `UploadTimeoutError` error. When that happens, you will need to
+    retry the request.
+
+    ```json
+
+    Request
+      PATCH api/v4/documents/1234?fields=id,latest_document_version{fully_uploaded}
+        "data": {
+          "uuid": "eba78724-31e8-4529-b6e2-0f2eef6feeec",
+          "fully_uploaded": "true"
+        }
+      }
+
+    Response (success)
+      {
+        "data": {
+          "id": 12345,
+          "latest_document_version": {
+              "fully_uploaded": true
+          }
+        }
+      }
+    Response (error)
+      {
+        "error": {
+          "type": "UploadNotFoundError",
+          "message": "A matching remote file was not found for the file named file.jpg with UUID a51faa2c-859e-4c08-a996-2d0bb385df90"
+        }
+      }
+    Response (timeout)
+      {
+        "error": {
+          "type": "UploadTimeoutError",
+          "message": "A timeout occurred verifying the remote file. Please try the request again."
+        }
+      }
+    ```
+
+    The file is now visible in Clio documents and is available to the user for download.
+
+
+    ## Uploading a new document version using multipart upload
+
+    It is same as splitting and uploading a new document using multipart upload, except setting the `parent`
+    to an existing `Document`. Check out the example to upload a new document version for the document
+    with id `1234`:
+
+    ```bash
+
+    Request
+      POST api/v4/documents?fields=id,latest_document_version{uuid,put_headers,multiparts}
+        "data": {
+          "name": "big.pdf",
+          "parent": {
+            "id": 1234,
+            "type": "Document"
+          }
+          "multiparts": [
+            {
+              "part_number": 1,
+              "content_length": 31457280,
+              "content_md5": "F16pda4G0h4lzH7d2/Jbdw=="
+            },
+            {
+              "part_number": 2,
+              "content_length": 31457280,
+              "content_md5": "cRbxEG//GK9rIze5tdYzcg=="
+            },
+            {
+              "part_number": 3,
+              "content_length": 31457280,
+              "content_md5": "Tck0KKU4SrmSp8hsSCuSYg=="
+            },
+            {
+              "part_number": 4,
+              "content_length": 7316647,
+              "content_md5": "CrIt7lbZzVhMV7JzVTkUvw=="
+            }
+          ]
+        }
+    ```
+
+    The remaining steps are same as uploading a new document to Clio.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-documents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-email-addresses-api
+  name: Clio Email Addresses API
+  description: >-
+    Email Addresses are email addresses associated with a Contact. This endpoint returns all email addresses
+    associated with a Contact.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Email Addresses
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-email-addresses-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-event-metrics-api
+  name: Clio Event Metrics API
+  description: >-
+    Event metrics keep track of firm users' unread web and mobile [In-app notifications](https://help.clio.com/hc/en-us/articles/9290346939547-Set-Up-Clio-Manage#settings-0-3)
+    and unread [Clio Internal Messages](https://help.clio.com/hc/en-us/articles/9125264015259-Internal-Messages).
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Event Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-event-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-expense-categories-api
+  name: Clio Expense Categories API
+  description: >-
+    This endpoint provides the Legal Aid expense category rates, which are the prescribed reimbursement
+    rates for legal services provided under the Legal Aid Scheme.
+
+
+    [Support Link](https://help.clio.com/hc/en-150/sections/9591010772379-Legal-Aid)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Expense Categories
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-expense-categories-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-folders-api
+  name: Clio Folders API
+  description: >-
+    Files stored in Clio’s Documents section are organized in folders. Folders are automatically generated
+    for new Contacts and Matters. Folders can also be manually created anywhere in the folder structure.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9290308200091-Generate-Manage-and-Share-Documents#manage-documents-in-clio-manage-0-4)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Folders
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-folders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-grant-funding-sources-api
+  name: Clio Grant Funding Sources API
+  description: The Grant Funding Sources API from Clio — 2 operation(s) for grant funding sources.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Grant Funding Sources
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-grant-funding-sources-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-grants-api
+  name: Clio Grants API
+  description: The Grants API from Clio — 2 operation(s) for grants.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Grants
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-grants-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-groups-api
+  name: Clio Groups API
+  description: >-
+    In Clio, [permission levels](https://help.clio.com/hc/en-us/articles/9200279456667-Account-Users-and-Permissions#user-permissions-clio-manage--0-2)
+    and [Matter permissions](https://help.clio.com/hc/en-us/articles/9286062516123-Matter-Permissions-and-Rates)
+    are controlled using Groups. All accounts contain an “all users” group, as well as individual groups
+    for each user. Admins always have access to all of the account's groups. Users can also create groups
+    manually in order to precisely manage their permissions.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9200279456667-Account-Users-and-Permissions#user-groups-0-6)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-groups-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-interest-charges-api
+  name: Clio Interest Charges API
+  description: The Interest Charges API from Clio — 2 operation(s) for interest charges.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Interest Charges
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-interest-charges-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-jurisdictions-api
+  name: Clio Jurisdictions API
+  description: >-
+    There are over 1000 jurisdictions available to choose from when using Court Rules. These jurisdictions
+    contain state, federal, appellate, and bankruptcy courts from across the United States.
+
+
+    Jurisdictions are part of the [Court Rules](https://help.clio.com/hc/en-us/articles/9289840995867-Court-Rules)
+    feature which is not available to all plan types. See [here](https://www.clio.com/pricing/) for feature
+    support across different plans.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9289840995867-Court-Rules)
+
+
+    [Currently Available Jurisdictions](https://www.calendarrules.com/court-list)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Jurisdictions
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-jurisdictions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-jurisdictions-to-triggers-api
+  name: Clio Jurisdictions To Triggers API
+  description: >-
+    Jurisdictions-to-Triggers calculates the effective dates of related court and agency rules that a
+    lawyer must do for a Trigger. A Trigger is an activity or event which a lawyer or court does in a
+    jurisdiction.
+
+
+    These activities and events have corresponding deadlines, which the firm must be aware of. These deadlines
+    can be before or after the Trigger. Example Triggers are “Mediation-Session Completed, “Notice of
+    Appeal Filed,” ” or “Settlement Conference.”
+
+
+    Jurisdiction Triggers are part of the [Court Rules](https://help.clio.com/hc/en-us/articles/9289840995867-Court-Rules)
+    feature which is not available to all plan types. See [here](https://www.clio.com/pricing/) for feature
+    support across different plans.
+
+
+    Note that only account Administrators can add Court Rules jurisdictions.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Jurisdictions To Triggers
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-jurisdictions-to-triggers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-line-items-api
+  name: Clio Line Items API
+  description: The Line Items API from Clio — 2 operation(s) for line items.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Line Items
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-line-items-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-log-entries-api
+  name: Clio Log Entries API
+  description: >-
+    Log Entries populate the “Recents” dropdown in the header. The “Recent” section displays the ten Matters
+    and Contacts that the user most recently accessed.
+
+
+    When a user accesses a Contact or a Matter, a Log Entry is created.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Log Entries
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-log-entries-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-matter-contacts-api
+  name: Clio Matter Contacts API
+  description: >-
+    All clients, prospective clients, companies, and external co-counsels can be viewed as Contacts under
+    the Contacts tab in Clio Manage.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9290486281627-Clio-Manage-Contacts-Overview)
+
+
+    ## Contact Name
+
+    When creating a contact of type "Person" you must provide at least a first name or a last name. This
+    can be done in one of two ways:
+
+
+    1. Providing the name components explicitly (preferred): Using the `first_name` and `last_name` parameters.
+
+    2. Providing the full name (discouraged): Using the `name` parameter, you can provide the person's
+    full name (e.g. "John Smith") and Clio will attempt to infer the individual components of the name.
+    If it is unable to do so, you will receive a "422 Unprocessable Entity: At least one of first name
+    or last name must be provided" Error.
+
+
+    **We recommend using the individual name fields when possible to avoid any ambiguities.**
+
+
+    ## Associations
+
+    A Contact can be persisted with its associations in a single request. The followings detail the nested
+    attributes to persist the associations.
+
+
+    ### Addresses
+
+    Checkout the sample request to update the Addresses of a Contact:
+
+    ```json
+
+    Request
+      PATCH /api/v4/contacts/1.json
+      {
+        data: {
+          addresses: [
+            // update
+            { id: 1, name: "Work", country: "Canada" },
+            // create
+            { name: "Home", street: "1234 Main Street", city: "Burnaby", province: "BC", country: "Canada",
+    postal_code: "V1A 1A1" },
+            // destroy
+            { id: 2, _destroy: true }
+          ]
+        }
+    ```
+
+
+    ### Custom Field Values
+
+    A CustomFieldValue contains the value of a CustomField for a Contact.
+
+    Below are some examples of how to create, read, update, and destroy the CustomFieldValues of a Contact:
+
+    #### Create
+
+    Note: The value of `id` used here is the value of the `id` parameter in the response received when
+    [creating a new CustomField](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Custom-Fields/operation/CustomField#create)
+    or one returned in a [query of an existing CustomField](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Custom-Fields/operation/CustomField#show).
+
+    ```json
+
+    Request
+      PATCH /api/v4/contacts/1.json
+      {
+        data: {
+          custom_field_values: [
+            { custom_field: { id: 2 }, value: "Initial value" }
+          ]
+        }
+      }
+    ```
+
+    #### Read
+
+    Note: The `id` of the CustomFieldValue is a composite value including the custom field type. Use this
+    `id` to update and destroy the CustomFieldValue.
+
+    The `id` of the associated Custom Field can be found by querying the `custom_field` for all CustomFieldValues
+    related to the Contact, e.g.: `/api/v4/contacts/1?fields=id,display_number,custom_field_values{id,value,custom_field}`
+
+
+    Note: The `id` may be `NULL` when the CustomField is displayed by default but has not yet been given
+    a value.
+
+    ```json
+
+    Request
+      GET /api/v4/contacts/1.json?fields=custom_field_values{id,value,custom_field}
+      {
+        data: {
+          custom_field_values: [
+            {
+              id: "text_line-1",
+              value: "Current value",
+              custom_field: { id: 2 }
+            }
+          ]
+        }
+      }
+    ```
+
+    #### Update
+
+    Note: The value of the CustomFieldValue `id` used here is a composite value and can be found by querying
+    for all CustomFieldValues related to the Contact, e.g.: `/api/v4/contacts/1?fields=id,name,custom_field_values{id,value,custom_field}`
+
+
+    Note: If the `id` is `NULL`, you must provide `custom_field{id}` to create the CustomFieldValue and
+    assign a value (see **Create**).
+
+    ```json
+
+    Request
+      PATCH /api/v4/contacts/1.json
+      {
+        data: {
+          custom_field_values: [
+            { id: "text_line-1", value: "Updated value" }
+          ]
+        }
+      }
+    ```
+
+    #### Destroy
+
+    Note: The value of the CustomFieldValue `id` used here is a composite value and can be found by querying
+    for all CustomFieldValues related to the Contact, e.g.: `/api/v4/contacts/1?fields=id,name,custom_field_values{id,value}`
+
+    ```json
+
+    Request
+      PATCH /api/v4/contacts/1.json
+      {
+        data: {
+          custom_field_values: [
+            { id: "picklist-2", _destroy: true }
+          ]
+        }
+      }
+    ```
+
+
+    ### Email Addresses
+
+    Checkout the sample request to update the Email Addresses of a Contact:
+
+    ```json
+
+    Request
+      PATCH /api/v4/contacts/1.json
+      {
+        data: {
+          email_addresses: [
+            // update
+            { id: 1, name: "Work", address: "demo@clio.com" },
+            // create
+            { name: "Home", address: "home@clio.com" },
+            // destroy
+            { id: 2, _destroy: true }
+          ]
+        }
+    ```
+
+
+    ### Instant Messengers
+
+    Checkout the sample request to update the Instant Messengers of a Contact:
+
+    ```json
+
+    Request
+      PATCH /api/v4/contacts/1.json
+      {
+        data: {
+          instant_messengers: [
+            // update
+            { id: 1, name: "Work", address: "https://twitter.com/goclio" },
+            // create
+            { name: "Other", address: "https://www.facebook.com/GoClio/" },
+            // destroy
+            { id: 2, _destroy: true }
+          ]
+        }
+    ```
+
+
+    ### Phone Numbers
+
+    Checkout the sample request to update the Phone Numbers of a Contact:
+
+    ```json
+
+    Request
+      PATCH /api/v4/contacts/1.json
+      {
+        data: {
+          phone_numbers: [
+            // update
+            { id: 1, name: "Work", number: "123-456-7890" },
+            // create
+            { name: "Other", number: "000-000-0000" },
+            // destroy
+            { id: 2, _destroy: true }
+          ]
+        }
+    ```
+
+
+    ### Web Site
+
+    Checkout the sample request to update the Web Site of a Contact:
+
+    ```json
+
+    Request
+      PATCH /api/v4/contacts/1.json
+      {
+        data: {
+          web_sites: [
+            // update
+            { id: 1, name: "Work", address: "https://help.clio.com/" },
+            // create
+            { name: "Other", address: "https://www.clio.com/about/careers/" },
+            // destroy
+            { id: 2, _destroy: true }
+          ]
+        }
+    ```
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Matter Contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-matter-contacts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-matter-dockets-api
+  name: Clio Matter Dockets API
+  description: >-
+    A Matter Docket connects a Matter with a Court Rule (and all of the Calendar Entries associated with
+    the Court Rule). Matter Dockets are viewable on the Matter Edit screen under the Court Rules heading.
+
+
+    Matter Dockets are part of the [Court Rules](https://help.clio.com/hc/en-us/articles/9289840995867-Court-Rules)
+    feature which is not available to all plan types. See [here](https://www.clio.com/pricing/) for feature
+    support across different plans.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9289840995867-Court-Rules)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Matter Dockets
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-matter-dockets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-matter-stages-api
+  name: Clio Matter Stages API
+  description: The Matter Stages API from Clio — 1 operation(s) for matter stages.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Matter Stages
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-matter-stages-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-matters-api
+  name: Clio Matters API
+  description: >-
+    [Matters](https://help.clio.com/hc/en-us/articles/9285920226075-Clio-Manage-Matters-Overview) in Clio
+    represent a firm’s cases. All relevant information—Bills, Documents, Time Entries, etc.—are contained
+    in the Matter. A user’s ability to access a Matter is controlled by the [Matter Permission settings](https://help.clio.com/hc/en-us/articles/9286062516123-Matter-Permissions-and-Rates).
+    A user without permission will be unable to view or update a Matter.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9285920226075-Clio-Manage-Matters-Overview)
+
+
+    [Matters in Clio](http://app.clio.com/matters)
+
+
+    ## Associations
+
+    A Matter can be persisted with its associations in a single request. The followings detail the nested
+    attributes to persist the associations.
+
+
+    ### Custom Field Values
+
+    A CustomFieldValue contains the value of a CustomField for a Matter.
+
+    Below are some examples of how to create, read, update, and destroy the CustomFieldValues of a Matter:
+
+    #### Create
+
+    Note: The value of `id` used here is the value of the `id` parameter in the response received when
+    [creating a new CustomField](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Custom-Fields/operation/CustomField#create)
+    or one returned in a [query of an existing CustomField](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Custom-Fields/operation/CustomField#show).
+
+    ```json
+
+    Request
+      PATCH /api/v4/matters/1.json
+      {
+        data: {
+          custom_field_values: [
+            { custom_field: { id: 2 }, value: "Initial value" }
+          ]
+        }
+      }
+    ```
+
+    #### Read
+
+    Note:  The `id` of the CustomFieldValue is a composite value including the custom field type. Use
+    this `id` to update and destroy the CustomFieldValue.
+
+    The `id` of the associated Custom Field can be found by querying the `custom_field` for all CustomFieldValues
+    related to the Matter, e.g.: `/api/v4/matters/1?fields=id,display_number,custom_field_values{id,value,custom_field}`
+
+
+    Note: The `id` may be `NULL` when the CustomField is displayed by default but has not yet been given
+    a value.
+
+    ```json
+
+    Request
+      GET /api/v4/matters/1.json?fields=custom_field_values{id,value,custom_field}
+      {
+        data: {
+          custom_field_values: [
+            {
+              id: "text_line-1",
+              value: "Current value",
+              custom_field: { id: 2 }
+            }
+          ]
+        }
+      }
+    ```
+
+    #### Update
+
+    Note: The value of the CustomFieldValue `id` used here is a composite value and can be found by querying
+    for all CustomFieldValues related to the Matter, e.g.: `/api/v4/matters/1?fields=id,display_number,custom_field_values{id,value,custom_field}`
+
+
+    Note: If the `id` is `NULL`, you must provide `custom_field{id}` to create the CustomFieldValue and
+    assign a value (see **Create**).
+
+    ```json
+
+    Request
+      PATCH /api/v4/matters/1.json
+      {
+        data: {
+          custom_field_values: [
+            { id: "text_line-1", value: "Updated value" }
+          ]
+        }
+      }
+    ```
+
+    #### Destroy
+
+    Note: The value of the CustomFieldValue `id` used here is a composite value and can be found by querying
+    for all CustomFieldValues related to the Matter, e.g.: `/api/v4/matters/1?fields=id,display_number,custom_field_values{id,value}`
+
+    ```json
+
+    Request
+      PATCH /api/v4/matters/1.json
+      {
+        data: {
+          custom_field_values: [
+            { id: "picklist-2", _destroy: true }
+          ]
+        }
+      }
+    ```
+
+
+    ### Custom Rates
+
+    Each Matter can be set up to be billed on an Hourly basis, Flat Fee basis, or on Contingency.
+
+    To set the rate type, assign `custom_rate[type]` with one of the values, `"HourlyRate"`, `"FlatRate"`
+    or `"ContingencyFee"`.
+
+    By default, a Matter is billed on an hourly basis. If the rate type is modified, the persisted rates
+    will be deleted.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9289801180187)
+
+
+    #### Hourly Rates
+
+    Selecting the `"HourlyRate"` type will record time entries based on the custom hourly rates.
+
+    A custom hourly rate can be associated to a User or a Group.
+
+    Checkout the sample request to update the hourly rates of a Matter:
+
+    ```json
+
+    Request
+      PATCH /api/v4/matters/1.json
+      {
+        data: {
+          custom_rate: {
+            type: "HourlyRate",
+            rates: [
+              // update a rate for a user
+              { id: 1, rate: 100, user: { id: 1 } },
+              // update a rate for a group
+              { id: 2, rate: 100, group: { id: 1 } },
+              // create a rate for a user
+              { rate: 100, user: { id: 2 } },
+              // create a rate for a group
+              { rate: 100, group: { id: 2 } },
+              // destroy a rate
+              { id: 3, _destroy: true }
+            ]
+          }
+        }
+      }
+    ```
+
+
+    #### Flat Rate
+
+    Selecting the `"FlatRate"` type will bill the matter with a flat fee. A Matter can only have one flat
+    rate.
+
+    For associated objects, you can specify `_destroy` attribute to delete the rate.
+
+
+    Checkout the sample request to update the flat rate of a Matter:
+
+    ```json
+
+    Request
+      PATCH /api/v4/matters/1.json
+      {
+        data: {
+          custom_rate: {
+            type: "FlatRate",
+            rates: [
+              {
+                id: 1,
+                user: { id: 1 },
+                activity_description: { id: 1 },
+                rate: 100,
+              }
+            ]
+          }
+        }
+      }
+    ```
+
+
+    #### Contingency Fee
+
+    Selecting the `"ContingencyFee"` type will specify a contingency fee percentage on a Matter and the
+    award or settlement amount won at the completion of the case.
+
+    A Matter can only have one definition of contingency fee.
+
+    For associated objects, you can specify `_destroy` attribute to delete the rate.
+
+
+    Contingency Fee Matters are not available to all plan types. See [here](https://www.clio.com/pricing/)
+    for feature support across different plans.
+
+
+    Checkout the sample request to update the contingency fee of a Matter:
+
+    ```json
+
+    Request
+      PATCH /api/v4/matters/1.json
+      {
+        data: {
+          custom_rate: {
+            type: "ContingencyFee",
+            rates: [
+              {
+                id: 1,
+                user: { id: 1 },
+                rate: 20,
+              }
+            ]
+          }
+        }
+      }
+    ```
+
+    ### Matter Budget
+
+    Clio supports tracking a matter budget directly within a Matter.
+
+    A Matter can only have one matter budget associated with it.
+
+    A matter budget can not be added to flat rate matters.
+
+    For associated objects, you can specify the `_destroy` attribute to delete the Matter Budget.
+
+
+    Matter Budget are not available to all plan types. See [here](https://www.clio.com/pricing/) for feature
+    support across different plans.
+
+
+    Check out the sample request to update the matter budget of a Matter:
+
+    ```json
+
+    Request
+      PATCH /api/v4/matters/1.json
+      {
+        data: {
+          matter_budget: {
+            budget: 5000000,
+            include_expenses: true,
+            notification_threshold: 100,
+            notify_users: true
+            users: [
+              { id: 1 },
+              // destroy
+              { id: 2, _destroy: true }
+            ]
+          }
+        }
+      }
+    ```
+
+    ### Grant Matter
+
+    Clio supports associating a Grant with a Matter, using Grant Matters.
+
+    A Matter can have up to three Grants (and Grant Matters) associated with it.
+
+    For associated objects, you can specify the `_destroy` attribute to delete Grant Matters.
+
+
+    Grant Matters are only for legal aid US customers
+
+
+    Checkout the sample request to update a Grant Matter:
+
+    ```json
+
+    Request
+      PATCH /api/v4/matters/1.json
+      {
+        data: {
+        "grant_matters": [
+          {"id":{{existing_grant_matter_id}}}
+        ]
+        }
+      }
+      ```
+    ### Relationships
+
+    There are people and/or companies related to a Matter other than the client of the lawyer. Clio helps
+    define how the entities relate to a Matter.
+
+
+    #### Please be advised that the use of the relationships field below is discouraged. We plan to deprecate
+    it in the future. Please use [Relationships](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Relationships)
+    instead.
+
+
+    Checkout the sample request to update Relationships of a Matter:
+
+    ```json
+
+    Request
+      PATCH /api/v4/matters/1.json
+      {
+        data: {
+          relationships: [
+            // update
+            { id: 1, contact: { id: 1 }, description: "Opposing Counsel" },
+            // create
+            { contact: { id: 2 }, description: "Judge" },
+            // destroy
+            { id: 2, _destroy: true }
+          ]
+        }
+      }
+    ```
+
+
+    ### Statue Of Limitations
+
+    Clio supports to track a Statute of Limitations date directly within a Matter.
+
+    It can be associated with reminders as a Task.
+
+    A Matter can only have one definition of Statue of Limitations.
+
+    For associated objects, you can specify `_destroy` attribute to delete the Statue of Limitations.
+
+
+    Check out the sample request to update the Statue of Limitations and its reminders of a Matter:
+
+    ```json
+
+    Request
+      PATCH /api/v4/matters/1.json
+      {
+        data: {
+          statue_of_limitations: [
+            due_at: "20201231",
+            status: "open",
+            reminders: [
+              // update
+              { id: 1, duration_unit: "days", duration_value: 1, notification_method: { id: 1 } },
+              // create
+              { duration_unit: "days", duration_value: 1, notification_method: { id: 2 } },
+              // destroy
+              { id: 2, _destroy: true }
+            ]
+          ]
+        }
+      }
+    ```
+
+
+    ### Task Template Lists
+
+    Clio supports assigning task template lists to a matter from with the same request that
+
+    creates or updates a matter. Please note that a task template list **can only be
+
+    assigned**. Once a task template list is assigned, it **cannot be modified or destroyed**.
+
+
+    Checkout the sample request to assign a task template list id to a matter:
+
+
+    ```json
+
+    Request
+      PATCH /api/v4/matters/1.json
+      {
+        data: {
+          task_template_list_instances: [
+            {
+              notify_assignees: true,
+              task_template_list: {id: 1},
+            },
+            {
+              notify_assignees: false,
+              task_template_list: {id: 2},
+            }
+          ],
+        }
+      }
+    ```
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Matters
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-matters-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-medical-bills-api
+  name: Clio Medical Bills API
+  description: >-
+    Medical Bills are a subset of Medical Records Details and can be used to keep track of documents,
+    bill dates, and liens.
+
+
+    Note that these endpoints only handle Updating and Destroying a record. Creating records should be
+    handled in the Medical Records Details endpoint.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Medical Bills
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-medical-bills-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-medical-records-api
+  name: Clio Medical Records API
+  description: >-
+    Medical Records are a subset of Medical Records Details and can be used to keep track of documents,
+    start dates, and end dates.
+
+
+    Note that these endpoints only handle Updating and Destroying a record. Creating records should be
+    handled in the Medical Records Details endpoint.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Medical Records
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-medical-records-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-medical-records-details-api
+  name: Clio Medical Records Details API
+  description: >-
+    Medical Records Details allow you to track requests for medical records and medical bills, track treatment
+    dates, follow up on requests, upload medical files, and track liens and outstanding balances that
+    need to be paid out of the settlement all in one place.
+
+
+    Medical Records Details can be found in the Matters page under the Medical Records sub tab.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/15815962459931-Medical-Records)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Medical Records Details
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-medical-records-details-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-my-events-api
+  name: Clio My Events API
+  description: >-
+    In-app notifications are used to notify firm users of important events or changes in Clio, initiated
+    by other firm users. These events are displayed in the **Your firm** tab of the notifications panel.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - My Events
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-my-events-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-notes-api
+  name: Clio Notes API
+  description: >-
+    Notes can be added to Matters or Contacts in Clio to record meeting notes, research, or anything else
+    a user might want. The field can hold hundreds of pages, so users can add plenty of information.
+
+
+    Notes can be found either on the Matters or Contacts page under the Notes sub tab.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9285920226075-Clio-Manage-Matters-Overview#h_01GHETXG1D1HBK71VEF9HNSPDM)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Notes
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-notes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-outstanding-client-balances-api
+  name: Clio Outstanding Client Balances API
+  description: >-
+    The Outstanding Client Balances API from Clio — 1 operation(s) for outstanding client balances.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Outstanding Client Balances
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-outstanding-client-balances-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-phone-numbers-api
+  name: Clio Phone Numbers API
+  description: >-
+    Phone Numbers are phone numbers associated with a Contact. This endpoint returns all phone numbers
+    associated with a Contact.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Phone Numbers
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-phone-numbers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-practice-areas-api
+  name: Clio Practice Areas API
+  description: >-
+    The practice area field can be added to Matters and used for filtering purposes, or just for reference.
+    Users can create their own practice areas in their [Firm Preferences settings](https://help.clio.com/hc/en-us/articles/9290346939547-Set-Up-Clio-Manage#settings-0-3).
+
+
+    [Support link](https://help.clio.com/hc/en-us/articles/9285959663131-Create-Matters#h_01GEK791XBF1JJ0VYC8BQTG9MW)
+
+
+    [Practice areas settings](http://app.clio.com/practice_areas)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Practice Areas
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-practice-areas-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-related-contacts-api
+  name: Clio Related Contacts API
+  description: The Related Contacts API from Clio — 1 operation(s) for related contacts.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Related Contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-related-contacts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-relationships-api
+  name: Clio Relationships API
+  description: >-
+    Relationships are used on a Matter to track Contacts related to the Matter. Relationships are can
+    be found on the Contacts sub tab of a Matter.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9285959663131-Create-Matters#h_01GEK791XBF1JJ0VYC8BQTG9MW)
+
+
+    Relationships are used on the Matter detail page under the Contacts tab.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Relationships
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-relationships-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-reminders-api
+  name: Clio Reminders API
+  description: >-
+    Reminders can be added to Tasks or Calendar Entries. Reminder emails can be sent by a User to themselves,
+    other Users, Clio For Co-Counsel/Clio Connect Contacts, or [any authorized email](https://help.clio.com/hc/en-us/articles/9289861195291-Calendar-Notifications-and-Reminders).
+    An in-Clio pop-up reminder can also be sent by a User to themself.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9289861195291-Calendar-Notifications-and-Reminders)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Reminders
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-reminders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-report-presets-api
+  name: Clio Report Presets API
+  description: >-
+    Report Presets can be created to streamline report generation workflow by saving report option parameters
+    as a Preset.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9290078155803-Generate-Reports-Presets-and-History#reports-presets-0-2)
+
+
+    ## Creating a Report Preset
+
+    ### Options
+
+    When creating a Report Preset, the options sent in the request body is dependent on the report kind.
+
+
+    Check out the sample request to create a Report Preset for the Billing History web report for the
+    current year and grouped by client.
+
+
+    ```
+
+    Request
+      POST /api/v4/report_presets.json
+      {
+        data:
+        { name: "Current Yr Billing",
+          kind: "billing_history",
+          options: {
+            date_range: "year",
+            format: "html",
+            group_by: "client",
+            start_date: null,
+            end_date: null,
+            kind: "billing_history"
+          },
+          format: "html"
+        }
+      }
+    ```
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Report Presets
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-report-presets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-report-schedules-api
+  name: Clio Report Schedules API
+  description: >-
+    Schedule report generation for an existing Report Preset using Report Schedules. A Report Schedule
+    will generate reports from the specified Preset's report options on a daily, weekly or monthly basis.
+    Once the report has been generated, users will be notified via email.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9290078155803-Generate-Reports-Presets-and-History)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Report Schedules
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-report-schedules-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-reports-api
+  name: Clio Reports API
+  description: The Reports API from Clio — 3 operation(s) for reports.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-reports-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-service-types-api
+  name: Clio Service Types API
+  description: >-
+    Service Types are used when creating new Court Rules involving the delivery of documents. In order
+    to calculate the correct deadline to send the document, an account will specify their Service Type.
+
+
+    Current Service Types;
+
+    * Express mail outside country
+
+    * Mail outside country
+
+    * Personal/hand
+
+    * Mail outside state
+
+    * Electronic service
+
+    * Fax service
+
+    * Express/Overnight
+
+    * Regular mail
+
+    * Electronic service - 0 days
+
+
+    Service Types are part of the [Court Rules](https://help.clio.com/hc/en-us/articles/9289840995867-Court-Rules)
+    feature which is not available to all plan types. See [here](https://www.clio.com/pricing/) for feature
+    support across different plans.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Service Types
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-service-types-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-task-template-lists-api
+  name: Clio Task Template Lists API
+  description: >-
+    With Task Template Lists, users can create groups of [Task Templates](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Task-Templates)
+    for the types of projects they work on most often. Each Task in a list can be given a separate due
+    date in relation to the due dates for other [Tasks](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Tasks)
+    in the list.
+
+
+    Users can then assign individual tasks on a list to different users, or they can batch assign an entire
+    list.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9206286672155-Task-Lists)
+
+
+    [Task Template Lists in Clio](http://app.clio.com/list_templates)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Task Template Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-task-template-lists-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-task-templates-api
+  name: Clio Task Templates API
+  description: >-
+    Task Templates are the individual [Tasks](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Tasks)
+    which comprise a [Task Template List](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Task-Template-Lists).
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9206286672155-Task-Lists)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Task Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-task-templates-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-task-types-api
+  name: Clio Task Types API
+  description: >-
+    Task Types are used to better categorize and filter tasks. This is a simple text field which is limited
+    to 50 characters.
+
+
+    Task Types are part of the Advanced Tasks feature which is not available to all plan types. See [here](https://www.clio.com/pricing/)
+    for feature support across different plans.
+
+
+    [Support Link] (https://help.clio.com/hc/en-us/articles/9205859328923-Task-Types)
+
+
+    Used within Clio at [Task types](http://app.clio.com/task_types)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Task Types
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-task-types-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-tasks-api
+  name: Clio Tasks API
+  description: >-
+    Tasks are used to assign and track work. Users can set priorities, due dates, and add reminders.
+
+
+    Tasks can be assigned to firm users as well as Contacts (such as clients or co-counsel).
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9204917906971-Task-Management)
+
+
+    [Tasks in Clio](http://app.clio.com/tasks)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-tax-rate-configurations-api
+  name: Clio Tax Rate Configurations API
+  description: The Tax Rate Configurations API from Clio — 2 operation(s) for tax rate configurations.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Tax Rate Configurations
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-tax-rate-configurations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-text-snippets-api
+  name: Clio Text Snippets API
+  description: >-
+    Clio's Text Snippets feature allows users to create a list of predefined abbreviations for commonly
+    used phrases. For example, a user could configure their settings to have “meeting with client” show
+    up whenever they type “mwc.”
+
+
+    This feature can be used in various field in Clio, such as the Matter Description, Note Detail, Calendar
+    Entry Description and Task Description fields.
+
+
+    Text snippets are created and configured in a user's [personal settings](https://app.clio.com/settings/text_snippets)
+    in Clio Manage.
+
+
+    [Support link](https://help.clio.com/hc/en-us/articles/9290346939547-Set-Up-Clio-Manage#settings-0-3)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Text Snippets
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-text-snippets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-timers-api
+  name: Clio Timers API
+  description: >-
+    Timers are used to track time spent on billable work. They are used with hourly-billable [Time Entries](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Activities).
+
+
+    The Timer modal is accessed by clicking the timer in the application's header, or by clicking the
+    Timer icon on a Time Entry.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9289741706779-Time-Entries#timer-0-2)
+
+
+    Used within Clio in the timer modal which can be accessed by clicking the timer in the header or on
+    the create/edit Time Entry form.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Timers
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-timers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-trust-line-items-api
+  name: Clio Trust Line Items API
+  description: The Trust Line Items API from Clio — 2 operation(s) for trust line items.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Trust Line Items
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-trust-line-items-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-trust-requests-api
+  name: Clio Trust Requests API
+  description: The Trust Requests API from Clio — 1 operation(s) for trust requests.
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Trust Requests
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-trust-requests-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-users-api
+  name: Clio Users API
+  description: >-
+    A User is anyone with the ability to log in to Clio. This does not include Clio for Co-Counsel/Clio
+    Connect users.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9200279456667-Account-Users-and-Permissions)
+
+
+    ## Firm name
+
+    You can obtain the name of the firm linked to a user by accessing the nested `account` object:
+
+
+    ```json
+
+    Request
+      GET /api/v4/users/who_am_i?fields=account{name}
+    ```
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-utbms-codes-api
+  name: Clio Utbms Codes API
+  description: >-
+    [UTBMS codes](http://utbms.com/) standardize Time and Expense entries across the legal profession.
+    Clio users can enter their Activities using UTBMS codes in order to provide electronic invoices.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9289762435099-UTBMS-Codes)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Utbms Codes
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-utbms-codes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-utbms-sets-api
+  name: Clio Utbms Sets API
+  description: >-
+    [UTBMS codes](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Utbms-Codes) are divided
+    into code sets. Each set includes Activities relevant to a certain type of law (for example, litigation,
+    bankruptcy, etc.). Clio users can enable one or more of these sets in the [UTBMS settings menu](https://help.clio.com/hc/en-us/articles/9289762435099-UTBMS-Codes#enable-utbms-codes-0-0).
+    Enabling a UTBMS code set means that users will be able to select Activities from that list when adding
+    Time or Expense Entries into Clio.
+
+
+    [Support Link](https://help.clio.com/hc/en-us/articles/9289762435099-UTBMS-Codes)
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Utbms Sets
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-utbms-sets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
+- aid: clio:clio-webhooks-api
+  name: Clio Webhooks API
+  description: >-
+    Webhooks are a way of detecting events in Clio without the need for polling.
+
+
+    A webhook can be subscribed to a number of `events` on a model. Some events will be different depending
+    on the chosen model, but (with one exception) *all* models support the following events:
+
+
+    * `created`
+
+    * `updated`
+
+    * `deleted`
+
+
+    To subscribe to any or all events for a model, [create a webhook record](#operation/Webhook#create)
+    with the URL that you want webhooks to be sent to, a model, and the list of `events` you care about.
+    Whenever an event happens on that model in Clio that the user is authorized to see, an HTTP request
+    will be made to the supplied URL with details about the event. A webhook will automatically expire
+    after a set period of time. If no `expires_at` parameter is provided, the webhook will expire after
+    3 days. The maximum duration you can set a webhook to expire after is 31 days. If you require longer
+    than that, you can manually extend it by updating the `expires_at` field.
+
+
+    ## Supported Models
+
+
+    Your application needs to have the corresponding model OAuth scope when creating or updating a webhook.
+    For example, when creating/updating a folder webhook you need the document Oauth Scope and the webhook
+    Oauth Scope.
+
+    The list of models supported by webhooks with their corresponding string identifier and ID is presented
+    in the following table:
+
+
+    | Name                  | String Identifier     | ID | Oauth Scope    |
+
+    |-----------------------|-----------------------|:--:|----------------|
+
+    | Matter                | matter                | 1  | Matters        |
+
+    | Activity              | activity              | 2  | Activities     |
+
+    | Bill                  | bill                  | 3  | Billing        |
+
+    | Calendar Entry        | calendar_entry        | 4  | Calendars      |
+
+    | Communication         | communication         | 5  | Communications |
+
+    | Contact               | contact               | 6  | Contacts       |
+
+    | Task                  | task                  | 7  | Tasks          |
+
+    | Document              | document              | 8  | Documents      |
+
+    | Folder                | folder                | 9  | Documents      |
+
+    | Clio Payments payment | clio_payments_payment | 10 | Clio Payments  |
+
+
+    ## HTTPS
+
+
+    Please note that all webhooks MUST be using a url with the `https` scheme. All other schemes, including
+    `http`, will be rejected.
+
+
+    ## Specifying Fields in Webhooks
+
+
+    When a webhook is sent, the payload will not include the entire object for the record. To select specific
+    fields from the record, you can use the fields parameter when creating the webhook. For example: when
+    creating a webhook listening for new Activity records being created, you can pass the value “id,etag,quantity,price”
+    into the fields parameter. When an Activity is created, the id, etag, quantity, and price fields of
+    the new Activity will be included in the webhook's payload.
+
+
+    For `update` webhooks, the fields parameter is also used to specify fields that will be “watched”
+    by the webhook. Clio will only send a webhook when at least one of the selected fields has changed
+    on a record.
+
+
+
+    **An important note**
+
+    If you have never received a webhook for an object before, you will receive a webhook for that object
+    if any fields have changed on that object, including fields you haven't subscribed to.
+
+    For example: if you create a webhook that subscribes to updates to Activities and provide "price"
+    as the field parameter value, the first time an Activity is updated after the Webhook is live will
+    trigger a webhook event – even if the price hasn't changed. Subsequent webhook events for that Activity
+    will only be sent when the price field changes.
+
+
+    Note that there is a hard limit to the size of the `fields` parameter. Any request containing a `fields`
+    size over 1000 characters will be rejected.
+
+
+    Tip: Use the minimum set of fields to reduce how frequently your endpoint is hit.
+
+
+    ## Model Specific Events
+
+
+    As mentioned previously, almost all models support the created, updated, and deleted events. Some
+    models also support events specific to their life cycle.
+
+
+    ### Clio Payments payments
+
+
+    * `created` is fired whenever a payment is created
+
+    * `updated` is fired whenever a payment is updated
+
+
+    ### All other Models
+
+
+    * `created` is fired whenever a model is created
+
+    * `updated` is fired whenever a model is updated
+
+    * `deleted` is fired whenever a model is deleted
+
+
+    ### Matters
+
+
+    * `matter_opened` is fired whenever a matter's status changes to "Open"
+
+    * `matter_pended` is fired whenever a matter's status changes to "Pending"
+
+    * `matter_closed` is fired whenever a matter's status changes to "Close"
+
+
+    More model-specific events will be coming soon.
+
+
+    ## Delivery Failure and Retries
+
+
+    A response status code of `2xx`, `3xx`, or `410 GONE` indicate that the action was successfully processed.
+    When a `410 GONE` response is received, the webhook subscription will be disabled. All other responses
+    will be considered unsuccessful, and they will be retried using an exponential backoff strategy.
+
+
+    ### Timeouts
+
+
+    Clio will wait a short period of time before the request will timeout. We will consider it an unsuccessful
+    response and retry using an exponential backoff strategy. It is important to respond quickly. Failure
+    to do so repeatedly may result in your webhook being disabled. If you need to do lengthy processing
+    with the webhook, it is recommended that you defer the processing until after you have sent a response
+    back to Clio.
+
+
+    ## Webhook Security
+
+
+    ### Identity Confirmation
+
+
+    To ensure that a URL actually intends to receive webhooks from Clio, and to ensure that the payloads
+    are actually from Clio, we will share a secret in the initial handshake.
+
+
+    A POST request will be made immediately after a webhook is setup, or whenever the URL changes. This
+    request will have a unique secret in a `X-Hook-Secret` header along with the id of the webhook that
+    was just created. There are two ways of confirming the webhook using this secret:
+
+
+    #### Option 1: Immediate
+
+
+    Upon initially receiving this secret, the endpoint can return a `200 OK` response and include the
+    same secret in a `X-Hook-Secret` header.
+
+
+    #### Option 2: Delayed
+
+
+    After receiving the secret, make a PUT request to `/api/v4/webhooks/:webhook_id/activate` with the
+    secret in a `X-Hook-Secret` header.
+
+
+    Note that a webhook will not be enabled until this handshake is successful.
+
+
+    ### Confirming Hook Legitimacy
+
+
+    To prove that Clio is sending all subsequent messages, Clio will sign all of the requests.
+
+
+    Clio will compute an [HMAC-SHA256 signature](https://en.wikipedia.org/wiki/Hash-based_message_authentication_code)
+    based on the shared secret and the request body. That signature will then be placed in a `X-Hook-Signature`
+    header. The endpoint can then verify the signature to know if the message is authentic. Verification
+    is as simple as computing an HMAC-SHA256 signature using the shared secret as the key and the request
+    body as the message, and comparing it to the `X-Hook-Signature` header.
+
+
+    ## Examples
+
+
+    A Webhook can be created for the Activities model, to trigger on any events and return the id and
+    etag fields:
+      ```http
+        {
+          "data":{
+            "url":"https://my/callback/url",
+            "fields":"id,etag",
+            "model":"activity",
+            "events":["created","deleted","updated"]
+          }
+        }
+      ```
+
+    This webhook would have the following responses for different actions. It would trigger on any events
+    for the model, and return the id and etag fields for that model, and the event type.
+
+
+    Notes:
+
+    * The `model` field accepts both the string identifier of the model as in the example, or its ID.
+    In the latter case, you would have provided the ID parameter: `"model":2`. Refer to [the table listing
+    the models supported by webhooks](#section/Supported-Models) for matching the model name with its
+    ID.
+
+
+    ### Create
+
+
+    In the event of an Activity being created, your URL would receive the following JSON:
+      ```http
+        {
+          "data":{
+            "id":152,
+            "etag":"\"9a103be2201ae758992733a91f02903f\""
+          },
+          "meta":{
+            "event":"created",
+            "webhook_id":1234
+          }
+        }
+      ```
+
+    ### Update
+
+
+    In the event of an Activity being updated, your URL would receive the following JSON:
+      ```http
+        {
+          "data":{
+            "id":152,
+            "etag":"\"9d9ef9fb42a505976d90d564c1596f11\""
+          },
+          "meta":{
+            "event":"updated",
+            "webhook_id":1234
+          }
+        }
+      ```
+
+    ### Delete
+
+
+    In the event of an Activity being deleted, your URL would receive the following JSON:
+      ```http
+        {
+          "data":{
+            "id":152,
+            "etag":"\"3cc31bfbd6cfc16d3d7123423e437079\""
+          },
+          "meta":{
+            "event":"deleted",
+            "webhook_id":1234
+          }
+        }
+      ```
+  humanURL: https://docs.developers.clio.com/
+  baseURL: https://app.clio.com/api/v4
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/clio-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.clio.com/
+  - type: Reference
+    url: https://docs.developers.clio.com/api-docs/
+  - type: Authentication
+    url: https://app.clio.com/oauth/authorize
+  - type: GraphQL
+    url: graphql/clio-graphql.md
 common:
 - type: AgenticAccess
   url: agentic-access/clio-agentic-access.yml
