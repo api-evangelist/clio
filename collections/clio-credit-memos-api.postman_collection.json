@@ -1,0 +1,972 @@
+{
+  "item": [
+    {
+      "id": "dd534b2d-28ef-4fe2-b089-1fa3c970d8da",
+      "name": "Credit Memos",
+      "description": {
+        "content": "Credit Memos allow users to write off amounts that clients owe on approved Bills. They can be added in two \"ways\": when viewing a Bill, or when making a payment on a Bill.\n\n[Support Link](https://help.clio.com/hc/en-us/articles/9285299888539-Credit-Notes)\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c884f28f-ea63-4bfc-b25a-00297ba24c77",
+          "name": "Return the data for all CreditMemos",
+          "request": {
+            "name": "Return the data for all CreditMemos",
+            "description": {
+              "content": "Outlines the parameters, optional and required, used when requesting the data for all CreditMemos",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "credit_memos.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "contact_id",
+                  "value": "<long>",
+                  "description": "The unique identifier for a single Contact. The keyword `null` is not valid for this field. The list will be filtered to include only the CreditMemo records with the matching property."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_since",
+                  "value": "<dateTime>",
+                  "description": "Filter CreditMemo records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ids[]",
+                  "value": "<long>",
+                  "description": "Filter CreditMemo records to those having the specified unique identifiers."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "A limit on the number of CreditMemo records to be returned. Limit can range between 1 and 200. Default: `200`."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Orders the CreditMemo records by the given field. Default: `date(asc)`."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "A token specifying which page to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_since",
+                  "value": "<dateTime>",
+                  "description": "Filter CreditMemo records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "00e65f13-8f5b-44e5-b03a-69bca948d9a9",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credit_memos.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 495,\n      \"etag\": \"string\",\n      \"date\": \"1959-07-15\",\n      \"amount\": 6374.910691454231,\n      \"description\": \"string\",\n      \"discount\": true,\n      \"voided_at\": \"1984-12-27T17:35:44.373Z\",\n      \"created_at\": \"2021-02-06T20:27:00.997Z\",\n      \"updated_at\": \"2025-12-15T03:11:30.073Z\",\n      \"user\": {\n        \"account_owner\": true,\n        \"clio_connect\": true,\n        \"court_rules_default_attendee\": false,\n        \"created_at\": \"1978-03-23T17:59:10.052Z\",\n        \"default_calendar_id\": 6763,\n        \"email\": \"string\",\n        \"enabled\": true,\n        \"etag\": \"string\",\n        \"first_name\": \"string\",\n        \"id\": 2952,\n        \"initials\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"phone_number\": \"string\",\n        \"rate\": 5770.138511576692,\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ],\n        \"subscription_type\": \"Attorney\",\n        \"time_zone\": \"string\",\n        \"updated_at\": \"1955-06-27T05:21:16.341Z\"\n      },\n      \"contact\": {\n        \"id\": 2461,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"first_name\": \"string\",\n        \"middle_name\": \"string\",\n        \"last_name\": \"string\",\n        \"date_of_birth\": \"2004-09-17\",\n        \"type\": \"Person\",\n        \"created_at\": \"2026-04-24T17:49:55.556Z\",\n        \"updated_at\": \"1998-03-11T13:33:03.119Z\",\n        \"prefix\": \"string\",\n        \"title\": \"string\",\n        \"initials\": \"string\",\n        \"clio_connect_email\": \"string\",\n        \"locked_clio_connect_email\": true,\n        \"client_connect_user_id\": 7550,\n        \"primary_email_address\": \"string\",\n        \"secondary_email_address\": \"string\",\n        \"primary_phone_number\": \"string\",\n        \"secondary_phone_number\": \"string\",\n        \"ledes_client_id\": \"string\",\n        \"has_clio_for_clients_permission\": false,\n        \"is_client\": false,\n        \"is_clio_for_client_user\": true,\n        \"is_co_counsel\": false,\n        \"is_bill_recipient\": true,\n        \"sales_tax_number\": \"string\",\n        \"currency\": {}\n      },\n      \"allocations\": [\n        {\n          \"id\": 6178,\n          \"etag\": \"string\",\n          \"date\": \"2026-08-06\",\n          \"amount\": 9585.302871531761,\n          \"interest\": true,\n          \"voided_at\": \"1967-05-27T19:00:54.074Z\",\n          \"created_at\": \"1961-08-17T22:44:27.896Z\",\n          \"updated_at\": \"1996-07-26T06:34:00.259Z\",\n          \"description\": \"string\",\n          \"has_online_payment\": false,\n          \"destroyable\": false,\n          \"payment_type\": \"string\"\n        },\n        {\n          \"id\": 3526,\n          \"etag\": \"string\",\n          \"date\": \"2025-01-13\",\n          \"amount\": 1690.174057994186,\n          \"interest\": false,\n          \"voided_at\": \"1982-08-25T13:54:14.571Z\",\n          \"created_at\": \"1954-08-20T00:50:31.618Z\",\n          \"updated_at\": \"2022-10-06T15:31:52.089Z\",\n          \"description\": \"string\",\n          \"has_online_payment\": true,\n          \"destroyable\": false,\n          \"payment_type\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": 6650,\n      \"etag\": \"string\",\n      \"date\": \"1953-10-25\",\n      \"amount\": 3449.369100138502,\n      \"description\": \"string\",\n      \"discount\": true,\n      \"voided_at\": \"1953-01-23T11:43:53.002Z\",\n      \"created_at\": \"1979-08-17T23:45:46.459Z\",\n      \"updated_at\": \"2009-01-27T00:50:47.862Z\",\n      \"user\": {\n        \"account_owner\": true,\n        \"clio_connect\": false,\n        \"court_rules_default_attendee\": false,\n        \"created_at\": \"2021-07-29T15:13:08.544Z\",\n        \"default_calendar_id\": 3474,\n        \"email\": \"string\",\n        \"enabled\": false,\n        \"etag\": \"string\",\n        \"first_name\": \"string\",\n        \"id\": 336,\n        \"initials\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"phone_number\": \"string\",\n        \"rate\": 6068.683380912054,\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ],\n        \"subscription_type\": \"Attorney\",\n        \"time_zone\": \"string\",\n        \"updated_at\": \"1955-04-23T23:47:15.613Z\"\n      },\n      \"contact\": {\n        \"id\": 5649,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"first_name\": \"string\",\n        \"middle_name\": \"string\",\n        \"last_name\": \"string\",\n        \"date_of_birth\": \"2011-06-03\",\n        \"type\": \"Company\",\n        \"created_at\": \"2010-10-21T21:44:39.493Z\",\n        \"updated_at\": \"2024-11-16T12:05:04.732Z\",\n        \"prefix\": \"string\",\n        \"title\": \"string\",\n        \"initials\": \"string\",\n        \"clio_connect_email\": \"string\",\n        \"locked_clio_connect_email\": true,\n        \"client_connect_user_id\": 3696,\n        \"primary_email_address\": \"string\",\n        \"secondary_email_address\": \"string\",\n        \"primary_phone_number\": \"string\",\n        \"secondary_phone_number\": \"string\",\n        \"ledes_client_id\": \"string\",\n        \"has_clio_for_clients_permission\": false,\n        \"is_client\": false,\n        \"is_clio_for_client_user\": true,\n        \"is_co_counsel\": false,\n        \"is_bill_recipient\": true,\n        \"sales_tax_number\": \"string\",\n        \"currency\": {}\n      },\n      \"allocations\": [\n        {\n          \"id\": 6226,\n          \"etag\": \"string\",\n          \"date\": \"2026-04-11\",\n          \"amount\": 3639.615171132893,\n          \"interest\": true,\n          \"voided_at\": \"1959-12-20T13:18:01.622Z\",\n          \"created_at\": \"1963-02-06T00:32:48.536Z\",\n          \"updated_at\": \"1974-05-08T19:18:12.284Z\",\n          \"description\": \"string\",\n          \"has_online_payment\": true,\n          \"destroyable\": false,\n          \"payment_type\": \"string\"\n        },\n        {\n          \"id\": 8674,\n          \"etag\": \"string\",\n          \"date\": \"1988-07-15\",\n          \"amount\": 955.7348521164155,\n          \"interest\": false,\n          \"voided_at\": \"1997-06-25T11:24:31.991Z\",\n          \"created_at\": \"2006-01-26T21:08:24.164Z\",\n          \"updated_at\": \"1957-10-08T10:19:23.742Z\",\n          \"description\": \"string\",\n          \"has_online_payment\": false,\n          \"destroyable\": true,\n          \"payment_type\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "220a9204-8aba-4cc3-aeeb-403d99ba5b5c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credit_memos.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53b4e6d9-1885-4bed-be19-4ded13be19cd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credit_memos.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3e7ba88-519d-4f57-adab-86fb45dc508f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credit_memos.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85225d9d-9879-4ce6-a887-27f5035a55b1",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credit_memos.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8add881d-9afc-49b5-9adf-fd0e41db47cb",
+          "name": "Return the data for a single CreditMemo",
+          "request": {
+            "name": "Return the data for a single CreditMemo",
+            "description": {
+              "content": "Outlines the parameters, optional and required, used when requesting the data for a single CreditMemo",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "credit_memos",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                "key": "IF-MODIFIED-SINCE",
+                "value": "<date>"
+              },
+              {
+                "disabled": false,
+                "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                "key": "IF-NONE-MATCH",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc4f636a-ff12-419d-aac9-e8c3140b91bd",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credit_memos",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 9909,\n    \"etag\": \"string\",\n    \"date\": \"2006-07-26\",\n    \"amount\": 6920.753028948484,\n    \"description\": \"string\",\n    \"discount\": false,\n    \"voided_at\": \"1980-02-20T17:30:44.470Z\",\n    \"created_at\": \"1984-06-14T19:30:20.081Z\",\n    \"updated_at\": \"2020-09-08T00:18:24.721Z\",\n    \"user\": {\n      \"account_owner\": false,\n      \"clio_connect\": false,\n      \"court_rules_default_attendee\": true,\n      \"created_at\": \"2001-07-06T23:05:28.171Z\",\n      \"default_calendar_id\": 5438,\n      \"email\": \"string\",\n      \"enabled\": false,\n      \"etag\": \"string\",\n      \"first_name\": \"string\",\n      \"id\": 1016,\n      \"initials\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"rate\": 758.0565076363577,\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"subscription_type\": \"Attorney\",\n      \"time_zone\": \"string\",\n      \"updated_at\": \"1999-06-16T07:05:40.908Z\"\n    },\n    \"contact\": {\n      \"id\": 7056,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"first_name\": \"string\",\n      \"middle_name\": \"string\",\n      \"last_name\": \"string\",\n      \"date_of_birth\": \"2015-03-24\",\n      \"type\": \"Person\",\n      \"created_at\": \"1968-04-15T16:26:05.494Z\",\n      \"updated_at\": \"1979-01-02T02:16:01.585Z\",\n      \"prefix\": \"string\",\n      \"title\": \"string\",\n      \"initials\": \"string\",\n      \"clio_connect_email\": \"string\",\n      \"locked_clio_connect_email\": true,\n      \"client_connect_user_id\": 2965,\n      \"primary_email_address\": \"string\",\n      \"secondary_email_address\": \"string\",\n      \"primary_phone_number\": \"string\",\n      \"secondary_phone_number\": \"string\",\n      \"ledes_client_id\": \"string\",\n      \"has_clio_for_clients_permission\": true,\n      \"is_client\": true,\n      \"is_clio_for_client_user\": true,\n      \"is_co_counsel\": true,\n      \"is_bill_recipient\": false,\n      \"sales_tax_number\": \"string\",\n      \"currency\": {}\n    },\n    \"allocations\": [\n      {\n        \"id\": 5831,\n        \"etag\": \"string\",\n        \"date\": \"1968-12-04\",\n        \"amount\": 3743.439225742402,\n        \"interest\": false,\n        \"voided_at\": \"2015-03-07T15:03:02.454Z\",\n        \"created_at\": \"1974-12-22T15:24:58.794Z\",\n        \"updated_at\": \"2023-05-03T19:38:42.059Z\",\n        \"description\": \"string\",\n        \"has_online_payment\": false,\n        \"destroyable\": true,\n        \"payment_type\": \"string\"\n      },\n      {\n        \"id\": 5790,\n        \"etag\": \"string\",\n        \"date\": \"2007-06-20\",\n        \"amount\": 1394.7243886994665,\n        \"interest\": true,\n        \"voided_at\": \"2021-10-04T14:26:24.372Z\",\n        \"created_at\": \"1976-09-26T00:44:41.612Z\",\n        \"updated_at\": \"1953-02-28T15:03:15.006Z\",\n        \"description\": \"string\",\n        \"has_online_payment\": false,\n        \"destroyable\": true,\n        \"payment_type\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f50d76b7-cd86-4c83-a629-71309b02b9f9",
+              "name": "Not Modified",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credit_memos",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7e1c30c4-4652-4021-9ae1-9b0f16a0c806",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credit_memos",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ee40279-e7b0-45c2-b9b7-180404d05148",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credit_memos",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "211760b6-8c52-4cc4-83bd-92326696d8a0",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credit_memos",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bdeb3810-8f13-44d0-8854-62083201ca49",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credit_memos",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9521c461-412e-48cc-8dba-19530c0be88c",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credit_memos",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.clio.com/api/v4",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The unique identifier for the CreditMemo.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<long>",
+      "key": "id"
+    }
+  ],
+  "info": {
+    "_postman_id": "68b7d88a-8475-440f-a469-8a914306cda8",
+    "name": "Clio API Documentation Activities Credit Memos API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Developer Support and Feedback\n* Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio's API Support team at [api@clio.com](mailto:api@clio.com).\n* For business and partnership inquiries, contact our API Partnerships team at [api.partnerships@clio.com](mailto:api.partnerships@clio.com).\n* For best practices and tips from the Clio development community, join the conversation in the [Clio Developer Slack Channel](https://join.slack.com/t/clio-public/shared_invite/zt-36i0eqgo1-7POORPtMJpp2N0~_auL2IQ).\n\nA community-driven [Clio Developers Stack Overflow Group](https://stackoverflow.com/questions/tagged/clio-api) also exists where you can connect and ask questions from other Clio API users.\n# Getting Started\n> **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).\n>\n> Likewise, the developer portal is available at region-specific links for the [Australia](https://au.developers.clio.com), [Canada](https://ca.developers.clio.com), [EU](https://eu.developers.clio.com), and [US](https://developers.clio.com) regions.\n>\n> This document assumes the US region is being used (app.clio.com). If you're building in one of the other regions, you should adapt the links and examples as necessary.\n\nTo start building on the Clio API, you’ll need a Clio account – you can review our [Developer Handbook](https://docs.developers.clio.com/) and follow the steps to sign up for an account.\n\nOnce you have an account, you can [create a developer application](https://docs.developers.clio.com/api-docs/applications) from the [Developer Portal](https://developers.clio.com) and start building!\n# Authorization with OAuth 2.0\nSee our [Authorization documentation →](https://docs.developers.clio.com/api-docs/authorization)\n# Permissions\nSee our [Permissions documentation →](https://docs.developers.clio.com/api-docs/permissions)\n# Fields\nSee our [Fields documentation →](https://docs.developers.clio.com/api-docs/fields)\n# Rate Limiting\nSee our [Rate Limits documentation →](https://docs.developers.clio.com/api-docs/rate-limits)\n# Paging\nSee our [Pagination documentation →](https://docs.developers.clio.com/api-docs/paging)\n# ETags\nSee our [ETags documentation →](https://docs.developers.clio.com/api-docs/etags)\n# Minor Versions\nAPI v4 supports multiple minor versions. Versions are of the form '4.X.Y'. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you're requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.\n\nAn `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.\n\nYou can find our [API Versioning Policy and Guidelines](https://docs.developers.clio.com/api-docs/api-versioning-policy) in our documentation hub.\n\nThe [API Changelog](https://docs.developers.clio.com/api-docs/api-changelog) explains each version's changes in further detail.\n### [4.0.4](https://docs.developers.clio.com/api-docs/api-changelog#404)\n\n  * Update `quantity` field to return values in seconds rather than hours for Activities\n\n### [4.0.5](https://docs.developers.clio.com/api-docs/api-changelog#405)\n\n  * Remove `matter_balances` field from Bills\n* Standardize status/state enum values\n* Add a Document association to completed DocumentAutomations\n* Add rate visibility handling for Activity's price and total\n\n### [4.0.6](https://docs.developers.clio.com/api-docs/api-changelog#406)\n\n  * Remove `document_versions` collection field from Documents\n\n### [4.0.7](https://docs.developers.clio.com/api-docs/api-changelog#407)\n\n  * Change secure link format\n\n### [4.0.8](https://docs.developers.clio.com/api-docs/api-changelog#408)\n\n  * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user\n  * Add `quantity_redacted` field to activities\n\n### [4.0.9](https://docs.developers.clio.com/api-docs/api-changelog#409)\n\n  * Contacts are filtered and redacted in the response based on the new 'Contacts Visibility' user permission setting.\n\n### [4.0.10](https://docs.developers.clio.com/api-docs/api-changelog#4010)\n\n  * Fixed validation of `type` query parameter when querying Notes\n\n### [4.0.12](https://docs.developers.clio.com/api-docs/api-changelog#4012)\n\n  * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers\n\n### [4.0.13](https://docs.developers.clio.com/api-docs/api-changelog#4013)\n\n  **This is the default version**\n\n  * Add association limits to Contacts\n* Returns 422 Unprocessable Entity when association limits are exceeded\n\n\n\n\nContact Support:\n Name: Clio API Support\n Email: api@clio.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,3759 @@
+{
+  "item": [
+    {
+      "id": "03cdfef8-9129-4dbf-9425-48d95e623291",
+      "name": "Task Templates",
+      "description": {
+        "content": "Task Templates are the individual [Tasks](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Tasks) which comprise a [Task Template List](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Task-Template-Lists).\n\n[Support Link](https://help.clio.com/hc/en-us/articles/9206286672155-Task-Lists)\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eb18ffea-f3a0-460e-9872-005a795bb8cc",
+          "name": "Return the data for all TaskTemplates",
+          "request": {
+            "name": "Return the data for all TaskTemplates",
+            "description": {
+              "content": "Outlines the parameters, optional and required, used when requesting the data for all TaskTemplates",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "task_templates.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "created_since",
+                  "value": "<dateTime>",
+                  "description": "Filter TaskTemplate records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ids[]",
+                  "value": "<long>",
+                  "description": "Filter TaskTemplate records to those having the specified unique identifiers."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "A limit on the number of TaskTemplate records to be returned. Limit can range between 1 and 200. Default: `200`."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Orders the TaskTemplate records by the given field. Default: `id(asc)`."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "A token specifying which page to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "priority",
+                  "value": "<string>",
+                  "description": "Filter TaskTemplate records to those with the given priority."
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Wildcard search for `name` matching a given string."
+                },
+                {
+                  "disabled": false,
+                  "key": "task_template_list_id",
+                  "value": "<long>",
+                  "description": "The unique identifier for a single TaskTemplateList. The keyword `null` is not valid for this field. The list will be filtered to include only the TaskTemplate records with the matching property."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_since",
+                  "value": "<dateTime>",
+                  "description": "Filter TaskTemplate records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "af83757a-f47f-4742-8ff3-80ce0bd259ce",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "priority",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "task_template_list_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 524,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"description_text_type\": \"plain_text\",\n      \"priority\": \"Normal\",\n      \"private\": true,\n      \"created_at\": \"1966-10-24T17:56:35.928Z\",\n      \"updated_at\": \"1999-09-14T15:54:34.808Z\",\n      \"cascading_source\": {\n        \"id\": 2905,\n        \"name\": \"string\"\n      },\n      \"assignee\": {\n        \"account_owner\": false,\n        \"clio_connect\": false,\n        \"court_rules_default_attendee\": true,\n        \"created_at\": \"1979-04-07T03:52:11.924Z\",\n        \"default_calendar_id\": 3862,\n        \"email\": \"string\",\n        \"enabled\": false,\n        \"etag\": \"string\",\n        \"first_name\": \"string\",\n        \"id\": 8896,\n        \"initials\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"phone_number\": \"string\",\n        \"rate\": 2979.424697785541,\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ],\n        \"subscription_type\": \"NonAttorney\",\n        \"time_zone\": \"string\",\n        \"updated_at\": \"2017-09-12T21:20:46.530Z\"\n      },\n      \"task_template_list\": {\n        \"created_at\": \"1966-10-03T11:48:12.502Z\",\n        \"description\": \"string\",\n        \"id\": 1829,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"templates_count\": 6389,\n        \"updated_at\": \"2003-08-15T12:29:12.397Z\"\n      },\n      \"task_type\": {\n        \"id\": 4382,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"deleted_at\": \"1984-03-23T13:42:01.031Z\",\n        \"created_at\": \"1984-01-28T13:08:57.262Z\",\n        \"updated_at\": \"1988-05-16T23:52:07.912Z\"\n      },\n      \"template_creator\": {\n        \"account_owner\": false,\n        \"clio_connect\": false,\n        \"court_rules_default_attendee\": false,\n        \"created_at\": \"1974-11-30T09:19:56.597Z\",\n        \"default_calendar_id\": 6714,\n        \"email\": \"string\",\n        \"enabled\": false,\n        \"etag\": \"string\",\n        \"first_name\": \"string\",\n        \"id\": 754,\n        \"initials\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"phone_number\": \"string\",\n        \"rate\": 7301.725596730305,\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ],\n        \"subscription_type\": \"NonAttorney\",\n        \"time_zone\": \"string\",\n        \"updated_at\": \"2023-05-14T12:41:00.455Z\"\n      },\n      \"reminder_templates\": [\n        {\n          \"id\": 1673,\n          \"etag\": \"string\",\n          \"duration\": 9071,\n          \"notification_type\": \"Popup\",\n          \"created_at\": \"1963-11-14T10:09:19.335Z\",\n          \"updated_at\": \"1947-04-02T20:10:10.412Z\"\n        },\n        {\n          \"id\": 1976,\n          \"etag\": \"string\",\n          \"duration\": 9689,\n          \"notification_type\": \"Email\",\n          \"created_at\": \"1983-03-18T23:46:31.902Z\",\n          \"updated_at\": \"1993-01-10T13:44:27.407Z\"\n        }\n      ]\n    },\n    {\n      \"id\": 3051,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"description_text_type\": \"rich_text\",\n      \"priority\": \"High\",\n      \"private\": true,\n      \"created_at\": \"1947-08-14T01:52:07.894Z\",\n      \"updated_at\": \"1974-07-23T02:39:16.982Z\",\n      \"cascading_source\": {\n        \"id\": 833,\n        \"name\": \"string\"\n      },\n      \"assignee\": {\n        \"account_owner\": true,\n        \"clio_connect\": true,\n        \"court_rules_default_attendee\": false,\n        \"created_at\": \"1977-03-13T16:55:24.542Z\",\n        \"default_calendar_id\": 4418,\n        \"email\": \"string\",\n        \"enabled\": true,\n        \"etag\": \"string\",\n        \"first_name\": \"string\",\n        \"id\": 4756,\n        \"initials\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"phone_number\": \"string\",\n        \"rate\": 9658.053525260937,\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ],\n        \"subscription_type\": \"Attorney\",\n        \"time_zone\": \"string\",\n        \"updated_at\": \"1986-07-17T05:26:12.498Z\"\n      },\n      \"task_template_list\": {\n        \"created_at\": \"1968-04-29T13:26:25.323Z\",\n        \"description\": \"string\",\n        \"id\": 5616,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"templates_count\": 9008,\n        \"updated_at\": \"1947-11-01T01:43:30.960Z\"\n      },\n      \"task_type\": {\n        \"id\": 4568,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"deleted_at\": \"1972-02-24T22:35:08.354Z\",\n        \"created_at\": \"2026-07-10T12:28:54.548Z\",\n        \"updated_at\": \"2020-11-30T22:19:39.354Z\"\n      },\n      \"template_creator\": {\n        \"account_owner\": false,\n        \"clio_connect\": true,\n        \"court_rules_default_attendee\": true,\n        \"created_at\": \"1948-02-13T14:53:08.703Z\",\n        \"default_calendar_id\": 1892,\n        \"email\": \"string\",\n        \"enabled\": true,\n        \"etag\": \"string\",\n        \"first_name\": \"string\",\n        \"id\": 4261,\n        \"initials\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"phone_number\": \"string\",\n        \"rate\": 1242.664709489807,\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ],\n        \"subscription_type\": \"Attorney\",\n        \"time_zone\": \"string\",\n        \"updated_at\": \"1995-02-24T18:39:19.706Z\"\n      },\n      \"reminder_templates\": [\n        {\n          \"id\": 3640,\n          \"etag\": \"string\",\n          \"duration\": 6318,\n          \"notification_type\": \"Email\",\n          \"created_at\": \"2012-05-31T05:55:05.487Z\",\n          \"updated_at\": \"1980-11-25T04:24:35.279Z\"\n        },\n        {\n          \"id\": 7497,\n          \"etag\": \"string\",\n          \"duration\": 9045,\n          \"notification_type\": \"Email\",\n          \"created_at\": \"1957-08-19T13:22:35.894Z\",\n          \"updated_at\": \"1973-10-01T07:26:45.144Z\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b07c885-c90e-494a-9105-89c23d099ac8",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "priority",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "task_template_list_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4621e360-0736-4c32-80e0-619a9cec1bad",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "priority",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "task_template_list_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1439cff9-860e-4da4-9c20-ec8478bf147c",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "priority",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "task_template_list_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5f190ae-09b7-4555-97fd-5a6662b76886",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "priority",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "task_template_list_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce3f7a89-3e4d-4ac7-b764-dea8802b84d0",
+          "name": "Create a new TaskTemplate",
+          "request": {
+            "name": "Create a new TaskTemplate",
+            "description": {
+              "content": "Outlines the parameters and data fields used when creating a new TaskTemplate",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "task_templates.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "cascading",
+                  "value": "<boolean>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "cascading_offset",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "cascading_offset_polarity",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "cascading_offset_type",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "cascading_source",
+                  "value": "{\"id\":\"<integer>\"}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "description_text_type",
+                  "value": "plain_text",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "priority",
+                  "value": "Normal",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "private",
+                  "value": "<boolean>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "reminder_templates",
+                  "value": "[{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\"},{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\"}]",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "task_template_list",
+                  "value": "{\"id\":\"<long>\"}",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "be7e0d53-154e-4b8b-ad74-f86ca123552e",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_polarity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_source",
+                      "value": "{\"id\":\"<integer>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description_text_type",
+                      "value": "plain_text"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "priority",
+                      "value": "Normal"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "reminder_templates",
+                      "value": "[{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\"},{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "task_template_list",
+                      "value": "{\"id\":\"<long>\"}"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 435,\n    \"etag\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"description_text_type\": \"plain_text\",\n    \"priority\": \"Normal\",\n    \"private\": false,\n    \"created_at\": \"1951-09-03T08:38:51.888Z\",\n    \"updated_at\": \"2015-06-12T20:33:02.135Z\",\n    \"cascading_source\": {\n      \"id\": 7433,\n      \"name\": \"string\"\n    },\n    \"assignee\": {\n      \"account_owner\": false,\n      \"clio_connect\": true,\n      \"court_rules_default_attendee\": true,\n      \"created_at\": \"1973-10-28T08:46:41.717Z\",\n      \"default_calendar_id\": 1295,\n      \"email\": \"string\",\n      \"enabled\": true,\n      \"etag\": \"string\",\n      \"first_name\": \"string\",\n      \"id\": 2548,\n      \"initials\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"rate\": 98.59521027572148,\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"subscription_type\": \"Attorney\",\n      \"time_zone\": \"string\",\n      \"updated_at\": \"2009-03-03T01:27:29.373Z\"\n    },\n    \"task_template_list\": {\n      \"created_at\": \"1988-06-30T00:32:46.997Z\",\n      \"description\": \"string\",\n      \"id\": 1525,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"templates_count\": 3331,\n      \"updated_at\": \"2012-11-22T19:33:09.011Z\"\n    },\n    \"task_type\": {\n      \"id\": 4831,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"deleted_at\": \"1950-02-13T19:34:07.902Z\",\n      \"created_at\": \"1953-07-05T21:06:06.618Z\",\n      \"updated_at\": \"2001-04-18T12:10:58.979Z\"\n    },\n    \"template_creator\": {\n      \"account_owner\": false,\n      \"clio_connect\": false,\n      \"court_rules_default_attendee\": true,\n      \"created_at\": \"2023-09-12T04:25:05.441Z\",\n      \"default_calendar_id\": 9094,\n      \"email\": \"string\",\n      \"enabled\": true,\n      \"etag\": \"string\",\n      \"first_name\": \"string\",\n      \"id\": 9209,\n      \"initials\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"rate\": 6058.96626735428,\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"subscription_type\": \"Attorney\",\n      \"time_zone\": \"string\",\n      \"updated_at\": \"1976-12-05T22:59:04.239Z\"\n    },\n    \"reminder_templates\": [\n      {\n        \"id\": 4439,\n        \"etag\": \"string\",\n        \"duration\": 8935,\n        \"notification_type\": \"Email\",\n        \"created_at\": \"1989-07-17T11:09:19.113Z\",\n        \"updated_at\": \"1997-03-18T00:01:33.667Z\"\n      },\n      {\n        \"id\": 772,\n        \"etag\": \"string\",\n        \"duration\": 8959,\n        \"notification_type\": \"Email\",\n        \"created_at\": \"1997-01-10T07:21:06.007Z\",\n        \"updated_at\": \"2026-06-06T17:33:20.995Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1fc7206-138b-4bc0-b669-9b9450964b3b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_polarity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_source",
+                      "value": "{\"id\":\"<integer>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description_text_type",
+                      "value": "plain_text"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "priority",
+                      "value": "Normal"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "reminder_templates",
+                      "value": "[{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\"},{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "task_template_list",
+                      "value": "{\"id\":\"<long>\"}"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0d2d938-3d2f-409b-8eaf-c0d1fd9839dc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_polarity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_source",
+                      "value": "{\"id\":\"<integer>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description_text_type",
+                      "value": "plain_text"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "priority",
+                      "value": "Normal"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "reminder_templates",
+                      "value": "[{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\"},{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "task_template_list",
+                      "value": "{\"id\":\"<long>\"}"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12e3ac4e-a68d-409c-afca-71f1d6632eeb",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_polarity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_source",
+                      "value": "{\"id\":\"<integer>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description_text_type",
+                      "value": "plain_text"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "priority",
+                      "value": "Normal"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "reminder_templates",
+                      "value": "[{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\"},{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "task_template_list",
+                      "value": "{\"id\":\"<long>\"}"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26a059cf-a4f7-4a17-8386-da754e85905d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_polarity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_source",
+                      "value": "{\"id\":\"<integer>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description_text_type",
+                      "value": "plain_text"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "priority",
+                      "value": "Normal"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "reminder_templates",
+                      "value": "[{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\"},{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "task_template_list",
+                      "value": "{\"id\":\"<long>\"}"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cdc67705-7ade-4dd3-a2ef-620155870c00",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_polarity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_source",
+                      "value": "{\"id\":\"<integer>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description_text_type",
+                      "value": "plain_text"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "priority",
+                      "value": "Normal"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "reminder_templates",
+                      "value": "[{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\"},{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "task_template_list",
+                      "value": "{\"id\":\"<long>\"}"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "287f2bd0-0ddf-4187-bad8-88ee8ed6c60c",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_polarity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_source",
+                      "value": "{\"id\":\"<integer>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description_text_type",
+                      "value": "plain_text"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "priority",
+                      "value": "Normal"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "reminder_templates",
+                      "value": "[{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\"},{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "task_template_list",
+                      "value": "{\"id\":\"<long>\"}"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22644c23-689e-4697-bd9d-d5e38d276211",
+          "name": "Return the data for a single TaskTemplate",
+          "request": {
+            "name": "Return the data for a single TaskTemplate",
+            "description": {
+              "content": "Outlines the parameters, optional and required, used when requesting the data for a single TaskTemplate",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "task_templates",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                "key": "IF-MODIFIED-SINCE",
+                "value": "<date>"
+              },
+              {
+                "disabled": false,
+                "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                "key": "IF-NONE-MATCH",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "276c9eac-f72c-45c9-8682-6fc3b70ed5fe",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 435,\n    \"etag\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"description_text_type\": \"plain_text\",\n    \"priority\": \"Normal\",\n    \"private\": false,\n    \"created_at\": \"1951-09-03T08:38:51.888Z\",\n    \"updated_at\": \"2015-06-12T20:33:02.135Z\",\n    \"cascading_source\": {\n      \"id\": 7433,\n      \"name\": \"string\"\n    },\n    \"assignee\": {\n      \"account_owner\": false,\n      \"clio_connect\": true,\n      \"court_rules_default_attendee\": true,\n      \"created_at\": \"1973-10-28T08:46:41.717Z\",\n      \"default_calendar_id\": 1295,\n      \"email\": \"string\",\n      \"enabled\": true,\n      \"etag\": \"string\",\n      \"first_name\": \"string\",\n      \"id\": 2548,\n      \"initials\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"rate\": 98.59521027572148,\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"subscription_type\": \"Attorney\",\n      \"time_zone\": \"string\",\n      \"updated_at\": \"2009-03-03T01:27:29.373Z\"\n    },\n    \"task_template_list\": {\n      \"created_at\": \"1988-06-30T00:32:46.997Z\",\n      \"description\": \"string\",\n      \"id\": 1525,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"templates_count\": 3331,\n      \"updated_at\": \"2012-11-22T19:33:09.011Z\"\n    },\n    \"task_type\": {\n      \"id\": 4831,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"deleted_at\": \"1950-02-13T19:34:07.902Z\",\n      \"created_at\": \"1953-07-05T21:06:06.618Z\",\n      \"updated_at\": \"2001-04-18T12:10:58.979Z\"\n    },\n    \"template_creator\": {\n      \"account_owner\": false,\n      \"clio_connect\": false,\n      \"court_rules_default_attendee\": true,\n      \"created_at\": \"2023-09-12T04:25:05.441Z\",\n      \"default_calendar_id\": 9094,\n      \"email\": \"string\",\n      \"enabled\": true,\n      \"etag\": \"string\",\n      \"first_name\": \"string\",\n      \"id\": 9209,\n      \"initials\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"rate\": 6058.96626735428,\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"subscription_type\": \"Attorney\",\n      \"time_zone\": \"string\",\n      \"updated_at\": \"1976-12-05T22:59:04.239Z\"\n    },\n    \"reminder_templates\": [\n      {\n        \"id\": 4439,\n        \"etag\": \"string\",\n        \"duration\": 8935,\n        \"notification_type\": \"Email\",\n        \"created_at\": \"1989-07-17T11:09:19.113Z\",\n        \"updated_at\": \"1997-03-18T00:01:33.667Z\"\n      },\n      {\n        \"id\": 772,\n        \"etag\": \"string\",\n        \"duration\": 8959,\n        \"notification_type\": \"Email\",\n        \"created_at\": \"1997-01-10T07:21:06.007Z\",\n        \"updated_at\": \"2026-06-06T17:33:20.995Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "067e2f09-59ac-4289-ae03-57de2df9d38d",
+              "name": "Not Modified",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7d951cac-211b-4abb-895f-f793e9a160fc",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f070bd9-2dea-4f74-8773-3038e3c234df",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "142d8979-a79a-4191-9944-1ac217b6a0e2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04a111df-cd3d-413a-aac8-e7866d072cf2",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c09525bf-3aaa-4f2b-b032-65f2ef7dc4fb",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec5d7b3e-a460-4dad-8de2-5990ed1281a8",
+          "name": "Update a single TaskTemplate",
+          "request": {
+            "name": "Update a single TaskTemplate",
+            "description": {
+              "content": "Outlines the parameters and data fields used when updating a single TaskTemplate",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "task_templates",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                "key": "IF-MATCH",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "cascading",
+                  "value": "<boolean>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "cascading_offset",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "cascading_offset_polarity",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "cascading_offset_type",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "cascading_source",
+                  "value": "{\"id\":\"<integer>\"}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "description_text_type",
+                  "value": "plain_text",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "priority",
+                  "value": "Normal",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "private",
+                  "value": "<boolean>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "reminder_templates",
+                  "value": "[{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\",\"id\":\"<long>\",\"_destroy\":\"<boolean>\"},{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\",\"id\":\"<long>\",\"_destroy\":\"<boolean>\"}]",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "79350330-3e1f-41d9-af6e-df3171c05e77",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_polarity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_source",
+                      "value": "{\"id\":\"<integer>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description_text_type",
+                      "value": "plain_text"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "priority",
+                      "value": "Normal"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "reminder_templates",
+                      "value": "[{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\",\"id\":\"<long>\",\"_destroy\":\"<boolean>\"},{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\",\"id\":\"<long>\",\"_destroy\":\"<boolean>\"}]"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 435,\n    \"etag\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"description_text_type\": \"plain_text\",\n    \"priority\": \"Normal\",\n    \"private\": false,\n    \"created_at\": \"1951-09-03T08:38:51.888Z\",\n    \"updated_at\": \"2015-06-12T20:33:02.135Z\",\n    \"cascading_source\": {\n      \"id\": 7433,\n      \"name\": \"string\"\n    },\n    \"assignee\": {\n      \"account_owner\": false,\n      \"clio_connect\": true,\n      \"court_rules_default_attendee\": true,\n      \"created_at\": \"1973-10-28T08:46:41.717Z\",\n      \"default_calendar_id\": 1295,\n      \"email\": \"string\",\n      \"enabled\": true,\n      \"etag\": \"string\",\n      \"first_name\": \"string\",\n      \"id\": 2548,\n      \"initials\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"rate\": 98.59521027572148,\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"subscription_type\": \"Attorney\",\n      \"time_zone\": \"string\",\n      \"updated_at\": \"2009-03-03T01:27:29.373Z\"\n    },\n    \"task_template_list\": {\n      \"created_at\": \"1988-06-30T00:32:46.997Z\",\n      \"description\": \"string\",\n      \"id\": 1525,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"templates_count\": 3331,\n      \"updated_at\": \"2012-11-22T19:33:09.011Z\"\n    },\n    \"task_type\": {\n      \"id\": 4831,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"deleted_at\": \"1950-02-13T19:34:07.902Z\",\n      \"created_at\": \"1953-07-05T21:06:06.618Z\",\n      \"updated_at\": \"2001-04-18T12:10:58.979Z\"\n    },\n    \"template_creator\": {\n      \"account_owner\": false,\n      \"clio_connect\": false,\n      \"court_rules_default_attendee\": true,\n      \"created_at\": \"2023-09-12T04:25:05.441Z\",\n      \"default_calendar_id\": 9094,\n      \"email\": \"string\",\n      \"enabled\": true,\n      \"etag\": \"string\",\n      \"first_name\": \"string\",\n      \"id\": 9209,\n      \"initials\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"rate\": 6058.96626735428,\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"subscription_type\": \"Attorney\",\n      \"time_zone\": \"string\",\n      \"updated_at\": \"1976-12-05T22:59:04.239Z\"\n    },\n    \"reminder_templates\": [\n      {\n        \"id\": 4439,\n        \"etag\": \"string\",\n        \"duration\": 8935,\n        \"notification_type\": \"Email\",\n        \"created_at\": \"1989-07-17T11:09:19.113Z\",\n        \"updated_at\": \"1997-03-18T00:01:33.667Z\"\n      },\n      {\n        \"id\": 772,\n        \"etag\": \"string\",\n        \"duration\": 8959,\n        \"notification_type\": \"Email\",\n        \"created_at\": \"1997-01-10T07:21:06.007Z\",\n        \"updated_at\": \"2026-06-06T17:33:20.995Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db8843d7-788c-4840-9003-62f2b0733cee",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_polarity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_source",
+                      "value": "{\"id\":\"<integer>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description_text_type",
+                      "value": "plain_text"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "priority",
+                      "value": "Normal"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "reminder_templates",
+                      "value": "[{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\",\"id\":\"<long>\",\"_destroy\":\"<boolean>\"},{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\",\"id\":\"<long>\",\"_destroy\":\"<boolean>\"}]"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62af1b32-d25f-4d32-8859-c5300688e02f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_polarity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_source",
+                      "value": "{\"id\":\"<integer>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description_text_type",
+                      "value": "plain_text"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "priority",
+                      "value": "Normal"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "reminder_templates",
+                      "value": "[{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\",\"id\":\"<long>\",\"_destroy\":\"<boolean>\"},{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\",\"id\":\"<long>\",\"_destroy\":\"<boolean>\"}]"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2cebd08-47d2-4f8f-930a-e0134090c936",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_polarity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_source",
+                      "value": "{\"id\":\"<integer>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description_text_type",
+                      "value": "plain_text"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "priority",
+                      "value": "Normal"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "reminder_templates",
+                      "value": "[{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\",\"id\":\"<long>\",\"_destroy\":\"<boolean>\"},{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\",\"id\":\"<long>\",\"_destroy\":\"<boolean>\"}]"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18ed0272-8e57-44c3-968d-5291ddbca44a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_polarity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_source",
+                      "value": "{\"id\":\"<integer>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description_text_type",
+                      "value": "plain_text"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "priority",
+                      "value": "Normal"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "reminder_templates",
+                      "value": "[{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\",\"id\":\"<long>\",\"_destroy\":\"<boolean>\"},{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\",\"id\":\"<long>\",\"_destroy\":\"<boolean>\"}]"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c4086af-53ad-4086-b4e5-aaf520f3d490",
+              "name": "Precondition Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_polarity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_source",
+                      "value": "{\"id\":\"<integer>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description_text_type",
+                      "value": "plain_text"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "priority",
+                      "value": "Normal"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "reminder_templates",
+                      "value": "[{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\",\"id\":\"<long>\",\"_destroy\":\"<boolean>\"},{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\",\"id\":\"<long>\",\"_destroy\":\"<boolean>\"}]"
+                    }
+                  ]
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da71b5a1-8f5d-4cc7-a6a5-1e131cfcc0cb",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_polarity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_source",
+                      "value": "{\"id\":\"<integer>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description_text_type",
+                      "value": "plain_text"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "priority",
+                      "value": "Normal"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "reminder_templates",
+                      "value": "[{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\",\"id\":\"<long>\",\"_destroy\":\"<boolean>\"},{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\",\"id\":\"<long>\",\"_destroy\":\"<boolean>\"}]"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f390285-1497-46cb-b2de-97786f3255fe",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_polarity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_offset_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cascading_source",
+                      "value": "{\"id\":\"<integer>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description_text_type",
+                      "value": "plain_text"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "priority",
+                      "value": "Normal"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "reminder_templates",
+                      "value": "[{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\",\"id\":\"<long>\",\"_destroy\":\"<boolean>\"},{\"duration_value\":\"<integer>\",\"duration_unit\":\"<string>\",\"notification_type\":\"<string>\",\"id\":\"<long>\",\"_destroy\":\"<boolean>\"}]"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9dba726-a9dd-46db-91cd-20489c30582e",
+          "name": "Delete a single TaskTemplate",
+          "request": {
+            "name": "Delete a single TaskTemplate",
+            "description": {
+              "content": "Outlines the parameters, optional and required, used when deleting the record for a single TaskTemplate",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "task_templates",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cd263613-4d77-44ca-95c1-e2f09749ea85",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f598ca6d-07bb-46e4-9738-263d02cb6b8d",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task_templates",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.clio.com/api/v4",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The unique identifier for the TaskTemplate.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<long>",
+      "key": "id"
+    }
+  ],
+  "info": {
+    "_postman_id": "d17521b5-f2bb-499d-86f5-1486160eb68c",
+    "name": "Clio API Documentation Activities Task Templates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Developer Support and Feedback\n* Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio's API Support team at [api@clio.com](mailto:api@clio.com).\n* For business and partnership inquiries, contact our API Partnerships team at [api.partnerships@clio.com](mailto:api.partnerships@clio.com).\n* For best practices and tips from the Clio development community, join the conversation in the [Clio Developer Slack Channel](https://join.slack.com/t/clio-public/shared_invite/zt-36i0eqgo1-7POORPtMJpp2N0~_auL2IQ).\n\nA community-driven [Clio Developers Stack Overflow Group](https://stackoverflow.com/questions/tagged/clio-api) also exists where you can connect and ask questions from other Clio API users.\n# Getting Started\n> **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).\n>\n> Likewise, the developer portal is available at region-specific links for the [Australia](https://au.developers.clio.com), [Canada](https://ca.developers.clio.com), [EU](https://eu.developers.clio.com), and [US](https://developers.clio.com) regions.\n>\n> This document assumes the US region is being used (app.clio.com). If you're building in one of the other regions, you should adapt the links and examples as necessary.\n\nTo start building on the Clio API, you’ll need a Clio account – you can review our [Developer Handbook](https://docs.developers.clio.com/) and follow the steps to sign up for an account.\n\nOnce you have an account, you can [create a developer application](https://docs.developers.clio.com/api-docs/applications) from the [Developer Portal](https://developers.clio.com) and start building!\n# Authorization with OAuth 2.0\nSee our [Authorization documentation →](https://docs.developers.clio.com/api-docs/authorization)\n# Permissions\nSee our [Permissions documentation →](https://docs.developers.clio.com/api-docs/permissions)\n# Fields\nSee our [Fields documentation →](https://docs.developers.clio.com/api-docs/fields)\n# Rate Limiting\nSee our [Rate Limits documentation →](https://docs.developers.clio.com/api-docs/rate-limits)\n# Paging\nSee our [Pagination documentation →](https://docs.developers.clio.com/api-docs/paging)\n# ETags\nSee our [ETags documentation →](https://docs.developers.clio.com/api-docs/etags)\n# Minor Versions\nAPI v4 supports multiple minor versions. Versions are of the form '4.X.Y'. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you're requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.\n\nAn `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.\n\nYou can find our [API Versioning Policy and Guidelines](https://docs.developers.clio.com/api-docs/api-versioning-policy) in our documentation hub.\n\nThe [API Changelog](https://docs.developers.clio.com/api-docs/api-changelog) explains each version's changes in further detail.\n### [4.0.4](https://docs.developers.clio.com/api-docs/api-changelog#404)\n\n  * Update `quantity` field to return values in seconds rather than hours for Activities\n\n### [4.0.5](https://docs.developers.clio.com/api-docs/api-changelog#405)\n\n  * Remove `matter_balances` field from Bills\n* Standardize status/state enum values\n* Add a Document association to completed DocumentAutomations\n* Add rate visibility handling for Activity's price and total\n\n### [4.0.6](https://docs.developers.clio.com/api-docs/api-changelog#406)\n\n  * Remove `document_versions` collection field from Documents\n\n### [4.0.7](https://docs.developers.clio.com/api-docs/api-changelog#407)\n\n  * Change secure link format\n\n### [4.0.8](https://docs.developers.clio.com/api-docs/api-changelog#408)\n\n  * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user\n  * Add `quantity_redacted` field to activities\n\n### [4.0.9](https://docs.developers.clio.com/api-docs/api-changelog#409)\n\n  * Contacts are filtered and redacted in the response based on the new 'Contacts Visibility' user permission setting.\n\n### [4.0.10](https://docs.developers.clio.com/api-docs/api-changelog#4010)\n\n  * Fixed validation of `type` query parameter when querying Notes\n\n### [4.0.12](https://docs.developers.clio.com/api-docs/api-changelog#4012)\n\n  * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers\n\n### [4.0.13](https://docs.developers.clio.com/api-docs/api-changelog#4013)\n\n  **This is the default version**\n\n  * Add association limits to Contacts\n* Returns 422 Unprocessable Entity when association limits are exceeded\n\n\n\n\nContact Support:\n Name: Clio API Support\n Email: api@clio.com",
+      "type": "text/plain"
+    }
+  }
+}

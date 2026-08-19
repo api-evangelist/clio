@@ -1,0 +1,283 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clio API Documentation Activities Calendar Entries API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Calendar Entries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return the data for all CalendarEntries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/calendar_entries.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "calendar_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for a single Calendar. The keyword `null` is not valid for this field. The list will be filtered to include only the CalendarEntry records with the matching property."
+              },
+              {
+                "name": "created_since",
+                "value": "",
+                "type": "query",
+                "description": "Filter CalendarEntry records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+              },
+              {
+                "name": "expanded",
+                "value": "",
+                "type": "query",
+                "description": "Returns a record for each occurrence of a recurring calendar event.  Non-recurring calendar events are unaffected and returned as separate records regardless of the expanded setting."
+              },
+              {
+                "name": "external_property_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter records to only those with the given external property(s) name set.\n\ne.g. `?external_property_name=Name`\n"
+              },
+              {
+                "name": "external_property_value",
+                "value": "",
+                "type": "query",
+                "description": "Filter records to only those with the given external property(s) value set. Requires external property name as well.\n\ne.g. `?external_property_name=Name&external_property_value=Value`\n"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Filter CalendarEntry records to those that end on or after the provided time (Expects an ISO-8601 timestamp)."
+              },
+              {
+                "name": "has_court_rule",
+                "value": "",
+                "type": "query",
+                "description": "Allows matching court rule on calendar entry."
+              },
+              {
+                "name": "ids[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter CalendarEntry records to those having the specified unique identifiers."
+              },
+              {
+                "name": "is_all_day",
+                "value": "",
+                "type": "query",
+                "description": "Filter CalendarEntry records to those that are marked as all day events."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "A limit on the number of CalendarEntry records to be returned. Limit can range between 1 and 200. Default: `200`."
+              },
+              {
+                "name": "matter_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for a single Matter. Use the keyword `null` to match those without a CalendarEntry. The list will be filtered to include only the CalendarEntry records with the matching property."
+              },
+              {
+                "name": "owner_entries_across_all_users",
+                "value": "",
+                "type": "query",
+                "description": "Returns CalendarEntry records for all users related to a matter. Requires matter id."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "A token specifying which page to return."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Allows matching search on calendar entry."
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "Filter CalendarEntry records to those having a specific calendar visibility source (mobile, web)."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Filter CalendarEntry records to those that begin on or before the provided time (Expects an ISO-8601 timestamp)."
+              },
+              {
+                "name": "updated_since",
+                "value": "",
+                "type": "query",
+                "description": "Filter CalendarEntry records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+              },
+              {
+                "name": "visible",
+                "value": "",
+                "type": "query",
+                "description": "Filter CalendarEntry records to those that are visible."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when requesting the data for all CalendarEntries"
+        },
+        {
+          "info": {
+            "name": "Create a new CalendarEntry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.clio.com/api/v4/calendar_entries.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Outlines the parameters and data fields used when creating a new CalendarEntry"
+        },
+        {
+          "info": {
+            "name": "Return the data for a single CalendarEntry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/calendar_entries/:id.json",
+            "headers": [
+              {
+                "name": "IF-MODIFIED-SINCE",
+                "value": ""
+              },
+              {
+                "name": "IF-NONE-MATCH",
+                "value": ""
+              },
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the CalendarEntry."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when requesting the data for a single CalendarEntry"
+        },
+        {
+          "info": {
+            "name": "Update a single CalendarEntry",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.clio.com/api/v4/calendar_entries/:id.json",
+            "headers": [
+              {
+                "name": "IF-MATCH",
+                "value": ""
+              },
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the CalendarEntry."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Outlines the parameters and data fields used when updating a single CalendarEntry"
+        },
+        {
+          "info": {
+            "name": "Delete a single CalendarEntry",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.clio.com/api/v4/calendar_entries/:id.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the CalendarEntry."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when deleting the record for a single CalendarEntry"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

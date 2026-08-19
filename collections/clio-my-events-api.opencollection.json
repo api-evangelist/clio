@@ -1,0 +1,119 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clio API Documentation Activities My Events API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "My Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return the data for all of my in-app notification events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/internal_notifications/my_events.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "A limit on the number of MyEvent records to be returned. Limit can range between 1 and 200. Default: `200`."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "A token specifying which page to return."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when requesting the data for all MyEvents"
+        },
+        {
+          "info": {
+            "name": "Mark a single in-app notification event as read/unread",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.clio.com/api/v4/internal_notifications/my_events/:id.json",
+            "headers": [
+              {
+                "name": "IF-MATCH",
+                "value": ""
+              },
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the MyEvent."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Outlines the parameters and data fields used when updating a single MyEvent"
+        },
+        {
+          "info": {
+            "name": "Clear (delete) a single in-app notification event",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.clio.com/api/v4/internal_notifications/my_events/:id.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the MyEvent."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when deleting the record for a single MyEvent"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

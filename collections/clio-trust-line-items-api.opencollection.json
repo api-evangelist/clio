@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clio API Documentation Activities Trust Line Items API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Trust Line Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return the data for all TrustLineItems",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/trust_line_items.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "bill_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for a single Bill. The keyword `null` is not valid for this field. The list will be filtered to include only the TrustLineItem records with the matching property."
+              },
+              {
+                "name": "created_since",
+                "value": "",
+                "type": "query",
+                "description": "Filter TrustLineItem records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "ids[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter TrustLineItem records to those having the specified unique identifiers."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "A limit on the number of TrustLineItem records to be returned. Limit can range between 1 and 200. Default: `200`."
+              },
+              {
+                "name": "matter_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for a single Matter. Use the keyword `null` to match those without a TrustLineItem. The list will be filtered to include only the TrustLineItem records with the matching property."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Orders the TrustLineItem records by the given field. Default: `id(asc)`."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "A token specifying which page to return."
+              },
+              {
+                "name": "updated_since",
+                "value": "",
+                "type": "query",
+                "description": "Filter TrustLineItem records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when requesting the data for all TrustLineItems"
+        },
+        {
+          "info": {
+            "name": "Update a single TrustLineItem",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.clio.com/api/v4/trust_line_items/:id.json",
+            "headers": [
+              {
+                "name": "IF-MATCH",
+                "value": ""
+              },
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the TrustLineItem."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Outlines the parameters and data fields used when updating a single TrustLineItem"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

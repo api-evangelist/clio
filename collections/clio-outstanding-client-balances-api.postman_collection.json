@@ -1,0 +1,544 @@
+{
+  "item": [
+    {
+      "id": "db8b5062-3da3-47a2-a97d-bcb36b382c18",
+      "name": "Outstanding Client Balances",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "785b9aa3-d9b6-4178-85bd-788687321b33",
+          "name": "Return the data for all OutstandingClientBalances",
+          "request": {
+            "name": "Return the data for all OutstandingClientBalances",
+            "description": {
+              "content": "Outlines the parameters, optional and required, used when requesting the data for all OutstandingClientBalances",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "outstanding_client_balances.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "contact_id",
+                  "value": "<long>",
+                  "description": "The unique identifier for a single Contact. Use the keyword `null` to match those without a OutstandingClientBalance. The list will be filtered to include only the OutstandingClientBalance records with the matching property."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                },
+                {
+                  "disabled": false,
+                  "key": "last_paid_end_date",
+                  "value": "<date>",
+                  "description": "Filter OutstandingClientBalance records for those whose bills have been paid before the specified date"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_paid_start_date",
+                  "value": "<date>",
+                  "description": "Filter OutstandingClientBalance records for those whose bills have been paid after the specified date"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "A limit on the number of OutstandingClientBalance records to be returned. Limit can range between 1 and 200. Default: `200`."
+                },
+                {
+                  "disabled": false,
+                  "key": "newest_bill_due_end_date",
+                  "value": "<date>",
+                  "description": "Filter OutstandingClientBalance records for the contact's newest bill due date before the specified date"
+                },
+                {
+                  "disabled": false,
+                  "key": "newest_bill_due_start_date",
+                  "value": "<date>",
+                  "description": "Filter OutstandingClientBalance records for the contact's newest bill due date after the specified date"
+                },
+                {
+                  "disabled": false,
+                  "key": "originating_attorney_id",
+                  "value": "<long>",
+                  "description": "Filters OutstandingClientBalance records to those with matters that have a matching originating attorney."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "A token specifying which page to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "responsible_attorney_id",
+                  "value": "<long>",
+                  "description": "Filter OutstandingClientBalance records to those with matters that have a matching responsible attorney"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b84f33e3-48bb-41ea-9ae2-75fb961a0f62",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "outstanding_client_balances.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last_paid_end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "last_paid_start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "newest_bill_due_end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "newest_bill_due_start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "originating_attorney_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "responsible_attorney_id",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"associated_matter_ids\": [\n        9431,\n        851\n      ],\n      \"etag\": \"string\",\n      \"id\": 2866,\n      \"last_payment_date\": \"1980-04-03\",\n      \"last_shared_date\": \"2006-01-18\",\n      \"newest_issued_bill_due_date\": \"1968-04-23\",\n      \"pending_payments_total\": 9323.512528001293,\n      \"reminders_enabled\": false,\n      \"total_outstanding_balance\": 6665.719361169663,\n      \"created_at\": \"1966-07-10T12:56:19.621Z\",\n      \"updated_at\": \"1972-06-07T13:11:02.272Z\",\n      \"outstanding_bills\": [\n        {\n          \"id\": 8722,\n          \"etag\": \"string\",\n          \"number\": \"string\",\n          \"issued_at\": \"2017-10-16\",\n          \"created_at\": \"1973-04-19T08:20:24.580Z\",\n          \"due_at\": \"2009-09-03\",\n          \"tax_rate\": 5996.264348118472,\n          \"secondary_tax_rate\": 2.381851694089887,\n          \"updated_at\": \"1975-06-05T20:25:58.896Z\",\n          \"subject\": \"string\",\n          \"purchase_order\": \"string\",\n          \"type\": \"ClientBill\",\n          \"memo\": \"string\",\n          \"start_at\": \"1952-06-02\",\n          \"end_at\": \"1974-11-21\",\n          \"balance\": 695.8439034954922,\n          \"state\": \"paid\",\n          \"kind\": \"aggregate_services\",\n          \"total\": 8471.671243464285,\n          \"paid\": 4747.336809847604,\n          \"paid_at\": \"1956-02-23T11:46:40.294Z\",\n          \"pending\": 9070.738129887888,\n          \"due\": 4900.841452825967,\n          \"discount_services_only\": \"string\",\n          \"can_update\": false,\n          \"credits_issued\": 6919.330724496511,\n          \"shared\": true,\n          \"last_sent_at\": \"2021-09-12T12:09:10.073Z\",\n          \"services_secondary_tax\": 1129.1625530417482,\n          \"services_sub_total\": 9215.265581567373,\n          \"services_tax\": 4217.367113883298,\n          \"services_taxable_sub_total\": 827,\n          \"services_secondary_taxable_sub_total\": 4603,\n          \"taxable_sub_total\": 7924,\n          \"secondary_taxable_sub_total\": 7195,\n          \"sub_total\": 779.5281989062786,\n          \"tax_sum\": 3570.243086013829,\n          \"secondary_tax_sum\": 8490.568632934035,\n          \"total_tax\": 5732.096003054945,\n          \"available_state_transitions\": [\n            \"awaiting_payment\",\n            \"deleted\"\n          ]\n        },\n        {\n          \"id\": 2220,\n          \"etag\": \"string\",\n          \"number\": \"string\",\n          \"issued_at\": \"1970-06-10\",\n          \"created_at\": \"1986-07-02T15:10:37.429Z\",\n          \"due_at\": \"1996-08-09\",\n          \"tax_rate\": 5080.838173272131,\n          \"secondary_tax_rate\": 2220.4822429126257,\n          \"updated_at\": \"1963-10-23T11:41:11.324Z\",\n          \"subject\": \"string\",\n          \"purchase_order\": \"string\",\n          \"type\": \"MatterBill\",\n          \"memo\": \"string\",\n          \"start_at\": \"2010-08-05\",\n          \"end_at\": \"1982-06-01\",\n          \"balance\": 2448.9619138869944,\n          \"state\": \"paid\",\n          \"kind\": \"revenue_kind\",\n          \"total\": 9129.008999814589,\n          \"paid\": 4158.120359616486,\n          \"paid_at\": \"2007-04-21T01:31:53.450Z\",\n          \"pending\": 862.4272143278666,\n          \"due\": 6913.096354725616,\n          \"discount_services_only\": \"string\",\n          \"can_update\": false,\n          \"credits_issued\": 2358.548051510194,\n          \"shared\": false,\n          \"last_sent_at\": \"1950-02-20T10:21:48.355Z\",\n          \"services_secondary_tax\": 1894.8967924311344,\n          \"services_sub_total\": 1972.9290206984806,\n          \"services_tax\": 6091.739148613909,\n          \"services_taxable_sub_total\": 7465,\n          \"services_secondary_taxable_sub_total\": 2383,\n          \"taxable_sub_total\": 5482,\n          \"secondary_taxable_sub_total\": 8630,\n          \"sub_total\": 4062.65191617291,\n          \"tax_sum\": 8458.085445821667,\n          \"secondary_tax_sum\": 8095.469350227607,\n          \"total_tax\": 5453.260397514043,\n          \"available_state_transitions\": [\n            \"paid\",\n            \"paid\"\n          ]\n        }\n      ],\n      \"contact\": {\n        \"id\": 758,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"first_name\": \"string\",\n        \"middle_name\": \"string\",\n        \"last_name\": \"string\",\n        \"date_of_birth\": \"2019-04-13\",\n        \"type\": \"Person\",\n        \"created_at\": \"1967-09-02T18:19:25.972Z\",\n        \"updated_at\": \"2007-04-02T03:44:47.539Z\",\n        \"prefix\": \"string\",\n        \"title\": \"string\",\n        \"initials\": \"string\",\n        \"clio_connect_email\": \"string\",\n        \"locked_clio_connect_email\": false,\n        \"client_connect_user_id\": 4480,\n        \"primary_email_address\": \"string\",\n        \"secondary_email_address\": \"string\",\n        \"primary_phone_number\": \"string\",\n        \"secondary_phone_number\": \"string\",\n        \"ledes_client_id\": \"string\",\n        \"has_clio_for_clients_permission\": true,\n        \"is_client\": true,\n        \"is_clio_for_client_user\": false,\n        \"is_co_counsel\": true,\n        \"is_bill_recipient\": false,\n        \"sales_tax_number\": \"string\",\n        \"currency\": {}\n      },\n      \"currency\": {\n        \"id\": 8017,\n        \"etag\": \"string\",\n        \"code\": \"string\",\n        \"sign\": \"string\",\n        \"created_at\": \"1993-04-01T13:55:39.520Z\",\n        \"updated_at\": \"1968-04-30T14:19:30.969Z\"\n      }\n    },\n    {\n      \"associated_matter_ids\": [\n        6315,\n        3370\n      ],\n      \"etag\": \"string\",\n      \"id\": 5906,\n      \"last_payment_date\": \"1972-10-02\",\n      \"last_shared_date\": \"1960-06-18\",\n      \"newest_issued_bill_due_date\": \"1946-11-04\",\n      \"pending_payments_total\": 49.00374841310784,\n      \"reminders_enabled\": false,\n      \"total_outstanding_balance\": 5612.845151714584,\n      \"created_at\": \"1989-06-25T13:58:19.064Z\",\n      \"updated_at\": \"1987-11-14T21:15:10.573Z\",\n      \"outstanding_bills\": [\n        {\n          \"id\": 2470,\n          \"etag\": \"string\",\n          \"number\": \"string\",\n          \"issued_at\": \"1955-04-21\",\n          \"created_at\": \"2006-01-15T00:52:17.646Z\",\n          \"due_at\": \"1992-01-13\",\n          \"tax_rate\": 4182.288729789996,\n          \"secondary_tax_rate\": 7188.338682300762,\n          \"updated_at\": \"1973-03-15T00:46:11.113Z\",\n          \"subject\": \"string\",\n          \"purchase_order\": \"string\",\n          \"type\": \"ClientBill\",\n          \"memo\": \"string\",\n          \"start_at\": \"1960-04-01\",\n          \"end_at\": \"1959-04-10\",\n          \"balance\": 7786.353583226028,\n          \"state\": \"deleted\",\n          \"kind\": \"aggregate_expenses\",\n          \"total\": 6692.464198596713,\n          \"paid\": 3422.643592288961,\n          \"paid_at\": \"1975-10-02T15:27:45.108Z\",\n          \"pending\": 2173.066666661526,\n          \"due\": 1060.2782497983653,\n          \"discount_services_only\": \"string\",\n          \"can_update\": true,\n          \"credits_issued\": 9207.498505456322,\n          \"shared\": true,\n          \"last_sent_at\": \"1963-05-11T00:27:08.136Z\",\n          \"services_secondary_tax\": 3800.4735704287486,\n          \"services_sub_total\": 8486.666814030748,\n          \"services_tax\": 396.00528963563806,\n          \"services_taxable_sub_total\": 1835,\n          \"services_secondary_taxable_sub_total\": 2211,\n          \"taxable_sub_total\": 2743,\n          \"secondary_taxable_sub_total\": 8263,\n          \"sub_total\": 6015.209101721956,\n          \"tax_sum\": 9423.978642241085,\n          \"secondary_tax_sum\": 4427.1022031213515,\n          \"total_tax\": 8389.53483971764,\n          \"available_state_transitions\": [\n            \"void\",\n            \"void\"\n          ]\n        },\n        {\n          \"id\": 9648,\n          \"etag\": \"string\",\n          \"number\": \"string\",\n          \"issued_at\": \"2020-04-06\",\n          \"created_at\": \"1951-07-30T03:02:34.301Z\",\n          \"due_at\": \"1953-09-14\",\n          \"tax_rate\": 9516.637570800009,\n          \"secondary_tax_rate\": 5511.450759769379,\n          \"updated_at\": \"1967-07-14T09:48:15.404Z\",\n          \"subject\": \"string\",\n          \"purchase_order\": \"string\",\n          \"type\": \"MatterBill\",\n          \"memo\": \"string\",\n          \"start_at\": \"1967-07-15\",\n          \"end_at\": \"1992-07-13\",\n          \"balance\": 6450.146581628626,\n          \"state\": \"deleted\",\n          \"kind\": \"aggregate_expenses\",\n          \"total\": 4080.5369416926383,\n          \"paid\": 9767.085537552015,\n          \"paid_at\": \"1963-06-10T00:03:49.551Z\",\n          \"pending\": 7499.22385466979,\n          \"due\": 4492.4472254527545,\n          \"discount_services_only\": \"string\",\n          \"can_update\": true,\n          \"credits_issued\": 5042.84027441705,\n          \"shared\": true,\n          \"last_sent_at\": \"2020-08-14T03:16:15.251Z\",\n          \"services_secondary_tax\": 4295.663316184008,\n          \"services_sub_total\": 2825.803514144065,\n          \"services_tax\": 8797.669735792353,\n          \"services_taxable_sub_total\": 9318,\n          \"services_secondary_taxable_sub_total\": 3956,\n          \"taxable_sub_total\": 8894,\n          \"secondary_taxable_sub_total\": 4654,\n          \"sub_total\": 6902.649519193931,\n          \"tax_sum\": 9423.330264692024,\n          \"secondary_tax_sum\": 515.5398687202118,\n          \"total_tax\": 3115.3983367887827,\n          \"available_state_transitions\": [\n            \"paid\",\n            \"awaiting_payment\"\n          ]\n        }\n      ],\n      \"contact\": {\n        \"id\": 8912,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"first_name\": \"string\",\n        \"middle_name\": \"string\",\n        \"last_name\": \"string\",\n        \"date_of_birth\": \"1998-03-19\",\n        \"type\": \"Person\",\n        \"created_at\": \"1979-03-10T18:06:26.412Z\",\n        \"updated_at\": \"2016-12-10T21:25:58.490Z\",\n        \"prefix\": \"string\",\n        \"title\": \"string\",\n        \"initials\": \"string\",\n        \"clio_connect_email\": \"string\",\n        \"locked_clio_connect_email\": true,\n        \"client_connect_user_id\": 2068,\n        \"primary_email_address\": \"string\",\n        \"secondary_email_address\": \"string\",\n        \"primary_phone_number\": \"string\",\n        \"secondary_phone_number\": \"string\",\n        \"ledes_client_id\": \"string\",\n        \"has_clio_for_clients_permission\": false,\n        \"is_client\": true,\n        \"is_clio_for_client_user\": false,\n        \"is_co_counsel\": false,\n        \"is_bill_recipient\": true,\n        \"sales_tax_number\": \"string\",\n        \"currency\": {}\n      },\n      \"currency\": {\n        \"id\": 3795,\n        \"etag\": \"string\",\n        \"code\": \"string\",\n        \"sign\": \"string\",\n        \"created_at\": \"1951-01-21T18:29:17.628Z\",\n        \"updated_at\": \"1969-04-12T04:52:23.855Z\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55f267d4-fcc1-4167-ac0a-81548efb7a28",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "outstanding_client_balances.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last_paid_end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "last_paid_start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "newest_bill_due_end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "newest_bill_due_start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "originating_attorney_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "responsible_attorney_id",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c49f837-6d43-4b2a-8c2a-b9a40a09cb7d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "outstanding_client_balances.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last_paid_end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "last_paid_start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "newest_bill_due_end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "newest_bill_due_start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "originating_attorney_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "responsible_attorney_id",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b3d38ca-3c7d-461a-a8c9-1591ecfa8d13",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "outstanding_client_balances.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last_paid_end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "last_paid_start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "newest_bill_due_end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "newest_bill_due_start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "originating_attorney_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "responsible_attorney_id",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5307fcab-efd5-4339-b726-20f4138de0e3",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "outstanding_client_balances.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last_paid_end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "last_paid_start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "newest_bill_due_end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "newest_bill_due_start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "originating_attorney_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "responsible_attorney_id",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.clio.com/api/v4",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d8d36ac0-08c2-40ae-a318-43403ca9c69a",
+    "name": "Clio API Documentation Activities Outstanding Client Balances API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Developer Support and Feedback\n* Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio's API Support team at [api@clio.com](mailto:api@clio.com).\n* For business and partnership inquiries, contact our API Partnerships team at [api.partnerships@clio.com](mailto:api.partnerships@clio.com).\n* For best practices and tips from the Clio development community, join the conversation in the [Clio Developer Slack Channel](https://join.slack.com/t/clio-public/shared_invite/zt-36i0eqgo1-7POORPtMJpp2N0~_auL2IQ).\n\nA community-driven [Clio Developers Stack Overflow Group](https://stackoverflow.com/questions/tagged/clio-api) also exists where you can connect and ask questions from other Clio API users.\n# Getting Started\n> **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).\n>\n> Likewise, the developer portal is available at region-specific links for the [Australia](https://au.developers.clio.com), [Canada](https://ca.developers.clio.com), [EU](https://eu.developers.clio.com), and [US](https://developers.clio.com) regions.\n>\n> This document assumes the US region is being used (app.clio.com). If you're building in one of the other regions, you should adapt the links and examples as necessary.\n\nTo start building on the Clio API, you’ll need a Clio account – you can review our [Developer Handbook](https://docs.developers.clio.com/) and follow the steps to sign up for an account.\n\nOnce you have an account, you can [create a developer application](https://docs.developers.clio.com/api-docs/applications) from the [Developer Portal](https://developers.clio.com) and start building!\n# Authorization with OAuth 2.0\nSee our [Authorization documentation →](https://docs.developers.clio.com/api-docs/authorization)\n# Permissions\nSee our [Permissions documentation →](https://docs.developers.clio.com/api-docs/permissions)\n# Fields\nSee our [Fields documentation →](https://docs.developers.clio.com/api-docs/fields)\n# Rate Limiting\nSee our [Rate Limits documentation →](https://docs.developers.clio.com/api-docs/rate-limits)\n# Paging\nSee our [Pagination documentation →](https://docs.developers.clio.com/api-docs/paging)\n# ETags\nSee our [ETags documentation →](https://docs.developers.clio.com/api-docs/etags)\n# Minor Versions\nAPI v4 supports multiple minor versions. Versions are of the form '4.X.Y'. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you're requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.\n\nAn `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.\n\nYou can find our [API Versioning Policy and Guidelines](https://docs.developers.clio.com/api-docs/api-versioning-policy) in our documentation hub.\n\nThe [API Changelog](https://docs.developers.clio.com/api-docs/api-changelog) explains each version's changes in further detail.\n### [4.0.4](https://docs.developers.clio.com/api-docs/api-changelog#404)\n\n  * Update `quantity` field to return values in seconds rather than hours for Activities\n\n### [4.0.5](https://docs.developers.clio.com/api-docs/api-changelog#405)\n\n  * Remove `matter_balances` field from Bills\n* Standardize status/state enum values\n* Add a Document association to completed DocumentAutomations\n* Add rate visibility handling for Activity's price and total\n\n### [4.0.6](https://docs.developers.clio.com/api-docs/api-changelog#406)\n\n  * Remove `document_versions` collection field from Documents\n\n### [4.0.7](https://docs.developers.clio.com/api-docs/api-changelog#407)\n\n  * Change secure link format\n\n### [4.0.8](https://docs.developers.clio.com/api-docs/api-changelog#408)\n\n  * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user\n  * Add `quantity_redacted` field to activities\n\n### [4.0.9](https://docs.developers.clio.com/api-docs/api-changelog#409)\n\n  * Contacts are filtered and redacted in the response based on the new 'Contacts Visibility' user permission setting.\n\n### [4.0.10](https://docs.developers.clio.com/api-docs/api-changelog#4010)\n\n  * Fixed validation of `type` query parameter when querying Notes\n\n### [4.0.12](https://docs.developers.clio.com/api-docs/api-changelog#4012)\n\n  * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers\n\n### [4.0.13](https://docs.developers.clio.com/api-docs/api-changelog#4013)\n\n  **This is the default version**\n\n  * Add association limits to Contacts\n* Returns 422 Unprocessable Entity when association limits are exceeded\n\n\n\n\nContact Support:\n Name: Clio API Support\n Email: api@clio.com",
+      "type": "text/plain"
+    }
+  }
+}

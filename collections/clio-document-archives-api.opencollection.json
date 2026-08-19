@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clio API Documentation Activities Document Archives API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Document Archives",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download the DocumentArchive. Will return a 303 See Other redirecting to the download URL for the DocumentArchive",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/document_archives/:id/download.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the DocumentArchive."
+              }
+            ]
+          },
+          "docs": "Download the DocumentArchive. Will return a 303 See Other redirecting to the download URL for the DocumentArchive"
+        },
+        {
+          "info": {
+            "name": "Create a new DocumentArchive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.clio.com/api/v4/document_archives.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Outlines the parameters and data fields used when creating a new DocumentArchive"
+        },
+        {
+          "info": {
+            "name": "Return the data for a single DocumentArchive",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/document_archives/:id.json",
+            "headers": [
+              {
+                "name": "IF-MODIFIED-SINCE",
+                "value": ""
+              },
+              {
+                "name": "IF-NONE-MATCH",
+                "value": ""
+              },
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the DocumentArchive."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when requesting the data for a single DocumentArchive"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

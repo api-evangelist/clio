@@ -1,0 +1,2353 @@
+{
+  "item": [
+    {
+      "id": "176e9b33-dfd1-4ae0-a0cc-5266efbb248c",
+      "name": "Matter Dockets",
+      "description": {
+        "content": "A Matter Docket connects a Matter with a Court Rule (and all of the Calendar Entries associated with the Court Rule). Matter Dockets are viewable on the Matter Edit screen under the Court Rules heading.\n\nMatter Dockets are part of the [Court Rules](https://help.clio.com/hc/en-us/articles/9289840995867-Court-Rules) feature which is not available to all plan types. See [here](https://www.clio.com/pricing/) for feature support across different plans.\n\n[Support Link](https://help.clio.com/hc/en-us/articles/9289840995867-Court-Rules)\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "93808e9c-2a38-4007-9aab-0eff5d83b8f1",
+          "name": "Preview calendar dates for the docket",
+          "request": {
+            "name": "Preview calendar dates for the docket",
+            "description": {
+              "content": "Preview calendar dates for the docket",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "court_rules",
+                "matter_dockets",
+                "preview.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "event_prefix",
+                  "value": "<string>",
+                  "description": "The prefix that will be added to the beginning of all court rule event titles"
+                },
+                {
+                  "disabled": false,
+                  "key": "jurisdiction[id]",
+                  "value": "<long>",
+                  "description": "(Required) The unique identifier for a single Jurisdiction. The keyword `null` is not valid for this field. The list will be filtered to include only the MatterDocket records with the matching property."
+                },
+                {
+                  "disabled": false,
+                  "key": "service_type[id]",
+                  "value": "<long>",
+                  "description": "(Required) The unique identifier for a single ServiceType. The keyword `null` is not valid for this field. The list will be filtered to include only the MatterDocket records with the matching property."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<dateTime>",
+                  "description": "(Required) The date the MatterDocket should start. (Expects an ISO-8601 date)."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<dateTime>",
+                  "description": "(Required) The time the MatterDocket should start. (Expects an ISO-8601 timestamp)."
+                },
+                {
+                  "disabled": false,
+                  "key": "trigger[id]",
+                  "value": "<long>",
+                  "description": "(Required) The unique identifier for a single JurisdictionsToTrigger. The keyword `null` is not valid for this field. The list will be filtered to include only the MatterDocket records with the matching property."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5b9e1337-86e5-4837-acca-1fc02ed64aaf",
+              "name": "See Other",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets",
+                    "preview.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "event_prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "jurisdiction[id]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "service_type[id]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "trigger[id]",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "See Other",
+              "code": 303,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3695de4a-f3f6-4c0e-aa06-86c30c255ad2",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets",
+                    "preview.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "event_prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "jurisdiction[id]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "service_type[id]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "trigger[id]",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6849c54-6ccd-4b8c-a23a-b39ed6188db8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets",
+                    "preview.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "event_prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "jurisdiction[id]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "service_type[id]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "trigger[id]",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1443d30-58ed-4aae-9f50-0fe5b0601768",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets",
+                    "preview.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "event_prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "jurisdiction[id]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "service_type[id]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "trigger[id]",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4a8730c-b384-434d-a113-5c700bef025c",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets",
+                    "preview.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "event_prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "jurisdiction[id]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "service_type[id]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "trigger[id]",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8627632-59ac-42d7-a535-26fdfe8f98ef",
+          "name": "Return the data for all matter dockets",
+          "request": {
+            "name": "Return the data for all matter dockets",
+            "description": {
+              "content": "Outlines the parameters, optional and required, used when requesting the data for all MatterDockets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "court_rules",
+                "matter_dockets.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "created_since",
+                  "value": "<dateTime>",
+                  "description": "Filter MatterDocket records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ids[]",
+                  "value": "<long>",
+                  "description": "Filter MatterDocket records to those having the specified unique identifiers."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "A limit on the number of MatterDocket records to be returned. Limit can range between 1 and 200. Default: `200`."
+                },
+                {
+                  "disabled": false,
+                  "key": "matter_id",
+                  "value": "<long>",
+                  "description": "The unique identifier for a single Matter. The keyword `null` is not valid for this field. The list will be filtered to include only the MatterDocket records with the matching property."
+                },
+                {
+                  "disabled": false,
+                  "key": "matter_status",
+                  "value": "<string>",
+                  "description": "Filter MatterDocket records to those with Matters having a specific status."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Orders the MatterDocket records by the given field. Default: `id(asc)`."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "A token specifying which page to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Wildcard search for `name` matching a given string."
+                },
+                {
+                  "disabled": false,
+                  "key": "service_type_id",
+                  "value": "<long>",
+                  "description": "The unique identifier for a single ServiceType. Use the keyword `null` to match those without a MatterDocket. The list will be filtered to include only the MatterDocket records with the matching property."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter MatterDocket records to those having a specific status."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_since",
+                  "value": "<dateTime>",
+                  "description": "Filter MatterDocket records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e1594c72-ee88-4eca-b047-fe66c3327956",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "matter_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_type_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 1679,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"start_date\": \"1996-05-21\",\n      \"start_time\": \"2008-05-27T04:40:35.174Z\",\n      \"status\": \"string\",\n      \"created_at\": \"1982-10-29T09:06:44.401Z\",\n      \"updated_at\": \"1951-02-03T16:23:58.437Z\",\n      \"deleted_at\": \"1962-12-05T02:46:20.933Z\",\n      \"matter\": {\n        \"id\": 5768,\n        \"etag\": \"string\",\n        \"number\": 524,\n        \"display_number\": \"string\",\n        \"custom_number\": \"string\",\n        \"currency\": {},\n        \"description\": \"string\",\n        \"status\": \"Closed\",\n        \"location\": \"string\",\n        \"client_reference\": \"string\",\n        \"client_id\": 3990,\n        \"billable\": true,\n        \"maildrop_address\": \"string\",\n        \"billing_method\": \"flat\",\n        \"open_date\": \"1990-04-29\",\n        \"close_date\": \"1970-05-21\",\n        \"pending_date\": \"2019-10-24\",\n        \"created_at\": \"1960-02-07T10:33:17.262Z\",\n        \"updated_at\": \"2001-06-09T22:53:54.666Z\",\n        \"shared\": true,\n        \"has_tasks\": false,\n        \"last_activity_date\": \"1968-12-01\",\n        \"matter_stage_updated_at\": \"1981-02-03T22:34:46.282Z\"\n      },\n      \"jurisdiction\": {\n        \"id\": 1443,\n        \"etag\": \"string\",\n        \"created_at\": \"1999-03-04T12:59:11.745Z\",\n        \"updated_at\": \"1988-05-22T11:18:41.249Z\",\n        \"system_id\": 2265,\n        \"description\": \"string\",\n        \"default\": false,\n        \"display_timezone\": \"string\",\n        \"valid_subscription\": false,\n        \"is_local_timezone\": true\n      },\n      \"trigger\": {\n        \"id\": 4306,\n        \"etag\": \"string\",\n        \"system_id\": 5816,\n        \"description\": \"string\",\n        \"do_not_recalculate\": false,\n        \"is_served\": false,\n        \"is_requirements_required\": false,\n        \"created_at\": \"1990-07-07T14:06:47.669Z\",\n        \"updated_at\": \"1997-05-31T00:42:50.353Z\"\n      },\n      \"service_type\": {\n        \"id\": 5265,\n        \"etag\": \"string\",\n        \"created_at\": \"1964-01-22T06:16:42.518Z\",\n        \"updated_at\": \"1993-01-29T07:24:04.407Z\",\n        \"system_id\": 5656,\n        \"description\": \"string\",\n        \"default\": true\n      },\n      \"calendar_entries\": [\n        {\n          \"id\": \"string\",\n          \"etag\": \"string\",\n          \"summary\": \"string\",\n          \"description\": \"string\",\n          \"location\": \"string\",\n          \"start_at\": \"1958-11-04T22:45:07.486Z\",\n          \"start_date\": \"2017-09-06\",\n          \"start_time\": \"string\",\n          \"end_at\": \"2016-02-19T08:48:01.376Z\",\n          \"end_date\": \"2007-06-03\",\n          \"end_time\": \"string\",\n          \"all_day\": false,\n          \"recurrence_rule\": \"string\",\n          \"parent_calendar_entry_id\": 1387,\n          \"court_rule\": false,\n          \"created_at\": \"1965-04-17T05:16:49.245Z\",\n          \"updated_at\": \"2009-12-11T01:36:58.265Z\",\n          \"permission\": \"string\",\n          \"calendar_owner_id\": 8938,\n          \"start_at_time_zone\": \"string\",\n          \"time_entries_count\": 9563\n        },\n        {\n          \"id\": \"string\",\n          \"etag\": \"string\",\n          \"summary\": \"string\",\n          \"description\": \"string\",\n          \"location\": \"string\",\n          \"start_at\": \"2004-09-17T19:35:58.028Z\",\n          \"start_date\": \"1984-04-13\",\n          \"start_time\": \"string\",\n          \"end_at\": \"2009-11-11T03:43:32.956Z\",\n          \"end_date\": \"1951-05-02\",\n          \"end_time\": \"string\",\n          \"all_day\": false,\n          \"recurrence_rule\": \"string\",\n          \"parent_calendar_entry_id\": 8874,\n          \"court_rule\": false,\n          \"created_at\": \"1975-05-02T09:32:28.889Z\",\n          \"updated_at\": \"1984-02-07T20:38:27.694Z\",\n          \"permission\": \"string\",\n          \"calendar_owner_id\": 2367,\n          \"start_at_time_zone\": \"string\",\n          \"time_entries_count\": 1658\n        }\n      ]\n    },\n    {\n      \"id\": 5828,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"start_date\": \"2012-03-06\",\n      \"start_time\": \"2020-10-14T15:59:21.306Z\",\n      \"status\": \"string\",\n      \"created_at\": \"2018-05-18T03:21:13.939Z\",\n      \"updated_at\": \"2010-11-04T23:08:06.971Z\",\n      \"deleted_at\": \"1999-01-04T01:05:09.388Z\",\n      \"matter\": {\n        \"id\": 3844,\n        \"etag\": \"string\",\n        \"number\": 8872,\n        \"display_number\": \"string\",\n        \"custom_number\": \"string\",\n        \"currency\": {},\n        \"description\": \"string\",\n        \"status\": \"Open\",\n        \"location\": \"string\",\n        \"client_reference\": \"string\",\n        \"client_id\": 6836,\n        \"billable\": false,\n        \"maildrop_address\": \"string\",\n        \"billing_method\": \"flat\",\n        \"open_date\": \"2011-09-21\",\n        \"close_date\": \"1961-03-01\",\n        \"pending_date\": \"2008-07-10\",\n        \"created_at\": \"1979-05-18T11:09:52.144Z\",\n        \"updated_at\": \"2007-02-01T13:37:27.234Z\",\n        \"shared\": true,\n        \"has_tasks\": true,\n        \"last_activity_date\": \"1962-11-11\",\n        \"matter_stage_updated_at\": \"1999-11-06T08:55:43.022Z\"\n      },\n      \"jurisdiction\": {\n        \"id\": 2923,\n        \"etag\": \"string\",\n        \"created_at\": \"1998-07-01T17:49:18.981Z\",\n        \"updated_at\": \"1973-07-15T15:47:48.644Z\",\n        \"system_id\": 8965,\n        \"description\": \"string\",\n        \"default\": true,\n        \"display_timezone\": \"string\",\n        \"valid_subscription\": false,\n        \"is_local_timezone\": true\n      },\n      \"trigger\": {\n        \"id\": 344,\n        \"etag\": \"string\",\n        \"system_id\": 2801,\n        \"description\": \"string\",\n        \"do_not_recalculate\": false,\n        \"is_served\": false,\n        \"is_requirements_required\": false,\n        \"created_at\": \"2015-02-02T15:36:01.198Z\",\n        \"updated_at\": \"1977-07-16T11:08:49.303Z\"\n      },\n      \"service_type\": {\n        \"id\": 1308,\n        \"etag\": \"string\",\n        \"created_at\": \"1990-06-05T02:55:42.424Z\",\n        \"updated_at\": \"2022-10-17T00:56:49.806Z\",\n        \"system_id\": 3578,\n        \"description\": \"string\",\n        \"default\": false\n      },\n      \"calendar_entries\": [\n        {\n          \"id\": \"string\",\n          \"etag\": \"string\",\n          \"summary\": \"string\",\n          \"description\": \"string\",\n          \"location\": \"string\",\n          \"start_at\": \"1948-04-27T23:33:06.703Z\",\n          \"start_date\": \"1981-07-09\",\n          \"start_time\": \"string\",\n          \"end_at\": \"2018-05-15T13:57:40.868Z\",\n          \"end_date\": \"2020-07-27\",\n          \"end_time\": \"string\",\n          \"all_day\": false,\n          \"recurrence_rule\": \"string\",\n          \"parent_calendar_entry_id\": 4817,\n          \"court_rule\": false,\n          \"created_at\": \"1993-04-23T17:40:58.142Z\",\n          \"updated_at\": \"1978-09-11T12:04:19.473Z\",\n          \"permission\": \"string\",\n          \"calendar_owner_id\": 6717,\n          \"start_at_time_zone\": \"string\",\n          \"time_entries_count\": 3278\n        },\n        {\n          \"id\": \"string\",\n          \"etag\": \"string\",\n          \"summary\": \"string\",\n          \"description\": \"string\",\n          \"location\": \"string\",\n          \"start_at\": \"1962-06-05T08:03:56.785Z\",\n          \"start_date\": \"1995-10-16\",\n          \"start_time\": \"string\",\n          \"end_at\": \"1984-02-27T02:32:22.054Z\",\n          \"end_date\": \"2004-05-27\",\n          \"end_time\": \"string\",\n          \"all_day\": false,\n          \"recurrence_rule\": \"string\",\n          \"parent_calendar_entry_id\": 6269,\n          \"court_rule\": false,\n          \"created_at\": \"1979-01-19T10:14:03.093Z\",\n          \"updated_at\": \"1996-11-28T17:39:44.572Z\",\n          \"permission\": \"string\",\n          \"calendar_owner_id\": 8397,\n          \"start_at_time_zone\": \"string\",\n          \"time_entries_count\": 4536\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5a14bd7-18c6-4dd9-83cc-5a30f1215e1f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "matter_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_type_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee0ebfff-3753-4773-954b-17d3a6dc6edf",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "matter_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_type_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d7a2a31-4407-496d-a872-6b65d183ad3d",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "matter_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_type_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e0d31fb-cf03-4677-8fbc-6bc0c244a41b",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "matter_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_type_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "afde807d-220c-4221-8e69-01f8578632c6",
+          "name": "Creates a matter docket",
+          "request": {
+            "name": "Creates a matter docket",
+            "description": {
+              "content": "Outlines the parameters and data fields used when creating a new MatterDocket",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "court_rules",
+                "matter_dockets.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "jurisdiction",
+                  "value": "{\"id\":\"<long>\"}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "trigger",
+                  "value": "{\"id\":\"<long>\"}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<dateTime>",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a627a5c0-a88d-43fa-bcfa-d17d8a6cb630",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "jurisdiction",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "trigger",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 6779,\n    \"etag\": \"string\",\n    \"name\": \"string\",\n    \"start_date\": \"1992-08-30\",\n    \"start_time\": \"1960-09-26T17:03:45.691Z\",\n    \"status\": \"string\",\n    \"created_at\": \"1961-03-28T11:30:47.887Z\",\n    \"updated_at\": \"2018-05-24T14:32:26.312Z\",\n    \"deleted_at\": \"1977-01-19T23:29:32.997Z\",\n    \"matter\": {\n      \"id\": 6288,\n      \"etag\": \"string\",\n      \"number\": 8511,\n      \"display_number\": \"string\",\n      \"custom_number\": \"string\",\n      \"currency\": {},\n      \"description\": \"string\",\n      \"status\": \"Open\",\n      \"location\": \"string\",\n      \"client_reference\": \"string\",\n      \"client_id\": 0,\n      \"billable\": true,\n      \"maildrop_address\": \"string\",\n      \"billing_method\": \"contingency\",\n      \"open_date\": \"2003-01-09\",\n      \"close_date\": \"2017-01-09\",\n      \"pending_date\": \"2012-09-18\",\n      \"created_at\": \"1971-05-13T00:09:15.403Z\",\n      \"updated_at\": \"1954-03-08T20:39:26.106Z\",\n      \"shared\": false,\n      \"has_tasks\": false,\n      \"last_activity_date\": \"1983-10-28\",\n      \"matter_stage_updated_at\": \"1991-08-22T11:50:38.124Z\"\n    },\n    \"jurisdiction\": {\n      \"id\": 2248,\n      \"etag\": \"string\",\n      \"created_at\": \"2008-09-19T07:21:43.317Z\",\n      \"updated_at\": \"2023-12-05T20:54:02.708Z\",\n      \"system_id\": 5399,\n      \"description\": \"string\",\n      \"default\": true,\n      \"display_timezone\": \"string\",\n      \"valid_subscription\": true,\n      \"is_local_timezone\": false\n    },\n    \"trigger\": {\n      \"id\": 7376,\n      \"etag\": \"string\",\n      \"system_id\": 7426,\n      \"description\": \"string\",\n      \"do_not_recalculate\": true,\n      \"is_served\": true,\n      \"is_requirements_required\": true,\n      \"created_at\": \"1956-08-12T07:41:59.326Z\",\n      \"updated_at\": \"1975-08-08T23:27:52.295Z\"\n    },\n    \"service_type\": {\n      \"id\": 7983,\n      \"etag\": \"string\",\n      \"created_at\": \"2022-07-18T02:36:23.912Z\",\n      \"updated_at\": \"2010-06-22T17:03:05.157Z\",\n      \"system_id\": 6357,\n      \"description\": \"string\",\n      \"default\": false\n    },\n    \"calendar_entries\": [\n      {\n        \"id\": \"string\",\n        \"etag\": \"string\",\n        \"summary\": \"string\",\n        \"description\": \"string\",\n        \"location\": \"string\",\n        \"start_at\": \"2002-01-13T06:10:51.109Z\",\n        \"start_date\": \"2022-03-28\",\n        \"start_time\": \"string\",\n        \"end_at\": \"1969-05-12T02:11:52.647Z\",\n        \"end_date\": \"2019-01-18\",\n        \"end_time\": \"string\",\n        \"all_day\": false,\n        \"recurrence_rule\": \"string\",\n        \"parent_calendar_entry_id\": 7672,\n        \"court_rule\": false,\n        \"created_at\": \"2016-09-09T08:59:11.457Z\",\n        \"updated_at\": \"2020-01-27T01:33:08.012Z\",\n        \"permission\": \"string\",\n        \"calendar_owner_id\": 5648,\n        \"start_at_time_zone\": \"string\",\n        \"time_entries_count\": 1477\n      },\n      {\n        \"id\": \"string\",\n        \"etag\": \"string\",\n        \"summary\": \"string\",\n        \"description\": \"string\",\n        \"location\": \"string\",\n        \"start_at\": \"1961-06-21T05:09:36.610Z\",\n        \"start_date\": \"1987-07-04\",\n        \"start_time\": \"string\",\n        \"end_at\": \"1971-11-06T11:44:15.226Z\",\n        \"end_date\": \"2020-02-21\",\n        \"end_time\": \"string\",\n        \"all_day\": true,\n        \"recurrence_rule\": \"string\",\n        \"parent_calendar_entry_id\": 8108,\n        \"court_rule\": true,\n        \"created_at\": \"2002-03-09T06:52:44.725Z\",\n        \"updated_at\": \"2024-06-21T15:03:59.986Z\",\n        \"permission\": \"string\",\n        \"calendar_owner_id\": 3710,\n        \"start_at_time_zone\": \"string\",\n        \"time_entries_count\": 8823\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66425d1e-9c23-4f82-acac-1360e0557587",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "jurisdiction",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "trigger",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d7d4221-134d-4952-9859-c3be532de2a5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "jurisdiction",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "trigger",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8782cfda-c8be-4056-bf4e-a3a5f2b4e53b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "jurisdiction",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "trigger",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da60f6d1-53d2-4bd5-b443-65140faa3a2c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "jurisdiction",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "trigger",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf2b1ba5-c64f-4bf2-a952-e39dd989ccc7",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "jurisdiction",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "trigger",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "765a8222-e36b-4a4d-9938-4d954c7209f4",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "jurisdiction",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "trigger",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "start_time",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "61ecf0dd-9acf-4bd1-9531-554355dd17b4",
+          "name": "Return the data for the matter docket",
+          "request": {
+            "name": "Return the data for the matter docket",
+            "description": {
+              "content": "Outlines the parameters, optional and required, used when requesting the data for a single MatterDocket",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "court_rules",
+                "matter_dockets",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                "key": "IF-MODIFIED-SINCE",
+                "value": "<date>"
+              },
+              {
+                "disabled": false,
+                "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                "key": "IF-NONE-MATCH",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74f3c4fd-036f-483f-a290-75137b804e9b",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 6779,\n    \"etag\": \"string\",\n    \"name\": \"string\",\n    \"start_date\": \"1992-08-30\",\n    \"start_time\": \"1960-09-26T17:03:45.691Z\",\n    \"status\": \"string\",\n    \"created_at\": \"1961-03-28T11:30:47.887Z\",\n    \"updated_at\": \"2018-05-24T14:32:26.312Z\",\n    \"deleted_at\": \"1977-01-19T23:29:32.997Z\",\n    \"matter\": {\n      \"id\": 6288,\n      \"etag\": \"string\",\n      \"number\": 8511,\n      \"display_number\": \"string\",\n      \"custom_number\": \"string\",\n      \"currency\": {},\n      \"description\": \"string\",\n      \"status\": \"Open\",\n      \"location\": \"string\",\n      \"client_reference\": \"string\",\n      \"client_id\": 0,\n      \"billable\": true,\n      \"maildrop_address\": \"string\",\n      \"billing_method\": \"contingency\",\n      \"open_date\": \"2003-01-09\",\n      \"close_date\": \"2017-01-09\",\n      \"pending_date\": \"2012-09-18\",\n      \"created_at\": \"1971-05-13T00:09:15.403Z\",\n      \"updated_at\": \"1954-03-08T20:39:26.106Z\",\n      \"shared\": false,\n      \"has_tasks\": false,\n      \"last_activity_date\": \"1983-10-28\",\n      \"matter_stage_updated_at\": \"1991-08-22T11:50:38.124Z\"\n    },\n    \"jurisdiction\": {\n      \"id\": 2248,\n      \"etag\": \"string\",\n      \"created_at\": \"2008-09-19T07:21:43.317Z\",\n      \"updated_at\": \"2023-12-05T20:54:02.708Z\",\n      \"system_id\": 5399,\n      \"description\": \"string\",\n      \"default\": true,\n      \"display_timezone\": \"string\",\n      \"valid_subscription\": true,\n      \"is_local_timezone\": false\n    },\n    \"trigger\": {\n      \"id\": 7376,\n      \"etag\": \"string\",\n      \"system_id\": 7426,\n      \"description\": \"string\",\n      \"do_not_recalculate\": true,\n      \"is_served\": true,\n      \"is_requirements_required\": true,\n      \"created_at\": \"1956-08-12T07:41:59.326Z\",\n      \"updated_at\": \"1975-08-08T23:27:52.295Z\"\n    },\n    \"service_type\": {\n      \"id\": 7983,\n      \"etag\": \"string\",\n      \"created_at\": \"2022-07-18T02:36:23.912Z\",\n      \"updated_at\": \"2010-06-22T17:03:05.157Z\",\n      \"system_id\": 6357,\n      \"description\": \"string\",\n      \"default\": false\n    },\n    \"calendar_entries\": [\n      {\n        \"id\": \"string\",\n        \"etag\": \"string\",\n        \"summary\": \"string\",\n        \"description\": \"string\",\n        \"location\": \"string\",\n        \"start_at\": \"2002-01-13T06:10:51.109Z\",\n        \"start_date\": \"2022-03-28\",\n        \"start_time\": \"string\",\n        \"end_at\": \"1969-05-12T02:11:52.647Z\",\n        \"end_date\": \"2019-01-18\",\n        \"end_time\": \"string\",\n        \"all_day\": false,\n        \"recurrence_rule\": \"string\",\n        \"parent_calendar_entry_id\": 7672,\n        \"court_rule\": false,\n        \"created_at\": \"2016-09-09T08:59:11.457Z\",\n        \"updated_at\": \"2020-01-27T01:33:08.012Z\",\n        \"permission\": \"string\",\n        \"calendar_owner_id\": 5648,\n        \"start_at_time_zone\": \"string\",\n        \"time_entries_count\": 1477\n      },\n      {\n        \"id\": \"string\",\n        \"etag\": \"string\",\n        \"summary\": \"string\",\n        \"description\": \"string\",\n        \"location\": \"string\",\n        \"start_at\": \"1961-06-21T05:09:36.610Z\",\n        \"start_date\": \"1987-07-04\",\n        \"start_time\": \"string\",\n        \"end_at\": \"1971-11-06T11:44:15.226Z\",\n        \"end_date\": \"2020-02-21\",\n        \"end_time\": \"string\",\n        \"all_day\": true,\n        \"recurrence_rule\": \"string\",\n        \"parent_calendar_entry_id\": 8108,\n        \"court_rule\": true,\n        \"created_at\": \"2002-03-09T06:52:44.725Z\",\n        \"updated_at\": \"2024-06-21T15:03:59.986Z\",\n        \"permission\": \"string\",\n        \"calendar_owner_id\": 3710,\n        \"start_at_time_zone\": \"string\",\n        \"time_entries_count\": 8823\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "620a10cd-056e-4566-94f7-c600feb44b00",
+              "name": "Not Modified",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9a7f2374-2985-42fb-8e0f-9ed94f79ed3a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5a19df3-ffba-4354-baab-129997ebf918",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f42e7690-2719-4fb6-a6d8-57b3066ba3ed",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cab90d5c-9fe8-4c6c-b45a-ba2534c6c2e0",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5bf4728-51ee-42de-b756-cbbe11394f01",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ebdfab22-1c07-43cb-8387-fc8dc6d9f34a",
+          "name": "Deletes the requested matter docket",
+          "request": {
+            "name": "Deletes the requested matter docket",
+            "description": {
+              "content": "Outlines the parameters, optional and required, used when deleting the record for a single MatterDocket",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "court_rules",
+                "matter_dockets",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ba09e822-c123-47da-8fe6-808d38569071",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "96c00f95-5390-4ed4-8cdf-877b018da49b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "court_rules",
+                    "matter_dockets",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.clio.com/api/v4",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The unique identifier for the MatterDocket.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<long>",
+      "key": "id"
+    }
+  ],
+  "info": {
+    "_postman_id": "de93d96e-ba80-4695-a85b-e8d84fcfa26d",
+    "name": "Clio API Documentation Activities Matter Dockets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Developer Support and Feedback\n* Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio's API Support team at [api@clio.com](mailto:api@clio.com).\n* For business and partnership inquiries, contact our API Partnerships team at [api.partnerships@clio.com](mailto:api.partnerships@clio.com).\n* For best practices and tips from the Clio development community, join the conversation in the [Clio Developer Slack Channel](https://join.slack.com/t/clio-public/shared_invite/zt-36i0eqgo1-7POORPtMJpp2N0~_auL2IQ).\n\nA community-driven [Clio Developers Stack Overflow Group](https://stackoverflow.com/questions/tagged/clio-api) also exists where you can connect and ask questions from other Clio API users.\n# Getting Started\n> **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).\n>\n> Likewise, the developer portal is available at region-specific links for the [Australia](https://au.developers.clio.com), [Canada](https://ca.developers.clio.com), [EU](https://eu.developers.clio.com), and [US](https://developers.clio.com) regions.\n>\n> This document assumes the US region is being used (app.clio.com). If you're building in one of the other regions, you should adapt the links and examples as necessary.\n\nTo start building on the Clio API, you’ll need a Clio account – you can review our [Developer Handbook](https://docs.developers.clio.com/) and follow the steps to sign up for an account.\n\nOnce you have an account, you can [create a developer application](https://docs.developers.clio.com/api-docs/applications) from the [Developer Portal](https://developers.clio.com) and start building!\n# Authorization with OAuth 2.0\nSee our [Authorization documentation →](https://docs.developers.clio.com/api-docs/authorization)\n# Permissions\nSee our [Permissions documentation →](https://docs.developers.clio.com/api-docs/permissions)\n# Fields\nSee our [Fields documentation →](https://docs.developers.clio.com/api-docs/fields)\n# Rate Limiting\nSee our [Rate Limits documentation →](https://docs.developers.clio.com/api-docs/rate-limits)\n# Paging\nSee our [Pagination documentation →](https://docs.developers.clio.com/api-docs/paging)\n# ETags\nSee our [ETags documentation →](https://docs.developers.clio.com/api-docs/etags)\n# Minor Versions\nAPI v4 supports multiple minor versions. Versions are of the form '4.X.Y'. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you're requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.\n\nAn `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.\n\nYou can find our [API Versioning Policy and Guidelines](https://docs.developers.clio.com/api-docs/api-versioning-policy) in our documentation hub.\n\nThe [API Changelog](https://docs.developers.clio.com/api-docs/api-changelog) explains each version's changes in further detail.\n### [4.0.4](https://docs.developers.clio.com/api-docs/api-changelog#404)\n\n  * Update `quantity` field to return values in seconds rather than hours for Activities\n\n### [4.0.5](https://docs.developers.clio.com/api-docs/api-changelog#405)\n\n  * Remove `matter_balances` field from Bills\n* Standardize status/state enum values\n* Add a Document association to completed DocumentAutomations\n* Add rate visibility handling for Activity's price and total\n\n### [4.0.6](https://docs.developers.clio.com/api-docs/api-changelog#406)\n\n  * Remove `document_versions` collection field from Documents\n\n### [4.0.7](https://docs.developers.clio.com/api-docs/api-changelog#407)\n\n  * Change secure link format\n\n### [4.0.8](https://docs.developers.clio.com/api-docs/api-changelog#408)\n\n  * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user\n  * Add `quantity_redacted` field to activities\n\n### [4.0.9](https://docs.developers.clio.com/api-docs/api-changelog#409)\n\n  * Contacts are filtered and redacted in the response based on the new 'Contacts Visibility' user permission setting.\n\n### [4.0.10](https://docs.developers.clio.com/api-docs/api-changelog#4010)\n\n  * Fixed validation of `type` query parameter when querying Notes\n\n### [4.0.12](https://docs.developers.clio.com/api-docs/api-changelog#4012)\n\n  * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers\n\n### [4.0.13](https://docs.developers.clio.com/api-docs/api-changelog#4013)\n\n  **This is the default version**\n\n  * Add association limits to Contacts\n* Returns 422 Unprocessable Entity when association limits are exceeded\n\n\n\n\nContact Support:\n Name: Clio API Support\n Email: api@clio.com",
+      "type": "text/plain"
+    }
+  }
+}

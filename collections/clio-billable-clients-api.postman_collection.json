@@ -1,0 +1,570 @@
+{
+  "item": [
+    {
+      "id": "9e9fc6d1-4cec-4071-b6b2-c7b39e48a5cc",
+      "name": "Billable Clients",
+      "description": {
+        "content": "Users can view all Billable Clients, or clients with outstanding [Bills](https://help.clio.com/hc/en-us/articles/9285169278747-Generate-Bills), on the Billable Clients page, located under the Bills tab.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ca1bd6b3-c0dd-40cc-a081-8bbebdc8b00b",
+          "name": "Return the data for all BillableClients",
+          "request": {
+            "name": "Return the data for all BillableClients",
+            "description": {
+              "content": "Outlines the parameters, optional and required, used when requesting the data for all BillableClients",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "billable_clients.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<long>",
+                  "description": "The unique identifier for a single Contact. The keyword `null` is not valid for this field. The list will be filtered to include only the BillableClient records with the matching property."
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_field_values",
+                  "value": "<string>",
+                  "description": "Filter records to only those with the given custom field(s) set. The value is compared using the operator provided, or,\nif the value type only supports one operator, the supported operator is used. In the latter case, no check for operator is performed on the input string.\nThe key for the custom field value filter is the custom_field.id. e.g. `custom_field_values[12345]`\nIf an operator is used for a type that does not support it, an `400 Bad Request` is returned.\n\n*Supported operators:*\n* `checkbox`, `contact`, `matter`, `picklist` : `=`\n\ne.g. `?custom_field_values[1]=42`\n\n* `currency`, `date`, `time`, `numeric` : `=`, `<`, `>`, `<=`, `>=`\n\ne.g. `?custom_field_values[1]=>=105.4`\n\n* `email`, `text_area`, `text_line`, `url` : `=`\n\ne.g. `?custom_field_values[1]=url_encoded`\n\n*Multiple conditions for the same custom field:*\n\nIf you want to use more than one operator to filter a custom field, you can do so by passing in an array of values.\ne.g. `?custom_field_values[1]=[<=50, >=45]`\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "Filter BillableClient records to those that have Matters with unbilled Activities on or before this date (Expects an ISO-8601 date)."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "A limit on the number of BillableClient records to be returned. Limit can range between 1 and 25. Default: `25`."
+                },
+                {
+                  "disabled": false,
+                  "key": "matter_id",
+                  "value": "<long>",
+                  "description": "The unique identifier for a single Matter. The keyword `null` is not valid for this field. The list will be filtered to include only the BillableClient records with the matching property."
+                },
+                {
+                  "disabled": false,
+                  "key": "originating_attorney_id",
+                  "value": "<long>",
+                  "description": "The unique identifier for a single User. Use the keyword `null` to match those without a BillableClient. The list will be filtered to include only the BillableClient records with the matching property."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "A token specifying which page to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Wildcard search for `display_number` or `number` or `description` matching a given string."
+                },
+                {
+                  "disabled": false,
+                  "key": "responsible_attorney_id",
+                  "value": "<long>",
+                  "description": "The unique identifier for a single User. Use the keyword `null` to match those without a BillableClient. The list will be filtered to include only the BillableClient records with the matching property."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "Filter BillableClient records to those that have Matters with unbilled Activities on or after this date (Expects an ISO-8601 date)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de581c5a-9baa-4d3f-88c5-15714a7e14dc",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billable_clients.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "custom_field_values",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "originating_attorney_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "responsible_attorney_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 8827,\n      \"unbilled_hours\": 8931.025395518998,\n      \"unbilled_amount\": 867.1190158908593,\n      \"amount_in_trust\": 6782.312837291611,\n      \"name\": \"string\",\n      \"billable_matters_count\": 2634,\n      \"billable_matters\": [\n        {\n          \"currency_code\": \"string\",\n          \"currency_id\": 7077,\n          \"id\": 2285,\n          \"unbilled_hours\": 2688.931169706467,\n          \"unbilled_amount\": 2460.4773316795604,\n          \"amount_in_trust\": 9219.67432578368,\n          \"display_number\": \"string\"\n        },\n        {\n          \"currency_code\": \"string\",\n          \"currency_id\": 1920,\n          \"id\": 2512,\n          \"unbilled_hours\": 7787.9749512307335,\n          \"unbilled_amount\": 8348.95051096605,\n          \"amount_in_trust\": 2927.322776802458,\n          \"display_number\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": 8479,\n      \"unbilled_hours\": 6217.051797876943,\n      \"unbilled_amount\": 9441.790407710538,\n      \"amount_in_trust\": 8530.661797154811,\n      \"name\": \"string\",\n      \"billable_matters_count\": 3836,\n      \"billable_matters\": [\n        {\n          \"currency_code\": \"string\",\n          \"currency_id\": 1540,\n          \"id\": 284,\n          \"unbilled_hours\": 2567.5035370689916,\n          \"unbilled_amount\": 9728.45121883583,\n          \"amount_in_trust\": 8918.052306035408,\n          \"display_number\": \"string\"\n        },\n        {\n          \"currency_code\": \"string\",\n          \"currency_id\": 3103,\n          \"id\": 3940,\n          \"unbilled_hours\": 9312.194697032184,\n          \"unbilled_amount\": 3681.8443392109557,\n          \"amount_in_trust\": 7922.894660081129,\n          \"display_number\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e42bf63b-b00f-4401-aec3-58cbfc8b3c98",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billable_clients.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "custom_field_values",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "originating_attorney_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "responsible_attorney_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80688d99-347e-438f-be49-8f872e976757",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billable_clients.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "custom_field_values",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "originating_attorney_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "responsible_attorney_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e6973d5-ad3b-447b-83a3-f5d3601821c2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billable_clients.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "custom_field_values",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "originating_attorney_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "responsible_attorney_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d019838a-bb3d-409d-83ea-7d3763bfa246",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billable_clients.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "custom_field_values",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "originating_attorney_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "responsible_attorney_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.clio.com/api/v4",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ef43c8df-1bc1-4050-8783-4964599cb2c7",
+    "name": "Clio API Documentation Activities Billable Clients API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Developer Support and Feedback\n* Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio's API Support team at [api@clio.com](mailto:api@clio.com).\n* For business and partnership inquiries, contact our API Partnerships team at [api.partnerships@clio.com](mailto:api.partnerships@clio.com).\n* For best practices and tips from the Clio development community, join the conversation in the [Clio Developer Slack Channel](https://join.slack.com/t/clio-public/shared_invite/zt-36i0eqgo1-7POORPtMJpp2N0~_auL2IQ).\n\nA community-driven [Clio Developers Stack Overflow Group](https://stackoverflow.com/questions/tagged/clio-api) also exists where you can connect and ask questions from other Clio API users.\n# Getting Started\n> **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).\n>\n> Likewise, the developer portal is available at region-specific links for the [Australia](https://au.developers.clio.com), [Canada](https://ca.developers.clio.com), [EU](https://eu.developers.clio.com), and [US](https://developers.clio.com) regions.\n>\n> This document assumes the US region is being used (app.clio.com). If you're building in one of the other regions, you should adapt the links and examples as necessary.\n\nTo start building on the Clio API, you’ll need a Clio account – you can review our [Developer Handbook](https://docs.developers.clio.com/) and follow the steps to sign up for an account.\n\nOnce you have an account, you can [create a developer application](https://docs.developers.clio.com/api-docs/applications) from the [Developer Portal](https://developers.clio.com) and start building!\n# Authorization with OAuth 2.0\nSee our [Authorization documentation →](https://docs.developers.clio.com/api-docs/authorization)\n# Permissions\nSee our [Permissions documentation →](https://docs.developers.clio.com/api-docs/permissions)\n# Fields\nSee our [Fields documentation →](https://docs.developers.clio.com/api-docs/fields)\n# Rate Limiting\nSee our [Rate Limits documentation →](https://docs.developers.clio.com/api-docs/rate-limits)\n# Paging\nSee our [Pagination documentation →](https://docs.developers.clio.com/api-docs/paging)\n# ETags\nSee our [ETags documentation →](https://docs.developers.clio.com/api-docs/etags)\n# Minor Versions\nAPI v4 supports multiple minor versions. Versions are of the form '4.X.Y'. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you're requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.\n\nAn `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.\n\nYou can find our [API Versioning Policy and Guidelines](https://docs.developers.clio.com/api-docs/api-versioning-policy) in our documentation hub.\n\nThe [API Changelog](https://docs.developers.clio.com/api-docs/api-changelog) explains each version's changes in further detail.\n### [4.0.4](https://docs.developers.clio.com/api-docs/api-changelog#404)\n\n  * Update `quantity` field to return values in seconds rather than hours for Activities\n\n### [4.0.5](https://docs.developers.clio.com/api-docs/api-changelog#405)\n\n  * Remove `matter_balances` field from Bills\n* Standardize status/state enum values\n* Add a Document association to completed DocumentAutomations\n* Add rate visibility handling for Activity's price and total\n\n### [4.0.6](https://docs.developers.clio.com/api-docs/api-changelog#406)\n\n  * Remove `document_versions` collection field from Documents\n\n### [4.0.7](https://docs.developers.clio.com/api-docs/api-changelog#407)\n\n  * Change secure link format\n\n### [4.0.8](https://docs.developers.clio.com/api-docs/api-changelog#408)\n\n  * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user\n  * Add `quantity_redacted` field to activities\n\n### [4.0.9](https://docs.developers.clio.com/api-docs/api-changelog#409)\n\n  * Contacts are filtered and redacted in the response based on the new 'Contacts Visibility' user permission setting.\n\n### [4.0.10](https://docs.developers.clio.com/api-docs/api-changelog#4010)\n\n  * Fixed validation of `type` query parameter when querying Notes\n\n### [4.0.12](https://docs.developers.clio.com/api-docs/api-changelog#4012)\n\n  * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers\n\n### [4.0.13](https://docs.developers.clio.com/api-docs/api-changelog#4013)\n\n  **This is the default version**\n\n  * Add association limits to Contacts\n* Returns 422 Unprocessable Entity when association limits are exceeded\n\n\n\n\nContact Support:\n Name: Clio API Support\n Email: api@clio.com",
+      "type": "text/plain"
+    }
+  }
+}

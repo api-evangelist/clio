@@ -1,0 +1,217 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clio API Documentation Activities Tax Rate Configurations API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tax Rate Configurations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return the data for all TaxRateConfigurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/tax_rate_configurations.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "created_since",
+                "value": "",
+                "type": "query",
+                "description": "Filter TaxRateConfiguration records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "ids[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter TaxRateConfiguration records to those having the specified unique identifiers."
+              },
+              {
+                "name": "include_system",
+                "value": "",
+                "type": "query",
+                "description": "When true (default), system tax rates (\"Do not apply tax\", \"Tax exempt\") are included in the response. Pass include_system=false to exclude them."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "A limit on the number of TaxRateConfiguration records to be returned. Limit can range between 1 and 200. Default: `200`."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Orders the TaxRateConfiguration records by the given field. Default: `id(asc)`."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "A token specifying which page to return."
+              },
+              {
+                "name": "updated_since",
+                "value": "",
+                "type": "query",
+                "description": "Filter TaxRateConfiguration records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when requesting the data for all TaxRateConfigurations"
+        },
+        {
+          "info": {
+            "name": "Create a new TaxRateConfiguration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.clio.com/api/v4/tax_rate_configurations.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Outlines the parameters and data fields used when creating a new TaxRateConfiguration"
+        },
+        {
+          "info": {
+            "name": "Return the data for a single TaxRateConfiguration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/tax_rate_configurations/:id.json",
+            "headers": [
+              {
+                "name": "IF-MODIFIED-SINCE",
+                "value": ""
+              },
+              {
+                "name": "IF-NONE-MATCH",
+                "value": ""
+              },
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the TaxRateConfiguration."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when requesting the data for a single TaxRateConfiguration"
+        },
+        {
+          "info": {
+            "name": "Update a single TaxRateConfiguration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.clio.com/api/v4/tax_rate_configurations/:id.json",
+            "headers": [
+              {
+                "name": "IF-MATCH",
+                "value": ""
+              },
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the TaxRateConfiguration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Outlines the parameters and data fields used when updating a single TaxRateConfiguration"
+        },
+        {
+          "info": {
+            "name": "Delete a single TaxRateConfiguration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.clio.com/api/v4/tax_rate_configurations/:id.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the TaxRateConfiguration."
+              }
+            ]
+          },
+          "docs": "A TaxRateConfiguration can not be deleted if it is a system tax rate, has already been deleted, or is in use — set as an invoice default, used on one or more expenses, used on one or more expense categories, or used in one or more unpaid invoices."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

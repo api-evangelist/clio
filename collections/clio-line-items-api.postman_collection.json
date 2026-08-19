@@ -1,0 +1,2470 @@
+{
+  "item": [
+    {
+      "id": "1ebea697-6050-4865-b748-e024ff47066b",
+      "name": "Line Items",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8fa2c670-aec5-4008-a57c-23ba0dafbb39",
+          "name": "Return the data for all LineItems",
+          "request": {
+            "name": "Return the data for all LineItems",
+            "description": {
+              "content": "Outlines the parameters, optional and required, used when requesting the data for all LineItems",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "line_items.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "activity_id",
+                  "value": "<long>",
+                  "description": "The unique identifier for a single Activity. Use the keyword `null` to match those without a LineItem. The list will be filtered to include only the LineItem records with the matching property."
+                },
+                {
+                  "disabled": false,
+                  "key": "bill_id",
+                  "value": "<long>",
+                  "description": "The unique identifier for a single Bill. The keyword `null` is not valid for this field. The list will be filtered to include only the LineItem records with the matching property."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_since",
+                  "value": "<dateTime>",
+                  "description": "Filter LineItem records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+                },
+                {
+                  "disabled": false,
+                  "key": "display",
+                  "value": "<boolean>",
+                  "description": "Set this flag to true to return only LineItems displayed on the bill."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude_ids[]",
+                  "value": "<long>",
+                  "description": "Array containing LineItem identifiers that should be excluded from the query."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                },
+                {
+                  "disabled": false,
+                  "key": "group_ordering",
+                  "value": "<integer>",
+                  "description": "Filters LineItem records to match given group ordering."
+                },
+                {
+                  "disabled": false,
+                  "key": "ids[]",
+                  "value": "<long>",
+                  "description": "Filter LineItem records to those having the specified unique identifiers."
+                },
+                {
+                  "disabled": false,
+                  "key": "kind",
+                  "value": "<string>",
+                  "description": "The kind of LineItem."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "A limit on the number of LineItem records to be returned. Limit can range between 1 and 200. Default: `200`."
+                },
+                {
+                  "disabled": false,
+                  "key": "matter_id",
+                  "value": "<long>",
+                  "description": "The unique identifier for a single Matter. Use the keyword `null` to match those without a LineItem. The list will be filtered to include only the LineItem records with the matching property."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "A token specifying which page to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Wildcard search for `description` or `note` matching a given string."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_since",
+                  "value": "<dateTime>",
+                  "description": "Filter LineItem records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74c88077-6aef-4ce8-8815-d450cf91f4f2",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "line_items.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "activity_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "bill_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "display",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "exclude_ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "group_ordering",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 1490,\n      \"etag\": \"string\",\n      \"type\": \"SummaryLineItem\",\n      \"description\": \"string\",\n      \"date\": \"1964-08-26\",\n      \"price\": 7878.997494438294,\n      \"taxable\": true,\n      \"kind\": \"Service\",\n      \"note\": \"string\",\n      \"secondary_taxable\": true,\n      \"total\": 9362.187758953285,\n      \"tax\": 7897.65282155023,\n      \"secondary_tax\": 1932.6128607192627,\n      \"sub_total\": 5224.083452580268,\n      \"quantity\": 6710.718917061545,\n      \"group_ordering\": 9232,\n      \"created_at\": \"2017-09-29T03:39:37.059Z\",\n      \"updated_at\": \"1993-12-28T06:56:59.669Z\",\n      \"tax_settings\": [\n        {\n          \"id\": 8466,\n          \"etag\": \"string\",\n          \"tax_rate_configuration_id\": 7751,\n          \"name\": \"string\",\n          \"rate\": 3935.5304578050686,\n          \"formatted_rate\": \"string\",\n          \"rule\": \"string\",\n          \"amount\": 2099.6274392159253,\n          \"order\": 9710,\n          \"created_at\": \"1982-04-23T18:55:09.742Z\",\n          \"updated_at\": \"1988-02-19T09:39:42.000Z\"\n        },\n        {\n          \"id\": 489,\n          \"etag\": \"string\",\n          \"tax_rate_configuration_id\": 8164,\n          \"name\": \"string\",\n          \"rate\": 4329.712195690993,\n          \"formatted_rate\": \"string\",\n          \"rule\": \"string\",\n          \"amount\": 7386.077976283416,\n          \"order\": 2890,\n          \"created_at\": \"1982-01-03T13:04:26.196Z\",\n          \"updated_at\": \"2009-11-09T18:18:21.546Z\"\n        }\n      ],\n      \"bill\": {\n        \"id\": 1094,\n        \"etag\": \"string\",\n        \"number\": \"string\",\n        \"issued_at\": \"1997-10-17\",\n        \"created_at\": \"1981-01-05T21:55:28.558Z\",\n        \"due_at\": \"2004-03-15\",\n        \"tax_rate\": 3111.2492736194577,\n        \"secondary_tax_rate\": 4303.020332992119,\n        \"updated_at\": \"1997-02-20T11:35:00.047Z\",\n        \"subject\": \"string\",\n        \"purchase_order\": \"string\",\n        \"type\": \"MatterBill\",\n        \"memo\": \"string\",\n        \"start_at\": \"1967-09-14\",\n        \"end_at\": \"1953-10-23\",\n        \"balance\": 8193.021969504081,\n        \"state\": \"awaiting_payment\",\n        \"kind\": \"aggregate_split\",\n        \"total\": 3904.010602696837,\n        \"paid\": 2887.938700641217,\n        \"paid_at\": \"2005-04-15T01:57:04.231Z\",\n        \"pending\": 2666.7798634951932,\n        \"due\": 8215.949402461818,\n        \"discount_services_only\": \"string\",\n        \"can_update\": true,\n        \"credits_issued\": 3051.7873114317963,\n        \"shared\": true,\n        \"last_sent_at\": \"2019-10-24T12:11:24.295Z\",\n        \"services_secondary_tax\": 8455.142293977984,\n        \"services_sub_total\": 1745.2765391495618,\n        \"services_tax\": 9674.1528320387,\n        \"services_taxable_sub_total\": 3886,\n        \"services_secondary_taxable_sub_total\": 9582,\n        \"taxable_sub_total\": 8583,\n        \"secondary_taxable_sub_total\": 2962,\n        \"sub_total\": 6586.215394003233,\n        \"tax_sum\": 3066.2699982439103,\n        \"secondary_tax_sum\": 9105.425932098566,\n        \"total_tax\": 7497.556733013508,\n        \"available_state_transitions\": [\n          \"awaiting_approval\",\n          \"awaiting_approval\"\n        ]\n      },\n      \"activity\": {\n        \"id\": 3810,\n        \"etag\": \"string\",\n        \"type\": \"HardCostEntry\",\n        \"date\": \"1982-03-22\",\n        \"quantity_in_hours\": 313.362647309543,\n        \"rounded_quantity_in_hours\": 7323.331076053083,\n        \"quantity\": 793.0404120390277,\n        \"rounded_quantity\": 3129.0087756203498,\n        \"quantity_redacted\": false,\n        \"price\": 868.3168485767678,\n        \"note\": \"string\",\n        \"flat_rate\": true,\n        \"billed\": false,\n        \"on_bill\": false,\n        \"total\": 868.2793604405604,\n        \"contingency_fee\": false,\n        \"created_at\": \"2016-08-25T20:25:49.959Z\",\n        \"updated_at\": \"1947-10-23T10:20:17.669Z\",\n        \"reference\": \"string\",\n        \"non_billable\": false,\n        \"non_billable_total\": 9107.881246782235,\n        \"no_charge\": false,\n        \"tax_setting\": \"tax_2_only\",\n        \"currency\": {}\n      },\n      \"matter\": {\n        \"id\": 4784,\n        \"etag\": \"string\",\n        \"number\": 5630,\n        \"display_number\": \"string\",\n        \"custom_number\": \"string\",\n        \"currency\": {},\n        \"description\": \"string\",\n        \"status\": \"Open\",\n        \"location\": \"string\",\n        \"client_reference\": \"string\",\n        \"client_id\": 6927,\n        \"billable\": false,\n        \"maildrop_address\": \"string\",\n        \"billing_method\": \"hourly\",\n        \"open_date\": \"1947-03-13\",\n        \"close_date\": \"2011-03-11\",\n        \"pending_date\": \"1986-05-19\",\n        \"created_at\": \"2008-07-19T21:51:13.097Z\",\n        \"updated_at\": \"2021-09-25T14:35:07.914Z\",\n        \"shared\": false,\n        \"has_tasks\": true,\n        \"last_activity_date\": \"1963-02-15\",\n        \"matter_stage_updated_at\": \"2016-10-27T14:42:56.063Z\"\n      },\n      \"user\": {\n        \"account_owner\": true,\n        \"clio_connect\": true,\n        \"court_rules_default_attendee\": false,\n        \"created_at\": \"1986-10-27T15:04:24.481Z\",\n        \"default_calendar_id\": 8969,\n        \"email\": \"string\",\n        \"enabled\": true,\n        \"etag\": \"string\",\n        \"first_name\": \"string\",\n        \"id\": 5482,\n        \"initials\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"phone_number\": \"string\",\n        \"rate\": 8426.40886063571,\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ],\n        \"subscription_type\": \"NonAttorney\",\n        \"time_zone\": \"string\",\n        \"updated_at\": \"1980-05-18T20:53:49.733Z\"\n      },\n      \"discount\": {\n        \"rate\": 4920.5679429906395,\n        \"type\": \"percentage\",\n        \"note\": \"string\",\n        \"early_payment_rate\": 417,\n        \"early_payment_period\": 4037\n      },\n      \"included_line_item_totals\": {\n        \"quantity\": 1069.0087205832133,\n        \"price\": 3119.2627777737393,\n        \"discount_percent\": 8564.32504116637,\n        \"total\": 2590.129816490636,\n        \"sub_total\": 6064.625212032708\n      }\n    },\n    {\n      \"id\": 7143,\n      \"etag\": \"string\",\n      \"type\": \"LineItem\",\n      \"description\": \"string\",\n      \"date\": \"1990-06-09\",\n      \"price\": 6168.349325739371,\n      \"taxable\": true,\n      \"kind\": \"Service\",\n      \"note\": \"string\",\n      \"secondary_taxable\": true,\n      \"total\": 9629.468573326272,\n      \"tax\": 1967.9604968960184,\n      \"secondary_tax\": 7607.46019422947,\n      \"sub_total\": 728.4305121624068,\n      \"quantity\": 1699.3388037957914,\n      \"group_ordering\": 2909,\n      \"created_at\": \"2022-09-20T02:26:41.895Z\",\n      \"updated_at\": \"1973-09-28T21:46:00.620Z\",\n      \"tax_settings\": [\n        {\n          \"id\": 8813,\n          \"etag\": \"string\",\n          \"tax_rate_configuration_id\": 1892,\n          \"name\": \"string\",\n          \"rate\": 6454.555118711457,\n          \"formatted_rate\": \"string\",\n          \"rule\": \"string\",\n          \"amount\": 3361.0223267169713,\n          \"order\": 3845,\n          \"created_at\": \"1955-03-25T18:27:05.208Z\",\n          \"updated_at\": \"2004-02-27T11:23:11.445Z\"\n        },\n        {\n          \"id\": 48,\n          \"etag\": \"string\",\n          \"tax_rate_configuration_id\": 7391,\n          \"name\": \"string\",\n          \"rate\": 9601.931954215219,\n          \"formatted_rate\": \"string\",\n          \"rule\": \"string\",\n          \"amount\": 5959.247413549372,\n          \"order\": 9976,\n          \"created_at\": \"1982-07-16T04:19:51.833Z\",\n          \"updated_at\": \"1967-08-21T20:40:45.345Z\"\n        }\n      ],\n      \"bill\": {\n        \"id\": 7326,\n        \"etag\": \"string\",\n        \"number\": \"string\",\n        \"issued_at\": \"2012-12-30\",\n        \"created_at\": \"2018-05-02T18:03:27.880Z\",\n        \"due_at\": \"1968-09-10\",\n        \"tax_rate\": 6355.123730316716,\n        \"secondary_tax_rate\": 96.21125958632959,\n        \"updated_at\": \"1984-07-05T06:18:43.913Z\",\n        \"subject\": \"string\",\n        \"purchase_order\": \"string\",\n        \"type\": \"MatterBill\",\n        \"memo\": \"string\",\n        \"start_at\": \"1965-09-10\",\n        \"end_at\": \"1976-05-22\",\n        \"balance\": 7446.139029938805,\n        \"state\": \"paid\",\n        \"kind\": \"summary_kind\",\n        \"total\": 4571.166020682953,\n        \"paid\": 1181.4844527556745,\n        \"paid_at\": \"1996-06-22T04:12:39.284Z\",\n        \"pending\": 854.612569945199,\n        \"due\": 2709.9301457945357,\n        \"discount_services_only\": \"string\",\n        \"can_update\": true,\n        \"credits_issued\": 2859.326563784651,\n        \"shared\": false,\n        \"last_sent_at\": \"2024-03-15T04:08:11.725Z\",\n        \"services_secondary_tax\": 4876.506257202808,\n        \"services_sub_total\": 7600.293809892795,\n        \"services_tax\": 1666.3402408039874,\n        \"services_taxable_sub_total\": 8789,\n        \"services_secondary_taxable_sub_total\": 4042,\n        \"taxable_sub_total\": 9610,\n        \"secondary_taxable_sub_total\": 5235,\n        \"sub_total\": 2184.5638841987825,\n        \"tax_sum\": 9739.41556665762,\n        \"secondary_tax_sum\": 7088.4231689207445,\n        \"total_tax\": 798.4996801895438,\n        \"available_state_transitions\": [\n          \"awaiting_payment\",\n          \"awaiting_payment\"\n        ]\n      },\n      \"activity\": {\n        \"id\": 5275,\n        \"etag\": \"string\",\n        \"type\": \"TimeEntry\",\n        \"date\": \"1970-09-11\",\n        \"quantity_in_hours\": 9342.927947475546,\n        \"rounded_quantity_in_hours\": 553.8686815330207,\n        \"quantity\": 7173.58341982404,\n        \"rounded_quantity\": 8805.946005215375,\n        \"quantity_redacted\": false,\n        \"price\": 3488.9679389120665,\n        \"note\": \"string\",\n        \"flat_rate\": false,\n        \"billed\": true,\n        \"on_bill\": true,\n        \"total\": 1849.4994290623001,\n        \"contingency_fee\": false,\n        \"created_at\": \"1973-07-27T21:54:55.555Z\",\n        \"updated_at\": \"2001-11-23T11:46:48.426Z\",\n        \"reference\": \"string\",\n        \"non_billable\": true,\n        \"non_billable_total\": 6143.1373620734885,\n        \"no_charge\": true,\n        \"tax_setting\": \"tax_1_and_tax_2\",\n        \"currency\": {}\n      },\n      \"matter\": {\n        \"id\": 6753,\n        \"etag\": \"string\",\n        \"number\": 87,\n        \"display_number\": \"string\",\n        \"custom_number\": \"string\",\n        \"currency\": {},\n        \"description\": \"string\",\n        \"status\": \"Pending\",\n        \"location\": \"string\",\n        \"client_reference\": \"string\",\n        \"client_id\": 6415,\n        \"billable\": false,\n        \"maildrop_address\": \"string\",\n        \"billing_method\": \"flat\",\n        \"open_date\": \"1951-11-10\",\n        \"close_date\": \"1958-11-16\",\n        \"pending_date\": \"1982-10-16\",\n        \"created_at\": \"2008-08-09T18:22:55.245Z\",\n        \"updated_at\": \"2007-09-22T13:55:33.121Z\",\n        \"shared\": false,\n        \"has_tasks\": false,\n        \"last_activity_date\": \"1979-12-15\",\n        \"matter_stage_updated_at\": \"1994-11-01T23:49:03.144Z\"\n      },\n      \"user\": {\n        \"account_owner\": true,\n        \"clio_connect\": true,\n        \"court_rules_default_attendee\": false,\n        \"created_at\": \"2017-09-28T16:51:09.500Z\",\n        \"default_calendar_id\": 4920,\n        \"email\": \"string\",\n        \"enabled\": true,\n        \"etag\": \"string\",\n        \"first_name\": \"string\",\n        \"id\": 2867,\n        \"initials\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"phone_number\": \"string\",\n        \"rate\": 286.2111982580451,\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ],\n        \"subscription_type\": \"Attorney\",\n        \"time_zone\": \"string\",\n        \"updated_at\": \"1988-12-13T08:25:04.356Z\"\n      },\n      \"discount\": {\n        \"rate\": 3512.591981658724,\n        \"type\": \"money\",\n        \"note\": \"string\",\n        \"early_payment_rate\": 9413,\n        \"early_payment_period\": 9317\n      },\n      \"included_line_item_totals\": {\n        \"quantity\": 6175.864286114727,\n        \"price\": 3223.2511165715396,\n        \"discount_percent\": 6486.181462104853,\n        \"total\": 4635.348525689158,\n        \"sub_total\": 121.63639346173261\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "606c4acb-e616-43b5-807c-d0470fbaf303",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "line_items.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "activity_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "bill_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "display",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "exclude_ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "group_ordering",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd24e47f-f578-4918-985d-479d08b939b1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "line_items.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "activity_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "bill_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "display",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "exclude_ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "group_ordering",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8871a04c-3188-4449-9441-e475b0984baf",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "line_items.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "activity_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "bill_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "display",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "exclude_ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "group_ordering",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ddcff6f0-d31d-4c86-8112-60fd56a346b7",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "line_items.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "activity_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "bill_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "display",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "exclude_ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "group_ordering",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2431eef4-98c6-4eee-a89b-f1dea3cfb548",
+          "name": "Update a single LineItem",
+          "request": {
+            "name": "Update a single LineItem",
+            "description": {
+              "content": "Outlines the parameters and data fields used when updating a single LineItem",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "line_items",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                "key": "IF-MATCH",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "activity",
+                  "value": "{\"id\":\"<long>\"}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "bill",
+                  "value": "{\"id\":\"<long>\"}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "discount",
+                  "value": "{\"rate\":\"<double>\",\"type\":\"<boolean>\"}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "group_ordering",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "kind",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "matter",
+                  "value": "{\"id\":\"<long>\"}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "note",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "price",
+                  "value": "<double>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "quantity",
+                  "value": "<double>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "secondary_taxable",
+                  "value": "<boolean>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "tax_settings",
+                  "value": "[{\"tax_rate_configuration_id\":\"<long>\",\"order\":\"<integer>\",\"rule\":\"<string>\"},{\"tax_rate_configuration_id\":\"<long>\",\"order\":\"<integer>\",\"rule\":\"<string>\"}]",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "taxable",
+                  "value": "<boolean>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "update_original_record",
+                  "value": "<boolean>",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "42096cc6-dba2-470b-8c20-d85600bc0444",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "line_items",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "activity",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "bill",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "discount",
+                      "value": "{\"rate\":\"<double>\",\"type\":\"<boolean>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "group_ordering",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "matter",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "note",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "price",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "quantity",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "secondary_taxable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "tax_settings",
+                      "value": "[{\"tax_rate_configuration_id\":\"<long>\",\"order\":\"<integer>\",\"rule\":\"<string>\"},{\"tax_rate_configuration_id\":\"<long>\",\"order\":\"<integer>\",\"rule\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "taxable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "update_original_record",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 733,\n    \"etag\": \"string\",\n    \"type\": \"NoChargeLineItem\",\n    \"description\": \"string\",\n    \"date\": \"1992-10-31\",\n    \"price\": 7187.283538335128,\n    \"taxable\": false,\n    \"kind\": \"Expense\",\n    \"note\": \"string\",\n    \"secondary_taxable\": false,\n    \"total\": 1839.6438204678745,\n    \"tax\": 7428.048745996622,\n    \"secondary_tax\": 1525.2188652215782,\n    \"sub_total\": 2197.238720384056,\n    \"quantity\": 1203.9350775208213,\n    \"group_ordering\": 6504,\n    \"created_at\": \"2003-10-21T04:19:38.565Z\",\n    \"updated_at\": \"1981-03-07T12:38:54.700Z\",\n    \"tax_settings\": [\n      {\n        \"id\": 4368,\n        \"etag\": \"string\",\n        \"tax_rate_configuration_id\": 9671,\n        \"name\": \"string\",\n        \"rate\": 476.64576414370055,\n        \"formatted_rate\": \"string\",\n        \"rule\": \"string\",\n        \"amount\": 5993.231195723571,\n        \"order\": 8887,\n        \"created_at\": \"2015-06-06T17:50:15.704Z\",\n        \"updated_at\": \"1982-07-03T18:39:44.492Z\"\n      },\n      {\n        \"id\": 6680,\n        \"etag\": \"string\",\n        \"tax_rate_configuration_id\": 1517,\n        \"name\": \"string\",\n        \"rate\": 9251.056923406832,\n        \"formatted_rate\": \"string\",\n        \"rule\": \"string\",\n        \"amount\": 504.9387738347222,\n        \"order\": 8263,\n        \"created_at\": \"1950-08-23T02:07:06.419Z\",\n        \"updated_at\": \"2019-01-21T19:24:35.012Z\"\n      }\n    ],\n    \"bill\": {\n      \"id\": 5712,\n      \"etag\": \"string\",\n      \"number\": \"string\",\n      \"issued_at\": \"1978-01-22\",\n      \"created_at\": \"1985-06-05T00:53:29.775Z\",\n      \"due_at\": \"1960-03-31\",\n      \"tax_rate\": 5974.800173500262,\n      \"secondary_tax_rate\": 5402.6839674016965,\n      \"updated_at\": \"1957-10-10T12:14:26.850Z\",\n      \"subject\": \"string\",\n      \"purchase_order\": \"string\",\n      \"type\": \"MatterBill\",\n      \"memo\": \"string\",\n      \"start_at\": \"1979-10-29\",\n      \"end_at\": \"2012-05-12\",\n      \"balance\": 5531.867479791505,\n      \"state\": \"deleted\",\n      \"kind\": \"trust_kind\",\n      \"total\": 6997.775083113405,\n      \"paid\": 2816.851296324184,\n      \"paid_at\": \"1986-12-26T03:27:31.759Z\",\n      \"pending\": 8760.746047248613,\n      \"due\": 1252.5595683952995,\n      \"discount_services_only\": \"string\",\n      \"can_update\": false,\n      \"credits_issued\": 5023.229207062491,\n      \"shared\": false,\n      \"last_sent_at\": \"1995-06-20T08:42:54.479Z\",\n      \"services_secondary_tax\": 2524.260005873521,\n      \"services_sub_total\": 5907.9055167248625,\n      \"services_tax\": 4405.139735251884,\n      \"services_taxable_sub_total\": 3430,\n      \"services_secondary_taxable_sub_total\": 6301,\n      \"taxable_sub_total\": 8016,\n      \"secondary_taxable_sub_total\": 9976,\n      \"sub_total\": 9651.993214784785,\n      \"tax_sum\": 3775.523171671512,\n      \"secondary_tax_sum\": 425.1801025341373,\n      \"total_tax\": 1628.634136755992,\n      \"available_state_transitions\": [\n        \"deleted\",\n        \"void\"\n      ]\n    },\n    \"activity\": {\n      \"id\": 2244,\n      \"etag\": \"string\",\n      \"type\": \"HardCostEntry\",\n      \"date\": \"2020-09-08\",\n      \"quantity_in_hours\": 523.2652784973468,\n      \"rounded_quantity_in_hours\": 7227.006341988787,\n      \"quantity\": 4696.454511587177,\n      \"rounded_quantity\": 502.2771492166056,\n      \"quantity_redacted\": true,\n      \"price\": 97.64380601078648,\n      \"note\": \"string\",\n      \"flat_rate\": true,\n      \"billed\": false,\n      \"on_bill\": true,\n      \"total\": 4219.469406303356,\n      \"contingency_fee\": true,\n      \"created_at\": \"1967-03-24T00:29:05.297Z\",\n      \"updated_at\": \"2009-08-07T18:14:36.856Z\",\n      \"reference\": \"string\",\n      \"non_billable\": true,\n      \"non_billable_total\": 5633.757995744414,\n      \"no_charge\": false,\n      \"tax_setting\": \"no_tax\",\n      \"currency\": {}\n    },\n    \"matter\": {\n      \"id\": 2127,\n      \"etag\": \"string\",\n      \"number\": 4564,\n      \"display_number\": \"string\",\n      \"custom_number\": \"string\",\n      \"currency\": {},\n      \"description\": \"string\",\n      \"status\": \"Open\",\n      \"location\": \"string\",\n      \"client_reference\": \"string\",\n      \"client_id\": 1773,\n      \"billable\": true,\n      \"maildrop_address\": \"string\",\n      \"billing_method\": \"contingency\",\n      \"open_date\": \"1956-09-27\",\n      \"close_date\": \"2013-04-09\",\n      \"pending_date\": \"1946-11-08\",\n      \"created_at\": \"1969-12-04T07:03:27.204Z\",\n      \"updated_at\": \"1979-12-21T02:17:14.143Z\",\n      \"shared\": false,\n      \"has_tasks\": false,\n      \"last_activity_date\": \"2006-04-21\",\n      \"matter_stage_updated_at\": \"2010-05-23T04:27:59.636Z\"\n    },\n    \"user\": {\n      \"account_owner\": false,\n      \"clio_connect\": true,\n      \"court_rules_default_attendee\": false,\n      \"created_at\": \"1958-04-20T23:31:47.410Z\",\n      \"default_calendar_id\": 4263,\n      \"email\": \"string\",\n      \"enabled\": false,\n      \"etag\": \"string\",\n      \"first_name\": \"string\",\n      \"id\": 6969,\n      \"initials\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"rate\": 9515.099614025083,\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"subscription_type\": \"Attorney\",\n      \"time_zone\": \"string\",\n      \"updated_at\": \"1951-07-23T18:36:13.552Z\"\n    },\n    \"discount\": {\n      \"rate\": 3795.489948458356,\n      \"type\": \"percentage\",\n      \"note\": \"string\",\n      \"early_payment_rate\": 9053,\n      \"early_payment_period\": 4529\n    },\n    \"included_line_item_totals\": {\n      \"quantity\": 9526.654293130685,\n      \"price\": 9824.546207290537,\n      \"discount_percent\": 1750.9012791765133,\n      \"total\": 510.75013917040724,\n      \"sub_total\": 1453.6647353526878\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3154a812-3252-4dfc-9e36-467d61e6db25",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "line_items",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "activity",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "bill",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "discount",
+                      "value": "{\"rate\":\"<double>\",\"type\":\"<boolean>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "group_ordering",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "matter",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "note",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "price",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "quantity",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "secondary_taxable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "tax_settings",
+                      "value": "[{\"tax_rate_configuration_id\":\"<long>\",\"order\":\"<integer>\",\"rule\":\"<string>\"},{\"tax_rate_configuration_id\":\"<long>\",\"order\":\"<integer>\",\"rule\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "taxable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "update_original_record",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5a35875-b905-4b3c-932c-6cba0cbe8668",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "line_items",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "activity",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "bill",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "discount",
+                      "value": "{\"rate\":\"<double>\",\"type\":\"<boolean>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "group_ordering",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "matter",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "note",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "price",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "quantity",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "secondary_taxable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "tax_settings",
+                      "value": "[{\"tax_rate_configuration_id\":\"<long>\",\"order\":\"<integer>\",\"rule\":\"<string>\"},{\"tax_rate_configuration_id\":\"<long>\",\"order\":\"<integer>\",\"rule\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "taxable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "update_original_record",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "897af97c-626d-4115-90b4-82f3ca4deb3c",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "line_items",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "activity",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "bill",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "discount",
+                      "value": "{\"rate\":\"<double>\",\"type\":\"<boolean>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "group_ordering",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "matter",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "note",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "price",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "quantity",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "secondary_taxable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "tax_settings",
+                      "value": "[{\"tax_rate_configuration_id\":\"<long>\",\"order\":\"<integer>\",\"rule\":\"<string>\"},{\"tax_rate_configuration_id\":\"<long>\",\"order\":\"<integer>\",\"rule\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "taxable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "update_original_record",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6bd6e24e-9446-45f8-b1fd-b12981e1b39d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "line_items",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "activity",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "bill",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "discount",
+                      "value": "{\"rate\":\"<double>\",\"type\":\"<boolean>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "group_ordering",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "matter",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "note",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "price",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "quantity",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "secondary_taxable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "tax_settings",
+                      "value": "[{\"tax_rate_configuration_id\":\"<long>\",\"order\":\"<integer>\",\"rule\":\"<string>\"},{\"tax_rate_configuration_id\":\"<long>\",\"order\":\"<integer>\",\"rule\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "taxable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "update_original_record",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "794f26b2-40d9-4c24-a696-8696ad396787",
+              "name": "Precondition Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "line_items",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "activity",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "bill",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "discount",
+                      "value": "{\"rate\":\"<double>\",\"type\":\"<boolean>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "group_ordering",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "matter",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "note",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "price",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "quantity",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "secondary_taxable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "tax_settings",
+                      "value": "[{\"tax_rate_configuration_id\":\"<long>\",\"order\":\"<integer>\",\"rule\":\"<string>\"},{\"tax_rate_configuration_id\":\"<long>\",\"order\":\"<integer>\",\"rule\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "taxable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "update_original_record",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6af40409-42a7-41b5-81fc-6ec9dc70e97c",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "line_items",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "activity",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "bill",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "discount",
+                      "value": "{\"rate\":\"<double>\",\"type\":\"<boolean>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "group_ordering",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "matter",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "note",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "price",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "quantity",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "secondary_taxable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "tax_settings",
+                      "value": "[{\"tax_rate_configuration_id\":\"<long>\",\"order\":\"<integer>\",\"rule\":\"<string>\"},{\"tax_rate_configuration_id\":\"<long>\",\"order\":\"<integer>\",\"rule\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "taxable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "update_original_record",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d37c2051-f2f5-448f-8544-738bc044dc03",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "line_items",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "activity",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "bill",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "discount",
+                      "value": "{\"rate\":\"<double>\",\"type\":\"<boolean>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "group_ordering",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "matter",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "note",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "price",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "quantity",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "secondary_taxable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "tax_settings",
+                      "value": "[{\"tax_rate_configuration_id\":\"<long>\",\"order\":\"<integer>\",\"rule\":\"<string>\"},{\"tax_rate_configuration_id\":\"<long>\",\"order\":\"<integer>\",\"rule\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "taxable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "update_original_record",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f0af833-362e-4b3b-b069-a2b90f11ed7c",
+          "name": "Delete a single LineItem",
+          "request": {
+            "name": "Delete a single LineItem",
+            "description": {
+              "content": "A LineItem can not be deleted if it's Bill is not editable",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "line_items",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb9d5d29-4ac4-4c74-900a-e5a0d55595df",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "line_items",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7882bcdb-e9cd-48df-93f8-f49d3b058ed4",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "line_items",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.clio.com/api/v4",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The unique identifier for the LineItem.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<long>",
+      "key": "id"
+    }
+  ],
+  "info": {
+    "_postman_id": "a32c6cb5-0d36-4c3d-b495-f98d13199271",
+    "name": "Clio API Documentation Activities Line Items API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Developer Support and Feedback\n* Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio's API Support team at [api@clio.com](mailto:api@clio.com).\n* For business and partnership inquiries, contact our API Partnerships team at [api.partnerships@clio.com](mailto:api.partnerships@clio.com).\n* For best practices and tips from the Clio development community, join the conversation in the [Clio Developer Slack Channel](https://join.slack.com/t/clio-public/shared_invite/zt-36i0eqgo1-7POORPtMJpp2N0~_auL2IQ).\n\nA community-driven [Clio Developers Stack Overflow Group](https://stackoverflow.com/questions/tagged/clio-api) also exists where you can connect and ask questions from other Clio API users.\n# Getting Started\n> **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).\n>\n> Likewise, the developer portal is available at region-specific links for the [Australia](https://au.developers.clio.com), [Canada](https://ca.developers.clio.com), [EU](https://eu.developers.clio.com), and [US](https://developers.clio.com) regions.\n>\n> This document assumes the US region is being used (app.clio.com). If you're building in one of the other regions, you should adapt the links and examples as necessary.\n\nTo start building on the Clio API, you’ll need a Clio account – you can review our [Developer Handbook](https://docs.developers.clio.com/) and follow the steps to sign up for an account.\n\nOnce you have an account, you can [create a developer application](https://docs.developers.clio.com/api-docs/applications) from the [Developer Portal](https://developers.clio.com) and start building!\n# Authorization with OAuth 2.0\nSee our [Authorization documentation →](https://docs.developers.clio.com/api-docs/authorization)\n# Permissions\nSee our [Permissions documentation →](https://docs.developers.clio.com/api-docs/permissions)\n# Fields\nSee our [Fields documentation →](https://docs.developers.clio.com/api-docs/fields)\n# Rate Limiting\nSee our [Rate Limits documentation →](https://docs.developers.clio.com/api-docs/rate-limits)\n# Paging\nSee our [Pagination documentation →](https://docs.developers.clio.com/api-docs/paging)\n# ETags\nSee our [ETags documentation →](https://docs.developers.clio.com/api-docs/etags)\n# Minor Versions\nAPI v4 supports multiple minor versions. Versions are of the form '4.X.Y'. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you're requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.\n\nAn `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.\n\nYou can find our [API Versioning Policy and Guidelines](https://docs.developers.clio.com/api-docs/api-versioning-policy) in our documentation hub.\n\nThe [API Changelog](https://docs.developers.clio.com/api-docs/api-changelog) explains each version's changes in further detail.\n### [4.0.4](https://docs.developers.clio.com/api-docs/api-changelog#404)\n\n  * Update `quantity` field to return values in seconds rather than hours for Activities\n\n### [4.0.5](https://docs.developers.clio.com/api-docs/api-changelog#405)\n\n  * Remove `matter_balances` field from Bills\n* Standardize status/state enum values\n* Add a Document association to completed DocumentAutomations\n* Add rate visibility handling for Activity's price and total\n\n### [4.0.6](https://docs.developers.clio.com/api-docs/api-changelog#406)\n\n  * Remove `document_versions` collection field from Documents\n\n### [4.0.7](https://docs.developers.clio.com/api-docs/api-changelog#407)\n\n  * Change secure link format\n\n### [4.0.8](https://docs.developers.clio.com/api-docs/api-changelog#408)\n\n  * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user\n  * Add `quantity_redacted` field to activities\n\n### [4.0.9](https://docs.developers.clio.com/api-docs/api-changelog#409)\n\n  * Contacts are filtered and redacted in the response based on the new 'Contacts Visibility' user permission setting.\n\n### [4.0.10](https://docs.developers.clio.com/api-docs/api-changelog#4010)\n\n  * Fixed validation of `type` query parameter when querying Notes\n\n### [4.0.12](https://docs.developers.clio.com/api-docs/api-changelog#4012)\n\n  * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers\n\n### [4.0.13](https://docs.developers.clio.com/api-docs/api-changelog#4013)\n\n  **This is the default version**\n\n  * Add association limits to Contacts\n* Returns 422 Unprocessable Entity when association limits are exceeded\n\n\n\n\nContact Support:\n Name: Clio API Support\n Email: api@clio.com",
+      "type": "text/plain"
+    }
+  }
+}

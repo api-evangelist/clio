@@ -1,0 +1,202 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clio API Documentation Activities Reports API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download the completed Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/reports/:id/download.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the Report."
+              }
+            ]
+          },
+          "docs": "Download the completed Report"
+        },
+        {
+          "info": {
+            "name": "Return the data for all Reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/reports.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Filters Report data by category."
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Filters Report data by date. (Expects an ISO-8601 date)."
+              },
+              {
+                "name": "created_since",
+                "value": "",
+                "type": "query",
+                "description": "Filter Report records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "ids[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter Report records to those having the specified unique identifiers."
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query",
+                "description": "Filters Report data by kind."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "A limit on the number of Report records to be returned. Limit can range between 1 and 200. Default: `200`."
+              },
+              {
+                "name": "output_format",
+                "value": "",
+                "type": "query",
+                "description": "Filters Report data by format."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "A token specifying which page to return."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Wildcard search for Report name."
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "Filters Report data by source."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Filters Report data by state."
+              },
+              {
+                "name": "updated_since",
+                "value": "",
+                "type": "query",
+                "description": "Filter Report records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when requesting the data for all Reports"
+        },
+        {
+          "info": {
+            "name": "Create a new Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.clio.com/api/v4/reports.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Outlines the parameters and data fields used when creating a new Report"
+        },
+        {
+          "info": {
+            "name": "Return the data for a single Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/reports/:id.json",
+            "headers": [
+              {
+                "name": "IF-MODIFIED-SINCE",
+                "value": ""
+              },
+              {
+                "name": "IF-NONE-MATCH",
+                "value": ""
+              },
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the Report."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when requesting the data for a single Report"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

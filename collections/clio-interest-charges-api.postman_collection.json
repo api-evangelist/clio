@@ -1,0 +1,624 @@
+{
+  "item": [
+    {
+      "id": "224b7f9e-5ec0-4a89-b401-94ecc4fa2d18",
+      "name": "Interest Charges",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fe571e86-76f1-4dcc-ac93-f2858c233c63",
+          "name": "Return the data for all InterestCharges",
+          "request": {
+            "name": "Return the data for all InterestCharges",
+            "description": {
+              "content": "Outlines the parameters, optional and required, used when requesting the data for all InterestCharges",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "interest_charges.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "bill_id",
+                  "value": "<long>",
+                  "description": "The unique identifier for a single Bill. The keyword `null` is not valid for this field. The list will be filtered to include only the InterestCharge records with the matching property."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_since",
+                  "value": "<dateTime>",
+                  "description": "Filter InterestCharge records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude_ids[]",
+                  "value": "<long>",
+                  "description": "Array containing *InterestCharge* identifiers that should be excluded from the query."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ids[]",
+                  "value": "<long>",
+                  "description": "Filter InterestCharge records to those having the specified unique identifiers."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "A limit on the number of InterestCharge records to be returned. Limit can range between 1 and 200. Default: `200`."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "A token specifying which page to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_since",
+                  "value": "<dateTime>",
+                  "description": "Filter InterestCharge records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "701ea90b-f93c-4b88-bbe9-6192cec4f44b",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "interest_charges.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bill_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "exclude_ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 8179,\n      \"etag\": \"string\",\n      \"date\": \"1968-02-27\",\n      \"description\": \"string\",\n      \"total\": 6140.267093295819,\n      \"created_at\": \"2022-05-25T00:28:30.153Z\",\n      \"updated_at\": \"2023-02-24T15:44:27.950Z\",\n      \"bill\": {\n        \"id\": 6865,\n        \"etag\": \"string\",\n        \"number\": \"string\",\n        \"issued_at\": \"1956-07-30\",\n        \"created_at\": \"1976-11-13T05:00:45.028Z\",\n        \"due_at\": \"1969-02-11\",\n        \"tax_rate\": 3893.8944016269406,\n        \"secondary_tax_rate\": 766.4072138056765,\n        \"updated_at\": \"1995-03-04T07:53:56.237Z\",\n        \"subject\": \"string\",\n        \"purchase_order\": \"string\",\n        \"type\": \"MatterBill\",\n        \"memo\": \"string\",\n        \"start_at\": \"1985-11-01\",\n        \"end_at\": \"2017-10-31\",\n        \"balance\": 6450.753756152545,\n        \"state\": \"paid\",\n        \"kind\": \"revenue_kind\",\n        \"total\": 9890.188411604466,\n        \"paid\": 4050.2306870165417,\n        \"paid_at\": \"1963-05-04T18:29:00.245Z\",\n        \"pending\": 9054.096437987995,\n        \"due\": 9798.907025469727,\n        \"discount_services_only\": \"string\",\n        \"can_update\": true,\n        \"credits_issued\": 34.21589814451509,\n        \"shared\": true,\n        \"last_sent_at\": \"1953-03-12T13:33:13.402Z\",\n        \"services_secondary_tax\": 7136.531777818232,\n        \"services_sub_total\": 8325.300740112574,\n        \"services_tax\": 516.3713804102033,\n        \"services_taxable_sub_total\": 9787,\n        \"services_secondary_taxable_sub_total\": 9362,\n        \"taxable_sub_total\": 7425,\n        \"secondary_taxable_sub_total\": 5143,\n        \"sub_total\": 4407.380265336542,\n        \"tax_sum\": 4294.920805578505,\n        \"secondary_tax_sum\": 244.76377290063022,\n        \"total_tax\": 7989.16941361987,\n        \"available_state_transitions\": [\n          \"deleted\",\n          \"awaiting_payment\"\n        ]\n      },\n      \"balances\": [\n        {\n          \"id\": 2724,\n          \"amount\": 6247.435072876516,\n          \"type\": \"Client\",\n          \"interest_amount\": 1488.53978337115,\n          \"due\": 3157.470572915463\n        },\n        {\n          \"id\": 9161,\n          \"amount\": 681.7057242294055,\n          \"type\": \"Matter\",\n          \"interest_amount\": 6817.1965936607185,\n          \"due\": 3365.0321089700387\n        }\n      ],\n      \"matters\": [\n        {\n          \"id\": 5236,\n          \"etag\": \"string\",\n          \"number\": 5397,\n          \"display_number\": \"string\",\n          \"custom_number\": \"string\",\n          \"currency\": {},\n          \"description\": \"string\",\n          \"status\": \"Open\",\n          \"location\": \"string\",\n          \"client_reference\": \"string\",\n          \"client_id\": 7305,\n          \"billable\": true,\n          \"maildrop_address\": \"string\",\n          \"billing_method\": \"flat\",\n          \"open_date\": \"1965-12-22\",\n          \"close_date\": \"1990-02-02\",\n          \"pending_date\": \"1961-08-04\",\n          \"created_at\": \"1963-02-20T17:56:13.683Z\",\n          \"updated_at\": \"1988-04-02T00:34:59.393Z\",\n          \"shared\": false,\n          \"has_tasks\": true,\n          \"last_activity_date\": \"1987-12-27\",\n          \"matter_stage_updated_at\": \"1976-03-30T17:16:44.848Z\"\n        },\n        {\n          \"id\": 3174,\n          \"etag\": \"string\",\n          \"number\": 7065,\n          \"display_number\": \"string\",\n          \"custom_number\": \"string\",\n          \"currency\": {},\n          \"description\": \"string\",\n          \"status\": \"Closed\",\n          \"location\": \"string\",\n          \"client_reference\": \"string\",\n          \"client_id\": 847,\n          \"billable\": true,\n          \"maildrop_address\": \"string\",\n          \"billing_method\": \"hourly\",\n          \"open_date\": \"1975-08-10\",\n          \"close_date\": \"1958-07-02\",\n          \"pending_date\": \"1960-01-02\",\n          \"created_at\": \"1970-12-19T10:37:17.573Z\",\n          \"updated_at\": \"1993-04-28T10:55:11.177Z\",\n          \"shared\": true,\n          \"has_tasks\": true,\n          \"last_activity_date\": \"1955-01-21\",\n          \"matter_stage_updated_at\": \"2022-12-09T02:09:13.257Z\"\n        }\n      ]\n    },\n    {\n      \"id\": 1131,\n      \"etag\": \"string\",\n      \"date\": \"1982-09-13\",\n      \"description\": \"string\",\n      \"total\": 1664.320409351584,\n      \"created_at\": \"2020-03-24T04:11:21.947Z\",\n      \"updated_at\": \"1983-08-09T20:11:19.563Z\",\n      \"bill\": {\n        \"id\": 5931,\n        \"etag\": \"string\",\n        \"number\": \"string\",\n        \"issued_at\": \"2013-05-26\",\n        \"created_at\": \"2023-03-31T14:54:19.336Z\",\n        \"due_at\": \"1956-04-14\",\n        \"tax_rate\": 9933.534991261939,\n        \"secondary_tax_rate\": 8681.581210081842,\n        \"updated_at\": \"1955-01-19T01:43:10.223Z\",\n        \"subject\": \"string\",\n        \"purchase_order\": \"string\",\n        \"type\": \"ClientBill\",\n        \"memo\": \"string\",\n        \"start_at\": \"1992-09-21\",\n        \"end_at\": \"1994-05-29\",\n        \"balance\": 3752.804147726455,\n        \"state\": \"draft\",\n        \"kind\": \"aggregate_expenses\",\n        \"total\": 8104.630930637321,\n        \"paid\": 7505.943833980647,\n        \"paid_at\": \"2022-12-04T00:06:09.660Z\",\n        \"pending\": 715.7910167366077,\n        \"due\": 5951.046897506005,\n        \"discount_services_only\": \"string\",\n        \"can_update\": false,\n        \"credits_issued\": 8751.733753098086,\n        \"shared\": true,\n        \"last_sent_at\": \"1960-03-25T01:37:26.933Z\",\n        \"services_secondary_tax\": 373.13695585708075,\n        \"services_sub_total\": 1477.4846586058798,\n        \"services_tax\": 5830.869568115793,\n        \"services_taxable_sub_total\": 1683,\n        \"services_secondary_taxable_sub_total\": 9757,\n        \"taxable_sub_total\": 2460,\n        \"secondary_taxable_sub_total\": 4425,\n        \"sub_total\": 1072.5007568851797,\n        \"tax_sum\": 4445.578980620199,\n        \"secondary_tax_sum\": 6266.370250197164,\n        \"total_tax\": 1602.7926755902256,\n        \"available_state_transitions\": [\n          \"awaiting_approval\",\n          \"awaiting_approval\"\n        ]\n      },\n      \"balances\": [\n        {\n          \"id\": 4441,\n          \"amount\": 9991.264665147617,\n          \"type\": \"Matter\",\n          \"interest_amount\": 7478.293633272977,\n          \"due\": 1116.2219864232482\n        },\n        {\n          \"id\": 1974,\n          \"amount\": 4648.858229154966,\n          \"type\": \"Client\",\n          \"interest_amount\": 6643.786528721305,\n          \"due\": 906.2391372250578\n        }\n      ],\n      \"matters\": [\n        {\n          \"id\": 9289,\n          \"etag\": \"string\",\n          \"number\": 5806,\n          \"display_number\": \"string\",\n          \"custom_number\": \"string\",\n          \"currency\": {},\n          \"description\": \"string\",\n          \"status\": \"Pending\",\n          \"location\": \"string\",\n          \"client_reference\": \"string\",\n          \"client_id\": 400,\n          \"billable\": false,\n          \"maildrop_address\": \"string\",\n          \"billing_method\": \"contingency\",\n          \"open_date\": \"1975-11-18\",\n          \"close_date\": \"1956-02-05\",\n          \"pending_date\": \"1986-04-08\",\n          \"created_at\": \"1976-10-28T18:30:07.112Z\",\n          \"updated_at\": \"1960-06-25T13:08:06.771Z\",\n          \"shared\": false,\n          \"has_tasks\": true,\n          \"last_activity_date\": \"1953-08-16\",\n          \"matter_stage_updated_at\": \"1958-07-19T01:24:19.674Z\"\n        },\n        {\n          \"id\": 2153,\n          \"etag\": \"string\",\n          \"number\": 996,\n          \"display_number\": \"string\",\n          \"custom_number\": \"string\",\n          \"currency\": {},\n          \"description\": \"string\",\n          \"status\": \"Closed\",\n          \"location\": \"string\",\n          \"client_reference\": \"string\",\n          \"client_id\": 8153,\n          \"billable\": true,\n          \"maildrop_address\": \"string\",\n          \"billing_method\": \"hourly\",\n          \"open_date\": \"1960-03-07\",\n          \"close_date\": \"2019-12-05\",\n          \"pending_date\": \"1968-06-10\",\n          \"created_at\": \"1976-12-03T21:06:07.323Z\",\n          \"updated_at\": \"1959-10-09T21:53:45.302Z\",\n          \"shared\": false,\n          \"has_tasks\": false,\n          \"last_activity_date\": \"1961-05-11\",\n          \"matter_stage_updated_at\": \"2006-03-06T11:16:11.248Z\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4177cfaf-e7a2-407f-a0d8-ff3da0eb84f7",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "interest_charges.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bill_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "exclude_ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d97c393-e4fc-42e5-8304-5b306ee96000",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "interest_charges.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bill_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "exclude_ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "147e1012-3b24-45fb-bb50-1c618901b9a1",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "interest_charges.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bill_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "exclude_ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "107ff894-27fb-46d4-a516-f612f1902bd5",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "interest_charges.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bill_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "exclude_ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e44f2639-1514-4868-ac52-504d978d26e2",
+          "name": "Delete a single InterestCharge",
+          "request": {
+            "name": "Delete a single InterestCharge",
+            "description": {
+              "content": "Outlines the parameters, optional and required, used when deleting the record for a single InterestCharge",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "interest_charges",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7d6de202-c02d-4b53-8e67-c56a54a86e9f",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "interest_charges",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "787b2542-b1b5-46d8-ae1a-c97331c5765a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "interest_charges",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.clio.com/api/v4",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The unique identifier for the InterestCharge.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<long>",
+      "key": "id"
+    }
+  ],
+  "info": {
+    "_postman_id": "9711a306-5346-43d3-b590-231ec863c878",
+    "name": "Clio API Documentation Activities Interest Charges API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Developer Support and Feedback\n* Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio's API Support team at [api@clio.com](mailto:api@clio.com).\n* For business and partnership inquiries, contact our API Partnerships team at [api.partnerships@clio.com](mailto:api.partnerships@clio.com).\n* For best practices and tips from the Clio development community, join the conversation in the [Clio Developer Slack Channel](https://join.slack.com/t/clio-public/shared_invite/zt-36i0eqgo1-7POORPtMJpp2N0~_auL2IQ).\n\nA community-driven [Clio Developers Stack Overflow Group](https://stackoverflow.com/questions/tagged/clio-api) also exists where you can connect and ask questions from other Clio API users.\n# Getting Started\n> **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).\n>\n> Likewise, the developer portal is available at region-specific links for the [Australia](https://au.developers.clio.com), [Canada](https://ca.developers.clio.com), [EU](https://eu.developers.clio.com), and [US](https://developers.clio.com) regions.\n>\n> This document assumes the US region is being used (app.clio.com). If you're building in one of the other regions, you should adapt the links and examples as necessary.\n\nTo start building on the Clio API, you’ll need a Clio account – you can review our [Developer Handbook](https://docs.developers.clio.com/) and follow the steps to sign up for an account.\n\nOnce you have an account, you can [create a developer application](https://docs.developers.clio.com/api-docs/applications) from the [Developer Portal](https://developers.clio.com) and start building!\n# Authorization with OAuth 2.0\nSee our [Authorization documentation →](https://docs.developers.clio.com/api-docs/authorization)\n# Permissions\nSee our [Permissions documentation →](https://docs.developers.clio.com/api-docs/permissions)\n# Fields\nSee our [Fields documentation →](https://docs.developers.clio.com/api-docs/fields)\n# Rate Limiting\nSee our [Rate Limits documentation →](https://docs.developers.clio.com/api-docs/rate-limits)\n# Paging\nSee our [Pagination documentation →](https://docs.developers.clio.com/api-docs/paging)\n# ETags\nSee our [ETags documentation →](https://docs.developers.clio.com/api-docs/etags)\n# Minor Versions\nAPI v4 supports multiple minor versions. Versions are of the form '4.X.Y'. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you're requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.\n\nAn `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.\n\nYou can find our [API Versioning Policy and Guidelines](https://docs.developers.clio.com/api-docs/api-versioning-policy) in our documentation hub.\n\nThe [API Changelog](https://docs.developers.clio.com/api-docs/api-changelog) explains each version's changes in further detail.\n### [4.0.4](https://docs.developers.clio.com/api-docs/api-changelog#404)\n\n  * Update `quantity` field to return values in seconds rather than hours for Activities\n\n### [4.0.5](https://docs.developers.clio.com/api-docs/api-changelog#405)\n\n  * Remove `matter_balances` field from Bills\n* Standardize status/state enum values\n* Add a Document association to completed DocumentAutomations\n* Add rate visibility handling for Activity's price and total\n\n### [4.0.6](https://docs.developers.clio.com/api-docs/api-changelog#406)\n\n  * Remove `document_versions` collection field from Documents\n\n### [4.0.7](https://docs.developers.clio.com/api-docs/api-changelog#407)\n\n  * Change secure link format\n\n### [4.0.8](https://docs.developers.clio.com/api-docs/api-changelog#408)\n\n  * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user\n  * Add `quantity_redacted` field to activities\n\n### [4.0.9](https://docs.developers.clio.com/api-docs/api-changelog#409)\n\n  * Contacts are filtered and redacted in the response based on the new 'Contacts Visibility' user permission setting.\n\n### [4.0.10](https://docs.developers.clio.com/api-docs/api-changelog#4010)\n\n  * Fixed validation of `type` query parameter when querying Notes\n\n### [4.0.12](https://docs.developers.clio.com/api-docs/api-changelog#4012)\n\n  * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers\n\n### [4.0.13](https://docs.developers.clio.com/api-docs/api-changelog#4013)\n\n  **This is the default version**\n\n  * Add association limits to Contacts\n* Returns 422 Unprocessable Entity when association limits are exceeded\n\n\n\n\nContact Support:\n Name: Clio API Support\n Email: api@clio.com",
+      "type": "text/plain"
+    }
+  }
+}

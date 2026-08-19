@@ -1,0 +1,283 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clio API Documentation Activities Communications API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Communications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return the data for all Communications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/communications.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "contact_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for a single Contact. The keyword `null` is not valid for this field. The list will be filtered to include only the Communication records with the matching property."
+              },
+              {
+                "name": "created_since",
+                "value": "",
+                "type": "query",
+                "description": "Filter Communication records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Filter Communication records to those that occur on the specified date (Expects an ISO-8601 date)."
+              },
+              {
+                "name": "external_property_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter records to only those with the given external property(s) name set.\n\ne.g. `?external_property_name=Name`\n"
+              },
+              {
+                "name": "external_property_value",
+                "value": "",
+                "type": "query",
+                "description": "Filter records to only those with the given external property(s) value set. Requires external property name as well.\n\ne.g. `?external_property_name=Name&external_property_value=Value`\n"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "having_time_entries",
+                "value": "",
+                "type": "query",
+                "description": "Filter Communication records to those that do or do not have time entries."
+              },
+              {
+                "name": "ids[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter Communication records to those having the specified unique identifiers."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "A limit on the number of Communication records to be returned. Limit can range between 1 and 200. Default: `200`."
+              },
+              {
+                "name": "matter_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for a single Matter. Use the keyword `null` to match those without a Communication. The list will be filtered to include only the Communication records with the matching property."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Orders the Communication records by the given field. Default: `date(asc)`."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "A token specifying which page to return."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Wildcard search for `body` or `subject` matching a given string."
+              },
+              {
+                "name": "received_at",
+                "value": "",
+                "type": "query",
+                "description": "Filter Communication records to those that occur on the specified date (Expects an ISO-8601 date-time)."
+              },
+              {
+                "name": "received_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter Communication records to those whose `date` is on or before the date provided (Expects an ISO-8601 date)."
+              },
+              {
+                "name": "received_since",
+                "value": "",
+                "type": "query",
+                "description": "Filter Communication records to those whose `date` is on or after the date provided (Expects an ISO-8601 date)."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter Communication records to those of the specified type."
+              },
+              {
+                "name": "updated_since",
+                "value": "",
+                "type": "query",
+                "description": "Filter Communication records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for a single User. The keyword `null` is not valid for this field. The list will be filtered to include only the Communication records with the matching property."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when requesting the data for all Communications"
+        },
+        {
+          "info": {
+            "name": "Create a new Communication",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.clio.com/api/v4/communications.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Outlines the parameters and data fields used when creating a new Communication"
+        },
+        {
+          "info": {
+            "name": "Return the data for a single Communication",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/communications/:id.json",
+            "headers": [
+              {
+                "name": "IF-MODIFIED-SINCE",
+                "value": ""
+              },
+              {
+                "name": "IF-NONE-MATCH",
+                "value": ""
+              },
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the Communication."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when requesting the data for a single Communication"
+        },
+        {
+          "info": {
+            "name": "Update a single Communication",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.clio.com/api/v4/communications/:id.json",
+            "headers": [
+              {
+                "name": "IF-MATCH",
+                "value": ""
+              },
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the Communication."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Outlines the parameters and data fields used when updating a single Communication"
+        },
+        {
+          "info": {
+            "name": "Delete a single Communication",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.clio.com/api/v4/communications/:id.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the Communication."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when deleting the record for a single Communication"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

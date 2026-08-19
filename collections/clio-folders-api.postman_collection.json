@@ -1,0 +1,3748 @@
+{
+  "item": [
+    {
+      "id": "83c03536-5cd5-43a8-903f-8c7d4d39cffd",
+      "name": "Folders",
+      "description": {
+        "content": "Files stored in Clio’s Documents section are organized in folders. Folders are automatically generated for new Contacts and Matters. Folders can also be manually created anywhere in the folder structure.\n\n[Support Link](https://help.clio.com/hc/en-us/articles/9290308200091-Generate-Manage-and-Share-Documents#manage-documents-in-clio-manage-0-4)\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c92923e6-e9f4-4937-a6e4-784490c67f10",
+          "name": "Return the data of the contents of a Folder",
+          "request": {
+            "name": "Return the data of the contents of a Folder",
+            "description": {
+              "content": "Return the data of the contents of a Folder.\n\nNote: offset pagination is not supported for this endpoint. Use cursor pagination if you're looking to paginate through the results.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "folders",
+                "list.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "contact_id",
+                  "value": "<long>",
+                  "description": "The unique identifier for a single Contact. Use the keyword `null` to match those without a Folder. The list will be filtered to include only the Folder records with the matching property."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_since",
+                  "value": "<dateTime>",
+                  "description": "Filter Folder records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+                },
+                {
+                  "disabled": false,
+                  "key": "document_category_id",
+                  "value": "<long>",
+                  "description": "The unique identifier for a single DocumentCategory. Use the keyword `null` to match those without a Folder. The list will be filtered to include only the Folder records with the matching property."
+                },
+                {
+                  "disabled": false,
+                  "key": "external_property_name",
+                  "value": "<string>",
+                  "description": "Filter records to only those with the given external property(s) name set.\n\ne.g. `?external_property_name=Name`\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_property_value",
+                  "value": "<string>",
+                  "description": "Filter records to only those with the given external property(s) value set. Requires external property name as well.\n\ne.g. `?external_property_name=Name&external_property_value=Value`\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ids[]",
+                  "value": "<long>",
+                  "description": "Filter Folder records to those having the specified unique identifiers."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_deleted",
+                  "value": "<boolean>",
+                  "description": "Allow trashed Folder record to be included."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "A limit on the number of Folder records to be returned. Limit can range between 1 and 200. Default: `200`."
+                },
+                {
+                  "disabled": false,
+                  "key": "matter_id",
+                  "value": "<long>",
+                  "description": "The unique identifier for a single Matter. Use the keyword `null` to match those without a Folder. The list will be filtered to include only the Folder records with the matching property."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Orders the Folder records by the given field. Default: `id(asc)`."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "A token specifying which page to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "parent_id",
+                  "value": "<long>",
+                  "description": "The unique identifier for a single Folder.\n\nWhen returning the data of the contents of a Folder, the keyword `null` is not valid for this field. If no Folder is provided, it will default to the account's root Folder.\n\nWhen returning the data for all Folders, use the keyword `null` to match those without a Folder. The list will be filtered to include only the Folder records with the matching property.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Wildcard search for `name` matching the given string."
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "Filters Folder record to those being a child of the parent Folder, or a descendant of the parent Folder. Default is `children`."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_uncompleted",
+                  "value": "<boolean>",
+                  "description": "Allow Folder record being uploaded to be included."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_since",
+                  "value": "<dateTime>",
+                  "description": "Filter Folder records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f1096bf2-b5ee-4f2c-9d10-de6bfa8d60c7",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "list.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "document_category_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "external_property_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_property_value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "include_deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_uncompleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 6155,\n      \"etag\": \"string\",\n      \"created_at\": \"1995-12-17T06:05:26.791Z\",\n      \"updated_at\": \"1975-07-07T22:32:28.976Z\",\n      \"deleted_at\": \"2022-02-21T04:24:57.898Z\",\n      \"type\": \"Document\",\n      \"locked\": true,\n      \"name\": \"string\",\n      \"parent\": {\n        \"id\": 899,\n        \"etag\": \"string\",\n        \"created_at\": \"2006-04-08T01:14:05.285Z\",\n        \"updated_at\": \"1975-11-12T03:09:54.171Z\",\n        \"deleted_at\": \"2024-06-12T22:28:30.459Z\",\n        \"type\": \"Folder\",\n        \"locked\": false,\n        \"name\": \"string\",\n        \"root\": false\n      },\n      \"matter\": {\n        \"id\": 6361,\n        \"etag\": \"string\",\n        \"number\": 7986,\n        \"display_number\": \"string\",\n        \"custom_number\": \"string\",\n        \"currency\": {},\n        \"description\": \"string\",\n        \"status\": \"Closed\",\n        \"location\": \"string\",\n        \"client_reference\": \"string\",\n        \"client_id\": 2125,\n        \"billable\": false,\n        \"maildrop_address\": \"string\",\n        \"billing_method\": \"hourly\",\n        \"open_date\": \"1971-08-23\",\n        \"close_date\": \"1949-06-04\",\n        \"pending_date\": \"1967-09-11\",\n        \"created_at\": \"2020-10-30T09:55:33.502Z\",\n        \"updated_at\": \"1995-05-24T02:54:02.414Z\",\n        \"shared\": true,\n        \"has_tasks\": false,\n        \"last_activity_date\": \"2021-03-25\",\n        \"matter_stage_updated_at\": \"1956-08-07T11:17:18.798Z\"\n      },\n      \"contact\": {\n        \"id\": 9273,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"first_name\": \"string\",\n        \"middle_name\": \"string\",\n        \"last_name\": \"string\",\n        \"date_of_birth\": \"1957-05-04\",\n        \"type\": \"Person\",\n        \"created_at\": \"1955-09-17T06:19:49.571Z\",\n        \"updated_at\": \"2015-08-08T10:50:00.045Z\",\n        \"prefix\": \"string\",\n        \"title\": \"string\",\n        \"initials\": \"string\",\n        \"clio_connect_email\": \"string\",\n        \"locked_clio_connect_email\": true,\n        \"client_connect_user_id\": 9067,\n        \"primary_email_address\": \"string\",\n        \"secondary_email_address\": \"string\",\n        \"primary_phone_number\": \"string\",\n        \"secondary_phone_number\": \"string\",\n        \"ledes_client_id\": \"string\",\n        \"has_clio_for_clients_permission\": true,\n        \"is_client\": false,\n        \"is_clio_for_client_user\": false,\n        \"is_co_counsel\": true,\n        \"is_bill_recipient\": true,\n        \"sales_tax_number\": \"string\",\n        \"currency\": {}\n      },\n      \"document_category\": {\n        \"id\": 6738,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"created_at\": \"1991-04-20T11:46:42.002Z\",\n        \"updated_at\": \"1982-08-01T08:41:30.495Z\"\n      },\n      \"creator\": {\n        \"account_owner\": true,\n        \"clio_connect\": false,\n        \"court_rules_default_attendee\": true,\n        \"default_calendar_id\": 4776,\n        \"email\": \"string\",\n        \"enabled\": false,\n        \"etag\": \"string\",\n        \"id\": 1555,\n        \"type\": \"ManageUser\",\n        \"initials\": \"string\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"phone_number\": \"string\",\n        \"rate\": 2018.8565809211955,\n        \"subscription_type\": \"NonAttorney\",\n        \"time_zone\": \"string\",\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ],\n        \"created_at\": \"1995-08-04T18:58:55.792Z\",\n        \"updated_at\": \"1969-06-03T17:39:48.689Z\"\n      },\n      \"latest_document_version\": {\n        \"id\": 4245,\n        \"document_id\": 1923,\n        \"etag\": \"string\",\n        \"uuid\": \"string\",\n        \"created_at\": \"2022-08-06T10:32:40.418Z\",\n        \"updated_at\": \"2017-01-02T18:45:12.247Z\",\n        \"filename\": \"string\",\n        \"size\": 5427,\n        \"version_number\": 7126,\n        \"content_type\": \"string\",\n        \"received_at\": \"1997-08-16T19:52:16.033Z\",\n        \"put_url\": \"string\",\n        \"fully_uploaded\": true\n      },\n      \"group\": {\n        \"client_connect_user\": false,\n        \"etag\": \"string\",\n        \"id\": 5982,\n        \"name\": \"string\",\n        \"type\": \"UserGroup\",\n        \"updated_at\": \"1999-01-06T00:58:24.222Z\"\n      },\n      \"external_properties\": [\n        {\n          \"id\": 5683,\n          \"etag\": \"string\",\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"created_at\": \"1979-08-03T23:14:17.326Z\",\n          \"updated_at\": \"1984-03-25T02:33:12.781Z\"\n        },\n        {\n          \"id\": 8285,\n          \"etag\": \"string\",\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"created_at\": \"1953-11-23T11:40:28.654Z\",\n          \"updated_at\": \"2019-10-06T12:11:21.489Z\"\n        }\n      ]\n    },\n    {\n      \"id\": 474,\n      \"etag\": \"string\",\n      \"created_at\": \"1990-08-21T17:47:28.924Z\",\n      \"updated_at\": \"1969-02-08T09:52:03.325Z\",\n      \"deleted_at\": \"2017-05-07T18:32:12.178Z\",\n      \"type\": \"Folder\",\n      \"locked\": true,\n      \"name\": \"string\",\n      \"parent\": {\n        \"id\": 1268,\n        \"etag\": \"string\",\n        \"created_at\": \"1949-01-03T07:50:02.890Z\",\n        \"updated_at\": \"1981-04-24T11:07:10.182Z\",\n        \"deleted_at\": \"1982-08-21T09:28:47.833Z\",\n        \"type\": \"Folder\",\n        \"locked\": false,\n        \"name\": \"string\",\n        \"root\": true\n      },\n      \"matter\": {\n        \"id\": 121,\n        \"etag\": \"string\",\n        \"number\": 3003,\n        \"display_number\": \"string\",\n        \"custom_number\": \"string\",\n        \"currency\": {},\n        \"description\": \"string\",\n        \"status\": \"Closed\",\n        \"location\": \"string\",\n        \"client_reference\": \"string\",\n        \"client_id\": 9445,\n        \"billable\": false,\n        \"maildrop_address\": \"string\",\n        \"billing_method\": \"flat\",\n        \"open_date\": \"2011-08-02\",\n        \"close_date\": \"2001-02-20\",\n        \"pending_date\": \"1951-08-22\",\n        \"created_at\": \"1963-12-27T00:54:55.501Z\",\n        \"updated_at\": \"1958-07-09T00:58:56.270Z\",\n        \"shared\": true,\n        \"has_tasks\": true,\n        \"last_activity_date\": \"1975-06-16\",\n        \"matter_stage_updated_at\": \"2024-06-22T22:47:12.636Z\"\n      },\n      \"contact\": {\n        \"id\": 9306,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"first_name\": \"string\",\n        \"middle_name\": \"string\",\n        \"last_name\": \"string\",\n        \"date_of_birth\": \"1987-12-29\",\n        \"type\": \"Person\",\n        \"created_at\": \"2012-08-23T18:39:33.085Z\",\n        \"updated_at\": \"1966-08-19T10:27:56.824Z\",\n        \"prefix\": \"string\",\n        \"title\": \"string\",\n        \"initials\": \"string\",\n        \"clio_connect_email\": \"string\",\n        \"locked_clio_connect_email\": true,\n        \"client_connect_user_id\": 9177,\n        \"primary_email_address\": \"string\",\n        \"secondary_email_address\": \"string\",\n        \"primary_phone_number\": \"string\",\n        \"secondary_phone_number\": \"string\",\n        \"ledes_client_id\": \"string\",\n        \"has_clio_for_clients_permission\": false,\n        \"is_client\": true,\n        \"is_clio_for_client_user\": false,\n        \"is_co_counsel\": true,\n        \"is_bill_recipient\": false,\n        \"sales_tax_number\": \"string\",\n        \"currency\": {}\n      },\n      \"document_category\": {\n        \"id\": 4674,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"created_at\": \"2006-09-30T17:56:48.211Z\",\n        \"updated_at\": \"1985-05-16T10:03:35.882Z\"\n      },\n      \"creator\": {\n        \"account_owner\": true,\n        \"clio_connect\": false,\n        \"court_rules_default_attendee\": true,\n        \"default_calendar_id\": 6660,\n        \"email\": \"string\",\n        \"enabled\": false,\n        \"etag\": \"string\",\n        \"id\": 210,\n        \"type\": \"ManageUser\",\n        \"initials\": \"string\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"phone_number\": \"string\",\n        \"rate\": 9509.441916702997,\n        \"subscription_type\": \"Attorney\",\n        \"time_zone\": \"string\",\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ],\n        \"created_at\": \"2010-10-12T16:03:55.228Z\",\n        \"updated_at\": \"2026-08-09T10:16:53.698Z\"\n      },\n      \"latest_document_version\": {\n        \"id\": 1965,\n        \"document_id\": 9238,\n        \"etag\": \"string\",\n        \"uuid\": \"string\",\n        \"created_at\": \"1995-03-27T12:00:53.722Z\",\n        \"updated_at\": \"1965-12-27T11:31:52.146Z\",\n        \"filename\": \"string\",\n        \"size\": 6907,\n        \"version_number\": 1815,\n        \"content_type\": \"string\",\n        \"received_at\": \"2013-03-18T19:39:20.557Z\",\n        \"put_url\": \"string\",\n        \"fully_uploaded\": false\n      },\n      \"group\": {\n        \"client_connect_user\": true,\n        \"etag\": \"string\",\n        \"id\": 5875,\n        \"name\": \"string\",\n        \"type\": \"UserGroup\",\n        \"updated_at\": \"2023-10-30T17:30:25.245Z\"\n      },\n      \"external_properties\": [\n        {\n          \"id\": 2010,\n          \"etag\": \"string\",\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"created_at\": \"1960-12-22T22:43:22.907Z\",\n          \"updated_at\": \"1954-05-06T06:17:44.898Z\"\n        },\n        {\n          \"id\": 2425,\n          \"etag\": \"string\",\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"created_at\": \"1966-12-02T23:28:38.613Z\",\n          \"updated_at\": \"2008-09-04T07:19:30.889Z\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3cc53b68-232c-4841-addb-af191c4e1833",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "list.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "document_category_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "external_property_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_property_value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "include_deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_uncompleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "352c4155-4472-4138-9e44-60a5f992ae3e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "list.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "document_category_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "external_property_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_property_value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "include_deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_uncompleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4333e27-b87a-4da9-b711-b3b9c56ceceb",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "list.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "document_category_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "external_property_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_property_value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "include_deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_uncompleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9477c504-09a6-4a76-a00a-7077d22a37a0",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "list.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "document_category_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "external_property_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_property_value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "include_deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_uncompleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2ff1dc8-f5c2-458e-b6b1-1b842d2b1b3a",
+          "name": "Return the data for all Folders",
+          "request": {
+            "name": "Return the data for all Folders",
+            "description": {
+              "content": "Outlines the parameters, optional and required, used when requesting the data for all Folders",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "folders.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "contact_id",
+                  "value": "<long>",
+                  "description": "The unique identifier for a single Contact. Use the keyword `null` to match those without a Folder. The list will be filtered to include only the Folder records with the matching property."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_since",
+                  "value": "<dateTime>",
+                  "description": "Filter Folder records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+                },
+                {
+                  "disabled": false,
+                  "key": "document_category_id",
+                  "value": "<long>",
+                  "description": "The unique identifier for a single DocumentCategory. Use the keyword `null` to match those without a Folder. The list will be filtered to include only the Folder records with the matching property."
+                },
+                {
+                  "disabled": false,
+                  "key": "external_property_name",
+                  "value": "<string>",
+                  "description": "Filter records to only those with the given external property(s) name set.\n\ne.g. `?external_property_name=Name`\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_property_value",
+                  "value": "<string>",
+                  "description": "Filter records to only those with the given external property(s) value set. Requires external property name as well.\n\ne.g. `?external_property_name=Name&external_property_value=Value`\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ids[]",
+                  "value": "<long>",
+                  "description": "Filter Folder records to those having the specified unique identifiers."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_deleted",
+                  "value": "<boolean>",
+                  "description": "Allow trashed Folder record to be included."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "A limit on the number of Folder records to be returned. Limit can range between 1 and 200. Default: `200`."
+                },
+                {
+                  "disabled": false,
+                  "key": "matter_id",
+                  "value": "<long>",
+                  "description": "The unique identifier for a single Matter. Use the keyword `null` to match those without a Folder. The list will be filtered to include only the Folder records with the matching property."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Orders the Folder records by the given field. Default: `id(asc)`."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "A token specifying which page to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "parent_id",
+                  "value": "<long>",
+                  "description": "The unique identifier for a single Folder.\n\nWhen returning the data of the contents of a Folder, the keyword `null` is not valid for this field. If no Folder is provided, it will default to the account's root Folder.\n\nWhen returning the data for all Folders, use the keyword `null` to match those without a Folder. The list will be filtered to include only the Folder records with the matching property.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Wildcard search for `name` matching the given string."
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "Filters Folder record to those being a child of the parent Folder, or a descendant of the parent Folder. Default is `children`."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_since",
+                  "value": "<dateTime>",
+                  "description": "Filter Folder records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ce5e9f1-47c2-4eac-9e39-954625dc157f",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "document_category_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "external_property_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_property_value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "include_deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 9707,\n      \"etag\": \"string\",\n      \"created_at\": \"2022-04-17T22:26:04.116Z\",\n      \"updated_at\": \"1954-12-31T06:33:29.570Z\",\n      \"deleted_at\": \"2020-05-18T04:00:21.911Z\",\n      \"type\": \"Folder\",\n      \"locked\": true,\n      \"name\": \"string\",\n      \"root\": false,\n      \"parent\": {\n        \"id\": 8381,\n        \"etag\": \"string\",\n        \"created_at\": \"1960-02-17T08:32:33.547Z\",\n        \"updated_at\": \"2024-03-02T19:03:47.419Z\",\n        \"deleted_at\": \"1953-01-13T06:15:55.211Z\",\n        \"type\": \"Folder\",\n        \"locked\": false,\n        \"name\": \"string\",\n        \"root\": true\n      },\n      \"matter\": {\n        \"id\": 3939,\n        \"etag\": \"string\",\n        \"number\": 7729,\n        \"display_number\": \"string\",\n        \"custom_number\": \"string\",\n        \"currency\": {},\n        \"description\": \"string\",\n        \"status\": \"Closed\",\n        \"location\": \"string\",\n        \"client_reference\": \"string\",\n        \"client_id\": 6388,\n        \"billable\": true,\n        \"maildrop_address\": \"string\",\n        \"billing_method\": \"contingency\",\n        \"open_date\": \"2018-03-08\",\n        \"close_date\": \"1994-11-09\",\n        \"pending_date\": \"2023-03-05\",\n        \"created_at\": \"1967-02-05T18:54:48.041Z\",\n        \"updated_at\": \"1962-12-15T13:51:37.077Z\",\n        \"shared\": true,\n        \"has_tasks\": true,\n        \"last_activity_date\": \"2003-04-17\",\n        \"matter_stage_updated_at\": \"1996-06-06T23:22:17.747Z\"\n      },\n      \"contact\": {\n        \"id\": 2273,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"first_name\": \"string\",\n        \"middle_name\": \"string\",\n        \"last_name\": \"string\",\n        \"date_of_birth\": \"1959-07-26\",\n        \"type\": \"Company\",\n        \"created_at\": \"2018-02-22T10:53:22.003Z\",\n        \"updated_at\": \"1948-01-12T07:35:05.239Z\",\n        \"prefix\": \"string\",\n        \"title\": \"string\",\n        \"initials\": \"string\",\n        \"clio_connect_email\": \"string\",\n        \"locked_clio_connect_email\": false,\n        \"client_connect_user_id\": 4772,\n        \"primary_email_address\": \"string\",\n        \"secondary_email_address\": \"string\",\n        \"primary_phone_number\": \"string\",\n        \"secondary_phone_number\": \"string\",\n        \"ledes_client_id\": \"string\",\n        \"has_clio_for_clients_permission\": false,\n        \"is_client\": true,\n        \"is_clio_for_client_user\": true,\n        \"is_co_counsel\": true,\n        \"is_bill_recipient\": true,\n        \"sales_tax_number\": \"string\",\n        \"currency\": {}\n      },\n      \"document_category\": {\n        \"id\": 3460,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"created_at\": \"1988-05-02T16:10:12.769Z\",\n        \"updated_at\": \"1947-03-16T10:45:40.966Z\"\n      },\n      \"creator\": {\n        \"account_owner\": false,\n        \"clio_connect\": false,\n        \"court_rules_default_attendee\": true,\n        \"default_calendar_id\": 1233,\n        \"email\": \"string\",\n        \"enabled\": true,\n        \"etag\": \"string\",\n        \"id\": 9424,\n        \"type\": \"ClientUser\",\n        \"initials\": \"string\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"phone_number\": \"string\",\n        \"rate\": 1787.5940710935479,\n        \"subscription_type\": \"NonAttorney\",\n        \"time_zone\": \"string\",\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ],\n        \"created_at\": \"1960-09-22T08:40:57.520Z\",\n        \"updated_at\": \"2001-04-19T01:23:46.175Z\"\n      },\n      \"latest_document_version\": {\n        \"id\": 3869,\n        \"document_id\": 6489,\n        \"etag\": \"string\",\n        \"uuid\": \"string\",\n        \"created_at\": \"1984-12-29T00:05:08.849Z\",\n        \"updated_at\": \"1988-08-07T01:11:37.559Z\",\n        \"filename\": \"string\",\n        \"size\": 8966,\n        \"version_number\": 6843,\n        \"content_type\": \"string\",\n        \"received_at\": \"2010-04-08T11:36:55.557Z\",\n        \"put_url\": \"string\",\n        \"fully_uploaded\": false\n      },\n      \"group\": {\n        \"client_connect_user\": false,\n        \"etag\": \"string\",\n        \"id\": 9286,\n        \"name\": \"string\",\n        \"type\": \"AdhocGroup\",\n        \"updated_at\": \"2017-12-09T13:03:43.946Z\"\n      },\n      \"external_properties\": [\n        {\n          \"id\": 5331,\n          \"etag\": \"string\",\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"created_at\": \"1959-01-11T17:50:44.181Z\",\n          \"updated_at\": \"1965-01-06T04:28:56.426Z\"\n        },\n        {\n          \"id\": 4822,\n          \"etag\": \"string\",\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"created_at\": \"1953-07-29T15:19:27.128Z\",\n          \"updated_at\": \"1968-07-25T17:02:44.122Z\"\n        }\n      ]\n    },\n    {\n      \"id\": 1687,\n      \"etag\": \"string\",\n      \"created_at\": \"1987-11-21T06:20:12.396Z\",\n      \"updated_at\": \"1952-09-25T01:49:38.860Z\",\n      \"deleted_at\": \"1961-12-27T05:55:52.964Z\",\n      \"type\": \"Folder\",\n      \"locked\": true,\n      \"name\": \"string\",\n      \"root\": false,\n      \"parent\": {\n        \"id\": 9426,\n        \"etag\": \"string\",\n        \"created_at\": \"2009-01-17T03:54:06.354Z\",\n        \"updated_at\": \"2023-12-16T03:20:31.490Z\",\n        \"deleted_at\": \"1949-10-06T09:34:08.577Z\",\n        \"type\": \"Folder\",\n        \"locked\": false,\n        \"name\": \"string\",\n        \"root\": true\n      },\n      \"matter\": {\n        \"id\": 7716,\n        \"etag\": \"string\",\n        \"number\": 746,\n        \"display_number\": \"string\",\n        \"custom_number\": \"string\",\n        \"currency\": {},\n        \"description\": \"string\",\n        \"status\": \"Pending\",\n        \"location\": \"string\",\n        \"client_reference\": \"string\",\n        \"client_id\": 9495,\n        \"billable\": true,\n        \"maildrop_address\": \"string\",\n        \"billing_method\": \"hourly\",\n        \"open_date\": \"2021-09-15\",\n        \"close_date\": \"2016-01-26\",\n        \"pending_date\": \"1980-02-13\",\n        \"created_at\": \"1982-11-04T09:51:42.321Z\",\n        \"updated_at\": \"2007-12-26T10:38:26.634Z\",\n        \"shared\": false,\n        \"has_tasks\": false,\n        \"last_activity_date\": \"2004-02-08\",\n        \"matter_stage_updated_at\": \"1980-07-17T15:38:15.199Z\"\n      },\n      \"contact\": {\n        \"id\": 8809,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"first_name\": \"string\",\n        \"middle_name\": \"string\",\n        \"last_name\": \"string\",\n        \"date_of_birth\": \"1957-09-14\",\n        \"type\": \"Company\",\n        \"created_at\": \"2005-11-09T07:20:34.056Z\",\n        \"updated_at\": \"1954-12-14T08:10:11.254Z\",\n        \"prefix\": \"string\",\n        \"title\": \"string\",\n        \"initials\": \"string\",\n        \"clio_connect_email\": \"string\",\n        \"locked_clio_connect_email\": false,\n        \"client_connect_user_id\": 2167,\n        \"primary_email_address\": \"string\",\n        \"secondary_email_address\": \"string\",\n        \"primary_phone_number\": \"string\",\n        \"secondary_phone_number\": \"string\",\n        \"ledes_client_id\": \"string\",\n        \"has_clio_for_clients_permission\": false,\n        \"is_client\": true,\n        \"is_clio_for_client_user\": true,\n        \"is_co_counsel\": false,\n        \"is_bill_recipient\": false,\n        \"sales_tax_number\": \"string\",\n        \"currency\": {}\n      },\n      \"document_category\": {\n        \"id\": 5160,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"created_at\": \"2001-03-17T01:49:47.760Z\",\n        \"updated_at\": \"1999-01-02T06:13:31.953Z\"\n      },\n      \"creator\": {\n        \"account_owner\": true,\n        \"clio_connect\": false,\n        \"court_rules_default_attendee\": false,\n        \"default_calendar_id\": 8693,\n        \"email\": \"string\",\n        \"enabled\": true,\n        \"etag\": \"string\",\n        \"id\": 5623,\n        \"type\": \"ClientUser\",\n        \"initials\": \"string\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"phone_number\": \"string\",\n        \"rate\": 4642.2733119080685,\n        \"subscription_type\": \"Attorney\",\n        \"time_zone\": \"string\",\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ],\n        \"created_at\": \"1994-06-01T15:09:57.447Z\",\n        \"updated_at\": \"2025-11-26T17:38:19.228Z\"\n      },\n      \"latest_document_version\": {\n        \"id\": 1881,\n        \"document_id\": 7772,\n        \"etag\": \"string\",\n        \"uuid\": \"string\",\n        \"created_at\": \"1993-09-22T12:54:29.729Z\",\n        \"updated_at\": \"2015-01-13T17:55:57.835Z\",\n        \"filename\": \"string\",\n        \"size\": 4791,\n        \"version_number\": 220,\n        \"content_type\": \"string\",\n        \"received_at\": \"1995-11-24T10:05:59.181Z\",\n        \"put_url\": \"string\",\n        \"fully_uploaded\": false\n      },\n      \"group\": {\n        \"client_connect_user\": true,\n        \"etag\": \"string\",\n        \"id\": 9606,\n        \"name\": \"string\",\n        \"type\": \"UserGroup\",\n        \"updated_at\": \"2023-10-03T02:05:43.940Z\"\n      },\n      \"external_properties\": [\n        {\n          \"id\": 229,\n          \"etag\": \"string\",\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"created_at\": \"2026-06-04T01:01:32.091Z\",\n          \"updated_at\": \"2025-02-21T14:07:08.410Z\"\n        },\n        {\n          \"id\": 4021,\n          \"etag\": \"string\",\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"created_at\": \"2024-05-28T10:41:44.109Z\",\n          \"updated_at\": \"2022-07-16T19:27:53.530Z\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f518595-4e77-44eb-a076-15f2717d094d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "document_category_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "external_property_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_property_value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "include_deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eecaddaf-58cd-4048-99f5-a2a2a161833e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "document_category_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "external_property_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_property_value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "include_deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1d9155c-04c0-42df-a889-913100d9be59",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "document_category_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "external_property_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_property_value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "include_deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c68fa33-cab3-435a-82e7-881305ac0be4",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "document_category_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "external_property_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_property_value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "include_deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "matter_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c421bc41-644d-4c2d-a677-81475c8d21c9",
+          "name": "Create a new Folder",
+          "request": {
+            "name": "Create a new Folder",
+            "description": {
+              "content": "Create a Folder to an existing folder.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "folders.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "parent",
+                  "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "document_category",
+                  "value": "{\"id\":\"<long>\"}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "external_properties",
+                  "value": "[{\"name\":\"<string>\",\"value\":\"<string>\"},{\"name\":\"<string>\",\"value\":\"<string>\"}]",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "restore",
+                  "value": "<boolean>",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "56f58d9f-53dc-45ab-8c62-220cf5ada5cc",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "parent",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "document_category",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "external_properties",
+                      "value": "[{\"name\":\"<string>\",\"value\":\"<string>\"},{\"name\":\"<string>\",\"value\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "restore",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 417,\n    \"etag\": \"string\",\n    \"created_at\": \"1984-08-05T11:04:31.161Z\",\n    \"updated_at\": \"1991-05-19T17:53:44.476Z\",\n    \"deleted_at\": \"1983-09-25T07:09:02.733Z\",\n    \"type\": \"Folder\",\n    \"locked\": true,\n    \"name\": \"string\",\n    \"root\": false,\n    \"parent\": {\n      \"id\": 2074,\n      \"etag\": \"string\",\n      \"created_at\": \"2013-02-16T15:47:28.285Z\",\n      \"updated_at\": \"2015-04-28T15:43:29.811Z\",\n      \"deleted_at\": \"1947-11-01T21:33:36.296Z\",\n      \"type\": \"Folder\",\n      \"locked\": true,\n      \"name\": \"string\",\n      \"root\": true\n    },\n    \"matter\": {\n      \"id\": 5802,\n      \"etag\": \"string\",\n      \"number\": 7909,\n      \"display_number\": \"string\",\n      \"custom_number\": \"string\",\n      \"currency\": {},\n      \"description\": \"string\",\n      \"status\": \"Closed\",\n      \"location\": \"string\",\n      \"client_reference\": \"string\",\n      \"client_id\": 4346,\n      \"billable\": true,\n      \"maildrop_address\": \"string\",\n      \"billing_method\": \"contingency\",\n      \"open_date\": \"1985-03-07\",\n      \"close_date\": \"1976-12-11\",\n      \"pending_date\": \"2002-08-14\",\n      \"created_at\": \"1969-12-16T09:17:21.912Z\",\n      \"updated_at\": \"1989-07-26T21:46:13.078Z\",\n      \"shared\": true,\n      \"has_tasks\": false,\n      \"last_activity_date\": \"2020-02-18\",\n      \"matter_stage_updated_at\": \"2002-04-11T08:14:04.957Z\"\n    },\n    \"contact\": {\n      \"id\": 6287,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"first_name\": \"string\",\n      \"middle_name\": \"string\",\n      \"last_name\": \"string\",\n      \"date_of_birth\": \"1993-07-07\",\n      \"type\": \"Company\",\n      \"created_at\": \"1983-10-27T01:49:24.882Z\",\n      \"updated_at\": \"2025-12-06T02:58:04.240Z\",\n      \"prefix\": \"string\",\n      \"title\": \"string\",\n      \"initials\": \"string\",\n      \"clio_connect_email\": \"string\",\n      \"locked_clio_connect_email\": true,\n      \"client_connect_user_id\": 8763,\n      \"primary_email_address\": \"string\",\n      \"secondary_email_address\": \"string\",\n      \"primary_phone_number\": \"string\",\n      \"secondary_phone_number\": \"string\",\n      \"ledes_client_id\": \"string\",\n      \"has_clio_for_clients_permission\": false,\n      \"is_client\": true,\n      \"is_clio_for_client_user\": true,\n      \"is_co_counsel\": false,\n      \"is_bill_recipient\": false,\n      \"sales_tax_number\": \"string\",\n      \"currency\": {}\n    },\n    \"document_category\": {\n      \"id\": 9988,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"created_at\": \"1960-07-20T17:23:32.639Z\",\n      \"updated_at\": \"1957-09-13T05:20:55.959Z\"\n    },\n    \"creator\": {\n      \"account_owner\": true,\n      \"clio_connect\": false,\n      \"court_rules_default_attendee\": true,\n      \"default_calendar_id\": 768,\n      \"email\": \"string\",\n      \"enabled\": false,\n      \"etag\": \"string\",\n      \"id\": 8569,\n      \"type\": \"ManageUser\",\n      \"initials\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"rate\": 8582.129803904914,\n      \"subscription_type\": \"Attorney\",\n      \"time_zone\": \"string\",\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"created_at\": \"1961-04-21T09:58:09.137Z\",\n      \"updated_at\": \"1954-01-09T19:11:13.534Z\"\n    },\n    \"latest_document_version\": {\n      \"id\": 9240,\n      \"document_id\": 7979,\n      \"etag\": \"string\",\n      \"uuid\": \"string\",\n      \"created_at\": \"2021-09-07T13:43:33.803Z\",\n      \"updated_at\": \"1975-04-09T22:32:24.885Z\",\n      \"filename\": \"string\",\n      \"size\": 533,\n      \"version_number\": 1659,\n      \"content_type\": \"string\",\n      \"received_at\": \"1967-04-09T11:58:52.843Z\",\n      \"put_url\": \"string\",\n      \"fully_uploaded\": false\n    },\n    \"group\": {\n      \"client_connect_user\": false,\n      \"etag\": \"string\",\n      \"id\": 2951,\n      \"name\": \"string\",\n      \"type\": \"UserGroup\",\n      \"updated_at\": \"2000-07-26T18:36:22.880Z\"\n    },\n    \"external_properties\": [\n      {\n        \"id\": 9530,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"value\": \"string\",\n        \"created_at\": \"1993-01-21T00:06:53.144Z\",\n        \"updated_at\": \"1969-04-03T10:40:26.597Z\"\n      },\n      {\n        \"id\": 841,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"value\": \"string\",\n        \"created_at\": \"1971-07-02T05:51:24.196Z\",\n        \"updated_at\": \"1992-06-17T19:09:01.962Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1fd1d04f-63fb-412e-945e-aa53dae2ea62",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "parent",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "document_category",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "external_properties",
+                      "value": "[{\"name\":\"<string>\",\"value\":\"<string>\"},{\"name\":\"<string>\",\"value\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "restore",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1df554f9-8be3-4d68-88b0-996797683aec",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "parent",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "document_category",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "external_properties",
+                      "value": "[{\"name\":\"<string>\",\"value\":\"<string>\"},{\"name\":\"<string>\",\"value\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "restore",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e959d167-dc37-4452-a62c-d1b55a0b792b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "parent",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "document_category",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "external_properties",
+                      "value": "[{\"name\":\"<string>\",\"value\":\"<string>\"},{\"name\":\"<string>\",\"value\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "restore",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "005294b0-6548-4661-bb38-e4e2c34d75fa",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "parent",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "document_category",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "external_properties",
+                      "value": "[{\"name\":\"<string>\",\"value\":\"<string>\"},{\"name\":\"<string>\",\"value\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "restore",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4f27b62-8312-4c47-aab9-af011aac4a00",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "parent",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "document_category",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "external_properties",
+                      "value": "[{\"name\":\"<string>\",\"value\":\"<string>\"},{\"name\":\"<string>\",\"value\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "restore",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "943b9199-9858-4b51-ba25-b9fc743f7c54",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "parent",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "document_category",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "external_properties",
+                      "value": "[{\"name\":\"<string>\",\"value\":\"<string>\"},{\"name\":\"<string>\",\"value\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "restore",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6203a4b-a1f9-4d82-995e-3f675e9d6536",
+          "name": "Return the data for a single Folder",
+          "request": {
+            "name": "Return the data for a single Folder",
+            "description": {
+              "content": "Outlines the parameters, optional and required, used when requesting the data for a single Folder",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "folders",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                "key": "IF-MODIFIED-SINCE",
+                "value": "<date>"
+              },
+              {
+                "disabled": false,
+                "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                "key": "IF-NONE-MATCH",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2325c46f-e907-48ec-8ec1-e40938ecba2c",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 417,\n    \"etag\": \"string\",\n    \"created_at\": \"1984-08-05T11:04:31.161Z\",\n    \"updated_at\": \"1991-05-19T17:53:44.476Z\",\n    \"deleted_at\": \"1983-09-25T07:09:02.733Z\",\n    \"type\": \"Folder\",\n    \"locked\": true,\n    \"name\": \"string\",\n    \"root\": false,\n    \"parent\": {\n      \"id\": 2074,\n      \"etag\": \"string\",\n      \"created_at\": \"2013-02-16T15:47:28.285Z\",\n      \"updated_at\": \"2015-04-28T15:43:29.811Z\",\n      \"deleted_at\": \"1947-11-01T21:33:36.296Z\",\n      \"type\": \"Folder\",\n      \"locked\": true,\n      \"name\": \"string\",\n      \"root\": true\n    },\n    \"matter\": {\n      \"id\": 5802,\n      \"etag\": \"string\",\n      \"number\": 7909,\n      \"display_number\": \"string\",\n      \"custom_number\": \"string\",\n      \"currency\": {},\n      \"description\": \"string\",\n      \"status\": \"Closed\",\n      \"location\": \"string\",\n      \"client_reference\": \"string\",\n      \"client_id\": 4346,\n      \"billable\": true,\n      \"maildrop_address\": \"string\",\n      \"billing_method\": \"contingency\",\n      \"open_date\": \"1985-03-07\",\n      \"close_date\": \"1976-12-11\",\n      \"pending_date\": \"2002-08-14\",\n      \"created_at\": \"1969-12-16T09:17:21.912Z\",\n      \"updated_at\": \"1989-07-26T21:46:13.078Z\",\n      \"shared\": true,\n      \"has_tasks\": false,\n      \"last_activity_date\": \"2020-02-18\",\n      \"matter_stage_updated_at\": \"2002-04-11T08:14:04.957Z\"\n    },\n    \"contact\": {\n      \"id\": 6287,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"first_name\": \"string\",\n      \"middle_name\": \"string\",\n      \"last_name\": \"string\",\n      \"date_of_birth\": \"1993-07-07\",\n      \"type\": \"Company\",\n      \"created_at\": \"1983-10-27T01:49:24.882Z\",\n      \"updated_at\": \"2025-12-06T02:58:04.240Z\",\n      \"prefix\": \"string\",\n      \"title\": \"string\",\n      \"initials\": \"string\",\n      \"clio_connect_email\": \"string\",\n      \"locked_clio_connect_email\": true,\n      \"client_connect_user_id\": 8763,\n      \"primary_email_address\": \"string\",\n      \"secondary_email_address\": \"string\",\n      \"primary_phone_number\": \"string\",\n      \"secondary_phone_number\": \"string\",\n      \"ledes_client_id\": \"string\",\n      \"has_clio_for_clients_permission\": false,\n      \"is_client\": true,\n      \"is_clio_for_client_user\": true,\n      \"is_co_counsel\": false,\n      \"is_bill_recipient\": false,\n      \"sales_tax_number\": \"string\",\n      \"currency\": {}\n    },\n    \"document_category\": {\n      \"id\": 9988,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"created_at\": \"1960-07-20T17:23:32.639Z\",\n      \"updated_at\": \"1957-09-13T05:20:55.959Z\"\n    },\n    \"creator\": {\n      \"account_owner\": true,\n      \"clio_connect\": false,\n      \"court_rules_default_attendee\": true,\n      \"default_calendar_id\": 768,\n      \"email\": \"string\",\n      \"enabled\": false,\n      \"etag\": \"string\",\n      \"id\": 8569,\n      \"type\": \"ManageUser\",\n      \"initials\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"rate\": 8582.129803904914,\n      \"subscription_type\": \"Attorney\",\n      \"time_zone\": \"string\",\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"created_at\": \"1961-04-21T09:58:09.137Z\",\n      \"updated_at\": \"1954-01-09T19:11:13.534Z\"\n    },\n    \"latest_document_version\": {\n      \"id\": 9240,\n      \"document_id\": 7979,\n      \"etag\": \"string\",\n      \"uuid\": \"string\",\n      \"created_at\": \"2021-09-07T13:43:33.803Z\",\n      \"updated_at\": \"1975-04-09T22:32:24.885Z\",\n      \"filename\": \"string\",\n      \"size\": 533,\n      \"version_number\": 1659,\n      \"content_type\": \"string\",\n      \"received_at\": \"1967-04-09T11:58:52.843Z\",\n      \"put_url\": \"string\",\n      \"fully_uploaded\": false\n    },\n    \"group\": {\n      \"client_connect_user\": false,\n      \"etag\": \"string\",\n      \"id\": 2951,\n      \"name\": \"string\",\n      \"type\": \"UserGroup\",\n      \"updated_at\": \"2000-07-26T18:36:22.880Z\"\n    },\n    \"external_properties\": [\n      {\n        \"id\": 9530,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"value\": \"string\",\n        \"created_at\": \"1993-01-21T00:06:53.144Z\",\n        \"updated_at\": \"1969-04-03T10:40:26.597Z\"\n      },\n      {\n        \"id\": 841,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"value\": \"string\",\n        \"created_at\": \"1971-07-02T05:51:24.196Z\",\n        \"updated_at\": \"1992-06-17T19:09:01.962Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c06e3686-cc37-4180-a41f-5ff2d1dd80b9",
+              "name": "Not Modified",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1ccb9c80-f8ec-4f4a-8e65-29df7820ba3c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7395ac60-4194-4b01-b4ac-774b60ab8298",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f0350fc-49e1-489b-a283-1b6006b5e8ea",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a51bfb4-632b-40d6-a5c7-b594981293fd",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6e2c2fb-f4e9-4893-9a28-70a1e8ad4d76",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c91d5d6-c2a2-4ab0-9ccc-679fc523c333",
+          "name": "Update a single Folder",
+          "request": {
+            "name": "Update a single Folder",
+            "description": {
+              "content": "Update Folder, move Folder to another Folder, and/or restore a trashed Folder.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "folders",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                "key": "IF-MATCH",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "document_category",
+                  "value": "{\"id\":\"<long>\"}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "external_properties",
+                  "value": "[{\"id\":\"<long>\",\"name\":\"<string>\",\"value\":\"<string>\",\"_destroy\":\"<boolean>\"},{\"id\":\"<long>\",\"name\":\"<string>\",\"value\":\"<string>\",\"_destroy\":\"<boolean>\"}]",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "parent",
+                  "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "restore",
+                  "value": "<boolean>",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "71b263b9-aa2d-44e5-bcd0-b739c9c7c886",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "document_category",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "external_properties",
+                      "value": "[{\"id\":\"<long>\",\"name\":\"<string>\",\"value\":\"<string>\",\"_destroy\":\"<boolean>\"},{\"id\":\"<long>\",\"name\":\"<string>\",\"value\":\"<string>\",\"_destroy\":\"<boolean>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "parent",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "restore",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 417,\n    \"etag\": \"string\",\n    \"created_at\": \"1984-08-05T11:04:31.161Z\",\n    \"updated_at\": \"1991-05-19T17:53:44.476Z\",\n    \"deleted_at\": \"1983-09-25T07:09:02.733Z\",\n    \"type\": \"Folder\",\n    \"locked\": true,\n    \"name\": \"string\",\n    \"root\": false,\n    \"parent\": {\n      \"id\": 2074,\n      \"etag\": \"string\",\n      \"created_at\": \"2013-02-16T15:47:28.285Z\",\n      \"updated_at\": \"2015-04-28T15:43:29.811Z\",\n      \"deleted_at\": \"1947-11-01T21:33:36.296Z\",\n      \"type\": \"Folder\",\n      \"locked\": true,\n      \"name\": \"string\",\n      \"root\": true\n    },\n    \"matter\": {\n      \"id\": 5802,\n      \"etag\": \"string\",\n      \"number\": 7909,\n      \"display_number\": \"string\",\n      \"custom_number\": \"string\",\n      \"currency\": {},\n      \"description\": \"string\",\n      \"status\": \"Closed\",\n      \"location\": \"string\",\n      \"client_reference\": \"string\",\n      \"client_id\": 4346,\n      \"billable\": true,\n      \"maildrop_address\": \"string\",\n      \"billing_method\": \"contingency\",\n      \"open_date\": \"1985-03-07\",\n      \"close_date\": \"1976-12-11\",\n      \"pending_date\": \"2002-08-14\",\n      \"created_at\": \"1969-12-16T09:17:21.912Z\",\n      \"updated_at\": \"1989-07-26T21:46:13.078Z\",\n      \"shared\": true,\n      \"has_tasks\": false,\n      \"last_activity_date\": \"2020-02-18\",\n      \"matter_stage_updated_at\": \"2002-04-11T08:14:04.957Z\"\n    },\n    \"contact\": {\n      \"id\": 6287,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"first_name\": \"string\",\n      \"middle_name\": \"string\",\n      \"last_name\": \"string\",\n      \"date_of_birth\": \"1993-07-07\",\n      \"type\": \"Company\",\n      \"created_at\": \"1983-10-27T01:49:24.882Z\",\n      \"updated_at\": \"2025-12-06T02:58:04.240Z\",\n      \"prefix\": \"string\",\n      \"title\": \"string\",\n      \"initials\": \"string\",\n      \"clio_connect_email\": \"string\",\n      \"locked_clio_connect_email\": true,\n      \"client_connect_user_id\": 8763,\n      \"primary_email_address\": \"string\",\n      \"secondary_email_address\": \"string\",\n      \"primary_phone_number\": \"string\",\n      \"secondary_phone_number\": \"string\",\n      \"ledes_client_id\": \"string\",\n      \"has_clio_for_clients_permission\": false,\n      \"is_client\": true,\n      \"is_clio_for_client_user\": true,\n      \"is_co_counsel\": false,\n      \"is_bill_recipient\": false,\n      \"sales_tax_number\": \"string\",\n      \"currency\": {}\n    },\n    \"document_category\": {\n      \"id\": 9988,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"created_at\": \"1960-07-20T17:23:32.639Z\",\n      \"updated_at\": \"1957-09-13T05:20:55.959Z\"\n    },\n    \"creator\": {\n      \"account_owner\": true,\n      \"clio_connect\": false,\n      \"court_rules_default_attendee\": true,\n      \"default_calendar_id\": 768,\n      \"email\": \"string\",\n      \"enabled\": false,\n      \"etag\": \"string\",\n      \"id\": 8569,\n      \"type\": \"ManageUser\",\n      \"initials\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"rate\": 8582.129803904914,\n      \"subscription_type\": \"Attorney\",\n      \"time_zone\": \"string\",\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"created_at\": \"1961-04-21T09:58:09.137Z\",\n      \"updated_at\": \"1954-01-09T19:11:13.534Z\"\n    },\n    \"latest_document_version\": {\n      \"id\": 9240,\n      \"document_id\": 7979,\n      \"etag\": \"string\",\n      \"uuid\": \"string\",\n      \"created_at\": \"2021-09-07T13:43:33.803Z\",\n      \"updated_at\": \"1975-04-09T22:32:24.885Z\",\n      \"filename\": \"string\",\n      \"size\": 533,\n      \"version_number\": 1659,\n      \"content_type\": \"string\",\n      \"received_at\": \"1967-04-09T11:58:52.843Z\",\n      \"put_url\": \"string\",\n      \"fully_uploaded\": false\n    },\n    \"group\": {\n      \"client_connect_user\": false,\n      \"etag\": \"string\",\n      \"id\": 2951,\n      \"name\": \"string\",\n      \"type\": \"UserGroup\",\n      \"updated_at\": \"2000-07-26T18:36:22.880Z\"\n    },\n    \"external_properties\": [\n      {\n        \"id\": 9530,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"value\": \"string\",\n        \"created_at\": \"1993-01-21T00:06:53.144Z\",\n        \"updated_at\": \"1969-04-03T10:40:26.597Z\"\n      },\n      {\n        \"id\": 841,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"value\": \"string\",\n        \"created_at\": \"1971-07-02T05:51:24.196Z\",\n        \"updated_at\": \"1992-06-17T19:09:01.962Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5bc48c7-0bcb-4711-9298-76e33126f875",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "document_category",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "external_properties",
+                      "value": "[{\"id\":\"<long>\",\"name\":\"<string>\",\"value\":\"<string>\",\"_destroy\":\"<boolean>\"},{\"id\":\"<long>\",\"name\":\"<string>\",\"value\":\"<string>\",\"_destroy\":\"<boolean>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "parent",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "restore",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ac2c9a0-8a7e-48fa-a8d9-3099f9807c97",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "document_category",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "external_properties",
+                      "value": "[{\"id\":\"<long>\",\"name\":\"<string>\",\"value\":\"<string>\",\"_destroy\":\"<boolean>\"},{\"id\":\"<long>\",\"name\":\"<string>\",\"value\":\"<string>\",\"_destroy\":\"<boolean>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "parent",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "restore",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d232138-3206-4bf9-9d3d-e1a6332b7ad6",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "document_category",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "external_properties",
+                      "value": "[{\"id\":\"<long>\",\"name\":\"<string>\",\"value\":\"<string>\",\"_destroy\":\"<boolean>\"},{\"id\":\"<long>\",\"name\":\"<string>\",\"value\":\"<string>\",\"_destroy\":\"<boolean>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "parent",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "restore",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "524665b2-9cb0-4b3f-b055-d0f794620751",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "document_category",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "external_properties",
+                      "value": "[{\"id\":\"<long>\",\"name\":\"<string>\",\"value\":\"<string>\",\"_destroy\":\"<boolean>\"},{\"id\":\"<long>\",\"name\":\"<string>\",\"value\":\"<string>\",\"_destroy\":\"<boolean>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "parent",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "restore",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "969d8066-84b0-4f87-894a-962591f7f402",
+              "name": "Precondition Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "document_category",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "external_properties",
+                      "value": "[{\"id\":\"<long>\",\"name\":\"<string>\",\"value\":\"<string>\",\"_destroy\":\"<boolean>\"},{\"id\":\"<long>\",\"name\":\"<string>\",\"value\":\"<string>\",\"_destroy\":\"<boolean>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "parent",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "restore",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80e24ef6-6722-467e-81e5-10e1c759bad7",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "document_category",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "external_properties",
+                      "value": "[{\"id\":\"<long>\",\"name\":\"<string>\",\"value\":\"<string>\",\"_destroy\":\"<boolean>\"},{\"id\":\"<long>\",\"name\":\"<string>\",\"value\":\"<string>\",\"_destroy\":\"<boolean>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "parent",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "restore",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2321a788-cb1c-4fb0-8df0-177f9b16626d",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "document_category",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "external_properties",
+                      "value": "[{\"id\":\"<long>\",\"name\":\"<string>\",\"value\":\"<string>\",\"_destroy\":\"<boolean>\"},{\"id\":\"<long>\",\"name\":\"<string>\",\"value\":\"<string>\",\"_destroy\":\"<boolean>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "parent",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "restore",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4db23983-dbb5-49c7-afef-586639664ae1",
+          "name": "Delete a single Folder",
+          "request": {
+            "name": "Delete a single Folder",
+            "description": {
+              "content": "Deleting a Folder using this method will move it to the trash instead of permanently deleting it. Trashed Folders are permanently deleted after 30 days. The following errors may be returned:\n\n- `400 Bad Request`: The Folder cannot be trashed. The `type` of the error will be `DeleteFailed` and the `message` of the error will be one of the following:\n  - `Delete failed: This folder contains more than 100,000 items and cannot be trashed. Please trash some of the items inside it before trying again.`\n  - `Delete failed: This item contains locked items and cannot be deleted.`\n  - `Delete failed: The root folder cannot be trashed`\n- `409 Conflict`: The Folder (or one of its descendants) is currently being modified by another request, and cannot be trashed.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "folders",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "649a8f14-9499-4d30-b3ed-5fe13d900f0d",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f66cde3b-0c95-4daa-9de7-ebdb1aa1622a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77520dcd-cdf8-4bf0-8ac4-76190ce7e0f4",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "931e71c3-f993-4853-8246-a9589aebd5e4",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folders",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.clio.com/api/v4",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The unique identifier for the Folder.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<long>",
+      "key": "id"
+    }
+  ],
+  "info": {
+    "_postman_id": "530f5d49-7d17-4c16-be1d-661ccd53c7ed",
+    "name": "Clio API Documentation Activities Folders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Developer Support and Feedback\n* Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio's API Support team at [api@clio.com](mailto:api@clio.com).\n* For business and partnership inquiries, contact our API Partnerships team at [api.partnerships@clio.com](mailto:api.partnerships@clio.com).\n* For best practices and tips from the Clio development community, join the conversation in the [Clio Developer Slack Channel](https://join.slack.com/t/clio-public/shared_invite/zt-36i0eqgo1-7POORPtMJpp2N0~_auL2IQ).\n\nA community-driven [Clio Developers Stack Overflow Group](https://stackoverflow.com/questions/tagged/clio-api) also exists where you can connect and ask questions from other Clio API users.\n# Getting Started\n> **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).\n>\n> Likewise, the developer portal is available at region-specific links for the [Australia](https://au.developers.clio.com), [Canada](https://ca.developers.clio.com), [EU](https://eu.developers.clio.com), and [US](https://developers.clio.com) regions.\n>\n> This document assumes the US region is being used (app.clio.com). If you're building in one of the other regions, you should adapt the links and examples as necessary.\n\nTo start building on the Clio API, you’ll need a Clio account – you can review our [Developer Handbook](https://docs.developers.clio.com/) and follow the steps to sign up for an account.\n\nOnce you have an account, you can [create a developer application](https://docs.developers.clio.com/api-docs/applications) from the [Developer Portal](https://developers.clio.com) and start building!\n# Authorization with OAuth 2.0\nSee our [Authorization documentation →](https://docs.developers.clio.com/api-docs/authorization)\n# Permissions\nSee our [Permissions documentation →](https://docs.developers.clio.com/api-docs/permissions)\n# Fields\nSee our [Fields documentation →](https://docs.developers.clio.com/api-docs/fields)\n# Rate Limiting\nSee our [Rate Limits documentation →](https://docs.developers.clio.com/api-docs/rate-limits)\n# Paging\nSee our [Pagination documentation →](https://docs.developers.clio.com/api-docs/paging)\n# ETags\nSee our [ETags documentation →](https://docs.developers.clio.com/api-docs/etags)\n# Minor Versions\nAPI v4 supports multiple minor versions. Versions are of the form '4.X.Y'. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you're requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.\n\nAn `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.\n\nYou can find our [API Versioning Policy and Guidelines](https://docs.developers.clio.com/api-docs/api-versioning-policy) in our documentation hub.\n\nThe [API Changelog](https://docs.developers.clio.com/api-docs/api-changelog) explains each version's changes in further detail.\n### [4.0.4](https://docs.developers.clio.com/api-docs/api-changelog#404)\n\n  * Update `quantity` field to return values in seconds rather than hours for Activities\n\n### [4.0.5](https://docs.developers.clio.com/api-docs/api-changelog#405)\n\n  * Remove `matter_balances` field from Bills\n* Standardize status/state enum values\n* Add a Document association to completed DocumentAutomations\n* Add rate visibility handling for Activity's price and total\n\n### [4.0.6](https://docs.developers.clio.com/api-docs/api-changelog#406)\n\n  * Remove `document_versions` collection field from Documents\n\n### [4.0.7](https://docs.developers.clio.com/api-docs/api-changelog#407)\n\n  * Change secure link format\n\n### [4.0.8](https://docs.developers.clio.com/api-docs/api-changelog#408)\n\n  * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user\n  * Add `quantity_redacted` field to activities\n\n### [4.0.9](https://docs.developers.clio.com/api-docs/api-changelog#409)\n\n  * Contacts are filtered and redacted in the response based on the new 'Contacts Visibility' user permission setting.\n\n### [4.0.10](https://docs.developers.clio.com/api-docs/api-changelog#4010)\n\n  * Fixed validation of `type` query parameter when querying Notes\n\n### [4.0.12](https://docs.developers.clio.com/api-docs/api-changelog#4012)\n\n  * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers\n\n### [4.0.13](https://docs.developers.clio.com/api-docs/api-changelog#4013)\n\n  **This is the default version**\n\n  * Add association limits to Contacts\n* Returns 422 Unprocessable Entity when association limits are exceeded\n\n\n\n\nContact Support:\n Name: Clio API Support\n Email: api@clio.com",
+      "type": "text/plain"
+    }
+  }
+}

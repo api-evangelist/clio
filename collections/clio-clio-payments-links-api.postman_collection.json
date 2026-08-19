@@ -1,0 +1,2603 @@
+{
+  "item": [
+    {
+      "id": "5b98987d-f023-476b-9a63-48182f58a70c",
+      "name": "Clio Payments Links",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7ab34691-25eb-4cb8-9cd0-202c34ac068a",
+          "name": "Return the data for all ClioPaymentsLinks",
+          "request": {
+            "name": "Return the data for all ClioPaymentsLinks",
+            "description": {
+              "content": "Outlines the parameters, optional and required, used when requesting the data for all ClioPaymentsLinks",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "clio_payments",
+                "links.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>",
+                  "description": "Filter ClioPaymentsLink records based on whether or not they have expired."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_since",
+                  "value": "<dateTime>",
+                  "description": "Filter ClioPaymentsLink records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ids[]",
+                  "value": "<long>",
+                  "description": "Filter ClioPaymentsLink records to those having the specified unique identifiers."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "A limit on the number of ClioPaymentsLink records to be returned. Limit can range between 1 and 200. Default: `200`."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "A token specifying which page to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_since",
+                  "value": "<dateTime>",
+                  "description": "Filter ClioPaymentsLink records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2ff8288d-1673-4a1d-a6c1-1e08c1d727da",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"active\": false,\n      \"amount\": 4049.859552615279,\n      \"created_at\": \"1992-07-04T19:31:12.212Z\",\n      \"currency\": \"string\",\n      \"description\": \"string\",\n      \"email_address\": \"string\",\n      \"etag\": \"string\",\n      \"expires_at\": \"2020-03-29T03:56:20.654Z\",\n      \"id\": 5814,\n      \"is_allocated_as_revenue\": false,\n      \"redirect_url\": \"string\",\n      \"url\": \"string\",\n      \"bank_account\": {\n        \"account_number\": \"string\",\n        \"balance\": 2791.2827944571272,\n        \"bank_transactions_count\": 5208,\n        \"clio_payment_page_link\": \"string\",\n        \"clio_payment_page_qr_code\": \"string\",\n        \"clio_payments_enabled\": false,\n        \"controlled_account\": true,\n        \"created_at\": \"1976-10-31T09:31:54.281Z\",\n        \"currency\": \"string\",\n        \"currency_symbol\": \"string\",\n        \"currency_id\": 2662.5981365719063,\n        \"default_account\": false,\n        \"domicile_branch\": \"string\",\n        \"etag\": \"string\",\n        \"general_ledger_number\": \"string\",\n        \"holder\": \"string\",\n        \"id\": 1682,\n        \"institution\": \"string\",\n        \"name\": \"string\",\n        \"swift\": \"string\",\n        \"transit_number\": \"string\",\n        \"type\": \"Trust\",\n        \"updated_at\": \"2014-08-18T02:06:13.267Z\"\n      },\n      \"bill\": {\n        \"id\": 2448,\n        \"etag\": \"string\",\n        \"number\": \"string\",\n        \"issued_at\": \"2014-09-09\",\n        \"created_at\": \"1981-02-07T21:25:30.219Z\",\n        \"due_at\": \"1979-12-29\",\n        \"tax_rate\": 3028.566900232237,\n        \"secondary_tax_rate\": 627.5473786137565,\n        \"updated_at\": \"1974-07-11T20:05:34.527Z\",\n        \"subject\": \"string\",\n        \"purchase_order\": \"string\",\n        \"type\": \"ClientBill\",\n        \"memo\": \"string\",\n        \"start_at\": \"1947-05-10\",\n        \"end_at\": \"1951-10-11\",\n        \"balance\": 4923.284665500237,\n        \"state\": \"deleted\",\n        \"kind\": \"trust_kind\",\n        \"total\": 7239.148983379785,\n        \"paid\": 227.7943684506456,\n        \"paid_at\": \"1957-11-18T14:54:28.523Z\",\n        \"pending\": 3331.8372922764606,\n        \"due\": 1376.1566465578424,\n        \"discount_services_only\": \"string\",\n        \"can_update\": true,\n        \"credits_issued\": 3709.210129319306,\n        \"shared\": true,\n        \"last_sent_at\": \"1993-08-16T21:26:53.353Z\",\n        \"services_secondary_tax\": 8279.257094418906,\n        \"services_sub_total\": 1357.008914831168,\n        \"services_tax\": 4338.015303729529,\n        \"services_taxable_sub_total\": 2059,\n        \"services_secondary_taxable_sub_total\": 1407,\n        \"taxable_sub_total\": 973,\n        \"secondary_taxable_sub_total\": 838,\n        \"sub_total\": 248.65911149034915,\n        \"tax_sum\": 4858.850510396737,\n        \"secondary_tax_sum\": 8580.636035947178,\n        \"total_tax\": 3483.778054560618,\n        \"available_state_transitions\": [\n          \"paid\",\n          \"paid\"\n        ]\n      },\n      \"clio_payments_payment\": {\n        \"amount\": 6095.038723539581,\n        \"confirmation_number\": \"string\",\n        \"created_at\": \"1997-05-22T18:30:41.361Z\",\n        \"currency\": \"string\",\n        \"deposit_as_revenue\": false,\n        \"description\": \"string\",\n        \"email_address\": \"string\",\n        \"id\": 8109,\n        \"state\": \"authorized\",\n        \"updated_at\": \"1998-06-11T23:04:14.718Z\"\n      },\n      \"contact\": {\n        \"id\": 7136,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"first_name\": \"string\",\n        \"middle_name\": \"string\",\n        \"last_name\": \"string\",\n        \"date_of_birth\": \"1976-01-28\",\n        \"type\": \"Company\",\n        \"created_at\": \"2023-05-10T21:30:41.286Z\",\n        \"updated_at\": \"1966-06-21T07:50:40.161Z\",\n        \"prefix\": \"string\",\n        \"title\": \"string\",\n        \"initials\": \"string\",\n        \"clio_connect_email\": \"string\",\n        \"locked_clio_connect_email\": true,\n        \"client_connect_user_id\": 6900,\n        \"primary_email_address\": \"string\",\n        \"secondary_email_address\": \"string\",\n        \"primary_phone_number\": \"string\",\n        \"secondary_phone_number\": \"string\",\n        \"ledes_client_id\": \"string\",\n        \"has_clio_for_clients_permission\": true,\n        \"is_client\": false,\n        \"is_clio_for_client_user\": true,\n        \"is_co_counsel\": true,\n        \"is_bill_recipient\": false,\n        \"sales_tax_number\": \"string\",\n        \"currency\": {}\n      },\n      \"destination_account\": {\n        \"account_number\": \"string\",\n        \"balance\": 2625.8412464618973,\n        \"bank_transactions_count\": 4781,\n        \"clio_payment_page_link\": \"string\",\n        \"clio_payment_page_qr_code\": \"string\",\n        \"clio_payments_enabled\": false,\n        \"controlled_account\": false,\n        \"created_at\": \"1994-05-06T02:56:57.488Z\",\n        \"currency\": \"string\",\n        \"currency_symbol\": \"string\",\n        \"currency_id\": 6252.322156011873,\n        \"default_account\": true,\n        \"domicile_branch\": \"string\",\n        \"etag\": \"string\",\n        \"general_ledger_number\": \"string\",\n        \"holder\": \"string\",\n        \"id\": 5141,\n        \"institution\": \"string\",\n        \"name\": \"string\",\n        \"swift\": \"string\",\n        \"transit_number\": \"string\",\n        \"type\": \"Trust\",\n        \"updated_at\": \"1961-12-08T19:04:55.995Z\"\n      },\n      \"destination_contact\": {\n        \"id\": 2664,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"first_name\": \"string\",\n        \"middle_name\": \"string\",\n        \"last_name\": \"string\",\n        \"date_of_birth\": \"1975-12-23\",\n        \"type\": \"Company\",\n        \"created_at\": \"1956-07-31T06:56:21.012Z\",\n        \"updated_at\": \"2005-06-09T23:18:44.743Z\",\n        \"prefix\": \"string\",\n        \"title\": \"string\",\n        \"initials\": \"string\",\n        \"clio_connect_email\": \"string\",\n        \"locked_clio_connect_email\": false,\n        \"client_connect_user_id\": 8661,\n        \"primary_email_address\": \"string\",\n        \"secondary_email_address\": \"string\",\n        \"primary_phone_number\": \"string\",\n        \"secondary_phone_number\": \"string\",\n        \"ledes_client_id\": \"string\",\n        \"has_clio_for_clients_permission\": false,\n        \"is_client\": true,\n        \"is_clio_for_client_user\": false,\n        \"is_co_counsel\": false,\n        \"is_bill_recipient\": true,\n        \"sales_tax_number\": \"string\",\n        \"currency\": {}\n      }\n    },\n    {\n      \"active\": false,\n      \"amount\": 933.2463223180898,\n      \"created_at\": \"2016-12-20T12:24:54.309Z\",\n      \"currency\": \"string\",\n      \"description\": \"string\",\n      \"email_address\": \"string\",\n      \"etag\": \"string\",\n      \"expires_at\": \"1957-03-05T23:22:13.971Z\",\n      \"id\": 710,\n      \"is_allocated_as_revenue\": false,\n      \"redirect_url\": \"string\",\n      \"url\": \"string\",\n      \"bank_account\": {\n        \"account_number\": \"string\",\n        \"balance\": 8539.561642042943,\n        \"bank_transactions_count\": 8534,\n        \"clio_payment_page_link\": \"string\",\n        \"clio_payment_page_qr_code\": \"string\",\n        \"clio_payments_enabled\": true,\n        \"controlled_account\": true,\n        \"created_at\": \"1995-01-26T06:12:26.520Z\",\n        \"currency\": \"string\",\n        \"currency_symbol\": \"string\",\n        \"currency_id\": 4299.136404644587,\n        \"default_account\": true,\n        \"domicile_branch\": \"string\",\n        \"etag\": \"string\",\n        \"general_ledger_number\": \"string\",\n        \"holder\": \"string\",\n        \"id\": 2285,\n        \"institution\": \"string\",\n        \"name\": \"string\",\n        \"swift\": \"string\",\n        \"transit_number\": \"string\",\n        \"type\": \"Operating\",\n        \"updated_at\": \"2016-01-12T13:23:01.285Z\"\n      },\n      \"bill\": {\n        \"id\": 8969,\n        \"etag\": \"string\",\n        \"number\": \"string\",\n        \"issued_at\": \"1994-11-24\",\n        \"created_at\": \"1954-12-25T04:42:02.122Z\",\n        \"due_at\": \"1950-09-17\",\n        \"tax_rate\": 6459.991689363137,\n        \"secondary_tax_rate\": 3968.3870259535192,\n        \"updated_at\": \"2012-05-10T22:13:51.737Z\",\n        \"subject\": \"string\",\n        \"purchase_order\": \"string\",\n        \"type\": \"ClientBill\",\n        \"memo\": \"string\",\n        \"start_at\": \"2024-04-29\",\n        \"end_at\": \"1958-05-01\",\n        \"balance\": 6624.900429473768,\n        \"state\": \"awaiting_payment\",\n        \"kind\": \"aggregate_expenses\",\n        \"total\": 9063.56580838128,\n        \"paid\": 7502.857806850978,\n        \"paid_at\": \"1980-10-01T09:16:27.137Z\",\n        \"pending\": 8796.329920933245,\n        \"due\": 9836.952212574879,\n        \"discount_services_only\": \"string\",\n        \"can_update\": false,\n        \"credits_issued\": 2095.7375884601192,\n        \"shared\": false,\n        \"last_sent_at\": \"1976-09-11T09:47:01.668Z\",\n        \"services_secondary_tax\": 307.36400082352236,\n        \"services_sub_total\": 150.7399705886281,\n        \"services_tax\": 8670.724045697425,\n        \"services_taxable_sub_total\": 7602,\n        \"services_secondary_taxable_sub_total\": 7121,\n        \"taxable_sub_total\": 874,\n        \"secondary_taxable_sub_total\": 598,\n        \"sub_total\": 7897.091610614497,\n        \"tax_sum\": 2860.4397425619677,\n        \"secondary_tax_sum\": 4478.143931814741,\n        \"total_tax\": 5521.307182448505,\n        \"available_state_transitions\": [\n          \"paid\",\n          \"awaiting_payment\"\n        ]\n      },\n      \"clio_payments_payment\": {\n        \"amount\": 4803.688048873202,\n        \"confirmation_number\": \"string\",\n        \"created_at\": \"1960-04-15T00:02:33.018Z\",\n        \"currency\": \"string\",\n        \"deposit_as_revenue\": false,\n        \"description\": \"string\",\n        \"email_address\": \"string\",\n        \"id\": 6306,\n        \"state\": \"failed\",\n        \"updated_at\": \"1949-05-22T16:39:41.301Z\"\n      },\n      \"contact\": {\n        \"id\": 6954,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"first_name\": \"string\",\n        \"middle_name\": \"string\",\n        \"last_name\": \"string\",\n        \"date_of_birth\": \"1963-08-05\",\n        \"type\": \"Person\",\n        \"created_at\": \"2019-06-24T05:02:21.702Z\",\n        \"updated_at\": \"2021-06-04T08:18:36.913Z\",\n        \"prefix\": \"string\",\n        \"title\": \"string\",\n        \"initials\": \"string\",\n        \"clio_connect_email\": \"string\",\n        \"locked_clio_connect_email\": false,\n        \"client_connect_user_id\": 8583,\n        \"primary_email_address\": \"string\",\n        \"secondary_email_address\": \"string\",\n        \"primary_phone_number\": \"string\",\n        \"secondary_phone_number\": \"string\",\n        \"ledes_client_id\": \"string\",\n        \"has_clio_for_clients_permission\": false,\n        \"is_client\": true,\n        \"is_clio_for_client_user\": true,\n        \"is_co_counsel\": true,\n        \"is_bill_recipient\": true,\n        \"sales_tax_number\": \"string\",\n        \"currency\": {}\n      },\n      \"destination_account\": {\n        \"account_number\": \"string\",\n        \"balance\": 1732.9791303683116,\n        \"bank_transactions_count\": 57,\n        \"clio_payment_page_link\": \"string\",\n        \"clio_payment_page_qr_code\": \"string\",\n        \"clio_payments_enabled\": false,\n        \"controlled_account\": false,\n        \"created_at\": \"1980-09-16T12:04:18.568Z\",\n        \"currency\": \"string\",\n        \"currency_symbol\": \"string\",\n        \"currency_id\": 4012.7591443444567,\n        \"default_account\": false,\n        \"domicile_branch\": \"string\",\n        \"etag\": \"string\",\n        \"general_ledger_number\": \"string\",\n        \"holder\": \"string\",\n        \"id\": 6691,\n        \"institution\": \"string\",\n        \"name\": \"string\",\n        \"swift\": \"string\",\n        \"transit_number\": \"string\",\n        \"type\": \"Operating\",\n        \"updated_at\": \"1950-06-21T05:39:57.914Z\"\n      },\n      \"destination_contact\": {\n        \"id\": 9032,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"first_name\": \"string\",\n        \"middle_name\": \"string\",\n        \"last_name\": \"string\",\n        \"date_of_birth\": \"2015-10-11\",\n        \"type\": \"Company\",\n        \"created_at\": \"1955-05-04T04:58:07.764Z\",\n        \"updated_at\": \"1974-01-03T01:20:31.705Z\",\n        \"prefix\": \"string\",\n        \"title\": \"string\",\n        \"initials\": \"string\",\n        \"clio_connect_email\": \"string\",\n        \"locked_clio_connect_email\": true,\n        \"client_connect_user_id\": 5647,\n        \"primary_email_address\": \"string\",\n        \"secondary_email_address\": \"string\",\n        \"primary_phone_number\": \"string\",\n        \"secondary_phone_number\": \"string\",\n        \"ledes_client_id\": \"string\",\n        \"has_clio_for_clients_permission\": true,\n        \"is_client\": true,\n        \"is_clio_for_client_user\": false,\n        \"is_co_counsel\": false,\n        \"is_bill_recipient\": true,\n        \"sales_tax_number\": \"string\",\n        \"currency\": {}\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70be4bc6-d634-460b-880c-c5774968c6f5",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41b5eef2-0c44-497b-805a-770e21129120",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8bc948a-869d-4bf2-916a-28d07e78175e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acb58164-af7e-4f11-bd87-648f5168e167",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "created_since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b7498ae-6f62-484c-99c7-678a39c9a3ac",
+          "name": "Create a new ClioPaymentsLink",
+          "request": {
+            "name": "Create a new ClioPaymentsLink",
+            "description": {
+              "content": "Outlines the parameters and data fields used when creating a new ClioPaymentsLink",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "clio_payments",
+                "links.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "destination_account",
+                  "value": "{\"id\":\"<long>\"}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "duration",
+                  "value": "<long>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "subject",
+                  "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<double>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "destination_contact",
+                  "value": "{\"id\":\"<long>\"}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "email_address",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "is_allocated_as_revenue",
+                  "value": "<boolean>",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "58d4ad1b-6bf0-47b1-94ef-db4295e6ad99",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "destination_account",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "duration",
+                      "value": "<long>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "subject",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "amount",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "destination_contact",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "email_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "is_allocated_as_revenue",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"active\": true,\n    \"amount\": 9065.235816156988,\n    \"created_at\": \"1948-08-03T07:28:26.832Z\",\n    \"currency\": \"string\",\n    \"description\": \"string\",\n    \"email_address\": \"string\",\n    \"etag\": \"string\",\n    \"expires_at\": \"1999-05-22T17:55:47.690Z\",\n    \"id\": 4957,\n    \"is_allocated_as_revenue\": false,\n    \"redirect_url\": \"string\",\n    \"url\": \"string\",\n    \"bank_account\": {\n      \"account_number\": \"string\",\n      \"balance\": 8294.265743960965,\n      \"bank_transactions_count\": 686,\n      \"clio_payment_page_link\": \"string\",\n      \"clio_payment_page_qr_code\": \"string\",\n      \"clio_payments_enabled\": true,\n      \"controlled_account\": false,\n      \"created_at\": \"1970-05-16T07:13:09.673Z\",\n      \"currency\": \"string\",\n      \"currency_symbol\": \"string\",\n      \"currency_id\": 7603.124611016057,\n      \"default_account\": true,\n      \"domicile_branch\": \"string\",\n      \"etag\": \"string\",\n      \"general_ledger_number\": \"string\",\n      \"holder\": \"string\",\n      \"id\": 5644,\n      \"institution\": \"string\",\n      \"name\": \"string\",\n      \"swift\": \"string\",\n      \"transit_number\": \"string\",\n      \"type\": \"Trust\",\n      \"updated_at\": \"2006-11-01T23:12:21.758Z\"\n    },\n    \"bill\": {\n      \"id\": 9246,\n      \"etag\": \"string\",\n      \"number\": \"string\",\n      \"issued_at\": \"1985-08-30\",\n      \"created_at\": \"1996-11-22T03:56:58.237Z\",\n      \"due_at\": \"2019-06-13\",\n      \"tax_rate\": 3166.8968377528186,\n      \"secondary_tax_rate\": 3466.5258339635916,\n      \"updated_at\": \"1977-06-25T16:35:22.758Z\",\n      \"subject\": \"string\",\n      \"purchase_order\": \"string\",\n      \"type\": \"ClientBill\",\n      \"memo\": \"string\",\n      \"start_at\": \"1983-11-08\",\n      \"end_at\": \"1999-10-12\",\n      \"balance\": 9006.453954818357,\n      \"state\": \"paid\",\n      \"kind\": \"trust_kind\",\n      \"total\": 9089.08202237235,\n      \"paid\": 6000.74978825524,\n      \"paid_at\": \"1960-09-24T00:26:27.122Z\",\n      \"pending\": 5266.812746869671,\n      \"due\": 2519.328633243566,\n      \"discount_services_only\": \"string\",\n      \"can_update\": true,\n      \"credits_issued\": 3499.71421468388,\n      \"shared\": true,\n      \"last_sent_at\": \"1985-07-03T02:18:34.311Z\",\n      \"services_secondary_tax\": 6324.101879500555,\n      \"services_sub_total\": 5870.167120874995,\n      \"services_tax\": 8883.56601749166,\n      \"services_taxable_sub_total\": 9717,\n      \"services_secondary_taxable_sub_total\": 5927,\n      \"taxable_sub_total\": 243,\n      \"secondary_taxable_sub_total\": 8313,\n      \"sub_total\": 447.7838112969257,\n      \"tax_sum\": 5161.960550337684,\n      \"secondary_tax_sum\": 87.78098600584872,\n      \"total_tax\": 7329.79057882448,\n      \"available_state_transitions\": [\n        \"paid\",\n        \"deleted\"\n      ]\n    },\n    \"clio_payments_payment\": {\n      \"amount\": 5167.948715245269,\n      \"confirmation_number\": \"string\",\n      \"created_at\": \"1969-02-01T23:06:39.812Z\",\n      \"currency\": \"string\",\n      \"deposit_as_revenue\": false,\n      \"description\": \"string\",\n      \"email_address\": \"string\",\n      \"id\": 4086,\n      \"state\": \"authorized\",\n      \"updated_at\": \"1978-06-13T17:26:10.431Z\"\n    },\n    \"contact\": {\n      \"id\": 1625,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"first_name\": \"string\",\n      \"middle_name\": \"string\",\n      \"last_name\": \"string\",\n      \"date_of_birth\": \"2002-02-11\",\n      \"type\": \"Company\",\n      \"created_at\": \"1973-12-14T23:40:16.595Z\",\n      \"updated_at\": \"1991-12-11T22:15:06.382Z\",\n      \"prefix\": \"string\",\n      \"title\": \"string\",\n      \"initials\": \"string\",\n      \"clio_connect_email\": \"string\",\n      \"locked_clio_connect_email\": true,\n      \"client_connect_user_id\": 3770,\n      \"primary_email_address\": \"string\",\n      \"secondary_email_address\": \"string\",\n      \"primary_phone_number\": \"string\",\n      \"secondary_phone_number\": \"string\",\n      \"ledes_client_id\": \"string\",\n      \"has_clio_for_clients_permission\": true,\n      \"is_client\": true,\n      \"is_clio_for_client_user\": false,\n      \"is_co_counsel\": true,\n      \"is_bill_recipient\": true,\n      \"sales_tax_number\": \"string\",\n      \"currency\": {}\n    },\n    \"destination_account\": {\n      \"account_number\": \"string\",\n      \"balance\": 7087.5686210960785,\n      \"bank_transactions_count\": 7371,\n      \"clio_payment_page_link\": \"string\",\n      \"clio_payment_page_qr_code\": \"string\",\n      \"clio_payments_enabled\": true,\n      \"controlled_account\": true,\n      \"created_at\": \"1984-03-02T12:32:30.621Z\",\n      \"currency\": \"string\",\n      \"currency_symbol\": \"string\",\n      \"currency_id\": 2216.2715836078914,\n      \"default_account\": true,\n      \"domicile_branch\": \"string\",\n      \"etag\": \"string\",\n      \"general_ledger_number\": \"string\",\n      \"holder\": \"string\",\n      \"id\": 8926,\n      \"institution\": \"string\",\n      \"name\": \"string\",\n      \"swift\": \"string\",\n      \"transit_number\": \"string\",\n      \"type\": \"Operating\",\n      \"updated_at\": \"1952-09-06T10:13:45.206Z\"\n    },\n    \"destination_contact\": {\n      \"id\": 8965,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"first_name\": \"string\",\n      \"middle_name\": \"string\",\n      \"last_name\": \"string\",\n      \"date_of_birth\": \"1976-08-09\",\n      \"type\": \"Company\",\n      \"created_at\": \"1971-01-14T04:44:21.934Z\",\n      \"updated_at\": \"1981-04-10T15:46:37.932Z\",\n      \"prefix\": \"string\",\n      \"title\": \"string\",\n      \"initials\": \"string\",\n      \"clio_connect_email\": \"string\",\n      \"locked_clio_connect_email\": false,\n      \"client_connect_user_id\": 4769,\n      \"primary_email_address\": \"string\",\n      \"secondary_email_address\": \"string\",\n      \"primary_phone_number\": \"string\",\n      \"secondary_phone_number\": \"string\",\n      \"ledes_client_id\": \"string\",\n      \"has_clio_for_clients_permission\": false,\n      \"is_client\": false,\n      \"is_clio_for_client_user\": false,\n      \"is_co_counsel\": false,\n      \"is_bill_recipient\": true,\n      \"sales_tax_number\": \"string\",\n      \"currency\": {}\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76adf300-cbf3-4f74-82a5-2eed3e6bff87",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "destination_account",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "duration",
+                      "value": "<long>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "subject",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "amount",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "destination_contact",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "email_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "is_allocated_as_revenue",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91a647f7-be2e-45b6-9a80-9ac3c0e1d9c8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "destination_account",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "duration",
+                      "value": "<long>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "subject",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "amount",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "destination_contact",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "email_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "is_allocated_as_revenue",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc2c8669-a5c5-459d-91d4-550e9ee11836",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "destination_account",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "duration",
+                      "value": "<long>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "subject",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "amount",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "destination_contact",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "email_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "is_allocated_as_revenue",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4bd51d8-9f3f-467d-9137-9c2641c40046",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "destination_account",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "duration",
+                      "value": "<long>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "subject",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "amount",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "destination_contact",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "email_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "is_allocated_as_revenue",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92a56d61-4f07-4692-8ea7-173bafc98fbd",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "destination_account",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "duration",
+                      "value": "<long>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "subject",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "amount",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "destination_contact",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "email_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "is_allocated_as_revenue",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2de85a60-9be5-49eb-bd41-afc62a94275f",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "destination_account",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "duration",
+                      "value": "<long>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "subject",
+                      "value": "{\"id\":\"<long>\",\"type\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "amount",
+                      "value": "<double>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "destination_contact",
+                      "value": "{\"id\":\"<long>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "email_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "is_allocated_as_revenue",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "654e66ac-2952-45b9-9fb9-3107173ae42c",
+          "name": "Return the data for a single ClioPaymentsLink",
+          "request": {
+            "name": "Return the data for a single ClioPaymentsLink",
+            "description": {
+              "content": "Outlines the parameters, optional and required, used when requesting the data for a single ClioPaymentsLink",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "clio_payments",
+                "links",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                "key": "IF-MODIFIED-SINCE",
+                "value": "<date>"
+              },
+              {
+                "disabled": false,
+                "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                "key": "IF-NONE-MATCH",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f1a5e59-a358-4a1f-a841-fb86acb35f70",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"active\": true,\n    \"amount\": 9065.235816156988,\n    \"created_at\": \"1948-08-03T07:28:26.832Z\",\n    \"currency\": \"string\",\n    \"description\": \"string\",\n    \"email_address\": \"string\",\n    \"etag\": \"string\",\n    \"expires_at\": \"1999-05-22T17:55:47.690Z\",\n    \"id\": 4957,\n    \"is_allocated_as_revenue\": false,\n    \"redirect_url\": \"string\",\n    \"url\": \"string\",\n    \"bank_account\": {\n      \"account_number\": \"string\",\n      \"balance\": 8294.265743960965,\n      \"bank_transactions_count\": 686,\n      \"clio_payment_page_link\": \"string\",\n      \"clio_payment_page_qr_code\": \"string\",\n      \"clio_payments_enabled\": true,\n      \"controlled_account\": false,\n      \"created_at\": \"1970-05-16T07:13:09.673Z\",\n      \"currency\": \"string\",\n      \"currency_symbol\": \"string\",\n      \"currency_id\": 7603.124611016057,\n      \"default_account\": true,\n      \"domicile_branch\": \"string\",\n      \"etag\": \"string\",\n      \"general_ledger_number\": \"string\",\n      \"holder\": \"string\",\n      \"id\": 5644,\n      \"institution\": \"string\",\n      \"name\": \"string\",\n      \"swift\": \"string\",\n      \"transit_number\": \"string\",\n      \"type\": \"Trust\",\n      \"updated_at\": \"2006-11-01T23:12:21.758Z\"\n    },\n    \"bill\": {\n      \"id\": 9246,\n      \"etag\": \"string\",\n      \"number\": \"string\",\n      \"issued_at\": \"1985-08-30\",\n      \"created_at\": \"1996-11-22T03:56:58.237Z\",\n      \"due_at\": \"2019-06-13\",\n      \"tax_rate\": 3166.8968377528186,\n      \"secondary_tax_rate\": 3466.5258339635916,\n      \"updated_at\": \"1977-06-25T16:35:22.758Z\",\n      \"subject\": \"string\",\n      \"purchase_order\": \"string\",\n      \"type\": \"ClientBill\",\n      \"memo\": \"string\",\n      \"start_at\": \"1983-11-08\",\n      \"end_at\": \"1999-10-12\",\n      \"balance\": 9006.453954818357,\n      \"state\": \"paid\",\n      \"kind\": \"trust_kind\",\n      \"total\": 9089.08202237235,\n      \"paid\": 6000.74978825524,\n      \"paid_at\": \"1960-09-24T00:26:27.122Z\",\n      \"pending\": 5266.812746869671,\n      \"due\": 2519.328633243566,\n      \"discount_services_only\": \"string\",\n      \"can_update\": true,\n      \"credits_issued\": 3499.71421468388,\n      \"shared\": true,\n      \"last_sent_at\": \"1985-07-03T02:18:34.311Z\",\n      \"services_secondary_tax\": 6324.101879500555,\n      \"services_sub_total\": 5870.167120874995,\n      \"services_tax\": 8883.56601749166,\n      \"services_taxable_sub_total\": 9717,\n      \"services_secondary_taxable_sub_total\": 5927,\n      \"taxable_sub_total\": 243,\n      \"secondary_taxable_sub_total\": 8313,\n      \"sub_total\": 447.7838112969257,\n      \"tax_sum\": 5161.960550337684,\n      \"secondary_tax_sum\": 87.78098600584872,\n      \"total_tax\": 7329.79057882448,\n      \"available_state_transitions\": [\n        \"paid\",\n        \"deleted\"\n      ]\n    },\n    \"clio_payments_payment\": {\n      \"amount\": 5167.948715245269,\n      \"confirmation_number\": \"string\",\n      \"created_at\": \"1969-02-01T23:06:39.812Z\",\n      \"currency\": \"string\",\n      \"deposit_as_revenue\": false,\n      \"description\": \"string\",\n      \"email_address\": \"string\",\n      \"id\": 4086,\n      \"state\": \"authorized\",\n      \"updated_at\": \"1978-06-13T17:26:10.431Z\"\n    },\n    \"contact\": {\n      \"id\": 1625,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"first_name\": \"string\",\n      \"middle_name\": \"string\",\n      \"last_name\": \"string\",\n      \"date_of_birth\": \"2002-02-11\",\n      \"type\": \"Company\",\n      \"created_at\": \"1973-12-14T23:40:16.595Z\",\n      \"updated_at\": \"1991-12-11T22:15:06.382Z\",\n      \"prefix\": \"string\",\n      \"title\": \"string\",\n      \"initials\": \"string\",\n      \"clio_connect_email\": \"string\",\n      \"locked_clio_connect_email\": true,\n      \"client_connect_user_id\": 3770,\n      \"primary_email_address\": \"string\",\n      \"secondary_email_address\": \"string\",\n      \"primary_phone_number\": \"string\",\n      \"secondary_phone_number\": \"string\",\n      \"ledes_client_id\": \"string\",\n      \"has_clio_for_clients_permission\": true,\n      \"is_client\": true,\n      \"is_clio_for_client_user\": false,\n      \"is_co_counsel\": true,\n      \"is_bill_recipient\": true,\n      \"sales_tax_number\": \"string\",\n      \"currency\": {}\n    },\n    \"destination_account\": {\n      \"account_number\": \"string\",\n      \"balance\": 7087.5686210960785,\n      \"bank_transactions_count\": 7371,\n      \"clio_payment_page_link\": \"string\",\n      \"clio_payment_page_qr_code\": \"string\",\n      \"clio_payments_enabled\": true,\n      \"controlled_account\": true,\n      \"created_at\": \"1984-03-02T12:32:30.621Z\",\n      \"currency\": \"string\",\n      \"currency_symbol\": \"string\",\n      \"currency_id\": 2216.2715836078914,\n      \"default_account\": true,\n      \"domicile_branch\": \"string\",\n      \"etag\": \"string\",\n      \"general_ledger_number\": \"string\",\n      \"holder\": \"string\",\n      \"id\": 8926,\n      \"institution\": \"string\",\n      \"name\": \"string\",\n      \"swift\": \"string\",\n      \"transit_number\": \"string\",\n      \"type\": \"Operating\",\n      \"updated_at\": \"1952-09-06T10:13:45.206Z\"\n    },\n    \"destination_contact\": {\n      \"id\": 8965,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"first_name\": \"string\",\n      \"middle_name\": \"string\",\n      \"last_name\": \"string\",\n      \"date_of_birth\": \"1976-08-09\",\n      \"type\": \"Company\",\n      \"created_at\": \"1971-01-14T04:44:21.934Z\",\n      \"updated_at\": \"1981-04-10T15:46:37.932Z\",\n      \"prefix\": \"string\",\n      \"title\": \"string\",\n      \"initials\": \"string\",\n      \"clio_connect_email\": \"string\",\n      \"locked_clio_connect_email\": false,\n      \"client_connect_user_id\": 4769,\n      \"primary_email_address\": \"string\",\n      \"secondary_email_address\": \"string\",\n      \"primary_phone_number\": \"string\",\n      \"secondary_phone_number\": \"string\",\n      \"ledes_client_id\": \"string\",\n      \"has_clio_for_clients_permission\": false,\n      \"is_client\": false,\n      \"is_clio_for_client_user\": false,\n      \"is_co_counsel\": false,\n      \"is_bill_recipient\": true,\n      \"sales_tax_number\": \"string\",\n      \"currency\": {}\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38886e1d-d6ba-4c65-97c3-64ec93b1ed1c",
+              "name": "Not Modified",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a4179834-e773-4436-81bc-3d9467be2392",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6dfcc0a7-fb8c-41c5-94bd-d218af88db2d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "507019d8-ed00-42e3-985d-bf66cf5e800e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f66e606c-71cd-4e75-85dd-9a68ebf6f590",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc5e4b75-c4b1-4817-bd31-3fc084079130",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "81f0d010-2b03-4466-963f-ac3eda6d7850",
+          "name": "Update a single ClioPaymentsLink",
+          "request": {
+            "name": "Update a single ClioPaymentsLink",
+            "description": {
+              "content": "Outlines the parameters and data fields used when updating a single ClioPaymentsLink",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "clio_payments",
+                "links",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                "key": "IF-MATCH",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "expired",
+                  "value": "<boolean>",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "678872f6-945e-4a5f-80e9-59d21278fc6d",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "expired",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"active\": true,\n    \"amount\": 9065.235816156988,\n    \"created_at\": \"1948-08-03T07:28:26.832Z\",\n    \"currency\": \"string\",\n    \"description\": \"string\",\n    \"email_address\": \"string\",\n    \"etag\": \"string\",\n    \"expires_at\": \"1999-05-22T17:55:47.690Z\",\n    \"id\": 4957,\n    \"is_allocated_as_revenue\": false,\n    \"redirect_url\": \"string\",\n    \"url\": \"string\",\n    \"bank_account\": {\n      \"account_number\": \"string\",\n      \"balance\": 8294.265743960965,\n      \"bank_transactions_count\": 686,\n      \"clio_payment_page_link\": \"string\",\n      \"clio_payment_page_qr_code\": \"string\",\n      \"clio_payments_enabled\": true,\n      \"controlled_account\": false,\n      \"created_at\": \"1970-05-16T07:13:09.673Z\",\n      \"currency\": \"string\",\n      \"currency_symbol\": \"string\",\n      \"currency_id\": 7603.124611016057,\n      \"default_account\": true,\n      \"domicile_branch\": \"string\",\n      \"etag\": \"string\",\n      \"general_ledger_number\": \"string\",\n      \"holder\": \"string\",\n      \"id\": 5644,\n      \"institution\": \"string\",\n      \"name\": \"string\",\n      \"swift\": \"string\",\n      \"transit_number\": \"string\",\n      \"type\": \"Trust\",\n      \"updated_at\": \"2006-11-01T23:12:21.758Z\"\n    },\n    \"bill\": {\n      \"id\": 9246,\n      \"etag\": \"string\",\n      \"number\": \"string\",\n      \"issued_at\": \"1985-08-30\",\n      \"created_at\": \"1996-11-22T03:56:58.237Z\",\n      \"due_at\": \"2019-06-13\",\n      \"tax_rate\": 3166.8968377528186,\n      \"secondary_tax_rate\": 3466.5258339635916,\n      \"updated_at\": \"1977-06-25T16:35:22.758Z\",\n      \"subject\": \"string\",\n      \"purchase_order\": \"string\",\n      \"type\": \"ClientBill\",\n      \"memo\": \"string\",\n      \"start_at\": \"1983-11-08\",\n      \"end_at\": \"1999-10-12\",\n      \"balance\": 9006.453954818357,\n      \"state\": \"paid\",\n      \"kind\": \"trust_kind\",\n      \"total\": 9089.08202237235,\n      \"paid\": 6000.74978825524,\n      \"paid_at\": \"1960-09-24T00:26:27.122Z\",\n      \"pending\": 5266.812746869671,\n      \"due\": 2519.328633243566,\n      \"discount_services_only\": \"string\",\n      \"can_update\": true,\n      \"credits_issued\": 3499.71421468388,\n      \"shared\": true,\n      \"last_sent_at\": \"1985-07-03T02:18:34.311Z\",\n      \"services_secondary_tax\": 6324.101879500555,\n      \"services_sub_total\": 5870.167120874995,\n      \"services_tax\": 8883.56601749166,\n      \"services_taxable_sub_total\": 9717,\n      \"services_secondary_taxable_sub_total\": 5927,\n      \"taxable_sub_total\": 243,\n      \"secondary_taxable_sub_total\": 8313,\n      \"sub_total\": 447.7838112969257,\n      \"tax_sum\": 5161.960550337684,\n      \"secondary_tax_sum\": 87.78098600584872,\n      \"total_tax\": 7329.79057882448,\n      \"available_state_transitions\": [\n        \"paid\",\n        \"deleted\"\n      ]\n    },\n    \"clio_payments_payment\": {\n      \"amount\": 5167.948715245269,\n      \"confirmation_number\": \"string\",\n      \"created_at\": \"1969-02-01T23:06:39.812Z\",\n      \"currency\": \"string\",\n      \"deposit_as_revenue\": false,\n      \"description\": \"string\",\n      \"email_address\": \"string\",\n      \"id\": 4086,\n      \"state\": \"authorized\",\n      \"updated_at\": \"1978-06-13T17:26:10.431Z\"\n    },\n    \"contact\": {\n      \"id\": 1625,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"first_name\": \"string\",\n      \"middle_name\": \"string\",\n      \"last_name\": \"string\",\n      \"date_of_birth\": \"2002-02-11\",\n      \"type\": \"Company\",\n      \"created_at\": \"1973-12-14T23:40:16.595Z\",\n      \"updated_at\": \"1991-12-11T22:15:06.382Z\",\n      \"prefix\": \"string\",\n      \"title\": \"string\",\n      \"initials\": \"string\",\n      \"clio_connect_email\": \"string\",\n      \"locked_clio_connect_email\": true,\n      \"client_connect_user_id\": 3770,\n      \"primary_email_address\": \"string\",\n      \"secondary_email_address\": \"string\",\n      \"primary_phone_number\": \"string\",\n      \"secondary_phone_number\": \"string\",\n      \"ledes_client_id\": \"string\",\n      \"has_clio_for_clients_permission\": true,\n      \"is_client\": true,\n      \"is_clio_for_client_user\": false,\n      \"is_co_counsel\": true,\n      \"is_bill_recipient\": true,\n      \"sales_tax_number\": \"string\",\n      \"currency\": {}\n    },\n    \"destination_account\": {\n      \"account_number\": \"string\",\n      \"balance\": 7087.5686210960785,\n      \"bank_transactions_count\": 7371,\n      \"clio_payment_page_link\": \"string\",\n      \"clio_payment_page_qr_code\": \"string\",\n      \"clio_payments_enabled\": true,\n      \"controlled_account\": true,\n      \"created_at\": \"1984-03-02T12:32:30.621Z\",\n      \"currency\": \"string\",\n      \"currency_symbol\": \"string\",\n      \"currency_id\": 2216.2715836078914,\n      \"default_account\": true,\n      \"domicile_branch\": \"string\",\n      \"etag\": \"string\",\n      \"general_ledger_number\": \"string\",\n      \"holder\": \"string\",\n      \"id\": 8926,\n      \"institution\": \"string\",\n      \"name\": \"string\",\n      \"swift\": \"string\",\n      \"transit_number\": \"string\",\n      \"type\": \"Operating\",\n      \"updated_at\": \"1952-09-06T10:13:45.206Z\"\n    },\n    \"destination_contact\": {\n      \"id\": 8965,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"first_name\": \"string\",\n      \"middle_name\": \"string\",\n      \"last_name\": \"string\",\n      \"date_of_birth\": \"1976-08-09\",\n      \"type\": \"Company\",\n      \"created_at\": \"1971-01-14T04:44:21.934Z\",\n      \"updated_at\": \"1981-04-10T15:46:37.932Z\",\n      \"prefix\": \"string\",\n      \"title\": \"string\",\n      \"initials\": \"string\",\n      \"clio_connect_email\": \"string\",\n      \"locked_clio_connect_email\": false,\n      \"client_connect_user_id\": 4769,\n      \"primary_email_address\": \"string\",\n      \"secondary_email_address\": \"string\",\n      \"primary_phone_number\": \"string\",\n      \"secondary_phone_number\": \"string\",\n      \"ledes_client_id\": \"string\",\n      \"has_clio_for_clients_permission\": false,\n      \"is_client\": false,\n      \"is_clio_for_client_user\": false,\n      \"is_co_counsel\": false,\n      \"is_bill_recipient\": true,\n      \"sales_tax_number\": \"string\",\n      \"currency\": {}\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f67c59c-1a0e-4239-908a-5387f9536836",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "expired",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00a698b8-3c5e-480c-8e8a-4e782bbaa119",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "expired",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be52c98e-8188-42c0-90c8-5d0a66746bf8",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "expired",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b165e7f-1d63-4dbe-8313-14f8a93fa58d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "expired",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "112ef5ff-6bdd-4484-a177-093eb7c607ec",
+              "name": "Precondition Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "expired",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40fe3fc9-b65e-447b-a79a-463e862daacb",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "expired",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a245cc1b-a9d3-4be7-a157-b44daca9a781",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "links",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).",
+                    "key": "IF-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "expired",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.clio.com/api/v4",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The unique identifier for the ClioPaymentsLink.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<long>",
+      "key": "id"
+    }
+  ],
+  "info": {
+    "_postman_id": "697b90e4-3383-42ff-beca-420e8224560e",
+    "name": "Clio API Documentation Activities Clio Payments Links API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Developer Support and Feedback\n* Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio's API Support team at [api@clio.com](mailto:api@clio.com).\n* For business and partnership inquiries, contact our API Partnerships team at [api.partnerships@clio.com](mailto:api.partnerships@clio.com).\n* For best practices and tips from the Clio development community, join the conversation in the [Clio Developer Slack Channel](https://join.slack.com/t/clio-public/shared_invite/zt-36i0eqgo1-7POORPtMJpp2N0~_auL2IQ).\n\nA community-driven [Clio Developers Stack Overflow Group](https://stackoverflow.com/questions/tagged/clio-api) also exists where you can connect and ask questions from other Clio API users.\n# Getting Started\n> **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).\n>\n> Likewise, the developer portal is available at region-specific links for the [Australia](https://au.developers.clio.com), [Canada](https://ca.developers.clio.com), [EU](https://eu.developers.clio.com), and [US](https://developers.clio.com) regions.\n>\n> This document assumes the US region is being used (app.clio.com). If you're building in one of the other regions, you should adapt the links and examples as necessary.\n\nTo start building on the Clio API, you’ll need a Clio account – you can review our [Developer Handbook](https://docs.developers.clio.com/) and follow the steps to sign up for an account.\n\nOnce you have an account, you can [create a developer application](https://docs.developers.clio.com/api-docs/applications) from the [Developer Portal](https://developers.clio.com) and start building!\n# Authorization with OAuth 2.0\nSee our [Authorization documentation →](https://docs.developers.clio.com/api-docs/authorization)\n# Permissions\nSee our [Permissions documentation →](https://docs.developers.clio.com/api-docs/permissions)\n# Fields\nSee our [Fields documentation →](https://docs.developers.clio.com/api-docs/fields)\n# Rate Limiting\nSee our [Rate Limits documentation →](https://docs.developers.clio.com/api-docs/rate-limits)\n# Paging\nSee our [Pagination documentation →](https://docs.developers.clio.com/api-docs/paging)\n# ETags\nSee our [ETags documentation →](https://docs.developers.clio.com/api-docs/etags)\n# Minor Versions\nAPI v4 supports multiple minor versions. Versions are of the form '4.X.Y'. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you're requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.\n\nAn `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.\n\nYou can find our [API Versioning Policy and Guidelines](https://docs.developers.clio.com/api-docs/api-versioning-policy) in our documentation hub.\n\nThe [API Changelog](https://docs.developers.clio.com/api-docs/api-changelog) explains each version's changes in further detail.\n### [4.0.4](https://docs.developers.clio.com/api-docs/api-changelog#404)\n\n  * Update `quantity` field to return values in seconds rather than hours for Activities\n\n### [4.0.5](https://docs.developers.clio.com/api-docs/api-changelog#405)\n\n  * Remove `matter_balances` field from Bills\n* Standardize status/state enum values\n* Add a Document association to completed DocumentAutomations\n* Add rate visibility handling for Activity's price and total\n\n### [4.0.6](https://docs.developers.clio.com/api-docs/api-changelog#406)\n\n  * Remove `document_versions` collection field from Documents\n\n### [4.0.7](https://docs.developers.clio.com/api-docs/api-changelog#407)\n\n  * Change secure link format\n\n### [4.0.8](https://docs.developers.clio.com/api-docs/api-changelog#408)\n\n  * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user\n  * Add `quantity_redacted` field to activities\n\n### [4.0.9](https://docs.developers.clio.com/api-docs/api-changelog#409)\n\n  * Contacts are filtered and redacted in the response based on the new 'Contacts Visibility' user permission setting.\n\n### [4.0.10](https://docs.developers.clio.com/api-docs/api-changelog#4010)\n\n  * Fixed validation of `type` query parameter when querying Notes\n\n### [4.0.12](https://docs.developers.clio.com/api-docs/api-changelog#4012)\n\n  * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers\n\n### [4.0.13](https://docs.developers.clio.com/api-docs/api-changelog#4013)\n\n  **This is the default version**\n\n  * Add association limits to Contacts\n* Returns 422 Unprocessable Entity when association limits are exceeded\n\n\n\n\nContact Support:\n Name: Clio API Support\n Email: api@clio.com",
+      "type": "text/plain"
+    }
+  }
+}

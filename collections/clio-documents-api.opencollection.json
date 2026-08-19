@@ -1,0 +1,331 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clio API Documentation Activities Documents API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download the Document. Will return a 303 See Other redirecting to the download URL for the Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/documents/:id/download.json",
+            "params": [
+              {
+                "name": "document_version_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for a DocumentVersion to be downloaded. Defaults to the latest."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the Document."
+              }
+            ]
+          },
+          "docs": "Download the Document. Will return a 303 See Other redirecting to the download URL for the Document"
+        },
+        {
+          "info": {
+            "name": "Copy a Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.clio.com/api/v4/documents/:id/copy.json",
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the Document."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Copies the latest document version of a Document into a new Document. The parameters `filename` and `name` will be copied from the source Document if none are provided.\n"
+        },
+        {
+          "info": {
+            "name": "Return the data for all Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/documents.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "contact_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for a single Contact. Use the keyword `null` to match those without a Document. The list will be filtered to include only the Document records with the matching property."
+              },
+              {
+                "name": "created_since",
+                "value": "",
+                "type": "query",
+                "description": "Filter Document records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+              },
+              {
+                "name": "document_category_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for a single DocumentCategory. Use the keyword `null` to match those without a Document. The list will be filtered to include only the Document records with the matching property."
+              },
+              {
+                "name": "external_property_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter records to only those with the given external property(s) name set.\n\ne.g. `?external_property_name=Name`\n"
+              },
+              {
+                "name": "external_property_value",
+                "value": "",
+                "type": "query",
+                "description": "Filter records to only those with the given external property(s) value set. Requires external property name as well.\n\ne.g. `?external_property_name=Name&external_property_value=Value`\n"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "ids[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter Document records to those having the specified unique identifiers."
+              },
+              {
+                "name": "include_deleted",
+                "value": "",
+                "type": "query",
+                "description": "Allow trashed Document record to be included."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "A limit on the number of Document records to be returned. Limit can range between 1 and 200. Default: `200`."
+              },
+              {
+                "name": "locked",
+                "value": "",
+                "type": "query",
+                "description": "Filter Document records to those that are locked."
+              },
+              {
+                "name": "matter_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for a single Matter. Use the keyword `null` to match those without a Document. The list will be filtered to include only the Document records with the matching property."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Orders the Document records by the given field. Default: `id(asc)`."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "A token specifying which page to return."
+              },
+              {
+                "name": "parent_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for a single Folder. Use the keyword `null` to match those without a Document. The list will be filtered to include only the Document records with the matching property."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Wildcard search for `name` matching the given string."
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Filters Document record to those being a child of the parent Folder, or a descendant of the parent Folder. Default is `children`."
+              },
+              {
+                "name": "show_uncompleted",
+                "value": "",
+                "type": "query",
+                "description": "Allow Document record being uploaded to be included."
+              },
+              {
+                "name": "updated_since",
+                "value": "",
+                "type": "query",
+                "description": "Filter Document records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when requesting the data for all Documents"
+        },
+        {
+          "info": {
+            "name": "Create a new Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.clio.com/api/v4/documents.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Document, or Create Document Version to an existing Document.\n"
+        },
+        {
+          "info": {
+            "name": "Return the data for a single Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/documents/:id.json",
+            "headers": [
+              {
+                "name": "IF-MODIFIED-SINCE",
+                "value": ""
+              },
+              {
+                "name": "IF-NONE-MATCH",
+                "value": ""
+              },
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the Document."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when requesting the data for a single Document"
+        },
+        {
+          "info": {
+            "name": "Update a single Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.clio.com/api/v4/documents/:id.json",
+            "headers": [
+              {
+                "name": "IF-MATCH",
+                "value": ""
+              },
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the Document."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Document, move Document to another Folder, and/or restore a trashed Document.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a single Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.clio.com/api/v4/documents/:id.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the Document."
+              }
+            ]
+          },
+          "docs": "Deleting a Document using this method will move it to the trash instead of permanently deleting it. Trashed Documents are permanently deleted after 30 days. The following errors may be returned:\n\n- `409 Conflict`: The Document (or one of its ancestor folders) is currently being modified by another request, and cannot be trashed.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

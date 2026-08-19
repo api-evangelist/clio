@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clio API Documentation Activities Document Versions API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Document Versions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Save a specific document version as the latest version of the document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.clio.com/api/v4/documents/:id/versions/:document_version_id/save_as_latest_version.json",
+            "params": [
+              {
+                "name": "document_version_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the Document Version"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the Document"
+              }
+            ]
+          },
+          "docs": "This operation creates a new document version based on the specified version and updates the document to point to this new version as the latest"
+        },
+        {
+          "info": {
+            "name": "Return the data for all DocumentVersions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/documents/:id/versions.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "fully_uploaded",
+                "value": "",
+                "type": "query",
+                "description": "Filter DocumentVersion records to those with the given `fully_uploaded` status."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for the DocumentVersion."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the Document"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "A limit on the number of DocumentVersion records to be returned. Limit can range between 1 and 200. Default: `200`."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "A token specifying which page to return."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when requesting the data for all DocumentVersions"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

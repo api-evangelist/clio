@@ -1,0 +1,448 @@
+{
+  "item": [
+    {
+      "id": "cf681200-b1f8-4da2-aac4-a545d15a4d60",
+      "name": "Related Contacts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c0ceb9fa-04fa-4b72-a5ef-e09e5f64deb0",
+          "name": "Return the related contact data for a single matter",
+          "request": {
+            "name": "Return the related contact data for a single matter",
+            "description": {
+              "content": "Outlines the parameters, optional and required, used when requesting the data for all RelatedContacts",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "matters",
+                ":matter_id",
+                "related_contacts.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "A limit on the number of RelatedContacts records to be returned. Limit can range between 1 and 200. Default: `200`."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Orders the RelatedContacts records by the given field. Note that `id` is ordered by the `id` of the nested Relationship record. Default: `id(asc)`."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "A token specifying which page to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "matter_id",
+                  "description": "(Required) Filters RelatedContacts data by matter."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "83835f7c-18c2-4a61-beb9-16cbdce952f0",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matter_id",
+                    "related_contacts.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "matter_id",
+                      "description": "(Required) Filters RelatedContacts data by matter."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 5235,\n      \"contact_id\": 9030,\n      \"name\": \"string\",\n      \"first_name\": \"string\",\n      \"middle_name\": \"string\",\n      \"last_name\": \"string\",\n      \"type\": \"Company\",\n      \"created_at\": \"2008-08-27T17:14:32.195Z\",\n      \"updated_at\": \"1960-07-10T10:49:11.176Z\",\n      \"prefix\": \"string\",\n      \"title\": \"string\",\n      \"initials\": \"string\",\n      \"is_matter_client\": true,\n      \"primary_email_address\": \"string\",\n      \"primary_phone_number\": \"string\",\n      \"client_connect_user_id\": 5865,\n      \"avatar\": {\n        \"id\": 9129,\n        \"etag\": \"string\",\n        \"created_at\": \"1965-10-15T04:24:31.860Z\",\n        \"updated_at\": \"1976-09-04T10:29:57.241Z\",\n        \"url\": \"string\",\n        \"_destroy\": false\n      },\n      \"company\": {\n        \"id\": 1044,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"first_name\": \"string\",\n        \"middle_name\": \"string\",\n        \"last_name\": \"string\",\n        \"date_of_birth\": \"2016-11-25\",\n        \"type\": \"Company\",\n        \"created_at\": \"1989-07-24T06:43:26.497Z\",\n        \"updated_at\": \"1970-01-31T01:07:17.272Z\",\n        \"prefix\": \"string\",\n        \"title\": \"string\",\n        \"initials\": \"string\",\n        \"clio_connect_email\": \"string\",\n        \"locked_clio_connect_email\": true,\n        \"client_connect_user_id\": 2104,\n        \"primary_email_address\": \"string\",\n        \"secondary_email_address\": \"string\",\n        \"primary_phone_number\": \"string\",\n        \"secondary_phone_number\": \"string\",\n        \"ledes_client_id\": \"string\",\n        \"has_clio_for_clients_permission\": true,\n        \"is_client\": true,\n        \"is_clio_for_client_user\": false,\n        \"is_co_counsel\": true,\n        \"is_bill_recipient\": true,\n        \"sales_tax_number\": \"string\",\n        \"currency\": {}\n      },\n      \"primary_address\": {\n        \"id\": 4992,\n        \"etag\": \"string\",\n        \"street\": \"string\",\n        \"city\": \"string\",\n        \"province\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\",\n        \"name\": \"Home\",\n        \"created_at\": \"1997-02-17T17:13:19.045Z\",\n        \"updated_at\": \"2013-07-08T13:03:38.386Z\",\n        \"primary\": true\n      },\n      \"primary_web_site\": {\n        \"id\": 5042,\n        \"etag\": \"string\",\n        \"address\": \"string\",\n        \"name\": \"Personal\",\n        \"default_web_site\": true,\n        \"created_at\": \"1974-08-03T14:31:13.166Z\",\n        \"updated_at\": \"2009-05-11T13:08:43.461Z\"\n      },\n      \"secondary_address\": {\n        \"id\": 476,\n        \"etag\": \"string\",\n        \"street\": \"string\",\n        \"city\": \"string\",\n        \"province\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\",\n        \"name\": \"Other\",\n        \"created_at\": \"2020-02-21T22:23:22.237Z\",\n        \"updated_at\": \"1965-05-30T04:59:32.111Z\",\n        \"primary\": false\n      },\n      \"secondary_web_site\": {\n        \"id\": 863,\n        \"etag\": \"string\",\n        \"address\": \"string\",\n        \"name\": \"Work\",\n        \"default_web_site\": true,\n        \"created_at\": \"2016-05-15T05:39:17.230Z\",\n        \"updated_at\": \"1988-12-28T02:58:20.687Z\"\n      },\n      \"addresses\": [\n        {\n          \"id\": 1852,\n          \"etag\": \"string\",\n          \"street\": \"string\",\n          \"city\": \"string\",\n          \"province\": \"string\",\n          \"postal_code\": \"string\",\n          \"country\": \"string\",\n          \"name\": \"Work\",\n          \"created_at\": \"1962-11-18T22:12:31.940Z\",\n          \"updated_at\": \"2012-08-12T20:09:15.574Z\",\n          \"primary\": true\n        },\n        {\n          \"id\": 9484,\n          \"etag\": \"string\",\n          \"street\": \"string\",\n          \"city\": \"string\",\n          \"province\": \"string\",\n          \"postal_code\": \"string\",\n          \"country\": \"string\",\n          \"name\": \"Other\",\n          \"created_at\": \"1966-09-05T13:39:27.698Z\",\n          \"updated_at\": \"1966-03-03T19:16:04.608Z\",\n          \"primary\": false\n        }\n      ],\n      \"custom_field_values\": [\n        {\n          \"id\": \"string\",\n          \"etag\": \"string\",\n          \"field_name\": \"string\",\n          \"created_at\": \"2014-03-13T23:51:17.257Z\",\n          \"updated_at\": \"1990-04-02T22:28:55.947Z\",\n          \"field_type\": \"picklist\",\n          \"field_required\": true,\n          \"field_displayed\": true,\n          \"field_display_order\": 2138,\n          \"value\": \"string\",\n          \"soft_deleted\": false\n        },\n        {\n          \"id\": \"string\",\n          \"etag\": \"string\",\n          \"field_name\": \"string\",\n          \"created_at\": \"1984-01-31T01:29:06.769Z\",\n          \"updated_at\": \"1986-12-15T00:34:52.949Z\",\n          \"field_type\": \"matter\",\n          \"field_required\": false,\n          \"field_displayed\": false,\n          \"field_display_order\": 5374,\n          \"value\": \"string\",\n          \"soft_deleted\": true\n        }\n      ],\n      \"email_addresses\": [\n        {\n          \"id\": 8101,\n          \"etag\": \"string\",\n          \"address\": \"string\",\n          \"name\": \"string\",\n          \"primary\": false,\n          \"created_at\": \"1958-02-15T15:59:19.711Z\",\n          \"updated_at\": \"1971-11-04T12:58:21.223Z\"\n        },\n        {\n          \"id\": 6337,\n          \"etag\": \"string\",\n          \"address\": \"string\",\n          \"name\": \"string\",\n          \"primary\": false,\n          \"created_at\": \"1995-12-25T01:53:09.177Z\",\n          \"updated_at\": \"2007-12-17T23:09:20.753Z\"\n        }\n      ],\n      \"phone_numbers\": [\n        {\n          \"id\": 2800,\n          \"etag\": \"string\",\n          \"number\": \"string\",\n          \"name\": \"Work\",\n          \"primary\": true,\n          \"created_at\": \"1984-10-08T12:26:09.779Z\",\n          \"updated_at\": \"2023-06-28T17:17:14.254Z\"\n        },\n        {\n          \"id\": 6264,\n          \"etag\": \"string\",\n          \"number\": \"string\",\n          \"name\": \"Other\",\n          \"primary\": false,\n          \"created_at\": \"1948-07-09T13:30:45.625Z\",\n          \"updated_at\": \"1999-09-07T21:33:53.408Z\"\n        }\n      ],\n      \"web_sites\": [\n        {\n          \"id\": 1117,\n          \"etag\": \"string\",\n          \"address\": \"string\",\n          \"name\": \"Facebook\",\n          \"default_web_site\": false,\n          \"created_at\": \"1988-10-25T10:23:15.215Z\",\n          \"updated_at\": \"2010-07-29T04:50:22.367Z\"\n        },\n        {\n          \"id\": 4284,\n          \"etag\": \"string\",\n          \"address\": \"string\",\n          \"name\": \"Twitter\",\n          \"default_web_site\": true,\n          \"created_at\": \"1960-02-15T02:16:18.286Z\",\n          \"updated_at\": \"1981-04-11T02:49:42.782Z\"\n        }\n      ],\n      \"relationship\": {\n        \"id\": 8399,\n        \"etag\": \"string\",\n        \"description\": \"string\",\n        \"created_at\": \"1977-08-12T08:57:41.073Z\",\n        \"updated_at\": \"1957-10-21T05:34:23.120Z\"\n      }\n    },\n    {\n      \"id\": 3603,\n      \"contact_id\": 5096,\n      \"name\": \"string\",\n      \"first_name\": \"string\",\n      \"middle_name\": \"string\",\n      \"last_name\": \"string\",\n      \"type\": \"Person\",\n      \"created_at\": \"1990-10-01T12:49:10.807Z\",\n      \"updated_at\": \"1953-03-18T04:13:23.555Z\",\n      \"prefix\": \"string\",\n      \"title\": \"string\",\n      \"initials\": \"string\",\n      \"is_matter_client\": true,\n      \"primary_email_address\": \"string\",\n      \"primary_phone_number\": \"string\",\n      \"client_connect_user_id\": 9316,\n      \"avatar\": {\n        \"id\": 5563,\n        \"etag\": \"string\",\n        \"created_at\": \"1980-10-18T05:39:15.158Z\",\n        \"updated_at\": \"1964-10-14T03:50:54.975Z\",\n        \"url\": \"string\",\n        \"_destroy\": true\n      },\n      \"company\": {\n        \"id\": 7131,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"first_name\": \"string\",\n        \"middle_name\": \"string\",\n        \"last_name\": \"string\",\n        \"date_of_birth\": \"2018-09-27\",\n        \"type\": \"Company\",\n        \"created_at\": \"2020-12-04T13:12:58.689Z\",\n        \"updated_at\": \"2019-05-28T05:54:34.874Z\",\n        \"prefix\": \"string\",\n        \"title\": \"string\",\n        \"initials\": \"string\",\n        \"clio_connect_email\": \"string\",\n        \"locked_clio_connect_email\": true,\n        \"client_connect_user_id\": 5041,\n        \"primary_email_address\": \"string\",\n        \"secondary_email_address\": \"string\",\n        \"primary_phone_number\": \"string\",\n        \"secondary_phone_number\": \"string\",\n        \"ledes_client_id\": \"string\",\n        \"has_clio_for_clients_permission\": false,\n        \"is_client\": false,\n        \"is_clio_for_client_user\": true,\n        \"is_co_counsel\": false,\n        \"is_bill_recipient\": false,\n        \"sales_tax_number\": \"string\",\n        \"currency\": {}\n      },\n      \"primary_address\": {\n        \"id\": 8906,\n        \"etag\": \"string\",\n        \"street\": \"string\",\n        \"city\": \"string\",\n        \"province\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\",\n        \"name\": \"Billing\",\n        \"created_at\": \"1983-12-17T14:55:20.896Z\",\n        \"updated_at\": \"1947-03-03T23:06:50.647Z\",\n        \"primary\": false\n      },\n      \"primary_web_site\": {\n        \"id\": 8319,\n        \"etag\": \"string\",\n        \"address\": \"string\",\n        \"name\": \"LinkedIn\",\n        \"default_web_site\": true,\n        \"created_at\": \"1970-08-11T18:53:00.509Z\",\n        \"updated_at\": \"1988-11-16T08:05:25.217Z\"\n      },\n      \"secondary_address\": {\n        \"id\": 8335,\n        \"etag\": \"string\",\n        \"street\": \"string\",\n        \"city\": \"string\",\n        \"province\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\",\n        \"name\": \"Work\",\n        \"created_at\": \"1973-01-10T08:19:51.441Z\",\n        \"updated_at\": \"1952-11-15T22:33:43.482Z\",\n        \"primary\": false\n      },\n      \"secondary_web_site\": {\n        \"id\": 3901,\n        \"etag\": \"string\",\n        \"address\": \"string\",\n        \"name\": \"LinkedIn\",\n        \"default_web_site\": true,\n        \"created_at\": \"1966-09-09T02:53:26.543Z\",\n        \"updated_at\": \"1959-05-26T22:35:14.231Z\"\n      },\n      \"addresses\": [\n        {\n          \"id\": 7375,\n          \"etag\": \"string\",\n          \"street\": \"string\",\n          \"city\": \"string\",\n          \"province\": \"string\",\n          \"postal_code\": \"string\",\n          \"country\": \"string\",\n          \"name\": \"Other\",\n          \"created_at\": \"1963-02-12T08:53:33.889Z\",\n          \"updated_at\": \"1980-04-07T14:44:59.494Z\",\n          \"primary\": true\n        },\n        {\n          \"id\": 1383,\n          \"etag\": \"string\",\n          \"street\": \"string\",\n          \"city\": \"string\",\n          \"province\": \"string\",\n          \"postal_code\": \"string\",\n          \"country\": \"string\",\n          \"name\": \"Work\",\n          \"created_at\": \"1984-04-25T06:52:11.228Z\",\n          \"updated_at\": \"1995-06-06T05:04:31.376Z\",\n          \"primary\": true\n        }\n      ],\n      \"custom_field_values\": [\n        {\n          \"id\": \"string\",\n          \"etag\": \"string\",\n          \"field_name\": \"string\",\n          \"created_at\": \"2009-05-05T18:06:39.277Z\",\n          \"updated_at\": \"1970-05-17T05:40:55.658Z\",\n          \"field_type\": \"date\",\n          \"field_required\": false,\n          \"field_displayed\": false,\n          \"field_display_order\": 303,\n          \"value\": \"string\",\n          \"soft_deleted\": false\n        },\n        {\n          \"id\": \"string\",\n          \"etag\": \"string\",\n          \"field_name\": \"string\",\n          \"created_at\": \"1968-02-12T01:17:12.551Z\",\n          \"updated_at\": \"2008-04-26T23:43:58.849Z\",\n          \"field_type\": \"picklist\",\n          \"field_required\": false,\n          \"field_displayed\": false,\n          \"field_display_order\": 7348,\n          \"value\": \"string\",\n          \"soft_deleted\": true\n        }\n      ],\n      \"email_addresses\": [\n        {\n          \"id\": 2017,\n          \"etag\": \"string\",\n          \"address\": \"string\",\n          \"name\": \"string\",\n          \"primary\": true,\n          \"created_at\": \"1978-05-17T20:38:10.687Z\",\n          \"updated_at\": \"1978-08-16T13:33:58.563Z\"\n        },\n        {\n          \"id\": 9479,\n          \"etag\": \"string\",\n          \"address\": \"string\",\n          \"name\": \"string\",\n          \"primary\": false,\n          \"created_at\": \"1963-01-04T16:54:06.224Z\",\n          \"updated_at\": \"1948-07-01T16:03:47.165Z\"\n        }\n      ],\n      \"phone_numbers\": [\n        {\n          \"id\": 3788,\n          \"etag\": \"string\",\n          \"number\": \"string\",\n          \"name\": \"Other\",\n          \"primary\": false,\n          \"created_at\": \"1950-09-13T03:47:39.179Z\",\n          \"updated_at\": \"2022-09-05T16:39:50.457Z\"\n        },\n        {\n          \"id\": 6866,\n          \"etag\": \"string\",\n          \"number\": \"string\",\n          \"name\": \"Other\",\n          \"primary\": true,\n          \"created_at\": \"1971-01-28T06:57:29.341Z\",\n          \"updated_at\": \"1966-05-22T16:40:11.587Z\"\n        }\n      ],\n      \"web_sites\": [\n        {\n          \"id\": 7190,\n          \"etag\": \"string\",\n          \"address\": \"string\",\n          \"name\": \"Work\",\n          \"default_web_site\": true,\n          \"created_at\": \"1987-07-08T23:16:27.761Z\",\n          \"updated_at\": \"1979-02-16T13:33:55.752Z\"\n        },\n        {\n          \"id\": 2022,\n          \"etag\": \"string\",\n          \"address\": \"string\",\n          \"name\": \"Other\",\n          \"default_web_site\": true,\n          \"created_at\": \"2012-08-09T16:41:32.941Z\",\n          \"updated_at\": \"1984-01-09T20:51:31.637Z\"\n        }\n      ],\n      \"relationship\": {\n        \"id\": 5339,\n        \"etag\": \"string\",\n        \"description\": \"string\",\n        \"created_at\": \"1990-01-10T10:52:02.135Z\",\n        \"updated_at\": \"1974-07-17T02:34:41.871Z\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ffe6df20-20f2-4aab-9d7f-812d62fe2295",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matter_id",
+                    "related_contacts.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "matter_id",
+                      "description": "(Required) Filters RelatedContacts data by matter."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "483bddd5-ca9b-461b-bc80-58f2a731480f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matter_id",
+                    "related_contacts.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "matter_id",
+                      "description": "(Required) Filters RelatedContacts data by matter."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62ab4436-6bc8-4258-a531-55abe426334e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matter_id",
+                    "related_contacts.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "matter_id",
+                      "description": "(Required) Filters RelatedContacts data by matter."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9035ed5-d8ae-428b-8691-d039a59e422e",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "matters",
+                    ":matter_id",
+                    "related_contacts.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "matter_id",
+                      "description": "(Required) Filters RelatedContacts data by matter."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.clio.com/api/v4",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "63079a71-3d47-408f-bb64-e84eaae695b6",
+    "name": "Clio API Documentation Activities Related Contacts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Developer Support and Feedback\n* Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio's API Support team at [api@clio.com](mailto:api@clio.com).\n* For business and partnership inquiries, contact our API Partnerships team at [api.partnerships@clio.com](mailto:api.partnerships@clio.com).\n* For best practices and tips from the Clio development community, join the conversation in the [Clio Developer Slack Channel](https://join.slack.com/t/clio-public/shared_invite/zt-36i0eqgo1-7POORPtMJpp2N0~_auL2IQ).\n\nA community-driven [Clio Developers Stack Overflow Group](https://stackoverflow.com/questions/tagged/clio-api) also exists where you can connect and ask questions from other Clio API users.\n# Getting Started\n> **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).\n>\n> Likewise, the developer portal is available at region-specific links for the [Australia](https://au.developers.clio.com), [Canada](https://ca.developers.clio.com), [EU](https://eu.developers.clio.com), and [US](https://developers.clio.com) regions.\n>\n> This document assumes the US region is being used (app.clio.com). If you're building in one of the other regions, you should adapt the links and examples as necessary.\n\nTo start building on the Clio API, you’ll need a Clio account – you can review our [Developer Handbook](https://docs.developers.clio.com/) and follow the steps to sign up for an account.\n\nOnce you have an account, you can [create a developer application](https://docs.developers.clio.com/api-docs/applications) from the [Developer Portal](https://developers.clio.com) and start building!\n# Authorization with OAuth 2.0\nSee our [Authorization documentation →](https://docs.developers.clio.com/api-docs/authorization)\n# Permissions\nSee our [Permissions documentation →](https://docs.developers.clio.com/api-docs/permissions)\n# Fields\nSee our [Fields documentation →](https://docs.developers.clio.com/api-docs/fields)\n# Rate Limiting\nSee our [Rate Limits documentation →](https://docs.developers.clio.com/api-docs/rate-limits)\n# Paging\nSee our [Pagination documentation →](https://docs.developers.clio.com/api-docs/paging)\n# ETags\nSee our [ETags documentation →](https://docs.developers.clio.com/api-docs/etags)\n# Minor Versions\nAPI v4 supports multiple minor versions. Versions are of the form '4.X.Y'. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you're requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.\n\nAn `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.\n\nYou can find our [API Versioning Policy and Guidelines](https://docs.developers.clio.com/api-docs/api-versioning-policy) in our documentation hub.\n\nThe [API Changelog](https://docs.developers.clio.com/api-docs/api-changelog) explains each version's changes in further detail.\n### [4.0.4](https://docs.developers.clio.com/api-docs/api-changelog#404)\n\n  * Update `quantity` field to return values in seconds rather than hours for Activities\n\n### [4.0.5](https://docs.developers.clio.com/api-docs/api-changelog#405)\n\n  * Remove `matter_balances` field from Bills\n* Standardize status/state enum values\n* Add a Document association to completed DocumentAutomations\n* Add rate visibility handling for Activity's price and total\n\n### [4.0.6](https://docs.developers.clio.com/api-docs/api-changelog#406)\n\n  * Remove `document_versions` collection field from Documents\n\n### [4.0.7](https://docs.developers.clio.com/api-docs/api-changelog#407)\n\n  * Change secure link format\n\n### [4.0.8](https://docs.developers.clio.com/api-docs/api-changelog#408)\n\n  * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user\n  * Add `quantity_redacted` field to activities\n\n### [4.0.9](https://docs.developers.clio.com/api-docs/api-changelog#409)\n\n  * Contacts are filtered and redacted in the response based on the new 'Contacts Visibility' user permission setting.\n\n### [4.0.10](https://docs.developers.clio.com/api-docs/api-changelog#4010)\n\n  * Fixed validation of `type` query parameter when querying Notes\n\n### [4.0.12](https://docs.developers.clio.com/api-docs/api-changelog#4012)\n\n  * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers\n\n### [4.0.13](https://docs.developers.clio.com/api-docs/api-changelog#4013)\n\n  **This is the default version**\n\n  * Add association limits to Contacts\n* Returns 422 Unprocessable Entity when association limits are exceeded\n\n\n\n\nContact Support:\n Name: Clio API Support\n Email: api@clio.com",
+      "type": "text/plain"
+    }
+  }
+}

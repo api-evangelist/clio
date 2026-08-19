@@ -1,0 +1,960 @@
+{
+  "item": [
+    {
+      "id": "7ae6e10c-38d5-49a0-a032-499920bfa427",
+      "name": "Clio Payments Payments",
+      "description": {
+        "content": "Payments allow users to record that funds (from checks, cash, credit cards, etc.) have been transferred from a client to the firm. In order to pay Bills, Payments must be [allocated](https://help.clio.com/hc/articles/9285641955355-Record-Edit-and-Delete-Payments).\n\n[Support Link](https://help.clio.com/hc/articles/9285641955355-Record-Edit-and-Delete-Payments)\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a5f33276-a309-4e47-8cb8-d15b456f85c2",
+          "name": "Return the data for all ClioPaymentsPayments",
+          "request": {
+            "name": "Return the data for all ClioPaymentsPayments",
+            "description": {
+              "content": "Outlines the parameters, optional and required, used when requesting the data for all ClioPaymentsPayments",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "clio_payments",
+                "payments.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "bill_id",
+                  "value": "<long>",
+                  "description": "Filter ClioPaymentsPayment records to those that are allocated to the specified bill."
+                },
+                {
+                  "disabled": false,
+                  "key": "contact_id",
+                  "value": "<long>",
+                  "description": "Filter ClioPaymentsPayment records to those that are assigned to the specified contact."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ids[]",
+                  "value": "<long>",
+                  "description": "Filter ClioPaymentsPayment records to those having the specified unique identifiers."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "A limit on the number of ClioPaymentsPayment records to be returned. Limit can range between 1 and 200. Default: `200`."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "A token specifying which page to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Filter ClioPaymentsPayment records to those in a given state."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "02cc8a61-fe09-402a-8df8-6f6d588e1185",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "payments.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bill_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"amount\": 1200.5090244751127,\n      \"confirmation_number\": \"string\",\n      \"created_at\": \"1972-07-15T17:27:28.689Z\",\n      \"currency\": \"string\",\n      \"deposit_as_revenue\": true,\n      \"description\": \"string\",\n      \"email_address\": \"string\",\n      \"id\": 9258,\n      \"state\": \"failed\",\n      \"updated_at\": \"1952-03-29T18:30:40.665Z\",\n      \"bank_transaction\": {\n        \"id\": 9226,\n        \"type\": \"string\",\n        \"etag\": \"string\",\n        \"created_at\": \"2023-04-30T21:06:27.477Z\",\n        \"updated_at\": \"1990-08-06T14:59:47.121Z\",\n        \"bank_account_id\": 3364,\n        \"source\": \"string\",\n        \"confirmation\": \"string\",\n        \"date\": \"1970-12-30\",\n        \"amount\": 9215.634290116606,\n        \"currency\": \"string\",\n        \"currency_id\": 2642,\n        \"description\": \"string\",\n        \"exchange_rate\": 2977.0192076362077,\n        \"transaction_type\": \"string\",\n        \"funds_in\": 6014.761351986458,\n        \"funds_out\": 6678.708038232836,\n        \"clio_payments_transaction\": false,\n        \"current_account_balance\": 6126.70952599817,\n        \"read_only_confirmation\": false\n      },\n      \"clio_payments_link\": {\n        \"active\": false,\n        \"amount\": 8016.288879492594,\n        \"created_at\": \"1950-12-13T00:13:56.007Z\",\n        \"currency\": \"string\",\n        \"description\": \"string\",\n        \"email_address\": \"string\",\n        \"etag\": \"string\",\n        \"expires_at\": \"1959-01-20T03:41:17.887Z\",\n        \"id\": 1638,\n        \"is_allocated_as_revenue\": false,\n        \"redirect_url\": \"string\",\n        \"url\": \"string\"\n      },\n      \"contact\": {\n        \"id\": 9938,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"first_name\": \"string\",\n        \"middle_name\": \"string\",\n        \"last_name\": \"string\",\n        \"date_of_birth\": \"1986-07-26\",\n        \"type\": \"Company\",\n        \"created_at\": \"1957-10-25T12:09:47.562Z\",\n        \"updated_at\": \"2023-09-25T06:29:30.855Z\",\n        \"prefix\": \"string\",\n        \"title\": \"string\",\n        \"initials\": \"string\",\n        \"clio_connect_email\": \"string\",\n        \"locked_clio_connect_email\": true,\n        \"client_connect_user_id\": 8611,\n        \"primary_email_address\": \"string\",\n        \"secondary_email_address\": \"string\",\n        \"primary_phone_number\": \"string\",\n        \"secondary_phone_number\": \"string\",\n        \"ledes_client_id\": \"string\",\n        \"has_clio_for_clients_permission\": false,\n        \"is_client\": false,\n        \"is_clio_for_client_user\": true,\n        \"is_co_counsel\": false,\n        \"is_bill_recipient\": true,\n        \"sales_tax_number\": \"string\",\n        \"currency\": {}\n      },\n      \"destination_account\": {\n        \"account_number\": \"string\",\n        \"balance\": 8074.8486442414605,\n        \"bank_transactions_count\": 1689,\n        \"clio_payment_page_link\": \"string\",\n        \"clio_payment_page_qr_code\": \"string\",\n        \"clio_payments_enabled\": true,\n        \"controlled_account\": false,\n        \"created_at\": \"1964-02-16T19:10:13.004Z\",\n        \"currency\": \"string\",\n        \"currency_symbol\": \"string\",\n        \"currency_id\": 7067.4207325592515,\n        \"default_account\": true,\n        \"domicile_branch\": \"string\",\n        \"etag\": \"string\",\n        \"general_ledger_number\": \"string\",\n        \"holder\": \"string\",\n        \"id\": 7016,\n        \"institution\": \"string\",\n        \"name\": \"string\",\n        \"swift\": \"string\",\n        \"transit_number\": \"string\",\n        \"type\": \"Operating\",\n        \"updated_at\": \"1955-09-07T20:38:35.784Z\"\n      },\n      \"user\": {\n        \"account_owner\": true,\n        \"clio_connect\": false,\n        \"court_rules_default_attendee\": false,\n        \"created_at\": \"1991-05-10T20:11:59.140Z\",\n        \"default_calendar_id\": 7147,\n        \"email\": \"string\",\n        \"enabled\": true,\n        \"etag\": \"string\",\n        \"first_name\": \"string\",\n        \"id\": 8005,\n        \"initials\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"phone_number\": \"string\",\n        \"rate\": 8279.722777419878,\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ],\n        \"subscription_type\": \"Attorney\",\n        \"time_zone\": \"string\",\n        \"updated_at\": \"1985-08-24T11:22:46.241Z\"\n      },\n      \"allocations\": [\n        {\n          \"id\": 87,\n          \"etag\": \"string\",\n          \"date\": \"1952-04-06\",\n          \"amount\": 1397.9953168037152,\n          \"interest\": true,\n          \"voided_at\": \"1987-04-16T16:52:06.023Z\",\n          \"created_at\": \"1958-05-12T08:50:15.597Z\",\n          \"updated_at\": \"1979-03-07T00:23:42.926Z\",\n          \"description\": \"string\",\n          \"has_online_payment\": false,\n          \"destroyable\": false,\n          \"payment_type\": \"string\"\n        },\n        {\n          \"id\": 4102,\n          \"etag\": \"string\",\n          \"date\": \"2018-12-16\",\n          \"amount\": 8511.347496181328,\n          \"interest\": true,\n          \"voided_at\": \"2012-01-21T02:29:02.351Z\",\n          \"created_at\": \"1948-01-27T03:55:33.615Z\",\n          \"updated_at\": \"1970-05-18T23:44:04.623Z\",\n          \"description\": \"string\",\n          \"has_online_payment\": false,\n          \"destroyable\": false,\n          \"payment_type\": \"string\"\n        }\n      ],\n      \"bills\": [\n        {\n          \"id\": 1301,\n          \"etag\": \"string\",\n          \"number\": \"string\",\n          \"issued_at\": \"1960-11-28\",\n          \"created_at\": \"1983-10-27T13:46:26.081Z\",\n          \"due_at\": \"1989-01-27\",\n          \"tax_rate\": 711.8437240540609,\n          \"secondary_tax_rate\": 4214.473849888393,\n          \"updated_at\": \"2005-10-26T05:54:43.485Z\",\n          \"subject\": \"string\",\n          \"purchase_order\": \"string\",\n          \"type\": \"ClientBill\",\n          \"memo\": \"string\",\n          \"start_at\": \"1976-11-14\",\n          \"end_at\": \"1968-01-27\",\n          \"balance\": 5266.037740544426,\n          \"state\": \"paid\",\n          \"kind\": \"summary_kind\",\n          \"total\": 4992.372307889539,\n          \"paid\": 8497.903708084568,\n          \"paid_at\": \"1946-10-20T00:56:28.141Z\",\n          \"pending\": 9856.540833497787,\n          \"due\": 1584.5961340814329,\n          \"discount_services_only\": \"string\",\n          \"can_update\": true,\n          \"credits_issued\": 7755.116958720395,\n          \"shared\": true,\n          \"last_sent_at\": \"1980-01-04T22:31:36.653Z\",\n          \"services_secondary_tax\": 6436.841080004963,\n          \"services_sub_total\": 1976.2688911480918,\n          \"services_tax\": 2580.484871674845,\n          \"services_taxable_sub_total\": 2095,\n          \"services_secondary_taxable_sub_total\": 5644,\n          \"taxable_sub_total\": 9205,\n          \"secondary_taxable_sub_total\": 1053,\n          \"sub_total\": 9661.827191553037,\n          \"tax_sum\": 6335.498609510691,\n          \"secondary_tax_sum\": 8496.322520836507,\n          \"total_tax\": 3222.7782031152497,\n          \"available_state_transitions\": [\n            \"awaiting_payment\",\n            \"void\"\n          ]\n        },\n        {\n          \"id\": 3912,\n          \"etag\": \"string\",\n          \"number\": \"string\",\n          \"issued_at\": \"1955-10-31\",\n          \"created_at\": \"1997-06-25T17:52:49.145Z\",\n          \"due_at\": \"1989-10-11\",\n          \"tax_rate\": 7299.613895568171,\n          \"secondary_tax_rate\": 2655.3089749552882,\n          \"updated_at\": \"1965-12-02T14:18:19.493Z\",\n          \"subject\": \"string\",\n          \"purchase_order\": \"string\",\n          \"type\": \"MatterBill\",\n          \"memo\": \"string\",\n          \"start_at\": \"1964-08-13\",\n          \"end_at\": \"2012-04-27\",\n          \"balance\": 5179.712414538429,\n          \"state\": \"void\",\n          \"kind\": \"revenue_kind\",\n          \"total\": 186.69171829880594,\n          \"paid\": 6799.4092277076115,\n          \"paid_at\": \"1949-08-21T02:37:35.026Z\",\n          \"pending\": 9518.4879750109,\n          \"due\": 2170.1575677968112,\n          \"discount_services_only\": \"string\",\n          \"can_update\": true,\n          \"credits_issued\": 1256.8002993393402,\n          \"shared\": false,\n          \"last_sent_at\": \"2004-03-19T06:17:24.236Z\",\n          \"services_secondary_tax\": 8581.881726846144,\n          \"services_sub_total\": 833.1576570338673,\n          \"services_tax\": 7519.018199747732,\n          \"services_taxable_sub_total\": 5114,\n          \"services_secondary_taxable_sub_total\": 8507,\n          \"taxable_sub_total\": 6828,\n          \"secondary_taxable_sub_total\": 1530,\n          \"sub_total\": 6782.08748411465,\n          \"tax_sum\": 7021.910901627445,\n          \"secondary_tax_sum\": 6931.543657866327,\n          \"total_tax\": 3599.922852879559,\n          \"available_state_transitions\": [\n            \"void\",\n            \"awaiting_approval\"\n          ]\n        }\n      ],\n      \"matters\": [\n        {\n          \"id\": 1147,\n          \"etag\": \"string\",\n          \"number\": 7956,\n          \"display_number\": \"string\",\n          \"custom_number\": \"string\",\n          \"currency\": {},\n          \"description\": \"string\",\n          \"status\": \"Closed\",\n          \"location\": \"string\",\n          \"client_reference\": \"string\",\n          \"client_id\": 8843,\n          \"billable\": true,\n          \"maildrop_address\": \"string\",\n          \"billing_method\": \"hourly\",\n          \"open_date\": \"1988-01-02\",\n          \"close_date\": \"1948-12-28\",\n          \"pending_date\": \"1980-09-26\",\n          \"created_at\": \"1965-09-15T15:11:14.356Z\",\n          \"updated_at\": \"1956-02-22T21:00:47.234Z\",\n          \"shared\": false,\n          \"has_tasks\": false,\n          \"last_activity_date\": \"1983-09-19\",\n          \"matter_stage_updated_at\": \"1967-07-10T14:40:54.758Z\"\n        },\n        {\n          \"id\": 9251,\n          \"etag\": \"string\",\n          \"number\": 6363,\n          \"display_number\": \"string\",\n          \"custom_number\": \"string\",\n          \"currency\": {},\n          \"description\": \"string\",\n          \"status\": \"Pending\",\n          \"location\": \"string\",\n          \"client_reference\": \"string\",\n          \"client_id\": 3540,\n          \"billable\": false,\n          \"maildrop_address\": \"string\",\n          \"billing_method\": \"contingency\",\n          \"open_date\": \"1960-09-04\",\n          \"close_date\": \"2013-02-22\",\n          \"pending_date\": \"1994-02-19\",\n          \"created_at\": \"1989-02-23T10:33:11.769Z\",\n          \"updated_at\": \"1947-09-02T04:41:07.552Z\",\n          \"shared\": true,\n          \"has_tasks\": false,\n          \"last_activity_date\": \"1968-09-10\",\n          \"matter_stage_updated_at\": \"1948-05-31T06:18:08.587Z\"\n        }\n      ]\n    },\n    {\n      \"amount\": 5820.021165765514,\n      \"confirmation_number\": \"string\",\n      \"created_at\": \"1991-02-27T15:17:04.838Z\",\n      \"currency\": \"string\",\n      \"deposit_as_revenue\": false,\n      \"description\": \"string\",\n      \"email_address\": \"string\",\n      \"id\": 5266,\n      \"state\": \"failed\",\n      \"updated_at\": \"1947-05-10T21:40:51.388Z\",\n      \"bank_transaction\": {\n        \"id\": 9287,\n        \"type\": \"string\",\n        \"etag\": \"string\",\n        \"created_at\": \"1963-09-24T22:36:46.579Z\",\n        \"updated_at\": \"1955-11-10T16:24:28.962Z\",\n        \"bank_account_id\": 1068,\n        \"source\": \"string\",\n        \"confirmation\": \"string\",\n        \"date\": \"1952-03-11\",\n        \"amount\": 6122.832959228205,\n        \"currency\": \"string\",\n        \"currency_id\": 6085,\n        \"description\": \"string\",\n        \"exchange_rate\": 5519.6707869422635,\n        \"transaction_type\": \"string\",\n        \"funds_in\": 603.3464189043348,\n        \"funds_out\": 4886.73642026213,\n        \"clio_payments_transaction\": true,\n        \"current_account_balance\": 7132.650742296677,\n        \"read_only_confirmation\": false\n      },\n      \"clio_payments_link\": {\n        \"active\": true,\n        \"amount\": 895.2873445306475,\n        \"created_at\": \"1994-03-17T12:33:37.624Z\",\n        \"currency\": \"string\",\n        \"description\": \"string\",\n        \"email_address\": \"string\",\n        \"etag\": \"string\",\n        \"expires_at\": \"1952-08-25T10:04:40.067Z\",\n        \"id\": 791,\n        \"is_allocated_as_revenue\": true,\n        \"redirect_url\": \"string\",\n        \"url\": \"string\"\n      },\n      \"contact\": {\n        \"id\": 5297,\n        \"etag\": \"string\",\n        \"name\": \"string\",\n        \"first_name\": \"string\",\n        \"middle_name\": \"string\",\n        \"last_name\": \"string\",\n        \"date_of_birth\": \"1995-11-07\",\n        \"type\": \"Person\",\n        \"created_at\": \"1992-07-16T13:53:30.407Z\",\n        \"updated_at\": \"1961-07-14T15:48:36.496Z\",\n        \"prefix\": \"string\",\n        \"title\": \"string\",\n        \"initials\": \"string\",\n        \"clio_connect_email\": \"string\",\n        \"locked_clio_connect_email\": true,\n        \"client_connect_user_id\": 9920,\n        \"primary_email_address\": \"string\",\n        \"secondary_email_address\": \"string\",\n        \"primary_phone_number\": \"string\",\n        \"secondary_phone_number\": \"string\",\n        \"ledes_client_id\": \"string\",\n        \"has_clio_for_clients_permission\": true,\n        \"is_client\": true,\n        \"is_clio_for_client_user\": false,\n        \"is_co_counsel\": true,\n        \"is_bill_recipient\": true,\n        \"sales_tax_number\": \"string\",\n        \"currency\": {}\n      },\n      \"destination_account\": {\n        \"account_number\": \"string\",\n        \"balance\": 1758.914133113897,\n        \"bank_transactions_count\": 171,\n        \"clio_payment_page_link\": \"string\",\n        \"clio_payment_page_qr_code\": \"string\",\n        \"clio_payments_enabled\": false,\n        \"controlled_account\": true,\n        \"created_at\": \"2010-03-09T06:02:06.872Z\",\n        \"currency\": \"string\",\n        \"currency_symbol\": \"string\",\n        \"currency_id\": 9098.345353101957,\n        \"default_account\": true,\n        \"domicile_branch\": \"string\",\n        \"etag\": \"string\",\n        \"general_ledger_number\": \"string\",\n        \"holder\": \"string\",\n        \"id\": 7042,\n        \"institution\": \"string\",\n        \"name\": \"string\",\n        \"swift\": \"string\",\n        \"transit_number\": \"string\",\n        \"type\": \"Trust\",\n        \"updated_at\": \"2019-12-02T15:16:23.629Z\"\n      },\n      \"user\": {\n        \"account_owner\": false,\n        \"clio_connect\": true,\n        \"court_rules_default_attendee\": false,\n        \"created_at\": \"1949-01-21T12:06:23.670Z\",\n        \"default_calendar_id\": 886,\n        \"email\": \"string\",\n        \"enabled\": true,\n        \"etag\": \"string\",\n        \"first_name\": \"string\",\n        \"id\": 9407,\n        \"initials\": \"string\",\n        \"last_name\": \"string\",\n        \"name\": \"string\",\n        \"phone_number\": \"string\",\n        \"rate\": 2665.6402046367357,\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ],\n        \"subscription_type\": \"Attorney\",\n        \"time_zone\": \"string\",\n        \"updated_at\": \"1988-12-08T16:16:02.604Z\"\n      },\n      \"allocations\": [\n        {\n          \"id\": 4672,\n          \"etag\": \"string\",\n          \"date\": \"1998-02-18\",\n          \"amount\": 908.919618743137,\n          \"interest\": false,\n          \"voided_at\": \"2013-07-18T23:17:14.920Z\",\n          \"created_at\": \"2021-06-09T09:10:09.900Z\",\n          \"updated_at\": \"1997-04-10T09:21:46.843Z\",\n          \"description\": \"string\",\n          \"has_online_payment\": false,\n          \"destroyable\": true,\n          \"payment_type\": \"string\"\n        },\n        {\n          \"id\": 1127,\n          \"etag\": \"string\",\n          \"date\": \"1979-07-19\",\n          \"amount\": 2822.8853079318806,\n          \"interest\": true,\n          \"voided_at\": \"2010-06-24T02:36:33.069Z\",\n          \"created_at\": \"1969-02-20T08:17:04.433Z\",\n          \"updated_at\": \"2009-02-12T06:48:37.876Z\",\n          \"description\": \"string\",\n          \"has_online_payment\": true,\n          \"destroyable\": true,\n          \"payment_type\": \"string\"\n        }\n      ],\n      \"bills\": [\n        {\n          \"id\": 6206,\n          \"etag\": \"string\",\n          \"number\": \"string\",\n          \"issued_at\": \"1994-10-28\",\n          \"created_at\": \"1968-02-22T09:21:31.120Z\",\n          \"due_at\": \"1980-07-31\",\n          \"tax_rate\": 6368.584984800326,\n          \"secondary_tax_rate\": 7618.418740894356,\n          \"updated_at\": \"1991-06-25T21:49:37.862Z\",\n          \"subject\": \"string\",\n          \"purchase_order\": \"string\",\n          \"type\": \"ClientBill\",\n          \"memo\": \"string\",\n          \"start_at\": \"1957-04-09\",\n          \"end_at\": \"1959-11-19\",\n          \"balance\": 250.74680659645466,\n          \"state\": \"deleted\",\n          \"kind\": \"aggregate_split\",\n          \"total\": 923.6869145519299,\n          \"paid\": 3748.246917384853,\n          \"paid_at\": \"1950-08-03T18:38:28.903Z\",\n          \"pending\": 7546.737177991943,\n          \"due\": 8877.399687917878,\n          \"discount_services_only\": \"string\",\n          \"can_update\": false,\n          \"credits_issued\": 7479.433885974968,\n          \"shared\": false,\n          \"last_sent_at\": \"2015-10-31T20:25:13.492Z\",\n          \"services_secondary_tax\": 5630.156488773166,\n          \"services_sub_total\": 225.12742332868152,\n          \"services_tax\": 9092.570088059205,\n          \"services_taxable_sub_total\": 7912,\n          \"services_secondary_taxable_sub_total\": 3267,\n          \"taxable_sub_total\": 8190,\n          \"secondary_taxable_sub_total\": 1838,\n          \"sub_total\": 5628.743483487397,\n          \"tax_sum\": 4977.438001345575,\n          \"secondary_tax_sum\": 7841.409613049005,\n          \"total_tax\": 1258.1941546696085,\n          \"available_state_transitions\": [\n            \"deleted\",\n            \"awaiting_payment\"\n          ]\n        },\n        {\n          \"id\": 1061,\n          \"etag\": \"string\",\n          \"number\": \"string\",\n          \"issued_at\": \"1956-04-25\",\n          \"created_at\": \"1984-10-05T23:00:46.571Z\",\n          \"due_at\": \"1987-05-19\",\n          \"tax_rate\": 3275.1612430792043,\n          \"secondary_tax_rate\": 1649.8385683528581,\n          \"updated_at\": \"2011-08-13T01:55:14.787Z\",\n          \"subject\": \"string\",\n          \"purchase_order\": \"string\",\n          \"type\": \"ClientBill\",\n          \"memo\": \"string\",\n          \"start_at\": \"1975-10-31\",\n          \"end_at\": \"2007-06-06\",\n          \"balance\": 6182.075785956017,\n          \"state\": \"paid\",\n          \"kind\": \"aggregate_expenses\",\n          \"total\": 1088.9133058531231,\n          \"paid\": 8074.988852585016,\n          \"paid_at\": \"1960-03-16T04:55:15.435Z\",\n          \"pending\": 5525.922631314955,\n          \"due\": 6724.895417152854,\n          \"discount_services_only\": \"string\",\n          \"can_update\": false,\n          \"credits_issued\": 3554.1998363558437,\n          \"shared\": false,\n          \"last_sent_at\": \"1975-06-16T15:53:10.950Z\",\n          \"services_secondary_tax\": 3244.9106417656926,\n          \"services_sub_total\": 8260.71221033191,\n          \"services_tax\": 3872.1018651197546,\n          \"services_taxable_sub_total\": 3292,\n          \"services_secondary_taxable_sub_total\": 6059,\n          \"taxable_sub_total\": 9748,\n          \"secondary_taxable_sub_total\": 4890,\n          \"sub_total\": 4112.844023887675,\n          \"tax_sum\": 5890.769919793237,\n          \"secondary_tax_sum\": 6129.625751634538,\n          \"total_tax\": 9171.755153126858,\n          \"available_state_transitions\": [\n            \"void\",\n            \"awaiting_payment\"\n          ]\n        }\n      ],\n      \"matters\": [\n        {\n          \"id\": 88,\n          \"etag\": \"string\",\n          \"number\": 9908,\n          \"display_number\": \"string\",\n          \"custom_number\": \"string\",\n          \"currency\": {},\n          \"description\": \"string\",\n          \"status\": \"Pending\",\n          \"location\": \"string\",\n          \"client_reference\": \"string\",\n          \"client_id\": 1637,\n          \"billable\": false,\n          \"maildrop_address\": \"string\",\n          \"billing_method\": \"hourly\",\n          \"open_date\": \"1986-03-05\",\n          \"close_date\": \"1970-03-24\",\n          \"pending_date\": \"2010-05-17\",\n          \"created_at\": \"1952-09-14T05:51:26.138Z\",\n          \"updated_at\": \"1951-01-13T08:43:57.909Z\",\n          \"shared\": false,\n          \"has_tasks\": false,\n          \"last_activity_date\": \"1985-04-02\",\n          \"matter_stage_updated_at\": \"2013-03-28T05:03:53.079Z\"\n        },\n        {\n          \"id\": 4002,\n          \"etag\": \"string\",\n          \"number\": 7581,\n          \"display_number\": \"string\",\n          \"custom_number\": \"string\",\n          \"currency\": {},\n          \"description\": \"string\",\n          \"status\": \"Pending\",\n          \"location\": \"string\",\n          \"client_reference\": \"string\",\n          \"client_id\": 2673,\n          \"billable\": false,\n          \"maildrop_address\": \"string\",\n          \"billing_method\": \"flat\",\n          \"open_date\": \"2003-03-30\",\n          \"close_date\": \"2013-12-09\",\n          \"pending_date\": \"1953-05-16\",\n          \"created_at\": \"1948-05-23T13:15:26.023Z\",\n          \"updated_at\": \"2011-02-26T08:11:24.716Z\",\n          \"shared\": false,\n          \"has_tasks\": false,\n          \"last_activity_date\": \"2011-09-27\",\n          \"matter_stage_updated_at\": \"2006-02-21T15:27:11.446Z\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56575ffa-821f-4b4d-990b-5eed7bc0adfa",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "payments.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bill_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cea8aa0c-70ed-4aac-bad0-16695c11ab6a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "payments.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bill_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb6b31e6-856a-4571-8ea1-6a370a4bf6fb",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "payments.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bill_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c77837d-99a7-404d-a8cf-15df35ac9960",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "payments.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bill_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "contact_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids[]",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf2b21c8-3666-47d4-a68a-44de656f92b2",
+          "name": "Return the data for a single ClioPaymentsPayment",
+          "request": {
+            "name": "Return the data for a single ClioPaymentsPayment",
+            "description": {
+              "content": "Outlines the parameters, optional and required, used when requesting the data for a single ClioPaymentsPayment",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "clio_payments",
+                "payments",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                "key": "IF-MODIFIED-SINCE",
+                "value": "<date>"
+              },
+              {
+                "disabled": false,
+                "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                "key": "IF-NONE-MATCH",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                "key": "X-API-VERSION",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "80ad61ff-5cbd-4738-a50a-9400d5843fee",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "payments",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"amount\": 5414.3094211879215,\n    \"confirmation_number\": \"string\",\n    \"created_at\": \"2024-07-06T13:48:10.864Z\",\n    \"currency\": \"string\",\n    \"deposit_as_revenue\": false,\n    \"description\": \"string\",\n    \"email_address\": \"string\",\n    \"id\": 415,\n    \"state\": \"voided\",\n    \"updated_at\": \"1983-04-28T10:58:46.649Z\",\n    \"bank_transaction\": {\n      \"id\": 5749,\n      \"type\": \"string\",\n      \"etag\": \"string\",\n      \"created_at\": \"1991-09-26T21:24:44.980Z\",\n      \"updated_at\": \"1995-11-08T23:17:52.805Z\",\n      \"bank_account_id\": 3145,\n      \"source\": \"string\",\n      \"confirmation\": \"string\",\n      \"date\": \"1968-06-29\",\n      \"amount\": 5170.131855847525,\n      \"currency\": \"string\",\n      \"currency_id\": 8073,\n      \"description\": \"string\",\n      \"exchange_rate\": 1965.3373702864085,\n      \"transaction_type\": \"string\",\n      \"funds_in\": 2110.1179492117094,\n      \"funds_out\": 268.2620233367328,\n      \"clio_payments_transaction\": true,\n      \"current_account_balance\": 8088.96543170667,\n      \"read_only_confirmation\": false\n    },\n    \"clio_payments_link\": {\n      \"active\": false,\n      \"amount\": 4380.514769306597,\n      \"created_at\": \"1977-01-21T03:20:47.664Z\",\n      \"currency\": \"string\",\n      \"description\": \"string\",\n      \"email_address\": \"string\",\n      \"etag\": \"string\",\n      \"expires_at\": \"2001-12-05T00:54:43.359Z\",\n      \"id\": 7615,\n      \"is_allocated_as_revenue\": false,\n      \"redirect_url\": \"string\",\n      \"url\": \"string\"\n    },\n    \"contact\": {\n      \"id\": 8688,\n      \"etag\": \"string\",\n      \"name\": \"string\",\n      \"first_name\": \"string\",\n      \"middle_name\": \"string\",\n      \"last_name\": \"string\",\n      \"date_of_birth\": \"1976-02-20\",\n      \"type\": \"Company\",\n      \"created_at\": \"1976-05-07T08:59:52.522Z\",\n      \"updated_at\": \"1973-04-30T18:22:36.313Z\",\n      \"prefix\": \"string\",\n      \"title\": \"string\",\n      \"initials\": \"string\",\n      \"clio_connect_email\": \"string\",\n      \"locked_clio_connect_email\": true,\n      \"client_connect_user_id\": 6155,\n      \"primary_email_address\": \"string\",\n      \"secondary_email_address\": \"string\",\n      \"primary_phone_number\": \"string\",\n      \"secondary_phone_number\": \"string\",\n      \"ledes_client_id\": \"string\",\n      \"has_clio_for_clients_permission\": false,\n      \"is_client\": false,\n      \"is_clio_for_client_user\": true,\n      \"is_co_counsel\": false,\n      \"is_bill_recipient\": true,\n      \"sales_tax_number\": \"string\",\n      \"currency\": {}\n    },\n    \"destination_account\": {\n      \"account_number\": \"string\",\n      \"balance\": 6565.915397754028,\n      \"bank_transactions_count\": 3094,\n      \"clio_payment_page_link\": \"string\",\n      \"clio_payment_page_qr_code\": \"string\",\n      \"clio_payments_enabled\": true,\n      \"controlled_account\": true,\n      \"created_at\": \"1974-02-24T03:41:32.208Z\",\n      \"currency\": \"string\",\n      \"currency_symbol\": \"string\",\n      \"currency_id\": 8516.871816510828,\n      \"default_account\": false,\n      \"domicile_branch\": \"string\",\n      \"etag\": \"string\",\n      \"general_ledger_number\": \"string\",\n      \"holder\": \"string\",\n      \"id\": 1664,\n      \"institution\": \"string\",\n      \"name\": \"string\",\n      \"swift\": \"string\",\n      \"transit_number\": \"string\",\n      \"type\": \"Operating\",\n      \"updated_at\": \"1978-10-11T18:17:48.690Z\"\n    },\n    \"user\": {\n      \"account_owner\": false,\n      \"clio_connect\": false,\n      \"court_rules_default_attendee\": false,\n      \"created_at\": \"2025-06-21T19:07:18.014Z\",\n      \"default_calendar_id\": 8010,\n      \"email\": \"string\",\n      \"enabled\": false,\n      \"etag\": \"string\",\n      \"first_name\": \"string\",\n      \"id\": 6635,\n      \"initials\": \"string\",\n      \"last_name\": \"string\",\n      \"name\": \"string\",\n      \"phone_number\": \"string\",\n      \"rate\": 76.8708578969457,\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"subscription_type\": \"Attorney\",\n      \"time_zone\": \"string\",\n      \"updated_at\": \"1953-04-24T04:51:14.854Z\"\n    },\n    \"allocations\": [\n      {\n        \"id\": 3397,\n        \"etag\": \"string\",\n        \"date\": \"2013-09-19\",\n        \"amount\": 853.9886623117576,\n        \"interest\": false,\n        \"voided_at\": \"1956-11-09T00:11:08.173Z\",\n        \"created_at\": \"1949-06-06T21:50:44.455Z\",\n        \"updated_at\": \"1987-10-08T11:49:02.724Z\",\n        \"description\": \"string\",\n        \"has_online_payment\": true,\n        \"destroyable\": false,\n        \"payment_type\": \"string\"\n      },\n      {\n        \"id\": 7418,\n        \"etag\": \"string\",\n        \"date\": \"1958-06-18\",\n        \"amount\": 9590.587888183432,\n        \"interest\": false,\n        \"voided_at\": \"1963-05-25T08:06:45.935Z\",\n        \"created_at\": \"1968-02-04T07:04:34.428Z\",\n        \"updated_at\": \"1966-08-19T03:21:22.543Z\",\n        \"description\": \"string\",\n        \"has_online_payment\": true,\n        \"destroyable\": true,\n        \"payment_type\": \"string\"\n      }\n    ],\n    \"bills\": [\n      {\n        \"id\": 5043,\n        \"etag\": \"string\",\n        \"number\": \"string\",\n        \"issued_at\": \"1968-03-05\",\n        \"created_at\": \"1993-03-30T20:22:16.137Z\",\n        \"due_at\": \"2015-04-16\",\n        \"tax_rate\": 3271.7794226557394,\n        \"secondary_tax_rate\": 9629.519572235704,\n        \"updated_at\": \"1982-10-05T22:37:28.918Z\",\n        \"subject\": \"string\",\n        \"purchase_order\": \"string\",\n        \"type\": \"MatterBill\",\n        \"memo\": \"string\",\n        \"start_at\": \"2014-08-11\",\n        \"end_at\": \"2017-10-07\",\n        \"balance\": 3817.966297053769,\n        \"state\": \"paid\",\n        \"kind\": \"summary_kind\",\n        \"total\": 4080.3461357893066,\n        \"paid\": 4003.6781150359434,\n        \"paid_at\": \"1988-03-27T01:40:38.535Z\",\n        \"pending\": 5493.72577541918,\n        \"due\": 4151.650266703437,\n        \"discount_services_only\": \"string\",\n        \"can_update\": false,\n        \"credits_issued\": 8929.702748327103,\n        \"shared\": true,\n        \"last_sent_at\": \"2000-08-21T22:47:11.668Z\",\n        \"services_secondary_tax\": 8616.682039901476,\n        \"services_sub_total\": 981.2524336064376,\n        \"services_tax\": 3280.171779019697,\n        \"services_taxable_sub_total\": 2413,\n        \"services_secondary_taxable_sub_total\": 5321,\n        \"taxable_sub_total\": 995,\n        \"secondary_taxable_sub_total\": 4828,\n        \"sub_total\": 131.28476158575376,\n        \"tax_sum\": 5584.837158660689,\n        \"secondary_tax_sum\": 5997.458215714223,\n        \"total_tax\": 7513.501235712965,\n        \"available_state_transitions\": [\n          \"awaiting_approval\",\n          \"awaiting_approval\"\n        ]\n      },\n      {\n        \"id\": 9017,\n        \"etag\": \"string\",\n        \"number\": \"string\",\n        \"issued_at\": \"1976-06-11\",\n        \"created_at\": \"1966-12-22T08:02:25.671Z\",\n        \"due_at\": \"2003-08-27\",\n        \"tax_rate\": 6540.968653756378,\n        \"secondary_tax_rate\": 7360.5161070493,\n        \"updated_at\": \"1998-07-31T01:23:52.148Z\",\n        \"subject\": \"string\",\n        \"purchase_order\": \"string\",\n        \"type\": \"ClientBill\",\n        \"memo\": \"string\",\n        \"start_at\": \"2010-01-30\",\n        \"end_at\": \"1985-10-17\",\n        \"balance\": 7375.562600789294,\n        \"state\": \"deleted\",\n        \"kind\": \"aggregate_split\",\n        \"total\": 6994.967902418036,\n        \"paid\": 3018.6623852885696,\n        \"paid_at\": \"2012-07-12T02:00:05.824Z\",\n        \"pending\": 8535.36452963425,\n        \"due\": 5459.761139614681,\n        \"discount_services_only\": \"string\",\n        \"can_update\": true,\n        \"credits_issued\": 9092.96019266278,\n        \"shared\": true,\n        \"last_sent_at\": \"1962-10-03T19:53:01.135Z\",\n        \"services_secondary_tax\": 1814.0994305564172,\n        \"services_sub_total\": 7826.615970734318,\n        \"services_tax\": 8731.188311137845,\n        \"services_taxable_sub_total\": 2888,\n        \"services_secondary_taxable_sub_total\": 8696,\n        \"taxable_sub_total\": 9652,\n        \"secondary_taxable_sub_total\": 8871,\n        \"sub_total\": 8503.092741329516,\n        \"tax_sum\": 997.7171940236562,\n        \"secondary_tax_sum\": 9267.612075404211,\n        \"total_tax\": 2276.36349344454,\n        \"available_state_transitions\": [\n          \"paid\",\n          \"awaiting_approval\"\n        ]\n      }\n    ],\n    \"matters\": [\n      {\n        \"id\": 550,\n        \"etag\": \"string\",\n        \"number\": 6393,\n        \"display_number\": \"string\",\n        \"custom_number\": \"string\",\n        \"currency\": {},\n        \"description\": \"string\",\n        \"status\": \"Closed\",\n        \"location\": \"string\",\n        \"client_reference\": \"string\",\n        \"client_id\": 47,\n        \"billable\": true,\n        \"maildrop_address\": \"string\",\n        \"billing_method\": \"hourly\",\n        \"open_date\": \"1982-08-27\",\n        \"close_date\": \"1992-09-02\",\n        \"pending_date\": \"1998-10-07\",\n        \"created_at\": \"1980-11-25T07:04:58.479Z\",\n        \"updated_at\": \"1960-11-13T18:01:37.782Z\",\n        \"shared\": false,\n        \"has_tasks\": true,\n        \"last_activity_date\": \"1991-03-10\",\n        \"matter_stage_updated_at\": \"2020-09-10T16:33:48.899Z\"\n      },\n      {\n        \"id\": 9822,\n        \"etag\": \"string\",\n        \"number\": 5474,\n        \"display_number\": \"string\",\n        \"custom_number\": \"string\",\n        \"currency\": {},\n        \"description\": \"string\",\n        \"status\": \"Closed\",\n        \"location\": \"string\",\n        \"client_reference\": \"string\",\n        \"client_id\": 2536,\n        \"billable\": false,\n        \"maildrop_address\": \"string\",\n        \"billing_method\": \"contingency\",\n        \"open_date\": \"1962-03-09\",\n        \"close_date\": \"2019-12-08\",\n        \"pending_date\": \"1948-11-20\",\n        \"created_at\": \"1951-08-06T04:47:07.864Z\",\n        \"updated_at\": \"2025-01-18T19:03:03.958Z\",\n        \"shared\": true,\n        \"has_tasks\": false,\n        \"last_activity_date\": \"1977-12-28\",\n        \"matter_stage_updated_at\": \"1976-10-11T06:02:27.096Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32674df1-ec2e-454c-b6da-728585fc694b",
+              "name": "Not Modified",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "payments",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a40c581d-86ea-44ba-9d23-36442a7494af",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "payments",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95819239-af09-47fd-9117-3e6adc371691",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "payments",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5469458d-cd2e-442e-8fe6-5406ce40219a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "payments",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53a635e9-5cb2-4d0e-be13-0dda83706520",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "payments",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77e1942a-31be-4802-8a68-73007ab5514b",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clio_payments",
+                    "payments",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).",
+                    "key": "IF-MODIFIED-SINCE",
+                    "value": "<date>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.",
+                    "key": "IF-NONE-MATCH",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The [API minor version](#section/Minor-Versions). Default: latest version.",
+                    "key": "X-API-VERSION",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=utf-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.clio.com/api/v4",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The unique identifier for the ClioPaymentsPayment.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<long>",
+      "key": "id"
+    }
+  ],
+  "info": {
+    "_postman_id": "d21c87b2-2120-43d4-94bd-e1c185b6b072",
+    "name": "Clio API Documentation Activities Clio Payments Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Developer Support and Feedback\n* Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio's API Support team at [api@clio.com](mailto:api@clio.com).\n* For business and partnership inquiries, contact our API Partnerships team at [api.partnerships@clio.com](mailto:api.partnerships@clio.com).\n* For best practices and tips from the Clio development community, join the conversation in the [Clio Developer Slack Channel](https://join.slack.com/t/clio-public/shared_invite/zt-36i0eqgo1-7POORPtMJpp2N0~_auL2IQ).\n\nA community-driven [Clio Developers Stack Overflow Group](https://stackoverflow.com/questions/tagged/clio-api) also exists where you can connect and ask questions from other Clio API users.\n# Getting Started\n> **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).\n>\n> Likewise, the developer portal is available at region-specific links for the [Australia](https://au.developers.clio.com), [Canada](https://ca.developers.clio.com), [EU](https://eu.developers.clio.com), and [US](https://developers.clio.com) regions.\n>\n> This document assumes the US region is being used (app.clio.com). If you're building in one of the other regions, you should adapt the links and examples as necessary.\n\nTo start building on the Clio API, you’ll need a Clio account – you can review our [Developer Handbook](https://docs.developers.clio.com/) and follow the steps to sign up for an account.\n\nOnce you have an account, you can [create a developer application](https://docs.developers.clio.com/api-docs/applications) from the [Developer Portal](https://developers.clio.com) and start building!\n# Authorization with OAuth 2.0\nSee our [Authorization documentation →](https://docs.developers.clio.com/api-docs/authorization)\n# Permissions\nSee our [Permissions documentation →](https://docs.developers.clio.com/api-docs/permissions)\n# Fields\nSee our [Fields documentation →](https://docs.developers.clio.com/api-docs/fields)\n# Rate Limiting\nSee our [Rate Limits documentation →](https://docs.developers.clio.com/api-docs/rate-limits)\n# Paging\nSee our [Pagination documentation →](https://docs.developers.clio.com/api-docs/paging)\n# ETags\nSee our [ETags documentation →](https://docs.developers.clio.com/api-docs/etags)\n# Minor Versions\nAPI v4 supports multiple minor versions. Versions are of the form '4.X.Y'. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you're requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.\n\nAn `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.\n\nYou can find our [API Versioning Policy and Guidelines](https://docs.developers.clio.com/api-docs/api-versioning-policy) in our documentation hub.\n\nThe [API Changelog](https://docs.developers.clio.com/api-docs/api-changelog) explains each version's changes in further detail.\n### [4.0.4](https://docs.developers.clio.com/api-docs/api-changelog#404)\n\n  * Update `quantity` field to return values in seconds rather than hours for Activities\n\n### [4.0.5](https://docs.developers.clio.com/api-docs/api-changelog#405)\n\n  * Remove `matter_balances` field from Bills\n* Standardize status/state enum values\n* Add a Document association to completed DocumentAutomations\n* Add rate visibility handling for Activity's price and total\n\n### [4.0.6](https://docs.developers.clio.com/api-docs/api-changelog#406)\n\n  * Remove `document_versions` collection field from Documents\n\n### [4.0.7](https://docs.developers.clio.com/api-docs/api-changelog#407)\n\n  * Change secure link format\n\n### [4.0.8](https://docs.developers.clio.com/api-docs/api-changelog#408)\n\n  * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user\n  * Add `quantity_redacted` field to activities\n\n### [4.0.9](https://docs.developers.clio.com/api-docs/api-changelog#409)\n\n  * Contacts are filtered and redacted in the response based on the new 'Contacts Visibility' user permission setting.\n\n### [4.0.10](https://docs.developers.clio.com/api-docs/api-changelog#4010)\n\n  * Fixed validation of `type` query parameter when querying Notes\n\n### [4.0.12](https://docs.developers.clio.com/api-docs/api-changelog#4012)\n\n  * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers\n\n### [4.0.13](https://docs.developers.clio.com/api-docs/api-changelog#4013)\n\n  **This is the default version**\n\n  * Add association limits to Contacts\n* Returns 422 Unprocessable Entity when association limits are exceeded\n\n\n\n\nContact Support:\n Name: Clio API Support\n Email: api@clio.com",
+      "type": "text/plain"
+    }
+  }
+}

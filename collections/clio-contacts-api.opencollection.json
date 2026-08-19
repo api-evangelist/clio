@@ -1,0 +1,289 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clio API Documentation Activities Contacts API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return the data for all Contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/contacts.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "client_only",
+                "value": "",
+                "type": "query",
+                "description": "Filter Contact records to those that are clients."
+              },
+              {
+                "name": "clio_connect_only",
+                "value": "",
+                "type": "query",
+                "description": "Filter Contact records to those that are Clio Connect users."
+              },
+              {
+                "name": "created_since",
+                "value": "",
+                "type": "query",
+                "description": "Filter Contact records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+              },
+              {
+                "name": "custom_field_ids[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter Contact's custom_field_values to only include values for the given custom field unique identifiers."
+              },
+              {
+                "name": "custom_field_values",
+                "value": "",
+                "type": "query",
+                "description": "Filter records to only those with the given custom field(s) set. The value is compared using the operator provided, or,\nif the value type only supports one operator, the supported operator is used. In the latter case, no check for operator is performed on the input string.\nThe key for the custom field value filter is the custom_field.id. e.g. `custom_field_values[12345]`\nIf an operator is used for a type that does not support it, an `400 Bad Request` is returned.\n\n*Supported operators:*\n* `checkbox`, `contact`, `matter`, `picklist` : `=`\n\ne.g. `?custom_field_values[1]=42`\n\n* `currency`, `date`, `time`, `numeric` : `=`, `<`, `>`, `<=`, `>=`\n\ne.g. `?custom_field_values[1]=>=105.4`\n\n* `email`, `text_area`, `text_line`, `url` : `=`\n\ne.g. `?custom_field_values[1]=url_encoded`\n\n*Multiple conditions for the same custom field:*\n\nIf you want to use more than one operator to filter a custom field, you can do so by passing in an array of values.\ne.g. `?custom_field_values[1]=[<=50, >=45]`\n"
+              },
+              {
+                "name": "email_only",
+                "value": "",
+                "type": "query",
+                "description": "Filter Contact records to those that have email addresses."
+              },
+              {
+                "name": "exclude_ids[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter Contact records to those who are not included in the given list of unique identifiers."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "ids[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter Contact records to those having the specified unique identifiers."
+              },
+              {
+                "name": "initial",
+                "value": "",
+                "type": "query",
+                "description": "Filter Contact records to those where the last name or company name start with the given initial."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "A limit on the number of Contact records to be returned. Limit can range between 1 and 200. Default: `200`."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Orders the Contact records by the given field. Default: `id(asc)`."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "A token specifying which page to return."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Wildcard search for name, title, email address, address, phone number, web site, instant messenger address,\ncustom fields, related matter name, or company name matching a given string.\n"
+              },
+              {
+                "name": "shared_resource_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter Contact records to those that currently have access to a given shared resource."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter Contact records to those that match the given type."
+              },
+              {
+                "name": "updated_since",
+                "value": "",
+                "type": "query",
+                "description": "Filter Contact records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when requesting the data for all Contacts"
+        },
+        {
+          "info": {
+            "name": "Create a new Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.clio.com/api/v4/contacts.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "custom_field_ids[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter Contact's custom_field_values to only include values for the given custom field unique identifiers."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Outlines the parameters and data fields used when creating a new Contact"
+        },
+        {
+          "info": {
+            "name": "Return the data for a single Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/contacts/:id.json",
+            "headers": [
+              {
+                "name": "IF-MODIFIED-SINCE",
+                "value": ""
+              },
+              {
+                "name": "IF-NONE-MATCH",
+                "value": ""
+              },
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "custom_field_ids[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter Contact's custom_field_values to only include values for the given custom field unique identifiers."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the Contact."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when requesting the data for a single Contact"
+        },
+        {
+          "info": {
+            "name": "Update a single Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.clio.com/api/v4/contacts/:id.json",
+            "headers": [
+              {
+                "name": "IF-MATCH",
+                "value": ""
+              },
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "custom_field_ids[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter Contact's custom_field_values to only include values for the given custom field unique identifiers."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the Contact."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Outlines the parameters and data fields used when updating a single Contact"
+        },
+        {
+          "info": {
+            "name": "Delete a single Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.clio.com/api/v4/contacts/:id.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the Contact."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when deleting the record for a single Contact"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

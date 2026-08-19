@@ -1,0 +1,251 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clio API Documentation Activities Matter Dockets API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Matter Dockets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Preview calendar dates for the docket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/court_rules/matter_dockets/preview.json",
+            "params": [
+              {
+                "name": "event_prefix",
+                "value": "",
+                "type": "query",
+                "description": "The prefix that will be added to the beginning of all court rule event titles"
+              },
+              {
+                "name": "jurisdiction[id]",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for a single Jurisdiction. The keyword `null` is not valid for this field. The list will be filtered to include only the MatterDocket records with the matching property."
+              },
+              {
+                "name": "service_type[id]",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for a single ServiceType. The keyword `null` is not valid for this field. The list will be filtered to include only the MatterDocket records with the matching property."
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "The date the MatterDocket should start. (Expects an ISO-8601 date)."
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query",
+                "description": "The time the MatterDocket should start. (Expects an ISO-8601 timestamp)."
+              },
+              {
+                "name": "trigger[id]",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for a single JurisdictionsToTrigger. The keyword `null` is not valid for this field. The list will be filtered to include only the MatterDocket records with the matching property."
+              }
+            ]
+          },
+          "docs": "Preview calendar dates for the docket"
+        },
+        {
+          "info": {
+            "name": "Return the data for all matter dockets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/court_rules/matter_dockets.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "created_since",
+                "value": "",
+                "type": "query",
+                "description": "Filter MatterDocket records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "ids[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter MatterDocket records to those having the specified unique identifiers."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "A limit on the number of MatterDocket records to be returned. Limit can range between 1 and 200. Default: `200`."
+              },
+              {
+                "name": "matter_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for a single Matter. The keyword `null` is not valid for this field. The list will be filtered to include only the MatterDocket records with the matching property."
+              },
+              {
+                "name": "matter_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter MatterDocket records to those with Matters having a specific status."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Orders the MatterDocket records by the given field. Default: `id(asc)`."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "A token specifying which page to return."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Wildcard search for `name` matching a given string."
+              },
+              {
+                "name": "service_type_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for a single ServiceType. Use the keyword `null` to match those without a MatterDocket. The list will be filtered to include only the MatterDocket records with the matching property."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter MatterDocket records to those having a specific status."
+              },
+              {
+                "name": "updated_since",
+                "value": "",
+                "type": "query",
+                "description": "Filter MatterDocket records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when requesting the data for all MatterDockets"
+        },
+        {
+          "info": {
+            "name": "Creates a matter docket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.clio.com/api/v4/court_rules/matter_dockets.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Outlines the parameters and data fields used when creating a new MatterDocket"
+        },
+        {
+          "info": {
+            "name": "Return the data for the matter docket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/court_rules/matter_dockets/:id.json",
+            "headers": [
+              {
+                "name": "IF-MODIFIED-SINCE",
+                "value": ""
+              },
+              {
+                "name": "IF-NONE-MATCH",
+                "value": ""
+              },
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the MatterDocket."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when requesting the data for a single MatterDocket"
+        },
+        {
+          "info": {
+            "name": "Deletes the requested matter docket",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.clio.com/api/v4/court_rules/matter_dockets/:id.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the MatterDocket."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when deleting the record for a single MatterDocket"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

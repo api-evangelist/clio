@@ -1,0 +1,148 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clio API Documentation Activities Jurisdictions To Triggers API",
+    "version": "v4"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jurisdictions To Triggers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return the data for all triggers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/court_rules/jurisdictions/:jurisdiction_id/triggers.json",
+            "headers": [
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "created_since",
+                "value": "",
+                "type": "query",
+                "description": "Filter JurisdictionsToTrigger records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "ids[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter JurisdictionsToTrigger records to those having the specified unique identifiers."
+              },
+              {
+                "name": "is_requirements_required",
+                "value": "",
+                "type": "query",
+                "description": "Filter JurisdictionsToTrigger records to those which require addition requirements to be checked (usually specifying trigger time)."
+              },
+              {
+                "name": "is_served",
+                "value": "",
+                "type": "query",
+                "description": "Filter JurisdictionsToTrigger records to those which require a service type to be selected."
+              },
+              {
+                "name": "jurisdiction_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the Jurisdiction."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "A limit on the number of JurisdictionsToTrigger records to be returned. Limit can range between 1 and 1000. Default: `1000`."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Orders the JurisdictionsToTrigger records by the given field. Default: `id(asc)`."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "A token specifying which page to return."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Wildcard search for `description` matching a given string."
+              },
+              {
+                "name": "updated_since",
+                "value": "",
+                "type": "query",
+                "description": "Filter JurisdictionsToTrigger records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp)."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when requesting the data for all JurisdictionsToTriggers"
+        },
+        {
+          "info": {
+            "name": "Return the data for the trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.clio.com/api/v4/court_rules/jurisdictions/:jurisdiction_id/triggers/:id.json",
+            "headers": [
+              {
+                "name": "IF-MODIFIED-SINCE",
+                "value": ""
+              },
+              {
+                "name": "IF-NONE-MATCH",
+                "value": ""
+              },
+              {
+                "name": "X-API-VERSION",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields)."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the JurisdictionsToTrigger."
+              },
+              {
+                "name": "jurisdiction_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the Jurisdiction."
+              }
+            ]
+          },
+          "docs": "Outlines the parameters, optional and required, used when requesting the data for a single JurisdictionsToTrigger"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
