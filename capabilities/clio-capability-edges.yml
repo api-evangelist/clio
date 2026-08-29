@@ -3,7 +3,7 @@ provider: Clio
 generated_by: planning/capability-mapping/scripts/classify_capabilities.py
 model: claude-opus-5
 frame:
-- Software & Technology
+- Healthcare Providers
 min_confidence: 0.7
 capability_model:
   source: https://github.com/vincentmakes/turbo-ea-capabilities
@@ -11,95 +11,76 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 9
+edge_count: 7
 edges:
-- tag: Webhooks
-  spec_file: clio-webhooks-api-openapi.yml
-  capability_id: BC-4270.80
-  capability_id_l1: BC-4270
-  capability_name: Webhook & Event Subscription Management
-  confidence: 0.9
-  evidence: POST /webhooks.json  Webhook#create  Create a new Webhook
-  reason: Full CRUD lifecycle over outbound webhook subscriptions exposed to API consumers, which is exactly
-    Webhook & Event Subscription Management within the developer platform capability.
-- tag: Bills
-  spec_file: clio-bills-api-openapi.yml
-  capability_id: BC-200.30
-  capability_id_l1: BC-200
-  capability_name: Accounts Receivable Management
-  confidence: 0.88
-  evidence: GET /bills/{id}/preview.json Returns the pre-rendered html for the Bill; DELETE /bills/{id}.json
-    Delete or void a Bill
-  reason: Full lifecycle of client bills (invoices) including preview, update and void, with Discount,
-    Interest, Balance, Currency and SplitInvoice schemas — plainly customer invoicing and receivables
-    management for a law firm.
-- tag: Matters
-  spec_file: clio-matters-api-openapi.yml
-  capability_id: BC-150.50
-  capability_id_l1: BC-150
-  capability_name: Legal Operations Management
-  confidence: 0.8
-  evidence: '"Matter#create  Create a new Matter"; schemas "MatterBudget_base", "AttorneyAllocation_base"'
-  reason: Full CRUD over legal matters with budgets and attorney allocations is matter management, explicitly
-    named under Legal Operations Management; some ambiguity vs litigation management depending on matter
-    type.
-- tag: Contacts
-  spec_file: clio-contacts-api-openapi.yml
-  capability_id: BC-420.10
-  capability_id_l1: BC-420
-  capability_name: Customer Data Management
-  confidence: 0.78
-  evidence: POST /contacts.json Contact#create; schemas EmailAddress_base, PhoneNumber_base, InstantMessenger_base,
-    PaymentProfile_base, CustomFieldValue, AccountBalance_base
-  reason: Maintains the master record for clients/contacts including addresses, phone numbers, custom
-    fields and payment profile — customer master data management.
 - tag: Outstanding Client Balances
   spec_file: clio-outstanding-client-balances-api-openapi.yml
   capability_id: BC-200.30
   capability_id_l1: BC-200
   capability_name: Accounts Receivable Management
+  confidence: 0.8
+  evidence: GET /outstanding_client_balances.json  OutstandingClientBalance#index  Return the data for
+    all OutstandingClientBalances; schemas OutstandingClientBalance, Bill_base, Currency_base, Contact_base
+  reason: 'Reports unpaid client bill balances by contact with currency — receivables/collections visibility,
+    i.e. Accounts Receivable Management for the firm. Not healthcare revenue cycle: the vendor bills legal
+    clients, not payers.'
+- tag: Bills
+  spec_file: clio-bills-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
   confidence: 0.78
-  evidence: 'GET /outstanding_client_balances.json  OutstandingClientBalance#index  Return the data for
-    all OutstandingClientBalances; schemas: Bill_base, Currency_base, Contact_base'
-  reason: Reports unpaid client balances against issued bills — customer invoicing/collections visibility,
-    i.e. accounts receivable management for the firm.
-- tag: Clients
-  spec_file: clio-clients-api-openapi.yml
+  evidence: GET /bills/{id}.json  Bill#show  Return the data for a single Bill; DELETE /bills/{id}.json  Bill#destroy  Delete
+    or void a Bill
+  reason: 'Bills here are client invoices with discounts, interest, balances and split invoices — i.e.
+    customer invoicing and receivables against matters, matching Accounts Receivable Management. Not healthcare
+    revenue cycle: the vendor is a legal practice platform.'
+- tag: Contacts
+  spec_file: clio-contacts-api-openapi.yml
   capability_id: BC-420.10
   capability_id_l1: BC-420
   capability_name: Customer Data Management
-  confidence: 0.72
-  evidence: GET /matters/{matter_id}/client.json Client#show Return the client data for a single matter
-  reason: Returns the client master record with Address_base, EmailAddress_base, PhoneNumber_base, Contact_base
-    — customer/client data records, i.e. customer data management. Read-only and matter-scoped, hence
-    moderate confidence.
+  confidence: 0.75
+  evidence: '''Contact#create  Create a new Contact''; schemas ''EmailAddress_base'', ''PhoneNumber_base'',
+    ''PaymentProfile_base'', ''AccountBalance_base'''
+  reason: Master record of clients/contacts with addresses, phone numbers, payment profiles and balances
+    — customer/client master data management.
+- tag: Matters
+  spec_file: clio-matters-api-openapi.yml
+  capability_id: BC-150.50
+  capability_id_l1: BC-150
+  capability_name: Legal Operations Management
+  confidence: 0.75
+  evidence: 'POST /matters.json  Matter#create  Create a new Matter; schemas: MatterBudget_base, AttorneyAllocation_base,
+    MatterCustomRate_base'
+  reason: Full CRUD over legal matters with budgets, attorney allocation and rates — the core matter management
+    surface, mapped to legal operations/matter management.
 - tag: Clio Payments Payments
   spec_file: clio-clio-payments-payments-api-openapi.yml
   capability_id: BC-200.30
   capability_id_l1: BC-200
   capability_name: Accounts Receivable Management
   confidence: 0.72
-  evidence: GET /clio_payments/payments.json ClioPaymentsPayment#index; schemas Bill_base, Allocation_base,
-    BankTransaction_base, Contact_base
-  reason: Records of client payments allocated against bills and bank transactions — receipt and cash
-    application of customer payments, which is accounts receivable management for the law firm using Clio.
+  evidence: GET /clio_payments/payments/{id}.json  ClioPaymentsPayment#show  Return the data for a single
+    ClioPaymentsPayment
+  reason: Payments recorded against Bills with Allocation_base and BankTransaction_base schemas — client
+    payment receipt and cash application against invoices, i.e. Accounts Receivable Management.
 - tag: Credit Memos
   spec_file: clio-credit-memos-api-openapi.yml
   capability_id: BC-200.30
   capability_id_l1: BC-200
   capability_name: Accounts Receivable Management
-  confidence: 0.7
-  evidence: GET /credit_memos.json CreditMemo#index — Return the data for all CreditMemos; schemas Contact_base,
-    Allocation_base
-  reason: Credit memos allocated to client contacts are customer billing adjustments applied against receivables
-    — accounts receivable management. Read-only surface, hence moderate confidence.
+  confidence: 0.72
+  evidence: '''CreditMemo#index  Return the data for all CreditMemos''; schemas ''Contact_base'', ''Allocation_base'''
+  reason: Credit memos allocated against client billing are a receivables/customer-invoicing accounting
+    artefact.
 - tag: Matter Dockets
   spec_file: clio-matter-dockets-api-openapi.yml
   capability_id: BC-150.20
   capability_id_l1: BC-150
   capability_name: Litigation & Dispute Management
   confidence: 0.7
-  evidence: '"Preview calendar dates for the docket"; "MatterDocket#create  Creates a matter docket" under
-    /court_rules/'
-  reason: Court-rule based dockets generating calendar deadlines for a matter is litigation/dispute management
-    in a law-firm system; the linkage to Jurisdiction and CalendarEntry schemas supports this.
+  evidence: POST /court_rules/matter_dockets.json  MatterDocket#create  Creates a matter docket; GET /court_rules/matter_dockets/preview.json  Preview
+    calendar dates for the docket
+  reason: Court dockets and court-rule-driven calendar dates for a matter are litigation/dispute management
+    activity.
