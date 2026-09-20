@@ -1,0 +1,26 @@
+# Rate limits transcribed from the provider's own documentation — see provenance. Quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://docs.developers.clio.com/api-docs/clio-manage/rate-limits/
+sources:
+- https://docs.developers.clio.com/api-docs/clio-manage/rate-limits/
+provenance:
+  tool: planning/api-economics/harvest_ratelimits.py
+  run: 20260920T133210
+  grounding: every limit_text was found verbatim in the fetched page text
+published: true
+note: Limits counted per access token; increased during off-peak hours (unspecified amounts). Some endpoints
+  may differ; no custom increases.
+limit_count: 1
+limits:
+- name: Default rate limit (peak hours)
+  limit_text: default rate limit of 50 requests per minute during peak usage hours
+  limit: 50
+  window: minute
+  scope: api-key
+headers:
+- X-RateLimit-Limit
+- X-RateLimit-Remaining
+- X-RateLimit-Reset
+- Retry-After
+exceeded_status: 429
