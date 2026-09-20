@@ -11,8 +11,18 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 7
+edge_count: 9
 edges:
+- tag: Webhooks
+  spec_file: clio-webhooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.9
+  evidence: POST /webhooks.json  Webhook#create  Create a new Webhook
+  reason: Full CRUD lifecycle over outbound webhook subscriptions exposed to API consumers, which is exactly
+    Webhook & Event Subscription Management within the developer platform capability.
+  recovered_from: sweep-20260828T235257Z-edges.json
 - tag: Outstanding Client Balances
   spec_file: clio-outstanding-client-balances-api-openapi.yml
   capability_id: BC-200.30
@@ -55,6 +65,17 @@ edges:
     MatterCustomRate_base'
   reason: Full CRUD over legal matters with budgets, attorney allocation and rates — the core matter management
     surface, mapped to legal operations/matter management.
+- tag: Clients
+  spec_file: clio-clients-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.72
+  evidence: GET /matters/{matter_id}/client.json Client#show Return the client data for a single matter
+  reason: Returns the client master record with Address_base, EmailAddress_base, PhoneNumber_base, Contact_base
+    — customer/client data records, i.e. customer data management. Read-only and matter-scoped, hence
+    moderate confidence.
+  recovered_from: sweep-20260828T235257Z-edges.json
 - tag: Clio Payments Payments
   spec_file: clio-clio-payments-payments-api-openapi.yml
   capability_id: BC-200.30
