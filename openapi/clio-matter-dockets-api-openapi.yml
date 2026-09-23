@@ -1,10 +1,12 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Clio API Documentation Activities Matter Dockets API
+  title: Clio API Documentation Matter Dockets API
   contact:
     name: Clio API Support
     email: api@clio.com
-  description: "# Developer Support and Feedback\n* Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio's API Support team at [api@clio.com](mailto:api@clio.com).\n* For business and partnership inquiries, contact our API Partnerships team at [api.partnerships@clio.com](mailto:api.partnerships@clio.com).\n* For best practices and tips from the Clio development community, join the conversation in the [Clio Developer Slack Channel](https://join.slack.com/t/clio-public/shared_invite/zt-36i0eqgo1-7POORPtMJpp2N0~_auL2IQ).\n\nA community-driven [Clio Developers Stack Overflow Group](https://stackoverflow.com/questions/tagged/clio-api) also exists where you can connect and ask questions from other Clio API users.\n# Getting Started\n> **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).\n>\n> Likewise, the developer portal is available at region-specific links for the [Australia](https://au.developers.clio.com), [Canada](https://ca.developers.clio.com), [EU](https://eu.developers.clio.com), and [US](https://developers.clio.com) regions.\n>\n> This document assumes the US region is being used (app.clio.com). If you're building in one of the other regions, you should adapt the links and examples as necessary.\n\nTo start building on the Clio API, you’ll need a Clio account – you can review our [Developer Handbook](https://docs.developers.clio.com/) and follow the steps to sign up for an account.\n\nOnce you have an account, you can [create a developer application](https://docs.developers.clio.com/api-docs/applications) from the [Developer Portal](https://developers.clio.com) and start building!\n# Authorization with OAuth 2.0\nSee our [Authorization documentation →](https://docs.developers.clio.com/api-docs/authorization)\n# Permissions\nSee our [Permissions documentation →](https://docs.developers.clio.com/api-docs/permissions)\n# Fields\nSee our [Fields documentation →](https://docs.developers.clio.com/api-docs/fields)\n# Rate Limiting\nSee our [Rate Limits documentation →](https://docs.developers.clio.com/api-docs/rate-limits)\n# Paging\nSee our [Pagination documentation →](https://docs.developers.clio.com/api-docs/paging)\n# ETags\nSee our [ETags documentation →](https://docs.developers.clio.com/api-docs/etags)\n# Minor Versions\nAPI v4 supports multiple minor versions. Versions are of the form '4.X.Y'. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you're requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.\n\nAn `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.\n\nYou can find our [API Versioning Policy and Guidelines](https://docs.developers.clio.com/api-docs/api-versioning-policy) in our documentation hub.\n\nThe [API Changelog](https://docs.developers.clio.com/api-docs/api-changelog) explains each version's changes in further detail.\n### [4.0.4](https://docs.developers.clio.com/api-docs/api-changelog#404)\n\n  * Update `quantity` field to return values in seconds rather than hours for Activities\n\n### [4.0.5](https://docs.developers.clio.com/api-docs/api-changelog#405)\n\n  * Remove `matter_balances` field from Bills\n* Standardize status/state enum values\n* Add a Document association to completed DocumentAutomations\n* Add rate visibility handling for Activity's price and total\n\n### [4.0.6](https://docs.developers.clio.com/api-docs/api-changelog#406)\n\n  * Remove `document_versions` collection field from Documents\n\n### [4.0.7](https://docs.developers.clio.com/api-docs/api-changelog#407)\n\n  * Change secure link format\n\n### [4.0.8](https://docs.developers.clio.com/api-docs/api-changelog#408)\n\n  * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user\n  * Add `quantity_redacted` field to activities\n\n### [4.0.9](https://docs.developers.clio.com/api-docs/api-changelog#409)\n\n  * Contacts are filtered and redacted in the response based on the new 'Contacts Visibility' user permission setting.\n\n### [4.0.10](https://docs.developers.clio.com/api-docs/api-changelog#4010)\n\n  * Fixed validation of `type` query parameter when querying Notes\n\n### [4.0.12](https://docs.developers.clio.com/api-docs/api-changelog#4012)\n\n  * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers\n\n### [4.0.13](https://docs.developers.clio.com/api-docs/api-changelog#4013)\n\n  **This is the default version**\n\n  * Add association limits to Contacts\n* Returns 422 Unprocessable Entity when association limits are exceeded\n\n\n"
+  description: '# Developer Support and Feedback
+
+    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.'
   version: v4
   x-logo:
     url: https://www.clio.com/wp-content/uploads/2015/05/Container-5-Logo.png
@@ -22,12 +24,10 @@ tags:
   description: 'A Matter Docket connects a Matter with a Court Rule (and all of the Calendar Entries associated with the Court Rule). Matter Dockets are viewable on the Matter Edit screen under the Court Rules heading.
 
 
-    Matter Dockets are part of the [Court Rules](https://help.clio.com/hc/en-us/articles/9289840995867-Court-Rules) feature which is not available to all plan types. See [here](https://www.clio.com/pricing/) for feature support across different plans.
+    Matter Dockets are part of the Court Rules feature which is not available to all plan types. See here for feature support across different plans.
 
 
-    [Support Link](https://help.clio.com/hc/en-us/articles/9289840995867-Court-Rules)
-
-    '
+    Support Link'
 paths:
   /court_rules/matter_dockets/preview.json:
     get:
@@ -35,7 +35,6 @@ paths:
       - Matter Dockets
       summary: Preview calendar dates for the docket
       operationId: MatterDocket#preview
-      description: Preview calendar dates for the docket
       parameters:
       - name: event_prefix
         in: query
@@ -547,78 +546,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ServiceType_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ServiceType*
-        etag:
-          type: string
-          description: ETag for the *ServiceType*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ServiceType* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ServiceType* was last updated (as a ISO-8601 timestamp)
-        system_id:
-          type: integer
-          format: int64
-          description: Server ID
-        description:
-          type: string
-          description: A detailed description of the *ServiceType*
-        default:
-          type: boolean
-          description: Whether *ServiceType* is default for the current user
-    Jurisdiction_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Jurisdiction*
-        etag:
-          type: string
-          description: ETag for the *Jurisdiction*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Jurisdiction* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Jurisdiction* was last updated (as a ISO-8601 timestamp)
-        system_id:
-          type: integer
-          format: int64
-          description: Server ID
-        description:
-          type: string
-          description: Description
-        default:
-          type: boolean
-          description: Whether the *Jurisdiction* is default for the current user
-        display_timezone:
-          type: string
-          description: Formatted IANA timezone with UTC offset
-        valid_subscription:
-          type: boolean
-          description: Boolean value for whether the user has the jurisdictions
-        is_local_timezone:
-          type: boolean
-          description: Boolean value for when the timezone is in the local users timezone
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
     MatterDocket_Show:
       type: object
       required:
@@ -626,18 +553,6 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/MatterDocket'
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
     Matter_base:
       type: object
       properties:
@@ -728,16 +643,6 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
-    MatterDocket_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: MatterDocket List Response
-          items:
-            $ref: '#/components/schemas/MatterDocket'
     JurisdictionsToTrigger_base:
       type: object
       properties:
@@ -772,42 +677,18 @@ components:
           type: string
           format: date-time
           description: The time the *JurisdictionsToTrigger* was last updated (as a ISO-8601 timestamp)
-    MatterDocket_base:
+    ErrorDetail:
       type: object
+      required:
+      - type
+      - message
       properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *MatterDocket*
-        etag:
+        type:
           type: string
-          description: ETag for the *MatterDocket*
-        name:
+          description: Unique name for this error
+        message:
           type: string
-          description: The name of the *MatterDocket*
-        start_date:
-          type: string
-          format: date
-          description: The date the *MatterDocket* will start (as a ISO-8601 date)
-        start_time:
-          type: string
-          format: date-time
-          description: The time the *MatterDocket* will start, required for specific triggers (as a ISO-8601 timestamp)
-        status:
-          type: string
-          description: The status of the *MatterDocket* creation
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *MatterDocket* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *MatterDocket* was last updated (as a ISO-8601 timestamp)
-        deleted_at:
-          type: string
-          format: date-time
-          description: The time the *MatterDocket* was deleted (as a ISO-8601 timestamp)
+          description: Detailed message about the error
     MatterDocket:
       allOf:
       - $ref: '#/components/schemas/MatterDocket_base'
@@ -905,6 +786,124 @@ components:
           type: integer
           format: int32
           description: The number of `TimeEntry` activities associated with the *CalendarEntry*
+    MatterDocket_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *MatterDocket*
+        etag:
+          type: string
+          description: ETag for the *MatterDocket*
+        name:
+          type: string
+          description: The name of the *MatterDocket*
+        start_date:
+          type: string
+          format: date
+          description: The date the *MatterDocket* will start (as a ISO-8601 date)
+        start_time:
+          type: string
+          format: date-time
+          description: The time the *MatterDocket* will start, required for specific triggers (as a ISO-8601 timestamp)
+        status:
+          type: string
+          description: The status of the *MatterDocket* creation
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *MatterDocket* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *MatterDocket* was last updated (as a ISO-8601 timestamp)
+        deleted_at:
+          type: string
+          format: date-time
+          description: The time the *MatterDocket* was deleted (as a ISO-8601 timestamp)
+    ServiceType_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ServiceType*
+        etag:
+          type: string
+          description: ETag for the *ServiceType*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ServiceType* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ServiceType* was last updated (as a ISO-8601 timestamp)
+        system_id:
+          type: integer
+          format: int64
+          description: Server ID
+        description:
+          type: string
+          description: A detailed description of the *ServiceType*
+        default:
+          type: boolean
+          description: Whether *ServiceType* is default for the current user
+    MatterDocket_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: MatterDocket List Response
+          items:
+            $ref: '#/components/schemas/MatterDocket'
+    Jurisdiction_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Jurisdiction*
+        etag:
+          type: string
+          description: ETag for the *Jurisdiction*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Jurisdiction* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Jurisdiction* was last updated (as a ISO-8601 timestamp)
+        system_id:
+          type: integer
+          format: int64
+          description: Server ID
+        description:
+          type: string
+          description: Description
+        default:
+          type: boolean
+          description: Whether the *Jurisdiction* is default for the current user
+        display_timezone:
+          type: string
+          description: Formatted IANA timezone with UTC offset
+        valid_subscription:
+          type: boolean
+          description: Boolean value for whether the user has the jurisdictions
+        is_local_timezone:
+          type: boolean
+          description: Boolean value for when the timezone is in the local users timezone
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

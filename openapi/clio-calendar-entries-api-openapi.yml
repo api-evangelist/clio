@@ -1,10 +1,12 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Clio API Documentation Activities Calendar Entries API
+  title: Clio API Documentation Calendar Entries API
   contact:
     name: Clio API Support
     email: api@clio.com
-  description: "# Developer Support and Feedback\n* Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio's API Support team at [api@clio.com](mailto:api@clio.com).\n* For business and partnership inquiries, contact our API Partnerships team at [api.partnerships@clio.com](mailto:api.partnerships@clio.com).\n* For best practices and tips from the Clio development community, join the conversation in the [Clio Developer Slack Channel](https://join.slack.com/t/clio-public/shared_invite/zt-36i0eqgo1-7POORPtMJpp2N0~_auL2IQ).\n\nA community-driven [Clio Developers Stack Overflow Group](https://stackoverflow.com/questions/tagged/clio-api) also exists where you can connect and ask questions from other Clio API users.\n# Getting Started\n> **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).\n>\n> Likewise, the developer portal is available at region-specific links for the [Australia](https://au.developers.clio.com), [Canada](https://ca.developers.clio.com), [EU](https://eu.developers.clio.com), and [US](https://developers.clio.com) regions.\n>\n> This document assumes the US region is being used (app.clio.com). If you're building in one of the other regions, you should adapt the links and examples as necessary.\n\nTo start building on the Clio API, you’ll need a Clio account – you can review our [Developer Handbook](https://docs.developers.clio.com/) and follow the steps to sign up for an account.\n\nOnce you have an account, you can [create a developer application](https://docs.developers.clio.com/api-docs/applications) from the [Developer Portal](https://developers.clio.com) and start building!\n# Authorization with OAuth 2.0\nSee our [Authorization documentation →](https://docs.developers.clio.com/api-docs/authorization)\n# Permissions\nSee our [Permissions documentation →](https://docs.developers.clio.com/api-docs/permissions)\n# Fields\nSee our [Fields documentation →](https://docs.developers.clio.com/api-docs/fields)\n# Rate Limiting\nSee our [Rate Limits documentation →](https://docs.developers.clio.com/api-docs/rate-limits)\n# Paging\nSee our [Pagination documentation →](https://docs.developers.clio.com/api-docs/paging)\n# ETags\nSee our [ETags documentation →](https://docs.developers.clio.com/api-docs/etags)\n# Minor Versions\nAPI v4 supports multiple minor versions. Versions are of the form '4.X.Y'. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you're requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.\n\nAn `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.\n\nYou can find our [API Versioning Policy and Guidelines](https://docs.developers.clio.com/api-docs/api-versioning-policy) in our documentation hub.\n\nThe [API Changelog](https://docs.developers.clio.com/api-docs/api-changelog) explains each version's changes in further detail.\n### [4.0.4](https://docs.developers.clio.com/api-docs/api-changelog#404)\n\n  * Update `quantity` field to return values in seconds rather than hours for Activities\n\n### [4.0.5](https://docs.developers.clio.com/api-docs/api-changelog#405)\n\n  * Remove `matter_balances` field from Bills\n* Standardize status/state enum values\n* Add a Document association to completed DocumentAutomations\n* Add rate visibility handling for Activity's price and total\n\n### [4.0.6](https://docs.developers.clio.com/api-docs/api-changelog#406)\n\n  * Remove `document_versions` collection field from Documents\n\n### [4.0.7](https://docs.developers.clio.com/api-docs/api-changelog#407)\n\n  * Change secure link format\n\n### [4.0.8](https://docs.developers.clio.com/api-docs/api-changelog#408)\n\n  * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user\n  * Add `quantity_redacted` field to activities\n\n### [4.0.9](https://docs.developers.clio.com/api-docs/api-changelog#409)\n\n  * Contacts are filtered and redacted in the response based on the new 'Contacts Visibility' user permission setting.\n\n### [4.0.10](https://docs.developers.clio.com/api-docs/api-changelog#4010)\n\n  * Fixed validation of `type` query parameter when querying Notes\n\n### [4.0.12](https://docs.developers.clio.com/api-docs/api-changelog#4012)\n\n  * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers\n\n### [4.0.13](https://docs.developers.clio.com/api-docs/api-changelog#4013)\n\n  **This is the default version**\n\n  * Add association limits to Contacts\n* Returns 422 Unprocessable Entity when association limits are exceeded\n\n\n"
+  description: '# Developer Support and Feedback
+
+    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.'
   version: v4
   x-logo:
     url: https://www.clio.com/wp-content/uploads/2015/05/Container-5-Logo.png
@@ -19,7 +21,7 @@ servers:
   description: Australia region Production Server
 tags:
 - name: Calendar Entries
-  description: "Calendar Entries are used to track appointments or deadlines. Users can view Calendar Entries on any Calendar that they have “Viewer” or “Editor” permission for. Users can create Calendar Entries on any Calendar that they have “Editor” permission for.\n### Only supports dates on or after January 01 1900 00:00 UTC\n* If you attempt to create a date before 1900, the year of that date will be pulled forward to 1900 before it's persisted.\n\n### Calendar Update/Deletion Best Practices\n* Prior to updating or deleting a calendar entry, check for recurrence.\n* If the recurrence_rule parameter is not equal to `null`, offer the following 3 options for the update/deletion, as well as the note:\n    1. Only this instance: Update/Delete this event, but leave all future events unchanged.\n    2. All following: Updates/Deletes this event and all the future events.\n    3. All events in the series: Updates/Deletes all events in the series.\n    * Note: If you've modified any future events in this series, those edits will be lost once you make this change.\n\n[Support Link](https://help.clio.com/hc/en-us/articles/9289905071387-Calendar-Events)\n"
+  description: Calendar Entries are used to track appointments or deadlines.
 paths:
   /calendar_entries.json:
     get:
@@ -1080,249 +1082,69 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    CalendarEntryEventType_base:
+    Reminder_base:
       type: object
       properties:
         id:
           type: integer
           format: int64
-          description: Unique identifier for the *CalendarEntryEventType*
+          description: Unique identifier for the *Reminder*
         etag:
           type: string
-          description: ETag for the *CalendarEntryEventType*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *CalendarEntryEventType* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *CalendarEntryEventType* was last updated (as a ISO-8601 timestamp)
-        color:
-          type: string
-          enum:
-          - '#367B9C'
-          - '#FFA5A4'
-          - '#83D17F'
-          - '#FFAC7B'
-          - '#8E3F64'
-          - '#C75300'
-          - '#009CEC'
-          - '#62D6B1'
-          - '#9EEDCB'
-          - '#F9A2C4'
-          - '#616161'
-          - '#BBDA81'
-          - '#DFD3F8'
-          - '#D6C4A5'
-          - '#FFD478'
-          - '#6AC9DE'
-          - '#EABBB0'
-          - '#BFC2E1'
-          - '#DADADA'
-          - '#CDE2F5'
-          description: The color describing the *CalendarEntryEventType*
-        name:
-          type: string
-          description: The name for the *CalendarEntryEventType*
-    ConferenceMeeting_base:
-      type: object
-      properties:
-        conference_id:
-          type: integer
-          format: int64
-          description: Third-party provider unique meeting ID
-        conference_password:
-          type: string
-          description: Third-party provider meeting password
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ConferenceMeeting* was created (as a ISO-8601 timestamp)
-        etag:
-          type: string
-          description: ETag for the *ConferenceMeeting*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ConferenceMeeting*
-        join_url:
-          type: string
-          description: URL for participants to join the video conference
-        type:
-          type: string
-          description: The type of video conference
-        source_id:
-          type: integer
-          format: int64
-          description: The external ID of the video conference meeting
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ConferenceMeeting* was last updated (as a ISO-8601 timestamp)
-    Attendee_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Attendee*
-        etag:
-          type: string
-          description: ETag for the *Attendee*
-        type:
-          type: string
-          enum:
-          - Contact
-          - Calendar
-          description: The class name of the *Attendee*
-        name:
-          type: string
-          description: The name of the *Attendee*
-        enabled:
-          type: boolean
-          description: If the Attendee is a user, represents whether the user is enabled or disabled. Returns null if attendee is a Contact.
-        email:
-          type: string
-          description: If the Attendee is a User, this is the User's email. If the Attendee is a contact, this is the Contact's primary email address.
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Attendee* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Attendee* was last updated (as a ISO-8601 timestamp)
-    CalendarEntry:
-      allOf:
-      - $ref: '#/components/schemas/CalendarEntry_base'
-      - type: object
-        properties:
-          time_entries:
-            type: array
-            items:
-              $ref: '#/components/schemas/Activity_base'
-            description: Activity
-          conference_meeting:
-            $ref: '#/components/schemas/ConferenceMeeting_base'
-            description: ConferenceMeeting
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          matter_docket:
-            $ref: '#/components/schemas/MatterDocket_base'
-            description: MatterDocket
-          calendar_owner:
-            $ref: '#/components/schemas/Calendar_base'
-            description: Calendar
-          parent_calendar_entry:
-            $ref: '#/components/schemas/CalendarEntry_base'
-            description: CalendarEntry
-          calendar_entry_event_type:
-            $ref: '#/components/schemas/CalendarEntryEventType_base'
-            description: CalendarEntryEventType
-          attendees:
-            type: array
-            items:
-              $ref: '#/components/schemas/Attendee_base'
-            description: Attendee
-          calendars:
-            type: array
-            items:
-              $ref: '#/components/schemas/Calendar_base'
-            description: Calendar
-          reminders:
-            type: array
-            items:
-              $ref: '#/components/schemas/Reminder_base'
-            description: Reminder
-          external_properties:
-            type: array
-            items:
-              $ref: '#/components/schemas/ExternalProperty_base'
-            description: ExternalProperty
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    CalendarEntry_base:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the *CalendarEntry*
-        etag:
-          type: string
-          description: ETag for the *CalendarEntry*
-        summary:
-          type: string
-          description: A short summary of the *CalendarEntry*
-        description:
-          type: string
-          description: A detailed description of the *CalendarEntry*
-        location:
-          type: string
-          description: The geographic location of the *CalendarEntry*
-        start_at:
-          type: string
-          format: date-time
-          description: The time the *CalendarEntry* starts (as an ISO-8601 timestamp)
-        start_date:
-          type: string
-          format: date
-          description: The date the *CalendarEntry* starts (in the current user's timezone)
-        start_time:
-          type: string
-          description: The time the *CalendarEntry* starts (in the current user's timezone, including timezone abbreviation)
-        end_at:
-          type: string
-          format: date-time
-          description: The time the *CalendarEntry* ends (as an ISO-8601 timestamp)
-        end_date:
-          type: string
-          format: date
-          description: The date the *CalendarEntry* ends (in the current user's timezone)
-        end_time:
-          type: string
-          description: The time the *CalendarEntry* ends (in the current user's timezone, including timezone abbreviation)
-        all_day:
-          type: boolean
-          description: Whether the event is all day
-        recurrence_rule:
-          type: string
-          description: Recurrence rule for expanding
-        parent_calendar_entry_id:
-          type: integer
-          format: int64
-          description: Identifier for the parent *CalendarEntry*
-        court_rule:
-          type: boolean
-          description: Whether this event is associated with a Court Rule
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *CalendarEntry* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *CalendarEntry* was last updated (as a ISO-8601 timestamp)
-        permission:
-          type: string
-          description: The view permission for the current user, will return 'viewer' when permission is 'limited_viewer' and the user is an attendee.
-        calendar_owner_id:
-          type: integer
-          format: int64
-          description: The id of the calendar owner.
-        start_at_time_zone:
-          type: string
-          description: Original start at time zone of the event.
-        time_entries_count:
+          description: ETag for the *Reminder*
+        duration:
           type: integer
           format: int32
-          description: The number of `TimeEntry` activities associated with the *CalendarEntry*
+          description: Time in minutes to remind user before the subject
+        next_delivery_at:
+          type: string
+          format: date-time
+          description: The time the *Reminder* will be delivered (as a ISO-8601 timestamp)
+        state:
+          type: string
+          enum:
+          - initializing
+          - scheduling
+          - rescheduling
+          - scheduled
+          - attempting_delivery
+          - delivery_failed
+          - delivered
+          - delivery_skipped
+          - invalid_user
+          description: The current state of the *Reminder*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Reminder* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Reminder* was last updated (as a ISO-8601 timestamp)
+    ExternalProperty_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ExternalProperty*
+        etag:
+          type: string
+          description: ETag for the *ExternalProperty*
+        name:
+          type: string
+          description: The name of the *ExternalProperty*
+        value:
+          type: string
+          description: The value of the *ExternalProperty*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ExternalProperty* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ExternalProperty* was last updated (as a ISO-8601 timestamp)
     CalendarEntry_List:
       type: object
       required:
@@ -1423,47 +1245,24 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
-    ExternalProperty_base:
+    CalendarEntryEventType_base:
       type: object
       properties:
         id:
           type: integer
           format: int64
-          description: Unique identifier for the *ExternalProperty*
+          description: Unique identifier for the *CalendarEntryEventType*
         etag:
           type: string
-          description: ETag for the *ExternalProperty*
-        name:
-          type: string
-          description: The name of the *ExternalProperty*
-        value:
-          type: string
-          description: The value of the *ExternalProperty*
+          description: ETag for the *CalendarEntryEventType*
         created_at:
           type: string
           format: date-time
-          description: The time the *ExternalProperty* was created (as a ISO-8601 timestamp)
+          description: The time the *CalendarEntryEventType* was created (as a ISO-8601 timestamp)
         updated_at:
           type: string
           format: date-time
-          description: The time the *ExternalProperty* was last updated (as a ISO-8601 timestamp)
-    CalendarEntry_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/CalendarEntry'
-    Calendar_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Calendar*
-        etag:
-          type: string
-          description: ETag for the *Calendar*
+          description: The time the *CalendarEntryEventType* was last updated (as a ISO-8601 timestamp)
         color:
           type: string
           enum:
@@ -1487,70 +1286,112 @@ components:
           - '#BFC2E1'
           - '#DADADA'
           - '#CDE2F5'
-          description: Color
-        light_color:
-          type: string
-          enum:
-          - '#5DA5C7'
-          - '#F95957'
-          - '#209412'
-          - '#FF7715'
-          - '#DE649D'
-          - '#FF6B02'
-          - '#56C4FC'
-          - '#00B177'
-          - '#50D19B'
-          - '#F14A8C'
-          - '#A3A2A2'
-          - '#84AB3B'
-          - '#B091EE'
-          - '#BD9E69'
-          - '#F2A000'
-          - '#00A5CA'
-          - '#CB5A3D'
-          - '#959CD0'
-          - '#B0B0B0'
-          - '#7BA6CD'
-          description: Accent color to complement the main calendar color.
-        court_rules_default_calendar:
-          type: boolean
-          description: Whether the calendar is default court rules calendar for current user
+          description: The color describing the *CalendarEntryEventType*
         name:
           type: string
-          description: The name of the *Calendar*
-        permission:
-          type: string
-          enum:
-          - owner
-          - editor
-          - viewer
-          - limited_viewer
-          - none
-          description: The user's permission to the *Calendar*
+          description: The name for the *CalendarEntryEventType*
+    CalendarEntry:
+      allOf:
+      - $ref: '#/components/schemas/CalendarEntry_base'
+      - type: object
+        properties:
+          time_entries:
+            type: array
+            items:
+              $ref: '#/components/schemas/Activity_base'
+            description: Activity
+          conference_meeting:
+            $ref: '#/components/schemas/ConferenceMeeting_base'
+            description: ConferenceMeeting
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          matter_docket:
+            $ref: '#/components/schemas/MatterDocket_base'
+            description: MatterDocket
+          calendar_owner:
+            $ref: '#/components/schemas/Calendar_base'
+            description: Calendar
+          parent_calendar_entry:
+            $ref: '#/components/schemas/CalendarEntry_base'
+            description: CalendarEntry
+          calendar_entry_event_type:
+            $ref: '#/components/schemas/CalendarEntryEventType_base'
+            description: CalendarEntryEventType
+          attendees:
+            type: array
+            items:
+              $ref: '#/components/schemas/Attendee_base'
+            description: Attendee
+          calendars:
+            type: array
+            items:
+              $ref: '#/components/schemas/Calendar_base'
+            description: Calendar
+          reminders:
+            type: array
+            items:
+              $ref: '#/components/schemas/Reminder_base'
+            description: Reminder
+          external_properties:
+            type: array
+            items:
+              $ref: '#/components/schemas/ExternalProperty_base'
+            description: ExternalProperty
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
         type:
           type: string
-          enum:
-          - AccountCalendar
-          - AdhocCalendar
-          - UserCalendar
-          description: The type of the *Calendar*
-        visible:
-          type: boolean
-          description: Whether the *Calendar* will be shown by default in the Clio Web UI (assuming no source is provided).
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    CalendarEntry_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/CalendarEntry'
+    ConferenceMeeting_base:
+      type: object
+      properties:
+        conference_id:
+          type: integer
+          format: int64
+          description: Third-party provider unique meeting ID
+        conference_password:
+          type: string
+          description: Third-party provider meeting password
         created_at:
           type: string
           format: date-time
-          description: The time the *Calendar* was created (as a ISO-8601 timestamp)
+          description: The time the *ConferenceMeeting* was created (as a ISO-8601 timestamp)
+        etag:
+          type: string
+          description: ETag for the *ConferenceMeeting*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ConferenceMeeting*
+        join_url:
+          type: string
+          description: URL for participants to join the video conference
+        type:
+          type: string
+          description: The type of video conference
+        source_id:
+          type: integer
+          format: int64
+          description: The external ID of the video conference meeting
         updated_at:
           type: string
           format: date-time
-          description: The time the *Calendar* was last updated (as a ISO-8601 timestamp)
-        source:
-          type: string
-          enum:
-          - web
-          - mobile
-          description: The source that visible applies to, by default the Clio Web UI (Expects 'mobile' or 'web').
+          description: The time the *ConferenceMeeting* was last updated (as a ISO-8601 timestamp)
     MatterDocket_base:
       type: object
       properties:
@@ -1587,57 +1428,81 @@ components:
           type: string
           format: date-time
           description: The time the *MatterDocket* was deleted (as a ISO-8601 timestamp)
-    Reminder_base:
+    CalendarEntry_base:
       type: object
       properties:
         id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Reminder*
+          type: string
+          description: Unique identifier for the *CalendarEntry*
         etag:
           type: string
-          description: ETag for the *Reminder*
-        duration:
-          type: integer
-          format: int32
-          description: Time in minutes to remind user before the subject
-        next_delivery_at:
+          description: ETag for the *CalendarEntry*
+        summary:
+          type: string
+          description: A short summary of the *CalendarEntry*
+        description:
+          type: string
+          description: A detailed description of the *CalendarEntry*
+        location:
+          type: string
+          description: The geographic location of the *CalendarEntry*
+        start_at:
           type: string
           format: date-time
-          description: The time the *Reminder* will be delivered (as a ISO-8601 timestamp)
-        state:
+          description: The time the *CalendarEntry* starts (as an ISO-8601 timestamp)
+        start_date:
           type: string
-          enum:
-          - initializing
-          - scheduling
-          - rescheduling
-          - scheduled
-          - attempting_delivery
-          - delivery_failed
-          - delivered
-          - delivery_skipped
-          - invalid_user
-          description: The current state of the *Reminder*
+          format: date
+          description: The date the *CalendarEntry* starts (in the current user's timezone)
+        start_time:
+          type: string
+          description: The time the *CalendarEntry* starts (in the current user's timezone, including timezone abbreviation)
+        end_at:
+          type: string
+          format: date-time
+          description: The time the *CalendarEntry* ends (as an ISO-8601 timestamp)
+        end_date:
+          type: string
+          format: date
+          description: The date the *CalendarEntry* ends (in the current user's timezone)
+        end_time:
+          type: string
+          description: The time the *CalendarEntry* ends (in the current user's timezone, including timezone abbreviation)
+        all_day:
+          type: boolean
+          description: Whether the event is all day
+        recurrence_rule:
+          type: string
+          description: Recurrence rule for expanding
+        parent_calendar_entry_id:
+          type: integer
+          format: int64
+          description: Identifier for the parent *CalendarEntry*
+        court_rule:
+          type: boolean
+          description: Whether this event is associated with a Court Rule
         created_at:
           type: string
           format: date-time
-          description: The time the *Reminder* was created (as a ISO-8601 timestamp)
+          description: The time the *CalendarEntry* was created (as a ISO-8601 timestamp)
         updated_at:
           type: string
           format: date-time
-          description: The time the *Reminder* was last updated (as a ISO-8601 timestamp)
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
+          description: The time the *CalendarEntry* was last updated (as a ISO-8601 timestamp)
+        permission:
           type: string
-          description: Unique name for this error
-        message:
+          description: The view permission for the current user, will return 'viewer' when permission is 'limited_viewer' and the user is an attendee.
+        calendar_owner_id:
+          type: integer
+          format: int64
+          description: The id of the calendar owner.
+        start_at_time_zone:
           type: string
-          description: Detailed message about the error
+          description: Original start at time zone of the event.
+        time_entries_count:
+          type: integer
+          format: int32
+          description: The number of `TimeEntry` activities associated with the *CalendarEntry*
     Activity_base:
       type: object
       properties:
@@ -1775,6 +1640,143 @@ components:
         currency:
           type: object
           description: The currency of the *Activity*
+    Calendar_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Calendar*
+        etag:
+          type: string
+          description: ETag for the *Calendar*
+        color:
+          type: string
+          enum:
+          - '#367B9C'
+          - '#FFA5A4'
+          - '#83D17F'
+          - '#FFAC7B'
+          - '#8E3F64'
+          - '#C75300'
+          - '#009CEC'
+          - '#62D6B1'
+          - '#9EEDCB'
+          - '#F9A2C4'
+          - '#616161'
+          - '#BBDA81'
+          - '#DFD3F8'
+          - '#D6C4A5'
+          - '#FFD478'
+          - '#6AC9DE'
+          - '#EABBB0'
+          - '#BFC2E1'
+          - '#DADADA'
+          - '#CDE2F5'
+          description: Color
+        light_color:
+          type: string
+          enum:
+          - '#5DA5C7'
+          - '#F95957'
+          - '#209412'
+          - '#FF7715'
+          - '#DE649D'
+          - '#FF6B02'
+          - '#56C4FC'
+          - '#00B177'
+          - '#50D19B'
+          - '#F14A8C'
+          - '#A3A2A2'
+          - '#84AB3B'
+          - '#B091EE'
+          - '#BD9E69'
+          - '#F2A000'
+          - '#00A5CA'
+          - '#CB5A3D'
+          - '#959CD0'
+          - '#B0B0B0'
+          - '#7BA6CD'
+          description: Accent color to complement the main calendar color.
+        court_rules_default_calendar:
+          type: boolean
+          description: Whether the calendar is default court rules calendar for current user
+        name:
+          type: string
+          description: The name of the *Calendar*
+        permission:
+          type: string
+          enum:
+          - owner
+          - editor
+          - viewer
+          - limited_viewer
+          - none
+          description: The user's permission to the *Calendar*
+        type:
+          type: string
+          enum:
+          - AccountCalendar
+          - AdhocCalendar
+          - UserCalendar
+          description: The type of the *Calendar*
+        visible:
+          type: boolean
+          description: Whether the *Calendar* will be shown by default in the Clio Web UI (assuming no source is provided).
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Calendar* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Calendar* was last updated (as a ISO-8601 timestamp)
+        source:
+          type: string
+          enum:
+          - web
+          - mobile
+          description: The source that visible applies to, by default the Clio Web UI (Expects 'mobile' or 'web').
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    Attendee_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Attendee*
+        etag:
+          type: string
+          description: ETag for the *Attendee*
+        type:
+          type: string
+          enum:
+          - Contact
+          - Calendar
+          description: The class name of the *Attendee*
+        name:
+          type: string
+          description: The name of the *Attendee*
+        enabled:
+          type: boolean
+          description: If the Attendee is a user, represents whether the user is enabled or disabled. Returns null if attendee is a Contact.
+        email:
+          type: string
+          description: If the Attendee is a User, this is the User's email. If the Attendee is a contact, this is the Contact's primary email address.
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Attendee* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Attendee* was last updated (as a ISO-8601 timestamp)
 x-tagGroups:
 - name: Api
   tags:

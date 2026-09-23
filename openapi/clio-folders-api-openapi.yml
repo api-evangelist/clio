@@ -1,10 +1,12 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Clio API Documentation Activities Folders API
+  title: Clio API Documentation Folders API
   contact:
     name: Clio API Support
     email: api@clio.com
-  description: "# Developer Support and Feedback\n* Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio's API Support team at [api@clio.com](mailto:api@clio.com).\n* For business and partnership inquiries, contact our API Partnerships team at [api.partnerships@clio.com](mailto:api.partnerships@clio.com).\n* For best practices and tips from the Clio development community, join the conversation in the [Clio Developer Slack Channel](https://join.slack.com/t/clio-public/shared_invite/zt-36i0eqgo1-7POORPtMJpp2N0~_auL2IQ).\n\nA community-driven [Clio Developers Stack Overflow Group](https://stackoverflow.com/questions/tagged/clio-api) also exists where you can connect and ask questions from other Clio API users.\n# Getting Started\n> **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).\n>\n> Likewise, the developer portal is available at region-specific links for the [Australia](https://au.developers.clio.com), [Canada](https://ca.developers.clio.com), [EU](https://eu.developers.clio.com), and [US](https://developers.clio.com) regions.\n>\n> This document assumes the US region is being used (app.clio.com). If you're building in one of the other regions, you should adapt the links and examples as necessary.\n\nTo start building on the Clio API, you’ll need a Clio account – you can review our [Developer Handbook](https://docs.developers.clio.com/) and follow the steps to sign up for an account.\n\nOnce you have an account, you can [create a developer application](https://docs.developers.clio.com/api-docs/applications) from the [Developer Portal](https://developers.clio.com) and start building!\n# Authorization with OAuth 2.0\nSee our [Authorization documentation →](https://docs.developers.clio.com/api-docs/authorization)\n# Permissions\nSee our [Permissions documentation →](https://docs.developers.clio.com/api-docs/permissions)\n# Fields\nSee our [Fields documentation →](https://docs.developers.clio.com/api-docs/fields)\n# Rate Limiting\nSee our [Rate Limits documentation →](https://docs.developers.clio.com/api-docs/rate-limits)\n# Paging\nSee our [Pagination documentation →](https://docs.developers.clio.com/api-docs/paging)\n# ETags\nSee our [ETags documentation →](https://docs.developers.clio.com/api-docs/etags)\n# Minor Versions\nAPI v4 supports multiple minor versions. Versions are of the form '4.X.Y'. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you're requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.\n\nAn `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.\n\nYou can find our [API Versioning Policy and Guidelines](https://docs.developers.clio.com/api-docs/api-versioning-policy) in our documentation hub.\n\nThe [API Changelog](https://docs.developers.clio.com/api-docs/api-changelog) explains each version's changes in further detail.\n### [4.0.4](https://docs.developers.clio.com/api-docs/api-changelog#404)\n\n  * Update `quantity` field to return values in seconds rather than hours for Activities\n\n### [4.0.5](https://docs.developers.clio.com/api-docs/api-changelog#405)\n\n  * Remove `matter_balances` field from Bills\n* Standardize status/state enum values\n* Add a Document association to completed DocumentAutomations\n* Add rate visibility handling for Activity's price and total\n\n### [4.0.6](https://docs.developers.clio.com/api-docs/api-changelog#406)\n\n  * Remove `document_versions` collection field from Documents\n\n### [4.0.7](https://docs.developers.clio.com/api-docs/api-changelog#407)\n\n  * Change secure link format\n\n### [4.0.8](https://docs.developers.clio.com/api-docs/api-changelog#408)\n\n  * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user\n  * Add `quantity_redacted` field to activities\n\n### [4.0.9](https://docs.developers.clio.com/api-docs/api-changelog#409)\n\n  * Contacts are filtered and redacted in the response based on the new 'Contacts Visibility' user permission setting.\n\n### [4.0.10](https://docs.developers.clio.com/api-docs/api-changelog#4010)\n\n  * Fixed validation of `type` query parameter when querying Notes\n\n### [4.0.12](https://docs.developers.clio.com/api-docs/api-changelog#4012)\n\n  * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers\n\n### [4.0.13](https://docs.developers.clio.com/api-docs/api-changelog#4013)\n\n  **This is the default version**\n\n  * Add association limits to Contacts\n* Returns 422 Unprocessable Entity when association limits are exceeded\n\n\n"
+  description: '# Developer Support and Feedback
+
+    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.'
   version: v4
   x-logo:
     url: https://www.clio.com/wp-content/uploads/2015/05/Container-5-Logo.png
@@ -22,9 +24,7 @@ tags:
   description: 'Files stored in Clio’s Documents section are organized in folders. Folders are automatically generated for new Contacts and Matters. Folders can also be manually created anywhere in the folder structure.
 
 
-    [Support Link](https://help.clio.com/hc/en-us/articles/9290308200091-Generate-Manage-and-Share-Documents#manage-documents-in-clio-manage-0-4)
-
-    '
+    Support Link'
 paths:
   /folders/list.json:
     get:
@@ -35,9 +35,7 @@ paths:
       description: 'Return the data of the contents of a Folder.
 
 
-        Note: offset pagination is not supported for this endpoint. Use cursor pagination if you''re looking to paginate through the results.
-
-        '
+        Note: offset pagination is not supported for this endpoint. Use cursor pagination if you''re looking to paginate through the results.'
       parameters:
       - name: X-API-VERSION
         in: header
@@ -402,9 +400,7 @@ paths:
       - Folders
       summary: Create a new Folder
       operationId: Folder#create
-      description: 'Create a Folder to an existing folder.
-
-        '
+      description: Create a Folder to an existing folder.
       parameters:
       - name: X-API-VERSION
         in: header
@@ -732,9 +728,7 @@ paths:
       - Folders
       summary: Update a single Folder
       operationId: Folder#update
-      description: 'Update Folder, move Folder to another Folder, and/or restore a trashed Folder.
-
-        '
+      description: Update Folder, move Folder to another Folder, and/or restore a trashed Folder.
       parameters:
       - name: IF-MATCH
         in: header
@@ -1005,7 +999,18 @@ paths:
       - Folders
       summary: Delete a single Folder
       operationId: Folder#destroy
-      description: "Deleting a Folder using this method will move it to the trash instead of permanently deleting it. Trashed Folders are permanently deleted after 30 days. The following errors may be returned:\n\n- `400 Bad Request`: The Folder cannot be trashed. The `type` of the error will be `DeleteFailed` and the `message` of the error will be one of the following:\n  - `Delete failed: This folder contains more than 100,000 items and cannot be trashed. Please trash some of the items inside it before trying again.`\n  - `Delete failed: This item contains locked items and cannot be deleted.`\n  - `Delete failed: The root folder cannot be trashed`\n- `409 Conflict`: The Folder (or one of its descendants) is currently being modified by another request, and cannot be trashed.\n"
+      description: 'Deleting a Folder using this method will move it to the trash instead of permanently deleting it. Trashed Folders are permanently deleted after 30 days. The following errors may be returned:
+
+
+        - `400 Bad Request`: The Folder cannot be trashed. The `type` of the error will be `DeleteFailed` and the `message` of the error will be one of the following:
+
+        - `Delete failed: This folder contains more than 100,000 items and cannot be trashed. Please trash some of the items inside it before trying again.`
+
+        - `Delete failed: This item contains locked items and cannot be deleted.`
+
+        - `Delete failed: The root folder cannot be trashed`
+
+        - `409 Conflict`: The Folder (or one of its descendants) is currently being modified by another request, and cannot be trashed.'
       parameters:
       - name: X-API-VERSION
         in: header
@@ -1043,285 +1048,16 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Group_base:
-      type: object
-      properties:
-        client_connect_user:
-          type: boolean
-          description: Whether or not the Group is a UserGroup for a Clio Connect User
-        etag:
-          type: string
-          description: ETag for the *Group*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Group*
-        name:
-          type: string
-          description: The name of the *Group*
-        type:
-          type: string
-          enum:
-          - UserGroup
-          - AdhocGroup
-          - AccountGroup
-          - TeamGroup
-          description: The type of the *Group*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Group* was last updated (as a ISO-8601 timestamp)
-    Folder:
-      allOf:
-      - $ref: '#/components/schemas/Folder_base'
-      - type: object
-        properties:
-          parent:
-            $ref: '#/components/schemas/LinkedFolder_base'
-            description: LinkedFolder
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          contact:
-            $ref: '#/components/schemas/Contact_base'
-            description: Contact
-          document_category:
-            $ref: '#/components/schemas/DocumentCategory_base'
-            description: DocumentCategory
-          creator:
-            $ref: '#/components/schemas/ClioCreator_base'
-            description: ClioCreator
-          latest_document_version:
-            $ref: '#/components/schemas/DocumentVersion_base'
-            description: DocumentVersion
-          group:
-            $ref: '#/components/schemas/Group_base'
-            description: Group
-          external_properties:
-            type: array
-            items:
-              $ref: '#/components/schemas/ExternalProperty_base'
-            description: ExternalProperty
-    ClioCreator_base:
-      type: object
-      properties:
-        account_owner:
-          type: boolean
-          description: Whether the *ClioCreator* is the owner of the account
-        clio_connect:
-          type: boolean
-          description: Whether the *ClioCreator* is a Clio Connect user
-        court_rules_default_attendee:
-          type: boolean
-          description: Whether the *ClioCreator* is a default attendee for court rules events
-        default_calendar_id:
-          type: integer
-          format: int64
-          description: Default calendar id for *ClioCreator*.
-        email:
-          type: string
-          description: The email of the *ClioCreator*
-        enabled:
-          type: boolean
-          description: Whether the *ClioCreator* is allowed to log in
-        etag:
-          type: string
-          description: ETag for the *ClioCreator*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ClioCreator*
-        type:
-          type: string
-          enum:
-          - ManageUser
-          - ClientUser
-          description: The type of the *ClioCreator*
-        initials:
-          type: string
-          description: The initials of the *ClioCreator*
-        first_name:
-          type: string
-          description: The first name of the *ClioCreator*
-        last_name:
-          type: string
-          description: The last name of the *ClioCreator*
-        name:
-          type: string
-          description: The full name of the *ClioCreator*
-        phone_number:
-          type: string
-          description: The primary phone number for the *ClioCreator*.
-        rate:
-          type: number
-          format: float
-          description: Default user activity rate for *ClioCreator*.
-        subscription_type:
-          type: string
-          enum:
-          - Attorney
-          - NonAttorney
-          description: The subscription type of the *ClioCreator*
-        time_zone:
-          type: string
-          description: The selected time zone of the *ClioCreator*
-        roles:
-          type: array
-          items:
-            type: string
-          description: An array of roles assigned to this *ClioCreator*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ClioCreator* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ClioCreator* was last updated (as a ISO-8601 timestamp)
-    LinkedFolder_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Folder*
-        etag:
-          type: string
-          description: ETag for the *Folder*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Folder* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Folder* was last updated (as a ISO-8601 timestamp)
-        deleted_at:
-          type: string
-          format: date-time
-          description: The time the *Folder* was deleted (as a ISO-8601 timestamp)
-        type:
-          type: string
-          enum:
-          - Folder
-          description: The type of the *Folder*
-        locked:
-          type: boolean
-          description: Whether or not the Folder is locked. Locked Folder cannot be modified
-        name:
-          type: string
-          description: The name of the *Folder*
-        root:
-          type: boolean
-          description: Whether or not the Folder is the root folder. There is only one root folder per account
-    Item_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Item*
-        etag:
-          type: string
-          description: ETag for the *Item*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Item* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Item* was last updated (as a ISO-8601 timestamp)
-        deleted_at:
-          type: string
-          format: date-time
-          description: The time the *Item* was deleted (as a ISO-8601 timestamp)
-        type:
-          type: string
-          enum:
-          - Document
-          - Folder
-          description: The type of the *Item*
-        locked:
-          type: boolean
-          description: Whether or not the Item is locked. Locked Item cannot be modified
-        name:
-          type: string
-          description: The name of the Item
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    Folder_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Folder*
-        etag:
-          type: string
-          description: ETag for the *Folder*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Folder* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Folder* was last updated (as a ISO-8601 timestamp)
-        deleted_at:
-          type: string
-          format: date-time
-          description: The time the *Folder* was deleted (as a ISO-8601 timestamp)
-        type:
-          type: string
-          enum:
-          - Folder
-          description: The type of the *Folder*
-        locked:
-          type: boolean
-          description: Whether or not the Folder is locked. Locked Folder cannot be modified
-        name:
-          type: string
-          description: The name of the Folder
-        root:
-          type: boolean
-          description: Whether or not the Folder is the root folder. There is only one root folder per account
-    Folder_Show:
+    Folder_List:
       type: object
       required:
       - data
       properties:
         data:
-          $ref: '#/components/schemas/Folder'
-    ExternalProperty_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ExternalProperty*
-        etag:
-          type: string
-          description: ETag for the *ExternalProperty*
-        name:
-          type: string
-          description: The name of the *ExternalProperty*
-        value:
-          type: string
-          description: The value of the *ExternalProperty*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ExternalProperty* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ExternalProperty* was last updated (as a ISO-8601 timestamp)
+          type: array
+          description: Folder List Response
+          items:
+            $ref: '#/components/schemas/Folder'
     Contact_base:
       type: object
       properties:
@@ -1417,6 +1153,61 @@ components:
         currency:
           type: object
           description: Currency of the *Contact*
+    ExternalProperty_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ExternalProperty*
+        etag:
+          type: string
+          description: ETag for the *ExternalProperty*
+        name:
+          type: string
+          description: The name of the *ExternalProperty*
+        value:
+          type: string
+          description: The value of the *ExternalProperty*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ExternalProperty* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ExternalProperty* was last updated (as a ISO-8601 timestamp)
+    Folder:
+      allOf:
+      - $ref: '#/components/schemas/Folder_base'
+      - type: object
+        properties:
+          parent:
+            $ref: '#/components/schemas/LinkedFolder_base'
+            description: LinkedFolder
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          contact:
+            $ref: '#/components/schemas/Contact_base'
+            description: Contact
+          document_category:
+            $ref: '#/components/schemas/DocumentCategory_base'
+            description: DocumentCategory
+          creator:
+            $ref: '#/components/schemas/ClioCreator_base'
+            description: ClioCreator
+          latest_document_version:
+            $ref: '#/components/schemas/DocumentVersion_base'
+            description: DocumentVersion
+          group:
+            $ref: '#/components/schemas/Group_base'
+            description: Group
+          external_properties:
+            type: array
+            items:
+              $ref: '#/components/schemas/ExternalProperty_base'
+            description: ExternalProperty
     Matter_base:
       type: object
       properties:
@@ -1507,16 +1298,132 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
-    Folder_List:
+    ClioCreator_base:
+      type: object
+      properties:
+        account_owner:
+          type: boolean
+          description: Whether the *ClioCreator* is the owner of the account
+        clio_connect:
+          type: boolean
+          description: Whether the *ClioCreator* is a Clio Connect user
+        court_rules_default_attendee:
+          type: boolean
+          description: Whether the *ClioCreator* is a default attendee for court rules events
+        default_calendar_id:
+          type: integer
+          format: int64
+          description: Default calendar id for *ClioCreator*.
+        email:
+          type: string
+          description: The email of the *ClioCreator*
+        enabled:
+          type: boolean
+          description: Whether the *ClioCreator* is allowed to log in
+        etag:
+          type: string
+          description: ETag for the *ClioCreator*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ClioCreator*
+        type:
+          type: string
+          enum:
+          - ManageUser
+          - ClientUser
+          description: The type of the *ClioCreator*
+        initials:
+          type: string
+          description: The initials of the *ClioCreator*
+        first_name:
+          type: string
+          description: The first name of the *ClioCreator*
+        last_name:
+          type: string
+          description: The last name of the *ClioCreator*
+        name:
+          type: string
+          description: The full name of the *ClioCreator*
+        phone_number:
+          type: string
+          description: The primary phone number for the *ClioCreator*.
+        rate:
+          type: number
+          format: float
+          description: Default user activity rate for *ClioCreator*.
+        subscription_type:
+          type: string
+          enum:
+          - Attorney
+          - NonAttorney
+          description: The subscription type of the *ClioCreator*
+        time_zone:
+          type: string
+          description: The selected time zone of the *ClioCreator*
+        roles:
+          type: array
+          items:
+            type: string
+          description: An array of roles assigned to this *ClioCreator*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ClioCreator* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ClioCreator* was last updated (as a ISO-8601 timestamp)
+    Group_base:
+      type: object
+      properties:
+        client_connect_user:
+          type: boolean
+          description: Whether or not the Group is a UserGroup for a Clio Connect User
+        etag:
+          type: string
+          description: ETag for the *Group*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Group*
+        name:
+          type: string
+          description: The name of the *Group*
+        type:
+          type: string
+          enum:
+          - UserGroup
+          - AdhocGroup
+          - AccountGroup
+          - TeamGroup
+          description: The type of the *Group*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Group* was last updated (as a ISO-8601 timestamp)
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    Item_List:
       type: object
       required:
       - data
       properties:
         data:
           type: array
-          description: Folder List Response
+          description: Item List Response
           items:
-            $ref: '#/components/schemas/Folder'
+            $ref: '#/components/schemas/Item'
     DocumentVersion_base:
       type: object
       properties:
@@ -1566,16 +1473,47 @@ components:
         fully_uploaded:
           type: boolean
           description: True if the DocumentVersion is uploaded. False if the DocumentVersion is being uploaded.
-    Item_List:
+    Item_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Item*
+        etag:
+          type: string
+          description: ETag for the *Item*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Item* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Item* was last updated (as a ISO-8601 timestamp)
+        deleted_at:
+          type: string
+          format: date-time
+          description: The time the *Item* was deleted (as a ISO-8601 timestamp)
+        type:
+          type: string
+          enum:
+          - Document
+          - Folder
+          description: The type of the *Item*
+        locked:
+          type: boolean
+          description: Whether or not the Item is locked. Locked Item cannot be modified
+        name:
+          type: string
+          description: The name of the Item
+    Folder_Show:
       type: object
       required:
       - data
       properties:
         data:
-          type: array
-          description: Item List Response
-          items:
-            $ref: '#/components/schemas/Item'
+          $ref: '#/components/schemas/Folder'
     Item:
       allOf:
       - $ref: '#/components/schemas/Item_base'
@@ -1607,18 +1545,78 @@ components:
             items:
               $ref: '#/components/schemas/ExternalProperty_base'
             description: ExternalProperty
-    ErrorDetail:
+    LinkedFolder_base:
       type: object
-      required:
-      - type
-      - message
       properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Folder*
+        etag:
+          type: string
+          description: ETag for the *Folder*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Folder* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Folder* was last updated (as a ISO-8601 timestamp)
+        deleted_at:
+          type: string
+          format: date-time
+          description: The time the *Folder* was deleted (as a ISO-8601 timestamp)
         type:
           type: string
-          description: Unique name for this error
-        message:
+          enum:
+          - Folder
+          description: The type of the *Folder*
+        locked:
+          type: boolean
+          description: Whether or not the Folder is locked. Locked Folder cannot be modified
+        name:
           type: string
-          description: Detailed message about the error
+          description: The name of the *Folder*
+        root:
+          type: boolean
+          description: Whether or not the Folder is the root folder. There is only one root folder per account
+    Folder_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Folder*
+        etag:
+          type: string
+          description: ETag for the *Folder*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Folder* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Folder* was last updated (as a ISO-8601 timestamp)
+        deleted_at:
+          type: string
+          format: date-time
+          description: The time the *Folder* was deleted (as a ISO-8601 timestamp)
+        type:
+          type: string
+          enum:
+          - Folder
+          description: The type of the *Folder*
+        locked:
+          type: boolean
+          description: Whether or not the Folder is locked. Locked Folder cannot be modified
+        name:
+          type: string
+          description: The name of the Folder
+        root:
+          type: boolean
+          description: Whether or not the Folder is the root folder. There is only one root folder per account
     DocumentCategory_base:
       type: object
       properties:
@@ -1640,6 +1638,13 @@ components:
           type: string
           format: date-time
           description: The time the *DocumentCategory* was last updated (as a ISO-8601 timestamp)
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

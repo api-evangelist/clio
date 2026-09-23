@@ -1,10 +1,12 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Clio API Documentation Activities Expense Categories API
+  title: Clio API Documentation Expense Categories API
   contact:
     name: Clio API Support
     email: api@clio.com
-  description: "# Developer Support and Feedback\n* Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio's API Support team at [api@clio.com](mailto:api@clio.com).\n* For business and partnership inquiries, contact our API Partnerships team at [api.partnerships@clio.com](mailto:api.partnerships@clio.com).\n* For best practices and tips from the Clio development community, join the conversation in the [Clio Developer Slack Channel](https://join.slack.com/t/clio-public/shared_invite/zt-36i0eqgo1-7POORPtMJpp2N0~_auL2IQ).\n\nA community-driven [Clio Developers Stack Overflow Group](https://stackoverflow.com/questions/tagged/clio-api) also exists where you can connect and ask questions from other Clio API users.\n# Getting Started\n> **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).\n>\n> Likewise, the developer portal is available at region-specific links for the [Australia](https://au.developers.clio.com), [Canada](https://ca.developers.clio.com), [EU](https://eu.developers.clio.com), and [US](https://developers.clio.com) regions.\n>\n> This document assumes the US region is being used (app.clio.com). If you're building in one of the other regions, you should adapt the links and examples as necessary.\n\nTo start building on the Clio API, you’ll need a Clio account – you can review our [Developer Handbook](https://docs.developers.clio.com/) and follow the steps to sign up for an account.\n\nOnce you have an account, you can [create a developer application](https://docs.developers.clio.com/api-docs/applications) from the [Developer Portal](https://developers.clio.com) and start building!\n# Authorization with OAuth 2.0\nSee our [Authorization documentation →](https://docs.developers.clio.com/api-docs/authorization)\n# Permissions\nSee our [Permissions documentation →](https://docs.developers.clio.com/api-docs/permissions)\n# Fields\nSee our [Fields documentation →](https://docs.developers.clio.com/api-docs/fields)\n# Rate Limiting\nSee our [Rate Limits documentation →](https://docs.developers.clio.com/api-docs/rate-limits)\n# Paging\nSee our [Pagination documentation →](https://docs.developers.clio.com/api-docs/paging)\n# ETags\nSee our [ETags documentation →](https://docs.developers.clio.com/api-docs/etags)\n# Minor Versions\nAPI v4 supports multiple minor versions. Versions are of the form '4.X.Y'. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you're requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.\n\nAn `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.\n\nYou can find our [API Versioning Policy and Guidelines](https://docs.developers.clio.com/api-docs/api-versioning-policy) in our documentation hub.\n\nThe [API Changelog](https://docs.developers.clio.com/api-docs/api-changelog) explains each version's changes in further detail.\n### [4.0.4](https://docs.developers.clio.com/api-docs/api-changelog#404)\n\n  * Update `quantity` field to return values in seconds rather than hours for Activities\n\n### [4.0.5](https://docs.developers.clio.com/api-docs/api-changelog#405)\n\n  * Remove `matter_balances` field from Bills\n* Standardize status/state enum values\n* Add a Document association to completed DocumentAutomations\n* Add rate visibility handling for Activity's price and total\n\n### [4.0.6](https://docs.developers.clio.com/api-docs/api-changelog#406)\n\n  * Remove `document_versions` collection field from Documents\n\n### [4.0.7](https://docs.developers.clio.com/api-docs/api-changelog#407)\n\n  * Change secure link format\n\n### [4.0.8](https://docs.developers.clio.com/api-docs/api-changelog#408)\n\n  * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user\n  * Add `quantity_redacted` field to activities\n\n### [4.0.9](https://docs.developers.clio.com/api-docs/api-changelog#409)\n\n  * Contacts are filtered and redacted in the response based on the new 'Contacts Visibility' user permission setting.\n\n### [4.0.10](https://docs.developers.clio.com/api-docs/api-changelog#4010)\n\n  * Fixed validation of `type` query parameter when querying Notes\n\n### [4.0.12](https://docs.developers.clio.com/api-docs/api-changelog#4012)\n\n  * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers\n\n### [4.0.13](https://docs.developers.clio.com/api-docs/api-changelog#4013)\n\n  **This is the default version**\n\n  * Add association limits to Contacts\n* Returns 422 Unprocessable Entity when association limits are exceeded\n\n\n"
+  description: '# Developer Support and Feedback
+
+    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.'
   version: v4
   x-logo:
     url: https://www.clio.com/wp-content/uploads/2015/05/Container-5-Logo.png
@@ -22,9 +24,7 @@ tags:
   description: 'This endpoint provides the Legal Aid expense category rates, which are the prescribed reimbursement rates for legal services provided under the Legal Aid Scheme.
 
 
-    [Support Link](https://help.clio.com/hc/en-150/sections/9591010772379-Legal-Aid)
-
-    '
+    Support Link'
 paths:
   /expense_categories.json:
     get:
@@ -889,80 +889,16 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Group_base:
-      type: object
-      properties:
-        client_connect_user:
-          type: boolean
-          description: Whether or not the Group is a UserGroup for a Clio Connect User
-        etag:
-          type: string
-          description: ETag for the *Group*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Group*
-        name:
-          type: string
-          description: The name of the *Group*
-        type:
-          type: string
-          enum:
-          - UserGroup
-          - AdhocGroup
-          - AccountGroup
-          - TeamGroup
-          description: The type of the *Group*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Group* was last updated (as a ISO-8601 timestamp)
-    ExpenseCategory_List:
+    LaukExpenseCategory_List:
       type: object
       required:
       - data
       properties:
         data:
           type: array
-          description: ExpenseCategory List Response
+          description: LaukExpenseCategory List Response
           items:
-            $ref: '#/components/schemas/ExpenseCategory'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    LaukExpenseCategory:
-      allOf:
-      - $ref: '#/components/schemas/LaukExpenseCategory_base'
-      - type: object
-        properties: {}
-    TaxSetting_base:
-      type: object
-      properties:
-        tax_rate_configuration_id:
-          type: integer
-          format: int64
-          description: The unique identifier of the tax rate configuration associated with the tax setting
-        tax_rate_configuration_name:
-          type: string
-          description: The name of the tax rate configuration
-        tax_rate_configuration_rate:
-          type: number
-          format: decimal
-          description: The rate of the tax rate configuration
-        tax_rate_configuration_formatted_rate:
-          type: string
-          description: The formatted rate of the tax rate configuration as a percentage
-        order:
-          type: integer
-          format: int32
-          description: The order in which this tax setting should be applied
-        rule:
-          type: string
-          description: The rule that the tax setting should be applied in
+            $ref: '#/components/schemas/LaukExpenseCategory'
     UtbmsCode_base:
       type: object
       properties:
@@ -1001,6 +937,164 @@ components:
           type: string
           format: date-time
           description: The time the *UtbmsCode* was last updated (as a ISO-8601 timestamp)
+    ExpenseCategory_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ExpenseCategory'
+    ExpenseCategory:
+      allOf:
+      - $ref: '#/components/schemas/ExpenseCategory_base'
+      - type: object
+        properties:
+          groups:
+            type: array
+            items:
+              $ref: '#/components/schemas/Group_base'
+            description: Group
+          utbms_code:
+            $ref: '#/components/schemas/UtbmsCode_base'
+            description: UtbmsCode
+          currency:
+            $ref: '#/components/schemas/Currency_base'
+            description: Currency
+          tax_settings:
+            type: array
+            items:
+              $ref: '#/components/schemas/TaxSetting_base'
+            description: TaxSetting
+    Group_base:
+      type: object
+      properties:
+        client_connect_user:
+          type: boolean
+          description: Whether or not the Group is a UserGroup for a Clio Connect User
+        etag:
+          type: string
+          description: ETag for the *Group*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Group*
+        name:
+          type: string
+          description: The name of the *Group*
+        type:
+          type: string
+          enum:
+          - UserGroup
+          - AdhocGroup
+          - AccountGroup
+          - TeamGroup
+          description: The type of the *Group*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Group* was last updated (as a ISO-8601 timestamp)
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    LaukExpenseCategory:
+      allOf:
+      - $ref: '#/components/schemas/LaukExpenseCategory_base'
+      - type: object
+        properties: {}
+    TaxSetting_base:
+      type: object
+      properties:
+        tax_rate_configuration_id:
+          type: integer
+          format: int64
+          description: The unique identifier of the tax rate configuration associated with the tax setting
+        tax_rate_configuration_name:
+          type: string
+          description: The name of the tax rate configuration
+        tax_rate_configuration_rate:
+          type: number
+          format: decimal
+          description: The rate of the tax rate configuration
+        tax_rate_configuration_formatted_rate:
+          type: string
+          description: The formatted rate of the tax rate configuration as a percentage
+        order:
+          type: integer
+          format: int32
+          description: The order in which this tax setting should be applied
+        rule:
+          type: string
+          description: The rule that the tax setting should be applied in
+    Currency_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Currency*
+        etag:
+          type: string
+          description: ETag for the *Currency*
+        code:
+          type: string
+          description: ISO 4217 code for the *Currency*
+        sign:
+          type: string
+          description: Symbol used to denote monetary values using this *Currency*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Currency* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
+    LaukExpenseCategory_base:
+      type: object
+      properties:
+        certificated:
+          type: boolean
+          description: Certificated boolean identifier for expense
+        civil:
+          type: boolean
+          description: Civil boolean identifier for expense
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *LaukExpenseCategory* was created (as a ISO-8601 timestamp)
+        criminal:
+          type: boolean
+          description: Criminal boolean identifier for expense
+        etag:
+          type: string
+          description: ETag for the *LaukExpenseCategory*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *LaukExpenseCategory*
+        key:
+          type: string
+          description: Unique key
+        name:
+          type: string
+          description: Expense name
+        rate:
+          type: number
+          format: decimal
+          description: Determines rate based on region param
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *LaukExpenseCategory* was last updated (as a ISO-8601 timestamp)
     ExpenseCategory_base:
       type: object
       properties:
@@ -1046,117 +1140,23 @@ components:
           items:
             type: object
           description: Array of objects, with each object representing a tax setting.
-    ExpenseCategory:
-      allOf:
-      - $ref: '#/components/schemas/ExpenseCategory_base'
-      - type: object
-        properties:
-          groups:
-            type: array
-            items:
-              $ref: '#/components/schemas/Group_base'
-            description: Group
-          utbms_code:
-            $ref: '#/components/schemas/UtbmsCode_base'
-            description: UtbmsCode
-          currency:
-            $ref: '#/components/schemas/Currency_base'
-            description: Currency
-          tax_settings:
-            type: array
-            items:
-              $ref: '#/components/schemas/TaxSetting_base'
-            description: TaxSetting
-    LaukExpenseCategory_List:
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    ExpenseCategory_List:
       type: object
       required:
       - data
       properties:
         data:
           type: array
-          description: LaukExpenseCategory List Response
+          description: ExpenseCategory List Response
           items:
-            $ref: '#/components/schemas/LaukExpenseCategory'
-    ExpenseCategory_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/ExpenseCategory'
-    Currency_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Currency*
-        etag:
-          type: string
-          description: ETag for the *Currency*
-        code:
-          type: string
-          description: ISO 4217 code for the *Currency*
-        sign:
-          type: string
-          description: Symbol used to denote monetary values using this *Currency*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Currency* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    LaukExpenseCategory_base:
-      type: object
-      properties:
-        certificated:
-          type: boolean
-          description: Certificated boolean identifier for expense
-        civil:
-          type: boolean
-          description: Civil boolean identifier for expense
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *LaukExpenseCategory* was created (as a ISO-8601 timestamp)
-        criminal:
-          type: boolean
-          description: Criminal boolean identifier for expense
-        etag:
-          type: string
-          description: ETag for the *LaukExpenseCategory*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *LaukExpenseCategory*
-        key:
-          type: string
-          description: Unique key
-        name:
-          type: string
-          description: Expense name
-        rate:
-          type: number
-          format: decimal
-          description: Determines rate based on region param
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *LaukExpenseCategory* was last updated (as a ISO-8601 timestamp)
+            $ref: '#/components/schemas/ExpenseCategory'
 x-tagGroups:
 - name: Api
   tags:
