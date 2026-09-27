@@ -751,6 +751,18 @@ paths:
           description: Not Modified
 components:
   schemas:
+    Report_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Report'
+    Report:
+      allOf:
+      - $ref: '#/components/schemas/Report_base'
+      - type: object
+        properties: {}
     Report_List:
       type: object
       required:
@@ -761,18 +773,6 @@ components:
           description: Report List Response
           items:
             $ref: '#/components/schemas/Report'
-    Report:
-      allOf:
-      - $ref: '#/components/schemas/Report_base'
-      - type: object
-        properties: {}
-    Report_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Report'
     Report_base:
       type: object
       properties:

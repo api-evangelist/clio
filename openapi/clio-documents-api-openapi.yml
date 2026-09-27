@@ -1516,23 +1516,55 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Multipart_base:
+    DocumentVersion_base:
       type: object
       properties:
-        part_number:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *DocumentVersion*
+        document_id:
+          type: integer
+          format: int64
+          description: The ID of the parent document.
+        etag:
+          type: string
+          description: ETag for the *DocumentVersion*
+        uuid:
+          type: string
+          description: UUID associated with the DocumentVersion. UUID is required to mark a document fully uploaded.
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentVersion* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentVersion* was last updated (as a ISO-8601 timestamp)
+        filename:
+          type: string
+          description: The uploaded file name of the DocumentVersion.
+        size:
           type: integer
           format: int32
-          description: Unique identifier of a part which defines its position within the document being uploaded.
+          description: The size of the DocumentVersion in bytes.
+        version_number:
+          type: integer
+          format: int32
+          description: The ordered number of when this DocumentVersion was uploaded.
+        content_type:
+          type: string
+          description: A standard MIME type describing the format of the object data.
+        received_at:
+          type: string
+          format: date-time
+          description: The time the DocumentVersion was received (as an ISO-8601 timestamp)
         put_url:
           type: string
-          description: A signed URL for uploading the file part. It expires in 10 minutes.
-    Document_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Document'
+          description: A signed URL for uploading the file in a single operation. It expires in 10 minutes. If the document is fully uploaded, the field is empty.
+        fully_uploaded:
+          type: boolean
+          description: True if the DocumentVersion is uploaded. False if the DocumentVersion is being uploaded.
     Document:
       allOf:
       - $ref: '#/components/schemas/Document_base'
@@ -1564,129 +1596,51 @@ components:
             items:
               $ref: '#/components/schemas/ExternalProperty_base'
             description: ExternalProperty
-    ExternalProperty_base:
+    Document_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Document'
+    Group_base:
       type: object
       properties:
+        client_connect_user:
+          type: boolean
+          description: Whether or not the Group is a UserGroup for a Clio Connect User
+        etag:
+          type: string
+          description: ETag for the *Group*
         id:
           type: integer
           format: int64
-          description: Unique identifier for the *ExternalProperty*
-        etag:
-          type: string
-          description: ETag for the *ExternalProperty*
+          description: Unique identifier for the *Group*
         name:
           type: string
-          description: The name of the *ExternalProperty*
-        value:
+          description: The name of the *Group*
+        type:
           type: string
-          description: The value of the *ExternalProperty*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ExternalProperty* was created (as a ISO-8601 timestamp)
+          enum:
+          - UserGroup
+          - AdhocGroup
+          - AccountGroup
+          - TeamGroup
+          description: The type of the *Group*
         updated_at:
           type: string
           format: date-time
-          description: The time the *ExternalProperty* was last updated (as a ISO-8601 timestamp)
-    MultipartHeader_base:
+          description: The time the *Group* was last updated (as a ISO-8601 timestamp)
+    Document_List:
       type: object
+      required:
+      - data
       properties:
-        name:
-          type: string
-          description: Required HTTP header field name for uploading.
-        value:
-          type: string
-          description: Required HTTP header field value for uploading.
-    Matter_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Matter*
-        etag:
-          type: string
-          description: ETag for the *Matter*
-        number:
-          type: integer
-          format: int32
-          description: The number given to the *Matter* within an account
-        display_number:
-          type: string
-          description: The reference and label of the *Matter*. Depending on the account's manual_matter_numbering setting, this is either read only (generated) or customizable.
-        custom_number:
-          type: string
-          description: User defined custom number of the *Matter*
-        currency:
-          type: object
-          description: Currency of the matter
-        description:
-          type: string
-          description: The detailed description of the *Matter*
-        status:
-          type: string
-          enum:
-          - Pending
-          - Open
-          - Closed
-          description: The current status of the *Matter*
-        location:
-          type: string
-          description: The location of the *Matter*
-        client_reference:
-          type: string
-          description: Client Reference string for external uses
-        client_id:
-          type: integer
-          format: int64
-          description: Client ID
-        billable:
-          type: boolean
-          description: Whether this matter is billable
-        maildrop_address:
-          type: string
-          description: A unique Maildrop email address for the matter
-        billing_method:
-          type: string
-          enum:
-          - flat
-          - contingency
-          - hourly
-          description: Billing method of this matter
-        open_date:
-          type: string
-          format: date
-          description: The date the matter was set to open (as a ISO-8601 date)
-        close_date:
-          type: string
-          format: date
-          description: The date the matter was set to closed (as a ISO-8601 date)
-        pending_date:
-          type: string
-          format: date
-          description: The date the matter was set to pending (as a ISO-8601 date)
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Matter* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Matter* was last updated (as a ISO-8601 timestamp)
-        shared:
-          type: boolean
-          description: Whether the matter is currently shared with Clio Connect
-        has_tasks:
-          type: boolean
-          description: Whether or not the matter has any tasks.
-        last_activity_date:
-          type: string
-          format: date
-          description: The greatest date out of all of the activities on the matter (as a ISO-8601 date)
-        matter_stage_updated_at:
-          type: string
-          format: date-time
-          description: The date the matter stage was last updated (as a ISO-8601 date)
+        data:
+          type: array
+          description: Document List Response
+          items:
+            $ref: '#/components/schemas/Document'
     Contact_base:
       type: object
       properties:
@@ -1782,6 +1736,107 @@ components:
         currency:
           type: object
           description: Currency of the *Contact*
+    DocumentVersion:
+      allOf:
+      - $ref: '#/components/schemas/DocumentVersion_base'
+      - type: object
+        properties:
+          creator:
+            $ref: '#/components/schemas/ClioCreator_base'
+            description: ClioCreator
+          put_headers:
+            type: array
+            items:
+              $ref: '#/components/schemas/MultipartHeader_base'
+            description: MultipartHeader
+          multiparts:
+            type: array
+            items:
+              $ref: '#/components/schemas/Multipart'
+            description: Multipart
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    Multipart:
+      allOf:
+      - $ref: '#/components/schemas/Multipart_base'
+      - type: object
+        properties:
+          put_headers:
+            type: array
+            items:
+              $ref: '#/components/schemas/MultipartHeader_base'
+            description: MultipartHeader
+    DocumentCategory_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *DocumentCategory*
+        etag:
+          type: string
+          description: ETag for the *DocumentCategory*
+        name:
+          type: string
+          description: The name of the *DocumentCategory*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentCategory* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentCategory* was last updated (as a ISO-8601 timestamp)
+    LinkedFolder_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Folder*
+        etag:
+          type: string
+          description: ETag for the *Folder*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Folder* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Folder* was last updated (as a ISO-8601 timestamp)
+        deleted_at:
+          type: string
+          format: date-time
+          description: The time the *Folder* was deleted (as a ISO-8601 timestamp)
+        type:
+          type: string
+          enum:
+          - Folder
+          description: The type of the *Folder*
+        locked:
+          type: boolean
+          description: Whether or not the Folder is locked. Locked Folder cannot be modified
+        name:
+          type: string
+          description: The name of the *Folder*
+        root:
+          type: boolean
+          description: Whether or not the Folder is the root folder. There is only one root folder per account
+    MultipartHeader_base:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Required HTTP header field name for uploading.
+        value:
+          type: string
+          description: Required HTTP header field value for uploading.
     ClioCreator_base:
       type: object
       properties:
@@ -1858,34 +1913,106 @@ components:
           type: string
           format: date-time
           description: The time the *ClioCreator* was last updated (as a ISO-8601 timestamp)
-    Group_base:
+    Matter_base:
       type: object
       properties:
-        client_connect_user:
-          type: boolean
-          description: Whether or not the Group is a UserGroup for a Clio Connect User
-        etag:
-          type: string
-          description: ETag for the *Group*
         id:
           type: integer
           format: int64
-          description: Unique identifier for the *Group*
-        name:
+          description: Unique identifier for the *Matter*
+        etag:
           type: string
-          description: The name of the *Group*
-        type:
+          description: ETag for the *Matter*
+        number:
+          type: integer
+          format: int32
+          description: The number given to the *Matter* within an account
+        display_number:
+          type: string
+          description: The reference and label of the *Matter*. Depending on the account's manual_matter_numbering setting, this is either read only (generated) or customizable.
+        custom_number:
+          type: string
+          description: User defined custom number of the *Matter*
+        currency:
+          type: object
+          description: Currency of the matter
+        description:
+          type: string
+          description: The detailed description of the *Matter*
+        status:
           type: string
           enum:
-          - UserGroup
-          - AdhocGroup
-          - AccountGroup
-          - TeamGroup
-          description: The type of the *Group*
+          - Pending
+          - Open
+          - Closed
+          description: The current status of the *Matter*
+        location:
+          type: string
+          description: The location of the *Matter*
+        client_reference:
+          type: string
+          description: Client Reference string for external uses
+        client_id:
+          type: integer
+          format: int64
+          description: Client ID
+        billable:
+          type: boolean
+          description: Whether this matter is billable
+        maildrop_address:
+          type: string
+          description: A unique Maildrop email address for the matter
+        billing_method:
+          type: string
+          enum:
+          - flat
+          - contingency
+          - hourly
+          description: Billing method of this matter
+        open_date:
+          type: string
+          format: date
+          description: The date the matter was set to open (as a ISO-8601 date)
+        close_date:
+          type: string
+          format: date
+          description: The date the matter was set to closed (as a ISO-8601 date)
+        pending_date:
+          type: string
+          format: date
+          description: The date the matter was set to pending (as a ISO-8601 date)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Matter* was created (as a ISO-8601 timestamp)
         updated_at:
           type: string
           format: date-time
-          description: The time the *Group* was last updated (as a ISO-8601 timestamp)
+          description: The time the *Matter* was last updated (as a ISO-8601 timestamp)
+        shared:
+          type: boolean
+          description: Whether the matter is currently shared with Clio Connect
+        has_tasks:
+          type: boolean
+          description: Whether or not the matter has any tasks.
+        last_activity_date:
+          type: string
+          format: date
+          description: The greatest date out of all of the activities on the matter (as a ISO-8601 date)
+        matter_stage_updated_at:
+          type: string
+          format: date-time
+          description: The date the matter stage was last updated (as a ISO-8601 date)
+    Multipart_base:
+      type: object
+      properties:
+        part_number:
+          type: integer
+          format: int32
+          description: Unique identifier of a part which defines its position within the document being uploaded.
+        put_url:
+          type: string
+          description: A signed URL for uploading the file part. It expires in 10 minutes.
     ErrorDetail:
       type: object
       required:
@@ -1898,150 +2025,30 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    DocumentVersion_base:
+    ExternalProperty_base:
       type: object
       properties:
         id:
           type: integer
           format: int64
-          description: Unique identifier for the *DocumentVersion*
-        document_id:
-          type: integer
-          format: int64
-          description: The ID of the parent document.
+          description: Unique identifier for the *ExternalProperty*
         etag:
           type: string
-          description: ETag for the *DocumentVersion*
-        uuid:
-          type: string
-          description: UUID associated with the DocumentVersion. UUID is required to mark a document fully uploaded.
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *DocumentVersion* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *DocumentVersion* was last updated (as a ISO-8601 timestamp)
-        filename:
-          type: string
-          description: The uploaded file name of the DocumentVersion.
-        size:
-          type: integer
-          format: int32
-          description: The size of the DocumentVersion in bytes.
-        version_number:
-          type: integer
-          format: int32
-          description: The ordered number of when this DocumentVersion was uploaded.
-        content_type:
-          type: string
-          description: A standard MIME type describing the format of the object data.
-        received_at:
-          type: string
-          format: date-time
-          description: The time the DocumentVersion was received (as an ISO-8601 timestamp)
-        put_url:
-          type: string
-          description: A signed URL for uploading the file in a single operation. It expires in 10 minutes. If the document is fully uploaded, the field is empty.
-        fully_uploaded:
-          type: boolean
-          description: True if the DocumentVersion is uploaded. False if the DocumentVersion is being uploaded.
-    DocumentVersion:
-      allOf:
-      - $ref: '#/components/schemas/DocumentVersion_base'
-      - type: object
-        properties:
-          creator:
-            $ref: '#/components/schemas/ClioCreator_base'
-            description: ClioCreator
-          put_headers:
-            type: array
-            items:
-              $ref: '#/components/schemas/MultipartHeader_base'
-            description: MultipartHeader
-          multiparts:
-            type: array
-            items:
-              $ref: '#/components/schemas/Multipart'
-            description: Multipart
-    LinkedFolder_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Folder*
-        etag:
-          type: string
-          description: ETag for the *Folder*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Folder* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Folder* was last updated (as a ISO-8601 timestamp)
-        deleted_at:
-          type: string
-          format: date-time
-          description: The time the *Folder* was deleted (as a ISO-8601 timestamp)
-        type:
-          type: string
-          enum:
-          - Folder
-          description: The type of the *Folder*
-        locked:
-          type: boolean
-          description: Whether or not the Folder is locked. Locked Folder cannot be modified
+          description: ETag for the *ExternalProperty*
         name:
           type: string
-          description: The name of the *Folder*
-        root:
-          type: boolean
-          description: Whether or not the Folder is the root folder. There is only one root folder per account
-    Multipart:
-      allOf:
-      - $ref: '#/components/schemas/Multipart_base'
-      - type: object
-        properties:
-          put_headers:
-            type: array
-            items:
-              $ref: '#/components/schemas/MultipartHeader_base'
-            description: MultipartHeader
-    Document_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: Document List Response
-          items:
-            $ref: '#/components/schemas/Document'
-    DocumentCategory_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *DocumentCategory*
-        etag:
+          description: The name of the *ExternalProperty*
+        value:
           type: string
-          description: ETag for the *DocumentCategory*
-        name:
-          type: string
-          description: The name of the *DocumentCategory*
+          description: The value of the *ExternalProperty*
         created_at:
           type: string
           format: date-time
-          description: The time the *DocumentCategory* was created (as a ISO-8601 timestamp)
+          description: The time the *ExternalProperty* was created (as a ISO-8601 timestamp)
         updated_at:
           type: string
           format: date-time
-          description: The time the *DocumentCategory* was last updated (as a ISO-8601 timestamp)
+          description: The time the *ExternalProperty* was last updated (as a ISO-8601 timestamp)
     Document_base:
       type: object
       properties:
@@ -2089,13 +2096,6 @@ components:
         content_type:
           type: string
           description: The uploaded file content type
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

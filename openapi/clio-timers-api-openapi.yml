@@ -269,6 +269,13 @@ components:
           activity:
             $ref: '#/components/schemas/Activity_base'
             description: Activity
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     ErrorDetail:
       type: object
       required:
@@ -281,32 +288,6 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    Timer_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Timer*
-        etag:
-          type: string
-          description: ETag for the *Timer*
-        start_time:
-          type: string
-          format: date-time
-          description: The time the *Timer* was started (as ISO-8601 timestamp)
-        elapsed_time:
-          type: number
-          format: double
-          description: How much time has elapsed, in hours, since the timer was started
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Timer* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Timer* was last updated (as a ISO-8601 timestamp)
     Activity_base:
       type: object
       properties:
@@ -444,13 +425,32 @@ components:
         currency:
           type: object
           description: The currency of the *Activity*
-    Error:
+    Timer_base:
       type: object
-      required:
-      - error
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Timer*
+        etag:
+          type: string
+          description: ETag for the *Timer*
+        start_time:
+          type: string
+          format: date-time
+          description: The time the *Timer* was started (as ISO-8601 timestamp)
+        elapsed_time:
+          type: number
+          format: double
+          description: How much time has elapsed, in hours, since the timer was started
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Timer* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Timer* was last updated (as a ISO-8601 timestamp)
 x-tagGroups:
 - name: Api
   tags:

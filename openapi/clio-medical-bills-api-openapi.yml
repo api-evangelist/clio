@@ -308,13 +308,50 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    MedicalBill_Show:
+    MedicalBill_base:
       type: object
-      required:
-      - data
       properties:
-        data:
-          $ref: '#/components/schemas/MedicalBill'
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *MedicalBill*
+        adjustment:
+          type: number
+          format: double
+          description: Adjustment for Medical Bill
+        amount:
+          type: number
+          format: double
+          description: Amount for Medical Bill
+        bill_date:
+          type: string
+          format: date
+          description: Bill date for Medical Bill (as a ISO-8601 date)
+        bill_received_date:
+          type: string
+          format: date
+          description: Bill received date for Medical Bill (as a ISO-8601 date)
+        damage_type:
+          type: string
+          description: Damage Type
+        document_id:
+          type: integer
+          format: int64
+          description: The id of the document associated with the Medical Bill
+        etag:
+          type: string
+          description: ETag for the *MedicalBill*
+        name:
+          type: string
+          description: Name of the Medical Bill
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *MedicalBill* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *MedicalBill* was last updated (as a ISO-8601 timestamp)
     Lien_base:
       type: object
       properties:
@@ -350,6 +387,26 @@ components:
           type: string
           format: date-time
           description: The time the *Lien* was last updated (as a ISO-8601 timestamp)
+    MedicalBill_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/MedicalBill'
+    MedicalBill:
+      allOf:
+      - $ref: '#/components/schemas/MedicalBill_base'
+      - type: object
+        properties:
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          liens:
+            type: array
+            items:
+              $ref: '#/components/schemas/Lien_base'
+            description: Lien
     Matter_base:
       type: object
       properties:
@@ -452,63 +509,6 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    MedicalBill:
-      allOf:
-      - $ref: '#/components/schemas/MedicalBill_base'
-      - type: object
-        properties:
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          liens:
-            type: array
-            items:
-              $ref: '#/components/schemas/Lien_base'
-            description: Lien
-    MedicalBill_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *MedicalBill*
-        adjustment:
-          type: number
-          format: double
-          description: Adjustment for Medical Bill
-        amount:
-          type: number
-          format: double
-          description: Amount for Medical Bill
-        bill_date:
-          type: string
-          format: date
-          description: Bill date for Medical Bill (as a ISO-8601 date)
-        bill_received_date:
-          type: string
-          format: date
-          description: Bill received date for Medical Bill (as a ISO-8601 date)
-        damage_type:
-          type: string
-          description: Damage Type
-        document_id:
-          type: integer
-          format: int64
-          description: The id of the document associated with the Medical Bill
-        etag:
-          type: string
-          description: ETag for the *MedicalBill*
-        name:
-          type: string
-          description: Name of the Medical Bill
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *MedicalBill* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *MedicalBill* was last updated (as a ISO-8601 timestamp)
     Error:
       type: object
       required:

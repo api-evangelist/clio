@@ -399,6 +399,39 @@ paths:
           description: Not Modified
 components:
   schemas:
+    DocumentAutomation:
+      allOf:
+      - $ref: '#/components/schemas/DocumentAutomation_base'
+      - type: object
+        properties:
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          document_template:
+            $ref: '#/components/schemas/DocumentTemplate_base'
+            description: DocumentTemplate
+          documents:
+            type: array
+            items:
+              $ref: '#/components/schemas/Document_base'
+            description: Document
+    DocumentAutomation_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/DocumentAutomation'
+    DocumentAutomation_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: DocumentAutomation List Response
+          items:
+            $ref: '#/components/schemas/DocumentAutomation'
     DocumentAutomation_base:
       type: object
       properties:
@@ -526,42 +559,6 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    DocumentAutomation_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/DocumentAutomation'
-    DocumentAutomation_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: DocumentAutomation List Response
-          items:
-            $ref: '#/components/schemas/DocumentAutomation'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
     DocumentTemplate_base:
       type: object
       properties:
@@ -590,6 +587,25 @@ components:
           type: string
           format: date-time
           description: The time the *DocumentTemplate* was last updated (as a ISO-8601 timestamp)
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     Document_base:
       type: object
       properties:
@@ -637,22 +653,6 @@ components:
         content_type:
           type: string
           description: The uploaded file content type
-    DocumentAutomation:
-      allOf:
-      - $ref: '#/components/schemas/DocumentAutomation_base'
-      - type: object
-        properties:
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          document_template:
-            $ref: '#/components/schemas/DocumentTemplate_base'
-            description: DocumentTemplate
-          documents:
-            type: array
-            items:
-              $ref: '#/components/schemas/Document_base'
-            description: Document
 x-tagGroups:
 - name: Api
   tags:

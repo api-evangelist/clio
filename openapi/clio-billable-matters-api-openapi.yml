@@ -348,21 +348,16 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    BillableMatter_Show:
+    BillableMatter_List:
       type: object
       required:
       - data
       properties:
         data:
-          $ref: '#/components/schemas/BillableMatter'
-    BillableMatter:
-      allOf:
-      - $ref: '#/components/schemas/BillableMatter_base'
-      - type: object
-        properties:
-          client:
-            $ref: '#/components/schemas/Contact_base'
-            description: Contact
+          type: array
+          description: BillableMatter List Response
+          items:
+            $ref: '#/components/schemas/BillableMatter'
     Contact_base:
       type: object
       properties:
@@ -458,6 +453,13 @@ components:
         currency:
           type: object
           description: Currency of the *Contact*
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     BillableMatter_base:
       type: object
       properties:
@@ -487,16 +489,14 @@ components:
         display_number:
           type: string
           description: The reference to the matter
-    BillableMatter_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: BillableMatter List Response
-          items:
-            $ref: '#/components/schemas/BillableMatter'
+    BillableMatter:
+      allOf:
+      - $ref: '#/components/schemas/BillableMatter_base'
+      - type: object
+        properties:
+          client:
+            $ref: '#/components/schemas/Contact_base'
+            description: Contact
     ErrorDetail:
       type: object
       required:
@@ -509,13 +509,13 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    Error:
+    BillableMatter_Show:
       type: object
       required:
-      - error
+      - data
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
+        data:
+          $ref: '#/components/schemas/BillableMatter'
 x-tagGroups:
 - name: Api
   tags:

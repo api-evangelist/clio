@@ -382,25 +382,11 @@ paths:
         required: false
 components:
   schemas:
-    CalendarVisibility_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/CalendarVisibility'
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
+    CalendarVisibility:
+      allOf:
+      - $ref: '#/components/schemas/CalendarVisibility_base'
+      - type: object
+        properties: {}
     CalendarVisibility_base:
       type: object
       properties:
@@ -483,11 +469,25 @@ components:
           description: CalendarVisibility List Response
           items:
             $ref: '#/components/schemas/CalendarVisibility'
-    CalendarVisibility:
-      allOf:
-      - $ref: '#/components/schemas/CalendarVisibility_base'
-      - type: object
-        properties: {}
+    CalendarVisibility_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/CalendarVisibility'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Error:
       type: object
       required:

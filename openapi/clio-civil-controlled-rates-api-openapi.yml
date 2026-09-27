@@ -146,6 +146,11 @@ components:
           description: LaukCivilControlledRate List Response
           items:
             $ref: '#/components/schemas/LaukCivilControlledRate'
+    LaukCivilControlledRate:
+      allOf:
+      - $ref: '#/components/schemas/LaukCivilControlledRate_base'
+      - type: object
+        properties: {}
     LaukCivilControlledRate_base:
       type: object
       properties:
@@ -221,11 +226,6 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    LaukCivilControlledRate:
-      allOf:
-      - $ref: '#/components/schemas/LaukCivilControlledRate_base'
-      - type: object
-        properties: {}
     Error:
       type: object
       required:

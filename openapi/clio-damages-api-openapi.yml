@@ -534,23 +534,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Damage_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Damage'
-    Damage_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: Damage List Response
-          items:
-            $ref: '#/components/schemas/Damage'
     Matter_base:
       type: object
       properties:
@@ -641,26 +624,23 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
-    ErrorDetail:
+    Damage_List:
       type: object
       required:
-      - type
-      - message
+      - data
       properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    Damage:
-      allOf:
-      - $ref: '#/components/schemas/Damage_base'
-      - type: object
-        properties:
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
+        data:
+          type: array
+          description: Damage List Response
+          items:
+            $ref: '#/components/schemas/Damage'
+    Damage_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Damage'
     Damage_base:
       type: object
       properties:
@@ -693,6 +673,26 @@ components:
           type: string
           format: date-time
           description: The time the *Damage* was last updated (as a ISO-8601 timestamp)
+    Damage:
+      allOf:
+      - $ref: '#/components/schemas/Damage_base'
+      - type: object
+        properties:
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Error:
       type: object
       required:

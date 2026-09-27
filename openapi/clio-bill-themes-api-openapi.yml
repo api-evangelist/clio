@@ -241,11 +241,28 @@ paths:
         required: false
 components:
   schemas:
+    BillTheme_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/BillTheme'
     BillTheme:
       allOf:
       - $ref: '#/components/schemas/BillTheme_base'
       - type: object
         properties: {}
+    BillTheme_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: BillTheme List Response
+          items:
+            $ref: '#/components/schemas/BillTheme'
     BillTheme_base:
       type: object
       properties:
@@ -277,13 +294,6 @@ components:
         config:
           type: string
           description: The configuration of the *BillTheme*
-    BillTheme_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/BillTheme'
     ErrorDetail:
       type: object
       required:
@@ -296,16 +306,6 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    BillTheme_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: BillTheme List Response
-          items:
-            $ref: '#/components/schemas/BillTheme'
     Error:
       type: object
       required:

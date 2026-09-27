@@ -540,18 +540,13 @@ components:
       - $ref: '#/components/schemas/CustomAction_base'
       - type: object
         properties: {}
-    ErrorDetail:
+    CustomAction_Show:
       type: object
       required:
-      - type
-      - message
+      - data
       properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
+        data:
+          $ref: '#/components/schemas/CustomAction'
     CustomAction_base:
       type: object
       properties:
@@ -585,13 +580,18 @@ components:
           - matters/show
           - folders/show
           description: UI reference location within Clio where the link will be displayed.
-    CustomAction_Show:
+    ErrorDetail:
       type: object
       required:
-      - data
+      - type
+      - message
       properties:
-        data:
-          $ref: '#/components/schemas/CustomAction'
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Error:
       type: object
       required:

@@ -194,18 +194,16 @@ components:
           type: string
           format: date-time
           description: The time the *User* was last updated (as a ISO-8601 timestamp)
-    ErrorDetail:
+    LogEntry_List:
       type: object
       required:
-      - type
-      - message
+      - data
       properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
+        data:
+          type: array
+          description: LogEntry List Response
+          items:
+            $ref: '#/components/schemas/LogEntry'
     LogEntry_base:
       type: object
       properties:
@@ -240,27 +238,6 @@ components:
           type: string
           format: date-time
           description: The time the *LogEntry* was last updated (as a ISO-8601 timestamp)
-    LogEntry_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: LogEntry List Response
-          items:
-            $ref: '#/components/schemas/LogEntry'
-    LogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry_base'
-      - type: object
-        properties:
-          item:
-            $ref: '#/components/schemas/PolymorphicObject_base'
-            description: PolymorphicObject
-          user:
-            $ref: '#/components/schemas/User_base'
-            description: User
     PolymorphicObject_base:
       type: object
       properties:
@@ -294,6 +271,18 @@ components:
         tertiary_identifier:
           type: string
           description: A tertiary string to identify the *PolymorphicObject*
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Error:
       type: object
       required:
@@ -301,6 +290,17 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetail'
+    LogEntry:
+      allOf:
+      - $ref: '#/components/schemas/LogEntry_base'
+      - type: object
+        properties:
+          item:
+            $ref: '#/components/schemas/PolymorphicObject_base'
+            description: PolymorphicObject
+          user:
+            $ref: '#/components/schemas/User_base'
+            description: User
 x-tagGroups:
 - name: Api
   tags:

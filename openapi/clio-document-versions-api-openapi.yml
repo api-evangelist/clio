@@ -143,123 +143,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Multipart_base:
-      type: object
-      properties:
-        part_number:
-          type: integer
-          format: int32
-          description: Unique identifier of a part which defines its position within the document being uploaded.
-        put_url:
-          type: string
-          description: A signed URL for uploading the file part. It expires in 10 minutes.
-    MultipartHeader_base:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Required HTTP header field name for uploading.
-        value:
-          type: string
-          description: Required HTTP header field value for uploading.
-    ClioCreator_base:
-      type: object
-      properties:
-        account_owner:
-          type: boolean
-          description: Whether the *ClioCreator* is the owner of the account
-        clio_connect:
-          type: boolean
-          description: Whether the *ClioCreator* is a Clio Connect user
-        court_rules_default_attendee:
-          type: boolean
-          description: Whether the *ClioCreator* is a default attendee for court rules events
-        default_calendar_id:
-          type: integer
-          format: int64
-          description: Default calendar id for *ClioCreator*.
-        email:
-          type: string
-          description: The email of the *ClioCreator*
-        enabled:
-          type: boolean
-          description: Whether the *ClioCreator* is allowed to log in
-        etag:
-          type: string
-          description: ETag for the *ClioCreator*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ClioCreator*
-        type:
-          type: string
-          enum:
-          - ManageUser
-          - ClientUser
-          description: The type of the *ClioCreator*
-        initials:
-          type: string
-          description: The initials of the *ClioCreator*
-        first_name:
-          type: string
-          description: The first name of the *ClioCreator*
-        last_name:
-          type: string
-          description: The last name of the *ClioCreator*
-        name:
-          type: string
-          description: The full name of the *ClioCreator*
-        phone_number:
-          type: string
-          description: The primary phone number for the *ClioCreator*.
-        rate:
-          type: number
-          format: float
-          description: Default user activity rate for *ClioCreator*.
-        subscription_type:
-          type: string
-          enum:
-          - Attorney
-          - NonAttorney
-          description: The subscription type of the *ClioCreator*
-        time_zone:
-          type: string
-          description: The selected time zone of the *ClioCreator*
-        roles:
-          type: array
-          items:
-            type: string
-          description: An array of roles assigned to this *ClioCreator*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ClioCreator* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ClioCreator* was last updated (as a ISO-8601 timestamp)
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    DocumentVersion_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: DocumentVersion List Response
-          items:
-            $ref: '#/components/schemas/DocumentVersion'
     DocumentVersion_base:
       type: object
       properties:
@@ -337,6 +220,123 @@ components:
             items:
               $ref: '#/components/schemas/MultipartHeader_base'
             description: MultipartHeader
+    MultipartHeader_base:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Required HTTP header field name for uploading.
+        value:
+          type: string
+          description: Required HTTP header field value for uploading.
+    DocumentVersion_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: DocumentVersion List Response
+          items:
+            $ref: '#/components/schemas/DocumentVersion'
+    ClioCreator_base:
+      type: object
+      properties:
+        account_owner:
+          type: boolean
+          description: Whether the *ClioCreator* is the owner of the account
+        clio_connect:
+          type: boolean
+          description: Whether the *ClioCreator* is a Clio Connect user
+        court_rules_default_attendee:
+          type: boolean
+          description: Whether the *ClioCreator* is a default attendee for court rules events
+        default_calendar_id:
+          type: integer
+          format: int64
+          description: Default calendar id for *ClioCreator*.
+        email:
+          type: string
+          description: The email of the *ClioCreator*
+        enabled:
+          type: boolean
+          description: Whether the *ClioCreator* is allowed to log in
+        etag:
+          type: string
+          description: ETag for the *ClioCreator*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ClioCreator*
+        type:
+          type: string
+          enum:
+          - ManageUser
+          - ClientUser
+          description: The type of the *ClioCreator*
+        initials:
+          type: string
+          description: The initials of the *ClioCreator*
+        first_name:
+          type: string
+          description: The first name of the *ClioCreator*
+        last_name:
+          type: string
+          description: The last name of the *ClioCreator*
+        name:
+          type: string
+          description: The full name of the *ClioCreator*
+        phone_number:
+          type: string
+          description: The primary phone number for the *ClioCreator*.
+        rate:
+          type: number
+          format: float
+          description: Default user activity rate for *ClioCreator*.
+        subscription_type:
+          type: string
+          enum:
+          - Attorney
+          - NonAttorney
+          description: The subscription type of the *ClioCreator*
+        time_zone:
+          type: string
+          description: The selected time zone of the *ClioCreator*
+        roles:
+          type: array
+          items:
+            type: string
+          description: An array of roles assigned to this *ClioCreator*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ClioCreator* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ClioCreator* was last updated (as a ISO-8601 timestamp)
+    Multipart_base:
+      type: object
+      properties:
+        part_number:
+          type: integer
+          format: int32
+          description: Unique identifier of a part which defines its position within the document being uploaded.
+        put_url:
+          type: string
+          description: A signed URL for uploading the file part. It expires in 10 minutes.
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Error:
       type: object
       required:

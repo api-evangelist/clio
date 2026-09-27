@@ -726,77 +726,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    UtbmsCode_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *UtbmsCode*
-        etag:
-          type: string
-          description: ETag for the *UtbmsCode*
-        name:
-          type: string
-          description: The name of the *UtbmsCode*
-        code:
-          type: string
-          description: The UTBMS code for the *UtbmsCode*
-        description:
-          type: string
-          description: The UTBMS description for the *UtbmsCode*
-        type:
-          type: string
-          enum:
-          - UtbmsTask
-          - UtbmsExpense
-          - UtbmsActivity
-          description: The type of the *UtbmsCode*
-        utbms_set_id:
-          type: integer
-          format: int64
-          description: Set id for the *UtbmsCode*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *UtbmsCode* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *UtbmsCode* was last updated (as a ISO-8601 timestamp)
-    ActivityDescription_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/ActivityDescription'
-    ActivityDescriptionRate_base:
-      type: object
-      properties:
-        amount:
-          type: number
-          format: double
-          description: Monetary value of this rate. Either hourly value or flat rate value
-        non_billable_amount:
-          type: number
-          format: double
-          description: Monetary value of this rate for non billable activities. Either hourly value or flat rate value
-        type:
-          type: string
-          enum:
-          - User
-          - FlatRate
-          - Custom
-          description: What kind of rate it is.
-        hierarchy:
-          type: string
-          enum:
-          - Default
-          - Activity
-          - Matter
-          - Client
-          description: What rate hierarchy the rate belongs to.
     Group_base:
       type: object
       properties:
@@ -825,18 +754,54 @@ components:
           type: string
           format: date-time
           description: The time the *Group* was last updated (as a ISO-8601 timestamp)
-    ErrorDetail:
+    ActivityDescription:
+      allOf:
+      - $ref: '#/components/schemas/ActivityDescription_base'
+      - type: object
+        properties:
+          groups:
+            type: array
+            items:
+              $ref: '#/components/schemas/Group_base'
+            description: Group
+          rate:
+            $ref: '#/components/schemas/ActivityDescriptionRate_base'
+            description: ActivityDescriptionRate
+          utbms_task:
+            $ref: '#/components/schemas/UtbmsCode_base'
+            description: UtbmsCode
+          utbms_activity:
+            $ref: '#/components/schemas/UtbmsCode_base'
+            description: UtbmsCode
+          currency:
+            $ref: '#/components/schemas/Currency_base'
+            description: Currency
+    ActivityDescriptionRate_base:
       type: object
-      required:
-      - type
-      - message
       properties:
+        amount:
+          type: number
+          format: double
+          description: Monetary value of this rate. Either hourly value or flat rate value
+        non_billable_amount:
+          type: number
+          format: double
+          description: Monetary value of this rate for non billable activities. Either hourly value or flat rate value
         type:
           type: string
-          description: Unique name for this error
-        message:
+          enum:
+          - User
+          - FlatRate
+          - Custom
+          description: What kind of rate it is.
+        hierarchy:
           type: string
-          description: Detailed message about the error
+          enum:
+          - Default
+          - Activity
+          - Matter
+          - Client
+          description: What rate hierarchy the rate belongs to.
     ActivityDescription_base:
       type: object
       properties:
@@ -890,28 +855,6 @@ components:
         currency:
           type: object
           description: The currency of the activity description
-    ActivityDescription:
-      allOf:
-      - $ref: '#/components/schemas/ActivityDescription_base'
-      - type: object
-        properties:
-          groups:
-            type: array
-            items:
-              $ref: '#/components/schemas/Group_base'
-            description: Group
-          rate:
-            $ref: '#/components/schemas/ActivityDescriptionRate_base'
-            description: ActivityDescriptionRate
-          utbms_task:
-            $ref: '#/components/schemas/UtbmsCode_base'
-            description: UtbmsCode
-          utbms_activity:
-            $ref: '#/components/schemas/UtbmsCode_base'
-            description: UtbmsCode
-          currency:
-            $ref: '#/components/schemas/Currency_base'
-            description: Currency
     Currency_base:
       type: object
       properties:
@@ -936,6 +879,70 @@ components:
           type: string
           format: date-time
           description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
+    ActivityDescription_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ActivityDescription'
+    UtbmsCode_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *UtbmsCode*
+        etag:
+          type: string
+          description: ETag for the *UtbmsCode*
+        name:
+          type: string
+          description: The name of the *UtbmsCode*
+        code:
+          type: string
+          description: The UTBMS code for the *UtbmsCode*
+        description:
+          type: string
+          description: The UTBMS description for the *UtbmsCode*
+        type:
+          type: string
+          enum:
+          - UtbmsTask
+          - UtbmsExpense
+          - UtbmsActivity
+          description: The type of the *UtbmsCode*
+        utbms_set_id:
+          type: integer
+          format: int64
+          description: Set id for the *UtbmsCode*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *UtbmsCode* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *UtbmsCode* was last updated (as a ISO-8601 timestamp)
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     ActivityDescription_List:
       type: object
       required:
@@ -946,13 +953,6 @@ components:
           description: ActivityDescription List Response
           items:
             $ref: '#/components/schemas/ActivityDescription'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

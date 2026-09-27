@@ -480,6 +480,18 @@ paths:
         required: false
 components:
   schemas:
+    TaskType:
+      allOf:
+      - $ref: '#/components/schemas/TaskType_base'
+      - type: object
+        properties: {}
+    TaskType_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/TaskType'
     TaskType_base:
       type: object
       properties:
@@ -505,13 +517,6 @@ components:
           type: string
           format: date-time
           description: The time the *TaskType* was last updated (as a ISO-8601 timestamp)
-    TaskType_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/TaskType'
     ErrorDetail:
       type: object
       required:
@@ -524,6 +529,13 @@ components:
         message:
           type: string
           description: Detailed message about the error
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     TaskType_List:
       type: object
       required:
@@ -534,18 +546,6 @@ components:
           description: TaskType List Response
           items:
             $ref: '#/components/schemas/TaskType'
-    TaskType:
-      allOf:
-      - $ref: '#/components/schemas/TaskType_base'
-      - type: object
-        properties: {}
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

@@ -668,99 +668,16 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/TaskTemplateList'
-    ErrorDetail:
+    TaskTemplateList_List:
       type: object
       required:
-      - type
-      - message
+      - data
       properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    TaskTemplateList:
-      allOf:
-      - $ref: '#/components/schemas/TaskTemplateList_base'
-      - type: object
-        properties:
-          practice_area:
-            $ref: '#/components/schemas/PracticeArea_base'
-            description: PracticeArea
-          creator:
-            $ref: '#/components/schemas/User_base'
-            description: User
-    User_base:
-      type: object
-      properties:
-        account_owner:
-          type: boolean
-          description: Whether the *User* is the owner of the account
-        clio_connect:
-          type: boolean
-          description: Whether the *User* is a Clio Connect user
-        court_rules_default_attendee:
-          type: boolean
-          description: Whether the *User* is a default attendee for court rules events
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *User* was created (as a ISO-8601 timestamp)
-        default_calendar_id:
-          type: integer
-          format: int64
-          description: Default calendar id for *User*.
-        email:
-          type: string
-          description: The email of the *User*
-        enabled:
-          type: boolean
-          description: Whether the *User* is allowed to log in
-        etag:
-          type: string
-          description: ETag for the *User*
-        first_name:
-          type: string
-          description: The first name of the *User*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *User*
-        initials:
-          type: string
-          description: The initials of the *User*
-        last_name:
-          type: string
-          description: The last name of the *User*
-        name:
-          type: string
-          description: The full name of the *User*
-        phone_number:
-          type: string
-          description: The primary phone number for the *User*.
-        rate:
-          type: number
-          format: float
-          description: Default user activity rate for *User*.
-        roles:
+        data:
           type: array
+          description: TaskTemplateList List Response
           items:
-            type: string
-          description: An array of roles assigned to this *User*
-        subscription_type:
-          type: string
-          enum:
-          - Attorney
-          - NonAttorney
-          description: The subscription type of the *User*
-        time_zone:
-          type: string
-          description: The selected time zone of the *User*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *User* was last updated (as a ISO-8601 timestamp)
+            $ref: '#/components/schemas/TaskTemplateList'
     PracticeArea_base:
       type: object
       properties:
@@ -849,6 +766,87 @@ components:
         code:
           type: string
           description: The code of the *PracticeArea*
+    User_base:
+      type: object
+      properties:
+        account_owner:
+          type: boolean
+          description: Whether the *User* is the owner of the account
+        clio_connect:
+          type: boolean
+          description: Whether the *User* is a Clio Connect user
+        court_rules_default_attendee:
+          type: boolean
+          description: Whether the *User* is a default attendee for court rules events
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *User* was created (as a ISO-8601 timestamp)
+        default_calendar_id:
+          type: integer
+          format: int64
+          description: Default calendar id for *User*.
+        email:
+          type: string
+          description: The email of the *User*
+        enabled:
+          type: boolean
+          description: Whether the *User* is allowed to log in
+        etag:
+          type: string
+          description: ETag for the *User*
+        first_name:
+          type: string
+          description: The first name of the *User*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *User*
+        initials:
+          type: string
+          description: The initials of the *User*
+        last_name:
+          type: string
+          description: The last name of the *User*
+        name:
+          type: string
+          description: The full name of the *User*
+        phone_number:
+          type: string
+          description: The primary phone number for the *User*.
+        rate:
+          type: number
+          format: float
+          description: Default user activity rate for *User*.
+        roles:
+          type: array
+          items:
+            type: string
+          description: An array of roles assigned to this *User*
+        subscription_type:
+          type: string
+          enum:
+          - Attorney
+          - NonAttorney
+          description: The subscription type of the *User*
+        time_zone:
+          type: string
+          description: The selected time zone of the *User*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *User* was last updated (as a ISO-8601 timestamp)
+    TaskTemplateList:
+      allOf:
+      - $ref: '#/components/schemas/TaskTemplateList_base'
+      - type: object
+        properties:
+          practice_area:
+            $ref: '#/components/schemas/PracticeArea_base'
+            description: PracticeArea
+          creator:
+            $ref: '#/components/schemas/User_base'
+            description: User
     TaskTemplateList_base:
       type: object
       properties:
@@ -877,16 +875,18 @@ components:
           type: string
           format: date-time
           description: The time the *TaskTemplateList* was last updated (as a ISO-8601 timestamp)
-    TaskTemplateList_List:
+    ErrorDetail:
       type: object
       required:
-      - data
+      - type
+      - message
       properties:
-        data:
-          type: array
-          description: TaskTemplateList List Response
-          items:
-            $ref: '#/components/schemas/TaskTemplateList'
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Error:
       type: object
       required:

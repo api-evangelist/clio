@@ -272,23 +272,13 @@ paths:
           description: Not Modified
 components:
   schemas:
-    ErrorDetail:
+    DocumentArchive_Show:
       type: object
       required:
-      - type
-      - message
+      - data
       properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    DocumentArchive:
-      allOf:
-      - $ref: '#/components/schemas/DocumentArchive_base'
-      - type: object
-        properties: {}
+        data:
+          $ref: '#/components/schemas/DocumentArchive'
     DocumentArchive_base:
       type: object
       properties:
@@ -327,13 +317,23 @@ components:
         message:
           type: string
           description: A message to indicate why the DocumentArchive didn't complete.
-    DocumentArchive_Show:
+    DocumentArchive:
+      allOf:
+      - $ref: '#/components/schemas/DocumentArchive_base'
+      - type: object
+        properties: {}
+    ErrorDetail:
       type: object
       required:
-      - data
+      - type
+      - message
       properties:
-        data:
-          $ref: '#/components/schemas/DocumentArchive'
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Error:
       type: object
       required:

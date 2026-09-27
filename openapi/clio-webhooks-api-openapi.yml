@@ -660,33 +660,16 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Webhook:
-      allOf:
-      - $ref: '#/components/schemas/Webhook_base'
-      - type: object
-        properties:
-          user:
-            $ref: '#/components/schemas/User_base'
-            description: User
-    Webhook_Show:
+    Webhook_List:
       type: object
       required:
       - data
       properties:
         data:
-          $ref: '#/components/schemas/Webhook'
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
+          type: array
+          description: Webhook List Response
+          items:
+            $ref: '#/components/schemas/Webhook'
     User_base:
       type: object
       properties:
@@ -821,16 +804,33 @@ components:
           type: string
           format: date-time
           description: The time the *Webhook* was last updated (as a ISO-8601 timestamp)
-    Webhook_List:
+    Webhook_Show:
       type: object
       required:
       - data
       properties:
         data:
-          type: array
-          description: Webhook List Response
-          items:
-            $ref: '#/components/schemas/Webhook'
+          $ref: '#/components/schemas/Webhook'
+    Webhook:
+      allOf:
+      - $ref: '#/components/schemas/Webhook_base'
+      - type: object
+        properties:
+          user:
+            $ref: '#/components/schemas/User_base'
+            description: User
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Error:
       type: object
       required:

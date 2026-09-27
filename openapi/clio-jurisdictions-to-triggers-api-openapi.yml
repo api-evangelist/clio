@@ -232,16 +232,6 @@ paths:
           description: Not Modified
 components:
   schemas:
-    JurisdictionsToTrigger_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: JurisdictionsToTrigger List Response
-          items:
-            $ref: '#/components/schemas/JurisdictionsToTrigger'
     JurisdictionsToTrigger_base:
       type: object
       properties:
@@ -283,6 +273,11 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/JurisdictionsToTrigger'
+    JurisdictionsToTrigger:
+      allOf:
+      - $ref: '#/components/schemas/JurisdictionsToTrigger_base'
+      - type: object
+        properties: {}
     ErrorDetail:
       type: object
       required:
@@ -295,11 +290,6 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    JurisdictionsToTrigger:
-      allOf:
-      - $ref: '#/components/schemas/JurisdictionsToTrigger_base'
-      - type: object
-        properties: {}
     Error:
       type: object
       required:
@@ -307,6 +297,16 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetail'
+    JurisdictionsToTrigger_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: JurisdictionsToTrigger List Response
+          items:
+            $ref: '#/components/schemas/JurisdictionsToTrigger'
 x-tagGroups:
 - name: Api
   tags:

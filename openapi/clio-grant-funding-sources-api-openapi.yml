@@ -461,16 +461,13 @@ paths:
         required: false
 components:
   schemas:
-    GrantFundingSource:
-      allOf:
-      - $ref: '#/components/schemas/GrantFundingSource_base'
-      - type: object
-        properties:
-          grants:
-            type: array
-            items:
-              $ref: '#/components/schemas/Grant_base'
-            description: Grant
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     GrantFundingSource_Show:
       type: object
       required:
@@ -499,6 +496,16 @@ components:
           type: string
           format: date-time
           description: The time the *GrantFundingSource* was last updated (as a ISO-8601 timestamp)
+    GrantFundingSource_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: GrantFundingSource List Response
+          items:
+            $ref: '#/components/schemas/GrantFundingSource'
     ErrorDetail:
       type: object
       required:
@@ -511,16 +518,16 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    GrantFundingSource_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: GrantFundingSource List Response
-          items:
-            $ref: '#/components/schemas/GrantFundingSource'
+    GrantFundingSource:
+      allOf:
+      - $ref: '#/components/schemas/GrantFundingSource_base'
+      - type: object
+        properties:
+          grants:
+            type: array
+            items:
+              $ref: '#/components/schemas/Grant_base'
+            description: Grant
     Grant_base:
       type: object
       properties:
@@ -562,13 +569,6 @@ components:
           type: string
           format: date
           description: End date of the grant
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

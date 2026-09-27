@@ -185,32 +185,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    BillableClient_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *BillableClient*
-        unbilled_hours:
-          type: number
-          format: double
-          description: The unbilled hours of  the client
-        unbilled_amount:
-          type: number
-          format: double
-          description: The unbilled amount of the client
-        amount_in_trust:
-          type: number
-          format: double
-          description: The trust amount available for the client
-        name:
-          type: string
-          description: The name of the Client
-        billable_matters_count:
-          type: integer
-          format: int32
-          description: The total number of billable matters the client has
     BillableMatter_base:
       type: object
       properties:
@@ -240,6 +214,42 @@ components:
         display_number:
           type: string
           description: The reference to the matter
+    BillableClient_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *BillableClient*
+        unbilled_hours:
+          type: number
+          format: double
+          description: The unbilled hours of  the client
+        unbilled_amount:
+          type: number
+          format: double
+          description: The unbilled amount of the client
+        amount_in_trust:
+          type: number
+          format: double
+          description: The trust amount available for the client
+        name:
+          type: string
+          description: The name of the Client
+        billable_matters_count:
+          type: integer
+          format: int32
+          description: The total number of billable matters the client has
+    BillableClient:
+      allOf:
+      - $ref: '#/components/schemas/BillableClient_base'
+      - type: object
+        properties:
+          billable_matters:
+            type: array
+            items:
+              $ref: '#/components/schemas/BillableMatter_base'
+            description: BillableMatter
     ErrorDetail:
       type: object
       required:
@@ -252,16 +262,13 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    BillableClient:
-      allOf:
-      - $ref: '#/components/schemas/BillableClient_base'
-      - type: object
-        properties:
-          billable_matters:
-            type: array
-            items:
-              $ref: '#/components/schemas/BillableMatter_base'
-            description: BillableMatter
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     BillableClient_List:
       type: object
       required:
@@ -272,13 +279,6 @@ components:
           description: BillableClient List Response
           items:
             $ref: '#/components/schemas/BillableClient'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

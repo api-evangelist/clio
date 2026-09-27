@@ -789,289 +789,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Contact_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Contact*
-        etag:
-          type: string
-          description: ETag for the *Contact*
-        name:
-          type: string
-          description: The full name of the *Contact*
-        first_name:
-          type: string
-          description: First name of the Person
-        middle_name:
-          type: string
-          description: Middle name of the Person
-        last_name:
-          type: string
-          description: Last name of the Person
-        date_of_birth:
-          type: string
-          format: date
-          description: Date of birth
-        type:
-          type: string
-          enum:
-          - Company
-          - Person
-          description: The type of the *Contact*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Contact* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Contact* was last updated (as a ISO-8601 timestamp)
-        prefix:
-          type: string
-          description: The prefix of the *Contact* (Mr, Mrs, etc)
-        title:
-          type: string
-          description: The designated title of the *Contact*
-        initials:
-          type: string
-          description: The initials of the *Contact*
-        clio_connect_email:
-          type: string
-          description: Clio Connect email if the *Contact* is a ClioConnect User
-        locked_clio_connect_email:
-          type: boolean
-          description: A boolean indicating if the ability to modify this *Contacts Clio connect email is locked.
-        client_connect_user_id:
-          type: integer
-          format: int64
-          description: The ID for the Clio Connect user associated with this *Contact*
-        primary_email_address:
-          type: string
-          description: The primary email address associated with this *Contact*.
-        secondary_email_address:
-          type: string
-          description: The secondary email address associated with this *Contact*.
-        primary_phone_number:
-          type: string
-          description: The primary phone number associated with this *Contact*.
-        secondary_phone_number:
-          type: string
-          description: The secondary phone number of the *Contact*.
-        ledes_client_id:
-          type: string
-          description: LEDES client id of the Contact
-        has_clio_for_clients_permission:
-          type: boolean
-          description: True if at least one resource has been shared with the contact using Clio for Clients.
-        is_client:
-          type: boolean
-          description: Whether or not the Contact is a client
-        is_clio_for_client_user:
-          type: boolean
-          description: Whether or not this contact has client_login and client_user (can be created due to addition to client portal or client_share_permissions)
-        is_co_counsel:
-          type: boolean
-          description: Whether or not the Contact has matters shared as co-counsel
-        is_bill_recipient:
-          type: boolean
-          description: Whether the Contact is a bill recipient on at least one matter.
-        sales_tax_number:
-          type: string
-          description: The sales tax number of the *Contact*
-        currency:
-          type: object
-          description: Currency of the *Contact*
-    BankTransaction_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/BankTransaction'
-    BankTransaction_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: BankTransaction List Response
-          items:
-            $ref: '#/components/schemas/BankTransaction'
-    Matter_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Matter*
-        etag:
-          type: string
-          description: ETag for the *Matter*
-        number:
-          type: integer
-          format: int32
-          description: The number given to the *Matter* within an account
-        display_number:
-          type: string
-          description: The reference and label of the *Matter*. Depending on the account's manual_matter_numbering setting, this is either read only (generated) or customizable.
-        custom_number:
-          type: string
-          description: User defined custom number of the *Matter*
-        currency:
-          type: object
-          description: Currency of the matter
-        description:
-          type: string
-          description: The detailed description of the *Matter*
-        status:
-          type: string
-          enum:
-          - Pending
-          - Open
-          - Closed
-          description: The current status of the *Matter*
-        location:
-          type: string
-          description: The location of the *Matter*
-        client_reference:
-          type: string
-          description: Client Reference string for external uses
-        client_id:
-          type: integer
-          format: int64
-          description: Client ID
-        billable:
-          type: boolean
-          description: Whether this matter is billable
-        maildrop_address:
-          type: string
-          description: A unique Maildrop email address for the matter
-        billing_method:
-          type: string
-          enum:
-          - flat
-          - contingency
-          - hourly
-          description: Billing method of this matter
-        open_date:
-          type: string
-          format: date
-          description: The date the matter was set to open (as a ISO-8601 date)
-        close_date:
-          type: string
-          format: date
-          description: The date the matter was set to closed (as a ISO-8601 date)
-        pending_date:
-          type: string
-          format: date
-          description: The date the matter was set to pending (as a ISO-8601 date)
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Matter* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Matter* was last updated (as a ISO-8601 timestamp)
-        shared:
-          type: boolean
-          description: Whether the matter is currently shared with Clio Connect
-        has_tasks:
-          type: boolean
-          description: Whether or not the matter has any tasks.
-        last_activity_date:
-          type: string
-          format: date
-          description: The greatest date out of all of the activities on the matter (as a ISO-8601 date)
-        matter_stage_updated_at:
-          type: string
-          format: date-time
-          description: The date the matter stage was last updated (as a ISO-8601 date)
-    BankAccount_base:
-      type: object
-      properties:
-        account_number:
-          type: string
-          description: The account number for *BankAccount*
-        balance:
-          type: number
-          format: double
-          description: The current balance of the *BankAccount*
-        bank_transactions_count:
-          type: integer
-          format: int32
-          description: The number of bank transactions associated with the account.
-        clio_payment_page_link:
-          type: string
-          description: Link to Single Payment Page which allows to transfer funds without logging in.
-        clio_payment_page_qr_code:
-          type: string
-          description: A QR code that links to a Single Payment Page which allows to transfer funds without logging in.
-        clio_payments_enabled:
-          type: boolean
-          description: Whether the bank account is connected to Clio Payments
-        controlled_account:
-          type: boolean
-          description: Whether is a controlled account
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *BankAccount* was created (as a ISO-8601 timestamp)
-        currency:
-          type: string
-          description: The currency type of the *BankAccount*
-        currency_symbol:
-          type: string
-          description: The currency symbol of the *BankAccount*
-        currency_id:
-          type: number
-          format: double
-          description: The currency ID of the *BankAccount*
-        default_account:
-          type: boolean
-          description: Whether it is the default account
-        domicile_branch:
-          type: string
-          description: The name of the branch where the account was opened
-        etag:
-          type: string
-          description: ETag for the *BankAccount*
-        general_ledger_number:
-          type: string
-          description: General ledger number
-        holder:
-          type: string
-          description: The name of the person or business that owns the *BankAccount*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *BankAccount*
-        institution:
-          type: string
-          description: The financial institution where the *BankAccount* is registered
-        name:
-          type: string
-          description: The name of the *BankAccount*
-        swift:
-          type: string
-          description: A unique identification code for the financial institution
-        transit_number:
-          type: string
-          description: Transit number for the bank account branch
-        type:
-          type: string
-          enum:
-          - Operating
-          - Trust
-          description: The type of the *BankAccount*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *BankAccount* was last updated (as a ISO-8601 timestamp)
     BankTransaction_base:
       type: object
       properties:
@@ -1146,6 +863,20 @@ components:
         read_only_confirmation:
           type: boolean
           description: Whether the transaction's reference code is read-only.
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    BankTransaction_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/BankTransaction'
     Bill_base:
       type: object
       properties:
@@ -1323,6 +1054,282 @@ components:
             - void
             - deleted
           description: The available *Bill* state transitions.
+    Contact_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Contact*
+        etag:
+          type: string
+          description: ETag for the *Contact*
+        name:
+          type: string
+          description: The full name of the *Contact*
+        first_name:
+          type: string
+          description: First name of the Person
+        middle_name:
+          type: string
+          description: Middle name of the Person
+        last_name:
+          type: string
+          description: Last name of the Person
+        date_of_birth:
+          type: string
+          format: date
+          description: Date of birth
+        type:
+          type: string
+          enum:
+          - Company
+          - Person
+          description: The type of the *Contact*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Contact* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Contact* was last updated (as a ISO-8601 timestamp)
+        prefix:
+          type: string
+          description: The prefix of the *Contact* (Mr, Mrs, etc)
+        title:
+          type: string
+          description: The designated title of the *Contact*
+        initials:
+          type: string
+          description: The initials of the *Contact*
+        clio_connect_email:
+          type: string
+          description: Clio Connect email if the *Contact* is a ClioConnect User
+        locked_clio_connect_email:
+          type: boolean
+          description: A boolean indicating if the ability to modify this *Contacts Clio connect email is locked.
+        client_connect_user_id:
+          type: integer
+          format: int64
+          description: The ID for the Clio Connect user associated with this *Contact*
+        primary_email_address:
+          type: string
+          description: The primary email address associated with this *Contact*.
+        secondary_email_address:
+          type: string
+          description: The secondary email address associated with this *Contact*.
+        primary_phone_number:
+          type: string
+          description: The primary phone number associated with this *Contact*.
+        secondary_phone_number:
+          type: string
+          description: The secondary phone number of the *Contact*.
+        ledes_client_id:
+          type: string
+          description: LEDES client id of the Contact
+        has_clio_for_clients_permission:
+          type: boolean
+          description: True if at least one resource has been shared with the contact using Clio for Clients.
+        is_client:
+          type: boolean
+          description: Whether or not the Contact is a client
+        is_clio_for_client_user:
+          type: boolean
+          description: Whether or not this contact has client_login and client_user (can be created due to addition to client portal or client_share_permissions)
+        is_co_counsel:
+          type: boolean
+          description: Whether or not the Contact has matters shared as co-counsel
+        is_bill_recipient:
+          type: boolean
+          description: Whether the Contact is a bill recipient on at least one matter.
+        sales_tax_number:
+          type: string
+          description: The sales tax number of the *Contact*
+        currency:
+          type: object
+          description: Currency of the *Contact*
+    BankAccount_base:
+      type: object
+      properties:
+        account_number:
+          type: string
+          description: The account number for *BankAccount*
+        balance:
+          type: number
+          format: double
+          description: The current balance of the *BankAccount*
+        bank_transactions_count:
+          type: integer
+          format: int32
+          description: The number of bank transactions associated with the account.
+        clio_payment_page_link:
+          type: string
+          description: Link to Single Payment Page which allows to transfer funds without logging in.
+        clio_payment_page_qr_code:
+          type: string
+          description: A QR code that links to a Single Payment Page which allows to transfer funds without logging in.
+        clio_payments_enabled:
+          type: boolean
+          description: Whether the bank account is connected to Clio Payments
+        controlled_account:
+          type: boolean
+          description: Whether is a controlled account
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *BankAccount* was created (as a ISO-8601 timestamp)
+        currency:
+          type: string
+          description: The currency type of the *BankAccount*
+        currency_symbol:
+          type: string
+          description: The currency symbol of the *BankAccount*
+        currency_id:
+          type: number
+          format: double
+          description: The currency ID of the *BankAccount*
+        default_account:
+          type: boolean
+          description: Whether it is the default account
+        domicile_branch:
+          type: string
+          description: The name of the branch where the account was opened
+        etag:
+          type: string
+          description: ETag for the *BankAccount*
+        general_ledger_number:
+          type: string
+          description: General ledger number
+        holder:
+          type: string
+          description: The name of the person or business that owns the *BankAccount*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *BankAccount*
+        institution:
+          type: string
+          description: The financial institution where the *BankAccount* is registered
+        name:
+          type: string
+          description: The name of the *BankAccount*
+        swift:
+          type: string
+          description: A unique identification code for the financial institution
+        transit_number:
+          type: string
+          description: Transit number for the bank account branch
+        type:
+          type: string
+          enum:
+          - Operating
+          - Trust
+          description: The type of the *BankAccount*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *BankAccount* was last updated (as a ISO-8601 timestamp)
+    Matter_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Matter*
+        etag:
+          type: string
+          description: ETag for the *Matter*
+        number:
+          type: integer
+          format: int32
+          description: The number given to the *Matter* within an account
+        display_number:
+          type: string
+          description: The reference and label of the *Matter*. Depending on the account's manual_matter_numbering setting, this is either read only (generated) or customizable.
+        custom_number:
+          type: string
+          description: User defined custom number of the *Matter*
+        currency:
+          type: object
+          description: Currency of the matter
+        description:
+          type: string
+          description: The detailed description of the *Matter*
+        status:
+          type: string
+          enum:
+          - Pending
+          - Open
+          - Closed
+          description: The current status of the *Matter*
+        location:
+          type: string
+          description: The location of the *Matter*
+        client_reference:
+          type: string
+          description: Client Reference string for external uses
+        client_id:
+          type: integer
+          format: int64
+          description: Client ID
+        billable:
+          type: boolean
+          description: Whether this matter is billable
+        maildrop_address:
+          type: string
+          description: A unique Maildrop email address for the matter
+        billing_method:
+          type: string
+          enum:
+          - flat
+          - contingency
+          - hourly
+          description: Billing method of this matter
+        open_date:
+          type: string
+          format: date
+          description: The date the matter was set to open (as a ISO-8601 date)
+        close_date:
+          type: string
+          format: date
+          description: The date the matter was set to closed (as a ISO-8601 date)
+        pending_date:
+          type: string
+          format: date
+          description: The date the matter was set to pending (as a ISO-8601 date)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Matter* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Matter* was last updated (as a ISO-8601 timestamp)
+        shared:
+          type: boolean
+          description: Whether the matter is currently shared with Clio Connect
+        has_tasks:
+          type: boolean
+          description: Whether or not the matter has any tasks.
+        last_activity_date:
+          type: string
+          format: date
+          description: The greatest date out of all of the activities on the matter (as a ISO-8601 date)
+        matter_stage_updated_at:
+          type: string
+          format: date-time
+          description: The date the matter stage was last updated (as a ISO-8601 date)
+    BankTransaction_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: BankTransaction List Response
+          items:
+            $ref: '#/components/schemas/BankTransaction'
     ErrorDetail:
       type: object
       required:
@@ -1335,6 +1342,26 @@ components:
         message:
           type: string
           description: Detailed message about the error
+    BankTransaction:
+      allOf:
+      - $ref: '#/components/schemas/BankTransaction_base'
+      - type: object
+        properties:
+          client:
+            $ref: '#/components/schemas/Contact_base'
+            description: Contact
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          bank_account:
+            $ref: '#/components/schemas/BankAccount_base'
+            description: BankAccount
+          bill:
+            $ref: '#/components/schemas/Bill_base'
+            description: Bill
+          allocation:
+            $ref: '#/components/schemas/Allocation_base'
+            description: Allocation
     Allocation_base:
       type: object
       properties:
@@ -1380,33 +1407,6 @@ components:
         payment_type:
           type: string
           description: A string indicating whether the payment is a card or an eCheck payment.
-    BankTransaction:
-      allOf:
-      - $ref: '#/components/schemas/BankTransaction_base'
-      - type: object
-        properties:
-          client:
-            $ref: '#/components/schemas/Contact_base'
-            description: Contact
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          bank_account:
-            $ref: '#/components/schemas/BankAccount_base'
-            description: BankAccount
-          bill:
-            $ref: '#/components/schemas/Bill_base'
-            description: Bill
-          allocation:
-            $ref: '#/components/schemas/Allocation_base'
-            description: Allocation
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

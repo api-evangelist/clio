@@ -250,6 +250,29 @@ paths:
           description: Not Modified
 components:
   schemas:
+    Allocation:
+      allOf:
+      - $ref: '#/components/schemas/Allocation_base'
+      - type: object
+        properties:
+          bill:
+            $ref: '#/components/schemas/Bill_base'
+            description: Bill
+          source_bank_account:
+            $ref: '#/components/schemas/BankAccount_base'
+            description: BankAccount
+          destination_bank_account:
+            $ref: '#/components/schemas/BankAccount_base'
+            description: BankAccount
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          contact:
+            $ref: '#/components/schemas/Contact_base'
+            description: Contact
+          parent:
+            $ref: '#/components/schemas/PolymorphicObject_base'
+            description: PolymorphicObject
     Contact_base:
       type: object
       properties:
@@ -345,187 +368,6 @@ components:
         currency:
           type: object
           description: Currency of the *Contact*
-    Allocation_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: Allocation List Response
-          items:
-            $ref: '#/components/schemas/Allocation'
-    Matter_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Matter*
-        etag:
-          type: string
-          description: ETag for the *Matter*
-        number:
-          type: integer
-          format: int32
-          description: The number given to the *Matter* within an account
-        display_number:
-          type: string
-          description: The reference and label of the *Matter*. Depending on the account's manual_matter_numbering setting, this is either read only (generated) or customizable.
-        custom_number:
-          type: string
-          description: User defined custom number of the *Matter*
-        currency:
-          type: object
-          description: Currency of the matter
-        description:
-          type: string
-          description: The detailed description of the *Matter*
-        status:
-          type: string
-          enum:
-          - Pending
-          - Open
-          - Closed
-          description: The current status of the *Matter*
-        location:
-          type: string
-          description: The location of the *Matter*
-        client_reference:
-          type: string
-          description: Client Reference string for external uses
-        client_id:
-          type: integer
-          format: int64
-          description: Client ID
-        billable:
-          type: boolean
-          description: Whether this matter is billable
-        maildrop_address:
-          type: string
-          description: A unique Maildrop email address for the matter
-        billing_method:
-          type: string
-          enum:
-          - flat
-          - contingency
-          - hourly
-          description: Billing method of this matter
-        open_date:
-          type: string
-          format: date
-          description: The date the matter was set to open (as a ISO-8601 date)
-        close_date:
-          type: string
-          format: date
-          description: The date the matter was set to closed (as a ISO-8601 date)
-        pending_date:
-          type: string
-          format: date
-          description: The date the matter was set to pending (as a ISO-8601 date)
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Matter* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Matter* was last updated (as a ISO-8601 timestamp)
-        shared:
-          type: boolean
-          description: Whether the matter is currently shared with Clio Connect
-        has_tasks:
-          type: boolean
-          description: Whether or not the matter has any tasks.
-        last_activity_date:
-          type: string
-          format: date
-          description: The greatest date out of all of the activities on the matter (as a ISO-8601 date)
-        matter_stage_updated_at:
-          type: string
-          format: date-time
-          description: The date the matter stage was last updated (as a ISO-8601 date)
-    BankAccount_base:
-      type: object
-      properties:
-        account_number:
-          type: string
-          description: The account number for *BankAccount*
-        balance:
-          type: number
-          format: double
-          description: The current balance of the *BankAccount*
-        bank_transactions_count:
-          type: integer
-          format: int32
-          description: The number of bank transactions associated with the account.
-        clio_payment_page_link:
-          type: string
-          description: Link to Single Payment Page which allows to transfer funds without logging in.
-        clio_payment_page_qr_code:
-          type: string
-          description: A QR code that links to a Single Payment Page which allows to transfer funds without logging in.
-        clio_payments_enabled:
-          type: boolean
-          description: Whether the bank account is connected to Clio Payments
-        controlled_account:
-          type: boolean
-          description: Whether is a controlled account
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *BankAccount* was created (as a ISO-8601 timestamp)
-        currency:
-          type: string
-          description: The currency type of the *BankAccount*
-        currency_symbol:
-          type: string
-          description: The currency symbol of the *BankAccount*
-        currency_id:
-          type: number
-          format: double
-          description: The currency ID of the *BankAccount*
-        default_account:
-          type: boolean
-          description: Whether it is the default account
-        domicile_branch:
-          type: string
-          description: The name of the branch where the account was opened
-        etag:
-          type: string
-          description: ETag for the *BankAccount*
-        general_ledger_number:
-          type: string
-          description: General ledger number
-        holder:
-          type: string
-          description: The name of the person or business that owns the *BankAccount*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *BankAccount*
-        institution:
-          type: string
-          description: The financial institution where the *BankAccount* is registered
-        name:
-          type: string
-          description: The name of the *BankAccount*
-        swift:
-          type: string
-          description: A unique identification code for the financial institution
-        transit_number:
-          type: string
-          description: Transit number for the bank account branch
-        type:
-          type: string
-          enum:
-          - Operating
-          - Trust
-          description: The type of the *BankAccount*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *BankAccount* was last updated (as a ISO-8601 timestamp)
     Bill_base:
       type: object
       properties:
@@ -703,6 +545,227 @@ components:
             - void
             - deleted
           description: The available *Bill* state transitions.
+    Allocation_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: Allocation List Response
+          items:
+            $ref: '#/components/schemas/Allocation'
+    Allocation_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Allocation'
+    PolymorphicObject_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *PolymorphicObject*
+        type:
+          type: string
+          enum:
+          - Task
+          - CalendarEntry
+          - MatterNote
+          - ContactNote
+          - Matter
+          - Contact
+          - User
+          - CreditMemo
+          - Payment
+          - Document
+          - Communication
+          - Conversation
+          - TextMessageConversation
+          description: The type of the *PolymorphicObject*
+        identifier:
+          type: string
+          description: A string to identify the *PolymorphicObject*
+        secondary_identifier:
+          type: string
+          description: A secondary string to identify the *PolymorphicObject*
+        tertiary_identifier:
+          type: string
+          description: A tertiary string to identify the *PolymorphicObject*
+    BankAccount_base:
+      type: object
+      properties:
+        account_number:
+          type: string
+          description: The account number for *BankAccount*
+        balance:
+          type: number
+          format: double
+          description: The current balance of the *BankAccount*
+        bank_transactions_count:
+          type: integer
+          format: int32
+          description: The number of bank transactions associated with the account.
+        clio_payment_page_link:
+          type: string
+          description: Link to Single Payment Page which allows to transfer funds without logging in.
+        clio_payment_page_qr_code:
+          type: string
+          description: A QR code that links to a Single Payment Page which allows to transfer funds without logging in.
+        clio_payments_enabled:
+          type: boolean
+          description: Whether the bank account is connected to Clio Payments
+        controlled_account:
+          type: boolean
+          description: Whether is a controlled account
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *BankAccount* was created (as a ISO-8601 timestamp)
+        currency:
+          type: string
+          description: The currency type of the *BankAccount*
+        currency_symbol:
+          type: string
+          description: The currency symbol of the *BankAccount*
+        currency_id:
+          type: number
+          format: double
+          description: The currency ID of the *BankAccount*
+        default_account:
+          type: boolean
+          description: Whether it is the default account
+        domicile_branch:
+          type: string
+          description: The name of the branch where the account was opened
+        etag:
+          type: string
+          description: ETag for the *BankAccount*
+        general_ledger_number:
+          type: string
+          description: General ledger number
+        holder:
+          type: string
+          description: The name of the person or business that owns the *BankAccount*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *BankAccount*
+        institution:
+          type: string
+          description: The financial institution where the *BankAccount* is registered
+        name:
+          type: string
+          description: The name of the *BankAccount*
+        swift:
+          type: string
+          description: A unique identification code for the financial institution
+        transit_number:
+          type: string
+          description: Transit number for the bank account branch
+        type:
+          type: string
+          enum:
+          - Operating
+          - Trust
+          description: The type of the *BankAccount*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *BankAccount* was last updated (as a ISO-8601 timestamp)
+    Matter_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Matter*
+        etag:
+          type: string
+          description: ETag for the *Matter*
+        number:
+          type: integer
+          format: int32
+          description: The number given to the *Matter* within an account
+        display_number:
+          type: string
+          description: The reference and label of the *Matter*. Depending on the account's manual_matter_numbering setting, this is either read only (generated) or customizable.
+        custom_number:
+          type: string
+          description: User defined custom number of the *Matter*
+        currency:
+          type: object
+          description: Currency of the matter
+        description:
+          type: string
+          description: The detailed description of the *Matter*
+        status:
+          type: string
+          enum:
+          - Pending
+          - Open
+          - Closed
+          description: The current status of the *Matter*
+        location:
+          type: string
+          description: The location of the *Matter*
+        client_reference:
+          type: string
+          description: Client Reference string for external uses
+        client_id:
+          type: integer
+          format: int64
+          description: Client ID
+        billable:
+          type: boolean
+          description: Whether this matter is billable
+        maildrop_address:
+          type: string
+          description: A unique Maildrop email address for the matter
+        billing_method:
+          type: string
+          enum:
+          - flat
+          - contingency
+          - hourly
+          description: Billing method of this matter
+        open_date:
+          type: string
+          format: date
+          description: The date the matter was set to open (as a ISO-8601 date)
+        close_date:
+          type: string
+          format: date
+          description: The date the matter was set to closed (as a ISO-8601 date)
+        pending_date:
+          type: string
+          format: date
+          description: The date the matter was set to pending (as a ISO-8601 date)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Matter* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Matter* was last updated (as a ISO-8601 timestamp)
+        shared:
+          type: boolean
+          description: Whether the matter is currently shared with Clio Connect
+        has_tasks:
+          type: boolean
+          description: Whether or not the matter has any tasks.
+        last_activity_date:
+          type: string
+          format: date
+          description: The greatest date out of all of the activities on the matter (as a ISO-8601 date)
+        matter_stage_updated_at:
+          type: string
+          format: date-time
+          description: The date the matter stage was last updated (as a ISO-8601 date)
     ErrorDetail:
       type: object
       required:
@@ -715,29 +778,13 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    Allocation:
-      allOf:
-      - $ref: '#/components/schemas/Allocation_base'
-      - type: object
-        properties:
-          bill:
-            $ref: '#/components/schemas/Bill_base'
-            description: Bill
-          source_bank_account:
-            $ref: '#/components/schemas/BankAccount_base'
-            description: BankAccount
-          destination_bank_account:
-            $ref: '#/components/schemas/BankAccount_base'
-            description: BankAccount
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          contact:
-            $ref: '#/components/schemas/Contact_base'
-            description: Contact
-          parent:
-            $ref: '#/components/schemas/PolymorphicObject_base'
-            description: PolymorphicObject
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     Allocation_base:
       type: object
       properties:
@@ -783,53 +830,6 @@ components:
         payment_type:
           type: string
           description: A string indicating whether the payment is a card or an eCheck payment.
-    PolymorphicObject_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *PolymorphicObject*
-        type:
-          type: string
-          enum:
-          - Task
-          - CalendarEntry
-          - MatterNote
-          - ContactNote
-          - Matter
-          - Contact
-          - User
-          - CreditMemo
-          - Payment
-          - Document
-          - Communication
-          - Conversation
-          - TextMessageConversation
-          description: The type of the *PolymorphicObject*
-        identifier:
-          type: string
-          description: A string to identify the *PolymorphicObject*
-        secondary_identifier:
-          type: string
-          description: A secondary string to identify the *PolymorphicObject*
-        tertiary_identifier:
-          type: string
-          description: A tertiary string to identify the *PolymorphicObject*
-    Allocation_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Allocation'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

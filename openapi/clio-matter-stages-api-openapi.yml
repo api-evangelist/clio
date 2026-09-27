@@ -117,6 +117,11 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    MatterStage:
+      allOf:
+      - $ref: '#/components/schemas/MatterStage_base'
+      - type: object
+        properties: {}
     MatterStage_List:
       type: object
       required:
@@ -155,11 +160,6 @@ components:
           type: string
           format: date-time
           description: The time the *MatterStage* was last updated (as a ISO-8601 timestamp)
-    MatterStage:
-      allOf:
-      - $ref: '#/components/schemas/MatterStage_base'
-      - type: object
-        properties: {}
     ErrorDetail:
       type: object
       required:

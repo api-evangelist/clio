@@ -740,6 +740,16 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    CustomField_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: CustomField List Response
+          items:
+            $ref: '#/components/schemas/CustomField'
     CustomField:
       allOf:
       - $ref: '#/components/schemas/CustomField_base'
@@ -750,6 +760,25 @@ components:
             items:
               $ref: '#/components/schemas/PicklistOption_base'
             description: PicklistOption
+    CustomField_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomField'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     CustomField_base:
       type: object
       properties:
@@ -806,13 +835,6 @@ components:
           type: integer
           format: int32
           description: The display position of the *CustomField*
-    CustomField_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/CustomField'
     PicklistOption_base:
       type: object
       properties:
@@ -838,28 +860,6 @@ components:
           type: string
           format: date-time
           description: The time the *PicklistOption* was deleted (as a ISO-8601 timestamp)
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    CustomField_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: CustomField List Response
-          items:
-            $ref: '#/components/schemas/CustomField'
     Error:
       type: object
       required:

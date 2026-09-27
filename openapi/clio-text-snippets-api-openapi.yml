@@ -516,11 +516,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    TextSnippet:
-      allOf:
-      - $ref: '#/components/schemas/TextSnippet_base'
-      - type: object
-        properties: {}
     TextSnippet_Show:
       type: object
       required:
@@ -528,35 +523,11 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/TextSnippet'
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    TextSnippet_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: TextSnippet List Response
-          items:
-            $ref: '#/components/schemas/TextSnippet'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
+    TextSnippet:
+      allOf:
+      - $ref: '#/components/schemas/TextSnippet_base'
+      - type: object
+        properties: {}
     TextSnippet_base:
       type: object
       properties:
@@ -584,6 +555,35 @@ components:
         whole_word:
           type: boolean
           description: Whether the *TextSnippet* abbreviation requires a space after it has been entered to expand to a phrase
+    TextSnippet_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: TextSnippet List Response
+          items:
+            $ref: '#/components/schemas/TextSnippet'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

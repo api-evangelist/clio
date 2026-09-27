@@ -981,6 +981,94 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    BankAccount_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: BankAccount List Response
+          items:
+            $ref: '#/components/schemas/BankAccount'
+    User_base:
+      type: object
+      properties:
+        account_owner:
+          type: boolean
+          description: Whether the *User* is the owner of the account
+        clio_connect:
+          type: boolean
+          description: Whether the *User* is a Clio Connect user
+        court_rules_default_attendee:
+          type: boolean
+          description: Whether the *User* is a default attendee for court rules events
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *User* was created (as a ISO-8601 timestamp)
+        default_calendar_id:
+          type: integer
+          format: int64
+          description: Default calendar id for *User*.
+        email:
+          type: string
+          description: The email of the *User*
+        enabled:
+          type: boolean
+          description: Whether the *User* is allowed to log in
+        etag:
+          type: string
+          description: ETag for the *User*
+        first_name:
+          type: string
+          description: The first name of the *User*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *User*
+        initials:
+          type: string
+          description: The initials of the *User*
+        last_name:
+          type: string
+          description: The last name of the *User*
+        name:
+          type: string
+          description: The full name of the *User*
+        phone_number:
+          type: string
+          description: The primary phone number for the *User*.
+        rate:
+          type: number
+          format: float
+          description: Default user activity rate for *User*.
+        roles:
+          type: array
+          items:
+            type: string
+          description: An array of roles assigned to this *User*
+        subscription_type:
+          type: string
+          enum:
+          - Attorney
+          - NonAttorney
+          description: The subscription type of the *User*
+        time_zone:
+          type: string
+          description: The selected time zone of the *User*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *User* was last updated (as a ISO-8601 timestamp)
+    BankAccount:
+      allOf:
+      - $ref: '#/components/schemas/BankAccount_base'
+      - type: object
+        properties:
+          user:
+            $ref: '#/components/schemas/User_base'
+            description: User
     BankAccount_Show:
       type: object
       required:
@@ -1081,94 +1169,6 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    User_base:
-      type: object
-      properties:
-        account_owner:
-          type: boolean
-          description: Whether the *User* is the owner of the account
-        clio_connect:
-          type: boolean
-          description: Whether the *User* is a Clio Connect user
-        court_rules_default_attendee:
-          type: boolean
-          description: Whether the *User* is a default attendee for court rules events
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *User* was created (as a ISO-8601 timestamp)
-        default_calendar_id:
-          type: integer
-          format: int64
-          description: Default calendar id for *User*.
-        email:
-          type: string
-          description: The email of the *User*
-        enabled:
-          type: boolean
-          description: Whether the *User* is allowed to log in
-        etag:
-          type: string
-          description: ETag for the *User*
-        first_name:
-          type: string
-          description: The first name of the *User*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *User*
-        initials:
-          type: string
-          description: The initials of the *User*
-        last_name:
-          type: string
-          description: The last name of the *User*
-        name:
-          type: string
-          description: The full name of the *User*
-        phone_number:
-          type: string
-          description: The primary phone number for the *User*.
-        rate:
-          type: number
-          format: float
-          description: Default user activity rate for *User*.
-        roles:
-          type: array
-          items:
-            type: string
-          description: An array of roles assigned to this *User*
-        subscription_type:
-          type: string
-          enum:
-          - Attorney
-          - NonAttorney
-          description: The subscription type of the *User*
-        time_zone:
-          type: string
-          description: The selected time zone of the *User*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *User* was last updated (as a ISO-8601 timestamp)
-    BankAccount_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: BankAccount List Response
-          items:
-            $ref: '#/components/schemas/BankAccount'
-    BankAccount:
-      allOf:
-      - $ref: '#/components/schemas/BankAccount_base'
-      - type: object
-        properties:
-          user:
-            $ref: '#/components/schemas/User_base'
-            description: User
     Error:
       type: object
       required:

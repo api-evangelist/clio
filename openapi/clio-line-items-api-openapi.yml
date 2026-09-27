@@ -572,139 +572,164 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Matter_base:
+    LineItem_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/LineItem'
+    User_base:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Matter*
-        etag:
-          type: string
-          description: ETag for the *Matter*
-        number:
-          type: integer
-          format: int32
-          description: The number given to the *Matter* within an account
-        display_number:
-          type: string
-          description: The reference and label of the *Matter*. Depending on the account's manual_matter_numbering setting, this is either read only (generated) or customizable.
-        custom_number:
-          type: string
-          description: User defined custom number of the *Matter*
-        currency:
-          type: object
-          description: Currency of the matter
-        description:
-          type: string
-          description: The detailed description of the *Matter*
-        status:
-          type: string
-          enum:
-          - Pending
-          - Open
-          - Closed
-          description: The current status of the *Matter*
-        location:
-          type: string
-          description: The location of the *Matter*
-        client_reference:
-          type: string
-          description: Client Reference string for external uses
-        client_id:
-          type: integer
-          format: int64
-          description: Client ID
-        billable:
+        account_owner:
           type: boolean
-          description: Whether this matter is billable
-        maildrop_address:
-          type: string
-          description: A unique Maildrop email address for the matter
-        billing_method:
-          type: string
-          enum:
-          - flat
-          - contingency
-          - hourly
-          description: Billing method of this matter
-        open_date:
-          type: string
-          format: date
-          description: The date the matter was set to open (as a ISO-8601 date)
-        close_date:
-          type: string
-          format: date
-          description: The date the matter was set to closed (as a ISO-8601 date)
-        pending_date:
-          type: string
-          format: date
-          description: The date the matter was set to pending (as a ISO-8601 date)
+          description: Whether the *User* is the owner of the account
+        clio_connect:
+          type: boolean
+          description: Whether the *User* is a Clio Connect user
+        court_rules_default_attendee:
+          type: boolean
+          description: Whether the *User* is a default attendee for court rules events
         created_at:
           type: string
           format: date-time
-          description: The time the *Matter* was created (as a ISO-8601 timestamp)
-        updated_at:
+          description: The time the *User* was created (as a ISO-8601 timestamp)
+        default_calendar_id:
+          type: integer
+          format: int64
+          description: Default calendar id for *User*.
+        email:
           type: string
-          format: date-time
-          description: The time the *Matter* was last updated (as a ISO-8601 timestamp)
-        shared:
+          description: The email of the *User*
+        enabled:
           type: boolean
-          description: Whether the matter is currently shared with Clio Connect
-        has_tasks:
-          type: boolean
-          description: Whether or not the matter has any tasks.
-        last_activity_date:
+          description: Whether the *User* is allowed to log in
+        etag:
           type: string
-          format: date
-          description: The greatest date out of all of the activities on the matter (as a ISO-8601 date)
-        matter_stage_updated_at:
+          description: ETag for the *User*
+        first_name:
           type: string
-          format: date-time
-          description: The date the matter stage was last updated (as a ISO-8601 date)
-    LineItemTax_base:
-      type: object
-      properties:
+          description: The first name of the *User*
         id:
           type: integer
           format: int64
-          description: Unique identifier for the *LineItemTax*
-        etag:
+          description: Unique identifier for the *User*
+        initials:
           type: string
-          description: ETag for the *LineItemTax*
-        tax_rate_configuration_id:
-          type: integer
-          format: int64
-          description: The unique identifier of the tax rate configuration
+          description: The initials of the *User*
+        last_name:
+          type: string
+          description: The last name of the *User*
         name:
           type: string
-          description: The tax name
+          description: The full name of the *User*
+        phone_number:
+          type: string
+          description: The primary phone number for the *User*.
         rate:
           type: number
-          format: decimal
-          description: The tax rate
-        formatted_rate:
+          format: float
+          description: Default user activity rate for *User*.
+        roles:
+          type: array
+          items:
+            type: string
+          description: An array of roles assigned to this *User*
+        subscription_type:
           type: string
-          description: The formatted tax rate as a percentage
-        rule:
+          enum:
+          - Attorney
+          - NonAttorney
+          description: The subscription type of the *User*
+        time_zone:
           type: string
-          description: The tax rule
-        amount:
-          type: number
-          format: decimal
-          description: The tax amount
-        order:
-          type: integer
-          format: int32
-          description: The tax order
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *LineItemTax* was created (as a ISO-8601 timestamp)
+          description: The selected time zone of the *User*
         updated_at:
           type: string
           format: date-time
-          description: The time the *LineItemTax* was last updated (as a ISO-8601 timestamp)
+          description: The time the *User* was last updated (as a ISO-8601 timestamp)
+    LineItem_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *LineItem*
+        etag:
+          type: string
+          description: ETag for the *LineItem*
+        type:
+          type: string
+          enum:
+          - ActivityLineItem
+          - LineItem
+          - NoChargeLineItem
+          - SummaryLineItem
+          description: The type of the *LineItem*
+        description:
+          type: string
+          description: The description for the *LineItem*
+        date:
+          type: string
+          format: date
+          description: The *LineItem* date (as a ISO-8601 date)
+        price:
+          type: number
+          format: double
+          description: The price of the *LineItem*
+        taxable:
+          type: boolean
+          description: Whether the *LineItem* is taxable
+        kind:
+          type: string
+          enum:
+          - Service
+          - Expense
+          description: The kind of *LineItem*
+        note:
+          type: string
+          description: The note attached to the *LineItem*
+        secondary_taxable:
+          type: boolean
+          description: Whether the *LineItem* is secondary taxable
+        total:
+          type: number
+          format: double
+          description: The total amount for the *LineItem*
+        tax:
+          type: number
+          format: double
+          description: The tax amount for the *LineItem*
+        secondary_tax:
+          type: number
+          format: double
+          description: The secondary tax amount for the *LineItem*
+        sub_total:
+          type: number
+          format: double
+          description: The subtotal amount for the *LineItem*
+        quantity:
+          type: number
+          format: double
+          description: The amount of hours for the *LineItem*
+        group_ordering:
+          type: integer
+          format: int32
+          description: The value to specify the ordering of the *LineItem* on a bill
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *LineItem* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *LineItem* was last updated (as a ISO-8601 timestamp)
+        tax_settings:
+          type: array
+          items:
+            type: object
+          description: Array of objects, with each object representing the line item tax that is associated with the *LineItem*
     Bill_base:
       type: object
       properties:
@@ -882,18 +907,72 @@ components:
             - void
             - deleted
           description: The available *Bill* state transitions.
-    ErrorDetail:
+    LineItemTax_base:
       type: object
-      required:
-      - type
-      - message
       properties:
-        type:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *LineItemTax*
+        etag:
           type: string
-          description: Unique name for this error
-        message:
+          description: ETag for the *LineItemTax*
+        tax_rate_configuration_id:
+          type: integer
+          format: int64
+          description: The unique identifier of the tax rate configuration
+        name:
           type: string
-          description: Detailed message about the error
+          description: The tax name
+        rate:
+          type: number
+          format: decimal
+          description: The tax rate
+        formatted_rate:
+          type: string
+          description: The formatted tax rate as a percentage
+        rule:
+          type: string
+          description: The tax rule
+        amount:
+          type: number
+          format: decimal
+          description: The tax amount
+        order:
+          type: integer
+          format: int32
+          description: The tax order
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *LineItemTax* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *LineItemTax* was last updated (as a ISO-8601 timestamp)
+    LineItemTotals_base:
+      type: object
+      properties:
+        quantity:
+          type: number
+          format: double
+          description: Sum of quantity for included line items.
+        price:
+          type: number
+          format: double
+          description: Sum of price for included line items.
+        discount_percent:
+          type: number
+          format: double
+          description: Sum of discount as percentage for included line items.
+        total:
+          type: number
+          format: double
+          description: Sum of total for included line items.
+        sub_total:
+          type: number
+          format: double
+          description: Sum of total before discount and tax is applied.
     Discount_base:
       type: object
       properties:
@@ -918,76 +997,6 @@ components:
           type: integer
           format: int32
           description: The number of days for your *Discount* period. If your bill is paid within this time, apply your *Discount* rate to the bill.
-    User_base:
-      type: object
-      properties:
-        account_owner:
-          type: boolean
-          description: Whether the *User* is the owner of the account
-        clio_connect:
-          type: boolean
-          description: Whether the *User* is a Clio Connect user
-        court_rules_default_attendee:
-          type: boolean
-          description: Whether the *User* is a default attendee for court rules events
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *User* was created (as a ISO-8601 timestamp)
-        default_calendar_id:
-          type: integer
-          format: int64
-          description: Default calendar id for *User*.
-        email:
-          type: string
-          description: The email of the *User*
-        enabled:
-          type: boolean
-          description: Whether the *User* is allowed to log in
-        etag:
-          type: string
-          description: ETag for the *User*
-        first_name:
-          type: string
-          description: The first name of the *User*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *User*
-        initials:
-          type: string
-          description: The initials of the *User*
-        last_name:
-          type: string
-          description: The last name of the *User*
-        name:
-          type: string
-          description: The full name of the *User*
-        phone_number:
-          type: string
-          description: The primary phone number for the *User*.
-        rate:
-          type: number
-          format: float
-          description: Default user activity rate for *User*.
-        roles:
-          type: array
-          items:
-            type: string
-          description: An array of roles assigned to this *User*
-        subscription_type:
-          type: string
-          enum:
-          - Attorney
-          - NonAttorney
-          description: The subscription type of the *User*
-        time_zone:
-          type: string
-          description: The selected time zone of the *User*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *User* was last updated (as a ISO-8601 timestamp)
     LineItem:
       allOf:
       - $ref: '#/components/schemas/LineItem_base'
@@ -1016,6 +1025,18 @@ components:
             items:
               $ref: '#/components/schemas/LineItemTax_base'
             description: LineItemTax
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     LineItem_List:
       type: object
       required:
@@ -1026,29 +1047,96 @@ components:
           description: LineItem List Response
           items:
             $ref: '#/components/schemas/LineItem'
-    LineItemTotals_base:
+    Matter_base:
       type: object
       properties:
-        quantity:
-          type: number
-          format: double
-          description: Sum of quantity for included line items.
-        price:
-          type: number
-          format: double
-          description: Sum of price for included line items.
-        discount_percent:
-          type: number
-          format: double
-          description: Sum of discount as percentage for included line items.
-        total:
-          type: number
-          format: double
-          description: Sum of total for included line items.
-        sub_total:
-          type: number
-          format: double
-          description: Sum of total before discount and tax is applied.
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Matter*
+        etag:
+          type: string
+          description: ETag for the *Matter*
+        number:
+          type: integer
+          format: int32
+          description: The number given to the *Matter* within an account
+        display_number:
+          type: string
+          description: The reference and label of the *Matter*. Depending on the account's manual_matter_numbering setting, this is either read only (generated) or customizable.
+        custom_number:
+          type: string
+          description: User defined custom number of the *Matter*
+        currency:
+          type: object
+          description: Currency of the matter
+        description:
+          type: string
+          description: The detailed description of the *Matter*
+        status:
+          type: string
+          enum:
+          - Pending
+          - Open
+          - Closed
+          description: The current status of the *Matter*
+        location:
+          type: string
+          description: The location of the *Matter*
+        client_reference:
+          type: string
+          description: Client Reference string for external uses
+        client_id:
+          type: integer
+          format: int64
+          description: Client ID
+        billable:
+          type: boolean
+          description: Whether this matter is billable
+        maildrop_address:
+          type: string
+          description: A unique Maildrop email address for the matter
+        billing_method:
+          type: string
+          enum:
+          - flat
+          - contingency
+          - hourly
+          description: Billing method of this matter
+        open_date:
+          type: string
+          format: date
+          description: The date the matter was set to open (as a ISO-8601 date)
+        close_date:
+          type: string
+          format: date
+          description: The date the matter was set to closed (as a ISO-8601 date)
+        pending_date:
+          type: string
+          format: date
+          description: The date the matter was set to pending (as a ISO-8601 date)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Matter* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Matter* was last updated (as a ISO-8601 timestamp)
+        shared:
+          type: boolean
+          description: Whether the matter is currently shared with Clio Connect
+        has_tasks:
+          type: boolean
+          description: Whether or not the matter has any tasks.
+        last_activity_date:
+          type: string
+          format: date
+          description: The greatest date out of all of the activities on the matter (as a ISO-8601 date)
+        matter_stage_updated_at:
+          type: string
+          format: date-time
+          description: The date the matter stage was last updated (as a ISO-8601 date)
     Activity_base:
       type: object
       properties:
@@ -1186,94 +1274,6 @@ components:
         currency:
           type: object
           description: The currency of the *Activity*
-    LineItem_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *LineItem*
-        etag:
-          type: string
-          description: ETag for the *LineItem*
-        type:
-          type: string
-          enum:
-          - ActivityLineItem
-          - LineItem
-          - NoChargeLineItem
-          - SummaryLineItem
-          description: The type of the *LineItem*
-        description:
-          type: string
-          description: The description for the *LineItem*
-        date:
-          type: string
-          format: date
-          description: The *LineItem* date (as a ISO-8601 date)
-        price:
-          type: number
-          format: double
-          description: The price of the *LineItem*
-        taxable:
-          type: boolean
-          description: Whether the *LineItem* is taxable
-        kind:
-          type: string
-          enum:
-          - Service
-          - Expense
-          description: The kind of *LineItem*
-        note:
-          type: string
-          description: The note attached to the *LineItem*
-        secondary_taxable:
-          type: boolean
-          description: Whether the *LineItem* is secondary taxable
-        total:
-          type: number
-          format: double
-          description: The total amount for the *LineItem*
-        tax:
-          type: number
-          format: double
-          description: The tax amount for the *LineItem*
-        secondary_tax:
-          type: number
-          format: double
-          description: The secondary tax amount for the *LineItem*
-        sub_total:
-          type: number
-          format: double
-          description: The subtotal amount for the *LineItem*
-        quantity:
-          type: number
-          format: double
-          description: The amount of hours for the *LineItem*
-        group_ordering:
-          type: integer
-          format: int32
-          description: The value to specify the ordering of the *LineItem* on a bill
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *LineItem* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *LineItem* was last updated (as a ISO-8601 timestamp)
-        tax_settings:
-          type: array
-          items:
-            type: object
-          description: Array of objects, with each object representing the line item tax that is associated with the *LineItem*
-    LineItem_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/LineItem'
     Error:
       type: object
       required:

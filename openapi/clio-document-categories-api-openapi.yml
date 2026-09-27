@@ -472,6 +472,34 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    DocumentCategory_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *DocumentCategory*
+        etag:
+          type: string
+          description: ETag for the *DocumentCategory*
+        name:
+          type: string
+          description: The name of the *DocumentCategory*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentCategory* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentCategory* was last updated (as a ISO-8601 timestamp)
+    DocumentCategory_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/DocumentCategory'
     DocumentCategory_List:
       type: object
       required:
@@ -499,34 +527,6 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    DocumentCategory_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/DocumentCategory'
-    DocumentCategory_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *DocumentCategory*
-        etag:
-          type: string
-          description: ETag for the *DocumentCategory*
-        name:
-          type: string
-          description: The name of the *DocumentCategory*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *DocumentCategory* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *DocumentCategory* was last updated (as a ISO-8601 timestamp)
     Error:
       type: object
       required:

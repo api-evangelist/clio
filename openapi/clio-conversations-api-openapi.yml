@@ -405,9 +405,113 @@ paths:
         required: false
 components:
   schemas:
+    ConversationMessage_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ConversationMessage*
+        etag:
+          type: string
+          description: ETag for the *ConversationMessage*
+        date:
+          type: string
+          description: The creation date of the message in the current user's time zone
+        body:
+          type: string
+          description: The main content of the *ConversationMessage*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ConversationMessage* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ConversationMessage* was last updated (as a ISO-8601 timestamp)
     UnredactedParticipant_base:
       type: object
       properties: {}
+    ConversationMembership:
+      allOf:
+      - $ref: '#/components/schemas/ConversationMembership_base'
+      - type: object
+        properties:
+          member:
+            $ref: '#/components/schemas/UnredactedParticipant_base'
+            description: UnredactedParticipant
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    Conversation_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Conversation*
+        etag:
+          type: string
+          description: ETag for the *Conversation*
+        archived:
+          type: boolean
+          description: Whether the conversation has been archived
+        read_only:
+          type: boolean
+          description: Whether the conversation is read only
+        current_user_is_member:
+          type: boolean
+          description: Whether the current user is a member of this conversation
+        subject:
+          type: string
+          description: The subject of the *Conversation*
+        message_count:
+          type: integer
+          format: int64
+          description: The number of messages in this conversation
+        time_entries_count:
+          type: integer
+          format: int64
+          description: The number of time entries applied to this conversation
+        read:
+          type: boolean
+          description: Whether any messages in this conversation have been viewed
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Conversation* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Conversation* was last updated (as a ISO-8601 timestamp)
+    ConversationMembership_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ConversationMembership*
+        etag:
+          type: string
+          description: ETag for the *ConversationMembership*
+        read:
+          type: boolean
+          description: Whether or not the ConversationMembership has been read by the member
+        archived:
+          type: boolean
+          description: Whether or not the ConversationMembership has been archived by the member
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ConversationMembership* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ConversationMembership* was last updated (as a ISO-8601 timestamp)
     Conversation_List:
       type: object
       required:
@@ -418,13 +522,6 @@ components:
           description: Conversation List Response
           items:
             $ref: '#/components/schemas/Conversation'
-    Conversation_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Conversation'
     Matter_base:
       type: object
       properties:
@@ -515,35 +612,6 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
-    Conversation:
-      allOf:
-      - $ref: '#/components/schemas/Conversation_base'
-      - type: object
-        properties:
-          last_message:
-            $ref: '#/components/schemas/ConversationMessage_base'
-            description: ConversationMessage
-          first_message:
-            $ref: '#/components/schemas/ConversationMessage_base'
-            description: ConversationMessage
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          messages:
-            type: array
-            items:
-              $ref: '#/components/schemas/ConversationMessage_base'
-            description: ConversationMessage
-          documents:
-            type: array
-            items:
-              $ref: '#/components/schemas/Document_base'
-            description: Document
-          memberships:
-            type: array
-            items:
-              $ref: '#/components/schemas/ConversationMembership'
-            description: ConversationMembership
     ErrorDetail:
       type: object
       required:
@@ -556,103 +624,13 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    ConversationMessage_base:
+    Conversation_Show:
       type: object
+      required:
+      - data
       properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ConversationMessage*
-        etag:
-          type: string
-          description: ETag for the *ConversationMessage*
-        date:
-          type: string
-          description: The creation date of the message in the current user's time zone
-        body:
-          type: string
-          description: The main content of the *ConversationMessage*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ConversationMessage* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ConversationMessage* was last updated (as a ISO-8601 timestamp)
-    ConversationMembership:
-      allOf:
-      - $ref: '#/components/schemas/ConversationMembership_base'
-      - type: object
-        properties:
-          member:
-            $ref: '#/components/schemas/UnredactedParticipant_base'
-            description: UnredactedParticipant
-    ConversationMembership_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ConversationMembership*
-        etag:
-          type: string
-          description: ETag for the *ConversationMembership*
-        read:
-          type: boolean
-          description: Whether or not the ConversationMembership has been read by the member
-        archived:
-          type: boolean
-          description: Whether or not the ConversationMembership has been archived by the member
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ConversationMembership* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ConversationMembership* was last updated (as a ISO-8601 timestamp)
-    Conversation_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Conversation*
-        etag:
-          type: string
-          description: ETag for the *Conversation*
-        archived:
-          type: boolean
-          description: Whether the conversation has been archived
-        read_only:
-          type: boolean
-          description: Whether the conversation is read only
-        current_user_is_member:
-          type: boolean
-          description: Whether the current user is a member of this conversation
-        subject:
-          type: string
-          description: The subject of the *Conversation*
-        message_count:
-          type: integer
-          format: int64
-          description: The number of messages in this conversation
-        time_entries_count:
-          type: integer
-          format: int64
-          description: The number of time entries applied to this conversation
-        read:
-          type: boolean
-          description: Whether any messages in this conversation have been viewed
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Conversation* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Conversation* was last updated (as a ISO-8601 timestamp)
+        data:
+          $ref: '#/components/schemas/Conversation'
     Document_base:
       type: object
       properties:
@@ -700,13 +678,35 @@ components:
         content_type:
           type: string
           description: The uploaded file content type
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
+    Conversation:
+      allOf:
+      - $ref: '#/components/schemas/Conversation_base'
+      - type: object
+        properties:
+          last_message:
+            $ref: '#/components/schemas/ConversationMessage_base'
+            description: ConversationMessage
+          first_message:
+            $ref: '#/components/schemas/ConversationMessage_base'
+            description: ConversationMessage
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          messages:
+            type: array
+            items:
+              $ref: '#/components/schemas/ConversationMessage_base'
+            description: ConversationMessage
+          documents:
+            type: array
+            items:
+              $ref: '#/components/schemas/Document_base'
+            description: Document
+          memberships:
+            type: array
+            items:
+              $ref: '#/components/schemas/ConversationMembership'
+            description: ConversationMembership
 x-tagGroups:
 - name: Api
   tags:

@@ -138,22 +138,63 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    OutstandingClientBalance:
-      allOf:
-      - $ref: '#/components/schemas/OutstandingClientBalance_base'
-      - type: object
-        properties:
-          outstanding_bills:
-            type: array
-            items:
-              $ref: '#/components/schemas/Bill_base'
-            description: Bill
-          contact:
-            $ref: '#/components/schemas/Contact_base'
-            description: Contact
-          currency:
-            $ref: '#/components/schemas/Currency_base'
-            description: Currency
+    OutstandingClientBalance_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: OutstandingClientBalance List Response
+          items:
+            $ref: '#/components/schemas/OutstandingClientBalance'
+    OutstandingClientBalance_base:
+      type: object
+      properties:
+        associated_matter_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+          description: An array of Matter IDs associated with bills in the unpaid state
+        etag:
+          type: string
+          description: ETag for the *OutstandingClientBalance*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *OutstandingClientBalance*
+        last_payment_date:
+          type: string
+          format: date
+          description: The date the most recent payment from the contact was received
+        last_shared_date:
+          type: string
+          format: date
+          description: The date of the most recently shared bills through the outstanding balance table
+        newest_issued_bill_due_date:
+          type: string
+          format: date
+          description: The due date of the contact's newest bill
+        pending_payments_total:
+          type: number
+          format: double
+          description: The sum of all online payments in a pending state on the outstanding bills
+        reminders_enabled:
+          type: boolean
+          description: The status of automated reminders for this client
+        total_outstanding_balance:
+          type: number
+          format: double
+          description: The sum of all bills in the unpaid state
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *OutstandingClientBalance* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *OutstandingClientBalance* was last updated (as a ISO-8601 timestamp)
     Contact_base:
       type: object
       properties:
@@ -426,65 +467,6 @@ components:
             - void
             - deleted
           description: The available *Bill* state transitions.
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    OutstandingClientBalance_base:
-      type: object
-      properties:
-        associated_matter_ids:
-          type: array
-          items:
-            type: integer
-            format: int64
-          description: An array of Matter IDs associated with bills in the unpaid state
-        etag:
-          type: string
-          description: ETag for the *OutstandingClientBalance*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *OutstandingClientBalance*
-        last_payment_date:
-          type: string
-          format: date
-          description: The date the most recent payment from the contact was received
-        last_shared_date:
-          type: string
-          format: date
-          description: The date of the most recently shared bills through the outstanding balance table
-        newest_issued_bill_due_date:
-          type: string
-          format: date
-          description: The due date of the contact's newest bill
-        pending_payments_total:
-          type: number
-          format: double
-          description: The sum of all online payments in a pending state on the outstanding bills
-        reminders_enabled:
-          type: boolean
-          description: The status of automated reminders for this client
-        total_outstanding_balance:
-          type: number
-          format: double
-          description: The sum of all bills in the unpaid state
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *OutstandingClientBalance* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *OutstandingClientBalance* was last updated (as a ISO-8601 timestamp)
     Currency_base:
       type: object
       properties:
@@ -509,16 +491,34 @@ components:
           type: string
           format: date-time
           description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
-    OutstandingClientBalance_List:
+    OutstandingClientBalance:
+      allOf:
+      - $ref: '#/components/schemas/OutstandingClientBalance_base'
+      - type: object
+        properties:
+          outstanding_bills:
+            type: array
+            items:
+              $ref: '#/components/schemas/Bill_base'
+            description: Bill
+          contact:
+            $ref: '#/components/schemas/Contact_base'
+            description: Contact
+          currency:
+            $ref: '#/components/schemas/Currency_base'
+            description: Currency
+    ErrorDetail:
       type: object
       required:
-      - data
+      - type
+      - message
       properties:
-        data:
-          type: array
-          description: OutstandingClientBalance List Response
-          items:
-            $ref: '#/components/schemas/OutstandingClientBalance'
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Error:
       type: object
       required:

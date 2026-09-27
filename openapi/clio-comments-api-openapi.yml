@@ -501,6 +501,65 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    DocumentVersion_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *DocumentVersion*
+        document_id:
+          type: integer
+          format: int64
+          description: The ID of the parent document.
+        etag:
+          type: string
+          description: ETag for the *DocumentVersion*
+        uuid:
+          type: string
+          description: UUID associated with the DocumentVersion. UUID is required to mark a document fully uploaded.
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentVersion* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentVersion* was last updated (as a ISO-8601 timestamp)
+        filename:
+          type: string
+          description: The uploaded file name of the DocumentVersion.
+        size:
+          type: integer
+          format: int32
+          description: The size of the DocumentVersion in bytes.
+        version_number:
+          type: integer
+          format: int32
+          description: The ordered number of when this DocumentVersion was uploaded.
+        content_type:
+          type: string
+          description: A standard MIME type describing the format of the object data.
+        received_at:
+          type: string
+          format: date-time
+          description: The time the DocumentVersion was received (as an ISO-8601 timestamp)
+        put_url:
+          type: string
+          description: A signed URL for uploading the file in a single operation. It expires in 10 minutes. If the document is fully uploaded, the field is empty.
+        fully_uploaded:
+          type: boolean
+          description: True if the DocumentVersion is uploaded. False if the DocumentVersion is being uploaded.
+    Comment_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: Comment List Response
+          items:
+            $ref: '#/components/schemas/Comment'
     Comment_Show:
       type: object
       required:
@@ -578,77 +637,6 @@ components:
           type: string
           format: date-time
           description: The time the *User* was last updated (as a ISO-8601 timestamp)
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    DocumentVersion_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *DocumentVersion*
-        document_id:
-          type: integer
-          format: int64
-          description: The ID of the parent document.
-        etag:
-          type: string
-          description: ETag for the *DocumentVersion*
-        uuid:
-          type: string
-          description: UUID associated with the DocumentVersion. UUID is required to mark a document fully uploaded.
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *DocumentVersion* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *DocumentVersion* was last updated (as a ISO-8601 timestamp)
-        filename:
-          type: string
-          description: The uploaded file name of the DocumentVersion.
-        size:
-          type: integer
-          format: int32
-          description: The size of the DocumentVersion in bytes.
-        version_number:
-          type: integer
-          format: int32
-          description: The ordered number of when this DocumentVersion was uploaded.
-        content_type:
-          type: string
-          description: A standard MIME type describing the format of the object data.
-        received_at:
-          type: string
-          format: date-time
-          description: The time the DocumentVersion was received (as an ISO-8601 timestamp)
-        put_url:
-          type: string
-          description: A signed URL for uploading the file in a single operation. It expires in 10 minutes. If the document is fully uploaded, the field is empty.
-        fully_uploaded:
-          type: boolean
-          description: True if the DocumentVersion is uploaded. False if the DocumentVersion is being uploaded.
-    Comment_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: Comment List Response
-          items:
-            $ref: '#/components/schemas/Comment'
     Comment_base:
       type: object
       properties:
@@ -685,6 +673,18 @@ components:
           document_version:
             $ref: '#/components/schemas/DocumentVersion_base'
             description: DocumentVersion
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Error:
       type: object
       required:

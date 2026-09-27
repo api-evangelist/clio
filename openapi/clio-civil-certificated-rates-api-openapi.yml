@@ -199,18 +199,16 @@ components:
       - $ref: '#/components/schemas/LaukCivilCertificatedRate_base'
       - type: object
         properties: {}
-    ErrorDetail:
+    LaukCivilCertificatedRate_List:
       type: object
       required:
-      - type
-      - message
+      - data
       properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
+        data:
+          type: array
+          description: LaukCivilCertificatedRate List Response
+          items:
+            $ref: '#/components/schemas/LaukCivilCertificatedRate'
     LaukCivilCertificatedRate_base:
       type: object
       properties:
@@ -294,16 +292,18 @@ components:
           type: string
           format: date-time
           description: The time the *LaukCivilCertificatedRate* was last updated (as a ISO-8601 timestamp)
-    LaukCivilCertificatedRate_List:
+    ErrorDetail:
       type: object
       required:
-      - data
+      - type
+      - message
       properties:
-        data:
-          type: array
-          description: LaukCivilCertificatedRate List Response
-          items:
-            $ref: '#/components/schemas/LaukCivilCertificatedRate'
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Error:
       type: object
       required:

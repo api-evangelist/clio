@@ -221,18 +221,13 @@ paths:
           description: Not Modified
 components:
   schemas:
-    ErrorDetail:
+    Jurisdiction_Show:
       type: object
       required:
-      - type
-      - message
+      - data
       properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
+        data:
+          $ref: '#/components/schemas/Jurisdiction'
     Jurisdiction_List:
       type: object
       required:
@@ -243,6 +238,43 @@ components:
           description: Jurisdiction List Response
           items:
             $ref: '#/components/schemas/Jurisdiction'
+    Jurisdiction_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Jurisdiction*
+        etag:
+          type: string
+          description: ETag for the *Jurisdiction*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Jurisdiction* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Jurisdiction* was last updated (as a ISO-8601 timestamp)
+        system_id:
+          type: integer
+          format: int64
+          description: Server ID
+        description:
+          type: string
+          description: Description
+        default:
+          type: boolean
+          description: Whether the *Jurisdiction* is default for the current user
+        display_timezone:
+          type: string
+          description: Formatted IANA timezone with UTC offset
+        valid_subscription:
+          type: boolean
+          description: Boolean value for whether the user has the jurisdictions
+        is_local_timezone:
+          type: boolean
+          description: Boolean value for when the timezone is in the local users timezone
     Jurisdiction:
       allOf:
       - $ref: '#/components/schemas/Jurisdiction_base'
@@ -281,50 +313,18 @@ components:
         default:
           type: boolean
           description: Whether *ServiceType* is default for the current user
-    Jurisdiction_Show:
+    ErrorDetail:
       type: object
       required:
-      - data
+      - type
+      - message
       properties:
-        data:
-          $ref: '#/components/schemas/Jurisdiction'
-    Jurisdiction_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Jurisdiction*
-        etag:
+        type:
           type: string
-          description: ETag for the *Jurisdiction*
-        created_at:
+          description: Unique name for this error
+        message:
           type: string
-          format: date-time
-          description: The time the *Jurisdiction* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Jurisdiction* was last updated (as a ISO-8601 timestamp)
-        system_id:
-          type: integer
-          format: int64
-          description: Server ID
-        description:
-          type: string
-          description: Description
-        default:
-          type: boolean
-          description: Whether the *Jurisdiction* is default for the current user
-        display_timezone:
-          type: string
-          description: Formatted IANA timezone with UTC offset
-        valid_subscription:
-          type: boolean
-          description: Boolean value for whether the user has the jurisdictions
-        is_local_timezone:
-          type: boolean
-          description: Boolean value for when the timezone is in the local users timezone
+          description: Detailed message about the error
     Error:
       type: object
       required:

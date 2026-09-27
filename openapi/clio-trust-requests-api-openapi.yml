@@ -284,13 +284,6 @@ paths:
         required: false
 components:
   schemas:
-    TrustRequest_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/TrustRequest'
     TrustRequest_base:
       type: object
       properties:
@@ -309,6 +302,18 @@ components:
           type: string
           format: date-time
           description: The time the *TrustRequest* was last updated (as a ISO-8601 timestamp)
+    TrustRequest_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/TrustRequest'
+    TrustRequest:
+      allOf:
+      - $ref: '#/components/schemas/TrustRequest_base'
+      - type: object
+        properties: {}
     ErrorDetail:
       type: object
       required:
@@ -321,11 +326,6 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    TrustRequest:
-      allOf:
-      - $ref: '#/components/schemas/TrustRequest_base'
-      - type: object
-        properties: {}
     Error:
       type: object
       required:
