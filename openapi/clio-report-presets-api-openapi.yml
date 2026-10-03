@@ -922,6 +922,14 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    ReportPreset:
+      allOf:
+      - $ref: '#/components/schemas/ReportPreset_base'
+      - type: object
+        properties:
+          report_schedule:
+            $ref: '#/components/schemas/ReportSchedule_base'
+            description: ReportSchedule
     ReportPreset_base:
       type: object
       properties:
@@ -1019,33 +1027,11 @@ components:
         options:
           type: string
           description: The report options parameters
-    ReportPreset_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/ReportPreset'
-    Report_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Report'
     Report:
       allOf:
       - $ref: '#/components/schemas/Report_base'
       - type: object
         properties: {}
-    ReportPreset:
-      allOf:
-      - $ref: '#/components/schemas/ReportPreset_base'
-      - type: object
-        properties:
-          report_schedule:
-            $ref: '#/components/schemas/ReportSchedule_base'
-            description: ReportSchedule
     Report_base:
       type: object
       properties:
@@ -1157,35 +1143,6 @@ components:
           - presets
           - scheduled
           description: The source of the report
-    ReportPreset_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: ReportPreset List Response
-          items:
-            $ref: '#/components/schemas/ReportPreset'
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
     ReportSchedule_base:
       type: object
       properties:
@@ -1257,6 +1214,49 @@ components:
           type: string
           format: date
           description: The date the Report Schedule will become enabled (a ISO-8601 date)
+    Report_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Report'
+    ReportPreset_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ReportPreset'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    ReportPreset_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: ReportPreset List Response
+          items:
+            $ref: '#/components/schemas/ReportPreset'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

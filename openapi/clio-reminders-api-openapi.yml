@@ -660,47 +660,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    NotificationMethod_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *NotificationMethod*
-        etag:
-          type: string
-          description: ETag for the *NotificationMethod*
-        type:
-          type: string
-          enum:
-          - Email
-          - Popup
-          - SMS
-          description: Human readable description of the type of notification
-        email_address:
-          type: string
-          description: Email address to send the notification to (only for email type)
-        is_default_email_address:
-          type: boolean
-          description: A boolean that is returned only on notification method objects that are relevant e.g. Email notification or Alternative Email
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *NotificationMethod* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *NotificationMethod* was last updated (as a ISO-8601 timestamp)
-    Reminder_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: Reminder List Response
-          items:
-            $ref: '#/components/schemas/Reminder'
     PolymorphicObject_base:
       type: object
       properties:
@@ -734,6 +693,16 @@ components:
         tertiary_identifier:
           type: string
           description: A tertiary string to identify the *PolymorphicObject*
+    Reminder_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: Reminder List Response
+          items:
+            $ref: '#/components/schemas/Reminder'
     Reminder_base:
       type: object
       properties:
@@ -773,6 +742,44 @@ components:
           type: string
           format: date-time
           description: The time the *Reminder* was last updated (as a ISO-8601 timestamp)
+    NotificationMethod_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *NotificationMethod*
+        etag:
+          type: string
+          description: ETag for the *NotificationMethod*
+        type:
+          type: string
+          enum:
+          - Email
+          - Popup
+          - SMS
+          description: Human readable description of the type of notification
+        email_address:
+          type: string
+          description: Email address to send the notification to (only for email type)
+        is_default_email_address:
+          type: boolean
+          description: A boolean that is returned only on notification method objects that are relevant e.g. Email notification or Alternative Email
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *NotificationMethod* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *NotificationMethod* was last updated (as a ISO-8601 timestamp)
+    Reminder_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Reminder'
     Reminder:
       allOf:
       - $ref: '#/components/schemas/Reminder_base'
@@ -784,13 +791,6 @@ components:
           subject:
             $ref: '#/components/schemas/PolymorphicObject_base'
             description: PolymorphicObject
-    Reminder_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Reminder'
     ErrorDetail:
       type: object
       required:

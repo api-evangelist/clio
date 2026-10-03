@@ -200,16 +200,6 @@ paths:
           description: Not Modified
 components:
   schemas:
-    ServiceType_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: ServiceType List Response
-          items:
-            $ref: '#/components/schemas/ServiceType'
     ServiceType_Show:
       type: object
       required:
@@ -245,6 +235,21 @@ components:
         default:
           type: boolean
           description: Whether *ServiceType* is default for the current user
+    ServiceType_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: ServiceType List Response
+          items:
+            $ref: '#/components/schemas/ServiceType'
+    ServiceType:
+      allOf:
+      - $ref: '#/components/schemas/ServiceType_base'
+      - type: object
+        properties: {}
     ErrorDetail:
       type: object
       required:
@@ -264,11 +269,6 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetail'
-    ServiceType:
-      allOf:
-      - $ref: '#/components/schemas/ServiceType_base'
-      - type: object
-        properties: {}
 x-tagGroups:
 - name: Api
   tags:

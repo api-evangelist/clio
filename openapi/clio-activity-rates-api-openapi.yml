@@ -527,6 +527,41 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    ActivityRate_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ActivityRate'
+    ActivityRate_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: ActivityRate List Response
+          items:
+            $ref: '#/components/schemas/ActivityRate'
+    ActivityRate:
+      allOf:
+      - $ref: '#/components/schemas/ActivityRate_base'
+      - type: object
+        properties:
+          user:
+            $ref: '#/components/schemas/User_base'
+            description: User
+          group:
+            $ref: '#/components/schemas/Group_base'
+            description: Group
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     Group_base:
       type: object
       properties:
@@ -588,6 +623,18 @@ components:
           type: integer
           format: int64
           description: Filter ActivityRate records for the co-counsel.
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     User_base:
       type: object
       properties:
@@ -658,53 +705,6 @@ components:
           type: string
           format: date-time
           description: The time the *User* was last updated (as a ISO-8601 timestamp)
-    ActivityRate:
-      allOf:
-      - $ref: '#/components/schemas/ActivityRate_base'
-      - type: object
-        properties:
-          user:
-            $ref: '#/components/schemas/User_base'
-            description: User
-          group:
-            $ref: '#/components/schemas/Group_base'
-            description: Group
-    ActivityRate_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: ActivityRate List Response
-          items:
-            $ref: '#/components/schemas/ActivityRate'
-    ActivityRate_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/ActivityRate'
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

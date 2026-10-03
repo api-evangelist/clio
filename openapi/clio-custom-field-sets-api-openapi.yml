@@ -627,23 +627,16 @@ components:
           type: integer
           format: int32
           description: The display position of the *CustomField*
-    CustomFieldSet_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/CustomFieldSet'
-    CustomFieldSet_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: CustomFieldSet List Response
-          items:
-            $ref: '#/components/schemas/CustomFieldSet'
+    CustomFieldSet:
+      allOf:
+      - $ref: '#/components/schemas/CustomFieldSet_base'
+      - type: object
+        properties:
+          custom_fields:
+            type: array
+            items:
+              $ref: '#/components/schemas/CustomField_base'
+            description: CustomField
     CustomFieldSet_base:
       type: object
       properties:
@@ -674,6 +667,23 @@ components:
           type: string
           format: date-time
           description: The time the *CustomFieldSet* was last updated (as a ISO-8601 timestamp)
+    CustomFieldSet_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: CustomFieldSet List Response
+          items:
+            $ref: '#/components/schemas/CustomFieldSet'
+    CustomFieldSet_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomFieldSet'
     ErrorDetail:
       type: object
       required:
@@ -693,16 +703,6 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetail'
-    CustomFieldSet:
-      allOf:
-      - $ref: '#/components/schemas/CustomFieldSet_base'
-      - type: object
-        properties:
-          custom_fields:
-            type: array
-            items:
-              $ref: '#/components/schemas/CustomField_base'
-            description: CustomField
 x-tagGroups:
 - name: Api
   tags:

@@ -525,6 +525,11 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    CustomAction:
+      allOf:
+      - $ref: '#/components/schemas/CustomAction_base'
+      - type: object
+        properties: {}
     CustomAction_List:
       type: object
       required:
@@ -535,11 +540,6 @@ components:
           description: CustomAction List Response
           items:
             $ref: '#/components/schemas/CustomAction'
-    CustomAction:
-      allOf:
-      - $ref: '#/components/schemas/CustomAction_base'
-      - type: object
-        properties: {}
     CustomAction_Show:
       type: object
       required:

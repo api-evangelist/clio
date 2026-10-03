@@ -110,21 +110,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Currency_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: Currency List Response
-          items:
-            $ref: '#/components/schemas/Currency'
-    Currency:
-      allOf:
-      - $ref: '#/components/schemas/Currency_base'
-      - type: object
-        properties: {}
     Currency_base:
       type: object
       properties:
@@ -149,6 +134,21 @@ components:
           type: string
           format: date-time
           description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
+    Currency_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: Currency List Response
+          items:
+            $ref: '#/components/schemas/Currency'
+    Currency:
+      allOf:
+      - $ref: '#/components/schemas/Currency_base'
+      - type: object
+        properties: {}
     ErrorDetail:
       type: object
       required:

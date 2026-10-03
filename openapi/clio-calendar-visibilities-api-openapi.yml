@@ -382,11 +382,13 @@ paths:
         required: false
 components:
   schemas:
-    CalendarVisibility:
-      allOf:
-      - $ref: '#/components/schemas/CalendarVisibility_base'
-      - type: object
-        properties: {}
+    CalendarVisibility_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/CalendarVisibility'
     CalendarVisibility_base:
       type: object
       properties:
@@ -459,6 +461,11 @@ components:
           type: string
           format: date-time
           description: The time the *CalendarVisibility* was last updated (as a ISO-8601 timestamp)
+    CalendarVisibility:
+      allOf:
+      - $ref: '#/components/schemas/CalendarVisibility_base'
+      - type: object
+        properties: {}
     CalendarVisibility_List:
       type: object
       required:
@@ -469,13 +476,6 @@ components:
           description: CalendarVisibility List Response
           items:
             $ref: '#/components/schemas/CalendarVisibility'
-    CalendarVisibility_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/CalendarVisibility'
     ErrorDetail:
       type: object
       required:

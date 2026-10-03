@@ -887,46 +887,143 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    SplitInvoice_base:
+    Interest_base:
+      type: object
+      properties:
+        balance:
+          type: number
+          format: double
+          description: Interest balance for the object
+        period:
+          type: integer
+          format: int32
+          description: Number of days that represent the frequency which your *Interest%* will be applied
+        rate:
+          type: number
+          format: double
+          description: Rate for the *Interest%*
+        total:
+          type: number
+          format: double
+          description: Interest total for the object
+        type:
+          type: string
+          enum:
+          - simple
+          - compound
+          description: Type of *Interest%* being applied
+    Currency_base:
       type: object
       properties:
         id:
           type: integer
           format: int64
-          description: Unique identifier for the *SplitInvoice*
-        bill_id:
-          type: integer
-          format: int64
-          description: The ID of the bill that was split.
-        linked_invoices_display_numbers:
-          type: array
-          items:
-            type: string
-          description: Display numbers of all invoices split with this one.
-        linked_invoices_ids:
-          type: array
-          items:
-            type: integer
-            format: int32
-          description: IDs of all invoices split with this one.
-        split_connection_id:
-          type: string
-          description: UUID to determine which invoices are split together.
-        split_portion:
-          type: number
-          format: double
-          description: The percentage of the bill that the payer is responsible for.
+          description: Unique identifier for the *Currency*
         etag:
           type: string
-          description: ETag for the *SplitInvoice*
+          description: ETag for the *Currency*
+        code:
+          type: string
+          description: ISO 4217 code for the *Currency*
+        sign:
+          type: string
+          description: Symbol used to denote monetary values using this *Currency*
         created_at:
           type: string
           format: date-time
-          description: The time the *SplitInvoice* was created (as a ISO-8601 timestamp)
+          description: The time the *Currency* was created (as a ISO-8601 timestamp)
         updated_at:
           type: string
           format: date-time
-          description: The time the *SplitInvoice* was last updated (as a ISO-8601 timestamp)
+          description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
+    BankAccount_base:
+      type: object
+      properties:
+        account_number:
+          type: string
+          description: The account number for *BankAccount*
+        balance:
+          type: number
+          format: double
+          description: The current balance of the *BankAccount*
+        bank_transactions_count:
+          type: integer
+          format: int32
+          description: The number of bank transactions associated with the account.
+        clio_payment_page_link:
+          type: string
+          description: Link to Single Payment Page which allows to transfer funds without logging in.
+        clio_payment_page_qr_code:
+          type: string
+          description: A QR code that links to a Single Payment Page which allows to transfer funds without logging in.
+        clio_payments_enabled:
+          type: boolean
+          description: Whether the bank account is connected to Clio Payments
+        controlled_account:
+          type: boolean
+          description: Whether is a controlled account
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *BankAccount* was created (as a ISO-8601 timestamp)
+        currency:
+          type: string
+          description: The currency type of the *BankAccount*
+        currency_symbol:
+          type: string
+          description: The currency symbol of the *BankAccount*
+        currency_id:
+          type: number
+          format: double
+          description: The currency ID of the *BankAccount*
+        default_account:
+          type: boolean
+          description: Whether it is the default account
+        domicile_branch:
+          type: string
+          description: The name of the branch where the account was opened
+        etag:
+          type: string
+          description: ETag for the *BankAccount*
+        general_ledger_number:
+          type: string
+          description: General ledger number
+        holder:
+          type: string
+          description: The name of the person or business that owns the *BankAccount*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *BankAccount*
+        institution:
+          type: string
+          description: The financial institution where the *BankAccount* is registered
+        name:
+          type: string
+          description: The name of the *BankAccount*
+        swift:
+          type: string
+          description: A unique identification code for the financial institution
+        transit_number:
+          type: string
+          description: Transit number for the bank account branch
+        type:
+          type: string
+          enum:
+          - Operating
+          - Trust
+          description: The type of the *BankAccount*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *BankAccount* was last updated (as a ISO-8601 timestamp)
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     Contact_base:
       type: object
       properties:
@@ -1022,487 +1119,6 @@ components:
         currency:
           type: object
           description: Currency of the *Contact*
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    BankAccount_base:
-      type: object
-      properties:
-        account_number:
-          type: string
-          description: The account number for *BankAccount*
-        balance:
-          type: number
-          format: double
-          description: The current balance of the *BankAccount*
-        bank_transactions_count:
-          type: integer
-          format: int32
-          description: The number of bank transactions associated with the account.
-        clio_payment_page_link:
-          type: string
-          description: Link to Single Payment Page which allows to transfer funds without logging in.
-        clio_payment_page_qr_code:
-          type: string
-          description: A QR code that links to a Single Payment Page which allows to transfer funds without logging in.
-        clio_payments_enabled:
-          type: boolean
-          description: Whether the bank account is connected to Clio Payments
-        controlled_account:
-          type: boolean
-          description: Whether is a controlled account
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *BankAccount* was created (as a ISO-8601 timestamp)
-        currency:
-          type: string
-          description: The currency type of the *BankAccount*
-        currency_symbol:
-          type: string
-          description: The currency symbol of the *BankAccount*
-        currency_id:
-          type: number
-          format: double
-          description: The currency ID of the *BankAccount*
-        default_account:
-          type: boolean
-          description: Whether it is the default account
-        domicile_branch:
-          type: string
-          description: The name of the branch where the account was opened
-        etag:
-          type: string
-          description: ETag for the *BankAccount*
-        general_ledger_number:
-          type: string
-          description: General ledger number
-        holder:
-          type: string
-          description: The name of the person or business that owns the *BankAccount*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *BankAccount*
-        institution:
-          type: string
-          description: The financial institution where the *BankAccount* is registered
-        name:
-          type: string
-          description: The name of the *BankAccount*
-        swift:
-          type: string
-          description: A unique identification code for the financial institution
-        transit_number:
-          type: string
-          description: Transit number for the bank account branch
-        type:
-          type: string
-          enum:
-          - Operating
-          - Trust
-          description: The type of the *BankAccount*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *BankAccount* was last updated (as a ISO-8601 timestamp)
-    MatterBalance_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *MatterBalance*
-        amount:
-          type: number
-          format: double
-          description: The amount of balance of a matter.
-    Interest_base:
-      type: object
-      properties:
-        balance:
-          type: number
-          format: double
-          description: Interest balance for the object
-        period:
-          type: integer
-          format: int32
-          description: Number of days that represent the frequency which your *Interest%* will be applied
-        rate:
-          type: number
-          format: double
-          description: Rate for the *Interest%*
-        total:
-          type: number
-          format: double
-          description: Interest total for the object
-        type:
-          type: string
-          enum:
-          - simple
-          - compound
-          description: Type of *Interest%* being applied
-    Bill:
-      allOf:
-      - $ref: '#/components/schemas/Bill_base'
-      - type: object
-        properties:
-          user:
-            $ref: '#/components/schemas/User_base'
-            description: User
-          client:
-            $ref: '#/components/schemas/Contact_base'
-            description: Contact
-          discount:
-            $ref: '#/components/schemas/Discount_base'
-            description: Discount
-          interest:
-            $ref: '#/components/schemas/Interest_base'
-            description: Interest
-          matters:
-            type: array
-            items:
-              $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          group:
-            $ref: '#/components/schemas/Group_base'
-            description: Group
-          bill_theme:
-            $ref: '#/components/schemas/BillTheme_base'
-            description: BillTheme
-          original_bill:
-            $ref: '#/components/schemas/Bill_base'
-            description: Bill
-          destination_account:
-            $ref: '#/components/schemas/BankAccount_base'
-            description: BankAccount
-          balances:
-            type: array
-            items:
-              $ref: '#/components/schemas/Balance_base'
-            description: Balance
-          matter_totals:
-            type: array
-            items:
-              $ref: '#/components/schemas/MatterBalance_base'
-            description: MatterBalance
-          currency:
-            $ref: '#/components/schemas/Currency_base'
-            description: Currency
-          billing_setting:
-            $ref: '#/components/schemas/BillingSetting_base'
-            description: BillingSetting
-          client_addresses:
-            type: array
-            items:
-              $ref: '#/components/schemas/Address_base'
-            description: Address
-          legal_aid_uk_bill:
-            $ref: '#/components/schemas/LegalAidUkBill_base'
-            description: LegalAidUkBill
-          split_invoice:
-            $ref: '#/components/schemas/SplitInvoice_base'
-            description: SplitInvoice
-    Group_base:
-      type: object
-      properties:
-        client_connect_user:
-          type: boolean
-          description: Whether or not the Group is a UserGroup for a Clio Connect User
-        etag:
-          type: string
-          description: ETag for the *Group*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Group*
-        name:
-          type: string
-          description: The name of the *Group*
-        type:
-          type: string
-          enum:
-          - UserGroup
-          - AdhocGroup
-          - AccountGroup
-          - TeamGroup
-          description: The type of the *Group*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Group* was last updated (as a ISO-8601 timestamp)
-    LegalAidUkBill_base:
-      type: object
-      properties:
-        additional_travel_payment:
-          type: boolean
-          description: Additional travel payment, for Legal Aid England and Wales
-        adjourned_hearing_fee:
-          type: string
-          description: Adjourned hearing fee
-        advocacy_costs:
-          type: number
-          format: double
-          description: Advocacy costs
-        advice_time:
-          type: integer
-          format: int32
-          description: Advice time
-        bill_type:
-          type: integer
-          format: int32
-          description: Bill type
-        case_concluded:
-          type: string
-          format: date
-          description: Case concluded
-        case_stage_level:
-          type: integer
-          format: int32
-          description: Case stage level
-        cla_exemption_code:
-          type: string
-          description: CLA exemption code
-        cla_reference:
-          type: string
-          description: CLA reference
-        cmrh_oral:
-          type: integer
-          format: int32
-          description: CMRH oral
-        cmrh_telephone:
-          type: integer
-          format: int32
-          description: CMRH telephone
-        cost_of_counsel:
-          type: string
-          description: Cost of counsel
-        costs_are_those_of:
-          type: integer
-          format: int32
-          description: Costs are those of
-        court_location:
-          type: string
-          description: Court location (HPCDS matters)
-        date_of_claim:
-          type: string
-          format: date
-          description: Date of claim
-        designated_accredited_representative:
-          type: integer
-          format: int32
-          description: Designated accredited representative
-        detention_travel_and_waiting_costs:
-          type: string
-          description: Detention travel & waiting costs ex VAT
-        disbursements_vat:
-          type: number
-          format: double
-          description: Disbursements VAT
-        exceptional_case_funding_reference:
-          type: string
-          description: Exceptional case funding reference
-        exemption_criteria_satisfied:
-          type: integer
-          format: int32
-          description: Exemption criteria satisfied
-        fee_code:
-          type: string
-          description: Fee code
-        follow_on_work:
-          type: integer
-          format: int32
-          description: Follow on work
-        ho_interview:
-          type: integer
-          format: int32
-          description: HO interview
-        ho_ucn:
-          type: integer
-          format: int32
-          description: HO UCN
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *LegalAidUkBill*
-        independent_medical_reports_claimed:
-          type: string
-          description: Independent medical reports claimed
-        jr_form_filling:
-          type: string
-          description: JR/Form filling ex VAT, for Legal Aid England and Wales
-        maat_id:
-          type: string
-          description: MAAT ID
-        meetings_attended:
-          type: integer
-          format: int32
-          description: Meetings attended
-        mht_ref_no:
-          type: string
-          description: MHT reference number
-        net_disbursements:
-          type: number
-          format: double
-          description: Net disbursements
-        net_profit_costs:
-          type: number
-          format: double
-          description: Net profit cost
-        niat_disbursement_prior_authority_number:
-          type: string
-          description: NIAT disbursement prior authority number
-        number_of_attendances:
-          type: integer
-          format: int32
-          description: Number of attendances
-        outcome_for_the_client:
-          type: integer
-          format: int32
-          description: Outcome for the client
-        profit_costs_ex_vat:
-          type: integer
-          format: int32
-          description: Profit costs ex VAT
-        prior_authority_reference:
-          type: string
-          description: Prior authority reference number
-        representation_order_date:
-          type: string
-          format: date
-          description: Representation order date
-        stage_reached:
-          type: integer
-          format: int32
-          description: Stage reached
-        substantive_hearing:
-          type: integer
-          format: int32
-          description: Substantive hearing
-        travel_and_waiting_costs:
-          type: number
-          format: double
-          description: Travel & waiting costs
-        travel_time:
-          type: integer
-          format: int32
-          description: Travel time
-        value_of_costs:
-          type: string
-          description: Value of costs
-        waiting_time:
-          type: integer
-          format: int32
-          description: Waiting time
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    BillingSetting_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *BillingSetting*
-        etag:
-          type: string
-          description: ETag for the *BillingSetting*
-        rounded_duration:
-          type: number
-          format: float
-          description: Rounded equivalent of duration submitted
-        rounding:
-          type: integer
-          format: int32
-          description: Minute increment for time rounding
-        use_decimal_rounding:
-          type: boolean
-          description: Round time to two decimal places
-        currency:
-          type: string
-          description: Current user setting of currency
-        currency_sign:
-          type: string
-          description: The sign of the current currency
-        tax_rate:
-          type: number
-          format: double
-          description: Rate applied for primary tax on invoices using this BillingSetting
-        tax_name:
-          type: string
-          description: Name shown for primary tax on invoices using this BillingSetting
-        apply_tax_by_default:
-          type: boolean
-          description: Used to determine if primary tax should be applied to invoices by default
-        apply_secondary_tax_by_default:
-          type: boolean
-          description: Used to determine if secondary tax should be applied to invoices by default
-        time_on_flat_rate_contingency_matters_is_non_billable:
-          type: boolean
-          description: Used to determine if hourly time entries on flat rate or contingency fee matters should be non-billable by default
-        use_secondary_tax:
-          type: boolean
-          description: Used to determine if secondary tax applies to invoices using this BillingSetting
-        secondary_tax_rate:
-          type: number
-          format: double
-          description: Rate applied for secondary tax on invoices using this BillingSetting
-        secondary_tax_rule:
-          type: string
-          enum:
-          - Pre
-          - Post
-          description: Used to determine if secondary tax should be applied separately or additionally to primary tax
-        secondary_tax_name:
-          type: string
-          description: Name shown for secondary tax on invoices using this BillingSetting
-        notify_after_bill_created:
-          type: boolean
-          description: Flag to indicate if users should have the option to notify other users when generating a bill
-        use_utbms_codes:
-          type: boolean
-          description: Controls usage of UTBMS codes, allowing creation of coded time entries and expenses
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *BillingSetting* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *BillingSetting* was last updated (as a ISO-8601 timestamp)
-        multi_currency_billing:
-          type: boolean
-          description: Whether multi-currency billing is enabled
-        billing_currencies:
-          type: array
-          items:
-            type: object
-          description: The currencies that an account has available for billing, if multi-currency billing is enabled
-        tax_settings:
-          type: array
-          items:
-            type: object
-          description: Array of objects representing invoice tax defaults, with each object containing 'tax_rate_configuration_id', 'order', and 'rule'
-    Bill_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Bill'
     User_base:
       type: object
       properties:
@@ -1750,89 +1366,34 @@ components:
             - void
             - deleted
           description: The available *Bill* state transitions.
-    Balance_base:
+    Group_base:
       type: object
       properties:
+        client_connect_user:
+          type: boolean
+          description: Whether or not the Group is a UserGroup for a Clio Connect User
+        etag:
+          type: string
+          description: ETag for the *Group*
         id:
           type: integer
           format: int64
-          description: Unique identifier for the *Balance*
-        amount:
-          type: number
-          format: double
-          description: The amount for this Balance.
+          description: Unique identifier for the *Group*
+        name:
+          type: string
+          description: The name of the *Group*
         type:
           type: string
           enum:
-          - Matter
-          - Client
-          description: The type of Balance this data is for.
-        interest_amount:
-          type: number
-          format: double
-          description: The interest amount for this Balance.
-        due:
-          type: number
-          format: double
-          description: The amount due for this Balance, factoring in applicable discounts.
-    Bill_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: Bill List Response
-          items:
-            $ref: '#/components/schemas/Bill'
-    Currency_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Currency*
-        etag:
-          type: string
-          description: ETag for the *Currency*
-        code:
-          type: string
-          description: ISO 4217 code for the *Currency*
-        sign:
-          type: string
-          description: Symbol used to denote monetary values using this *Currency*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Currency* was created (as a ISO-8601 timestamp)
+          - UserGroup
+          - AdhocGroup
+          - AccountGroup
+          - TeamGroup
+          description: The type of the *Group*
         updated_at:
           type: string
           format: date-time
-          description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
-    Discount_base:
-      type: object
-      properties:
-        rate:
-          type: number
-          format: double
-          description: The rate of the *Discount%*
-        type:
-          type: string
-          enum:
-          - percentage
-          - money
-          description: The type of *Discount* being applied in your *Discount* rate.
-        note:
-          type: string
-          description: A note for your *Discount*
-        early_payment_rate:
-          type: integer
-          format: int32
-          description: The % discount that will be applied if your *Discount* is paid within the early payment period.
-        early_payment_period:
-          type: integer
-          format: int32
-          description: The number of days for your *Discount* period. If your bill is paid within this time, apply your *Discount* rate to the bill.
+          description: The time the *Group* was last updated (as a ISO-8601 timestamp)
     BillTheme_base:
       type: object
       properties:
@@ -1954,6 +1515,54 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
+    MatterBalance_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *MatterBalance*
+        amount:
+          type: number
+          format: double
+          description: The amount of balance of a matter.
+    Balance_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Balance*
+        amount:
+          type: number
+          format: double
+          description: The amount for this Balance.
+        type:
+          type: string
+          enum:
+          - Matter
+          - Client
+          description: The type of Balance this data is for.
+        interest_amount:
+          type: number
+          format: double
+          description: The interest amount for this Balance.
+        due:
+          type: number
+          format: double
+          description: The amount due for this Balance, factoring in applicable discounts.
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Address_base:
       type: object
       properties:
@@ -1998,6 +1607,397 @@ components:
         primary:
           type: boolean
           description: Whether it is the default for this contact
+    Bill_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Bill'
+    Discount_base:
+      type: object
+      properties:
+        rate:
+          type: number
+          format: double
+          description: The rate of the *Discount%*
+        type:
+          type: string
+          enum:
+          - percentage
+          - money
+          description: The type of *Discount* being applied in your *Discount* rate.
+        note:
+          type: string
+          description: A note for your *Discount*
+        early_payment_rate:
+          type: integer
+          format: int32
+          description: The % discount that will be applied if your *Discount* is paid within the early payment period.
+        early_payment_period:
+          type: integer
+          format: int32
+          description: The number of days for your *Discount* period. If your bill is paid within this time, apply your *Discount* rate to the bill.
+    Bill_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: Bill List Response
+          items:
+            $ref: '#/components/schemas/Bill'
+    BillingSetting_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *BillingSetting*
+        etag:
+          type: string
+          description: ETag for the *BillingSetting*
+        rounded_duration:
+          type: number
+          format: float
+          description: Rounded equivalent of duration submitted
+        rounding:
+          type: integer
+          format: int32
+          description: Minute increment for time rounding
+        use_decimal_rounding:
+          type: boolean
+          description: Round time to two decimal places
+        currency:
+          type: string
+          description: Current user setting of currency
+        currency_sign:
+          type: string
+          description: The sign of the current currency
+        tax_rate:
+          type: number
+          format: double
+          description: Rate applied for primary tax on invoices using this BillingSetting
+        tax_name:
+          type: string
+          description: Name shown for primary tax on invoices using this BillingSetting
+        apply_tax_by_default:
+          type: boolean
+          description: Used to determine if primary tax should be applied to invoices by default
+        apply_secondary_tax_by_default:
+          type: boolean
+          description: Used to determine if secondary tax should be applied to invoices by default
+        time_on_flat_rate_contingency_matters_is_non_billable:
+          type: boolean
+          description: Used to determine if hourly time entries on flat rate or contingency fee matters should be non-billable by default
+        use_secondary_tax:
+          type: boolean
+          description: Used to determine if secondary tax applies to invoices using this BillingSetting
+        secondary_tax_rate:
+          type: number
+          format: double
+          description: Rate applied for secondary tax on invoices using this BillingSetting
+        secondary_tax_rule:
+          type: string
+          enum:
+          - Pre
+          - Post
+          description: Used to determine if secondary tax should be applied separately or additionally to primary tax
+        secondary_tax_name:
+          type: string
+          description: Name shown for secondary tax on invoices using this BillingSetting
+        notify_after_bill_created:
+          type: boolean
+          description: Flag to indicate if users should have the option to notify other users when generating a bill
+        use_utbms_codes:
+          type: boolean
+          description: Controls usage of UTBMS codes, allowing creation of coded time entries and expenses
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *BillingSetting* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *BillingSetting* was last updated (as a ISO-8601 timestamp)
+        multi_currency_billing:
+          type: boolean
+          description: Whether multi-currency billing is enabled
+        billing_currencies:
+          type: array
+          items:
+            type: object
+          description: The currencies that an account has available for billing, if multi-currency billing is enabled
+        tax_settings:
+          type: array
+          items:
+            type: object
+          description: Array of objects representing invoice tax defaults, with each object containing 'tax_rate_configuration_id', 'order', and 'rule'
+    SplitInvoice_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *SplitInvoice*
+        bill_id:
+          type: integer
+          format: int64
+          description: The ID of the bill that was split.
+        linked_invoices_display_numbers:
+          type: array
+          items:
+            type: string
+          description: Display numbers of all invoices split with this one.
+        linked_invoices_ids:
+          type: array
+          items:
+            type: integer
+            format: int32
+          description: IDs of all invoices split with this one.
+        split_connection_id:
+          type: string
+          description: UUID to determine which invoices are split together.
+        split_portion:
+          type: number
+          format: double
+          description: The percentage of the bill that the payer is responsible for.
+        etag:
+          type: string
+          description: ETag for the *SplitInvoice*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *SplitInvoice* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *SplitInvoice* was last updated (as a ISO-8601 timestamp)
+    Bill:
+      allOf:
+      - $ref: '#/components/schemas/Bill_base'
+      - type: object
+        properties:
+          user:
+            $ref: '#/components/schemas/User_base'
+            description: User
+          client:
+            $ref: '#/components/schemas/Contact_base'
+            description: Contact
+          discount:
+            $ref: '#/components/schemas/Discount_base'
+            description: Discount
+          interest:
+            $ref: '#/components/schemas/Interest_base'
+            description: Interest
+          matters:
+            type: array
+            items:
+              $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          group:
+            $ref: '#/components/schemas/Group_base'
+            description: Group
+          bill_theme:
+            $ref: '#/components/schemas/BillTheme_base'
+            description: BillTheme
+          original_bill:
+            $ref: '#/components/schemas/Bill_base'
+            description: Bill
+          destination_account:
+            $ref: '#/components/schemas/BankAccount_base'
+            description: BankAccount
+          balances:
+            type: array
+            items:
+              $ref: '#/components/schemas/Balance_base'
+            description: Balance
+          matter_totals:
+            type: array
+            items:
+              $ref: '#/components/schemas/MatterBalance_base'
+            description: MatterBalance
+          currency:
+            $ref: '#/components/schemas/Currency_base'
+            description: Currency
+          billing_setting:
+            $ref: '#/components/schemas/BillingSetting_base'
+            description: BillingSetting
+          client_addresses:
+            type: array
+            items:
+              $ref: '#/components/schemas/Address_base'
+            description: Address
+          legal_aid_uk_bill:
+            $ref: '#/components/schemas/LegalAidUkBill_base'
+            description: LegalAidUkBill
+          split_invoice:
+            $ref: '#/components/schemas/SplitInvoice_base'
+            description: SplitInvoice
+    LegalAidUkBill_base:
+      type: object
+      properties:
+        additional_travel_payment:
+          type: boolean
+          description: Additional travel payment, for Legal Aid England and Wales
+        adjourned_hearing_fee:
+          type: string
+          description: Adjourned hearing fee
+        advocacy_costs:
+          type: number
+          format: double
+          description: Advocacy costs
+        advice_time:
+          type: integer
+          format: int32
+          description: Advice time
+        bill_type:
+          type: integer
+          format: int32
+          description: Bill type
+        case_concluded:
+          type: string
+          format: date
+          description: Case concluded
+        case_stage_level:
+          type: integer
+          format: int32
+          description: Case stage level
+        cla_exemption_code:
+          type: string
+          description: CLA exemption code
+        cla_reference:
+          type: string
+          description: CLA reference
+        cmrh_oral:
+          type: integer
+          format: int32
+          description: CMRH oral
+        cmrh_telephone:
+          type: integer
+          format: int32
+          description: CMRH telephone
+        cost_of_counsel:
+          type: string
+          description: Cost of counsel
+        costs_are_those_of:
+          type: integer
+          format: int32
+          description: Costs are those of
+        court_location:
+          type: string
+          description: Court location (HPCDS matters)
+        date_of_claim:
+          type: string
+          format: date
+          description: Date of claim
+        designated_accredited_representative:
+          type: integer
+          format: int32
+          description: Designated accredited representative
+        detention_travel_and_waiting_costs:
+          type: string
+          description: Detention travel & waiting costs ex VAT
+        disbursements_vat:
+          type: number
+          format: double
+          description: Disbursements VAT
+        exceptional_case_funding_reference:
+          type: string
+          description: Exceptional case funding reference
+        exemption_criteria_satisfied:
+          type: integer
+          format: int32
+          description: Exemption criteria satisfied
+        fee_code:
+          type: string
+          description: Fee code
+        follow_on_work:
+          type: integer
+          format: int32
+          description: Follow on work
+        ho_interview:
+          type: integer
+          format: int32
+          description: HO interview
+        ho_ucn:
+          type: integer
+          format: int32
+          description: HO UCN
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *LegalAidUkBill*
+        independent_medical_reports_claimed:
+          type: string
+          description: Independent medical reports claimed
+        jr_form_filling:
+          type: string
+          description: JR/Form filling ex VAT, for Legal Aid England and Wales
+        maat_id:
+          type: string
+          description: MAAT ID
+        meetings_attended:
+          type: integer
+          format: int32
+          description: Meetings attended
+        mht_ref_no:
+          type: string
+          description: MHT reference number
+        net_disbursements:
+          type: number
+          format: double
+          description: Net disbursements
+        net_profit_costs:
+          type: number
+          format: double
+          description: Net profit cost
+        niat_disbursement_prior_authority_number:
+          type: string
+          description: NIAT disbursement prior authority number
+        number_of_attendances:
+          type: integer
+          format: int32
+          description: Number of attendances
+        outcome_for_the_client:
+          type: integer
+          format: int32
+          description: Outcome for the client
+        profit_costs_ex_vat:
+          type: integer
+          format: int32
+          description: Profit costs ex VAT
+        prior_authority_reference:
+          type: string
+          description: Prior authority reference number
+        representation_order_date:
+          type: string
+          format: date
+          description: Representation order date
+        stage_reached:
+          type: integer
+          format: int32
+          description: Stage reached
+        substantive_hearing:
+          type: integer
+          format: int32
+          description: Substantive hearing
+        travel_and_waiting_costs:
+          type: number
+          format: double
+          description: Travel & waiting costs
+        travel_time:
+          type: integer
+          format: int32
+          description: Travel time
+        value_of_costs:
+          type: string
+          description: Value of costs
+        waiting_time:
+          type: integer
+          format: int32
+          description: Waiting time
 x-tagGroups:
 - name: Api
   tags:

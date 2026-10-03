@@ -154,6 +154,35 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    InterestCharge_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *InterestCharge*
+        etag:
+          type: string
+          description: ETag for the *InterestCharge*
+        date:
+          type: string
+          format: date
+          description: The *InterestCharge* date (as a ISO-8601 date)
+        description:
+          type: string
+          description: The description for the *InterestCharge*
+        total:
+          type: number
+          format: double
+          description: The total amount for the *InterestCharge*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *InterestCharge* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *InterestCharge* was last updated (as a ISO-8601 timestamp)
     InterestCharge_List:
       type: object
       required:
@@ -164,96 +193,24 @@ components:
           description: InterestCharge List Response
           items:
             $ref: '#/components/schemas/InterestCharge'
-    Matter_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Matter*
-        etag:
-          type: string
-          description: ETag for the *Matter*
-        number:
-          type: integer
-          format: int32
-          description: The number given to the *Matter* within an account
-        display_number:
-          type: string
-          description: The reference and label of the *Matter*. Depending on the account's manual_matter_numbering setting, this is either read only (generated) or customizable.
-        custom_number:
-          type: string
-          description: User defined custom number of the *Matter*
-        currency:
-          type: object
-          description: Currency of the matter
-        description:
-          type: string
-          description: The detailed description of the *Matter*
-        status:
-          type: string
-          enum:
-          - Pending
-          - Open
-          - Closed
-          description: The current status of the *Matter*
-        location:
-          type: string
-          description: The location of the *Matter*
-        client_reference:
-          type: string
-          description: Client Reference string for external uses
-        client_id:
-          type: integer
-          format: int64
-          description: Client ID
-        billable:
-          type: boolean
-          description: Whether this matter is billable
-        maildrop_address:
-          type: string
-          description: A unique Maildrop email address for the matter
-        billing_method:
-          type: string
-          enum:
-          - flat
-          - contingency
-          - hourly
-          description: Billing method of this matter
-        open_date:
-          type: string
-          format: date
-          description: The date the matter was set to open (as a ISO-8601 date)
-        close_date:
-          type: string
-          format: date
-          description: The date the matter was set to closed (as a ISO-8601 date)
-        pending_date:
-          type: string
-          format: date
-          description: The date the matter was set to pending (as a ISO-8601 date)
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Matter* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Matter* was last updated (as a ISO-8601 timestamp)
-        shared:
-          type: boolean
-          description: Whether the matter is currently shared with Clio Connect
-        has_tasks:
-          type: boolean
-          description: Whether or not the matter has any tasks.
-        last_activity_date:
-          type: string
-          format: date
-          description: The greatest date out of all of the activities on the matter (as a ISO-8601 date)
-        matter_stage_updated_at:
-          type: string
-          format: date-time
-          description: The date the matter stage was last updated (as a ISO-8601 date)
+    InterestCharge:
+      allOf:
+      - $ref: '#/components/schemas/InterestCharge_base'
+      - type: object
+        properties:
+          bill:
+            $ref: '#/components/schemas/Bill_base'
+            description: Bill
+          balances:
+            type: array
+            items:
+              $ref: '#/components/schemas/Balance_base'
+            description: Balance
+          matters:
+            type: array
+            items:
+              $ref: '#/components/schemas/Matter_base'
+            description: Matter
     Bill_base:
       type: object
       properties:
@@ -431,35 +388,108 @@ components:
             - void
             - deleted
           description: The available *Bill* state transitions.
-    InterestCharge_base:
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    Matter_base:
       type: object
       properties:
         id:
           type: integer
           format: int64
-          description: Unique identifier for the *InterestCharge*
+          description: Unique identifier for the *Matter*
         etag:
           type: string
-          description: ETag for the *InterestCharge*
-        date:
+          description: ETag for the *Matter*
+        number:
+          type: integer
+          format: int32
+          description: The number given to the *Matter* within an account
+        display_number:
           type: string
-          format: date
-          description: The *InterestCharge* date (as a ISO-8601 date)
+          description: The reference and label of the *Matter*. Depending on the account's manual_matter_numbering setting, this is either read only (generated) or customizable.
+        custom_number:
+          type: string
+          description: User defined custom number of the *Matter*
+        currency:
+          type: object
+          description: Currency of the matter
         description:
           type: string
-          description: The description for the *InterestCharge*
-        total:
-          type: number
-          format: double
-          description: The total amount for the *InterestCharge*
+          description: The detailed description of the *Matter*
+        status:
+          type: string
+          enum:
+          - Pending
+          - Open
+          - Closed
+          description: The current status of the *Matter*
+        location:
+          type: string
+          description: The location of the *Matter*
+        client_reference:
+          type: string
+          description: Client Reference string for external uses
+        client_id:
+          type: integer
+          format: int64
+          description: Client ID
+        billable:
+          type: boolean
+          description: Whether this matter is billable
+        maildrop_address:
+          type: string
+          description: A unique Maildrop email address for the matter
+        billing_method:
+          type: string
+          enum:
+          - flat
+          - contingency
+          - hourly
+          description: Billing method of this matter
+        open_date:
+          type: string
+          format: date
+          description: The date the matter was set to open (as a ISO-8601 date)
+        close_date:
+          type: string
+          format: date
+          description: The date the matter was set to closed (as a ISO-8601 date)
+        pending_date:
+          type: string
+          format: date
+          description: The date the matter was set to pending (as a ISO-8601 date)
         created_at:
           type: string
           format: date-time
-          description: The time the *InterestCharge* was created (as a ISO-8601 timestamp)
+          description: The time the *Matter* was created (as a ISO-8601 timestamp)
         updated_at:
           type: string
           format: date-time
-          description: The time the *InterestCharge* was last updated (as a ISO-8601 timestamp)
+          description: The time the *Matter* was last updated (as a ISO-8601 timestamp)
+        shared:
+          type: boolean
+          description: Whether the matter is currently shared with Clio Connect
+        has_tasks:
+          type: boolean
+          description: Whether or not the matter has any tasks.
+        last_activity_date:
+          type: string
+          format: date
+          description: The greatest date out of all of the activities on the matter (as a ISO-8601 date)
+        matter_stage_updated_at:
+          type: string
+          format: date-time
+          description: The date the matter stage was last updated (as a ISO-8601 date)
     Balance_base:
       type: object
       properties:
@@ -485,36 +515,6 @@ components:
           type: number
           format: double
           description: The amount due for this Balance, factoring in applicable discounts.
-    InterestCharge:
-      allOf:
-      - $ref: '#/components/schemas/InterestCharge_base'
-      - type: object
-        properties:
-          bill:
-            $ref: '#/components/schemas/Bill_base'
-            description: Bill
-          balances:
-            type: array
-            items:
-              $ref: '#/components/schemas/Balance_base'
-            description: Balance
-          matters:
-            type: array
-            items:
-              $ref: '#/components/schemas/Matter_base'
-            description: Matter
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
     Error:
       type: object
       required:

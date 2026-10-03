@@ -1585,6 +1585,21 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    PracticeArea_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: PracticeArea List Response
+          items:
+            $ref: '#/components/schemas/PracticeArea'
+    PracticeArea:
+      allOf:
+      - $ref: '#/components/schemas/PracticeArea_base'
+      - type: object
+        properties: {}
     PracticeArea_base:
       type: object
       properties:
@@ -1673,21 +1688,6 @@ components:
         code:
           type: string
           description: The code of the *PracticeArea*
-    PracticeArea_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: PracticeArea List Response
-          items:
-            $ref: '#/components/schemas/PracticeArea'
-    PracticeArea:
-      allOf:
-      - $ref: '#/components/schemas/PracticeArea_base'
-      - type: object
-        properties: {}
     PracticeArea_Show:
       type: object
       required:

@@ -889,41 +889,16 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ExpenseCategory_Show:
+    LaukExpenseCategory_List:
       type: object
       required:
       - data
       properties:
         data:
-          $ref: '#/components/schemas/ExpenseCategory'
-    Group_base:
-      type: object
-      properties:
-        client_connect_user:
-          type: boolean
-          description: Whether or not the Group is a UserGroup for a Clio Connect User
-        etag:
-          type: string
-          description: ETag for the *Group*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Group*
-        name:
-          type: string
-          description: The name of the *Group*
-        type:
-          type: string
-          enum:
-          - UserGroup
-          - AdhocGroup
-          - AccountGroup
-          - TeamGroup
-          description: The type of the *Group*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Group* was last updated (as a ISO-8601 timestamp)
+          type: array
+          description: LaukExpenseCategory List Response
+          items:
+            $ref: '#/components/schemas/LaukExpenseCategory'
     LaukExpenseCategory_base:
       type: object
       properties:
@@ -961,16 +936,37 @@ components:
           type: string
           format: date-time
           description: The time the *LaukExpenseCategory* was last updated (as a ISO-8601 timestamp)
-    ExpenseCategory_List:
+    ExpenseCategory_Show:
       type: object
       required:
       - data
       properties:
         data:
-          type: array
-          description: ExpenseCategory List Response
-          items:
-            $ref: '#/components/schemas/ExpenseCategory'
+          $ref: '#/components/schemas/ExpenseCategory'
+    TaxSetting_base:
+      type: object
+      properties:
+        tax_rate_configuration_id:
+          type: integer
+          format: int64
+          description: The unique identifier of the tax rate configuration associated with the tax setting
+        tax_rate_configuration_name:
+          type: string
+          description: The name of the tax rate configuration
+        tax_rate_configuration_rate:
+          type: number
+          format: decimal
+          description: The rate of the tax rate configuration
+        tax_rate_configuration_formatted_rate:
+          type: string
+          description: The formatted rate of the tax rate configuration as a percentage
+        order:
+          type: integer
+          format: int32
+          description: The order in which this tax setting should be applied
+        rule:
+          type: string
+          description: The rule that the tax setting should be applied in
     Currency_base:
       type: object
       properties:
@@ -995,6 +991,65 @@ components:
           type: string
           format: date-time
           description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
+    ExpenseCategory_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: ExpenseCategory List Response
+          items:
+            $ref: '#/components/schemas/ExpenseCategory'
+    ExpenseCategory:
+      allOf:
+      - $ref: '#/components/schemas/ExpenseCategory_base'
+      - type: object
+        properties:
+          groups:
+            type: array
+            items:
+              $ref: '#/components/schemas/Group_base'
+            description: Group
+          utbms_code:
+            $ref: '#/components/schemas/UtbmsCode_base'
+            description: UtbmsCode
+          currency:
+            $ref: '#/components/schemas/Currency_base'
+            description: Currency
+          tax_settings:
+            type: array
+            items:
+              $ref: '#/components/schemas/TaxSetting_base'
+            description: TaxSetting
+    Group_base:
+      type: object
+      properties:
+        client_connect_user:
+          type: boolean
+          description: Whether or not the Group is a UserGroup for a Clio Connect User
+        etag:
+          type: string
+          description: ETag for the *Group*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Group*
+        name:
+          type: string
+          description: The name of the *Group*
+        type:
+          type: string
+          enum:
+          - UserGroup
+          - AdhocGroup
+          - AccountGroup
+          - TeamGroup
+          description: The type of the *Group*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Group* was last updated (as a ISO-8601 timestamp)
     ExpenseCategory_base:
       type: object
       properties:
@@ -1040,21 +1095,6 @@ components:
           items:
             type: object
           description: Array of objects, with each object representing a tax setting.
-    LaukExpenseCategory_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: LaukExpenseCategory List Response
-          items:
-            $ref: '#/components/schemas/LaukExpenseCategory'
-    LaukExpenseCategory:
-      allOf:
-      - $ref: '#/components/schemas/LaukExpenseCategory_base'
-      - type: object
-        properties: {}
     UtbmsCode_base:
       type: object
       properties:
@@ -1093,51 +1133,11 @@ components:
           type: string
           format: date-time
           description: The time the *UtbmsCode* was last updated (as a ISO-8601 timestamp)
-    TaxSetting_base:
-      type: object
-      properties:
-        tax_rate_configuration_id:
-          type: integer
-          format: int64
-          description: The unique identifier of the tax rate configuration associated with the tax setting
-        tax_rate_configuration_name:
-          type: string
-          description: The name of the tax rate configuration
-        tax_rate_configuration_rate:
-          type: number
-          format: decimal
-          description: The rate of the tax rate configuration
-        tax_rate_configuration_formatted_rate:
-          type: string
-          description: The formatted rate of the tax rate configuration as a percentage
-        order:
-          type: integer
-          format: int32
-          description: The order in which this tax setting should be applied
-        rule:
-          type: string
-          description: The rule that the tax setting should be applied in
-    ExpenseCategory:
+    LaukExpenseCategory:
       allOf:
-      - $ref: '#/components/schemas/ExpenseCategory_base'
+      - $ref: '#/components/schemas/LaukExpenseCategory_base'
       - type: object
-        properties:
-          groups:
-            type: array
-            items:
-              $ref: '#/components/schemas/Group_base'
-            description: Group
-          utbms_code:
-            $ref: '#/components/schemas/UtbmsCode_base'
-            description: UtbmsCode
-          currency:
-            $ref: '#/components/schemas/Currency_base'
-            description: Currency
-          tax_settings:
-            type: array
-            items:
-              $ref: '#/components/schemas/TaxSetting_base'
-            description: TaxSetting
+        properties: {}
     ErrorDetail:
       type: object
       required:

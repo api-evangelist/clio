@@ -232,6 +232,23 @@ paths:
           description: Not Modified
 components:
   schemas:
+    JurisdictionsToTrigger_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/JurisdictionsToTrigger'
+    JurisdictionsToTrigger_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: JurisdictionsToTrigger List Response
+          items:
+            $ref: '#/components/schemas/JurisdictionsToTrigger'
     JurisdictionsToTrigger_base:
       type: object
       properties:
@@ -266,13 +283,6 @@ components:
           type: string
           format: date-time
           description: The time the *JurisdictionsToTrigger* was last updated (as a ISO-8601 timestamp)
-    JurisdictionsToTrigger_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/JurisdictionsToTrigger'
     JurisdictionsToTrigger:
       allOf:
       - $ref: '#/components/schemas/JurisdictionsToTrigger_base'
@@ -297,16 +307,6 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetail'
-    JurisdictionsToTrigger_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: JurisdictionsToTrigger List Response
-          items:
-            $ref: '#/components/schemas/JurisdictionsToTrigger'
 x-tagGroups:
 - name: Api
   tags:

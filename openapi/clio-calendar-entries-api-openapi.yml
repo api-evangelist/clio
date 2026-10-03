@@ -1157,71 +1157,6 @@ components:
           type: integer
           format: int32
           description: The number of `TimeEntry` activities associated with the *CalendarEntry*
-    CalendarEntry_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/CalendarEntry'
-    CalendarEntry:
-      allOf:
-      - $ref: '#/components/schemas/CalendarEntry_base'
-      - type: object
-        properties:
-          time_entries:
-            type: array
-            items:
-              $ref: '#/components/schemas/Activity_base'
-            description: Activity
-          conference_meeting:
-            $ref: '#/components/schemas/ConferenceMeeting_base'
-            description: ConferenceMeeting
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          matter_docket:
-            $ref: '#/components/schemas/MatterDocket_base'
-            description: MatterDocket
-          calendar_owner:
-            $ref: '#/components/schemas/Calendar_base'
-            description: Calendar
-          parent_calendar_entry:
-            $ref: '#/components/schemas/CalendarEntry_base'
-            description: CalendarEntry
-          calendar_entry_event_type:
-            $ref: '#/components/schemas/CalendarEntryEventType_base'
-            description: CalendarEntryEventType
-          attendees:
-            type: array
-            items:
-              $ref: '#/components/schemas/Attendee_base'
-            description: Attendee
-          calendars:
-            type: array
-            items:
-              $ref: '#/components/schemas/Calendar_base'
-            description: Calendar
-          reminders:
-            type: array
-            items:
-              $ref: '#/components/schemas/Reminder_base'
-            description: Reminder
-          external_properties:
-            type: array
-            items:
-              $ref: '#/components/schemas/ExternalProperty_base'
-            description: ExternalProperty
-    CalendarEntry_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: CalendarEntry List Response
-          items:
-            $ref: '#/components/schemas/CalendarEntry'
     CalendarEntryEventType_base:
       type: object
       properties:
@@ -1267,315 +1202,30 @@ components:
         name:
           type: string
           description: The name for the *CalendarEntryEventType*
-    MatterDocket_base:
+    ExternalProperty_base:
       type: object
       properties:
         id:
           type: integer
           format: int64
-          description: Unique identifier for the *MatterDocket*
+          description: Unique identifier for the *ExternalProperty*
         etag:
           type: string
-          description: ETag for the *MatterDocket*
+          description: ETag for the *ExternalProperty*
         name:
           type: string
-          description: The name of the *MatterDocket*
-        start_date:
+          description: The name of the *ExternalProperty*
+        value:
           type: string
-          format: date
-          description: The date the *MatterDocket* will start (as a ISO-8601 date)
-        start_time:
-          type: string
-          format: date-time
-          description: The time the *MatterDocket* will start, required for specific triggers (as a ISO-8601 timestamp)
-        status:
-          type: string
-          description: The status of the *MatterDocket* creation
+          description: The value of the *ExternalProperty*
         created_at:
           type: string
           format: date-time
-          description: The time the *MatterDocket* was created (as a ISO-8601 timestamp)
+          description: The time the *ExternalProperty* was created (as a ISO-8601 timestamp)
         updated_at:
           type: string
           format: date-time
-          description: The time the *MatterDocket* was last updated (as a ISO-8601 timestamp)
-        deleted_at:
-          type: string
-          format: date-time
-          description: The time the *MatterDocket* was deleted (as a ISO-8601 timestamp)
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    Calendar_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Calendar*
-        etag:
-          type: string
-          description: ETag for the *Calendar*
-        color:
-          type: string
-          enum:
-          - '#367B9C'
-          - '#FFA5A4'
-          - '#83D17F'
-          - '#FFAC7B'
-          - '#8E3F64'
-          - '#C75300'
-          - '#009CEC'
-          - '#62D6B1'
-          - '#9EEDCB'
-          - '#F9A2C4'
-          - '#616161'
-          - '#BBDA81'
-          - '#DFD3F8'
-          - '#D6C4A5'
-          - '#FFD478'
-          - '#6AC9DE'
-          - '#EABBB0'
-          - '#BFC2E1'
-          - '#DADADA'
-          - '#CDE2F5'
-          description: Color
-        light_color:
-          type: string
-          enum:
-          - '#5DA5C7'
-          - '#F95957'
-          - '#209412'
-          - '#FF7715'
-          - '#DE649D'
-          - '#FF6B02'
-          - '#56C4FC'
-          - '#00B177'
-          - '#50D19B'
-          - '#F14A8C'
-          - '#A3A2A2'
-          - '#84AB3B'
-          - '#B091EE'
-          - '#BD9E69'
-          - '#F2A000'
-          - '#00A5CA'
-          - '#CB5A3D'
-          - '#959CD0'
-          - '#B0B0B0'
-          - '#7BA6CD'
-          description: Accent color to complement the main calendar color.
-        court_rules_default_calendar:
-          type: boolean
-          description: Whether the calendar is default court rules calendar for current user
-        name:
-          type: string
-          description: The name of the *Calendar*
-        permission:
-          type: string
-          enum:
-          - owner
-          - editor
-          - viewer
-          - limited_viewer
-          - none
-          description: The user's permission to the *Calendar*
-        type:
-          type: string
-          enum:
-          - AccountCalendar
-          - AdhocCalendar
-          - UserCalendar
-          description: The type of the *Calendar*
-        visible:
-          type: boolean
-          description: Whether the *Calendar* will be shown by default in the Clio Web UI (assuming no source is provided).
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Calendar* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Calendar* was last updated (as a ISO-8601 timestamp)
-        source:
-          type: string
-          enum:
-          - web
-          - mobile
-          description: The source that visible applies to, by default the Clio Web UI (Expects 'mobile' or 'web').
-    Reminder_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Reminder*
-        etag:
-          type: string
-          description: ETag for the *Reminder*
-        duration:
-          type: integer
-          format: int32
-          description: Time in minutes to remind user before the subject
-        next_delivery_at:
-          type: string
-          format: date-time
-          description: The time the *Reminder* will be delivered (as a ISO-8601 timestamp)
-        state:
-          type: string
-          enum:
-          - initializing
-          - scheduling
-          - rescheduling
-          - scheduled
-          - attempting_delivery
-          - delivery_failed
-          - delivered
-          - delivery_skipped
-          - invalid_user
-          description: The current state of the *Reminder*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Reminder* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Reminder* was last updated (as a ISO-8601 timestamp)
-    ConferenceMeeting_base:
-      type: object
-      properties:
-        conference_id:
-          type: integer
-          format: int64
-          description: Third-party provider unique meeting ID
-        conference_password:
-          type: string
-          description: Third-party provider meeting password
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ConferenceMeeting* was created (as a ISO-8601 timestamp)
-        etag:
-          type: string
-          description: ETag for the *ConferenceMeeting*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ConferenceMeeting*
-        join_url:
-          type: string
-          description: URL for participants to join the video conference
-        type:
-          type: string
-          description: The type of video conference
-        source_id:
-          type: integer
-          format: int64
-          description: The external ID of the video conference meeting
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ConferenceMeeting* was last updated (as a ISO-8601 timestamp)
-    Matter_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Matter*
-        etag:
-          type: string
-          description: ETag for the *Matter*
-        number:
-          type: integer
-          format: int32
-          description: The number given to the *Matter* within an account
-        display_number:
-          type: string
-          description: The reference and label of the *Matter*. Depending on the account's manual_matter_numbering setting, this is either read only (generated) or customizable.
-        custom_number:
-          type: string
-          description: User defined custom number of the *Matter*
-        currency:
-          type: object
-          description: Currency of the matter
-        description:
-          type: string
-          description: The detailed description of the *Matter*
-        status:
-          type: string
-          enum:
-          - Pending
-          - Open
-          - Closed
-          description: The current status of the *Matter*
-        location:
-          type: string
-          description: The location of the *Matter*
-        client_reference:
-          type: string
-          description: Client Reference string for external uses
-        client_id:
-          type: integer
-          format: int64
-          description: Client ID
-        billable:
-          type: boolean
-          description: Whether this matter is billable
-        maildrop_address:
-          type: string
-          description: A unique Maildrop email address for the matter
-        billing_method:
-          type: string
-          enum:
-          - flat
-          - contingency
-          - hourly
-          description: Billing method of this matter
-        open_date:
-          type: string
-          format: date
-          description: The date the matter was set to open (as a ISO-8601 date)
-        close_date:
-          type: string
-          format: date
-          description: The date the matter was set to closed (as a ISO-8601 date)
-        pending_date:
-          type: string
-          format: date
-          description: The date the matter was set to pending (as a ISO-8601 date)
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Matter* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Matter* was last updated (as a ISO-8601 timestamp)
-        shared:
-          type: boolean
-          description: Whether the matter is currently shared with Clio Connect
-        has_tasks:
-          type: boolean
-          description: Whether or not the matter has any tasks.
-        last_activity_date:
-          type: string
-          format: date
-          description: The greatest date out of all of the activities on the matter (as a ISO-8601 date)
-        matter_stage_updated_at:
-          type: string
-          format: date-time
-          description: The date the matter stage was last updated (as a ISO-8601 date)
+          description: The time the *ExternalProperty* was last updated (as a ISO-8601 timestamp)
     Attendee_base:
       type: object
       properties:
@@ -1746,6 +1396,380 @@ components:
         currency:
           type: object
           description: The currency of the *Activity*
+    CalendarEntry:
+      allOf:
+      - $ref: '#/components/schemas/CalendarEntry_base'
+      - type: object
+        properties:
+          time_entries:
+            type: array
+            items:
+              $ref: '#/components/schemas/Activity_base'
+            description: Activity
+          conference_meeting:
+            $ref: '#/components/schemas/ConferenceMeeting_base'
+            description: ConferenceMeeting
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          matter_docket:
+            $ref: '#/components/schemas/MatterDocket_base'
+            description: MatterDocket
+          calendar_owner:
+            $ref: '#/components/schemas/Calendar_base'
+            description: Calendar
+          parent_calendar_entry:
+            $ref: '#/components/schemas/CalendarEntry_base'
+            description: CalendarEntry
+          calendar_entry_event_type:
+            $ref: '#/components/schemas/CalendarEntryEventType_base'
+            description: CalendarEntryEventType
+          attendees:
+            type: array
+            items:
+              $ref: '#/components/schemas/Attendee_base'
+            description: Attendee
+          calendars:
+            type: array
+            items:
+              $ref: '#/components/schemas/Calendar_base'
+            description: Calendar
+          reminders:
+            type: array
+            items:
+              $ref: '#/components/schemas/Reminder_base'
+            description: Reminder
+          external_properties:
+            type: array
+            items:
+              $ref: '#/components/schemas/ExternalProperty_base'
+            description: ExternalProperty
+    Reminder_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Reminder*
+        etag:
+          type: string
+          description: ETag for the *Reminder*
+        duration:
+          type: integer
+          format: int32
+          description: Time in minutes to remind user before the subject
+        next_delivery_at:
+          type: string
+          format: date-time
+          description: The time the *Reminder* will be delivered (as a ISO-8601 timestamp)
+        state:
+          type: string
+          enum:
+          - initializing
+          - scheduling
+          - rescheduling
+          - scheduled
+          - attempting_delivery
+          - delivery_failed
+          - delivered
+          - delivery_skipped
+          - invalid_user
+          description: The current state of the *Reminder*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Reminder* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Reminder* was last updated (as a ISO-8601 timestamp)
+    CalendarEntry_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: CalendarEntry List Response
+          items:
+            $ref: '#/components/schemas/CalendarEntry'
+    CalendarEntry_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/CalendarEntry'
+    MatterDocket_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *MatterDocket*
+        etag:
+          type: string
+          description: ETag for the *MatterDocket*
+        name:
+          type: string
+          description: The name of the *MatterDocket*
+        start_date:
+          type: string
+          format: date
+          description: The date the *MatterDocket* will start (as a ISO-8601 date)
+        start_time:
+          type: string
+          format: date-time
+          description: The time the *MatterDocket* will start, required for specific triggers (as a ISO-8601 timestamp)
+        status:
+          type: string
+          description: The status of the *MatterDocket* creation
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *MatterDocket* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *MatterDocket* was last updated (as a ISO-8601 timestamp)
+        deleted_at:
+          type: string
+          format: date-time
+          description: The time the *MatterDocket* was deleted (as a ISO-8601 timestamp)
+    Calendar_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Calendar*
+        etag:
+          type: string
+          description: ETag for the *Calendar*
+        color:
+          type: string
+          enum:
+          - '#367B9C'
+          - '#FFA5A4'
+          - '#83D17F'
+          - '#FFAC7B'
+          - '#8E3F64'
+          - '#C75300'
+          - '#009CEC'
+          - '#62D6B1'
+          - '#9EEDCB'
+          - '#F9A2C4'
+          - '#616161'
+          - '#BBDA81'
+          - '#DFD3F8'
+          - '#D6C4A5'
+          - '#FFD478'
+          - '#6AC9DE'
+          - '#EABBB0'
+          - '#BFC2E1'
+          - '#DADADA'
+          - '#CDE2F5'
+          description: Color
+        light_color:
+          type: string
+          enum:
+          - '#5DA5C7'
+          - '#F95957'
+          - '#209412'
+          - '#FF7715'
+          - '#DE649D'
+          - '#FF6B02'
+          - '#56C4FC'
+          - '#00B177'
+          - '#50D19B'
+          - '#F14A8C'
+          - '#A3A2A2'
+          - '#84AB3B'
+          - '#B091EE'
+          - '#BD9E69'
+          - '#F2A000'
+          - '#00A5CA'
+          - '#CB5A3D'
+          - '#959CD0'
+          - '#B0B0B0'
+          - '#7BA6CD'
+          description: Accent color to complement the main calendar color.
+        court_rules_default_calendar:
+          type: boolean
+          description: Whether the calendar is default court rules calendar for current user
+        name:
+          type: string
+          description: The name of the *Calendar*
+        permission:
+          type: string
+          enum:
+          - owner
+          - editor
+          - viewer
+          - limited_viewer
+          - none
+          description: The user's permission to the *Calendar*
+        type:
+          type: string
+          enum:
+          - AccountCalendar
+          - AdhocCalendar
+          - UserCalendar
+          description: The type of the *Calendar*
+        visible:
+          type: boolean
+          description: Whether the *Calendar* will be shown by default in the Clio Web UI (assuming no source is provided).
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Calendar* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Calendar* was last updated (as a ISO-8601 timestamp)
+        source:
+          type: string
+          enum:
+          - web
+          - mobile
+          description: The source that visible applies to, by default the Clio Web UI (Expects 'mobile' or 'web').
+    ConferenceMeeting_base:
+      type: object
+      properties:
+        conference_id:
+          type: integer
+          format: int64
+          description: Third-party provider unique meeting ID
+        conference_password:
+          type: string
+          description: Third-party provider meeting password
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ConferenceMeeting* was created (as a ISO-8601 timestamp)
+        etag:
+          type: string
+          description: ETag for the *ConferenceMeeting*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ConferenceMeeting*
+        join_url:
+          type: string
+          description: URL for participants to join the video conference
+        type:
+          type: string
+          description: The type of video conference
+        source_id:
+          type: integer
+          format: int64
+          description: The external ID of the video conference meeting
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ConferenceMeeting* was last updated (as a ISO-8601 timestamp)
+    Matter_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Matter*
+        etag:
+          type: string
+          description: ETag for the *Matter*
+        number:
+          type: integer
+          format: int32
+          description: The number given to the *Matter* within an account
+        display_number:
+          type: string
+          description: The reference and label of the *Matter*. Depending on the account's manual_matter_numbering setting, this is either read only (generated) or customizable.
+        custom_number:
+          type: string
+          description: User defined custom number of the *Matter*
+        currency:
+          type: object
+          description: Currency of the matter
+        description:
+          type: string
+          description: The detailed description of the *Matter*
+        status:
+          type: string
+          enum:
+          - Pending
+          - Open
+          - Closed
+          description: The current status of the *Matter*
+        location:
+          type: string
+          description: The location of the *Matter*
+        client_reference:
+          type: string
+          description: Client Reference string for external uses
+        client_id:
+          type: integer
+          format: int64
+          description: Client ID
+        billable:
+          type: boolean
+          description: Whether this matter is billable
+        maildrop_address:
+          type: string
+          description: A unique Maildrop email address for the matter
+        billing_method:
+          type: string
+          enum:
+          - flat
+          - contingency
+          - hourly
+          description: Billing method of this matter
+        open_date:
+          type: string
+          format: date
+          description: The date the matter was set to open (as a ISO-8601 date)
+        close_date:
+          type: string
+          format: date
+          description: The date the matter was set to closed (as a ISO-8601 date)
+        pending_date:
+          type: string
+          format: date
+          description: The date the matter was set to pending (as a ISO-8601 date)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Matter* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Matter* was last updated (as a ISO-8601 timestamp)
+        shared:
+          type: boolean
+          description: Whether the matter is currently shared with Clio Connect
+        has_tasks:
+          type: boolean
+          description: Whether or not the matter has any tasks.
+        last_activity_date:
+          type: string
+          format: date
+          description: The greatest date out of all of the activities on the matter (as a ISO-8601 date)
+        matter_stage_updated_at:
+          type: string
+          format: date-time
+          description: The date the matter stage was last updated (as a ISO-8601 date)
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Error:
       type: object
       required:
@@ -1753,30 +1777,6 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetail'
-    ExternalProperty_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ExternalProperty*
-        etag:
-          type: string
-          description: ETag for the *ExternalProperty*
-        name:
-          type: string
-          description: The name of the *ExternalProperty*
-        value:
-          type: string
-          description: The value of the *ExternalProperty*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ExternalProperty* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ExternalProperty* was last updated (as a ISO-8601 timestamp)
 x-tagGroups:
 - name: Api
   tags:

@@ -228,16 +228,6 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/Jurisdiction'
-    Jurisdiction_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: Jurisdiction List Response
-          items:
-            $ref: '#/components/schemas/Jurisdiction'
     Jurisdiction_base:
       type: object
       properties:
@@ -275,16 +265,6 @@ components:
         is_local_timezone:
           type: boolean
           description: Boolean value for when the timezone is in the local users timezone
-    Jurisdiction:
-      allOf:
-      - $ref: '#/components/schemas/Jurisdiction_base'
-      - type: object
-        properties:
-          service_types:
-            type: array
-            items:
-              $ref: '#/components/schemas/ServiceType_base'
-            description: ServiceType
     ServiceType_base:
       type: object
       properties:
@@ -313,6 +293,26 @@ components:
         default:
           type: boolean
           description: Whether *ServiceType* is default for the current user
+    Jurisdiction_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: Jurisdiction List Response
+          items:
+            $ref: '#/components/schemas/Jurisdiction'
+    Jurisdiction:
+      allOf:
+      - $ref: '#/components/schemas/Jurisdiction_base'
+      - type: object
+        properties:
+          service_types:
+            type: array
+            items:
+              $ref: '#/components/schemas/ServiceType_base'
+            description: ServiceType
     ErrorDetail:
       type: object
       required:

@@ -661,13 +661,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    TaskTemplateList_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/TaskTemplateList'
     TaskTemplateList_List:
       type: object
       required:
@@ -678,6 +671,41 @@ components:
           description: TaskTemplateList List Response
           items:
             $ref: '#/components/schemas/TaskTemplateList'
+    TaskTemplateList_base:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *TaskTemplateList* was created (as a ISO-8601 timestamp)
+        description:
+          type: string
+          description: A detailed description of the *TaskTemplateList*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *TaskTemplateList*
+        etag:
+          type: string
+          description: ETag for the *TaskTemplateList*
+        name:
+          type: string
+          description: The name of the *TaskTemplateList*
+        templates_count:
+          type: integer
+          format: int32
+          description: How many task templates exist as an association to the *TaskTemplateList*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *TaskTemplateList* was last updated (as a ISO-8601 timestamp)
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     PracticeArea_base:
       type: object
       properties:
@@ -766,6 +794,36 @@ components:
         code:
           type: string
           description: The code of the *PracticeArea*
+    TaskTemplateList:
+      allOf:
+      - $ref: '#/components/schemas/TaskTemplateList_base'
+      - type: object
+        properties:
+          practice_area:
+            $ref: '#/components/schemas/PracticeArea_base'
+            description: PracticeArea
+          creator:
+            $ref: '#/components/schemas/User_base'
+            description: User
+    TaskTemplateList_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/TaskTemplateList'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     User_base:
       type: object
       properties:
@@ -836,64 +894,6 @@ components:
           type: string
           format: date-time
           description: The time the *User* was last updated (as a ISO-8601 timestamp)
-    TaskTemplateList:
-      allOf:
-      - $ref: '#/components/schemas/TaskTemplateList_base'
-      - type: object
-        properties:
-          practice_area:
-            $ref: '#/components/schemas/PracticeArea_base'
-            description: PracticeArea
-          creator:
-            $ref: '#/components/schemas/User_base'
-            description: User
-    TaskTemplateList_base:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *TaskTemplateList* was created (as a ISO-8601 timestamp)
-        description:
-          type: string
-          description: A detailed description of the *TaskTemplateList*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *TaskTemplateList*
-        etag:
-          type: string
-          description: ETag for the *TaskTemplateList*
-        name:
-          type: string
-          description: The name of the *TaskTemplateList*
-        templates_count:
-          type: integer
-          format: int32
-          description: How many task templates exist as an association to the *TaskTemplateList*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *TaskTemplateList* was last updated (as a ISO-8601 timestamp)
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

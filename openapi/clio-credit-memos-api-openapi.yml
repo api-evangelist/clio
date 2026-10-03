@@ -210,6 +210,16 @@ paths:
           description: Not Modified
 components:
   schemas:
+    CreditMemo_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: CreditMemo List Response
+          items:
+            $ref: '#/components/schemas/CreditMemo'
     User_base:
       type: object
       properties:
@@ -280,6 +290,129 @@ components:
           type: string
           format: date-time
           description: The time the *User* was last updated (as a ISO-8601 timestamp)
+    CreditMemo_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *CreditMemo*
+        etag:
+          type: string
+          description: ETag for the *CreditMemo*
+        date:
+          type: string
+          format: date
+          description: Date the *CreditMemo* was recorded (as a ISO-8601 date)
+        amount:
+          type: number
+          format: double
+          description: Total amount credited
+        description:
+          type: string
+          description: A detailed description for the *CreditMemo*
+        discount:
+          type: boolean
+          description: Whether the *CreditMemo* is applied as discount
+        voided_at:
+          type: string
+          format: date-time
+          description: Time the *CreditMemo* was voided (as a ISO-8601 timestamp)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *CreditMemo* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *CreditMemo* was last updated (as a ISO-8601 timestamp)
+    CreditMemo_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/CreditMemo'
+    CreditMemo:
+      allOf:
+      - $ref: '#/components/schemas/CreditMemo_base'
+      - type: object
+        properties:
+          user:
+            $ref: '#/components/schemas/User_base'
+            description: User
+          contact:
+            $ref: '#/components/schemas/Contact_base'
+            description: Contact
+          allocations:
+            type: array
+            items:
+              $ref: '#/components/schemas/Allocation_base'
+            description: Allocation
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    Allocation_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Allocation*
+        etag:
+          type: string
+          description: ETag for the *Allocation*
+        date:
+          type: string
+          format: date
+          description: The date the allocation was applied (as a ISO-8601 date)
+        amount:
+          type: number
+          format: double
+          description: The total amount of money that the user has allocated
+        interest:
+          type: boolean
+          description: Whether the allocation is applied to interest amount
+        voided_at:
+          type: string
+          format: date-time
+          description: Time the *Allocation* was voided (as a ISO-8601 timestamp)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Allocation* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Allocation* was last updated (as a ISO-8601 timestamp)
+        description:
+          type: string
+          description: The description from the associated Credit Memo (if applicable)
+        has_online_payment:
+          type: boolean
+          description: Whether this allocation is associated with an online payment or not
+        destroyable:
+          type: boolean
+          description: Whether the record can be deleted or not
+        payment_type:
+          type: string
+          description: A string indicating whether the payment is a card or an eCheck payment.
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Contact_base:
       type: object
       properties:
@@ -375,139 +508,6 @@ components:
         currency:
           type: object
           description: Currency of the *Contact*
-    CreditMemo_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *CreditMemo*
-        etag:
-          type: string
-          description: ETag for the *CreditMemo*
-        date:
-          type: string
-          format: date
-          description: Date the *CreditMemo* was recorded (as a ISO-8601 date)
-        amount:
-          type: number
-          format: double
-          description: Total amount credited
-        description:
-          type: string
-          description: A detailed description for the *CreditMemo*
-        discount:
-          type: boolean
-          description: Whether the *CreditMemo* is applied as discount
-        voided_at:
-          type: string
-          format: date-time
-          description: Time the *CreditMemo* was voided (as a ISO-8601 timestamp)
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *CreditMemo* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *CreditMemo* was last updated (as a ISO-8601 timestamp)
-    CreditMemo:
-      allOf:
-      - $ref: '#/components/schemas/CreditMemo_base'
-      - type: object
-        properties:
-          user:
-            $ref: '#/components/schemas/User_base'
-            description: User
-          contact:
-            $ref: '#/components/schemas/Contact_base'
-            description: Contact
-          allocations:
-            type: array
-            items:
-              $ref: '#/components/schemas/Allocation_base'
-            description: Allocation
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    CreditMemo_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/CreditMemo'
-    CreditMemo_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: CreditMemo List Response
-          items:
-            $ref: '#/components/schemas/CreditMemo'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    Allocation_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Allocation*
-        etag:
-          type: string
-          description: ETag for the *Allocation*
-        date:
-          type: string
-          format: date
-          description: The date the allocation was applied (as a ISO-8601 date)
-        amount:
-          type: number
-          format: double
-          description: The total amount of money that the user has allocated
-        interest:
-          type: boolean
-          description: Whether the allocation is applied to interest amount
-        voided_at:
-          type: string
-          format: date-time
-          description: Time the *Allocation* was voided (as a ISO-8601 timestamp)
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Allocation* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Allocation* was last updated (as a ISO-8601 timestamp)
-        description:
-          type: string
-          description: The description from the associated Credit Memo (if applicable)
-        has_online_payment:
-          type: boolean
-          description: Whether this allocation is associated with an online payment or not
-        destroyable:
-          type: boolean
-          description: Whether the record can be deleted or not
-        payment_type:
-          type: string
-          description: A string indicating whether the payment is a card or an eCheck payment.
 x-tagGroups:
 - name: Api
   tags:

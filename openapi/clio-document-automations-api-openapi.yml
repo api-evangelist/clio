@@ -399,29 +399,6 @@ paths:
           description: Not Modified
 components:
   schemas:
-    DocumentAutomation:
-      allOf:
-      - $ref: '#/components/schemas/DocumentAutomation_base'
-      - type: object
-        properties:
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          document_template:
-            $ref: '#/components/schemas/DocumentTemplate_base'
-            description: DocumentTemplate
-          documents:
-            type: array
-            items:
-              $ref: '#/components/schemas/Document_base'
-            description: Document
-    DocumentAutomation_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/DocumentAutomation'
     DocumentAutomation_List:
       type: object
       required:
@@ -469,6 +446,53 @@ components:
           type: string
           format: date-time
           description: The time the *DocumentAutomation* was last updated (as a ISO-8601 timestamp)
+    DocumentTemplate_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *DocumentTemplate*
+        etag:
+          type: string
+          description: ETag for the *DocumentTemplate*
+        size:
+          type: integer
+          format: int32
+          description: The size in bytes of the template
+        content_type:
+          type: string
+          description: A standard MIME type describing the format of the object data.
+        filename:
+          type: string
+          description: The name of the original file that was uploaded
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentTemplate* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentTemplate* was last updated (as a ISO-8601 timestamp)
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    DocumentAutomation_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/DocumentAutomation'
     Matter_base:
       type: object
       properties:
@@ -559,53 +583,6 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
-    DocumentTemplate_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *DocumentTemplate*
-        etag:
-          type: string
-          description: ETag for the *DocumentTemplate*
-        size:
-          type: integer
-          format: int32
-          description: The size in bytes of the template
-        content_type:
-          type: string
-          description: A standard MIME type describing the format of the object data.
-        filename:
-          type: string
-          description: The name of the original file that was uploaded
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *DocumentTemplate* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *DocumentTemplate* was last updated (as a ISO-8601 timestamp)
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
     Document_base:
       type: object
       properties:
@@ -653,6 +630,29 @@ components:
         content_type:
           type: string
           description: The uploaded file content type
+    DocumentAutomation:
+      allOf:
+      - $ref: '#/components/schemas/DocumentAutomation_base'
+      - type: object
+        properties:
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          document_template:
+            $ref: '#/components/schemas/DocumentTemplate_base'
+            description: DocumentTemplate
+          documents:
+            type: array
+            items:
+              $ref: '#/components/schemas/Document_base'
+            description: Document
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

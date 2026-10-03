@@ -117,21 +117,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    MatterStage:
-      allOf:
-      - $ref: '#/components/schemas/MatterStage_base'
-      - type: object
-        properties: {}
-    MatterStage_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: MatterStage List Response
-          items:
-            $ref: '#/components/schemas/MatterStage'
     MatterStage_base:
       type: object
       properties:
@@ -160,6 +145,21 @@ components:
           type: string
           format: date-time
           description: The time the *MatterStage* was last updated (as a ISO-8601 timestamp)
+    MatterStage:
+      allOf:
+      - $ref: '#/components/schemas/MatterStage_base'
+      - type: object
+        properties: {}
+    MatterStage_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: MatterStage List Response
+          items:
+            $ref: '#/components/schemas/MatterStage'
     ErrorDetail:
       type: object
       required:

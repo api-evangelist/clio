@@ -405,48 +405,40 @@ paths:
         required: false
 components:
   schemas:
-    ConversationMessage_base:
+    UnredactedParticipant_base:
+      type: object
+      properties: {}
+    Conversation_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Conversation'
+    ConversationMembership_base:
       type: object
       properties:
         id:
           type: integer
           format: int64
-          description: Unique identifier for the *ConversationMessage*
+          description: Unique identifier for the *ConversationMembership*
         etag:
           type: string
-          description: ETag for the *ConversationMessage*
-        date:
-          type: string
-          description: The creation date of the message in the current user's time zone
-        body:
-          type: string
-          description: The main content of the *ConversationMessage*
+          description: ETag for the *ConversationMembership*
+        read:
+          type: boolean
+          description: Whether or not the ConversationMembership has been read by the member
+        archived:
+          type: boolean
+          description: Whether or not the ConversationMembership has been archived by the member
         created_at:
           type: string
           format: date-time
-          description: The time the *ConversationMessage* was created (as a ISO-8601 timestamp)
+          description: The time the *ConversationMembership* was created (as a ISO-8601 timestamp)
         updated_at:
           type: string
           format: date-time
-          description: The time the *ConversationMessage* was last updated (as a ISO-8601 timestamp)
-    UnredactedParticipant_base:
-      type: object
-      properties: {}
-    ConversationMembership:
-      allOf:
-      - $ref: '#/components/schemas/ConversationMembership_base'
-      - type: object
-        properties:
-          member:
-            $ref: '#/components/schemas/UnredactedParticipant_base'
-            description: UnredactedParticipant
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
+          description: The time the *ConversationMembership* was last updated (as a ISO-8601 timestamp)
     Conversation_base:
       type: object
       properties:
@@ -488,30 +480,6 @@ components:
           type: string
           format: date-time
           description: The time the *Conversation* was last updated (as a ISO-8601 timestamp)
-    ConversationMembership_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ConversationMembership*
-        etag:
-          type: string
-          description: ETag for the *ConversationMembership*
-        read:
-          type: boolean
-          description: Whether or not the ConversationMembership has been read by the member
-        archived:
-          type: boolean
-          description: Whether or not the ConversationMembership has been archived by the member
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ConversationMembership* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ConversationMembership* was last updated (as a ISO-8601 timestamp)
     Conversation_List:
       type: object
       required:
@@ -522,6 +490,67 @@ components:
           description: Conversation List Response
           items:
             $ref: '#/components/schemas/Conversation'
+    ConversationMessage_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ConversationMessage*
+        etag:
+          type: string
+          description: ETag for the *ConversationMessage*
+        date:
+          type: string
+          description: The creation date of the message in the current user's time zone
+        body:
+          type: string
+          description: The main content of the *ConversationMessage*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ConversationMessage* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ConversationMessage* was last updated (as a ISO-8601 timestamp)
+    Conversation:
+      allOf:
+      - $ref: '#/components/schemas/Conversation_base'
+      - type: object
+        properties:
+          last_message:
+            $ref: '#/components/schemas/ConversationMessage_base'
+            description: ConversationMessage
+          first_message:
+            $ref: '#/components/schemas/ConversationMessage_base'
+            description: ConversationMessage
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          messages:
+            type: array
+            items:
+              $ref: '#/components/schemas/ConversationMessage_base'
+            description: ConversationMessage
+          documents:
+            type: array
+            items:
+              $ref: '#/components/schemas/Document_base'
+            description: Document
+          memberships:
+            type: array
+            items:
+              $ref: '#/components/schemas/ConversationMembership'
+            description: ConversationMembership
+    ConversationMembership:
+      allOf:
+      - $ref: '#/components/schemas/ConversationMembership_base'
+      - type: object
+        properties:
+          member:
+            $ref: '#/components/schemas/UnredactedParticipant_base'
+            description: UnredactedParticipant
     Matter_base:
       type: object
       properties:
@@ -612,25 +641,6 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    Conversation_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Conversation'
     Document_base:
       type: object
       properties:
@@ -678,35 +688,25 @@ components:
         content_type:
           type: string
           description: The uploaded file content type
-    Conversation:
-      allOf:
-      - $ref: '#/components/schemas/Conversation_base'
-      - type: object
-        properties:
-          last_message:
-            $ref: '#/components/schemas/ConversationMessage_base'
-            description: ConversationMessage
-          first_message:
-            $ref: '#/components/schemas/ConversationMessage_base'
-            description: ConversationMessage
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          messages:
-            type: array
-            items:
-              $ref: '#/components/schemas/ConversationMessage_base'
-            description: ConversationMessage
-          documents:
-            type: array
-            items:
-              $ref: '#/components/schemas/Document_base'
-            description: Document
-          memberships:
-            type: array
-            items:
-              $ref: '#/components/schemas/ConversationMembership'
-            description: ConversationMembership
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

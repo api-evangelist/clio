@@ -516,6 +516,21 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    TextSnippet_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: TextSnippet List Response
+          items:
+            $ref: '#/components/schemas/TextSnippet'
+    TextSnippet:
+      allOf:
+      - $ref: '#/components/schemas/TextSnippet_base'
+      - type: object
+        properties: {}
     TextSnippet_Show:
       type: object
       required:
@@ -523,11 +538,6 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/TextSnippet'
-    TextSnippet:
-      allOf:
-      - $ref: '#/components/schemas/TextSnippet_base'
-      - type: object
-        properties: {}
     TextSnippet_base:
       type: object
       properties:
@@ -555,16 +565,6 @@ components:
         whole_word:
           type: boolean
           description: Whether the *TextSnippet* abbreviation requires a space after it has been entered to expand to a phrase
-    TextSnippet_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: TextSnippet List Response
-          items:
-            $ref: '#/components/schemas/TextSnippet'
     ErrorDetail:
       type: object
       required:

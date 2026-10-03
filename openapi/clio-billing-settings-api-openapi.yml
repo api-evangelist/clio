@@ -103,6 +103,37 @@ paths:
           description: Not Modified
 components:
   schemas:
+    TaxSetting_base:
+      type: object
+      properties:
+        tax_rate_configuration_id:
+          type: integer
+          format: int64
+          description: The unique identifier of the tax rate configuration associated with the tax setting
+        tax_rate_configuration_name:
+          type: string
+          description: The name of the tax rate configuration
+        tax_rate_configuration_rate:
+          type: number
+          format: decimal
+          description: The rate of the tax rate configuration
+        tax_rate_configuration_formatted_rate:
+          type: string
+          description: The formatted rate of the tax rate configuration as a percentage
+        order:
+          type: integer
+          format: int32
+          description: The order in which this tax setting should be applied
+        rule:
+          type: string
+          description: The rule that the tax setting should be applied in
+    BillingSetting_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/BillingSetting'
     BillingSetting_base:
       type: object
       properties:
@@ -189,20 +220,6 @@ components:
           items:
             type: object
           description: Array of objects representing invoice tax defaults, with each object containing 'tax_rate_configuration_id', 'order', and 'rule'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    BillingSetting_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/BillingSetting'
     BillingSetting:
       allOf:
       - $ref: '#/components/schemas/BillingSetting_base'
@@ -225,30 +242,13 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    TaxSetting_base:
+    Error:
       type: object
+      required:
+      - error
       properties:
-        tax_rate_configuration_id:
-          type: integer
-          format: int64
-          description: The unique identifier of the tax rate configuration associated with the tax setting
-        tax_rate_configuration_name:
-          type: string
-          description: The name of the tax rate configuration
-        tax_rate_configuration_rate:
-          type: number
-          format: decimal
-          description: The rate of the tax rate configuration
-        tax_rate_configuration_formatted_rate:
-          type: string
-          description: The formatted rate of the tax rate configuration as a percentage
-        order:
-          type: integer
-          format: int32
-          description: The order in which this tax setting should be applied
-        rule:
-          type: string
-          description: The rule that the tax setting should be applied in
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

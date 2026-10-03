@@ -4251,18 +4251,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ReportSchedule:
-      allOf:
-      - $ref: '#/components/schemas/ReportSchedule_base'
-      - type: object
-        properties: {}
-    ReportSchedule_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/ReportSchedule'
     ReportSchedule_List:
       type: object
       required:
@@ -4273,25 +4261,11 @@ components:
           description: ReportSchedule List Response
           items:
             $ref: '#/components/schemas/ReportSchedule'
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
+    ReportSchedule:
+      allOf:
+      - $ref: '#/components/schemas/ReportSchedule_base'
+      - type: object
+        properties: {}
     ReportSchedule_base:
       type: object
       properties:
@@ -4363,6 +4337,32 @@ components:
           type: string
           format: date
           description: The date the Report Schedule will become enabled (a ISO-8601 date)
+    ReportSchedule_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ReportSchedule'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

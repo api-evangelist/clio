@@ -954,6 +954,166 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    TaskType_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *TaskType*
+        etag:
+          type: string
+          description: ETag for the *TaskType*
+        name:
+          type: string
+          description: The name of the *TaskType*
+        deleted_at:
+          type: string
+          format: date-time
+          description: The time the *TaskType* was deleted (as a ISO-8601 timestamp)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *TaskType* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *TaskType* was last updated (as a ISO-8601 timestamp)
+    CascadingTaskTemplate_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *TaskTemplate*
+        name:
+          type: string
+          description: The name of the *TaskTemplate*
+    ReminderTemplate_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ReminderTemplate*
+        etag:
+          type: string
+          description: ETag for the *ReminderTemplate*
+        duration:
+          type: integer
+          format: int32
+          description: The time in minutes to remind user before the subject.
+        notification_type:
+          type: string
+          enum:
+          - Email
+          - Popup
+          description: The type of method to be notified by
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ReminderTemplate* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ReminderTemplate* was last updated (as a ISO-8601 timestamp)
+    TaskTemplate_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: TaskTemplate List Response
+          items:
+            $ref: '#/components/schemas/TaskTemplate'
+    TaskTemplateList_base:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *TaskTemplateList* was created (as a ISO-8601 timestamp)
+        description:
+          type: string
+          description: A detailed description of the *TaskTemplateList*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *TaskTemplateList*
+        etag:
+          type: string
+          description: ETag for the *TaskTemplateList*
+        name:
+          type: string
+          description: The name of the *TaskTemplateList*
+        templates_count:
+          type: integer
+          format: int32
+          description: How many task templates exist as an association to the *TaskTemplateList*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *TaskTemplateList* was last updated (as a ISO-8601 timestamp)
+    TaskTemplate_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *TaskTemplate*
+        etag:
+          type: string
+          description: ETag for the *TaskTemplate*
+        name:
+          type: string
+          description: The name of the *TaskTemplate*
+        description:
+          type: string
+          description: The text body of the *TaskTemplate*. This TaskTemplate supports rich text when setting the field `detail_text_type` to `rich_text`. With supported tags such as `<a>`, `<b>`, `<br>`, `<div>`, `<em>`, `<i>` `<li>`, `<ol>`, `<p>`, `<s>`, `<strong>`, `<u>` and `<ul>`. This TaskTemplate also supports attributes such as `href`, `rel`, `type`, and `target`.
+        description_text_type:
+          type: string
+          enum:
+          - plain_text
+          - rich_text
+          description: The type of text in the description field.
+        priority:
+          type: string
+          enum:
+          - High
+          - Normal
+          - Low
+          description: '*TaskTemplate* priority'
+        private:
+          type: boolean
+          description: Whether the *TaskTemplate* is private.
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *TaskTemplate* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *TaskTemplate* was last updated (as a ISO-8601 timestamp)
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     TaskTemplate_Show:
       type: object
       required:
@@ -986,16 +1146,6 @@ components:
             items:
               $ref: '#/components/schemas/ReminderTemplate_base'
             description: ReminderTemplate
-    TaskTemplate_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: TaskTemplate List Response
-          items:
-            $ref: '#/components/schemas/TaskTemplate'
     User_base:
       type: object
       properties:
@@ -1066,156 +1216,6 @@ components:
           type: string
           format: date-time
           description: The time the *User* was last updated (as a ISO-8601 timestamp)
-    TaskTemplate_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *TaskTemplate*
-        etag:
-          type: string
-          description: ETag for the *TaskTemplate*
-        name:
-          type: string
-          description: The name of the *TaskTemplate*
-        description:
-          type: string
-          description: The text body of the *TaskTemplate*. This TaskTemplate supports rich text when setting the field `detail_text_type` to `rich_text`. With supported tags such as `<a>`, `<b>`, `<br>`, `<div>`, `<em>`, `<i>` `<li>`, `<ol>`, `<p>`, `<s>`, `<strong>`, `<u>` and `<ul>`. This TaskTemplate also supports attributes such as `href`, `rel`, `type`, and `target`.
-        description_text_type:
-          type: string
-          enum:
-          - plain_text
-          - rich_text
-          description: The type of text in the description field.
-        priority:
-          type: string
-          enum:
-          - High
-          - Normal
-          - Low
-          description: '*TaskTemplate* priority'
-        private:
-          type: boolean
-          description: Whether the *TaskTemplate* is private.
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *TaskTemplate* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *TaskTemplate* was last updated (as a ISO-8601 timestamp)
-    ReminderTemplate_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ReminderTemplate*
-        etag:
-          type: string
-          description: ETag for the *ReminderTemplate*
-        duration:
-          type: integer
-          format: int32
-          description: The time in minutes to remind user before the subject.
-        notification_type:
-          type: string
-          enum:
-          - Email
-          - Popup
-          description: The type of method to be notified by
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ReminderTemplate* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ReminderTemplate* was last updated (as a ISO-8601 timestamp)
-    CascadingTaskTemplate_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *TaskTemplate*
-        name:
-          type: string
-          description: The name of the *TaskTemplate*
-    TaskTemplateList_base:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *TaskTemplateList* was created (as a ISO-8601 timestamp)
-        description:
-          type: string
-          description: A detailed description of the *TaskTemplateList*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *TaskTemplateList*
-        etag:
-          type: string
-          description: ETag for the *TaskTemplateList*
-        name:
-          type: string
-          description: The name of the *TaskTemplateList*
-        templates_count:
-          type: integer
-          format: int32
-          description: How many task templates exist as an association to the *TaskTemplateList*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *TaskTemplateList* was last updated (as a ISO-8601 timestamp)
-    TaskType_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *TaskType*
-        etag:
-          type: string
-          description: ETag for the *TaskType*
-        name:
-          type: string
-          description: The name of the *TaskType*
-        deleted_at:
-          type: string
-          format: date-time
-          description: The time the *TaskType* was deleted (as a ISO-8601 timestamp)
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *TaskType* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *TaskType* was last updated (as a ISO-8601 timestamp)
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

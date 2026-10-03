@@ -308,6 +308,19 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    MedicalBill:
+      allOf:
+      - $ref: '#/components/schemas/MedicalBill_base'
+      - type: object
+        properties:
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          liens:
+            type: array
+            items:
+              $ref: '#/components/schemas/Lien_base'
+            description: Lien
     MedicalBill_base:
       type: object
       properties:
@@ -352,41 +365,6 @@ components:
           type: string
           format: date-time
           description: The time the *MedicalBill* was last updated (as a ISO-8601 timestamp)
-    Lien_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Lien*
-        amount:
-          type: number
-          format: double
-          description: The amount for Lien
-        description:
-          type: string
-          description: Lien description
-        etag:
-          type: string
-          description: ETag for the *Lien*
-        lien_type:
-          type: string
-          enum:
-          - general
-          - medical_payer
-          - medical_provider
-          description: Lien type
-        mark_as_lien:
-          type: boolean
-          description: Mark item as Lien
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Lien* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Lien* was last updated (as a ISO-8601 timestamp)
     MedicalBill_Show:
       type: object
       required:
@@ -394,19 +372,6 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/MedicalBill'
-    MedicalBill:
-      allOf:
-      - $ref: '#/components/schemas/MedicalBill_base'
-      - type: object
-        properties:
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          liens:
-            type: array
-            items:
-              $ref: '#/components/schemas/Lien_base'
-            description: Lien
     Matter_base:
       type: object
       properties:
@@ -497,6 +462,41 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
+    Lien_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Lien*
+        amount:
+          type: number
+          format: double
+          description: The amount for Lien
+        description:
+          type: string
+          description: Lien description
+        etag:
+          type: string
+          description: ETag for the *Lien*
+        lien_type:
+          type: string
+          enum:
+          - general
+          - medical_payer
+          - medical_provider
+          description: Lien type
+        mark_as_lien:
+          type: boolean
+          description: Mark item as Lien
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Lien* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Lien* was last updated (as a ISO-8601 timestamp)
     ErrorDetail:
       type: object
       required:

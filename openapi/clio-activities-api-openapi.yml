@@ -1908,6 +1908,158 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Activity_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Activity'
+    Currency_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Currency*
+        etag:
+          type: string
+          description: ETag for the *Currency*
+        code:
+          type: string
+          description: ISO 4217 code for the *Currency*
+        sign:
+          type: string
+          description: Symbol used to denote monetary values using this *Currency*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Currency* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
+    Activity_CalendarEntry_base:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the *CalendarEntry*
+        etag:
+          type: string
+          description: ETag for the *CalendarEntry*
+        calendar_owner_id:
+          type: integer
+          format: int64
+          description: The id of the calendar owner.
+    UtbmsCode_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *UtbmsCode*
+        etag:
+          type: string
+          description: ETag for the *UtbmsCode*
+        name:
+          type: string
+          description: The name of the *UtbmsCode*
+        code:
+          type: string
+          description: The UTBMS code for the *UtbmsCode*
+        description:
+          type: string
+          description: The UTBMS description for the *UtbmsCode*
+        type:
+          type: string
+          enum:
+          - UtbmsTask
+          - UtbmsExpense
+          - UtbmsActivity
+          description: The type of the *UtbmsCode*
+        utbms_set_id:
+          type: integer
+          format: int64
+          description: Set id for the *UtbmsCode*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *UtbmsCode* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *UtbmsCode* was last updated (as a ISO-8601 timestamp)
+    User_base:
+      type: object
+      properties:
+        account_owner:
+          type: boolean
+          description: Whether the *User* is the owner of the account
+        clio_connect:
+          type: boolean
+          description: Whether the *User* is a Clio Connect user
+        court_rules_default_attendee:
+          type: boolean
+          description: Whether the *User* is a default attendee for court rules events
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *User* was created (as a ISO-8601 timestamp)
+        default_calendar_id:
+          type: integer
+          format: int64
+          description: Default calendar id for *User*.
+        email:
+          type: string
+          description: The email of the *User*
+        enabled:
+          type: boolean
+          description: Whether the *User* is allowed to log in
+        etag:
+          type: string
+          description: ETag for the *User*
+        first_name:
+          type: string
+          description: The first name of the *User*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *User*
+        initials:
+          type: string
+          description: The initials of the *User*
+        last_name:
+          type: string
+          description: The last name of the *User*
+        name:
+          type: string
+          description: The full name of the *User*
+        phone_number:
+          type: string
+          description: The primary phone number for the *User*.
+        rate:
+          type: number
+          format: float
+          description: Default user activity rate for *User*.
+        roles:
+          type: array
+          items:
+            type: string
+          description: An array of roles assigned to this *User*
+        subscription_type:
+          type: string
+          enum:
+          - Attorney
+          - NonAttorney
+          description: The subscription type of the *User*
+        time_zone:
+          type: string
+          description: The selected time zone of the *User*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *User* was last updated (as a ISO-8601 timestamp)
     Contact_base:
       type: object
       properties:
@@ -2003,296 +2155,6 @@ components:
         currency:
           type: object
           description: Currency of the *Contact*
-    Activity_CalendarEntry_base:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the *CalendarEntry*
-        etag:
-          type: string
-          description: ETag for the *CalendarEntry*
-        calendar_owner_id:
-          type: integer
-          format: int64
-          description: The id of the calendar owner.
-    ExpenseCategory_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ExpenseCategory*
-        etag:
-          type: string
-          description: ETag for the *ExpenseCategory*
-        name:
-          type: string
-          description: The name of the expense category
-        rate:
-          type: integer
-          format: int32
-          description: The price charged per unit cost
-        entry_type:
-          type: string
-          description: The type of expense entry the category is associated to. Can be either "hard_cost", "soft_cost" or "unassociated"
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ExpenseCategory* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ExpenseCategory* was last updated (as a ISO-8601 timestamp)
-        xero_expense_code:
-          type: string
-          description: Custom Xero expense code for an expense category
-        accessible_to_user:
-          type: boolean
-          description: Determines if expense category is accessible to user
-        currency:
-          type: object
-          description: The currency details for the expense category
-        tax_setting:
-          type: string
-          description: The type of tax rate applied to the expense category.
-        tax_settings:
-          type: array
-          items:
-            type: object
-          description: Array of objects, with each object representing a tax setting.
-    Activity_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: Activity List Response
-          items:
-            $ref: '#/components/schemas/Activity'
-    Activity_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Activity*
-        etag:
-          type: string
-          description: ETag for the *Activity*
-        type:
-          type: string
-          enum:
-          - TimeEntry
-          - ExpenseEntry
-          - HardCostEntry
-          - SoftCostEntry
-          description: The type of the *Activity*
-        date:
-          type: string
-          format: date
-          description: The date the *Activity* was performed (as a ISO-8601 date)
-        quantity_in_hours:
-          type: number
-          format: double
-          description: The number of hours the TimeEntry took.
-        rounded_quantity_in_hours:
-          type: number
-          format: double
-          description: 'The number of hours rounded accordingly to the billing settings.
-
-            The rounded value is used to calculate the total.
-
-            '
-        quantity:
-          type: number
-          format: double
-          description: 'The field is applicable to TimeEntry, ExpenseEntry, and SoftCostEntry.
-
-
-            **Version <= 4.0.3:**
-
-            The number of hours the TimeEntry took.
-
-
-            **Latest version:**
-
-            The number of seconds the TimeEntry took.
-
-            '
-        rounded_quantity:
-          type: number
-          format: double
-          description: 'The field is applicable to time entries only.
-
-
-            **Version <= 4.0.3:**
-
-            The number of hours rounded accordingly to the billing settings.
-
-            The rounded value is used to calculate the total.
-
-
-            **Latest version:**
-
-            The number of seconds rounded accordingly to the billing settings.
-
-            The rounded value is used to calculate the total.
-
-            '
-        quantity_redacted:
-          type: boolean
-          description: 'Is `true` if any of the following fields are redacted:
-
-            `quantity`, `rounded_quantity`, `rounded_quantity_in_hours`, `quantity_in_hours`, `total`, `non_billable_total`
-
-            '
-        price:
-          type: number
-          format: double
-          description: The hourly or flat rate of the *Activity*
-        note:
-          type: string
-          description: The details about the *Activity*
-        flat_rate:
-          type: boolean
-          description: Whether the *Activity* is a flat rate
-        billed:
-          type: boolean
-          description: Whether the *Activity* has been added to an active bill that is in the state of `awaiting_payment` or `paid`
-        on_bill:
-          type: boolean
-          description: Whether the *Activity* has been added to an active bill that is in the state of `draft`, `awaiting_approval`, `awaiting_payment` or `paid`
-        total:
-          type: number
-          format: double
-          description: The total cost of draft, billable and billed items in the *Activity*
-        contingency_fee:
-          type: boolean
-          description: Whether or not the *Activity* is a contingency fee
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Activity* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Activity* was last updated (as a ISO-8601 timestamp)
-        reference:
-          type: string
-          description: A check reference for a HardCostEntry.
-        non_billable:
-          type: boolean
-          description: Whether the *Activity* is non-billable
-        non_billable_total:
-          type: number
-          format: double
-          description: The total cost of non-billable items in the *Activity*
-        no_charge:
-          type: boolean
-          description: Whether the non-billable *Activity* is shown on the bill.
-        tax_setting:
-          type: string
-          enum:
-          - no_tax
-          - tax_1_only
-          - tax_2_only
-          - tax_1_and_tax_2
-          description: The option denoting whether primary tax, secondary tax, or both is applied to an expense entry.
-        tax_settings:
-          type: array
-          items:
-            type: object
-          description: Array of objects, with each object representing a tax setting that is applied to an expense entry with 'tax_rate_configuration_id', 'order', and 'rule' as the object properties.
-        currency:
-          type: object
-          description: The currency of the *Activity*
-    TaxSetting_base:
-      type: object
-      properties:
-        tax_rate_configuration_id:
-          type: integer
-          format: int64
-          description: The unique identifier of the tax rate configuration associated with the tax setting
-        tax_rate_configuration_name:
-          type: string
-          description: The name of the tax rate configuration
-        tax_rate_configuration_rate:
-          type: number
-          format: decimal
-          description: The rate of the tax rate configuration
-        tax_rate_configuration_formatted_rate:
-          type: string
-          description: The formatted rate of the tax rate configuration as a percentage
-        order:
-          type: integer
-          format: int32
-          description: The order in which this tax setting should be applied
-        rule:
-          type: string
-          description: The rule that the tax setting should be applied in
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    DocumentVersion_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *DocumentVersion*
-        document_id:
-          type: integer
-          format: int64
-          description: The ID of the parent document.
-        etag:
-          type: string
-          description: ETag for the *DocumentVersion*
-        uuid:
-          type: string
-          description: UUID associated with the DocumentVersion. UUID is required to mark a document fully uploaded.
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *DocumentVersion* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *DocumentVersion* was last updated (as a ISO-8601 timestamp)
-        filename:
-          type: string
-          description: The uploaded file name of the DocumentVersion.
-        size:
-          type: integer
-          format: int32
-          description: The size of the DocumentVersion in bytes.
-        version_number:
-          type: integer
-          format: int32
-          description: The ordered number of when this DocumentVersion was uploaded.
-        content_type:
-          type: string
-          description: A standard MIME type describing the format of the object data.
-        received_at:
-          type: string
-          format: date-time
-          description: The time the DocumentVersion was received (as an ISO-8601 timestamp)
-        put_url:
-          type: string
-          description: A signed URL for uploading the file in a single operation. It expires in 10 minutes. If the document is fully uploaded, the field is empty.
-        fully_uploaded:
-          type: boolean
-          description: True if the DocumentVersion is uploaded. False if the DocumentVersion is being uploaded.
     ActivityDescription_base:
       type: object
       properties:
@@ -2346,44 +2208,6 @@ components:
         currency:
           type: object
           description: The currency of the activity description
-    UtbmsCode_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *UtbmsCode*
-        etag:
-          type: string
-          description: ETag for the *UtbmsCode*
-        name:
-          type: string
-          description: The name of the *UtbmsCode*
-        code:
-          type: string
-          description: The UTBMS code for the *UtbmsCode*
-        description:
-          type: string
-          description: The UTBMS description for the *UtbmsCode*
-        type:
-          type: string
-          enum:
-          - UtbmsTask
-          - UtbmsExpense
-          - UtbmsActivity
-          description: The type of the *UtbmsCode*
-        utbms_set_id:
-          type: integer
-          format: int64
-          description: Set id for the *UtbmsCode*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *UtbmsCode* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *UtbmsCode* was last updated (as a ISO-8601 timestamp)
     Error:
       type: object
       required:
@@ -2391,154 +2215,84 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetail'
-    Communication_base:
+    Activity_Task_base:
       type: object
       properties:
         id:
           type: integer
           format: int64
-          description: Unique identifier for the *Communication*
+          description: Unique identifier for the *Task*
         etag:
           type: string
-          description: ETag for the *Communication*
-        subject:
+          description: ETag for the *Task*
+    Note_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Note*
+        etag:
           type: string
-          description: The subject line of the *Communication*
-        body:
-          type: string
-          description: The main content of the *Communication*
+          description: ETag for the *Note*
         type:
           type: string
           enum:
-          - EmailCommunication
-          - PhoneCommunication
-          description: The type of the *Communication*
+          - Matter
+          - Contact
+          description: The type of the *Note*
+        subject:
+          type: string
+          description: The subject of the *Note*
+        detail:
+          type: string
+          description: The text body of the *Note*. This Note supports rich text when setting the field `detail_text_type` to `rich_text`. With supported tags such as `<a>`, `<b>`, `<br>`, `<div>`, `<em>`, `<i>` `<li>`, `<ol>`, `<p>`, `<s>`, `<strong>`, `<u>` and `<ul>`. This Note also supports attributes such as `href`, `rel`, `type`, and `target`.
+        detail_text_type:
+          type: string
+          enum:
+          - plain_text
+          - rich_text
+          description: The text type of the *Note*
         date:
           type: string
           format: date
-          description: The date of the *Communication* (as a ISO-8601 datestamp)
+          description: The date the *Note* is for (as a ISO-8601 date)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Note* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Note* was last updated (as a ISO-8601 timestamp)
         time_entries_count:
           type: integer
           format: int32
-          description: The number of time_entries associated with the *Communication*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Communication* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Communication* was last updated (as a ISO-8601 timestamp)
-        received_at:
-          type: string
-          format: date-time
-          description: The date-time of the *Communication* (in ISO-8601 format)
-    Activity_TextMessageConversation_base:
+          description: The number of time_entries associated with the *Note*
+    TaxSetting_base:
       type: object
       properties:
-        id:
+        tax_rate_configuration_id:
           type: integer
           format: int64
-          description: Unique identifier for the *TextMessageConversation*
-        etag:
+          description: The unique identifier of the tax rate configuration associated with the tax setting
+        tax_rate_configuration_name:
           type: string
-          description: ETag for the *TextMessageConversation*
-    ClientPortal_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ClientPortal*
-        etag:
-          type: string
-          description: ETag for the *ClientPortal*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ClientPortal* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ClientPortal* was last updated (as a ISO-8601 timestamp)
-        unread_count:
-          type: integer
-          format: int32
-          description: The number of unread count messages for the current user.
-        unread_notifiable_count:
-          type: integer
-          format: int32
-          description: The number of unread messages for the current user once their notification settings have been applied.
-    User_base:
-      type: object
-      properties:
-        account_owner:
-          type: boolean
-          description: Whether the *User* is the owner of the account
-        clio_connect:
-          type: boolean
-          description: Whether the *User* is a Clio Connect user
-        court_rules_default_attendee:
-          type: boolean
-          description: Whether the *User* is a default attendee for court rules events
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *User* was created (as a ISO-8601 timestamp)
-        default_calendar_id:
-          type: integer
-          format: int64
-          description: Default calendar id for *User*.
-        email:
-          type: string
-          description: The email of the *User*
-        enabled:
-          type: boolean
-          description: Whether the *User* is allowed to log in
-        etag:
-          type: string
-          description: ETag for the *User*
-        first_name:
-          type: string
-          description: The first name of the *User*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *User*
-        initials:
-          type: string
-          description: The initials of the *User*
-        last_name:
-          type: string
-          description: The last name of the *User*
-        name:
-          type: string
-          description: The full name of the *User*
-        phone_number:
-          type: string
-          description: The primary phone number for the *User*.
-        rate:
+          description: The name of the tax rate configuration
+        tax_rate_configuration_rate:
           type: number
-          format: float
-          description: Default user activity rate for *User*.
-        roles:
-          type: array
-          items:
-            type: string
-          description: An array of roles assigned to this *User*
-        subscription_type:
+          format: decimal
+          description: The rate of the tax rate configuration
+        tax_rate_configuration_formatted_rate:
           type: string
-          enum:
-          - Attorney
-          - NonAttorney
-          description: The subscription type of the *User*
-        time_zone:
+          description: The formatted rate of the tax rate configuration as a percentage
+        order:
+          type: integer
+          format: int32
+          description: The order in which this tax setting should be applied
+        rule:
           type: string
-          description: The selected time zone of the *User*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *User* was last updated (as a ISO-8601 timestamp)
+          description: The rule that the tax setting should be applied in
     Bill_base:
       type: object
       properties:
@@ -2716,106 +2470,6 @@ components:
             - void
             - deleted
           description: The available *Bill* state transitions.
-    PolymorphicObject_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *PolymorphicObject*
-        type:
-          type: string
-          enum:
-          - Task
-          - CalendarEntry
-          - MatterNote
-          - ContactNote
-          - Matter
-          - Contact
-          - User
-          - CreditMemo
-          - Payment
-          - Document
-          - Communication
-          - Conversation
-          - TextMessageConversation
-          description: The type of the *PolymorphicObject*
-        identifier:
-          type: string
-          description: A string to identify the *PolymorphicObject*
-        secondary_identifier:
-          type: string
-          description: A secondary string to identify the *PolymorphicObject*
-        tertiary_identifier:
-          type: string
-          description: A tertiary string to identify the *PolymorphicObject*
-    Activity:
-      allOf:
-      - $ref: '#/components/schemas/Activity_base'
-      - type: object
-        properties:
-          activity_description:
-            $ref: '#/components/schemas/ActivityDescription_base'
-            description: ActivityDescription
-          expense_category:
-            $ref: '#/components/schemas/ExpenseCategory_base'
-            description: ExpenseCategory
-          bill:
-            $ref: '#/components/schemas/Bill_base'
-            description: Bill
-          communication:
-            $ref: '#/components/schemas/Communication_base'
-            description: Communication
-          client_portal:
-            $ref: '#/components/schemas/ClientPortal_base'
-            description: ClientPortal
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          matter_note:
-            $ref: '#/components/schemas/Note_base'
-            description: Note
-          contact_note:
-            $ref: '#/components/schemas/Note_base'
-            description: Note
-          subject:
-            $ref: '#/components/schemas/PolymorphicObject_base'
-            description: PolymorphicObject
-          timer:
-            $ref: '#/components/schemas/Timer_base'
-            description: Timer
-          user:
-            $ref: '#/components/schemas/User_base'
-            description: User
-          utbms_expense:
-            $ref: '#/components/schemas/UtbmsCode_base'
-            description: UtbmsCode
-          vendor:
-            $ref: '#/components/schemas/Contact_base'
-            description: Contact
-          calendar_entry:
-            $ref: '#/components/schemas/Activity_CalendarEntry_base'
-            description: CalendarEntry
-          task:
-            $ref: '#/components/schemas/Activity_Task_base'
-            description: Task
-          text_message_conversation:
-            $ref: '#/components/schemas/Activity_TextMessageConversation_base'
-            description: TextMessageConversation
-          document_version:
-            $ref: '#/components/schemas/DocumentVersion_base'
-            description: DocumentVersion
-          legal_aid_uk_activity:
-            $ref: '#/components/schemas/LegalAidUkActivity_base'
-            description: LegalAidUkActivity
-          currency:
-            $ref: '#/components/schemas/Currency_base'
-            description: Currency
-          tax_settings:
-            type: array
-            items:
-              $ref: '#/components/schemas/TaxSetting_base'
-            description: TaxSetting
     LegalAidUkActivity_base:
       type: object
       properties:
@@ -2876,91 +2530,6 @@ components:
           type: integer
           format: int32
           description: User type
-    Note_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Note*
-        etag:
-          type: string
-          description: ETag for the *Note*
-        type:
-          type: string
-          enum:
-          - Matter
-          - Contact
-          description: The type of the *Note*
-        subject:
-          type: string
-          description: The subject of the *Note*
-        detail:
-          type: string
-          description: The text body of the *Note*. This Note supports rich text when setting the field `detail_text_type` to `rich_text`. With supported tags such as `<a>`, `<b>`, `<br>`, `<div>`, `<em>`, `<i>` `<li>`, `<ol>`, `<p>`, `<s>`, `<strong>`, `<u>` and `<ul>`. This Note also supports attributes such as `href`, `rel`, `type`, and `target`.
-        detail_text_type:
-          type: string
-          enum:
-          - plain_text
-          - rich_text
-          description: The text type of the *Note*
-        date:
-          type: string
-          format: date
-          description: The date the *Note* is for (as a ISO-8601 date)
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Note* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Note* was last updated (as a ISO-8601 timestamp)
-        time_entries_count:
-          type: integer
-          format: int32
-          description: The number of time_entries associated with the *Note*
-    Activity_Task_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Task*
-        etag:
-          type: string
-          description: ETag for the *Task*
-    Currency_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Currency*
-        etag:
-          type: string
-          description: ETag for the *Currency*
-        code:
-          type: string
-          description: ISO 4217 code for the *Currency*
-        sign:
-          type: string
-          description: Symbol used to denote monetary values using this *Currency*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Currency* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
-    Activity_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Activity'
     Matter_base:
       type: object
       properties:
@@ -3051,6 +2620,315 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    PolymorphicObject_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *PolymorphicObject*
+        type:
+          type: string
+          enum:
+          - Task
+          - CalendarEntry
+          - MatterNote
+          - ContactNote
+          - Matter
+          - Contact
+          - User
+          - CreditMemo
+          - Payment
+          - Document
+          - Communication
+          - Conversation
+          - TextMessageConversation
+          description: The type of the *PolymorphicObject*
+        identifier:
+          type: string
+          description: A string to identify the *PolymorphicObject*
+        secondary_identifier:
+          type: string
+          description: A secondary string to identify the *PolymorphicObject*
+        tertiary_identifier:
+          type: string
+          description: A tertiary string to identify the *PolymorphicObject*
+    Activity_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Activity*
+        etag:
+          type: string
+          description: ETag for the *Activity*
+        type:
+          type: string
+          enum:
+          - TimeEntry
+          - ExpenseEntry
+          - HardCostEntry
+          - SoftCostEntry
+          description: The type of the *Activity*
+        date:
+          type: string
+          format: date
+          description: The date the *Activity* was performed (as a ISO-8601 date)
+        quantity_in_hours:
+          type: number
+          format: double
+          description: The number of hours the TimeEntry took.
+        rounded_quantity_in_hours:
+          type: number
+          format: double
+          description: 'The number of hours rounded accordingly to the billing settings.
+
+            The rounded value is used to calculate the total.
+
+            '
+        quantity:
+          type: number
+          format: double
+          description: 'The field is applicable to TimeEntry, ExpenseEntry, and SoftCostEntry.
+
+
+            **Version <= 4.0.3:**
+
+            The number of hours the TimeEntry took.
+
+
+            **Latest version:**
+
+            The number of seconds the TimeEntry took.
+
+            '
+        rounded_quantity:
+          type: number
+          format: double
+          description: 'The field is applicable to time entries only.
+
+
+            **Version <= 4.0.3:**
+
+            The number of hours rounded accordingly to the billing settings.
+
+            The rounded value is used to calculate the total.
+
+
+            **Latest version:**
+
+            The number of seconds rounded accordingly to the billing settings.
+
+            The rounded value is used to calculate the total.
+
+            '
+        quantity_redacted:
+          type: boolean
+          description: 'Is `true` if any of the following fields are redacted:
+
+            `quantity`, `rounded_quantity`, `rounded_quantity_in_hours`, `quantity_in_hours`, `total`, `non_billable_total`
+
+            '
+        price:
+          type: number
+          format: double
+          description: The hourly or flat rate of the *Activity*
+        note:
+          type: string
+          description: The details about the *Activity*
+        flat_rate:
+          type: boolean
+          description: Whether the *Activity* is a flat rate
+        billed:
+          type: boolean
+          description: Whether the *Activity* has been added to an active bill that is in the state of `awaiting_payment` or `paid`
+        on_bill:
+          type: boolean
+          description: Whether the *Activity* has been added to an active bill that is in the state of `draft`, `awaiting_approval`, `awaiting_payment` or `paid`
+        total:
+          type: number
+          format: double
+          description: The total cost of draft, billable and billed items in the *Activity*
+        contingency_fee:
+          type: boolean
+          description: Whether or not the *Activity* is a contingency fee
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Activity* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Activity* was last updated (as a ISO-8601 timestamp)
+        reference:
+          type: string
+          description: A check reference for a HardCostEntry.
+        non_billable:
+          type: boolean
+          description: Whether the *Activity* is non-billable
+        non_billable_total:
+          type: number
+          format: double
+          description: The total cost of non-billable items in the *Activity*
+        no_charge:
+          type: boolean
+          description: Whether the non-billable *Activity* is shown on the bill.
+        tax_setting:
+          type: string
+          enum:
+          - no_tax
+          - tax_1_only
+          - tax_2_only
+          - tax_1_and_tax_2
+          description: The option denoting whether primary tax, secondary tax, or both is applied to an expense entry.
+        tax_settings:
+          type: array
+          items:
+            type: object
+          description: Array of objects, with each object representing a tax setting that is applied to an expense entry with 'tax_rate_configuration_id', 'order', and 'rule' as the object properties.
+        currency:
+          type: object
+          description: The currency of the *Activity*
+    DocumentVersion_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *DocumentVersion*
+        document_id:
+          type: integer
+          format: int64
+          description: The ID of the parent document.
+        etag:
+          type: string
+          description: ETag for the *DocumentVersion*
+        uuid:
+          type: string
+          description: UUID associated with the DocumentVersion. UUID is required to mark a document fully uploaded.
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentVersion* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentVersion* was last updated (as a ISO-8601 timestamp)
+        filename:
+          type: string
+          description: The uploaded file name of the DocumentVersion.
+        size:
+          type: integer
+          format: int32
+          description: The size of the DocumentVersion in bytes.
+        version_number:
+          type: integer
+          format: int32
+          description: The ordered number of when this DocumentVersion was uploaded.
+        content_type:
+          type: string
+          description: A standard MIME type describing the format of the object data.
+        received_at:
+          type: string
+          format: date-time
+          description: The time the DocumentVersion was received (as an ISO-8601 timestamp)
+        put_url:
+          type: string
+          description: A signed URL for uploading the file in a single operation. It expires in 10 minutes. If the document is fully uploaded, the field is empty.
+        fully_uploaded:
+          type: boolean
+          description: True if the DocumentVersion is uploaded. False if the DocumentVersion is being uploaded.
+    Communication_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Communication*
+        etag:
+          type: string
+          description: ETag for the *Communication*
+        subject:
+          type: string
+          description: The subject line of the *Communication*
+        body:
+          type: string
+          description: The main content of the *Communication*
+        type:
+          type: string
+          enum:
+          - EmailCommunication
+          - PhoneCommunication
+          description: The type of the *Communication*
+        date:
+          type: string
+          format: date
+          description: The date of the *Communication* (as a ISO-8601 datestamp)
+        time_entries_count:
+          type: integer
+          format: int32
+          description: The number of time_entries associated with the *Communication*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Communication* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Communication* was last updated (as a ISO-8601 timestamp)
+        received_at:
+          type: string
+          format: date-time
+          description: The date-time of the *Communication* (in ISO-8601 format)
+    ClientPortal_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ClientPortal*
+        etag:
+          type: string
+          description: ETag for the *ClientPortal*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ClientPortal* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ClientPortal* was last updated (as a ISO-8601 timestamp)
+        unread_count:
+          type: integer
+          format: int32
+          description: The number of unread count messages for the current user.
+        unread_notifiable_count:
+          type: integer
+          format: int32
+          description: The number of unread messages for the current user once their notification settings have been applied.
+    Activity_TextMessageConversation_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *TextMessageConversation*
+        etag:
+          type: string
+          description: ETag for the *TextMessageConversation*
     Timer_base:
       type: object
       properties:
@@ -3077,6 +2955,128 @@ components:
           type: string
           format: date-time
           description: The time the *Timer* was last updated (as a ISO-8601 timestamp)
+    Activity:
+      allOf:
+      - $ref: '#/components/schemas/Activity_base'
+      - type: object
+        properties:
+          activity_description:
+            $ref: '#/components/schemas/ActivityDescription_base'
+            description: ActivityDescription
+          expense_category:
+            $ref: '#/components/schemas/ExpenseCategory_base'
+            description: ExpenseCategory
+          bill:
+            $ref: '#/components/schemas/Bill_base'
+            description: Bill
+          communication:
+            $ref: '#/components/schemas/Communication_base'
+            description: Communication
+          client_portal:
+            $ref: '#/components/schemas/ClientPortal_base'
+            description: ClientPortal
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          matter_note:
+            $ref: '#/components/schemas/Note_base'
+            description: Note
+          contact_note:
+            $ref: '#/components/schemas/Note_base'
+            description: Note
+          subject:
+            $ref: '#/components/schemas/PolymorphicObject_base'
+            description: PolymorphicObject
+          timer:
+            $ref: '#/components/schemas/Timer_base'
+            description: Timer
+          user:
+            $ref: '#/components/schemas/User_base'
+            description: User
+          utbms_expense:
+            $ref: '#/components/schemas/UtbmsCode_base'
+            description: UtbmsCode
+          vendor:
+            $ref: '#/components/schemas/Contact_base'
+            description: Contact
+          calendar_entry:
+            $ref: '#/components/schemas/Activity_CalendarEntry_base'
+            description: CalendarEntry
+          task:
+            $ref: '#/components/schemas/Activity_Task_base'
+            description: Task
+          text_message_conversation:
+            $ref: '#/components/schemas/Activity_TextMessageConversation_base'
+            description: TextMessageConversation
+          document_version:
+            $ref: '#/components/schemas/DocumentVersion_base'
+            description: DocumentVersion
+          legal_aid_uk_activity:
+            $ref: '#/components/schemas/LegalAidUkActivity_base'
+            description: LegalAidUkActivity
+          currency:
+            $ref: '#/components/schemas/Currency_base'
+            description: Currency
+          tax_settings:
+            type: array
+            items:
+              $ref: '#/components/schemas/TaxSetting_base'
+            description: TaxSetting
+    ExpenseCategory_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ExpenseCategory*
+        etag:
+          type: string
+          description: ETag for the *ExpenseCategory*
+        name:
+          type: string
+          description: The name of the expense category
+        rate:
+          type: integer
+          format: int32
+          description: The price charged per unit cost
+        entry_type:
+          type: string
+          description: The type of expense entry the category is associated to. Can be either "hard_cost", "soft_cost" or "unassociated"
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ExpenseCategory* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ExpenseCategory* was last updated (as a ISO-8601 timestamp)
+        xero_expense_code:
+          type: string
+          description: Custom Xero expense code for an expense category
+        accessible_to_user:
+          type: boolean
+          description: Determines if expense category is accessible to user
+        currency:
+          type: object
+          description: The currency details for the expense category
+        tax_setting:
+          type: string
+          description: The type of tax rate applied to the expense category.
+        tax_settings:
+          type: array
+          items:
+            type: object
+          description: Array of objects, with each object representing a tax setting.
+    Activity_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: Activity List Response
+          items:
+            $ref: '#/components/schemas/Activity'
 x-tagGroups:
 - name: Api
   tags:

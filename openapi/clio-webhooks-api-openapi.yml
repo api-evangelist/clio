@@ -660,6 +660,85 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Webhook_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Webhook'
+    Webhook_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Webhook*
+        etag:
+          type: string
+          description: ETag for the *Webhook*
+        url:
+          type: string
+          description: The `https` URL to send the data to when the events are triggered
+        fields:
+          type: string
+          description: Fields to be included in the webhook request
+        shared_secret:
+          type: string
+          description: A shared secret used to create a signature for the payload
+        model:
+          type: string
+          enum:
+          - activity
+          - bill
+          - calendar_entry
+          - clio_payments_payment
+          - communication
+          - contact
+          - document
+          - folder
+          - matter
+          - task
+          description: What kind of records the webhook is for
+        status:
+          type: string
+          enum:
+          - pending
+          - enabled
+          - suspended
+          description: The current status of the webhook.
+        events:
+          type: array
+          items:
+            type: string
+            enum:
+            - created
+            - updated
+            - deleted
+            - matter_opened
+            - matter_pended
+            - matter_closed
+          description: The events your webhook is subscribed to.
+        expires_at:
+          type: string
+          format: date-time
+          description: The time webhook will expire (as a ISO-8601 timestamp)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Webhook* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Webhook* was last updated (as a ISO-8601 timestamp)
+    Webhook:
+      allOf:
+      - $ref: '#/components/schemas/Webhook_base'
+      - type: object
+        properties:
+          user:
+            $ref: '#/components/schemas/User_base'
+            description: User
     Webhook_List:
       type: object
       required:
@@ -670,6 +749,25 @@ components:
           description: Webhook List Response
           items:
             $ref: '#/components/schemas/Webhook'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     User_base:
       type: object
       properties:
@@ -740,104 +838,6 @@ components:
           type: string
           format: date-time
           description: The time the *User* was last updated (as a ISO-8601 timestamp)
-    Webhook_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Webhook*
-        etag:
-          type: string
-          description: ETag for the *Webhook*
-        url:
-          type: string
-          description: The `https` URL to send the data to when the events are triggered
-        fields:
-          type: string
-          description: Fields to be included in the webhook request
-        shared_secret:
-          type: string
-          description: A shared secret used to create a signature for the payload
-        model:
-          type: string
-          enum:
-          - activity
-          - bill
-          - calendar_entry
-          - clio_payments_payment
-          - communication
-          - contact
-          - document
-          - folder
-          - matter
-          - task
-          description: What kind of records the webhook is for
-        status:
-          type: string
-          enum:
-          - pending
-          - enabled
-          - suspended
-          description: The current status of the webhook.
-        events:
-          type: array
-          items:
-            type: string
-            enum:
-            - created
-            - updated
-            - deleted
-            - matter_opened
-            - matter_pended
-            - matter_closed
-          description: The events your webhook is subscribed to.
-        expires_at:
-          type: string
-          format: date-time
-          description: The time webhook will expire (as a ISO-8601 timestamp)
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Webhook* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Webhook* was last updated (as a ISO-8601 timestamp)
-    Webhook_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Webhook'
-    Webhook:
-      allOf:
-      - $ref: '#/components/schemas/Webhook_base'
-      - type: object
-        properties:
-          user:
-            $ref: '#/components/schemas/User_base'
-            description: User
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

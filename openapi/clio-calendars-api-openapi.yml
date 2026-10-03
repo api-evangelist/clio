@@ -702,86 +702,28 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    User_base:
-      type: object
-      properties:
-        account_owner:
-          type: boolean
-          description: Whether the *User* is the owner of the account
-        clio_connect:
-          type: boolean
-          description: Whether the *User* is a Clio Connect user
-        court_rules_default_attendee:
-          type: boolean
-          description: Whether the *User* is a default attendee for court rules events
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *User* was created (as a ISO-8601 timestamp)
-        default_calendar_id:
-          type: integer
-          format: int64
-          description: Default calendar id for *User*.
-        email:
-          type: string
-          description: The email of the *User*
-        enabled:
-          type: boolean
-          description: Whether the *User* is allowed to log in
-        etag:
-          type: string
-          description: ETag for the *User*
-        first_name:
-          type: string
-          description: The first name of the *User*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *User*
-        initials:
-          type: string
-          description: The initials of the *User*
-        last_name:
-          type: string
-          description: The last name of the *User*
-        name:
-          type: string
-          description: The full name of the *User*
-        phone_number:
-          type: string
-          description: The primary phone number for the *User*.
-        rate:
-          type: number
-          format: float
-          description: Default user activity rate for *User*.
-        roles:
-          type: array
-          items:
-            type: string
-          description: An array of roles assigned to this *User*
-        subscription_type:
-          type: string
-          enum:
-          - Attorney
-          - NonAttorney
-          description: The subscription type of the *User*
-        time_zone:
-          type: string
-          description: The selected time zone of the *User*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *User* was last updated (as a ISO-8601 timestamp)
-    Calendar_List:
+    Calendar:
+      allOf:
+      - $ref: '#/components/schemas/Calendar_base'
+      - type: object
+        properties:
+          creator:
+            $ref: '#/components/schemas/User_base'
+            description: User
+    Calendar_Show:
       type: object
       required:
       - data
       properties:
         data:
-          type: array
-          description: Calendar List Response
-          items:
-            $ref: '#/components/schemas/Calendar'
+          $ref: '#/components/schemas/Calendar'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     Calendar_base:
       type: object
       properties:
@@ -879,14 +821,16 @@ components:
           - web
           - mobile
           description: The source that visible applies to, by default the Clio Web UI (Expects 'mobile' or 'web').
-    Calendar:
-      allOf:
-      - $ref: '#/components/schemas/Calendar_base'
-      - type: object
-        properties:
-          creator:
-            $ref: '#/components/schemas/User_base'
-            description: User
+    Calendar_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: Calendar List Response
+          items:
+            $ref: '#/components/schemas/Calendar'
     ErrorDetail:
       type: object
       required:
@@ -899,20 +843,76 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    Error:
+    User_base:
       type: object
-      required:
-      - error
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    Calendar_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Calendar'
+        account_owner:
+          type: boolean
+          description: Whether the *User* is the owner of the account
+        clio_connect:
+          type: boolean
+          description: Whether the *User* is a Clio Connect user
+        court_rules_default_attendee:
+          type: boolean
+          description: Whether the *User* is a default attendee for court rules events
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *User* was created (as a ISO-8601 timestamp)
+        default_calendar_id:
+          type: integer
+          format: int64
+          description: Default calendar id for *User*.
+        email:
+          type: string
+          description: The email of the *User*
+        enabled:
+          type: boolean
+          description: Whether the *User* is allowed to log in
+        etag:
+          type: string
+          description: ETag for the *User*
+        first_name:
+          type: string
+          description: The first name of the *User*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *User*
+        initials:
+          type: string
+          description: The initials of the *User*
+        last_name:
+          type: string
+          description: The last name of the *User*
+        name:
+          type: string
+          description: The full name of the *User*
+        phone_number:
+          type: string
+          description: The primary phone number for the *User*.
+        rate:
+          type: number
+          format: float
+          description: Default user activity rate for *User*.
+        roles:
+          type: array
+          items:
+            type: string
+          description: An array of roles assigned to this *User*
+        subscription_type:
+          type: string
+          enum:
+          - Attorney
+          - NonAttorney
+          description: The subscription type of the *User*
+        time_zone:
+          type: string
+          description: The selected time zone of the *User*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *User* was last updated (as a ISO-8601 timestamp)
 x-tagGroups:
 - name: Api
   tags:

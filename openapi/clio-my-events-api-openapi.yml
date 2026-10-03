@@ -240,34 +240,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    MyEvent:
-      allOf:
-      - $ref: '#/components/schemas/MyEvent_base'
-      - type: object
-        properties:
-          event:
-            $ref: '#/components/schemas/Event_base'
-            description: Event
-    MyEvent_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/MyEvent'
-    MyEvent_base:
-      type: object
-      properties: {}
-    MyEvent_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: MyEvent List Response
-          items:
-            $ref: '#/components/schemas/MyEvent'
     Event_base:
       type: object
       properties:
@@ -322,6 +294,34 @@ components:
           type: integer
           format: int64
           description: Id of the subject that triggered the notification
+    MyEvent:
+      allOf:
+      - $ref: '#/components/schemas/MyEvent_base'
+      - type: object
+        properties:
+          event:
+            $ref: '#/components/schemas/Event_base'
+            description: Event
+    MyEvent_base:
+      type: object
+      properties: {}
+    MyEvent_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: MyEvent List Response
+          items:
+            $ref: '#/components/schemas/MyEvent'
+    MyEvent_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/MyEvent'
     ErrorDetail:
       type: object
       required:
