@@ -124,51 +124,18 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    LogEntry_base:
+    ErrorDetail:
       type: object
+      required:
+      - type
+      - message
       properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *LogEntry*
-        etag:
-          type: string
-          description: ETag for the *LogEntry*
         type:
           type: string
-          enum:
-          - MatterLogEntry
-          - ContactLogEntry
-          - DocumentLogEntry
-          - CalendarEntryLogEntry
-          - NoteLogEntry
-          - CommunicationLogEntry
-          - ConversationLogEntry
-          - SMSConversationLogEntry
-          description: The type of the *LogEntry*
-        accessed_at:
+          description: Unique name for this error
+        message:
           type: string
-          format: date-time
-          description: The time the item was last accessed (as a ISO-8601 timestamp)
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *LogEntry* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *LogEntry* was last updated (as a ISO-8601 timestamp)
-    LogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry_base'
-      - type: object
-        properties:
-          item:
-            $ref: '#/components/schemas/PolymorphicObject_base'
-            description: PolymorphicObject
-          user:
-            $ref: '#/components/schemas/User_base'
-            description: User
+          description: Detailed message about the error
     PolymorphicObject_base:
       type: object
       properties:
@@ -202,35 +169,17 @@ components:
         tertiary_identifier:
           type: string
           description: A tertiary string to identify the *PolymorphicObject*
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    LogEntry_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: LogEntry List Response
-          items:
-            $ref: '#/components/schemas/LogEntry'
+    LogEntry:
+      allOf:
+      - $ref: '#/components/schemas/LogEntry_base'
+      - type: object
+        properties:
+          item:
+            $ref: '#/components/schemas/PolymorphicObject_base'
+            description: PolymorphicObject
+          user:
+            $ref: '#/components/schemas/User_base'
+            description: User
     User_base:
       type: object
       properties:
@@ -301,6 +250,57 @@ components:
           type: string
           format: date-time
           description: The time the *User* was last updated (as a ISO-8601 timestamp)
+    LogEntry_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *LogEntry*
+        etag:
+          type: string
+          description: ETag for the *LogEntry*
+        type:
+          type: string
+          enum:
+          - MatterLogEntry
+          - ContactLogEntry
+          - DocumentLogEntry
+          - CalendarEntryLogEntry
+          - NoteLogEntry
+          - CommunicationLogEntry
+          - ConversationLogEntry
+          - SMSConversationLogEntry
+          description: The type of the *LogEntry*
+        accessed_at:
+          type: string
+          format: date-time
+          description: The time the item was last accessed (as a ISO-8601 timestamp)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *LogEntry* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *LogEntry* was last updated (as a ISO-8601 timestamp)
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    LogEntry_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: LogEntry List Response
+          items:
+            $ref: '#/components/schemas/LogEntry'
 x-tagGroups:
 - name: Api
   tags:

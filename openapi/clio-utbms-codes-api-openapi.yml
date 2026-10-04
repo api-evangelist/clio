@@ -222,6 +222,33 @@ paths:
           description: Not Modified
 components:
   schemas:
+    UtbmsCode_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: UtbmsCode List Response
+          items:
+            $ref: '#/components/schemas/UtbmsCode'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    UtbmsCode:
+      allOf:
+      - $ref: '#/components/schemas/UtbmsCode_base'
+      - type: object
+        properties: {}
     UtbmsCode_base:
       type: object
       properties:
@@ -260,40 +287,6 @@ components:
           type: string
           format: date-time
           description: The time the *UtbmsCode* was last updated (as a ISO-8601 timestamp)
-    UtbmsCode_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/UtbmsCode'
-    UtbmsCode_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: UtbmsCode List Response
-          items:
-            $ref: '#/components/schemas/UtbmsCode'
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    UtbmsCode:
-      allOf:
-      - $ref: '#/components/schemas/UtbmsCode_base'
-      - type: object
-        properties: {}
     Error:
       type: object
       required:
@@ -301,6 +294,13 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetail'
+    UtbmsCode_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/UtbmsCode'
 x-tagGroups:
 - name: Api
   tags:

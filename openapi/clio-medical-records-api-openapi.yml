@@ -194,14 +194,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    MedicalRecord:
-      allOf:
-      - $ref: '#/components/schemas/MedicalRecord_base'
-      - type: object
-        properties:
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
     MedicalRecord_Show:
       type: object
       required:
@@ -209,36 +201,6 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/MedicalRecord'
-    MedicalRecord_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *MedicalRecord*
-        document_id:
-          type: integer
-          format: int64
-          description: The id of the document associated with the Medical Record
-        etag:
-          type: string
-          description: ETag for the *MedicalRecord*
-        end_date:
-          type: string
-          format: date-time
-          description: End date for *MedicalRecord* (as a ISO-8601 date)
-        start_date:
-          type: string
-          format: date-time
-          description: Start date for *MedicalRecord* (as a ISO-8601 date)
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *MedicalRecord* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *MedicalRecord* was last updated (as a ISO-8601 timestamp)
     Matter_base:
       type: object
       properties:
@@ -341,6 +303,44 @@ components:
         message:
           type: string
           description: Detailed message about the error
+    MedicalRecord:
+      allOf:
+      - $ref: '#/components/schemas/MedicalRecord_base'
+      - type: object
+        properties:
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+    MedicalRecord_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *MedicalRecord*
+        document_id:
+          type: integer
+          format: int64
+          description: The id of the document associated with the Medical Record
+        etag:
+          type: string
+          description: ETag for the *MedicalRecord*
+        end_date:
+          type: string
+          format: date-time
+          description: End date for *MedicalRecord* (as a ISO-8601 date)
+        start_date:
+          type: string
+          format: date-time
+          description: Start date for *MedicalRecord* (as a ISO-8601 date)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *MedicalRecord* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *MedicalRecord* was last updated (as a ISO-8601 timestamp)
     Error:
       type: object
       required:

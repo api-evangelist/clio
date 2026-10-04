@@ -981,30 +981,26 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    BankAccount_Show:
+    ErrorDetail:
       type: object
       required:
-      - data
+      - type
+      - message
       properties:
-        data:
-          $ref: '#/components/schemas/BankAccount'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    BankAccount_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: BankAccount List Response
-          items:
-            $ref: '#/components/schemas/BankAccount'
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    BankAccount:
+      allOf:
+      - $ref: '#/components/schemas/BankAccount_base'
+      - type: object
+        properties:
+          user:
+            $ref: '#/components/schemas/User_base'
+            description: User
     BankAccount_base:
       type: object
       properties:
@@ -1086,26 +1082,6 @@ components:
           type: string
           format: date-time
           description: The time the *BankAccount* was last updated (as a ISO-8601 timestamp)
-    BankAccount:
-      allOf:
-      - $ref: '#/components/schemas/BankAccount_base'
-      - type: object
-        properties:
-          user:
-            $ref: '#/components/schemas/User_base'
-            description: User
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
     User_base:
       type: object
       properties:
@@ -1176,6 +1152,30 @@ components:
           type: string
           format: date-time
           description: The time the *User* was last updated (as a ISO-8601 timestamp)
+    BankAccount_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/BankAccount'
+    BankAccount_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: BankAccount List Response
+          items:
+            $ref: '#/components/schemas/BankAccount'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

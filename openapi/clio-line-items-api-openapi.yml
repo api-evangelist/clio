@@ -572,245 +572,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    LineItemTax_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *LineItemTax*
-        etag:
-          type: string
-          description: ETag for the *LineItemTax*
-        tax_rate_configuration_id:
-          type: integer
-          format: int64
-          description: The unique identifier of the tax rate configuration
-        name:
-          type: string
-          description: The tax name
-        rate:
-          type: number
-          format: decimal
-          description: The tax rate
-        formatted_rate:
-          type: string
-          description: The formatted tax rate as a percentage
-        rule:
-          type: string
-          description: The tax rule
-        amount:
-          type: number
-          format: decimal
-          description: The tax amount
-        order:
-          type: integer
-          format: int32
-          description: The tax order
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *LineItemTax* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *LineItemTax* was last updated (as a ISO-8601 timestamp)
-    LineItem:
-      allOf:
-      - $ref: '#/components/schemas/LineItem_base'
-      - type: object
-        properties:
-          bill:
-            $ref: '#/components/schemas/Bill_base'
-            description: Bill
-          activity:
-            $ref: '#/components/schemas/Activity_base'
-            description: Activity
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          user:
-            $ref: '#/components/schemas/User_base'
-            description: User
-          discount:
-            $ref: '#/components/schemas/Discount_base'
-            description: Discount
-          included_line_item_totals:
-            $ref: '#/components/schemas/LineItemTotals_base'
-            description: LineItemTotals
-          tax_settings:
-            type: array
-            items:
-              $ref: '#/components/schemas/LineItemTax_base'
-            description: LineItemTax
-    LineItem_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/LineItem'
-    Discount_base:
-      type: object
-      properties:
-        rate:
-          type: number
-          format: double
-          description: The rate of the *Discount%*
-        type:
-          type: string
-          enum:
-          - percentage
-          - money
-          description: The type of *Discount* being applied in your *Discount* rate.
-        note:
-          type: string
-          description: A note for your *Discount*
-        early_payment_rate:
-          type: integer
-          format: int32
-          description: The % discount that will be applied if your *Discount* is paid within the early payment period.
-        early_payment_period:
-          type: integer
-          format: int32
-          description: The number of days for your *Discount* period. If your bill is paid within this time, apply your *Discount* rate to the bill.
-    Activity_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Activity*
-        etag:
-          type: string
-          description: ETag for the *Activity*
-        type:
-          type: string
-          enum:
-          - TimeEntry
-          - ExpenseEntry
-          - HardCostEntry
-          - SoftCostEntry
-          description: The type of the *Activity*
-        date:
-          type: string
-          format: date
-          description: The date the *Activity* was performed (as a ISO-8601 date)
-        quantity_in_hours:
-          type: number
-          format: double
-          description: The number of hours the TimeEntry took.
-        rounded_quantity_in_hours:
-          type: number
-          format: double
-          description: 'The number of hours rounded accordingly to the billing settings.
-
-            The rounded value is used to calculate the total.
-
-            '
-        quantity:
-          type: number
-          format: double
-          description: 'The field is applicable to TimeEntry, ExpenseEntry, and SoftCostEntry.
-
-
-            **Version <= 4.0.3:**
-
-            The number of hours the TimeEntry took.
-
-
-            **Latest version:**
-
-            The number of seconds the TimeEntry took.
-
-            '
-        rounded_quantity:
-          type: number
-          format: double
-          description: 'The field is applicable to time entries only.
-
-
-            **Version <= 4.0.3:**
-
-            The number of hours rounded accordingly to the billing settings.
-
-            The rounded value is used to calculate the total.
-
-
-            **Latest version:**
-
-            The number of seconds rounded accordingly to the billing settings.
-
-            The rounded value is used to calculate the total.
-
-            '
-        quantity_redacted:
-          type: boolean
-          description: 'Is `true` if any of the following fields are redacted:
-
-            `quantity`, `rounded_quantity`, `rounded_quantity_in_hours`, `quantity_in_hours`, `total`, `non_billable_total`
-
-            '
-        price:
-          type: number
-          format: double
-          description: The hourly or flat rate of the *Activity*
-        note:
-          type: string
-          description: The details about the *Activity*
-        flat_rate:
-          type: boolean
-          description: Whether the *Activity* is a flat rate
-        billed:
-          type: boolean
-          description: Whether the *Activity* has been added to an active bill that is in the state of `awaiting_payment` or `paid`
-        on_bill:
-          type: boolean
-          description: Whether the *Activity* has been added to an active bill that is in the state of `draft`, `awaiting_approval`, `awaiting_payment` or `paid`
-        total:
-          type: number
-          format: double
-          description: The total cost of draft, billable and billed items in the *Activity*
-        contingency_fee:
-          type: boolean
-          description: Whether or not the *Activity* is a contingency fee
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Activity* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Activity* was last updated (as a ISO-8601 timestamp)
-        reference:
-          type: string
-          description: A check reference for a HardCostEntry.
-        non_billable:
-          type: boolean
-          description: Whether the *Activity* is non-billable
-        non_billable_total:
-          type: number
-          format: double
-          description: The total cost of non-billable items in the *Activity*
-        no_charge:
-          type: boolean
-          description: Whether the non-billable *Activity* is shown on the bill.
-        tax_setting:
-          type: string
-          enum:
-          - no_tax
-          - tax_1_only
-          - tax_2_only
-          - tax_1_and_tax_2
-          description: The option denoting whether primary tax, secondary tax, or both is applied to an expense entry.
-        tax_settings:
-          type: array
-          items:
-            type: object
-          description: Array of objects, with each object representing a tax setting that is applied to an expense entry with 'tax_rate_configuration_id', 'order', and 'rule' as the object properties.
-        currency:
-          type: object
-          description: The currency of the *Activity*
     Bill_base:
       type: object
       properties:
@@ -988,127 +749,6 @@ components:
             - void
             - deleted
           description: The available *Bill* state transitions.
-    LineItem_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *LineItem*
-        etag:
-          type: string
-          description: ETag for the *LineItem*
-        type:
-          type: string
-          enum:
-          - ActivityLineItem
-          - LineItem
-          - NoChargeLineItem
-          - SummaryLineItem
-          description: The type of the *LineItem*
-        description:
-          type: string
-          description: The description for the *LineItem*
-        date:
-          type: string
-          format: date
-          description: The *LineItem* date (as a ISO-8601 date)
-        price:
-          type: number
-          format: double
-          description: The price of the *LineItem*
-        taxable:
-          type: boolean
-          description: Whether the *LineItem* is taxable
-        kind:
-          type: string
-          enum:
-          - Service
-          - Expense
-          description: The kind of *LineItem*
-        note:
-          type: string
-          description: The note attached to the *LineItem*
-        secondary_taxable:
-          type: boolean
-          description: Whether the *LineItem* is secondary taxable
-        total:
-          type: number
-          format: double
-          description: The total amount for the *LineItem*
-        tax:
-          type: number
-          format: double
-          description: The tax amount for the *LineItem*
-        secondary_tax:
-          type: number
-          format: double
-          description: The secondary tax amount for the *LineItem*
-        sub_total:
-          type: number
-          format: double
-          description: The subtotal amount for the *LineItem*
-        quantity:
-          type: number
-          format: double
-          description: The amount of hours for the *LineItem*
-        group_ordering:
-          type: integer
-          format: int32
-          description: The value to specify the ordering of the *LineItem* on a bill
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *LineItem* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *LineItem* was last updated (as a ISO-8601 timestamp)
-        tax_settings:
-          type: array
-          items:
-            type: object
-          description: Array of objects, with each object representing the line item tax that is associated with the *LineItem*
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    LineItem_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: LineItem List Response
-          items:
-            $ref: '#/components/schemas/LineItem'
-    LineItemTotals_base:
-      type: object
-      properties:
-        quantity:
-          type: number
-          format: double
-          description: Sum of quantity for included line items.
-        price:
-          type: number
-          format: double
-          description: Sum of price for included line items.
-        discount_percent:
-          type: number
-          format: double
-          description: Sum of discount as percentage for included line items.
-        total:
-          type: number
-          format: double
-          description: Sum of total for included line items.
-        sub_total:
-          type: number
-          format: double
-          description: Sum of total before discount and tax is applied.
     Matter_base:
       type: object
       properties:
@@ -1211,6 +851,163 @@ components:
         message:
           type: string
           description: Detailed message about the error
+    LineItemTax_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *LineItemTax*
+        etag:
+          type: string
+          description: ETag for the *LineItemTax*
+        tax_rate_configuration_id:
+          type: integer
+          format: int64
+          description: The unique identifier of the tax rate configuration
+        name:
+          type: string
+          description: The tax name
+        rate:
+          type: number
+          format: decimal
+          description: The tax rate
+        formatted_rate:
+          type: string
+          description: The formatted tax rate as a percentage
+        rule:
+          type: string
+          description: The tax rule
+        amount:
+          type: number
+          format: decimal
+          description: The tax amount
+        order:
+          type: integer
+          format: int32
+          description: The tax order
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *LineItemTax* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *LineItemTax* was last updated (as a ISO-8601 timestamp)
+    LineItem_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: LineItem List Response
+          items:
+            $ref: '#/components/schemas/LineItem'
+    LineItem_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *LineItem*
+        etag:
+          type: string
+          description: ETag for the *LineItem*
+        type:
+          type: string
+          enum:
+          - ActivityLineItem
+          - LineItem
+          - NoChargeLineItem
+          - SummaryLineItem
+          description: The type of the *LineItem*
+        description:
+          type: string
+          description: The description for the *LineItem*
+        date:
+          type: string
+          format: date
+          description: The *LineItem* date (as a ISO-8601 date)
+        price:
+          type: number
+          format: double
+          description: The price of the *LineItem*
+        taxable:
+          type: boolean
+          description: Whether the *LineItem* is taxable
+        kind:
+          type: string
+          enum:
+          - Service
+          - Expense
+          description: The kind of *LineItem*
+        note:
+          type: string
+          description: The note attached to the *LineItem*
+        secondary_taxable:
+          type: boolean
+          description: Whether the *LineItem* is secondary taxable
+        total:
+          type: number
+          format: double
+          description: The total amount for the *LineItem*
+        tax:
+          type: number
+          format: double
+          description: The tax amount for the *LineItem*
+        secondary_tax:
+          type: number
+          format: double
+          description: The secondary tax amount for the *LineItem*
+        sub_total:
+          type: number
+          format: double
+          description: The subtotal amount for the *LineItem*
+        quantity:
+          type: number
+          format: double
+          description: The amount of hours for the *LineItem*
+        group_ordering:
+          type: integer
+          format: int32
+          description: The value to specify the ordering of the *LineItem* on a bill
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *LineItem* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *LineItem* was last updated (as a ISO-8601 timestamp)
+        tax_settings:
+          type: array
+          items:
+            type: object
+          description: Array of objects, with each object representing the line item tax that is associated with the *LineItem*
+    LineItemTotals_base:
+      type: object
+      properties:
+        quantity:
+          type: number
+          format: double
+          description: Sum of quantity for included line items.
+        price:
+          type: number
+          format: double
+          description: Sum of price for included line items.
+        discount_percent:
+          type: number
+          format: double
+          description: Sum of discount as percentage for included line items.
+        total:
+          type: number
+          format: double
+          description: Sum of total for included line items.
+        sub_total:
+          type: number
+          format: double
+          description: Sum of total before discount and tax is applied.
     User_base:
       type: object
       properties:
@@ -1281,6 +1078,209 @@ components:
           type: string
           format: date-time
           description: The time the *User* was last updated (as a ISO-8601 timestamp)
+    Activity_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Activity*
+        etag:
+          type: string
+          description: ETag for the *Activity*
+        type:
+          type: string
+          enum:
+          - TimeEntry
+          - ExpenseEntry
+          - HardCostEntry
+          - SoftCostEntry
+          description: The type of the *Activity*
+        date:
+          type: string
+          format: date
+          description: The date the *Activity* was performed (as a ISO-8601 date)
+        quantity_in_hours:
+          type: number
+          format: double
+          description: The number of hours the TimeEntry took.
+        rounded_quantity_in_hours:
+          type: number
+          format: double
+          description: 'The number of hours rounded accordingly to the billing settings.
+
+            The rounded value is used to calculate the total.
+
+            '
+        quantity:
+          type: number
+          format: double
+          description: 'The field is applicable to TimeEntry, ExpenseEntry, and SoftCostEntry.
+
+
+            **Version <= 4.0.3:**
+
+            The number of hours the TimeEntry took.
+
+
+            **Latest version:**
+
+            The number of seconds the TimeEntry took.
+
+            '
+        rounded_quantity:
+          type: number
+          format: double
+          description: 'The field is applicable to time entries only.
+
+
+            **Version <= 4.0.3:**
+
+            The number of hours rounded accordingly to the billing settings.
+
+            The rounded value is used to calculate the total.
+
+
+            **Latest version:**
+
+            The number of seconds rounded accordingly to the billing settings.
+
+            The rounded value is used to calculate the total.
+
+            '
+        quantity_redacted:
+          type: boolean
+          description: 'Is `true` if any of the following fields are redacted:
+
+            `quantity`, `rounded_quantity`, `rounded_quantity_in_hours`, `quantity_in_hours`, `total`, `non_billable_total`
+
+            '
+        price:
+          type: number
+          format: double
+          description: The hourly or flat rate of the *Activity*
+        note:
+          type: string
+          description: The details about the *Activity*
+        flat_rate:
+          type: boolean
+          description: Whether the *Activity* is a flat rate
+        billed:
+          type: boolean
+          description: Whether the *Activity* has been added to an active bill that is in the state of `awaiting_payment` or `paid`
+        on_bill:
+          type: boolean
+          description: Whether the *Activity* has been added to an active bill that is in the state of `draft`, `awaiting_approval`, `awaiting_payment` or `paid`
+        total:
+          type: number
+          format: double
+          description: The total cost of draft, billable and billed items in the *Activity*
+        contingency_fee:
+          type: boolean
+          description: Whether or not the *Activity* is a contingency fee
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Activity* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Activity* was last updated (as a ISO-8601 timestamp)
+        reference:
+          type: string
+          description: A check reference for a HardCostEntry.
+        non_billable:
+          type: boolean
+          description: Whether the *Activity* is non-billable
+        non_billable_total:
+          type: number
+          format: double
+          description: The total cost of non-billable items in the *Activity*
+        no_charge:
+          type: boolean
+          description: Whether the non-billable *Activity* is shown on the bill.
+        tax_setting:
+          type: string
+          enum:
+          - no_tax
+          - tax_1_only
+          - tax_2_only
+          - tax_1_and_tax_2
+          description: The option denoting whether primary tax, secondary tax, or both is applied to an expense entry.
+        tax_settings:
+          type: array
+          items:
+            type: object
+          description: Array of objects, with each object representing a tax setting that is applied to an expense entry with 'tax_rate_configuration_id', 'order', and 'rule' as the object properties.
+        currency:
+          type: object
+          description: The currency of the *Activity*
+    LineItem:
+      allOf:
+      - $ref: '#/components/schemas/LineItem_base'
+      - type: object
+        properties:
+          bill:
+            $ref: '#/components/schemas/Bill_base'
+            description: Bill
+          activity:
+            $ref: '#/components/schemas/Activity_base'
+            description: Activity
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          user:
+            $ref: '#/components/schemas/User_base'
+            description: User
+          discount:
+            $ref: '#/components/schemas/Discount_base'
+            description: Discount
+          included_line_item_totals:
+            $ref: '#/components/schemas/LineItemTotals_base'
+            description: LineItemTotals
+          tax_settings:
+            type: array
+            items:
+              $ref: '#/components/schemas/LineItemTax_base'
+            description: LineItemTax
+    LineItem_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/LineItem'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    Discount_base:
+      type: object
+      properties:
+        rate:
+          type: number
+          format: double
+          description: The rate of the *Discount%*
+        type:
+          type: string
+          enum:
+          - percentage
+          - money
+          description: The type of *Discount* being applied in your *Discount* rate.
+        note:
+          type: string
+          description: A note for your *Discount*
+        early_payment_rate:
+          type: integer
+          format: int32
+          description: The % discount that will be applied if your *Discount* is paid within the early payment period.
+        early_payment_period:
+          type: integer
+          format: int32
+          description: The number of days for your *Discount* period. If your bill is paid within this time, apply your *Discount* rate to the bill.
 x-tagGroups:
 - name: Api
   tags:

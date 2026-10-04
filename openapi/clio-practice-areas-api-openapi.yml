@@ -1585,6 +1585,18 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     PracticeArea_List:
       type: object
       required:
@@ -1688,25 +1700,6 @@ components:
         code:
           type: string
           description: The code of the *PracticeArea*
-    PracticeArea_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/PracticeArea'
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
     Error:
       type: object
       required:
@@ -1714,6 +1707,13 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetail'
+    PracticeArea_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/PracticeArea'
 x-tagGroups:
 - name: Api
   tags:

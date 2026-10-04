@@ -232,13 +232,6 @@ paths:
           description: Not Modified
 components:
   schemas:
-    JurisdictionsToTrigger_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/JurisdictionsToTrigger'
     JurisdictionsToTrigger_List:
       type: object
       required:
@@ -249,6 +242,23 @@ components:
           description: JurisdictionsToTrigger List Response
           items:
             $ref: '#/components/schemas/JurisdictionsToTrigger'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    JurisdictionsToTrigger:
+      allOf:
+      - $ref: '#/components/schemas/JurisdictionsToTrigger_base'
+      - type: object
+        properties: {}
     JurisdictionsToTrigger_base:
       type: object
       properties:
@@ -283,23 +293,13 @@ components:
           type: string
           format: date-time
           description: The time the *JurisdictionsToTrigger* was last updated (as a ISO-8601 timestamp)
-    JurisdictionsToTrigger:
-      allOf:
-      - $ref: '#/components/schemas/JurisdictionsToTrigger_base'
-      - type: object
-        properties: {}
-    ErrorDetail:
+    JurisdictionsToTrigger_Show:
       type: object
       required:
-      - type
-      - message
+      - data
       properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
+        data:
+          $ref: '#/components/schemas/JurisdictionsToTrigger'
     Error:
       type: object
       required:

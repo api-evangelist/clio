@@ -310,18 +310,6 @@ components:
         message:
           type: string
           description: A message to indicate why the DocumentArchive didn't complete.
-    DocumentArchive_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/DocumentArchive'
-    DocumentArchive:
-      allOf:
-      - $ref: '#/components/schemas/DocumentArchive_base'
-      - type: object
-        properties: {}
     ErrorDetail:
       type: object
       required:
@@ -334,6 +322,18 @@ components:
         message:
           type: string
           description: Detailed message about the error
+    DocumentArchive_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/DocumentArchive'
+    DocumentArchive:
+      allOf:
+      - $ref: '#/components/schemas/DocumentArchive_base'
+      - type: object
+        properties: {}
     Error:
       type: object
       required:

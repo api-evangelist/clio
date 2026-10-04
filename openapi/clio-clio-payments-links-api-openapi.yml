@@ -619,39 +619,6 @@ paths:
         required: false
 components:
   schemas:
-    ClioPaymentsLink:
-      allOf:
-      - $ref: '#/components/schemas/ClioPaymentsLink_base'
-      - type: object
-        properties:
-          bank_account:
-            $ref: '#/components/schemas/BankAccount_base'
-            description: BankAccount
-          bill:
-            $ref: '#/components/schemas/Bill_base'
-            description: Bill
-          clio_payments_payment:
-            $ref: '#/components/schemas/ClioPaymentsPayment_base'
-            description: ClioPaymentsPayment
-          contact:
-            $ref: '#/components/schemas/Contact_base'
-            description: Contact
-          destination_account:
-            $ref: '#/components/schemas/BankAccount_base'
-            description: BankAccount
-          destination_contact:
-            $ref: '#/components/schemas/Contact_base'
-            description: Contact
-    ClioPaymentsLink_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: ClioPaymentsLink List Response
-          items:
-            $ref: '#/components/schemas/ClioPaymentsLink'
     Bill_base:
       type: object
       properties:
@@ -829,6 +796,49 @@ components:
             - void
             - deleted
           description: The available *Bill* state transitions.
+    ClioPaymentsLink_base:
+      type: object
+      properties:
+        active:
+          type: boolean
+          description: Whether or not the payment link is active.
+        amount:
+          type: number
+          format: double
+          description: The defined amount of the payment link, if set.
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ClioPaymentsLink* was created (as a ISO-8601 timestamp)
+        currency:
+          type: string
+          description: The currency the payment link will collect.
+        description:
+          type: string
+          description: The defined description of the payment link, if set.
+        email_address:
+          type: string
+          description: The email address to pre-fill the field on the the payment link, if set.
+        etag:
+          type: string
+          description: ETag for the *ClioPaymentsLink*
+        expires_at:
+          type: string
+          format: date-time
+          description: The ISO 8601 date and time the payment link will expire.
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ClioPaymentsLink*
+        is_allocated_as_revenue:
+          type: boolean
+          description: Whether the payment link is allocated as revenue.
+        redirect_url:
+          type: string
+          description: The URL to redirect the client to after the payment has been made.
+        url:
+          type: string
+          description: The URL of the payment link.
     ClioPaymentsPayment_base:
       type: object
       properties:
@@ -875,144 +885,16 @@ components:
           type: string
           format: date-time
           description: The time the *ClioPaymentsPayment* was last updated (as a ISO-8601 timestamp)
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    BankAccount_base:
-      type: object
-      properties:
-        account_number:
-          type: string
-          description: The account number for *BankAccount*
-        balance:
-          type: number
-          format: double
-          description: The current balance of the *BankAccount*
-        bank_transactions_count:
-          type: integer
-          format: int32
-          description: The number of bank transactions associated with the account.
-        clio_payment_page_link:
-          type: string
-          description: Link to Single Payment Page which allows to transfer funds without logging in.
-        clio_payment_page_qr_code:
-          type: string
-          description: A QR code that links to a Single Payment Page which allows to transfer funds without logging in.
-        clio_payments_enabled:
-          type: boolean
-          description: Whether the bank account is connected to Clio Payments
-        controlled_account:
-          type: boolean
-          description: Whether is a controlled account
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *BankAccount* was created (as a ISO-8601 timestamp)
-        currency:
-          type: string
-          description: The currency type of the *BankAccount*
-        currency_symbol:
-          type: string
-          description: The currency symbol of the *BankAccount*
-        currency_id:
-          type: number
-          format: double
-          description: The currency ID of the *BankAccount*
-        default_account:
-          type: boolean
-          description: Whether it is the default account
-        domicile_branch:
-          type: string
-          description: The name of the branch where the account was opened
-        etag:
-          type: string
-          description: ETag for the *BankAccount*
-        general_ledger_number:
-          type: string
-          description: General ledger number
-        holder:
-          type: string
-          description: The name of the person or business that owns the *BankAccount*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *BankAccount*
-        institution:
-          type: string
-          description: The financial institution where the *BankAccount* is registered
-        name:
-          type: string
-          description: The name of the *BankAccount*
-        swift:
-          type: string
-          description: A unique identification code for the financial institution
-        transit_number:
-          type: string
-          description: Transit number for the bank account branch
-        type:
-          type: string
-          enum:
-          - Operating
-          - Trust
-          description: The type of the *BankAccount*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *BankAccount* was last updated (as a ISO-8601 timestamp)
-    ClioPaymentsLink_base:
-      type: object
-      properties:
-        active:
-          type: boolean
-          description: Whether or not the payment link is active.
-        amount:
-          type: number
-          format: double
-          description: The defined amount of the payment link, if set.
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ClioPaymentsLink* was created (as a ISO-8601 timestamp)
-        currency:
-          type: string
-          description: The currency the payment link will collect.
-        description:
-          type: string
-          description: The defined description of the payment link, if set.
-        email_address:
-          type: string
-          description: The email address to pre-fill the field on the the payment link, if set.
-        etag:
-          type: string
-          description: ETag for the *ClioPaymentsLink*
-        expires_at:
-          type: string
-          format: date-time
-          description: The ISO 8601 date and time the payment link will expire.
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ClioPaymentsLink*
-        is_allocated_as_revenue:
-          type: boolean
-          description: Whether the payment link is allocated as revenue.
-        redirect_url:
-          type: string
-          description: The URL to redirect the client to after the payment has been made.
-        url:
-          type: string
-          description: The URL of the payment link.
-    ClioPaymentsLink_Show:
+    ClioPaymentsLink_List:
       type: object
       required:
       - data
       properties:
         data:
-          $ref: '#/components/schemas/ClioPaymentsLink'
+          type: array
+          description: ClioPaymentsLink List Response
+          items:
+            $ref: '#/components/schemas/ClioPaymentsLink'
     ErrorDetail:
       type: object
       required:
@@ -1120,6 +1002,124 @@ components:
         currency:
           type: object
           description: Currency of the *Contact*
+    BankAccount_base:
+      type: object
+      properties:
+        account_number:
+          type: string
+          description: The account number for *BankAccount*
+        balance:
+          type: number
+          format: double
+          description: The current balance of the *BankAccount*
+        bank_transactions_count:
+          type: integer
+          format: int32
+          description: The number of bank transactions associated with the account.
+        clio_payment_page_link:
+          type: string
+          description: Link to Single Payment Page which allows to transfer funds without logging in.
+        clio_payment_page_qr_code:
+          type: string
+          description: A QR code that links to a Single Payment Page which allows to transfer funds without logging in.
+        clio_payments_enabled:
+          type: boolean
+          description: Whether the bank account is connected to Clio Payments
+        controlled_account:
+          type: boolean
+          description: Whether is a controlled account
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *BankAccount* was created (as a ISO-8601 timestamp)
+        currency:
+          type: string
+          description: The currency type of the *BankAccount*
+        currency_symbol:
+          type: string
+          description: The currency symbol of the *BankAccount*
+        currency_id:
+          type: number
+          format: double
+          description: The currency ID of the *BankAccount*
+        default_account:
+          type: boolean
+          description: Whether it is the default account
+        domicile_branch:
+          type: string
+          description: The name of the branch where the account was opened
+        etag:
+          type: string
+          description: ETag for the *BankAccount*
+        general_ledger_number:
+          type: string
+          description: General ledger number
+        holder:
+          type: string
+          description: The name of the person or business that owns the *BankAccount*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *BankAccount*
+        institution:
+          type: string
+          description: The financial institution where the *BankAccount* is registered
+        name:
+          type: string
+          description: The name of the *BankAccount*
+        swift:
+          type: string
+          description: A unique identification code for the financial institution
+        transit_number:
+          type: string
+          description: Transit number for the bank account branch
+        type:
+          type: string
+          enum:
+          - Operating
+          - Trust
+          description: The type of the *BankAccount*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *BankAccount* was last updated (as a ISO-8601 timestamp)
+    ClioPaymentsLink:
+      allOf:
+      - $ref: '#/components/schemas/ClioPaymentsLink_base'
+      - type: object
+        properties:
+          bank_account:
+            $ref: '#/components/schemas/BankAccount_base'
+            description: BankAccount
+          bill:
+            $ref: '#/components/schemas/Bill_base'
+            description: Bill
+          clio_payments_payment:
+            $ref: '#/components/schemas/ClioPaymentsPayment_base'
+            description: ClioPaymentsPayment
+          contact:
+            $ref: '#/components/schemas/Contact_base'
+            description: Contact
+          destination_account:
+            $ref: '#/components/schemas/BankAccount_base'
+            description: BankAccount
+          destination_contact:
+            $ref: '#/components/schemas/Contact_base'
+            description: Contact
+    ClioPaymentsLink_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ClioPaymentsLink'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

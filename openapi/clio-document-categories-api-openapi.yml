@@ -472,28 +472,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    DocumentCategory_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: DocumentCategory List Response
-          items:
-            $ref: '#/components/schemas/DocumentCategory'
-    DocumentCategory:
-      allOf:
-      - $ref: '#/components/schemas/DocumentCategory_base'
-      - type: object
-        properties: {}
-    DocumentCategory_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/DocumentCategory'
     ErrorDetail:
       type: object
       required:
@@ -506,6 +484,16 @@ components:
         message:
           type: string
           description: Detailed message about the error
+    DocumentCategory_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: DocumentCategory List Response
+          items:
+            $ref: '#/components/schemas/DocumentCategory'
     DocumentCategory_base:
       type: object
       properties:
@@ -527,6 +515,18 @@ components:
           type: string
           format: date-time
           description: The time the *DocumentCategory* was last updated (as a ISO-8601 timestamp)
+    DocumentCategory:
+      allOf:
+      - $ref: '#/components/schemas/DocumentCategory_base'
+      - type: object
+        properties: {}
+    DocumentCategory_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/DocumentCategory'
     Error:
       type: object
       required:

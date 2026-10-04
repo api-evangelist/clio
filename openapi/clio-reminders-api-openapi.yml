@@ -660,6 +660,18 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     PolymorphicObject_base:
       type: object
       properties:
@@ -693,16 +705,6 @@ components:
         tertiary_identifier:
           type: string
           description: A tertiary string to identify the *PolymorphicObject*
-    Reminder_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: Reminder List Response
-          items:
-            $ref: '#/components/schemas/Reminder'
     Reminder_base:
       type: object
       properties:
@@ -742,6 +744,24 @@ components:
           type: string
           format: date-time
           description: The time the *Reminder* was last updated (as a ISO-8601 timestamp)
+    Reminder:
+      allOf:
+      - $ref: '#/components/schemas/Reminder_base'
+      - type: object
+        properties:
+          notification_method:
+            $ref: '#/components/schemas/NotificationMethod_base'
+            description: NotificationMethod
+          subject:
+            $ref: '#/components/schemas/PolymorphicObject_base'
+            description: PolymorphicObject
+    Reminder_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Reminder'
     NotificationMethod_base:
       type: object
       properties:
@@ -773,36 +793,6 @@ components:
           type: string
           format: date-time
           description: The time the *NotificationMethod* was last updated (as a ISO-8601 timestamp)
-    Reminder_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Reminder'
-    Reminder:
-      allOf:
-      - $ref: '#/components/schemas/Reminder_base'
-      - type: object
-        properties:
-          notification_method:
-            $ref: '#/components/schemas/NotificationMethod_base'
-            description: NotificationMethod
-          subject:
-            $ref: '#/components/schemas/PolymorphicObject_base'
-            description: PolymorphicObject
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
     Error:
       type: object
       required:
@@ -810,6 +800,16 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetail'
+    Reminder_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: Reminder List Response
+          items:
+            $ref: '#/components/schemas/Reminder'
 x-tagGroups:
 - name: Api
   tags:

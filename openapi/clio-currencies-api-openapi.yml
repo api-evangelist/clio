@@ -110,6 +110,28 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Currency_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: Currency List Response
+          items:
+            $ref: '#/components/schemas/Currency'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Currency_base:
       type: object
       properties:
@@ -134,33 +156,6 @@ components:
           type: string
           format: date-time
           description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
-    Currency_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: Currency List Response
-          items:
-            $ref: '#/components/schemas/Currency'
-    Currency:
-      allOf:
-      - $ref: '#/components/schemas/Currency_base'
-      - type: object
-        properties: {}
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
     Error:
       type: object
       required:
@@ -168,6 +163,11 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetail'
+    Currency:
+      allOf:
+      - $ref: '#/components/schemas/Currency_base'
+      - type: object
+        properties: {}
 x-tagGroups:
 - name: Api
   tags:

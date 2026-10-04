@@ -660,13 +660,16 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Webhook_Show:
+    Webhook_List:
       type: object
       required:
       - data
       properties:
         data:
-          $ref: '#/components/schemas/Webhook'
+          type: array
+          description: Webhook List Response
+          items:
+            $ref: '#/components/schemas/Webhook'
     Webhook_base:
       type: object
       properties:
@@ -739,23 +742,6 @@ components:
           user:
             $ref: '#/components/schemas/User_base'
             description: User
-    Webhook_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: Webhook List Response
-          items:
-            $ref: '#/components/schemas/Webhook'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
     ErrorDetail:
       type: object
       required:
@@ -768,6 +754,13 @@ components:
         message:
           type: string
           description: Detailed message about the error
+    Webhook_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Webhook'
     User_base:
       type: object
       properties:
@@ -838,6 +831,13 @@ components:
           type: string
           format: date-time
           description: The time the *User* was last updated (as a ISO-8601 timestamp)
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

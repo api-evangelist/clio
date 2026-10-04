@@ -463,6 +463,16 @@ paths:
           description: Not Modified
 components:
   schemas:
+    ConversationMessage_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: ConversationMessage List Response
+          items:
+            $ref: '#/components/schemas/ConversationMessage'
     ConversationMessage_Show:
       type: object
       required:
@@ -470,9 +480,64 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/ConversationMessage'
+    ConversationMessage_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ConversationMessage*
+        etag:
+          type: string
+          description: ETag for the *ConversationMessage*
+        date:
+          type: string
+          description: The creation date of the message in the current user's time zone
+        body:
+          type: string
+          description: The main content of the *ConversationMessage*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ConversationMessage* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ConversationMessage* was last updated (as a ISO-8601 timestamp)
     UnredactedParticipant_base:
       type: object
       properties: {}
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    ConversationMessage:
+      allOf:
+      - $ref: '#/components/schemas/ConversationMessage_base'
+      - type: object
+        properties:
+          sender:
+            $ref: '#/components/schemas/UnredactedParticipant_base'
+            description: UnredactedParticipant
+          document:
+            $ref: '#/components/schemas/Document_base'
+            description: Document
+          conversation:
+            $ref: '#/components/schemas/Conversation_base'
+            description: Conversation
+          receivers:
+            type: array
+            items:
+              $ref: '#/components/schemas/UnredactedParticipant_base'
+            description: UnredactedParticipant
     Conversation_base:
       type: object
       properties:
@@ -514,49 +579,13 @@ components:
           type: string
           format: date-time
           description: The time the *Conversation* was last updated (as a ISO-8601 timestamp)
-    ConversationMessage_base:
+    Error:
       type: object
+      required:
+      - error
       properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ConversationMessage*
-        etag:
-          type: string
-          description: ETag for the *ConversationMessage*
-        date:
-          type: string
-          description: The creation date of the message in the current user's time zone
-        body:
-          type: string
-          description: The main content of the *ConversationMessage*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ConversationMessage* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ConversationMessage* was last updated (as a ISO-8601 timestamp)
-    ConversationMessage:
-      allOf:
-      - $ref: '#/components/schemas/ConversationMessage_base'
-      - type: object
-        properties:
-          sender:
-            $ref: '#/components/schemas/UnredactedParticipant_base'
-            description: UnredactedParticipant
-          document:
-            $ref: '#/components/schemas/Document_base'
-            description: Document
-          conversation:
-            $ref: '#/components/schemas/Conversation_base'
-            description: Conversation
-          receivers:
-            type: array
-            items:
-              $ref: '#/components/schemas/UnredactedParticipant_base'
-            description: UnredactedParticipant
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     Document_base:
       type: object
       properties:
@@ -604,35 +633,6 @@ components:
         content_type:
           type: string
           description: The uploaded file content type
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    ConversationMessage_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: ConversationMessage List Response
-          items:
-            $ref: '#/components/schemas/ConversationMessage'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

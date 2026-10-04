@@ -702,28 +702,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Calendar:
-      allOf:
-      - $ref: '#/components/schemas/Calendar_base'
-      - type: object
-        properties:
-          creator:
-            $ref: '#/components/schemas/User_base'
-            description: User
-    Calendar_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Calendar'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
     Calendar_base:
       type: object
       properties:
@@ -821,16 +799,6 @@ components:
           - web
           - mobile
           description: The source that visible applies to, by default the Clio Web UI (Expects 'mobile' or 'web').
-    Calendar_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: Calendar List Response
-          items:
-            $ref: '#/components/schemas/Calendar'
     ErrorDetail:
       type: object
       required:
@@ -843,6 +811,14 @@ components:
         message:
           type: string
           description: Detailed message about the error
+    Calendar:
+      allOf:
+      - $ref: '#/components/schemas/Calendar_base'
+      - type: object
+        properties:
+          creator:
+            $ref: '#/components/schemas/User_base'
+            description: User
     User_base:
       type: object
       properties:
@@ -913,6 +889,30 @@ components:
           type: string
           format: date-time
           description: The time the *User* was last updated (as a ISO-8601 timestamp)
+    Calendar_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: Calendar List Response
+          items:
+            $ref: '#/components/schemas/Calendar'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    Calendar_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Calendar'
 x-tagGroups:
 - name: Api
   tags:

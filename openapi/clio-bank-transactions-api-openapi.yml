@@ -789,23 +789,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    BankTransaction_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/BankTransaction'
-    BankTransaction_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: BankTransaction List Response
-          items:
-            $ref: '#/components/schemas/BankTransaction'
     Bill_base:
       type: object
       properties:
@@ -983,213 +966,36 @@ components:
             - void
             - deleted
           description: The available *Bill* state transitions.
-    BankTransaction_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *BankTransaction*
-        type:
-          type: string
-          description: The type of the *BankTransaction*
-        etag:
-          type: string
-          description: ETag for the *BankTransaction*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *BankTransaction* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *BankTransaction* was last updated (as a ISO-8601 timestamp)
-        bank_account_id:
-          type: integer
-          format: int64
-          description: The associated bank account.
-        source:
-          type: string
-          description: Where the transaction came from.
-        confirmation:
-          type: string
-          description: The reference code for the transaction.
-        date:
-          type: string
-          format: date
-          description: The date of the transaction.
-        amount:
-          type: number
-          format: double
-          description: The amount of the transaction.
-        currency:
-          type: string
-          description: The currency of the transaction.
-        currency_id:
-          type: integer
-          format: int64
-          description: The id of the currency of the transaction.
-        description:
-          type: string
-          description: The description of the transaction.
-        exchange_rate:
-          type: number
-          format: double
-          description: The exchange rate of the transaction.
-        transaction_type:
-          type: string
-          description: What kind of transaction.
-        funds_in:
-          type: number
-          format: double
-          description: The amount of funds received in this transaction.
-        funds_out:
-          type: number
-          format: double
-          description: The amount of funds withdrawn in this transaction.
-        clio_payments_transaction:
-          type: boolean
-          description: Whether the transaction was created through online payments.
-        current_account_balance:
-          type: number
-          format: double
-          description: The current account balance.
-        read_only_confirmation:
-          type: boolean
-          description: Whether the transaction's reference code is read-only.
-    Error:
+    BankTransaction_List:
       type: object
       required:
-      - error
+      - data
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    Allocation_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Allocation*
-        etag:
-          type: string
-          description: ETag for the *Allocation*
-        date:
-          type: string
-          format: date
-          description: The date the allocation was applied (as a ISO-8601 date)
-        amount:
-          type: number
-          format: double
-          description: The total amount of money that the user has allocated
-        interest:
-          type: boolean
-          description: Whether the allocation is applied to interest amount
-        voided_at:
-          type: string
-          format: date-time
-          description: Time the *Allocation* was voided (as a ISO-8601 timestamp)
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Allocation* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Allocation* was last updated (as a ISO-8601 timestamp)
-        description:
-          type: string
-          description: The description from the associated Credit Memo (if applicable)
-        has_online_payment:
-          type: boolean
-          description: Whether this allocation is associated with an online payment or not
-        destroyable:
-          type: boolean
-          description: Whether the record can be deleted or not
-        payment_type:
-          type: string
-          description: A string indicating whether the payment is a card or an eCheck payment.
-    BankAccount_base:
-      type: object
-      properties:
-        account_number:
-          type: string
-          description: The account number for *BankAccount*
-        balance:
-          type: number
-          format: double
-          description: The current balance of the *BankAccount*
-        bank_transactions_count:
-          type: integer
-          format: int32
-          description: The number of bank transactions associated with the account.
-        clio_payment_page_link:
-          type: string
-          description: Link to Single Payment Page which allows to transfer funds without logging in.
-        clio_payment_page_qr_code:
-          type: string
-          description: A QR code that links to a Single Payment Page which allows to transfer funds without logging in.
-        clio_payments_enabled:
-          type: boolean
-          description: Whether the bank account is connected to Clio Payments
-        controlled_account:
-          type: boolean
-          description: Whether is a controlled account
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *BankAccount* was created (as a ISO-8601 timestamp)
-        currency:
-          type: string
-          description: The currency type of the *BankAccount*
-        currency_symbol:
-          type: string
-          description: The currency symbol of the *BankAccount*
-        currency_id:
-          type: number
-          format: double
-          description: The currency ID of the *BankAccount*
-        default_account:
-          type: boolean
-          description: Whether it is the default account
-        domicile_branch:
-          type: string
-          description: The name of the branch where the account was opened
-        etag:
-          type: string
-          description: ETag for the *BankAccount*
-        general_ledger_number:
-          type: string
-          description: General ledger number
-        holder:
-          type: string
-          description: The name of the person or business that owns the *BankAccount*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *BankAccount*
-        institution:
-          type: string
-          description: The financial institution where the *BankAccount* is registered
-        name:
-          type: string
-          description: The name of the *BankAccount*
-        swift:
-          type: string
-          description: A unique identification code for the financial institution
-        transit_number:
-          type: string
-          description: Transit number for the bank account branch
-        type:
-          type: string
-          enum:
-          - Operating
-          - Trust
-          description: The type of the *BankAccount*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *BankAccount* was last updated (as a ISO-8601 timestamp)
+        data:
+          type: array
+          description: BankTransaction List Response
+          items:
+            $ref: '#/components/schemas/BankTransaction'
+    BankTransaction:
+      allOf:
+      - $ref: '#/components/schemas/BankTransaction_base'
+      - type: object
+        properties:
+          client:
+            $ref: '#/components/schemas/Contact_base'
+            description: Contact
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          bank_account:
+            $ref: '#/components/schemas/BankAccount_base'
+            description: BankAccount
+          bill:
+            $ref: '#/components/schemas/Bill_base'
+            description: Bill
+          allocation:
+            $ref: '#/components/schemas/Allocation_base'
+            description: Allocation
     Matter_base:
       type: object
       properties:
@@ -1280,38 +1086,13 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
-    BankTransaction:
-      allOf:
-      - $ref: '#/components/schemas/BankTransaction_base'
-      - type: object
-        properties:
-          client:
-            $ref: '#/components/schemas/Contact_base'
-            description: Contact
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          bank_account:
-            $ref: '#/components/schemas/BankAccount_base'
-            description: BankAccount
-          bill:
-            $ref: '#/components/schemas/Bill_base'
-            description: Bill
-          allocation:
-            $ref: '#/components/schemas/Allocation_base'
-            description: Allocation
-    ErrorDetail:
+    BankTransaction_Show:
       type: object
       required:
-      - type
-      - message
+      - data
       properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
+        data:
+          $ref: '#/components/schemas/BankTransaction'
     Contact_base:
       type: object
       properties:
@@ -1407,6 +1188,225 @@ components:
         currency:
           type: object
           description: Currency of the *Contact*
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    BankTransaction_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *BankTransaction*
+        type:
+          type: string
+          description: The type of the *BankTransaction*
+        etag:
+          type: string
+          description: ETag for the *BankTransaction*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *BankTransaction* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *BankTransaction* was last updated (as a ISO-8601 timestamp)
+        bank_account_id:
+          type: integer
+          format: int64
+          description: The associated bank account.
+        source:
+          type: string
+          description: Where the transaction came from.
+        confirmation:
+          type: string
+          description: The reference code for the transaction.
+        date:
+          type: string
+          format: date
+          description: The date of the transaction.
+        amount:
+          type: number
+          format: double
+          description: The amount of the transaction.
+        currency:
+          type: string
+          description: The currency of the transaction.
+        currency_id:
+          type: integer
+          format: int64
+          description: The id of the currency of the transaction.
+        description:
+          type: string
+          description: The description of the transaction.
+        exchange_rate:
+          type: number
+          format: double
+          description: The exchange rate of the transaction.
+        transaction_type:
+          type: string
+          description: What kind of transaction.
+        funds_in:
+          type: number
+          format: double
+          description: The amount of funds received in this transaction.
+        funds_out:
+          type: number
+          format: double
+          description: The amount of funds withdrawn in this transaction.
+        clio_payments_transaction:
+          type: boolean
+          description: Whether the transaction was created through online payments.
+        current_account_balance:
+          type: number
+          format: double
+          description: The current account balance.
+        read_only_confirmation:
+          type: boolean
+          description: Whether the transaction's reference code is read-only.
+    BankAccount_base:
+      type: object
+      properties:
+        account_number:
+          type: string
+          description: The account number for *BankAccount*
+        balance:
+          type: number
+          format: double
+          description: The current balance of the *BankAccount*
+        bank_transactions_count:
+          type: integer
+          format: int32
+          description: The number of bank transactions associated with the account.
+        clio_payment_page_link:
+          type: string
+          description: Link to Single Payment Page which allows to transfer funds without logging in.
+        clio_payment_page_qr_code:
+          type: string
+          description: A QR code that links to a Single Payment Page which allows to transfer funds without logging in.
+        clio_payments_enabled:
+          type: boolean
+          description: Whether the bank account is connected to Clio Payments
+        controlled_account:
+          type: boolean
+          description: Whether is a controlled account
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *BankAccount* was created (as a ISO-8601 timestamp)
+        currency:
+          type: string
+          description: The currency type of the *BankAccount*
+        currency_symbol:
+          type: string
+          description: The currency symbol of the *BankAccount*
+        currency_id:
+          type: number
+          format: double
+          description: The currency ID of the *BankAccount*
+        default_account:
+          type: boolean
+          description: Whether it is the default account
+        domicile_branch:
+          type: string
+          description: The name of the branch where the account was opened
+        etag:
+          type: string
+          description: ETag for the *BankAccount*
+        general_ledger_number:
+          type: string
+          description: General ledger number
+        holder:
+          type: string
+          description: The name of the person or business that owns the *BankAccount*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *BankAccount*
+        institution:
+          type: string
+          description: The financial institution where the *BankAccount* is registered
+        name:
+          type: string
+          description: The name of the *BankAccount*
+        swift:
+          type: string
+          description: A unique identification code for the financial institution
+        transit_number:
+          type: string
+          description: Transit number for the bank account branch
+        type:
+          type: string
+          enum:
+          - Operating
+          - Trust
+          description: The type of the *BankAccount*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *BankAccount* was last updated (as a ISO-8601 timestamp)
+    Allocation_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Allocation*
+        etag:
+          type: string
+          description: ETag for the *Allocation*
+        date:
+          type: string
+          format: date
+          description: The date the allocation was applied (as a ISO-8601 date)
+        amount:
+          type: number
+          format: double
+          description: The total amount of money that the user has allocated
+        interest:
+          type: boolean
+          description: Whether the allocation is applied to interest amount
+        voided_at:
+          type: string
+          format: date-time
+          description: Time the *Allocation* was voided (as a ISO-8601 timestamp)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Allocation* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Allocation* was last updated (as a ISO-8601 timestamp)
+        description:
+          type: string
+          description: The description from the associated Credit Memo (if applicable)
+        has_online_payment:
+          type: boolean
+          description: Whether this allocation is associated with an online payment or not
+        destroyable:
+          type: boolean
+          description: Whether the record can be deleted or not
+        payment_type:
+          type: string
+          description: A string indicating whether the payment is a card or an eCheck payment.
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

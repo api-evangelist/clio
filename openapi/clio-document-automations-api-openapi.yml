@@ -399,53 +399,13 @@ paths:
           description: Not Modified
 components:
   schemas:
-    DocumentAutomation_List:
+    DocumentAutomation_Show:
       type: object
       required:
       - data
       properties:
         data:
-          type: array
-          description: DocumentAutomation List Response
-          items:
-            $ref: '#/components/schemas/DocumentAutomation'
-    DocumentAutomation_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *DocumentAutomation*
-        etag:
-          type: string
-          description: ETag for the *DocumentAutomation*
-        state:
-          type: string
-          enum:
-          - not_started
-          - queued
-          - in_progress
-          - empty
-          - failed
-          - completed
-          description: A text description of what the automation is currently doing
-        export_formats:
-          type: string
-          enum:
-          - pdf
-          - original
-          description: An array of what formats were requested
-        filename:
-          type: string
-          description: The name of the file being generated.
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *DocumentAutomation* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *DocumentAutomation* was last updated (as a ISO-8601 timestamp)
+          $ref: '#/components/schemas/DocumentAutomation'
     DocumentTemplate_base:
       type: object
       properties:
@@ -474,25 +434,6 @@ components:
           type: string
           format: date-time
           description: The time the *DocumentTemplate* was last updated (as a ISO-8601 timestamp)
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    DocumentAutomation_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/DocumentAutomation'
     Matter_base:
       type: object
       properties:
@@ -583,6 +524,88 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    DocumentAutomation:
+      allOf:
+      - $ref: '#/components/schemas/DocumentAutomation_base'
+      - type: object
+        properties:
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          document_template:
+            $ref: '#/components/schemas/DocumentTemplate_base'
+            description: DocumentTemplate
+          documents:
+            type: array
+            items:
+              $ref: '#/components/schemas/Document_base'
+            description: Document
+    DocumentAutomation_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: DocumentAutomation List Response
+          items:
+            $ref: '#/components/schemas/DocumentAutomation'
+    DocumentAutomation_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *DocumentAutomation*
+        etag:
+          type: string
+          description: ETag for the *DocumentAutomation*
+        state:
+          type: string
+          enum:
+          - not_started
+          - queued
+          - in_progress
+          - empty
+          - failed
+          - completed
+          description: A text description of what the automation is currently doing
+        export_formats:
+          type: string
+          enum:
+          - pdf
+          - original
+          description: An array of what formats were requested
+        filename:
+          type: string
+          description: The name of the file being generated.
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentAutomation* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentAutomation* was last updated (as a ISO-8601 timestamp)
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     Document_base:
       type: object
       properties:
@@ -630,29 +653,6 @@ components:
         content_type:
           type: string
           description: The uploaded file content type
-    DocumentAutomation:
-      allOf:
-      - $ref: '#/components/schemas/DocumentAutomation_base'
-      - type: object
-        properties:
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          document_template:
-            $ref: '#/components/schemas/DocumentTemplate_base'
-            description: DocumentTemplate
-          documents:
-            type: array
-            items:
-              $ref: '#/components/schemas/Document_base'
-            description: Document
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

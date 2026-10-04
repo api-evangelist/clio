@@ -490,16 +490,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Group:
-      allOf:
-      - $ref: '#/components/schemas/Group_base'
-      - type: object
-        properties:
-          users:
-            type: array
-            items:
-              $ref: '#/components/schemas/User_base'
-            description: User
     Group_List:
       type: object
       required:
@@ -510,13 +500,16 @@ components:
           description: Group List Response
           items:
             $ref: '#/components/schemas/Group'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
+    Group:
+      allOf:
+      - $ref: '#/components/schemas/Group_base'
+      - type: object
+        properties:
+          users:
+            type: array
+            items:
+              $ref: '#/components/schemas/User_base'
+            description: User
     Group_base:
       type: object
       properties:
@@ -545,13 +538,6 @@ components:
           type: string
           format: date-time
           description: The time the *Group* was last updated (as a ISO-8601 timestamp)
-    Group_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Group'
     ErrorDetail:
       type: object
       required:
@@ -564,6 +550,13 @@ components:
         message:
           type: string
           description: Detailed message about the error
+    Group_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Group'
     User_base:
       type: object
       properties:
@@ -634,6 +627,13 @@ components:
           type: string
           format: date-time
           description: The time the *User* was last updated (as a ISO-8601 timestamp)
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

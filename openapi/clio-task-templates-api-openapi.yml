@@ -954,107 +954,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    TaskType_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *TaskType*
-        etag:
-          type: string
-          description: ETag for the *TaskType*
-        name:
-          type: string
-          description: The name of the *TaskType*
-        deleted_at:
-          type: string
-          format: date-time
-          description: The time the *TaskType* was deleted (as a ISO-8601 timestamp)
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *TaskType* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *TaskType* was last updated (as a ISO-8601 timestamp)
-    CascadingTaskTemplate_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *TaskTemplate*
-        name:
-          type: string
-          description: The name of the *TaskTemplate*
-    ReminderTemplate_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ReminderTemplate*
-        etag:
-          type: string
-          description: ETag for the *ReminderTemplate*
-        duration:
-          type: integer
-          format: int32
-          description: The time in minutes to remind user before the subject.
-        notification_type:
-          type: string
-          enum:
-          - Email
-          - Popup
-          description: The type of method to be notified by
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ReminderTemplate* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ReminderTemplate* was last updated (as a ISO-8601 timestamp)
-    TaskTemplate_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: TaskTemplate List Response
-          items:
-            $ref: '#/components/schemas/TaskTemplate'
-    TaskTemplateList_base:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *TaskTemplateList* was created (as a ISO-8601 timestamp)
-        description:
-          type: string
-          description: A detailed description of the *TaskTemplateList*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *TaskTemplateList*
-        etag:
-          type: string
-          description: ETag for the *TaskTemplateList*
-        name:
-          type: string
-          description: The name of the *TaskTemplateList*
-        templates_count:
-          type: integer
-          format: int32
-          description: How many task templates exist as an association to the *TaskTemplateList*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *TaskTemplateList* was last updated (as a ISO-8601 timestamp)
     TaskTemplate_base:
       type: object
       properties:
@@ -1107,45 +1006,44 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    Error:
+    CascadingTaskTemplate_base:
       type: object
-      required:
-      - error
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    TaskTemplate_Show:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *TaskTemplate*
+        name:
+          type: string
+          description: The name of the *TaskTemplate*
+    ReminderTemplate_base:
       type: object
-      required:
-      - data
       properties:
-        data:
-          $ref: '#/components/schemas/TaskTemplate'
-    TaskTemplate:
-      allOf:
-      - $ref: '#/components/schemas/TaskTemplate_base'
-      - type: object
-        properties:
-          cascading_source:
-            $ref: '#/components/schemas/CascadingTaskTemplate_base'
-            description: CascadingTaskTemplate
-          assignee:
-            $ref: '#/components/schemas/User_base'
-            description: User
-          task_template_list:
-            $ref: '#/components/schemas/TaskTemplateList_base'
-            description: TaskTemplateList
-          task_type:
-            $ref: '#/components/schemas/TaskType_base'
-            description: TaskType
-          template_creator:
-            $ref: '#/components/schemas/User_base'
-            description: User
-          reminder_templates:
-            type: array
-            items:
-              $ref: '#/components/schemas/ReminderTemplate_base'
-            description: ReminderTemplate
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ReminderTemplate*
+        etag:
+          type: string
+          description: ETag for the *ReminderTemplate*
+        duration:
+          type: integer
+          format: int32
+          description: The time in minutes to remind user before the subject.
+        notification_type:
+          type: string
+          enum:
+          - Email
+          - Popup
+          description: The type of method to be notified by
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ReminderTemplate* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ReminderTemplate* was last updated (as a ISO-8601 timestamp)
     User_base:
       type: object
       properties:
@@ -1216,6 +1114,108 @@ components:
           type: string
           format: date-time
           description: The time the *User* was last updated (as a ISO-8601 timestamp)
+    TaskTemplate_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: TaskTemplate List Response
+          items:
+            $ref: '#/components/schemas/TaskTemplate'
+    TaskTemplateList_base:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *TaskTemplateList* was created (as a ISO-8601 timestamp)
+        description:
+          type: string
+          description: A detailed description of the *TaskTemplateList*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *TaskTemplateList*
+        etag:
+          type: string
+          description: ETag for the *TaskTemplateList*
+        name:
+          type: string
+          description: The name of the *TaskTemplateList*
+        templates_count:
+          type: integer
+          format: int32
+          description: How many task templates exist as an association to the *TaskTemplateList*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *TaskTemplateList* was last updated (as a ISO-8601 timestamp)
+    TaskTemplate:
+      allOf:
+      - $ref: '#/components/schemas/TaskTemplate_base'
+      - type: object
+        properties:
+          cascading_source:
+            $ref: '#/components/schemas/CascadingTaskTemplate_base'
+            description: CascadingTaskTemplate
+          assignee:
+            $ref: '#/components/schemas/User_base'
+            description: User
+          task_template_list:
+            $ref: '#/components/schemas/TaskTemplateList_base'
+            description: TaskTemplateList
+          task_type:
+            $ref: '#/components/schemas/TaskType_base'
+            description: TaskType
+          template_creator:
+            $ref: '#/components/schemas/User_base'
+            description: User
+          reminder_templates:
+            type: array
+            items:
+              $ref: '#/components/schemas/ReminderTemplate_base'
+            description: ReminderTemplate
+    TaskType_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *TaskType*
+        etag:
+          type: string
+          description: ETag for the *TaskType*
+        name:
+          type: string
+          description: The name of the *TaskType*
+        deleted_at:
+          type: string
+          format: date-time
+          description: The time the *TaskType* was deleted (as a ISO-8601 timestamp)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *TaskType* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *TaskType* was last updated (as a ISO-8601 timestamp)
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    TaskTemplate_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/TaskTemplate'
 x-tagGroups:
 - name: Api
   tags:

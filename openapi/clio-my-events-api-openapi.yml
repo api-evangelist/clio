@@ -240,6 +240,26 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    MyEvent:
+      allOf:
+      - $ref: '#/components/schemas/MyEvent_base'
+      - type: object
+        properties:
+          event:
+            $ref: '#/components/schemas/Event_base'
+            description: Event
     Event_base:
       type: object
       properties:
@@ -294,17 +314,6 @@ components:
           type: integer
           format: int64
           description: Id of the subject that triggered the notification
-    MyEvent:
-      allOf:
-      - $ref: '#/components/schemas/MyEvent_base'
-      - type: object
-        properties:
-          event:
-            $ref: '#/components/schemas/Event_base'
-            description: Event
-    MyEvent_base:
-      type: object
-      properties: {}
     MyEvent_List:
       type: object
       required:
@@ -322,18 +331,9 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/MyEvent'
-    ErrorDetail:
+    MyEvent_base:
       type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
+      properties: {}
     Error:
       type: object
       required:

@@ -185,6 +185,18 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     BillableClient_List:
       type: object
       required:
@@ -195,6 +207,16 @@ components:
           description: BillableClient List Response
           items:
             $ref: '#/components/schemas/BillableClient'
+    BillableClient:
+      allOf:
+      - $ref: '#/components/schemas/BillableClient_base'
+      - type: object
+        properties:
+          billable_matters:
+            type: array
+            items:
+              $ref: '#/components/schemas/BillableMatter_base'
+            description: BillableMatter
     BillableClient_base:
       type: object
       properties:
@@ -250,28 +272,6 @@ components:
         display_number:
           type: string
           description: The reference to the matter
-    BillableClient:
-      allOf:
-      - $ref: '#/components/schemas/BillableClient_base'
-      - type: object
-        properties:
-          billable_matters:
-            type: array
-            items:
-              $ref: '#/components/schemas/BillableMatter_base'
-            description: BillableMatter
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
     Error:
       type: object
       required:

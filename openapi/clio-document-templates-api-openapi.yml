@@ -573,27 +573,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    DocumentTemplate:
-      allOf:
-      - $ref: '#/components/schemas/DocumentTemplate_base'
-      - type: object
-        properties:
-          document_category:
-            $ref: '#/components/schemas/DocumentCategory_base'
-            description: DocumentCategory
-          last_modified_by:
-            $ref: '#/components/schemas/User_base'
-            description: User
-    DocumentTemplate_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: DocumentTemplate List Response
-          items:
-            $ref: '#/components/schemas/DocumentTemplate'
     DocumentTemplate_base:
       type: object
       properties:
@@ -622,20 +601,6 @@ components:
           type: string
           format: date-time
           description: The time the *DocumentTemplate* was last updated (as a ISO-8601 timestamp)
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    DocumentTemplate_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/DocumentTemplate'
     ErrorDetail:
       type: object
       required:
@@ -648,27 +613,27 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    DocumentCategory_base:
+    DocumentTemplate_List:
       type: object
+      required:
+      - data
       properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *DocumentCategory*
-        etag:
-          type: string
-          description: ETag for the *DocumentCategory*
-        name:
-          type: string
-          description: The name of the *DocumentCategory*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *DocumentCategory* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *DocumentCategory* was last updated (as a ISO-8601 timestamp)
+        data:
+          type: array
+          description: DocumentTemplate List Response
+          items:
+            $ref: '#/components/schemas/DocumentTemplate'
+    DocumentTemplate:
+      allOf:
+      - $ref: '#/components/schemas/DocumentTemplate_base'
+      - type: object
+        properties:
+          document_category:
+            $ref: '#/components/schemas/DocumentCategory_base'
+            description: DocumentCategory
+          last_modified_by:
+            $ref: '#/components/schemas/User_base'
+            description: User
     User_base:
       type: object
       properties:
@@ -739,6 +704,41 @@ components:
           type: string
           format: date-time
           description: The time the *User* was last updated (as a ISO-8601 timestamp)
+    DocumentCategory_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *DocumentCategory*
+        etag:
+          type: string
+          description: ETag for the *DocumentCategory*
+        name:
+          type: string
+          description: The name of the *DocumentCategory*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentCategory* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentCategory* was last updated (as a ISO-8601 timestamp)
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    DocumentTemplate_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/DocumentTemplate'
 x-tagGroups:
 - name: Api
   tags:

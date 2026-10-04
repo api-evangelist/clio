@@ -1158,37 +1158,28 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
-    Communication_Show:
+    Communication_List:
       type: object
       required:
       - data
       properties:
         data:
-          $ref: '#/components/schemas/Communication'
-    ExternalProperty_base:
+          type: array
+          description: Communication List Response
+          items:
+            $ref: '#/components/schemas/Communication'
+    ErrorDetail:
       type: object
+      required:
+      - type
+      - message
       properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ExternalProperty*
-        etag:
+        type:
           type: string
-          description: ETag for the *ExternalProperty*
-        name:
+          description: Unique name for this error
+        message:
           type: string
-          description: The name of the *ExternalProperty*
-        value:
-          type: string
-          description: The value of the *ExternalProperty*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ExternalProperty* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ExternalProperty* was last updated (as a ISO-8601 timestamp)
+          description: Detailed message about the error
     Participant_base:
       type: object
       properties:
@@ -1232,6 +1223,62 @@ components:
         job_title_name:
           type: string
           description: the job title name of the participant if they are a firm user and have one
+    Avatar_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Avatar*
+        etag:
+          type: string
+          description: ETag for the *Avatar*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Avatar* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Avatar* was last updated (as a ISO-8601 timestamp)
+        url:
+          type: string
+          description: The URL for the *Avatar*
+        _destroy:
+          type: boolean
+          description: Whether to destroy the *Avatar*
+    Participant:
+      allOf:
+      - $ref: '#/components/schemas/Participant_base'
+      - type: object
+        properties:
+          avatar:
+            $ref: '#/components/schemas/Avatar_base'
+            description: Avatar
+    ExternalProperty_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ExternalProperty*
+        etag:
+          type: string
+          description: ETag for the *ExternalProperty*
+        name:
+          type: string
+          description: The name of the *ExternalProperty*
+        value:
+          type: string
+          description: The value of the *ExternalProperty*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ExternalProperty* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ExternalProperty* was last updated (as a ISO-8601 timestamp)
     NotificationEventSubscriber_base:
       type: object
       properties:
@@ -1257,6 +1304,176 @@ components:
           type: string
           format: date-time
           description: The time the *NotificationEventSubscriber* was last updated (as a ISO-8601 timestamp)
+    User_base:
+      type: object
+      properties:
+        account_owner:
+          type: boolean
+          description: Whether the *User* is the owner of the account
+        clio_connect:
+          type: boolean
+          description: Whether the *User* is a Clio Connect user
+        court_rules_default_attendee:
+          type: boolean
+          description: Whether the *User* is a default attendee for court rules events
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *User* was created (as a ISO-8601 timestamp)
+        default_calendar_id:
+          type: integer
+          format: int64
+          description: Default calendar id for *User*.
+        email:
+          type: string
+          description: The email of the *User*
+        enabled:
+          type: boolean
+          description: Whether the *User* is allowed to log in
+        etag:
+          type: string
+          description: ETag for the *User*
+        first_name:
+          type: string
+          description: The first name of the *User*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *User*
+        initials:
+          type: string
+          description: The initials of the *User*
+        last_name:
+          type: string
+          description: The last name of the *User*
+        name:
+          type: string
+          description: The full name of the *User*
+        phone_number:
+          type: string
+          description: The primary phone number for the *User*.
+        rate:
+          type: number
+          format: float
+          description: Default user activity rate for *User*.
+        roles:
+          type: array
+          items:
+            type: string
+          description: An array of roles assigned to this *User*
+        subscription_type:
+          type: string
+          enum:
+          - Attorney
+          - NonAttorney
+          description: The subscription type of the *User*
+        time_zone:
+          type: string
+          description: The selected time zone of the *User*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *User* was last updated (as a ISO-8601 timestamp)
+    Communication_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Communication*
+        etag:
+          type: string
+          description: ETag for the *Communication*
+        subject:
+          type: string
+          description: The subject line of the *Communication*
+        body:
+          type: string
+          description: The main content of the *Communication*
+        type:
+          type: string
+          enum:
+          - EmailCommunication
+          - PhoneCommunication
+          description: The type of the *Communication*
+        date:
+          type: string
+          format: date
+          description: The date of the *Communication* (as a ISO-8601 datestamp)
+        time_entries_count:
+          type: integer
+          format: int32
+          description: The number of time_entries associated with the *Communication*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Communication* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Communication* was last updated (as a ISO-8601 timestamp)
+        received_at:
+          type: string
+          format: date-time
+          description: The date-time of the *Communication* (in ISO-8601 format)
+    Communication:
+      allOf:
+      - $ref: '#/components/schemas/Communication_base'
+      - type: object
+        properties:
+          user:
+            $ref: '#/components/schemas/User_base'
+            description: User
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          communication_eml_file:
+            $ref: '#/components/schemas/CommunicationEmlFile_base'
+            description: CommunicationEmlFile
+          senders:
+            type: array
+            items:
+              $ref: '#/components/schemas/Participant'
+            description: Participant
+          receivers:
+            type: array
+            items:
+              $ref: '#/components/schemas/Participant'
+            description: Participant
+          external_properties:
+            type: array
+            items:
+              $ref: '#/components/schemas/ExternalProperty_base'
+            description: ExternalProperty
+          time_entries:
+            type: array
+            items:
+              $ref: '#/components/schemas/Activity_base'
+            description: Activity
+          documents:
+            type: array
+            items:
+              $ref: '#/components/schemas/Document_base'
+            description: Document
+          notification_event_subscribers:
+            type: array
+            items:
+              $ref: '#/components/schemas/NotificationEventSubscriber_base'
+            description: NotificationEventSubscriber
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    Communication_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Communication'
     Activity_base:
       type: object
       properties:
@@ -1394,141 +1611,6 @@ components:
         currency:
           type: object
           description: The currency of the *Activity*
-    Participant:
-      allOf:
-      - $ref: '#/components/schemas/Participant_base'
-      - type: object
-        properties:
-          avatar:
-            $ref: '#/components/schemas/Avatar_base'
-            description: Avatar
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    Avatar_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Avatar*
-        etag:
-          type: string
-          description: ETag for the *Avatar*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Avatar* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Avatar* was last updated (as a ISO-8601 timestamp)
-        url:
-          type: string
-          description: The URL for the *Avatar*
-        _destroy:
-          type: boolean
-          description: Whether to destroy the *Avatar*
-    Communication_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: Communication List Response
-          items:
-            $ref: '#/components/schemas/Communication'
-    Communication_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Communication*
-        etag:
-          type: string
-          description: ETag for the *Communication*
-        subject:
-          type: string
-          description: The subject line of the *Communication*
-        body:
-          type: string
-          description: The main content of the *Communication*
-        type:
-          type: string
-          enum:
-          - EmailCommunication
-          - PhoneCommunication
-          description: The type of the *Communication*
-        date:
-          type: string
-          format: date
-          description: The date of the *Communication* (as a ISO-8601 datestamp)
-        time_entries_count:
-          type: integer
-          format: int32
-          description: The number of time_entries associated with the *Communication*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Communication* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Communication* was last updated (as a ISO-8601 timestamp)
-        received_at:
-          type: string
-          format: date-time
-          description: The date-time of the *Communication* (in ISO-8601 format)
-    Communication:
-      allOf:
-      - $ref: '#/components/schemas/Communication_base'
-      - type: object
-        properties:
-          user:
-            $ref: '#/components/schemas/User_base'
-            description: User
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          communication_eml_file:
-            $ref: '#/components/schemas/CommunicationEmlFile_base'
-            description: CommunicationEmlFile
-          senders:
-            type: array
-            items:
-              $ref: '#/components/schemas/Participant'
-            description: Participant
-          receivers:
-            type: array
-            items:
-              $ref: '#/components/schemas/Participant'
-            description: Participant
-          external_properties:
-            type: array
-            items:
-              $ref: '#/components/schemas/ExternalProperty_base'
-            description: ExternalProperty
-          time_entries:
-            type: array
-            items:
-              $ref: '#/components/schemas/Activity_base'
-            description: Activity
-          documents:
-            type: array
-            items:
-              $ref: '#/components/schemas/Document_base'
-            description: Document
-          notification_event_subscribers:
-            type: array
-            items:
-              $ref: '#/components/schemas/NotificationEventSubscriber_base'
-            description: NotificationEventSubscriber
     Document_base:
       type: object
       properties:
@@ -1576,88 +1658,6 @@ components:
         content_type:
           type: string
           description: The uploaded file content type
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    User_base:
-      type: object
-      properties:
-        account_owner:
-          type: boolean
-          description: Whether the *User* is the owner of the account
-        clio_connect:
-          type: boolean
-          description: Whether the *User* is a Clio Connect user
-        court_rules_default_attendee:
-          type: boolean
-          description: Whether the *User* is a default attendee for court rules events
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *User* was created (as a ISO-8601 timestamp)
-        default_calendar_id:
-          type: integer
-          format: int64
-          description: Default calendar id for *User*.
-        email:
-          type: string
-          description: The email of the *User*
-        enabled:
-          type: boolean
-          description: Whether the *User* is allowed to log in
-        etag:
-          type: string
-          description: ETag for the *User*
-        first_name:
-          type: string
-          description: The first name of the *User*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *User*
-        initials:
-          type: string
-          description: The initials of the *User*
-        last_name:
-          type: string
-          description: The last name of the *User*
-        name:
-          type: string
-          description: The full name of the *User*
-        phone_number:
-          type: string
-          description: The primary phone number for the *User*.
-        rate:
-          type: number
-          format: float
-          description: Default user activity rate for *User*.
-        roles:
-          type: array
-          items:
-            type: string
-          description: An array of roles assigned to this *User*
-        subscription_type:
-          type: string
-          enum:
-          - Attorney
-          - NonAttorney
-          description: The subscription type of the *User*
-        time_zone:
-          type: string
-          description: The selected time zone of the *User*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *User* was last updated (as a ISO-8601 timestamp)
 x-tagGroups:
 - name: Api
   tags:

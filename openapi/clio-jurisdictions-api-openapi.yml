@@ -221,13 +221,46 @@ paths:
           description: Not Modified
 components:
   schemas:
-    Jurisdiction_Show:
+    ErrorDetail:
       type: object
       required:
-      - data
+      - type
+      - message
       properties:
-        data:
-          $ref: '#/components/schemas/Jurisdiction'
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    ServiceType_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ServiceType*
+        etag:
+          type: string
+          description: ETag for the *ServiceType*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ServiceType* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ServiceType* was last updated (as a ISO-8601 timestamp)
+        system_id:
+          type: integer
+          format: int64
+          description: Server ID
+        description:
+          type: string
+          description: A detailed description of the *ServiceType*
+        default:
+          type: boolean
+          description: Whether *ServiceType* is default for the current user
     Jurisdiction_base:
       type: object
       properties:
@@ -265,44 +298,6 @@ components:
         is_local_timezone:
           type: boolean
           description: Boolean value for when the timezone is in the local users timezone
-    ServiceType_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ServiceType*
-        etag:
-          type: string
-          description: ETag for the *ServiceType*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ServiceType* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ServiceType* was last updated (as a ISO-8601 timestamp)
-        system_id:
-          type: integer
-          format: int64
-          description: Server ID
-        description:
-          type: string
-          description: A detailed description of the *ServiceType*
-        default:
-          type: boolean
-          description: Whether *ServiceType* is default for the current user
-    Jurisdiction_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: Jurisdiction List Response
-          items:
-            $ref: '#/components/schemas/Jurisdiction'
     Jurisdiction:
       allOf:
       - $ref: '#/components/schemas/Jurisdiction_base'
@@ -313,18 +308,6 @@ components:
             items:
               $ref: '#/components/schemas/ServiceType_base'
             description: ServiceType
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
     Error:
       type: object
       required:
@@ -332,6 +315,23 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetail'
+    Jurisdiction_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Jurisdiction'
+    Jurisdiction_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: Jurisdiction List Response
+          items:
+            $ref: '#/components/schemas/Jurisdiction'
 x-tagGroups:
 - name: Api
   tags:

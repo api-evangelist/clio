@@ -117,6 +117,23 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    EmailAddress:
+      allOf:
+      - $ref: '#/components/schemas/EmailAddress_base'
+      - type: object
+        properties: {}
     EmailAddress_List:
       type: object
       required:
@@ -127,11 +144,6 @@ components:
           description: EmailAddress List Response
           items:
             $ref: '#/components/schemas/EmailAddress'
-    EmailAddress:
-      allOf:
-      - $ref: '#/components/schemas/EmailAddress_base'
-      - type: object
-        properties: {}
     EmailAddress_base:
       type: object
       properties:
@@ -159,18 +171,6 @@ components:
           type: string
           format: date-time
           description: The time the *EmailAddress* was last updated (as a ISO-8601 timestamp)
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
     Error:
       type: object
       required:

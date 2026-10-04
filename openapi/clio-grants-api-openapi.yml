@@ -447,13 +447,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Grant_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Grant'
     Grant_List:
       type: object
       required:
@@ -464,14 +457,6 @@ components:
           description: Grant List Response
           items:
             $ref: '#/components/schemas/Grant'
-    Grant:
-      allOf:
-      - $ref: '#/components/schemas/Grant_base'
-      - type: object
-        properties:
-          grant_funding_source:
-            $ref: '#/components/schemas/GrantFundingSource_base'
-            description: GrantFundingSource
     Grant_base:
       type: object
       properties:
@@ -513,6 +498,40 @@ components:
           type: string
           format: date
           description: End date of the grant
+    Grant:
+      allOf:
+      - $ref: '#/components/schemas/Grant_base'
+      - type: object
+        properties:
+          grant_funding_source:
+            $ref: '#/components/schemas/GrantFundingSource_base'
+            description: GrantFundingSource
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    Grant_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Grant'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     GrantFundingSource_base:
       type: object
       properties:
@@ -534,25 +553,6 @@ components:
           type: string
           format: date-time
           description: The time the *GrantFundingSource* was last updated (as a ISO-8601 timestamp)
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

@@ -538,13 +538,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    TaxRateConfiguration_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/TaxRateConfiguration'
     TaxRateConfiguration_List:
       type: object
       required:
@@ -555,6 +548,23 @@ components:
           description: TaxRateConfiguration List Response
           items:
             $ref: '#/components/schemas/TaxRateConfiguration'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    TaxRateConfiguration:
+      allOf:
+      - $ref: '#/components/schemas/TaxRateConfiguration_base'
+      - type: object
+        properties: {}
     TaxRateConfiguration_base:
       type: object
       properties:
@@ -599,23 +609,13 @@ components:
           type: string
           format: date-time
           description: The time the *TaxRateConfiguration* was last updated (as a ISO-8601 timestamp)
-    ErrorDetail:
+    TaxRateConfiguration_Show:
       type: object
       required:
-      - type
-      - message
+      - data
       properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    TaxRateConfiguration:
-      allOf:
-      - $ref: '#/components/schemas/TaxRateConfiguration_base'
-      - type: object
-        properties: {}
+        data:
+          $ref: '#/components/schemas/TaxRateConfiguration'
     Error:
       type: object
       required:

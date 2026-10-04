@@ -1082,81 +1082,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    CalendarEntry_base:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the *CalendarEntry*
-        etag:
-          type: string
-          description: ETag for the *CalendarEntry*
-        summary:
-          type: string
-          description: A short summary of the *CalendarEntry*
-        description:
-          type: string
-          description: A detailed description of the *CalendarEntry*
-        location:
-          type: string
-          description: The geographic location of the *CalendarEntry*
-        start_at:
-          type: string
-          format: date-time
-          description: The time the *CalendarEntry* starts (as an ISO-8601 timestamp)
-        start_date:
-          type: string
-          format: date
-          description: The date the *CalendarEntry* starts (in the current user's timezone)
-        start_time:
-          type: string
-          description: The time the *CalendarEntry* starts (in the current user's timezone, including timezone abbreviation)
-        end_at:
-          type: string
-          format: date-time
-          description: The time the *CalendarEntry* ends (as an ISO-8601 timestamp)
-        end_date:
-          type: string
-          format: date
-          description: The date the *CalendarEntry* ends (in the current user's timezone)
-        end_time:
-          type: string
-          description: The time the *CalendarEntry* ends (in the current user's timezone, including timezone abbreviation)
-        all_day:
-          type: boolean
-          description: Whether the event is all day
-        recurrence_rule:
-          type: string
-          description: Recurrence rule for expanding
-        parent_calendar_entry_id:
-          type: integer
-          format: int64
-          description: Identifier for the parent *CalendarEntry*
-        court_rule:
-          type: boolean
-          description: Whether this event is associated with a Court Rule
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *CalendarEntry* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *CalendarEntry* was last updated (as a ISO-8601 timestamp)
-        permission:
-          type: string
-          description: The view permission for the current user, will return 'viewer' when permission is 'limited_viewer' and the user is an attendee.
-        calendar_owner_id:
-          type: integer
-          format: int64
-          description: The id of the calendar owner.
-        start_at_time_zone:
-          type: string
-          description: Original start at time zone of the event.
-        time_entries_count:
-          type: integer
-          format: int32
-          description: The number of `TimeEntry` activities associated with the *CalendarEntry*
     CalendarEntryEventType_base:
       type: object
       properties:
@@ -1202,340 +1127,6 @@ components:
         name:
           type: string
           description: The name for the *CalendarEntryEventType*
-    ExternalProperty_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ExternalProperty*
-        etag:
-          type: string
-          description: ETag for the *ExternalProperty*
-        name:
-          type: string
-          description: The name of the *ExternalProperty*
-        value:
-          type: string
-          description: The value of the *ExternalProperty*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ExternalProperty* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ExternalProperty* was last updated (as a ISO-8601 timestamp)
-    Attendee_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Attendee*
-        etag:
-          type: string
-          description: ETag for the *Attendee*
-        type:
-          type: string
-          enum:
-          - Contact
-          - Calendar
-          description: The class name of the *Attendee*
-        name:
-          type: string
-          description: The name of the *Attendee*
-        enabled:
-          type: boolean
-          description: If the Attendee is a user, represents whether the user is enabled or disabled. Returns null if attendee is a Contact.
-        email:
-          type: string
-          description: If the Attendee is a User, this is the User's email. If the Attendee is a contact, this is the Contact's primary email address.
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Attendee* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Attendee* was last updated (as a ISO-8601 timestamp)
-    Activity_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Activity*
-        etag:
-          type: string
-          description: ETag for the *Activity*
-        type:
-          type: string
-          enum:
-          - TimeEntry
-          - ExpenseEntry
-          - HardCostEntry
-          - SoftCostEntry
-          description: The type of the *Activity*
-        date:
-          type: string
-          format: date
-          description: The date the *Activity* was performed (as a ISO-8601 date)
-        quantity_in_hours:
-          type: number
-          format: double
-          description: The number of hours the TimeEntry took.
-        rounded_quantity_in_hours:
-          type: number
-          format: double
-          description: 'The number of hours rounded accordingly to the billing settings.
-
-            The rounded value is used to calculate the total.
-
-            '
-        quantity:
-          type: number
-          format: double
-          description: 'The field is applicable to TimeEntry, ExpenseEntry, and SoftCostEntry.
-
-
-            **Version <= 4.0.3:**
-
-            The number of hours the TimeEntry took.
-
-
-            **Latest version:**
-
-            The number of seconds the TimeEntry took.
-
-            '
-        rounded_quantity:
-          type: number
-          format: double
-          description: 'The field is applicable to time entries only.
-
-
-            **Version <= 4.0.3:**
-
-            The number of hours rounded accordingly to the billing settings.
-
-            The rounded value is used to calculate the total.
-
-
-            **Latest version:**
-
-            The number of seconds rounded accordingly to the billing settings.
-
-            The rounded value is used to calculate the total.
-
-            '
-        quantity_redacted:
-          type: boolean
-          description: 'Is `true` if any of the following fields are redacted:
-
-            `quantity`, `rounded_quantity`, `rounded_quantity_in_hours`, `quantity_in_hours`, `total`, `non_billable_total`
-
-            '
-        price:
-          type: number
-          format: double
-          description: The hourly or flat rate of the *Activity*
-        note:
-          type: string
-          description: The details about the *Activity*
-        flat_rate:
-          type: boolean
-          description: Whether the *Activity* is a flat rate
-        billed:
-          type: boolean
-          description: Whether the *Activity* has been added to an active bill that is in the state of `awaiting_payment` or `paid`
-        on_bill:
-          type: boolean
-          description: Whether the *Activity* has been added to an active bill that is in the state of `draft`, `awaiting_approval`, `awaiting_payment` or `paid`
-        total:
-          type: number
-          format: double
-          description: The total cost of draft, billable and billed items in the *Activity*
-        contingency_fee:
-          type: boolean
-          description: Whether or not the *Activity* is a contingency fee
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Activity* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Activity* was last updated (as a ISO-8601 timestamp)
-        reference:
-          type: string
-          description: A check reference for a HardCostEntry.
-        non_billable:
-          type: boolean
-          description: Whether the *Activity* is non-billable
-        non_billable_total:
-          type: number
-          format: double
-          description: The total cost of non-billable items in the *Activity*
-        no_charge:
-          type: boolean
-          description: Whether the non-billable *Activity* is shown on the bill.
-        tax_setting:
-          type: string
-          enum:
-          - no_tax
-          - tax_1_only
-          - tax_2_only
-          - tax_1_and_tax_2
-          description: The option denoting whether primary tax, secondary tax, or both is applied to an expense entry.
-        tax_settings:
-          type: array
-          items:
-            type: object
-          description: Array of objects, with each object representing a tax setting that is applied to an expense entry with 'tax_rate_configuration_id', 'order', and 'rule' as the object properties.
-        currency:
-          type: object
-          description: The currency of the *Activity*
-    CalendarEntry:
-      allOf:
-      - $ref: '#/components/schemas/CalendarEntry_base'
-      - type: object
-        properties:
-          time_entries:
-            type: array
-            items:
-              $ref: '#/components/schemas/Activity_base'
-            description: Activity
-          conference_meeting:
-            $ref: '#/components/schemas/ConferenceMeeting_base'
-            description: ConferenceMeeting
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          matter_docket:
-            $ref: '#/components/schemas/MatterDocket_base'
-            description: MatterDocket
-          calendar_owner:
-            $ref: '#/components/schemas/Calendar_base'
-            description: Calendar
-          parent_calendar_entry:
-            $ref: '#/components/schemas/CalendarEntry_base'
-            description: CalendarEntry
-          calendar_entry_event_type:
-            $ref: '#/components/schemas/CalendarEntryEventType_base'
-            description: CalendarEntryEventType
-          attendees:
-            type: array
-            items:
-              $ref: '#/components/schemas/Attendee_base'
-            description: Attendee
-          calendars:
-            type: array
-            items:
-              $ref: '#/components/schemas/Calendar_base'
-            description: Calendar
-          reminders:
-            type: array
-            items:
-              $ref: '#/components/schemas/Reminder_base'
-            description: Reminder
-          external_properties:
-            type: array
-            items:
-              $ref: '#/components/schemas/ExternalProperty_base'
-            description: ExternalProperty
-    Reminder_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Reminder*
-        etag:
-          type: string
-          description: ETag for the *Reminder*
-        duration:
-          type: integer
-          format: int32
-          description: Time in minutes to remind user before the subject
-        next_delivery_at:
-          type: string
-          format: date-time
-          description: The time the *Reminder* will be delivered (as a ISO-8601 timestamp)
-        state:
-          type: string
-          enum:
-          - initializing
-          - scheduling
-          - rescheduling
-          - scheduled
-          - attempting_delivery
-          - delivery_failed
-          - delivered
-          - delivery_skipped
-          - invalid_user
-          description: The current state of the *Reminder*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Reminder* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Reminder* was last updated (as a ISO-8601 timestamp)
-    CalendarEntry_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: CalendarEntry List Response
-          items:
-            $ref: '#/components/schemas/CalendarEntry'
-    CalendarEntry_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/CalendarEntry'
-    MatterDocket_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *MatterDocket*
-        etag:
-          type: string
-          description: ETag for the *MatterDocket*
-        name:
-          type: string
-          description: The name of the *MatterDocket*
-        start_date:
-          type: string
-          format: date
-          description: The date the *MatterDocket* will start (as a ISO-8601 date)
-        start_time:
-          type: string
-          format: date-time
-          description: The time the *MatterDocket* will start, required for specific triggers (as a ISO-8601 timestamp)
-        status:
-          type: string
-          description: The status of the *MatterDocket* creation
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *MatterDocket* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *MatterDocket* was last updated (as a ISO-8601 timestamp)
-        deleted_at:
-          type: string
-          format: date-time
-          description: The time the *MatterDocket* was deleted (as a ISO-8601 timestamp)
     Calendar_base:
       type: object
       properties:
@@ -1758,6 +1349,75 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
+    Attendee_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Attendee*
+        etag:
+          type: string
+          description: ETag for the *Attendee*
+        type:
+          type: string
+          enum:
+          - Contact
+          - Calendar
+          description: The class name of the *Attendee*
+        name:
+          type: string
+          description: The name of the *Attendee*
+        enabled:
+          type: boolean
+          description: If the Attendee is a user, represents whether the user is enabled or disabled. Returns null if attendee is a Contact.
+        email:
+          type: string
+          description: If the Attendee is a User, this is the User's email. If the Attendee is a contact, this is the Contact's primary email address.
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Attendee* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Attendee* was last updated (as a ISO-8601 timestamp)
+    MatterDocket_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *MatterDocket*
+        etag:
+          type: string
+          description: ETag for the *MatterDocket*
+        name:
+          type: string
+          description: The name of the *MatterDocket*
+        start_date:
+          type: string
+          format: date
+          description: The date the *MatterDocket* will start (as a ISO-8601 date)
+        start_time:
+          type: string
+          format: date-time
+          description: The time the *MatterDocket* will start, required for specific triggers (as a ISO-8601 timestamp)
+        status:
+          type: string
+          description: The status of the *MatterDocket* creation
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *MatterDocket* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *MatterDocket* was last updated (as a ISO-8601 timestamp)
+        deleted_at:
+          type: string
+          format: date-time
+          description: The time the *MatterDocket* was deleted (as a ISO-8601 timestamp)
     ErrorDetail:
       type: object
       required:
@@ -1770,6 +1430,209 @@ components:
         message:
           type: string
           description: Detailed message about the error
+    CalendarEntry_base:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the *CalendarEntry*
+        etag:
+          type: string
+          description: ETag for the *CalendarEntry*
+        summary:
+          type: string
+          description: A short summary of the *CalendarEntry*
+        description:
+          type: string
+          description: A detailed description of the *CalendarEntry*
+        location:
+          type: string
+          description: The geographic location of the *CalendarEntry*
+        start_at:
+          type: string
+          format: date-time
+          description: The time the *CalendarEntry* starts (as an ISO-8601 timestamp)
+        start_date:
+          type: string
+          format: date
+          description: The date the *CalendarEntry* starts (in the current user's timezone)
+        start_time:
+          type: string
+          description: The time the *CalendarEntry* starts (in the current user's timezone, including timezone abbreviation)
+        end_at:
+          type: string
+          format: date-time
+          description: The time the *CalendarEntry* ends (as an ISO-8601 timestamp)
+        end_date:
+          type: string
+          format: date
+          description: The date the *CalendarEntry* ends (in the current user's timezone)
+        end_time:
+          type: string
+          description: The time the *CalendarEntry* ends (in the current user's timezone, including timezone abbreviation)
+        all_day:
+          type: boolean
+          description: Whether the event is all day
+        recurrence_rule:
+          type: string
+          description: Recurrence rule for expanding
+        parent_calendar_entry_id:
+          type: integer
+          format: int64
+          description: Identifier for the parent *CalendarEntry*
+        court_rule:
+          type: boolean
+          description: Whether this event is associated with a Court Rule
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *CalendarEntry* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *CalendarEntry* was last updated (as a ISO-8601 timestamp)
+        permission:
+          type: string
+          description: The view permission for the current user, will return 'viewer' when permission is 'limited_viewer' and the user is an attendee.
+        calendar_owner_id:
+          type: integer
+          format: int64
+          description: The id of the calendar owner.
+        start_at_time_zone:
+          type: string
+          description: Original start at time zone of the event.
+        time_entries_count:
+          type: integer
+          format: int32
+          description: The number of `TimeEntry` activities associated with the *CalendarEntry*
+    Reminder_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Reminder*
+        etag:
+          type: string
+          description: ETag for the *Reminder*
+        duration:
+          type: integer
+          format: int32
+          description: Time in minutes to remind user before the subject
+        next_delivery_at:
+          type: string
+          format: date-time
+          description: The time the *Reminder* will be delivered (as a ISO-8601 timestamp)
+        state:
+          type: string
+          enum:
+          - initializing
+          - scheduling
+          - rescheduling
+          - scheduled
+          - attempting_delivery
+          - delivery_failed
+          - delivered
+          - delivery_skipped
+          - invalid_user
+          description: The current state of the *Reminder*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Reminder* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Reminder* was last updated (as a ISO-8601 timestamp)
+    ExternalProperty_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ExternalProperty*
+        etag:
+          type: string
+          description: ETag for the *ExternalProperty*
+        name:
+          type: string
+          description: The name of the *ExternalProperty*
+        value:
+          type: string
+          description: The value of the *ExternalProperty*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ExternalProperty* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ExternalProperty* was last updated (as a ISO-8601 timestamp)
+    CalendarEntry_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/CalendarEntry'
+    CalendarEntry:
+      allOf:
+      - $ref: '#/components/schemas/CalendarEntry_base'
+      - type: object
+        properties:
+          time_entries:
+            type: array
+            items:
+              $ref: '#/components/schemas/Activity_base'
+            description: Activity
+          conference_meeting:
+            $ref: '#/components/schemas/ConferenceMeeting_base'
+            description: ConferenceMeeting
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          matter_docket:
+            $ref: '#/components/schemas/MatterDocket_base'
+            description: MatterDocket
+          calendar_owner:
+            $ref: '#/components/schemas/Calendar_base'
+            description: Calendar
+          parent_calendar_entry:
+            $ref: '#/components/schemas/CalendarEntry_base'
+            description: CalendarEntry
+          calendar_entry_event_type:
+            $ref: '#/components/schemas/CalendarEntryEventType_base'
+            description: CalendarEntryEventType
+          attendees:
+            type: array
+            items:
+              $ref: '#/components/schemas/Attendee_base'
+            description: Attendee
+          calendars:
+            type: array
+            items:
+              $ref: '#/components/schemas/Calendar_base'
+            description: Calendar
+          reminders:
+            type: array
+            items:
+              $ref: '#/components/schemas/Reminder_base'
+            description: Reminder
+          external_properties:
+            type: array
+            items:
+              $ref: '#/components/schemas/ExternalProperty_base'
+            description: ExternalProperty
+    CalendarEntry_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: CalendarEntry List Response
+          items:
+            $ref: '#/components/schemas/CalendarEntry'
     Error:
       type: object
       required:
@@ -1777,6 +1640,143 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetail'
+    Activity_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Activity*
+        etag:
+          type: string
+          description: ETag for the *Activity*
+        type:
+          type: string
+          enum:
+          - TimeEntry
+          - ExpenseEntry
+          - HardCostEntry
+          - SoftCostEntry
+          description: The type of the *Activity*
+        date:
+          type: string
+          format: date
+          description: The date the *Activity* was performed (as a ISO-8601 date)
+        quantity_in_hours:
+          type: number
+          format: double
+          description: The number of hours the TimeEntry took.
+        rounded_quantity_in_hours:
+          type: number
+          format: double
+          description: 'The number of hours rounded accordingly to the billing settings.
+
+            The rounded value is used to calculate the total.
+
+            '
+        quantity:
+          type: number
+          format: double
+          description: 'The field is applicable to TimeEntry, ExpenseEntry, and SoftCostEntry.
+
+
+            **Version <= 4.0.3:**
+
+            The number of hours the TimeEntry took.
+
+
+            **Latest version:**
+
+            The number of seconds the TimeEntry took.
+
+            '
+        rounded_quantity:
+          type: number
+          format: double
+          description: 'The field is applicable to time entries only.
+
+
+            **Version <= 4.0.3:**
+
+            The number of hours rounded accordingly to the billing settings.
+
+            The rounded value is used to calculate the total.
+
+
+            **Latest version:**
+
+            The number of seconds rounded accordingly to the billing settings.
+
+            The rounded value is used to calculate the total.
+
+            '
+        quantity_redacted:
+          type: boolean
+          description: 'Is `true` if any of the following fields are redacted:
+
+            `quantity`, `rounded_quantity`, `rounded_quantity_in_hours`, `quantity_in_hours`, `total`, `non_billable_total`
+
+            '
+        price:
+          type: number
+          format: double
+          description: The hourly or flat rate of the *Activity*
+        note:
+          type: string
+          description: The details about the *Activity*
+        flat_rate:
+          type: boolean
+          description: Whether the *Activity* is a flat rate
+        billed:
+          type: boolean
+          description: Whether the *Activity* has been added to an active bill that is in the state of `awaiting_payment` or `paid`
+        on_bill:
+          type: boolean
+          description: Whether the *Activity* has been added to an active bill that is in the state of `draft`, `awaiting_approval`, `awaiting_payment` or `paid`
+        total:
+          type: number
+          format: double
+          description: The total cost of draft, billable and billed items in the *Activity*
+        contingency_fee:
+          type: boolean
+          description: Whether or not the *Activity* is a contingency fee
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Activity* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Activity* was last updated (as a ISO-8601 timestamp)
+        reference:
+          type: string
+          description: A check reference for a HardCostEntry.
+        non_billable:
+          type: boolean
+          description: Whether the *Activity* is non-billable
+        non_billable_total:
+          type: number
+          format: double
+          description: The total cost of non-billable items in the *Activity*
+        no_charge:
+          type: boolean
+          description: Whether the non-billable *Activity* is shown on the bill.
+        tax_setting:
+          type: string
+          enum:
+          - no_tax
+          - tax_1_only
+          - tax_2_only
+          - tax_1_and_tax_2
+          description: The option denoting whether primary tax, secondary tax, or both is applied to an expense entry.
+        tax_settings:
+          type: array
+          items:
+            type: object
+          description: Array of objects, with each object representing a tax setting that is applied to an expense entry with 'tax_rate_configuration_id', 'order', and 'rule' as the object properties.
+        currency:
+          type: object
+          description: The currency of the *Activity*
 x-tagGroups:
 - name: Api
   tags:

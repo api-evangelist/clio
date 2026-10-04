@@ -571,6 +571,36 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    CustomFieldSet_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *CustomFieldSet*
+        etag:
+          type: string
+          description: ETag for the *CustomFieldSet*
+        name:
+          type: string
+          description: The name of the custom field set.
+        parent_type:
+          type: string
+          enum:
+          - Contact
+          - Matter
+          description: Type of object the *CustomFieldSet* is for.
+        displayed:
+          type: boolean
+          description: Whether or not the *CustomFieldSet* should be displayed by default.
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *CustomFieldSet* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *CustomFieldSet* was last updated (as a ISO-8601 timestamp)
     CustomField_base:
       type: object
       properties:
@@ -627,46 +657,6 @@ components:
           type: integer
           format: int32
           description: The display position of the *CustomField*
-    CustomFieldSet:
-      allOf:
-      - $ref: '#/components/schemas/CustomFieldSet_base'
-      - type: object
-        properties:
-          custom_fields:
-            type: array
-            items:
-              $ref: '#/components/schemas/CustomField_base'
-            description: CustomField
-    CustomFieldSet_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *CustomFieldSet*
-        etag:
-          type: string
-          description: ETag for the *CustomFieldSet*
-        name:
-          type: string
-          description: The name of the custom field set.
-        parent_type:
-          type: string
-          enum:
-          - Contact
-          - Matter
-          description: Type of object the *CustomFieldSet* is for.
-        displayed:
-          type: boolean
-          description: Whether or not the *CustomFieldSet* should be displayed by default.
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *CustomFieldSet* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *CustomFieldSet* was last updated (as a ISO-8601 timestamp)
     CustomFieldSet_List:
       type: object
       required:
@@ -677,13 +667,6 @@ components:
           description: CustomFieldSet List Response
           items:
             $ref: '#/components/schemas/CustomFieldSet'
-    CustomFieldSet_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/CustomFieldSet'
     ErrorDetail:
       type: object
       required:
@@ -696,6 +679,13 @@ components:
         message:
           type: string
           description: Detailed message about the error
+    CustomFieldSet_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomFieldSet'
     Error:
       type: object
       required:
@@ -703,6 +693,16 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetail'
+    CustomFieldSet:
+      allOf:
+      - $ref: '#/components/schemas/CustomFieldSet_base'
+      - type: object
+        properties:
+          custom_fields:
+            type: array
+            items:
+              $ref: '#/components/schemas/CustomField_base'
+            description: CustomField
 x-tagGroups:
 - name: Api
   tags:

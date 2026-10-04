@@ -76,18 +76,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    EventMetrics:
-      allOf:
-      - $ref: '#/components/schemas/EventMetrics_base'
-      - type: object
-        properties: {}
-    EventMetrics_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/EventMetrics'
     ErrorDetail:
       type: object
       required:
@@ -123,6 +111,18 @@ components:
           type: integer
           format: int64
           description: The number of unread text messages for the current user
+    EventMetrics_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/EventMetrics'
+    EventMetrics:
+      allOf:
+      - $ref: '#/components/schemas/EventMetrics_base'
+      - type: object
+        properties: {}
     Error:
       type: object
       required:

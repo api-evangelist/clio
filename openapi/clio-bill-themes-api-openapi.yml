@@ -241,21 +241,37 @@ paths:
         required: false
 components:
   schemas:
-    BillTheme:
-      allOf:
-      - $ref: '#/components/schemas/BillTheme_base'
-      - type: object
-        properties: {}
-    BillTheme_List:
+    BillTheme_Show:
       type: object
       required:
       - data
       properties:
         data:
-          type: array
-          description: BillTheme List Response
-          items:
-            $ref: '#/components/schemas/BillTheme'
+          $ref: '#/components/schemas/BillTheme'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    BillTheme:
+      allOf:
+      - $ref: '#/components/schemas/BillTheme_base'
+      - type: object
+        properties: {}
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     BillTheme_base:
       type: object
       properties:
@@ -287,32 +303,16 @@ components:
         config:
           type: string
           description: The configuration of the *BillTheme*
-    BillTheme_Show:
+    BillTheme_List:
       type: object
       required:
       - data
       properties:
         data:
-          $ref: '#/components/schemas/BillTheme'
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
+          type: array
+          description: BillTheme List Response
+          items:
+            $ref: '#/components/schemas/BillTheme'
 x-tagGroups:
 - name: Api
   tags:

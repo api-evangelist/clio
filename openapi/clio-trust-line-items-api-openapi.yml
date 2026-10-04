@@ -279,27 +279,6 @@ paths:
         required: false
 components:
   schemas:
-    TrustLineItem_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/TrustLineItem'
-    TrustLineItem:
-      allOf:
-      - $ref: '#/components/schemas/TrustLineItem_base'
-      - type: object
-        properties:
-          bill:
-            $ref: '#/components/schemas/Bill_base'
-            description: Bill
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          client:
-            $ref: '#/components/schemas/Contact_base'
-            description: Contact
     Bill_base:
       type: object
       properties:
@@ -477,52 +456,6 @@ components:
             - void
             - deleted
           description: The available *Bill* state transitions.
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    TrustLineItem_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *TrustLineItem*
-        etag:
-          type: string
-          description: ETag for the *TrustLineItem*
-        date:
-          type: string
-          format: date
-          description: The date of the *TrustLineItem* (as a ISO-8601 date)
-        total:
-          type: number
-          format: double
-          description: The total amount for the *TrustLineItem*
-        note:
-          type: string
-          description: Note for the *TrustLineItem*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *TrustLineItem* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *TrustLineItem* was last updated (as a ISO-8601 timestamp)
-    TrustLineItem_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: TrustLineItem List Response
-          items:
-            $ref: '#/components/schemas/TrustLineItem'
     Matter_base:
       type: object
       properties:
@@ -613,18 +546,6 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
     Contact_base:
       type: object
       properties:
@@ -720,6 +641,85 @@ components:
         currency:
           type: object
           description: Currency of the *Contact*
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    TrustLineItem_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/TrustLineItem'
+    TrustLineItem_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: TrustLineItem List Response
+          items:
+            $ref: '#/components/schemas/TrustLineItem'
+    TrustLineItem_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *TrustLineItem*
+        etag:
+          type: string
+          description: ETag for the *TrustLineItem*
+        date:
+          type: string
+          format: date
+          description: The date of the *TrustLineItem* (as a ISO-8601 date)
+        total:
+          type: number
+          format: double
+          description: The total amount for the *TrustLineItem*
+        note:
+          type: string
+          description: Note for the *TrustLineItem*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *TrustLineItem* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *TrustLineItem* was last updated (as a ISO-8601 timestamp)
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    TrustLineItem:
+      allOf:
+      - $ref: '#/components/schemas/TrustLineItem_base'
+      - type: object
+        properties:
+          bill:
+            $ref: '#/components/schemas/Bill_base'
+            description: Bill
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          client:
+            $ref: '#/components/schemas/Contact_base'
+            description: Contact
 x-tagGroups:
 - name: Api
   tags:

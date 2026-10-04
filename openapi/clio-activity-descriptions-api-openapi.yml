@@ -726,6 +726,60 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    ActivityDescriptionRate_base:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+          description: Monetary value of this rate. Either hourly value or flat rate value
+        non_billable_amount:
+          type: number
+          format: double
+          description: Monetary value of this rate for non billable activities. Either hourly value or flat rate value
+        type:
+          type: string
+          enum:
+          - User
+          - FlatRate
+          - Custom
+          description: What kind of rate it is.
+        hierarchy:
+          type: string
+          enum:
+          - Default
+          - Activity
+          - Matter
+          - Client
+          description: What rate hierarchy the rate belongs to.
+    Group_base:
+      type: object
+      properties:
+        client_connect_user:
+          type: boolean
+          description: Whether or not the Group is a UserGroup for a Clio Connect User
+        etag:
+          type: string
+          description: ETag for the *Group*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Group*
+        name:
+          type: string
+          description: The name of the *Group*
+        type:
+          type: string
+          enum:
+          - UserGroup
+          - AdhocGroup
+          - AccountGroup
+          - TeamGroup
+          description: The type of the *Group*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Group* was last updated (as a ISO-8601 timestamp)
     ActivityDescription_base:
       type: object
       properties:
@@ -779,6 +833,18 @@ components:
         currency:
           type: object
           description: The currency of the activity description
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     ActivityDescription_List:
       type: object
       required:
@@ -789,28 +855,6 @@ components:
           description: ActivityDescription List Response
           items:
             $ref: '#/components/schemas/ActivityDescription'
-    ActivityDescription:
-      allOf:
-      - $ref: '#/components/schemas/ActivityDescription_base'
-      - type: object
-        properties:
-          groups:
-            type: array
-            items:
-              $ref: '#/components/schemas/Group_base'
-            description: Group
-          rate:
-            $ref: '#/components/schemas/ActivityDescriptionRate_base'
-            description: ActivityDescriptionRate
-          utbms_task:
-            $ref: '#/components/schemas/UtbmsCode_base'
-            description: UtbmsCode
-          utbms_activity:
-            $ref: '#/components/schemas/UtbmsCode_base'
-            description: UtbmsCode
-          currency:
-            $ref: '#/components/schemas/Currency_base'
-            description: Currency
     ActivityDescription_Show:
       type: object
       required:
@@ -818,58 +862,6 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/ActivityDescription'
-    Currency_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Currency*
-        etag:
-          type: string
-          description: ETag for the *Currency*
-        code:
-          type: string
-          description: ISO 4217 code for the *Currency*
-        sign:
-          type: string
-          description: Symbol used to denote monetary values using this *Currency*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Currency* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
-    Group_base:
-      type: object
-      properties:
-        client_connect_user:
-          type: boolean
-          description: Whether or not the Group is a UserGroup for a Clio Connect User
-        etag:
-          type: string
-          description: ETag for the *Group*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Group*
-        name:
-          type: string
-          description: The name of the *Group*
-        type:
-          type: string
-          enum:
-          - UserGroup
-          - AdhocGroup
-          - AccountGroup
-          - TeamGroup
-          description: The type of the *Group*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Group* was last updated (as a ISO-8601 timestamp)
     UtbmsCode_base:
       type: object
       properties:
@@ -908,44 +900,30 @@ components:
           type: string
           format: date-time
           description: The time the *UtbmsCode* was last updated (as a ISO-8601 timestamp)
-    ActivityDescriptionRate_base:
+    Currency_base:
       type: object
       properties:
-        amount:
-          type: number
-          format: double
-          description: Monetary value of this rate. Either hourly value or flat rate value
-        non_billable_amount:
-          type: number
-          format: double
-          description: Monetary value of this rate for non billable activities. Either hourly value or flat rate value
-        type:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Currency*
+        etag:
           type: string
-          enum:
-          - User
-          - FlatRate
-          - Custom
-          description: What kind of rate it is.
-        hierarchy:
+          description: ETag for the *Currency*
+        code:
           type: string
-          enum:
-          - Default
-          - Activity
-          - Matter
-          - Client
-          description: What rate hierarchy the rate belongs to.
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
+          description: ISO 4217 code for the *Currency*
+        sign:
           type: string
-          description: Unique name for this error
-        message:
+          description: Symbol used to denote monetary values using this *Currency*
+        created_at:
           type: string
-          description: Detailed message about the error
+          format: date-time
+          description: The time the *Currency* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
     Error:
       type: object
       required:
@@ -953,6 +931,28 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetail'
+    ActivityDescription:
+      allOf:
+      - $ref: '#/components/schemas/ActivityDescription_base'
+      - type: object
+        properties:
+          groups:
+            type: array
+            items:
+              $ref: '#/components/schemas/Group_base'
+            description: Group
+          rate:
+            $ref: '#/components/schemas/ActivityDescriptionRate_base'
+            description: ActivityDescriptionRate
+          utbms_task:
+            $ref: '#/components/schemas/UtbmsCode_base'
+            description: UtbmsCode
+          utbms_activity:
+            $ref: '#/components/schemas/UtbmsCode_base'
+            description: UtbmsCode
+          currency:
+            $ref: '#/components/schemas/Currency_base'
+            description: Currency
 x-tagGroups:
 - name: Api
   tags:

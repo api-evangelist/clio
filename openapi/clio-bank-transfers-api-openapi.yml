@@ -104,153 +104,6 @@ paths:
           description: Not Modified
 components:
   schemas:
-    BankTransfer_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/BankTransfer'
-    BankTransfer_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *BankTransfer*
-        etag:
-          type: string
-          description: ETag for the *BankTransfer*
-        amount:
-          type: number
-          format: double
-          description: The amount of the transfer.
-        date:
-          type: string
-          format: date-time
-          description: The date of the transfer.
-        description:
-          type: string
-          description: The description of the transfer.
-        primary_authorizer:
-          type: string
-          description: The primary authorizer of the transfer.
-        secondary_authorizer:
-          type: string
-          description: The secondary authorizer of the transfer.
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *BankTransfer* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *BankTransfer* was last updated (as a ISO-8601 timestamp)
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    BankAccount_base:
-      type: object
-      properties:
-        account_number:
-          type: string
-          description: The account number for *BankAccount*
-        balance:
-          type: number
-          format: double
-          description: The current balance of the *BankAccount*
-        bank_transactions_count:
-          type: integer
-          format: int32
-          description: The number of bank transactions associated with the account.
-        clio_payment_page_link:
-          type: string
-          description: Link to Single Payment Page which allows to transfer funds without logging in.
-        clio_payment_page_qr_code:
-          type: string
-          description: A QR code that links to a Single Payment Page which allows to transfer funds without logging in.
-        clio_payments_enabled:
-          type: boolean
-          description: Whether the bank account is connected to Clio Payments
-        controlled_account:
-          type: boolean
-          description: Whether is a controlled account
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *BankAccount* was created (as a ISO-8601 timestamp)
-        currency:
-          type: string
-          description: The currency type of the *BankAccount*
-        currency_symbol:
-          type: string
-          description: The currency symbol of the *BankAccount*
-        currency_id:
-          type: number
-          format: double
-          description: The currency ID of the *BankAccount*
-        default_account:
-          type: boolean
-          description: Whether it is the default account
-        domicile_branch:
-          type: string
-          description: The name of the branch where the account was opened
-        etag:
-          type: string
-          description: ETag for the *BankAccount*
-        general_ledger_number:
-          type: string
-          description: General ledger number
-        holder:
-          type: string
-          description: The name of the person or business that owns the *BankAccount*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *BankAccount*
-        institution:
-          type: string
-          description: The financial institution where the *BankAccount* is registered
-        name:
-          type: string
-          description: The name of the *BankAccount*
-        swift:
-          type: string
-          description: A unique identification code for the financial institution
-        transit_number:
-          type: string
-          description: Transit number for the bank account branch
-        type:
-          type: string
-          enum:
-          - Operating
-          - Trust
-          description: The type of the *BankAccount*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *BankAccount* was last updated (as a ISO-8601 timestamp)
-    BankTransfer:
-      allOf:
-      - $ref: '#/components/schemas/BankTransfer_base'
-      - type: object
-        properties:
-          client:
-            $ref: '#/components/schemas/Contact_base'
-            description: Contact
-          destination_account:
-            $ref: '#/components/schemas/BankAccount_base'
-            description: BankAccount
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          source_account:
-            $ref: '#/components/schemas/BankAccount_base'
-            description: BankAccount
     Matter_base:
       type: object
       properties:
@@ -341,18 +194,48 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
-    ErrorDetail:
+    BankTransfer_Show:
       type: object
       required:
-      - type
-      - message
+      - data
       properties:
-        type:
+        data:
+          $ref: '#/components/schemas/BankTransfer'
+    BankTransfer_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *BankTransfer*
+        etag:
           type: string
-          description: Unique name for this error
-        message:
+          description: ETag for the *BankTransfer*
+        amount:
+          type: number
+          format: double
+          description: The amount of the transfer.
+        date:
           type: string
-          description: Detailed message about the error
+          format: date-time
+          description: The date of the transfer.
+        description:
+          type: string
+          description: The description of the transfer.
+        primary_authorizer:
+          type: string
+          description: The primary authorizer of the transfer.
+        secondary_authorizer:
+          type: string
+          description: The secondary authorizer of the transfer.
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *BankTransfer* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *BankTransfer* was last updated (as a ISO-8601 timestamp)
     Contact_base:
       type: object
       properties:
@@ -448,6 +331,123 @@ components:
         currency:
           type: object
           description: Currency of the *Contact*
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    BankAccount_base:
+      type: object
+      properties:
+        account_number:
+          type: string
+          description: The account number for *BankAccount*
+        balance:
+          type: number
+          format: double
+          description: The current balance of the *BankAccount*
+        bank_transactions_count:
+          type: integer
+          format: int32
+          description: The number of bank transactions associated with the account.
+        clio_payment_page_link:
+          type: string
+          description: Link to Single Payment Page which allows to transfer funds without logging in.
+        clio_payment_page_qr_code:
+          type: string
+          description: A QR code that links to a Single Payment Page which allows to transfer funds without logging in.
+        clio_payments_enabled:
+          type: boolean
+          description: Whether the bank account is connected to Clio Payments
+        controlled_account:
+          type: boolean
+          description: Whether is a controlled account
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *BankAccount* was created (as a ISO-8601 timestamp)
+        currency:
+          type: string
+          description: The currency type of the *BankAccount*
+        currency_symbol:
+          type: string
+          description: The currency symbol of the *BankAccount*
+        currency_id:
+          type: number
+          format: double
+          description: The currency ID of the *BankAccount*
+        default_account:
+          type: boolean
+          description: Whether it is the default account
+        domicile_branch:
+          type: string
+          description: The name of the branch where the account was opened
+        etag:
+          type: string
+          description: ETag for the *BankAccount*
+        general_ledger_number:
+          type: string
+          description: General ledger number
+        holder:
+          type: string
+          description: The name of the person or business that owns the *BankAccount*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *BankAccount*
+        institution:
+          type: string
+          description: The financial institution where the *BankAccount* is registered
+        name:
+          type: string
+          description: The name of the *BankAccount*
+        swift:
+          type: string
+          description: A unique identification code for the financial institution
+        transit_number:
+          type: string
+          description: Transit number for the bank account branch
+        type:
+          type: string
+          enum:
+          - Operating
+          - Trust
+          description: The type of the *BankAccount*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *BankAccount* was last updated (as a ISO-8601 timestamp)
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    BankTransfer:
+      allOf:
+      - $ref: '#/components/schemas/BankTransfer_base'
+      - type: object
+        properties:
+          client:
+            $ref: '#/components/schemas/Contact_base'
+            description: Contact
+          destination_account:
+            $ref: '#/components/schemas/BankAccount_base'
+            description: BankAccount
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          source_account:
+            $ref: '#/components/schemas/BankAccount_base'
+            description: BankAccount
 x-tagGroups:
 - name: Api
   tags:

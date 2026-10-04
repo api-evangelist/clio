@@ -146,23 +146,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    LaukCriminalControlledRate_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: LaukCriminalControlledRate List Response
-          items:
-            $ref: '#/components/schemas/LaukCriminalControlledRate'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
     LaukCriminalControlledRate:
       allOf:
       - $ref: '#/components/schemas/LaukCriminalControlledRate_base'
@@ -180,6 +163,16 @@ components:
         message:
           type: string
           description: Detailed message about the error
+    LaukCriminalControlledRate_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: LaukCriminalControlledRate List Response
+          items:
+            $ref: '#/components/schemas/LaukCriminalControlledRate'
     LaukCriminalControlledRate_base:
       type: object
       properties:
@@ -260,6 +253,13 @@ components:
           type: string
           format: date-time
           description: The time the *LaukCriminalControlledRate* was last updated (as a ISO-8601 timestamp)
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

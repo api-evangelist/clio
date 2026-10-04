@@ -527,69 +527,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ActivityRate_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/ActivityRate'
-    ActivityRate_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: ActivityRate List Response
-          items:
-            $ref: '#/components/schemas/ActivityRate'
-    ActivityRate:
-      allOf:
-      - $ref: '#/components/schemas/ActivityRate_base'
-      - type: object
-        properties:
-          user:
-            $ref: '#/components/schemas/User_base'
-            description: User
-          group:
-            $ref: '#/components/schemas/Group_base'
-            description: Group
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    Group_base:
-      type: object
-      properties:
-        client_connect_user:
-          type: boolean
-          description: Whether or not the Group is a UserGroup for a Clio Connect User
-        etag:
-          type: string
-          description: ETag for the *Group*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Group*
-        name:
-          type: string
-          description: The name of the *Group*
-        type:
-          type: string
-          enum:
-          - UserGroup
-          - AdhocGroup
-          - AccountGroup
-          - TeamGroup
-          description: The type of the *Group*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Group* was last updated (as a ISO-8601 timestamp)
     ActivityRate_base:
       type: object
       properties:
@@ -623,6 +560,34 @@ components:
           type: integer
           format: int64
           description: Filter ActivityRate records for the co-counsel.
+    Group_base:
+      type: object
+      properties:
+        client_connect_user:
+          type: boolean
+          description: Whether or not the Group is a UserGroup for a Clio Connect User
+        etag:
+          type: string
+          description: ETag for the *Group*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Group*
+        name:
+          type: string
+          description: The name of the *Group*
+        type:
+          type: string
+          enum:
+          - UserGroup
+          - AdhocGroup
+          - AccountGroup
+          - TeamGroup
+          description: The type of the *Group*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Group* was last updated (as a ISO-8601 timestamp)
     ErrorDetail:
       type: object
       required:
@@ -635,6 +600,23 @@ components:
         message:
           type: string
           description: Detailed message about the error
+    ActivityRate_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: ActivityRate List Response
+          items:
+            $ref: '#/components/schemas/ActivityRate'
+    ActivityRate_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ActivityRate'
     User_base:
       type: object
       properties:
@@ -705,6 +687,24 @@ components:
           type: string
           format: date-time
           description: The time the *User* was last updated (as a ISO-8601 timestamp)
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    ActivityRate:
+      allOf:
+      - $ref: '#/components/schemas/ActivityRate_base'
+      - type: object
+        properties:
+          user:
+            $ref: '#/components/schemas/User_base'
+            description: User
+          group:
+            $ref: '#/components/schemas/Group_base'
+            description: Group
 x-tagGroups:
 - name: Api
   tags:

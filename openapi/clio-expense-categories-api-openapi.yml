@@ -889,6 +889,27 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    ExpenseCategory:
+      allOf:
+      - $ref: '#/components/schemas/ExpenseCategory_base'
+      - type: object
+        properties:
+          groups:
+            type: array
+            items:
+              $ref: '#/components/schemas/Group_base'
+            description: Group
+          utbms_code:
+            $ref: '#/components/schemas/UtbmsCode_base'
+            description: UtbmsCode
+          currency:
+            $ref: '#/components/schemas/Currency_base'
+            description: Currency
+          tax_settings:
+            type: array
+            items:
+              $ref: '#/components/schemas/TaxSetting_base'
+            description: TaxSetting
     LaukExpenseCategory_List:
       type: object
       required:
@@ -936,92 +957,11 @@ components:
           type: string
           format: date-time
           description: The time the *LaukExpenseCategory* was last updated (as a ISO-8601 timestamp)
-    ExpenseCategory_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/ExpenseCategory'
-    TaxSetting_base:
-      type: object
-      properties:
-        tax_rate_configuration_id:
-          type: integer
-          format: int64
-          description: The unique identifier of the tax rate configuration associated with the tax setting
-        tax_rate_configuration_name:
-          type: string
-          description: The name of the tax rate configuration
-        tax_rate_configuration_rate:
-          type: number
-          format: decimal
-          description: The rate of the tax rate configuration
-        tax_rate_configuration_formatted_rate:
-          type: string
-          description: The formatted rate of the tax rate configuration as a percentage
-        order:
-          type: integer
-          format: int32
-          description: The order in which this tax setting should be applied
-        rule:
-          type: string
-          description: The rule that the tax setting should be applied in
-    Currency_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Currency*
-        etag:
-          type: string
-          description: ETag for the *Currency*
-        code:
-          type: string
-          description: ISO 4217 code for the *Currency*
-        sign:
-          type: string
-          description: Symbol used to denote monetary values using this *Currency*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Currency* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
-    ExpenseCategory_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: ExpenseCategory List Response
-          items:
-            $ref: '#/components/schemas/ExpenseCategory'
-    ExpenseCategory:
+    LaukExpenseCategory:
       allOf:
-      - $ref: '#/components/schemas/ExpenseCategory_base'
+      - $ref: '#/components/schemas/LaukExpenseCategory_base'
       - type: object
-        properties:
-          groups:
-            type: array
-            items:
-              $ref: '#/components/schemas/Group_base'
-            description: Group
-          utbms_code:
-            $ref: '#/components/schemas/UtbmsCode_base'
-            description: UtbmsCode
-          currency:
-            $ref: '#/components/schemas/Currency_base'
-            description: Currency
-          tax_settings:
-            type: array
-            items:
-              $ref: '#/components/schemas/TaxSetting_base'
-            description: TaxSetting
+        properties: {}
     Group_base:
       type: object
       properties:
@@ -1050,6 +990,35 @@ components:
           type: string
           format: date-time
           description: The time the *Group* was last updated (as a ISO-8601 timestamp)
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    ExpenseCategory_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: ExpenseCategory List Response
+          items:
+            $ref: '#/components/schemas/ExpenseCategory'
+    ExpenseCategory_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ExpenseCategory'
     ExpenseCategory_base:
       type: object
       properties:
@@ -1095,6 +1064,30 @@ components:
           items:
             type: object
           description: Array of objects, with each object representing a tax setting.
+    TaxSetting_base:
+      type: object
+      properties:
+        tax_rate_configuration_id:
+          type: integer
+          format: int64
+          description: The unique identifier of the tax rate configuration associated with the tax setting
+        tax_rate_configuration_name:
+          type: string
+          description: The name of the tax rate configuration
+        tax_rate_configuration_rate:
+          type: number
+          format: decimal
+          description: The rate of the tax rate configuration
+        tax_rate_configuration_formatted_rate:
+          type: string
+          description: The formatted rate of the tax rate configuration as a percentage
+        order:
+          type: integer
+          format: int32
+          description: The order in which this tax setting should be applied
+        rule:
+          type: string
+          description: The rule that the tax setting should be applied in
     UtbmsCode_base:
       type: object
       properties:
@@ -1133,23 +1126,30 @@ components:
           type: string
           format: date-time
           description: The time the *UtbmsCode* was last updated (as a ISO-8601 timestamp)
-    LaukExpenseCategory:
-      allOf:
-      - $ref: '#/components/schemas/LaukExpenseCategory_base'
-      - type: object
-        properties: {}
-    ErrorDetail:
+    Currency_base:
       type: object
-      required:
-      - type
-      - message
       properties:
-        type:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Currency*
+        etag:
           type: string
-          description: Unique name for this error
-        message:
+          description: ETag for the *Currency*
+        code:
           type: string
-          description: Detailed message about the error
+          description: ISO 4217 code for the *Currency*
+        sign:
+          type: string
+          description: Symbol used to denote monetary values using this *Currency*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Currency* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
     Error:
       type: object
       required:

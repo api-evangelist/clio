@@ -124,6 +124,23 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    UtbmsSet:
+      allOf:
+      - $ref: '#/components/schemas/UtbmsSet_base'
+      - type: object
+        properties: {}
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     UtbmsSet_base:
       type: object
       properties:
@@ -148,11 +165,6 @@ components:
           type: string
           format: date-time
           description: The time the *UtbmsSet* was last updated (as a ISO-8601 timestamp)
-    UtbmsSet:
-      allOf:
-      - $ref: '#/components/schemas/UtbmsSet_base'
-      - type: object
-        properties: {}
     UtbmsSet_List:
       type: object
       required:
@@ -163,18 +175,6 @@ components:
           description: UtbmsSet List Response
           items:
             $ref: '#/components/schemas/UtbmsSet'
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
     Error:
       type: object
       required:

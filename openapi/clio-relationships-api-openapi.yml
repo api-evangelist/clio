@@ -545,62 +545,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Relationship_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Relationship'
-    Relationship_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: Relationship List Response
-          items:
-            $ref: '#/components/schemas/Relationship'
-    Relationship:
-      allOf:
-      - $ref: '#/components/schemas/Relationship_base'
-      - type: object
-        properties:
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          contact:
-            $ref: '#/components/schemas/Contact_base'
-            description: Contact
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    Relationship_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Relationship*
-        etag:
-          type: string
-          description: ETag for the *Relationship*
-        description:
-          type: string
-          description: A detailed description of the *Relationship*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Relationship* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Relationship* was last updated (as a ISO-8601 timestamp)
     Matter_base:
       type: object
       properties:
@@ -691,18 +635,27 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
-    ErrorDetail:
+    Relationship:
+      allOf:
+      - $ref: '#/components/schemas/Relationship_base'
+      - type: object
+        properties:
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          contact:
+            $ref: '#/components/schemas/Contact_base'
+            description: Contact
+    Relationship_List:
       type: object
       required:
-      - type
-      - message
+      - data
       properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
+        data:
+          type: array
+          description: Relationship List Response
+          items:
+            $ref: '#/components/schemas/Relationship'
     Contact_base:
       type: object
       properties:
@@ -798,6 +751,53 @@ components:
         currency:
           type: object
           description: Currency of the *Contact*
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    Relationship_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Relationship'
+    Relationship_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Relationship*
+        etag:
+          type: string
+          description: ETag for the *Relationship*
+        description:
+          type: string
+          description: A detailed description of the *Relationship*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Relationship* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Relationship* was last updated (as a ISO-8601 timestamp)
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

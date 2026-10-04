@@ -751,16 +751,25 @@ paths:
           description: Not Modified
 components:
   schemas:
-    Report_List:
+    Report_Show:
       type: object
       required:
       - data
       properties:
         data:
-          type: array
-          description: Report List Response
-          items:
-            $ref: '#/components/schemas/Report'
+          $ref: '#/components/schemas/Report'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Report:
       allOf:
       - $ref: '#/components/schemas/Report_base'
@@ -877,25 +886,16 @@ components:
           - presets
           - scheduled
           description: The source of the report
-    Report_Show:
+    Report_List:
       type: object
       required:
       - data
       properties:
         data:
-          $ref: '#/components/schemas/Report'
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
+          type: array
+          description: Report List Response
+          items:
+            $ref: '#/components/schemas/Report'
     Error:
       type: object
       required:
