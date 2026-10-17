@@ -117,16 +117,13 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    PhoneNumber_List:
+    Error:
       type: object
       required:
-      - data
+      - error
       properties:
-        data:
-          type: array
-          description: PhoneNumber List Response
-          items:
-            $ref: '#/components/schemas/PhoneNumber'
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     ErrorDetail:
       type: object
       required:
@@ -170,18 +167,21 @@ components:
           type: string
           format: date-time
           description: The time the *PhoneNumber* was last updated (as a ISO-8601 timestamp)
+    PhoneNumber_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: PhoneNumber List Response
+          items:
+            $ref: '#/components/schemas/PhoneNumber'
     PhoneNumber:
       allOf:
       - $ref: '#/components/schemas/PhoneNumber_base'
       - type: object
         properties: {}
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

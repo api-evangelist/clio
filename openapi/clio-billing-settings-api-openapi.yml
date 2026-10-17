@@ -103,35 +103,6 @@ paths:
           description: Not Modified
 components:
   schemas:
-    BillingSetting_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/BillingSetting'
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    BillingSetting:
-      allOf:
-      - $ref: '#/components/schemas/BillingSetting_base'
-      - type: object
-        properties:
-          tax_settings:
-            type: array
-            items:
-              $ref: '#/components/schemas/TaxSetting_base'
-            description: TaxSetting
     TaxSetting_base:
       type: object
       properties:
@@ -163,6 +134,25 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetail'
+    BillingSetting_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/BillingSetting'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     BillingSetting_base:
       type: object
       properties:
@@ -249,6 +239,16 @@ components:
           items:
             type: object
           description: Array of objects representing invoice tax defaults, with each object containing 'tax_rate_configuration_id', 'order', and 'rule'
+    BillingSetting:
+      allOf:
+      - $ref: '#/components/schemas/BillingSetting_base'
+      - type: object
+        properties:
+          tax_settings:
+            type: array
+            items:
+              $ref: '#/components/schemas/TaxSetting_base'
+            description: TaxSetting
 x-tagGroups:
 - name: Api
   tags:

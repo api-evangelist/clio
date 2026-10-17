@@ -143,6 +143,43 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    DocumentVersion:
+      allOf:
+      - $ref: '#/components/schemas/DocumentVersion_base'
+      - type: object
+        properties:
+          creator:
+            $ref: '#/components/schemas/ClioCreator_base'
+            description: ClioCreator
+          put_headers:
+            type: array
+            items:
+              $ref: '#/components/schemas/MultipartHeader_base'
+            description: MultipartHeader
+          multiparts:
+            type: array
+            items:
+              $ref: '#/components/schemas/Multipart'
+            description: Multipart
     DocumentVersion_base:
       type: object
       properties:
@@ -192,18 +229,6 @@ components:
         fully_uploaded:
           type: boolean
           description: True if the DocumentVersion is uploaded. False if the DocumentVersion is being uploaded.
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
     MultipartHeader_base:
       type: object
       properties:
@@ -213,6 +238,36 @@ components:
         value:
           type: string
           description: Required HTTP header field value for uploading.
+    DocumentVersion_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: DocumentVersion List Response
+          items:
+            $ref: '#/components/schemas/DocumentVersion'
+    Multipart:
+      allOf:
+      - $ref: '#/components/schemas/Multipart_base'
+      - type: object
+        properties:
+          put_headers:
+            type: array
+            items:
+              $ref: '#/components/schemas/MultipartHeader_base'
+            description: MultipartHeader
+    Multipart_base:
+      type: object
+      properties:
+        part_number:
+          type: integer
+          format: int32
+          description: Unique identifier of a part which defines its position within the document being uploaded.
+        put_url:
+          type: string
+          description: A signed URL for uploading the file part. It expires in 10 minutes.
     ClioCreator_base:
       type: object
       properties:
@@ -289,61 +344,6 @@ components:
           type: string
           format: date-time
           description: The time the *ClioCreator* was last updated (as a ISO-8601 timestamp)
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    Multipart:
-      allOf:
-      - $ref: '#/components/schemas/Multipart_base'
-      - type: object
-        properties:
-          put_headers:
-            type: array
-            items:
-              $ref: '#/components/schemas/MultipartHeader_base'
-            description: MultipartHeader
-    DocumentVersion_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: DocumentVersion List Response
-          items:
-            $ref: '#/components/schemas/DocumentVersion'
-    Multipart_base:
-      type: object
-      properties:
-        part_number:
-          type: integer
-          format: int32
-          description: Unique identifier of a part which defines its position within the document being uploaded.
-        put_url:
-          type: string
-          description: A signed URL for uploading the file part. It expires in 10 minutes.
-    DocumentVersion:
-      allOf:
-      - $ref: '#/components/schemas/DocumentVersion_base'
-      - type: object
-        properties:
-          creator:
-            $ref: '#/components/schemas/ClioCreator_base'
-            description: ClioCreator
-          put_headers:
-            type: array
-            items:
-              $ref: '#/components/schemas/MultipartHeader_base'
-            description: MultipartHeader
-          multiparts:
-            type: array
-            items:
-              $ref: '#/components/schemas/Multipart'
-            description: Multipart
 x-tagGroups:
 - name: Api
   tags:

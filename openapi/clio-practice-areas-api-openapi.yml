@@ -1585,6 +1585,23 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    PracticeArea_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: PracticeArea List Response
+          items:
+            $ref: '#/components/schemas/PracticeArea'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     ErrorDetail:
       type: object
       required:
@@ -1597,16 +1614,13 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    PracticeArea_List:
+    PracticeArea_Show:
       type: object
       required:
       - data
       properties:
         data:
-          type: array
-          description: PracticeArea List Response
-          items:
-            $ref: '#/components/schemas/PracticeArea'
+          $ref: '#/components/schemas/PracticeArea'
     PracticeArea:
       allOf:
       - $ref: '#/components/schemas/PracticeArea_base'
@@ -1700,20 +1714,6 @@ components:
         code:
           type: string
           description: The code of the *PracticeArea*
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    PracticeArea_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/PracticeArea'
 x-tagGroups:
 - name: Api
   tags:

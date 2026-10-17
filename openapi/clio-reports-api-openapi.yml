@@ -751,30 +751,6 @@ paths:
           description: Not Modified
 components:
   schemas:
-    Report_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Report'
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    Report:
-      allOf:
-      - $ref: '#/components/schemas/Report_base'
-      - type: object
-        properties: {}
     Report_base:
       type: object
       properties:
@@ -886,6 +862,25 @@ components:
           - presets
           - scheduled
           description: The source of the report
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Report_List:
       type: object
       required:
@@ -896,13 +891,18 @@ components:
           description: Report List Response
           items:
             $ref: '#/components/schemas/Report'
-    Error:
+    Report_Show:
       type: object
       required:
-      - error
+      - data
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
+        data:
+          $ref: '#/components/schemas/Report'
+    Report:
+      allOf:
+      - $ref: '#/components/schemas/Report_base'
+      - type: object
+        properties: {}
 x-tagGroups:
 - name: Api
   tags:

@@ -331,6 +331,54 @@ components:
             - void
             - deleted
           description: The available *Bill* state transitions.
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    InterestCharge_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *InterestCharge*
+        etag:
+          type: string
+          description: ETag for the *InterestCharge*
+        date:
+          type: string
+          format: date
+          description: The *InterestCharge* date (as a ISO-8601 date)
+        description:
+          type: string
+          description: The description for the *InterestCharge*
+        total:
+          type: number
+          format: double
+          description: The total amount for the *InterestCharge*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *InterestCharge* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *InterestCharge* was last updated (as a ISO-8601 timestamp)
     Matter_base:
       type: object
       properties:
@@ -439,57 +487,6 @@ components:
             items:
               $ref: '#/components/schemas/Matter_base'
             description: Matter
-    InterestCharge_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: InterestCharge List Response
-          items:
-            $ref: '#/components/schemas/InterestCharge'
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    InterestCharge_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *InterestCharge*
-        etag:
-          type: string
-          description: ETag for the *InterestCharge*
-        date:
-          type: string
-          format: date
-          description: The *InterestCharge* date (as a ISO-8601 date)
-        description:
-          type: string
-          description: The description for the *InterestCharge*
-        total:
-          type: number
-          format: double
-          description: The total amount for the *InterestCharge*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *InterestCharge* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *InterestCharge* was last updated (as a ISO-8601 timestamp)
     Balance_base:
       type: object
       properties:
@@ -515,13 +512,16 @@ components:
           type: number
           format: double
           description: The amount due for this Balance, factoring in applicable discounts.
-    Error:
+    InterestCharge_List:
       type: object
       required:
-      - error
+      - data
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
+        data:
+          type: array
+          description: InterestCharge List Response
+          items:
+            $ref: '#/components/schemas/InterestCharge'
 x-tagGroups:
 - name: Api
   tags:

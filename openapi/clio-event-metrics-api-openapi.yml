@@ -76,6 +76,13 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     ErrorDetail:
       type: object
       required:
@@ -88,6 +95,18 @@ components:
         message:
           type: string
           description: Detailed message about the error
+    EventMetrics:
+      allOf:
+      - $ref: '#/components/schemas/EventMetrics_base'
+      - type: object
+        properties: {}
+    EventMetrics_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/EventMetrics'
     EventMetrics_base:
       type: object
       properties:
@@ -111,25 +130,6 @@ components:
           type: integer
           format: int64
           description: The number of unread text messages for the current user
-    EventMetrics_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/EventMetrics'
-    EventMetrics:
-      allOf:
-      - $ref: '#/components/schemas/EventMetrics_base'
-      - type: object
-        properties: {}
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

@@ -473,40 +473,13 @@ components:
           description: ConversationMessage List Response
           items:
             $ref: '#/components/schemas/ConversationMessage'
-    ConversationMessage_Show:
+    Error:
       type: object
       required:
-      - data
+      - error
       properties:
-        data:
-          $ref: '#/components/schemas/ConversationMessage'
-    ConversationMessage_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ConversationMessage*
-        etag:
-          type: string
-          description: ETag for the *ConversationMessage*
-        date:
-          type: string
-          description: The creation date of the message in the current user's time zone
-        body:
-          type: string
-          description: The main content of the *ConversationMessage*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ConversationMessage* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ConversationMessage* was last updated (as a ISO-8601 timestamp)
-    UnredactedParticipant_base:
-      type: object
-      properties: {}
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     ErrorDetail:
       type: object
       required:
@@ -519,73 +492,6 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    ConversationMessage:
-      allOf:
-      - $ref: '#/components/schemas/ConversationMessage_base'
-      - type: object
-        properties:
-          sender:
-            $ref: '#/components/schemas/UnredactedParticipant_base'
-            description: UnredactedParticipant
-          document:
-            $ref: '#/components/schemas/Document_base'
-            description: Document
-          conversation:
-            $ref: '#/components/schemas/Conversation_base'
-            description: Conversation
-          receivers:
-            type: array
-            items:
-              $ref: '#/components/schemas/UnredactedParticipant_base'
-            description: UnredactedParticipant
-    Conversation_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Conversation*
-        etag:
-          type: string
-          description: ETag for the *Conversation*
-        archived:
-          type: boolean
-          description: Whether the conversation has been archived
-        read_only:
-          type: boolean
-          description: Whether the conversation is read only
-        current_user_is_member:
-          type: boolean
-          description: Whether the current user is a member of this conversation
-        subject:
-          type: string
-          description: The subject of the *Conversation*
-        message_count:
-          type: integer
-          format: int64
-          description: The number of messages in this conversation
-        time_entries_count:
-          type: integer
-          format: int64
-          description: The number of time entries applied to this conversation
-        read:
-          type: boolean
-          description: Whether any messages in this conversation have been viewed
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Conversation* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Conversation* was last updated (as a ISO-8601 timestamp)
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
     Document_base:
       type: object
       properties:
@@ -633,6 +539,100 @@ components:
         content_type:
           type: string
           description: The uploaded file content type
+    Conversation_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Conversation*
+        etag:
+          type: string
+          description: ETag for the *Conversation*
+        archived:
+          type: boolean
+          description: Whether the conversation has been archived
+        read_only:
+          type: boolean
+          description: Whether the conversation is read only
+        current_user_is_member:
+          type: boolean
+          description: Whether the current user is a member of this conversation
+        subject:
+          type: string
+          description: The subject of the *Conversation*
+        message_count:
+          type: integer
+          format: int64
+          description: The number of messages in this conversation
+        time_entries_count:
+          type: integer
+          format: int64
+          description: The number of time entries applied to this conversation
+        read:
+          type: boolean
+          description: Whether any messages in this conversation have been viewed
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Conversation* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Conversation* was last updated (as a ISO-8601 timestamp)
+    ConversationMessage_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ConversationMessage'
+    ConversationMessage:
+      allOf:
+      - $ref: '#/components/schemas/ConversationMessage_base'
+      - type: object
+        properties:
+          sender:
+            $ref: '#/components/schemas/UnredactedParticipant_base'
+            description: UnredactedParticipant
+          document:
+            $ref: '#/components/schemas/Document_base'
+            description: Document
+          conversation:
+            $ref: '#/components/schemas/Conversation_base'
+            description: Conversation
+          receivers:
+            type: array
+            items:
+              $ref: '#/components/schemas/UnredactedParticipant_base'
+            description: UnredactedParticipant
+    UnredactedParticipant_base:
+      type: object
+      properties: {}
+    ConversationMessage_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ConversationMessage*
+        etag:
+          type: string
+          description: ETag for the *ConversationMessage*
+        date:
+          type: string
+          description: The creation date of the message in the current user's time zone
+        body:
+          type: string
+          description: The main content of the *ConversationMessage*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ConversationMessage* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ConversationMessage* was last updated (as a ISO-8601 timestamp)
 x-tagGroups:
 - name: Api
   tags:

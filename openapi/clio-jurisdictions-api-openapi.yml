@@ -221,6 +221,13 @@ paths:
           description: Not Modified
 components:
   schemas:
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     ErrorDetail:
       type: object
       required:
@@ -233,6 +240,16 @@ components:
         message:
           type: string
           description: Detailed message about the error
+    Jurisdiction:
+      allOf:
+      - $ref: '#/components/schemas/Jurisdiction_base'
+      - type: object
+        properties:
+          service_types:
+            type: array
+            items:
+              $ref: '#/components/schemas/ServiceType_base'
+            description: ServiceType
     ServiceType_base:
       type: object
       properties:
@@ -261,6 +278,23 @@ components:
         default:
           type: boolean
           description: Whether *ServiceType* is default for the current user
+    Jurisdiction_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: Jurisdiction List Response
+          items:
+            $ref: '#/components/schemas/Jurisdiction'
+    Jurisdiction_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Jurisdiction'
     Jurisdiction_base:
       type: object
       properties:
@@ -298,40 +332,6 @@ components:
         is_local_timezone:
           type: boolean
           description: Boolean value for when the timezone is in the local users timezone
-    Jurisdiction:
-      allOf:
-      - $ref: '#/components/schemas/Jurisdiction_base'
-      - type: object
-        properties:
-          service_types:
-            type: array
-            items:
-              $ref: '#/components/schemas/ServiceType_base'
-            description: ServiceType
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    Jurisdiction_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Jurisdiction'
-    Jurisdiction_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: Jurisdiction List Response
-          items:
-            $ref: '#/components/schemas/Jurisdiction'
 x-tagGroups:
 - name: Api
   tags:

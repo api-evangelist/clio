@@ -117,33 +117,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    EmailAddress:
-      allOf:
-      - $ref: '#/components/schemas/EmailAddress_base'
-      - type: object
-        properties: {}
-    EmailAddress_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: EmailAddress List Response
-          items:
-            $ref: '#/components/schemas/EmailAddress'
     EmailAddress_base:
       type: object
       properties:
@@ -178,6 +151,33 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetail'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    EmailAddress_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: EmailAddress List Response
+          items:
+            $ref: '#/components/schemas/EmailAddress'
+    EmailAddress:
+      allOf:
+      - $ref: '#/components/schemas/EmailAddress_base'
+      - type: object
+        properties: {}
 x-tagGroups:
 - name: Api
   tags:

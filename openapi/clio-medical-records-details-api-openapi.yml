@@ -1335,6 +1335,25 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/MedicalRecordsRequest'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Matter_base:
       type: object
       properties:
@@ -1425,6 +1444,60 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
+    MedicalRecordsRequest_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: MedicalRecordsRequest List Response
+          items:
+            $ref: '#/components/schemas/MedicalRecordsRequest'
+    MedicalBill_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *MedicalBill*
+        adjustment:
+          type: number
+          format: double
+          description: Adjustment for Medical Bill
+        amount:
+          type: number
+          format: double
+          description: Amount for Medical Bill
+        bill_date:
+          type: string
+          format: date
+          description: Bill date for Medical Bill (as a ISO-8601 date)
+        bill_received_date:
+          type: string
+          format: date
+          description: Bill received date for Medical Bill (as a ISO-8601 date)
+        damage_type:
+          type: string
+          description: Damage Type
+        document_id:
+          type: integer
+          format: int64
+          description: The id of the document associated with the Medical Bill
+        etag:
+          type: string
+          description: ETag for the *MedicalBill*
+        name:
+          type: string
+          description: Name of the Medical Bill
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *MedicalBill* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *MedicalBill* was last updated (as a ISO-8601 timestamp)
     Contact_base:
       type: object
       properties:
@@ -1520,18 +1593,6 @@ components:
         currency:
           type: object
           description: Currency of the *Contact*
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
     MedicalRecord_base:
       type: object
       properties:
@@ -1562,67 +1623,6 @@ components:
           type: string
           format: date-time
           description: The time the *MedicalRecord* was last updated (as a ISO-8601 timestamp)
-    MedicalRecordsRequest_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: MedicalRecordsRequest List Response
-          items:
-            $ref: '#/components/schemas/MedicalRecordsRequest'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    MedicalBill_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *MedicalBill*
-        adjustment:
-          type: number
-          format: double
-          description: Adjustment for Medical Bill
-        amount:
-          type: number
-          format: double
-          description: Amount for Medical Bill
-        bill_date:
-          type: string
-          format: date
-          description: Bill date for Medical Bill (as a ISO-8601 date)
-        bill_received_date:
-          type: string
-          format: date
-          description: Bill received date for Medical Bill (as a ISO-8601 date)
-        damage_type:
-          type: string
-          description: Damage Type
-        document_id:
-          type: integer
-          format: int64
-          description: The id of the document associated with the Medical Bill
-        etag:
-          type: string
-          description: ETag for the *MedicalBill*
-        name:
-          type: string
-          description: Name of the Medical Bill
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *MedicalBill* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *MedicalBill* was last updated (as a ISO-8601 timestamp)
     MedicalRecordsRequest:
       allOf:
       - $ref: '#/components/schemas/MedicalRecordsRequest_base'

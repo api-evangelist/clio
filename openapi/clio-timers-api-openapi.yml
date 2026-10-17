@@ -254,6 +254,13 @@ paths:
         required: false
 components:
   schemas:
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     Timer:
       allOf:
       - $ref: '#/components/schemas/Timer_base'
@@ -262,6 +269,18 @@ components:
           activity:
             $ref: '#/components/schemas/Activity_base'
             description: Activity
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Timer_base:
       type: object
       properties:
@@ -288,32 +307,6 @@ components:
           type: string
           format: date-time
           description: The time the *Timer* was last updated (as a ISO-8601 timestamp)
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    Timer_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Timer'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
     Activity_base:
       type: object
       properties:
@@ -451,6 +444,13 @@ components:
         currency:
           type: object
           description: The currency of the *Activity*
+    Timer_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Timer'
 x-tagGroups:
 - name: Api
   tags:

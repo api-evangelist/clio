@@ -222,6 +222,13 @@ paths:
           description: Not Modified
 components:
   schemas:
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     UtbmsCode_List:
       type: object
       required:
@@ -244,11 +251,6 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    UtbmsCode:
-      allOf:
-      - $ref: '#/components/schemas/UtbmsCode_base'
-      - type: object
-        properties: {}
     UtbmsCode_base:
       type: object
       properties:
@@ -287,13 +289,6 @@ components:
           type: string
           format: date-time
           description: The time the *UtbmsCode* was last updated (as a ISO-8601 timestamp)
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
     UtbmsCode_Show:
       type: object
       required:
@@ -301,6 +296,11 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/UtbmsCode'
+    UtbmsCode:
+      allOf:
+      - $ref: '#/components/schemas/UtbmsCode_base'
+      - type: object
+        properties: {}
 x-tagGroups:
 - name: Api
   tags:

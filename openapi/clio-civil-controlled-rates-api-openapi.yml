@@ -136,11 +136,13 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    LaukCivilControlledRate:
-      allOf:
-      - $ref: '#/components/schemas/LaukCivilControlledRate_base'
-      - type: object
-        properties: {}
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     ErrorDetail:
       type: object
       required:
@@ -163,6 +165,11 @@ components:
           description: LaukCivilControlledRate List Response
           items:
             $ref: '#/components/schemas/LaukCivilControlledRate'
+    LaukCivilControlledRate:
+      allOf:
+      - $ref: '#/components/schemas/LaukCivilControlledRate_base'
+      - type: object
+        properties: {}
     LaukCivilControlledRate_base:
       type: object
       properties:
@@ -226,13 +233,6 @@ components:
           type: string
           format: date-time
           description: The time the *LaukCivilControlledRate* was last updated (as a ISO-8601 timestamp)
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

@@ -284,6 +284,37 @@ paths:
         required: false
 components:
   schemas:
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    TrustRequest:
+      allOf:
+      - $ref: '#/components/schemas/TrustRequest_base'
+      - type: object
+        properties: {}
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    TrustRequest_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/TrustRequest'
     TrustRequest_base:
       type: object
       properties:
@@ -302,37 +333,6 @@ components:
           type: string
           format: date-time
           description: The time the *TrustRequest* was last updated (as a ISO-8601 timestamp)
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    TrustRequest:
-      allOf:
-      - $ref: '#/components/schemas/TrustRequest_base'
-      - type: object
-        properties: {}
-    TrustRequest_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/TrustRequest'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

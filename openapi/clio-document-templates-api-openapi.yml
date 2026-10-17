@@ -573,34 +573,23 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    DocumentTemplate_base:
+    DocumentTemplate_List:
       type: object
+      required:
+      - data
       properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *DocumentTemplate*
-        etag:
-          type: string
-          description: ETag for the *DocumentTemplate*
-        size:
-          type: integer
-          format: int32
-          description: The size in bytes of the template
-        content_type:
-          type: string
-          description: A standard MIME type describing the format of the object data.
-        filename:
-          type: string
-          description: The name of the original file that was uploaded
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *DocumentTemplate* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *DocumentTemplate* was last updated (as a ISO-8601 timestamp)
+        data:
+          type: array
+          description: DocumentTemplate List Response
+          items:
+            $ref: '#/components/schemas/DocumentTemplate'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     ErrorDetail:
       type: object
       required:
@@ -613,27 +602,6 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    DocumentTemplate_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: DocumentTemplate List Response
-          items:
-            $ref: '#/components/schemas/DocumentTemplate'
-    DocumentTemplate:
-      allOf:
-      - $ref: '#/components/schemas/DocumentTemplate_base'
-      - type: object
-        properties:
-          document_category:
-            $ref: '#/components/schemas/DocumentCategory_base'
-            description: DocumentCategory
-          last_modified_by:
-            $ref: '#/components/schemas/User_base'
-            description: User
     User_base:
       type: object
       properties:
@@ -704,6 +672,52 @@ components:
           type: string
           format: date-time
           description: The time the *User* was last updated (as a ISO-8601 timestamp)
+    DocumentTemplate_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/DocumentTemplate'
+    DocumentTemplate:
+      allOf:
+      - $ref: '#/components/schemas/DocumentTemplate_base'
+      - type: object
+        properties:
+          document_category:
+            $ref: '#/components/schemas/DocumentCategory_base'
+            description: DocumentCategory
+          last_modified_by:
+            $ref: '#/components/schemas/User_base'
+            description: User
+    DocumentTemplate_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *DocumentTemplate*
+        etag:
+          type: string
+          description: ETag for the *DocumentTemplate*
+        size:
+          type: integer
+          format: int32
+          description: The size in bytes of the template
+        content_type:
+          type: string
+          description: A standard MIME type describing the format of the object data.
+        filename:
+          type: string
+          description: The name of the original file that was uploaded
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentTemplate* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentTemplate* was last updated (as a ISO-8601 timestamp)
     DocumentCategory_base:
       type: object
       properties:
@@ -725,20 +739,6 @@ components:
           type: string
           format: date-time
           description: The time the *DocumentCategory* was last updated (as a ISO-8601 timestamp)
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    DocumentTemplate_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/DocumentTemplate'
 x-tagGroups:
 - name: Api
   tags:

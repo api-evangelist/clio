@@ -124,11 +124,23 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    UtbmsSet:
-      allOf:
-      - $ref: '#/components/schemas/UtbmsSet_base'
-      - type: object
-        properties: {}
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    UtbmsSet_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: UtbmsSet List Response
+          items:
+            $ref: '#/components/schemas/UtbmsSet'
     ErrorDetail:
       type: object
       required:
@@ -165,23 +177,11 @@ components:
           type: string
           format: date-time
           description: The time the *UtbmsSet* was last updated (as a ISO-8601 timestamp)
-    UtbmsSet_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: UtbmsSet List Response
-          items:
-            $ref: '#/components/schemas/UtbmsSet'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
+    UtbmsSet:
+      allOf:
+      - $ref: '#/components/schemas/UtbmsSet_base'
+      - type: object
+        properties: {}
 x-tagGroups:
 - name: Api
   tags:

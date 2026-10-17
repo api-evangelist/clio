@@ -4251,40 +4251,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ReportSchedule:
-      allOf:
-      - $ref: '#/components/schemas/ReportSchedule_base'
-      - type: object
-        properties: {}
-    ReportSchedule_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: ReportSchedule List Response
-          items:
-            $ref: '#/components/schemas/ReportSchedule'
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    ReportSchedule_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/ReportSchedule'
     Error:
       type: object
       required:
@@ -4363,6 +4329,40 @@ components:
           type: string
           format: date
           description: The date the Report Schedule will become enabled (a ISO-8601 date)
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    ReportSchedule_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: ReportSchedule List Response
+          items:
+            $ref: '#/components/schemas/ReportSchedule'
+    ReportSchedule_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ReportSchedule'
+    ReportSchedule:
+      allOf:
+      - $ref: '#/components/schemas/ReportSchedule_base'
+      - type: object
+        properties: {}
 x-tagGroups:
 - name: Api
   tags:

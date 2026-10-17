@@ -1048,6 +1048,199 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    ExternalProperty_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ExternalProperty*
+        etag:
+          type: string
+          description: ETag for the *ExternalProperty*
+        name:
+          type: string
+          description: The name of the *ExternalProperty*
+        value:
+          type: string
+          description: The value of the *ExternalProperty*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ExternalProperty* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ExternalProperty* was last updated (as a ISO-8601 timestamp)
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    Item_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Item*
+        etag:
+          type: string
+          description: ETag for the *Item*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Item* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Item* was last updated (as a ISO-8601 timestamp)
+        deleted_at:
+          type: string
+          format: date-time
+          description: The time the *Item* was deleted (as a ISO-8601 timestamp)
+        type:
+          type: string
+          enum:
+          - Document
+          - Folder
+          description: The type of the *Item*
+        locked:
+          type: boolean
+          description: Whether or not the Item is locked. Locked Item cannot be modified
+        name:
+          type: string
+          description: The name of the Item
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    Item:
+      allOf:
+      - $ref: '#/components/schemas/Item_base'
+      - type: object
+        properties:
+          parent:
+            $ref: '#/components/schemas/LinkedFolder_base'
+            description: LinkedFolder
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          contact:
+            $ref: '#/components/schemas/Contact_base'
+            description: Contact
+          document_category:
+            $ref: '#/components/schemas/DocumentCategory_base'
+            description: DocumentCategory
+          creator:
+            $ref: '#/components/schemas/ClioCreator_base'
+            description: ClioCreator
+          latest_document_version:
+            $ref: '#/components/schemas/DocumentVersion_base'
+            description: DocumentVersion
+          group:
+            $ref: '#/components/schemas/Group_base'
+            description: Group
+          external_properties:
+            type: array
+            items:
+              $ref: '#/components/schemas/ExternalProperty_base'
+            description: ExternalProperty
+    LinkedFolder_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Folder*
+        etag:
+          type: string
+          description: ETag for the *Folder*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Folder* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Folder* was last updated (as a ISO-8601 timestamp)
+        deleted_at:
+          type: string
+          format: date-time
+          description: The time the *Folder* was deleted (as a ISO-8601 timestamp)
+        type:
+          type: string
+          enum:
+          - Folder
+          description: The type of the *Folder*
+        locked:
+          type: boolean
+          description: Whether or not the Folder is locked. Locked Folder cannot be modified
+        name:
+          type: string
+          description: The name of the *Folder*
+        root:
+          type: boolean
+          description: Whether or not the Folder is the root folder. There is only one root folder per account
+    DocumentVersion_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *DocumentVersion*
+        document_id:
+          type: integer
+          format: int64
+          description: The ID of the parent document.
+        etag:
+          type: string
+          description: ETag for the *DocumentVersion*
+        uuid:
+          type: string
+          description: UUID associated with the DocumentVersion. UUID is required to mark a document fully uploaded.
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentVersion* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *DocumentVersion* was last updated (as a ISO-8601 timestamp)
+        filename:
+          type: string
+          description: The uploaded file name of the DocumentVersion.
+        size:
+          type: integer
+          format: int32
+          description: The size of the DocumentVersion in bytes.
+        version_number:
+          type: integer
+          format: int32
+          description: The ordered number of when this DocumentVersion was uploaded.
+        content_type:
+          type: string
+          description: A standard MIME type describing the format of the object data.
+        received_at:
+          type: string
+          format: date-time
+          description: The time the DocumentVersion was received (as an ISO-8601 timestamp)
+        put_url:
+          type: string
+          description: A signed URL for uploading the file in a single operation. It expires in 10 minutes. If the document is fully uploaded, the field is empty.
+        fully_uploaded:
+          type: boolean
+          description: True if the DocumentVersion is uploaded. False if the DocumentVersion is being uploaded.
     Matter_base:
       type: object
       properties:
@@ -1169,7 +1362,14 @@ components:
             items:
               $ref: '#/components/schemas/ExternalProperty_base'
             description: ExternalProperty
-    LinkedFolder_base:
+    Folder_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Folder'
+    Folder_base:
       type: object
       properties:
         id:
@@ -1201,59 +1401,30 @@ components:
           description: Whether or not the Folder is locked. Locked Folder cannot be modified
         name:
           type: string
-          description: The name of the *Folder*
+          description: The name of the Folder
         root:
           type: boolean
           description: Whether or not the Folder is the root folder. There is only one root folder per account
-    DocumentVersion_base:
+    Item_List:
       type: object
+      required:
+      - data
       properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *DocumentVersion*
-        document_id:
-          type: integer
-          format: int64
-          description: The ID of the parent document.
-        etag:
-          type: string
-          description: ETag for the *DocumentVersion*
-        uuid:
-          type: string
-          description: UUID associated with the DocumentVersion. UUID is required to mark a document fully uploaded.
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *DocumentVersion* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *DocumentVersion* was last updated (as a ISO-8601 timestamp)
-        filename:
-          type: string
-          description: The uploaded file name of the DocumentVersion.
-        size:
-          type: integer
-          format: int32
-          description: The size of the DocumentVersion in bytes.
-        version_number:
-          type: integer
-          format: int32
-          description: The ordered number of when this DocumentVersion was uploaded.
-        content_type:
-          type: string
-          description: A standard MIME type describing the format of the object data.
-        received_at:
-          type: string
-          format: date-time
-          description: The time the DocumentVersion was received (as an ISO-8601 timestamp)
-        put_url:
-          type: string
-          description: A signed URL for uploading the file in a single operation. It expires in 10 minutes. If the document is fully uploaded, the field is empty.
-        fully_uploaded:
-          type: boolean
-          description: True if the DocumentVersion is uploaded. False if the DocumentVersion is being uploaded.
+        data:
+          type: array
+          description: Item List Response
+          items:
+            $ref: '#/components/schemas/Item'
+    Folder_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: Folder List Response
+          items:
+            $ref: '#/components/schemas/Folder'
     Contact_base:
       type: object
       properties:
@@ -1377,61 +1548,6 @@ components:
           type: string
           format: date-time
           description: The time the *Group* was last updated (as a ISO-8601 timestamp)
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    Folder_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Folder'
-    Folder_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Folder*
-        etag:
-          type: string
-          description: ETag for the *Folder*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Folder* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Folder* was last updated (as a ISO-8601 timestamp)
-        deleted_at:
-          type: string
-          format: date-time
-          description: The time the *Folder* was deleted (as a ISO-8601 timestamp)
-        type:
-          type: string
-          enum:
-          - Folder
-          description: The type of the *Folder*
-        locked:
-          type: boolean
-          description: Whether or not the Folder is locked. Locked Folder cannot be modified
-        name:
-          type: string
-          description: The name of the Folder
-        root:
-          type: boolean
-          description: Whether or not the Folder is the root folder. There is only one root folder per account
     ClioCreator_base:
       type: object
       properties:
@@ -1508,74 +1624,6 @@ components:
           type: string
           format: date-time
           description: The time the *ClioCreator* was last updated (as a ISO-8601 timestamp)
-    ExternalProperty_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ExternalProperty*
-        etag:
-          type: string
-          description: ETag for the *ExternalProperty*
-        name:
-          type: string
-          description: The name of the *ExternalProperty*
-        value:
-          type: string
-          description: The value of the *ExternalProperty*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ExternalProperty* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ExternalProperty* was last updated (as a ISO-8601 timestamp)
-    Item_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: Item List Response
-          items:
-            $ref: '#/components/schemas/Item'
-    Item_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Item*
-        etag:
-          type: string
-          description: ETag for the *Item*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Item* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Item* was last updated (as a ISO-8601 timestamp)
-        deleted_at:
-          type: string
-          format: date-time
-          description: The time the *Item* was deleted (as a ISO-8601 timestamp)
-        type:
-          type: string
-          enum:
-          - Document
-          - Folder
-          description: The type of the *Item*
-        locked:
-          type: boolean
-          description: Whether or not the Item is locked. Locked Item cannot be modified
-        name:
-          type: string
-          description: The name of the Item
     DocumentCategory_base:
       type: object
       properties:
@@ -1597,54 +1645,6 @@ components:
           type: string
           format: date-time
           description: The time the *DocumentCategory* was last updated (as a ISO-8601 timestamp)
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    Item:
-      allOf:
-      - $ref: '#/components/schemas/Item_base'
-      - type: object
-        properties:
-          parent:
-            $ref: '#/components/schemas/LinkedFolder_base'
-            description: LinkedFolder
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          contact:
-            $ref: '#/components/schemas/Contact_base'
-            description: Contact
-          document_category:
-            $ref: '#/components/schemas/DocumentCategory_base'
-            description: DocumentCategory
-          creator:
-            $ref: '#/components/schemas/ClioCreator_base'
-            description: ClioCreator
-          latest_document_version:
-            $ref: '#/components/schemas/DocumentVersion_base'
-            description: DocumentVersion
-          group:
-            $ref: '#/components/schemas/Group_base'
-            description: Group
-          external_properties:
-            type: array
-            items:
-              $ref: '#/components/schemas/ExternalProperty_base'
-            description: ExternalProperty
-    Folder_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: Folder List Response
-          items:
-            $ref: '#/components/schemas/Folder'
 x-tagGroups:
 - name: Api
   tags:

@@ -461,6 +461,20 @@ paths:
         required: false
 components:
   schemas:
+    GrantFundingSource_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/GrantFundingSource'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     Grant_base:
       type: object
       properties:
@@ -524,30 +538,6 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    GrantFundingSource:
-      allOf:
-      - $ref: '#/components/schemas/GrantFundingSource_base'
-      - type: object
-        properties:
-          grants:
-            type: array
-            items:
-              $ref: '#/components/schemas/Grant_base'
-            description: Grant
-    GrantFundingSource_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/GrantFundingSource'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
     GrantFundingSource_base:
       type: object
       properties:
@@ -569,6 +559,16 @@ components:
           type: string
           format: date-time
           description: The time the *GrantFundingSource* was last updated (as a ISO-8601 timestamp)
+    GrantFundingSource:
+      allOf:
+      - $ref: '#/components/schemas/GrantFundingSource_base'
+      - type: object
+        properties:
+          grants:
+            type: array
+            items:
+              $ref: '#/components/schemas/Grant_base'
+            description: Grant
 x-tagGroups:
 - name: Api
   tags:

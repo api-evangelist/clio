@@ -194,13 +194,25 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    MedicalRecord_Show:
+    Error:
       type: object
       required:
-      - data
+      - error
       properties:
-        data:
-          $ref: '#/components/schemas/MedicalRecord'
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Matter_base:
       type: object
       properties:
@@ -291,18 +303,6 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
     MedicalRecord:
       allOf:
       - $ref: '#/components/schemas/MedicalRecord_base'
@@ -341,13 +341,13 @@ components:
           type: string
           format: date-time
           description: The time the *MedicalRecord* was last updated (as a ISO-8601 timestamp)
-    Error:
+    MedicalRecord_Show:
       type: object
       required:
-      - error
+      - data
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
+        data:
+          $ref: '#/components/schemas/MedicalRecord'
 x-tagGroups:
 - name: Api
   tags:

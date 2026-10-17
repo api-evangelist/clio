@@ -726,6 +726,49 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    Currency_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Currency*
+        etag:
+          type: string
+          description: ETag for the *Currency*
+        code:
+          type: string
+          description: ISO 4217 code for the *Currency*
+        sign:
+          type: string
+          description: Symbol used to denote monetary values using this *Currency*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Currency* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     ActivityDescriptionRate_base:
       type: object
       properties:
@@ -752,34 +795,44 @@ components:
           - Matter
           - Client
           description: What rate hierarchy the rate belongs to.
-    Group_base:
+    UtbmsCode_base:
       type: object
       properties:
-        client_connect_user:
-          type: boolean
-          description: Whether or not the Group is a UserGroup for a Clio Connect User
-        etag:
-          type: string
-          description: ETag for the *Group*
         id:
           type: integer
           format: int64
-          description: Unique identifier for the *Group*
+          description: Unique identifier for the *UtbmsCode*
+        etag:
+          type: string
+          description: ETag for the *UtbmsCode*
         name:
           type: string
-          description: The name of the *Group*
+          description: The name of the *UtbmsCode*
+        code:
+          type: string
+          description: The UTBMS code for the *UtbmsCode*
+        description:
+          type: string
+          description: The UTBMS description for the *UtbmsCode*
         type:
           type: string
           enum:
-          - UserGroup
-          - AdhocGroup
-          - AccountGroup
-          - TeamGroup
-          description: The type of the *Group*
+          - UtbmsTask
+          - UtbmsExpense
+          - UtbmsActivity
+          description: The type of the *UtbmsCode*
+        utbms_set_id:
+          type: integer
+          format: int64
+          description: Set id for the *UtbmsCode*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *UtbmsCode* was created (as a ISO-8601 timestamp)
         updated_at:
           type: string
           format: date-time
-          description: The time the *Group* was last updated (as a ISO-8601 timestamp)
+          description: The time the *UtbmsCode* was last updated (as a ISO-8601 timestamp)
     ActivityDescription_base:
       type: object
       properties:
@@ -833,18 +886,6 @@ components:
         currency:
           type: object
           description: The currency of the activity description
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
     ActivityDescription_List:
       type: object
       required:
@@ -855,6 +896,34 @@ components:
           description: ActivityDescription List Response
           items:
             $ref: '#/components/schemas/ActivityDescription'
+    Group_base:
+      type: object
+      properties:
+        client_connect_user:
+          type: boolean
+          description: Whether or not the Group is a UserGroup for a Clio Connect User
+        etag:
+          type: string
+          description: ETag for the *Group*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Group*
+        name:
+          type: string
+          description: The name of the *Group*
+        type:
+          type: string
+          enum:
+          - UserGroup
+          - AdhocGroup
+          - AccountGroup
+          - TeamGroup
+          description: The type of the *Group*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Group* was last updated (as a ISO-8601 timestamp)
     ActivityDescription_Show:
       type: object
       required:
@@ -862,75 +931,6 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/ActivityDescription'
-    UtbmsCode_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *UtbmsCode*
-        etag:
-          type: string
-          description: ETag for the *UtbmsCode*
-        name:
-          type: string
-          description: The name of the *UtbmsCode*
-        code:
-          type: string
-          description: The UTBMS code for the *UtbmsCode*
-        description:
-          type: string
-          description: The UTBMS description for the *UtbmsCode*
-        type:
-          type: string
-          enum:
-          - UtbmsTask
-          - UtbmsExpense
-          - UtbmsActivity
-          description: The type of the *UtbmsCode*
-        utbms_set_id:
-          type: integer
-          format: int64
-          description: Set id for the *UtbmsCode*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *UtbmsCode* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *UtbmsCode* was last updated (as a ISO-8601 timestamp)
-    Currency_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Currency*
-        etag:
-          type: string
-          description: ETag for the *Currency*
-        code:
-          type: string
-          description: ISO 4217 code for the *Currency*
-        sign:
-          type: string
-          description: Symbol used to denote monetary values using this *Currency*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Currency* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
     ActivityDescription:
       allOf:
       - $ref: '#/components/schemas/ActivityDescription_base'

@@ -889,6 +889,30 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    TaxSetting_base:
+      type: object
+      properties:
+        tax_rate_configuration_id:
+          type: integer
+          format: int64
+          description: The unique identifier of the tax rate configuration associated with the tax setting
+        tax_rate_configuration_name:
+          type: string
+          description: The name of the tax rate configuration
+        tax_rate_configuration_rate:
+          type: number
+          format: decimal
+          description: The rate of the tax rate configuration
+        tax_rate_configuration_formatted_rate:
+          type: string
+          description: The formatted rate of the tax rate configuration as a percentage
+        order:
+          type: integer
+          format: int32
+          description: The order in which this tax setting should be applied
+        rule:
+          type: string
+          description: The rule that the tax setting should be applied in
     ExpenseCategory:
       allOf:
       - $ref: '#/components/schemas/ExpenseCategory_base'
@@ -910,86 +934,37 @@ components:
             items:
               $ref: '#/components/schemas/TaxSetting_base'
             description: TaxSetting
-    LaukExpenseCategory_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: LaukExpenseCategory List Response
-          items:
-            $ref: '#/components/schemas/LaukExpenseCategory'
-    LaukExpenseCategory_base:
+    Currency_base:
       type: object
       properties:
-        certificated:
-          type: boolean
-          description: Certificated boolean identifier for expense
-        civil:
-          type: boolean
-          description: Civil boolean identifier for expense
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Currency*
+        etag:
+          type: string
+          description: ETag for the *Currency*
+        code:
+          type: string
+          description: ISO 4217 code for the *Currency*
+        sign:
+          type: string
+          description: Symbol used to denote monetary values using this *Currency*
         created_at:
           type: string
           format: date-time
-          description: The time the *LaukExpenseCategory* was created (as a ISO-8601 timestamp)
-        criminal:
-          type: boolean
-          description: Criminal boolean identifier for expense
-        etag:
-          type: string
-          description: ETag for the *LaukExpenseCategory*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *LaukExpenseCategory*
-        key:
-          type: string
-          description: Unique key
-        name:
-          type: string
-          description: Expense name
-        rate:
-          type: number
-          format: decimal
-          description: Determines rate based on region param
+          description: The time the *Currency* was created (as a ISO-8601 timestamp)
         updated_at:
           type: string
           format: date-time
-          description: The time the *LaukExpenseCategory* was last updated (as a ISO-8601 timestamp)
-    LaukExpenseCategory:
-      allOf:
-      - $ref: '#/components/schemas/LaukExpenseCategory_base'
-      - type: object
-        properties: {}
-    Group_base:
+          description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
+    Error:
       type: object
+      required:
+      - error
       properties:
-        client_connect_user:
-          type: boolean
-          description: Whether or not the Group is a UserGroup for a Clio Connect User
-        etag:
-          type: string
-          description: ETag for the *Group*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Group*
-        name:
-          type: string
-          description: The name of the *Group*
-        type:
-          type: string
-          enum:
-          - UserGroup
-          - AdhocGroup
-          - AccountGroup
-          - TeamGroup
-          description: The type of the *Group*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Group* was last updated (as a ISO-8601 timestamp)
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     ErrorDetail:
       type: object
       required:
@@ -1002,23 +977,49 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    ExpenseCategory_List:
+    LaukExpenseCategory:
+      allOf:
+      - $ref: '#/components/schemas/LaukExpenseCategory_base'
+      - type: object
+        properties: {}
+    UtbmsCode_base:
       type: object
-      required:
-      - data
       properties:
-        data:
-          type: array
-          description: ExpenseCategory List Response
-          items:
-            $ref: '#/components/schemas/ExpenseCategory'
-    ExpenseCategory_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/ExpenseCategory'
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *UtbmsCode*
+        etag:
+          type: string
+          description: ETag for the *UtbmsCode*
+        name:
+          type: string
+          description: The name of the *UtbmsCode*
+        code:
+          type: string
+          description: The UTBMS code for the *UtbmsCode*
+        description:
+          type: string
+          description: The UTBMS description for the *UtbmsCode*
+        type:
+          type: string
+          enum:
+          - UtbmsTask
+          - UtbmsExpense
+          - UtbmsActivity
+          description: The type of the *UtbmsCode*
+        utbms_set_id:
+          type: integer
+          format: int64
+          description: Set id for the *UtbmsCode*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *UtbmsCode* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *UtbmsCode* was last updated (as a ISO-8601 timestamp)
     ExpenseCategory_base:
       type: object
       properties:
@@ -1064,99 +1065,98 @@ components:
           items:
             type: object
           description: Array of objects, with each object representing a tax setting.
-    TaxSetting_base:
+    LaukExpenseCategory_base:
       type: object
       properties:
-        tax_rate_configuration_id:
-          type: integer
-          format: int64
-          description: The unique identifier of the tax rate configuration associated with the tax setting
-        tax_rate_configuration_name:
+        certificated:
+          type: boolean
+          description: Certificated boolean identifier for expense
+        civil:
+          type: boolean
+          description: Civil boolean identifier for expense
+        created_at:
           type: string
-          description: The name of the tax rate configuration
-        tax_rate_configuration_rate:
-          type: number
-          format: decimal
-          description: The rate of the tax rate configuration
-        tax_rate_configuration_formatted_rate:
+          format: date-time
+          description: The time the *LaukExpenseCategory* was created (as a ISO-8601 timestamp)
+        criminal:
+          type: boolean
+          description: Criminal boolean identifier for expense
+        etag:
           type: string
-          description: The formatted rate of the tax rate configuration as a percentage
-        order:
-          type: integer
-          format: int32
-          description: The order in which this tax setting should be applied
-        rule:
-          type: string
-          description: The rule that the tax setting should be applied in
-    UtbmsCode_base:
-      type: object
-      properties:
+          description: ETag for the *LaukExpenseCategory*
         id:
           type: integer
           format: int64
-          description: Unique identifier for the *UtbmsCode*
-        etag:
+          description: Unique identifier for the *LaukExpenseCategory*
+        key:
           type: string
-          description: ETag for the *UtbmsCode*
+          description: Unique key
         name:
           type: string
-          description: The name of the *UtbmsCode*
-        code:
+          description: Expense name
+        rate:
+          type: number
+          format: decimal
+          description: Determines rate based on region param
+        updated_at:
           type: string
-          description: The UTBMS code for the *UtbmsCode*
-        description:
+          format: date-time
+          description: The time the *LaukExpenseCategory* was last updated (as a ISO-8601 timestamp)
+    LaukExpenseCategory_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: LaukExpenseCategory List Response
+          items:
+            $ref: '#/components/schemas/LaukExpenseCategory'
+    Group_base:
+      type: object
+      properties:
+        client_connect_user:
+          type: boolean
+          description: Whether or not the Group is a UserGroup for a Clio Connect User
+        etag:
           type: string
-          description: The UTBMS description for the *UtbmsCode*
+          description: ETag for the *Group*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Group*
+        name:
+          type: string
+          description: The name of the *Group*
         type:
           type: string
           enum:
-          - UtbmsTask
-          - UtbmsExpense
-          - UtbmsActivity
-          description: The type of the *UtbmsCode*
-        utbms_set_id:
-          type: integer
-          format: int64
-          description: Set id for the *UtbmsCode*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *UtbmsCode* was created (as a ISO-8601 timestamp)
+          - UserGroup
+          - AdhocGroup
+          - AccountGroup
+          - TeamGroup
+          description: The type of the *Group*
         updated_at:
           type: string
           format: date-time
-          description: The time the *UtbmsCode* was last updated (as a ISO-8601 timestamp)
-    Currency_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Currency*
-        etag:
-          type: string
-          description: ETag for the *Currency*
-        code:
-          type: string
-          description: ISO 4217 code for the *Currency*
-        sign:
-          type: string
-          description: Symbol used to denote monetary values using this *Currency*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Currency* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
-    Error:
+          description: The time the *Group* was last updated (as a ISO-8601 timestamp)
+    ExpenseCategory_List:
       type: object
       required:
-      - error
+      - data
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
+        data:
+          type: array
+          description: ExpenseCategory List Response
+          items:
+            $ref: '#/components/schemas/ExpenseCategory'
+    ExpenseCategory_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ExpenseCategory'
 x-tagGroups:
 - name: Api
   tags:

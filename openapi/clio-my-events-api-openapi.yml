@@ -240,6 +240,23 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    MyEvent_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: MyEvent List Response
+          items:
+            $ref: '#/components/schemas/MyEvent'
     ErrorDetail:
       type: object
       required:
@@ -252,14 +269,16 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    MyEvent:
-      allOf:
-      - $ref: '#/components/schemas/MyEvent_base'
-      - type: object
-        properties:
-          event:
-            $ref: '#/components/schemas/Event_base'
-            description: Event
+    MyEvent_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/MyEvent'
+    MyEvent_base:
+      type: object
+      properties: {}
     Event_base:
       type: object
       properties:
@@ -314,33 +333,14 @@ components:
           type: integer
           format: int64
           description: Id of the subject that triggered the notification
-    MyEvent_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: MyEvent List Response
-          items:
-            $ref: '#/components/schemas/MyEvent'
-    MyEvent_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/MyEvent'
-    MyEvent_base:
-      type: object
-      properties: {}
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
+    MyEvent:
+      allOf:
+      - $ref: '#/components/schemas/MyEvent_base'
+      - type: object
+        properties:
+          event:
+            $ref: '#/components/schemas/Event_base'
+            description: Event
 x-tagGroups:
 - name: Api
   tags:

@@ -200,13 +200,13 @@ paths:
           description: Not Modified
 components:
   schemas:
-    ServiceType_Show:
+    Error:
       type: object
       required:
-      - data
+      - error
       properties:
-        data:
-          $ref: '#/components/schemas/ServiceType'
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     ErrorDetail:
       type: object
       required:
@@ -262,13 +262,13 @@ components:
       - $ref: '#/components/schemas/ServiceType_base'
       - type: object
         properties: {}
-    Error:
+    ServiceType_Show:
       type: object
       required:
-      - error
+      - data
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
+        data:
+          $ref: '#/components/schemas/ServiceType'
 x-tagGroups:
 - name: Api
   tags:

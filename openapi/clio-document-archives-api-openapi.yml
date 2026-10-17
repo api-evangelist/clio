@@ -272,6 +272,25 @@ paths:
           description: Not Modified
 components:
   schemas:
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     DocumentArchive_base:
       type: object
       properties:
@@ -310,18 +329,11 @@ components:
         message:
           type: string
           description: A message to indicate why the DocumentArchive didn't complete.
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
+    DocumentArchive:
+      allOf:
+      - $ref: '#/components/schemas/DocumentArchive_base'
+      - type: object
+        properties: {}
     DocumentArchive_Show:
       type: object
       required:
@@ -329,18 +341,6 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/DocumentArchive'
-    DocumentArchive:
-      allOf:
-      - $ref: '#/components/schemas/DocumentArchive_base'
-      - type: object
-        properties: {}
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

@@ -348,6 +348,50 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    BillableMatter_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: BillableMatter List Response
+          items:
+            $ref: '#/components/schemas/BillableMatter'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    BillableMatter:
+      allOf:
+      - $ref: '#/components/schemas/BillableMatter_base'
+      - type: object
+        properties:
+          client:
+            $ref: '#/components/schemas/Contact_base'
+            description: Contact
+    BillableMatter_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/BillableMatter'
     Contact_base:
       type: object
       properties:
@@ -443,18 +487,6 @@ components:
         currency:
           type: object
           description: Currency of the *Contact*
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
     BillableMatter_base:
       type: object
       properties:
@@ -484,38 +516,6 @@ components:
         display_number:
           type: string
           description: The reference to the matter
-    BillableMatter_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/BillableMatter'
-    BillableMatter_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: BillableMatter List Response
-          items:
-            $ref: '#/components/schemas/BillableMatter'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    BillableMatter:
-      allOf:
-      - $ref: '#/components/schemas/BillableMatter_base'
-      - type: object
-        properties:
-          client:
-            $ref: '#/components/schemas/Contact_base'
-            description: Contact
 x-tagGroups:
 - name: Api
   tags:

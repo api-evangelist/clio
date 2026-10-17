@@ -594,6 +594,30 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    CalendarEntryEventType:
+      allOf:
+      - $ref: '#/components/schemas/CalendarEntryEventType_base'
+      - type: object
+        properties: {}
     CalendarEntryEventType_base:
       type: object
       properties:
@@ -639,30 +663,6 @@ components:
         name:
           type: string
           description: The name for the *CalendarEntryEventType*
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    CalendarEntryEventType:
-      allOf:
-      - $ref: '#/components/schemas/CalendarEntryEventType_base'
-      - type: object
-        properties: {}
 x-tagGroups:
 - name: Api
   tags:

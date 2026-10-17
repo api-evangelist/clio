@@ -308,26 +308,25 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    MedicalBill_Show:
+    Error:
       type: object
       required:
-      - data
+      - error
       properties:
-        data:
-          $ref: '#/components/schemas/MedicalBill'
-    MedicalBill:
-      allOf:
-      - $ref: '#/components/schemas/MedicalBill_base'
-      - type: object
-        properties:
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          liens:
-            type: array
-            items:
-              $ref: '#/components/schemas/Lien_base'
-            description: Lien
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Matter_base:
       type: object
       properties:
@@ -418,18 +417,6 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
     Lien_base:
       type: object
       properties:
@@ -465,6 +452,13 @@ components:
           type: string
           format: date-time
           description: The time the *Lien* was last updated (as a ISO-8601 timestamp)
+    MedicalBill_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/MedicalBill'
     MedicalBill_base:
       type: object
       properties:
@@ -509,13 +503,19 @@ components:
           type: string
           format: date-time
           description: The time the *MedicalBill* was last updated (as a ISO-8601 timestamp)
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
+    MedicalBill:
+      allOf:
+      - $ref: '#/components/schemas/MedicalBill_base'
+      - type: object
+        properties:
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          liens:
+            type: array
+            items:
+              $ref: '#/components/schemas/Lien_base'
+            description: Lien
 x-tagGroups:
 - name: Api
   tags:

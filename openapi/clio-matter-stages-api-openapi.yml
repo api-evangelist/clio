@@ -117,16 +117,25 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    MatterStage_List:
+    Error:
       type: object
       required:
-      - data
+      - error
       properties:
-        data:
-          type: array
-          description: MatterStage List Response
-          items:
-            $ref: '#/components/schemas/MatterStage'
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     MatterStage_base:
       type: object
       properties:
@@ -155,30 +164,21 @@ components:
           type: string
           format: date-time
           description: The time the *MatterStage* was last updated (as a ISO-8601 timestamp)
-    ErrorDetail:
+    MatterStage_List:
       type: object
       required:
-      - type
-      - message
+      - data
       properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
+        data:
+          type: array
+          description: MatterStage List Response
+          items:
+            $ref: '#/components/schemas/MatterStage'
     MatterStage:
       allOf:
       - $ref: '#/components/schemas/MatterStage_base'
       - type: object
         properties: {}
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:

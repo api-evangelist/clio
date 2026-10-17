@@ -501,6 +501,35 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    Comment_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: Comment List Response
+          items:
+            $ref: '#/components/schemas/Comment'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     DocumentVersion_base:
       type: object
       properties:
@@ -550,64 +579,6 @@ components:
         fully_uploaded:
           type: boolean
           description: True if the DocumentVersion is uploaded. False if the DocumentVersion is being uploaded.
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    Comment_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: Comment List Response
-          items:
-            $ref: '#/components/schemas/Comment'
-    Comment_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Comment*
-        etag:
-          type: string
-          description: ETag for the *Comment*
-        message:
-          type: string
-          description: The content of the Comment
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Comment* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Comment* was last updated (as a ISO-8601 timestamp)
-        deleted_at:
-          type: string
-          format: date-time
-          description: The time the *Comment* was deleted (as a ISO-8601 timestamp)
-    Comment:
-      allOf:
-      - $ref: '#/components/schemas/Comment_base'
-      - type: object
-        properties:
-          creator:
-            $ref: '#/components/schemas/User_base'
-            description: User
-          document_version:
-            $ref: '#/components/schemas/DocumentVersion_base'
-            description: DocumentVersion
     User_base:
       type: object
       properties:
@@ -678,6 +649,31 @@ components:
           type: string
           format: date-time
           description: The time the *User* was last updated (as a ISO-8601 timestamp)
+    Comment_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Comment*
+        etag:
+          type: string
+          description: ETag for the *Comment*
+        message:
+          type: string
+          description: The content of the Comment
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Comment* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Comment* was last updated (as a ISO-8601 timestamp)
+        deleted_at:
+          type: string
+          format: date-time
+          description: The time the *Comment* was deleted (as a ISO-8601 timestamp)
     Comment_Show:
       type: object
       required:
@@ -685,13 +681,17 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/Comment'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
+    Comment:
+      allOf:
+      - $ref: '#/components/schemas/Comment_base'
+      - type: object
+        properties:
+          creator:
+            $ref: '#/components/schemas/User_base'
+            description: User
+          document_version:
+            $ref: '#/components/schemas/DocumentVersion_base'
+            description: DocumentVersion
 x-tagGroups:
 - name: Api
   tags:

@@ -534,6 +534,57 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    Damage_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Damage*
+        amount:
+          type: number
+          format: double
+          description: Amount for Damage
+        damage_type:
+          type: string
+          enum:
+          - special
+          - general
+          - other
+          description: Damage type of the record
+        description:
+          type: string
+          description: Description for Damage
+        etag:
+          type: string
+          description: ETag for the *Damage*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Damage* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Damage* was last updated (as a ISO-8601 timestamp)
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
     Matter_base:
       type: object
       properties:
@@ -624,6 +675,13 @@ components:
           type: string
           format: date-time
           description: The date the matter stage was last updated (as a ISO-8601 date)
+    Damage_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Damage'
     Damage_List:
       type: object
       required:
@@ -634,18 +692,6 @@ components:
           description: Damage List Response
           items:
             $ref: '#/components/schemas/Damage'
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
     Damage:
       allOf:
       - $ref: '#/components/schemas/Damage_base'
@@ -654,52 +700,6 @@ components:
           matter:
             $ref: '#/components/schemas/Matter_base'
             description: Matter
-    Damage_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Damage*
-        amount:
-          type: number
-          format: double
-          description: Amount for Damage
-        damage_type:
-          type: string
-          enum:
-          - special
-          - general
-          - other
-          description: Damage type of the record
-        description:
-          type: string
-          description: Description for Damage
-        etag:
-          type: string
-          description: ETag for the *Damage*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Damage* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Damage* was last updated (as a ISO-8601 timestamp)
-    Damage_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Damage'
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
 x-tagGroups:
 - name: Api
   tags:
