@@ -12,7 +12,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 20
+edge_count: 25
 edges:
 - tag: Webhooks
   spec_file: clio-webhooks-api-openapi.yml
@@ -24,6 +24,15 @@ edges:
   reason: Full CRUD lifecycle over outbound webhook subscriptions exposed to API consumers, which is exactly
     Webhook & Event Subscription Management within the developer platform capability.
   recovered_from: sweep-20260828T235257Z-edges.json
+- tag: Timers
+  spec_file: clio-timers-api-openapi.yml
+  capability_id: BC-4330.10
+  capability_id_l1: BC-4330
+  capability_name: Timekeeping Management
+  confidence: 0.88
+  evidence: 'POST /timer.json  Timer#create  Create a new Timer; schemas: Timer, Activity_base'
+  reason: Running timers tied to Activity records in a legal practice platform is chargeable time capture
+    — timekeeping for engagement billing.
 - tag: Bills
   spec_file: clio-bills-api-openapi.yml
   capability_id: BC-4330.50
@@ -35,15 +44,6 @@ edges:
     SplitInvoice_base
   reason: Bills are client invoices issued against legal matters, with preview, update and void operations
     and split-invoice/balance structures — squarely Invoice Generation Management within engagement billing.
-- tag: Timers
-  spec_file: clio-timers-api-openapi.yml
-  capability_id: BC-4330.10
-  capability_id_l1: BC-4330
-  capability_name: Timekeeping Management
-  confidence: 0.85
-  evidence: POST /timer.json Timer#create 'Create a new Timer'; schemas Timer, Activity_base
-  reason: Timers start/stop chargeable time against activities in a legal practice platform — this is
-    professional timekeeping capture feeding billing.
 - tag: Trust Line Items
   spec_file: clio-trust-line-items-api-openapi.yml
   capability_id: BC-4330.70
@@ -54,6 +54,17 @@ edges:
     Bill_base, Matter_base, Contact_base
   reason: Trust line items are entries against client trust funds applied to bills and matters, matching
     client trust and retainer fund management (IOLTA-type accounting) in legal practice.
+- tag: Matters
+  spec_file: clio-matters-api-openapi.yml
+  capability_id: BC-4300
+  capability_id_l1: BC-4300
+  capability_name: Client Engagement Management
+  confidence: 0.8
+  evidence: 'POST /matters.json  Matter#create  Create a new Matter; schemas: MatterStage_base, ContingencyFee_base,
+    EvergreenRetainer_base, MatterBillRecipient_base, AttorneyAllocation_base'
+  reason: Full CRUD over the matter record — the law firm's engagement entity, carrying stage, fee arrangement,
+    retainer, bill recipient and attorney allocation. This is the client/engagement lifecycle record;
+    the spread across intake, terms and closure means no single L2 is named.
 - tag: Outstanding Client Balances
   spec_file: clio-outstanding-client-balances-api-openapi.yml
   capability_id: BC-200.30
@@ -96,6 +107,28 @@ edges:
     ''PaymentProfile_base'', ''AccountBalance_base'''
   reason: Master record of clients/contacts with addresses, phone numbers, payment profiles and balances
     — customer/client master data management.
+- tag: Document Templates
+  spec_file: clio-document-templates-api-openapi.yml
+  capability_id: BC-4370.10
+  capability_id_l1: BC-4370
+  capability_name: Precedent and Template Management
+  confidence: 0.75
+  evidence: POST /document_templates.json  DocumentTemplate#create  Create a new DocumentTemplate; schema
+    DocumentTemplate_base, DocumentCategory_base
+  reason: Managing reusable document templates for a law firm maps to precedent and template management
+    (curation, versioning, access control of legal templates and standard work products). CRUD plus download
+    of templates grounds this; some risk it is generic content management, hence 0.75.
+- tag: Line Items
+  spec_file: clio-line-items-api-openapi.yml
+  capability_id: BC-4330.50
+  capability_id_l1: BC-4330
+  capability_name: Invoice Generation Management
+  confidence: 0.75
+  evidence: 'GET /line_items.json  LineItem#index  Return the data for all LineItems; schemas: Bill_base,
+    LineItemTax_base, LineItemTotals_base, Discount_base, Activity_base'
+  reason: Line items are bill lines (Bill_base, tax, discount, totals, activity) on legal invoices, i.e.
+    the composition of engagement invoices from recorded activities — invoice generation within time and
+    engagement billing.
 - tag: Matters
   spec_file: clio-matters-api-openapi.yml
   capability_id: BC-150.50
@@ -136,6 +169,17 @@ edges:
   evidence: '''CreditMemo#index  Return the data for all CreditMemos''; schemas ''Contact_base'', ''Allocation_base'''
   reason: Credit memos allocated against client billing are a receivables/customer-invoicing accounting
     artefact.
+- tag: Tasks
+  spec_file: clio-tasks-api-openapi.yml
+  capability_id: BC-4310.20
+  capability_id_l1: BC-4310
+  capability_name: Engagement Execution Management
+  confidence: 0.72
+  evidence: 'POST /tasks.json  Task#create  Create a new Task; schemas: Matter_base, Task_base, Reminder_base,
+    Activity_base'
+  reason: Tasks are attached to matters and activities with assignees and reminders — day-to-day management
+    of legal matter work, i.e. engagement execution. Some ambiguity as task tracking is also generic workflow
+    tooling.
 - tag: Activity Descriptions
   spec_file: clio-activity-descriptions-api-openapi.yml
   capability_id: BC-4330
@@ -189,6 +233,16 @@ edges:
     Rates
   reason: Legal aid controlled-work rate tables used to price chargeable legal work, i.e. rate-card/fee-structure
     data underpinning engagement billing.
+- tag: Credit Memos
+  spec_file: clio-credit-memos-api-openapi.yml
+  capability_id: BC-4330
+  capability_id_l1: BC-4330
+  capability_name: Time and Engagement Billing Management
+  confidence: 0.7
+  evidence: GET /credit_memos.json CreditMemo#index; schemas 'CreditMemo_base', 'Allocation_base', 'Contact_base'
+  reason: Credit memos with allocations against client contacts are part of engagement billing/receivables
+    in Clio's billing module; evidence does not pin a specific sub-capability (invoice production vs realisation/write-off),
+    so L1 only.
 - tag: Expense Categories
   spec_file: clio-expense-categories-api-openapi.yml
   capability_id: BC-4330.20
@@ -200,16 +254,15 @@ edges:
   reason: Expense categories carrying UTBMS codes are the classification scheme for chargeable engagement
     disbursements (legal-aid/UK legal billing codes), supporting disbursement capture and allocation on
     matters.
-- tag: Line Items
-  spec_file: clio-line-items-api-openapi.yml
+- tag: Interest Charges
+  spec_file: clio-interest-charges-api-openapi.yml
   capability_id: BC-4330.50
   capability_id_l1: BC-4330
   capability_name: Invoice Generation Management
   confidence: 0.7
-  evidence: 'GET /line_items.json  LineItem#index ... schemas: Bill_base, LineItemTax_base, LineItemTotals_base,
-    Discount_base, Activity_base'
-  reason: Line items belong to bills (Bill_base) with taxes, discounts and totals derived from billable
-    activities — i.e. the composition of engagement invoices in a law firm's time-and-billing system.
+  evidence: GET /interest_charges.json  InterestCharge#index; schemas Bill_base, Matter_base, Balance_base
+  reason: Interest charges applied to outstanding client bills are part of invoice/bill production and
+    balances for matters. Could arguably sit under realisation/collections, hence 0.7.
 - tag: Matter Dockets
   spec_file: clio-matter-dockets-api-openapi.yml
   capability_id: BC-150.20
