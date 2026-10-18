@@ -4,6 +4,7 @@ generated_by: planning/capability-mapping/scripts/classify_capabilities.py
 model: claude-opus-5
 frame:
 - Healthcare Providers
+- Professional Services
 min_confidence: 0.7
 capability_model:
   source: https://github.com/vincentmakes/turbo-ea-capabilities
@@ -11,7 +12,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 9
+edge_count: 20
 edges:
 - tag: Webhooks
   spec_file: clio-webhooks-api-openapi.yml
@@ -23,6 +24,36 @@ edges:
   reason: Full CRUD lifecycle over outbound webhook subscriptions exposed to API consumers, which is exactly
     Webhook & Event Subscription Management within the developer platform capability.
   recovered_from: sweep-20260828T235257Z-edges.json
+- tag: Bills
+  spec_file: clio-bills-api-openapi.yml
+  capability_id: BC-4330.50
+  capability_id_l1: BC-4330
+  capability_name: Invoice Generation Management
+  confidence: 0.85
+  evidence: GET /bills/{id}/preview.json Bill#preview Returns the pre-rendered html for the Bill; DELETE
+    /bills/{id}.json Bill#destroy Delete or void a Bill; schemas Bill_base, Matter_base, MatterBalance_base,
+    SplitInvoice_base
+  reason: Bills are client invoices issued against legal matters, with preview, update and void operations
+    and split-invoice/balance structures — squarely Invoice Generation Management within engagement billing.
+- tag: Timers
+  spec_file: clio-timers-api-openapi.yml
+  capability_id: BC-4330.10
+  capability_id_l1: BC-4330
+  capability_name: Timekeeping Management
+  confidence: 0.85
+  evidence: POST /timer.json Timer#create 'Create a new Timer'; schemas Timer, Activity_base
+  reason: Timers start/stop chargeable time against activities in a legal practice platform — this is
+    professional timekeeping capture feeding billing.
+- tag: Trust Line Items
+  spec_file: clio-trust-line-items-api-openapi.yml
+  capability_id: BC-4330.70
+  capability_id_l1: BC-4330
+  capability_name: Client Trust and Retainer Fund Management
+  confidence: 0.85
+  evidence: GET /trust_line_items.json TrustLineItem#index 'Return the data for all TrustLineItems'; schemas
+    Bill_base, Matter_base, Contact_base
+  reason: Trust line items are entries against client trust funds applied to bills and matters, matching
+    client trust and retainer fund management (IOLTA-type accounting) in legal practice.
 - tag: Outstanding Client Balances
   spec_file: clio-outstanding-client-balances-api-openapi.yml
   capability_id: BC-200.30
@@ -34,17 +65,27 @@ edges:
   reason: 'Reports unpaid client bill balances by contact with currency — receivables/collections visibility,
     i.e. Accounts Receivable Management for the firm. Not healthcare revenue cycle: the vendor bills legal
     clients, not payers.'
-- tag: Bills
-  spec_file: clio-bills-api-openapi.yml
-  capability_id: BC-200.30
-  capability_id_l1: BC-200
-  capability_name: Accounts Receivable Management
+- tag: Trust Requests
+  spec_file: clio-trust-requests-api-openapi.yml
+  capability_id: BC-4330.70
+  capability_id_l1: BC-4330
+  capability_name: Client Trust and Retainer Fund Management
   confidence: 0.78
-  evidence: GET /bills/{id}.json  Bill#show  Return the data for a single Bill; DELETE /bills/{id}.json  Bill#destroy  Delete
-    or void a Bill
-  reason: 'Bills here are client invoices with discounts, interest, balances and split invoices — i.e.
-    customer invoicing and receivables against matters, matching Accounts Receivable Management. Not healthcare
-    revenue cycle: the vendor is a legal practice platform.'
+  evidence: POST /trust_requests.json TrustRequest#create 'Create a new TrustRequest'
+  reason: Trust requests solicit client funds into the firm's trust/retainer account, part of client trust
+    and retainer fund management; single-operation surface limits certainty slightly.
+- tag: Activities
+  spec_file: clio-activities-api-openapi.yml
+  capability_id: BC-4330.10
+  capability_id_l1: BC-4330
+  capability_name: Timekeeping Management
+  confidence: 0.75
+  evidence: POST /activities.json Activity#create Create a new Activity; schemas Activity_base, ActivityDescription_base,
+    Matter_base, ExpenseCategory_base, UtbmsCode_base
+  reason: In Clio an Activity is a time or expense entry booked against a matter (UTBMS codes, expense
+    categories, activity descriptions), i.e. chargeable time/disbursement capture for legal engagements.
+    That is engagement timekeeping under Time and Engagement Billing Management; some ambiguity because
+    the same tag also carries expense entries (BC-4330.20).
 - tag: Contacts
   spec_file: clio-contacts-api-openapi.yml
   capability_id: BC-420.10
@@ -95,6 +136,80 @@ edges:
   evidence: '''CreditMemo#index  Return the data for all CreditMemos''; schemas ''Contact_base'', ''Allocation_base'''
   reason: Credit memos allocated against client billing are a receivables/customer-invoicing accounting
     artefact.
+- tag: Activity Descriptions
+  spec_file: clio-activity-descriptions-api-openapi.yml
+  capability_id: BC-4330
+  capability_id_l1: BC-4330
+  capability_name: Time and Engagement Billing Management
+  confidence: 0.7
+  evidence: ActivityDescription#create Create a new ActivityDescription; schemas ActivityDescriptionRate_base,
+    UtbmsCode_base, Currency_base
+  reason: Activity descriptions are the reusable billable work-type definitions (with associated rates
+    and UTBMS codes) that time entries draw on, so it sits inside engagement time and billing. Not specific
+    enough to choose confidently between timekeeping and fee-arrangement sub-capabilities.
+- tag: Activity Rates
+  spec_file: clio-activity-rates-api-openapi.yml
+  capability_id: BC-4330.40
+  capability_id_l1: BC-4330
+  capability_name: Fee Arrangement Management
+  confidence: 0.7
+  evidence: GET /activity_rates.json ActivityRate#index Return the data for all ActivityRates; schemas
+    ActivityRate_base, User_base, Group_base
+  reason: Activity rates define hourly billing rates per user/group for chargeable work, which is engagement
+    fee-structure/rate-card maintenance (Fee Arrangement Management) rather than generic pricing.
+- tag: Bill Themes
+  spec_file: clio-bill-themes-api-openapi.yml
+  capability_id: BC-4330.50
+  capability_id_l1: BC-4330
+  capability_name: Invoice Generation Management
+  confidence: 0.7
+  evidence: GET /bill_themes.json BillTheme#index Return the data for all BillThemes; PATCH /bill_themes/{id}.json
+    BillTheme#update
+  reason: Bill themes control the presentation/formatting template applied when producing client bills,
+    which belongs to Invoice Generation Management. Confidence moderate because it is a formatting configuration
+    object rather than invoice issuance itself.
+- tag: Civil Certificated Rates
+  spec_file: clio-civil-certificated-rates-api-openapi.yml
+  capability_id: BC-4330.40
+  capability_id_l1: BC-4330
+  capability_name: Fee Arrangement Management
+  confidence: 0.7
+  evidence: GET /lauk_civil_certificated_rates.json  LaukCivilCertificatedRate#index  List Civil Certificated
+    Rates
+  reason: Legal Aid UK certificated rate tables are the prescribed rate card applied to chargeable legal
+    work, matching Fee Arrangement Management (engagement-level rate cards). Read-only reference nature
+    keeps confidence moderate.
+- tag: Civil Controlled Rates
+  spec_file: clio-civil-controlled-rates-api-openapi.yml
+  capability_id: BC-4330.40
+  capability_id_l1: BC-4330
+  capability_name: Fee Arrangement Management
+  confidence: 0.7
+  evidence: GET /lauk_civil_controlled_rates.json  LaukCivilControlledRate#index  List Civil Controlled
+    Rates
+  reason: Legal aid controlled-work rate tables used to price chargeable legal work, i.e. rate-card/fee-structure
+    data underpinning engagement billing.
+- tag: Expense Categories
+  spec_file: clio-expense-categories-api-openapi.yml
+  capability_id: BC-4330.20
+  capability_id_l1: BC-4330
+  capability_name: Engagement Disbursement Management
+  confidence: 0.7
+  evidence: GET /lauk_expense_categories.json  LaukExpenseCategory#index  List Expense Categories; schemas
+    ExpenseCategory, UtbmsCode_base, TaxSetting_base
+  reason: Expense categories carrying UTBMS codes are the classification scheme for chargeable engagement
+    disbursements (legal-aid/UK legal billing codes), supporting disbursement capture and allocation on
+    matters.
+- tag: Line Items
+  spec_file: clio-line-items-api-openapi.yml
+  capability_id: BC-4330.50
+  capability_id_l1: BC-4330
+  capability_name: Invoice Generation Management
+  confidence: 0.7
+  evidence: 'GET /line_items.json  LineItem#index ... schemas: Bill_base, LineItemTax_base, LineItemTotals_base,
+    Discount_base, Activity_base'
+  reason: Line items belong to bills (Bill_base) with taxes, discounts and totals derived from billable
+    activities — i.e. the composition of engagement invoices in a law firm's time-and-billing system.
 - tag: Matter Dockets
   spec_file: clio-matter-dockets-api-openapi.yml
   capability_id: BC-150.20
