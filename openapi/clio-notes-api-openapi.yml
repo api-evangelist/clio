@@ -6,7 +6,135 @@ info:
     email: api@clio.com
   description: '# Developer Support and Feedback
 
-    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.'
+    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.
+
+    * For business and partnership inquiries, contact our API Partnerships team at api.partnerships@clio.com.
+
+    * For best practices and tips from the Clio development community, join the conversation in the Clio Developer Slack Channel.
+
+
+    A community-driven Clio Developers Stack Overflow Group also exists where you can connect and ask questions from other Clio API users.
+
+    # Getting Started
+
+    > **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).
+
+    >
+
+    > Likewise, the developer portal is available at region-specific links for the Australia, Canada, EU, and US regions.
+
+    >
+
+    > This document assumes the US region is being used (app.clio.com). If you''re building in one of the other regions, you should adapt the links and examples as necessary.
+
+
+    To start building on the Clio API, you’ll need a Clio account – you can review our Developer Handbook and follow the steps to sign up for an account.
+
+
+    Once you have an account, you can create a developer application from the Developer Portal and start building!
+
+    # Authorization with OAuth 2.0
+
+    See our Authorization documentation →
+
+    # Permissions
+
+    See our Permissions documentation →
+
+    # Fields
+
+    See our Fields documentation →
+
+    # Rate Limiting
+
+    See our Rate Limits documentation →
+
+    # Paging
+
+    See our Pagination documentation →
+
+    # ETags
+
+    See our ETags documentation →
+
+    # Minor Versions
+
+    API v4 supports multiple minor versions. Versions are of the form ''4.X.Y''. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you''re requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.
+
+
+    An `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.
+
+
+    You can find our API Versioning Policy and Guidelines in our documentation hub.
+
+
+    The API Changelog explains each version''s changes in further detail.
+
+    ### 4.0.4
+
+
+    * Update `quantity` field to return values in seconds rather than hours for Activities
+
+
+    ### 4.0.5
+
+
+    * Remove `matter_balances` field from Bills
+
+    * Standardize status/state enum values
+
+    * Add a Document association to completed DocumentAutomations
+
+    * Add rate visibility handling for Activity''s price and total
+
+
+    ### 4.0.6
+
+
+    * Remove `document_versions` collection field from Documents
+
+
+    ### 4.0.7
+
+
+    * Change secure link format
+
+
+    ### 4.0.8
+
+
+    * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user
+
+    * Add `quantity_redacted` field to activities
+
+
+    ### 4.0.9
+
+
+    * Contacts are filtered and redacted in the response based on the new ''Contacts Visibility'' user permission setting.
+
+
+    ### 4.0.10
+
+
+    * Fixed validation of `type` query parameter when querying Notes
+
+
+    ### 4.0.12
+
+
+    * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers
+
+
+    ### 4.0.13
+
+
+    **This is the default version**
+
+
+    * Add association limits to Contacts
+
+    * Returns 422 Unprocessable Entity when association limits are exceeded'
   version: v4
   x-logo:
     url: https://www.clio.com/wp-content/uploads/2015/05/Container-5-Logo.png
@@ -607,7 +735,7 @@ paths:
                           id:
                             type: integer
                             format: int64
-                            description: Unique id of this Note.
+                            description: The unique identifier for this notification event subscriber.
                           _destroy:
                             type: boolean
                             description: Whether or not the notification event subscriber should be deleted.
@@ -645,7 +773,7 @@ paths:
                           id:
                             type: integer
                             format: int64
-                            description: Unique id of this Note.
+                            description: The unique identifier for this notification event subscriber.
                           _destroy:
                             type: boolean
                             description: Whether or not the notification event subscriber should be deleted.
@@ -683,7 +811,7 @@ paths:
                           id:
                             type: integer
                             format: int64
-                            description: Unique id of this Note.
+                            description: The unique identifier for this notification event subscriber.
                           _destroy:
                             type: boolean
                             description: Whether or not the notification event subscriber should be deleted.
@@ -722,13 +850,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
     ErrorDetail:
       type: object
       required:
@@ -741,96 +862,6 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    Matter_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Matter*
-        etag:
-          type: string
-          description: ETag for the *Matter*
-        number:
-          type: integer
-          format: int32
-          description: The number given to the *Matter* within an account
-        display_number:
-          type: string
-          description: The reference and label of the *Matter*. Depending on the account's manual_matter_numbering setting, this is either read only (generated) or customizable.
-        custom_number:
-          type: string
-          description: User defined custom number of the *Matter*
-        currency:
-          type: object
-          description: Currency of the matter
-        description:
-          type: string
-          description: The detailed description of the *Matter*
-        status:
-          type: string
-          enum:
-          - Pending
-          - Open
-          - Closed
-          description: The current status of the *Matter*
-        location:
-          type: string
-          description: The location of the *Matter*
-        client_reference:
-          type: string
-          description: Client Reference string for external uses
-        client_id:
-          type: integer
-          format: int64
-          description: Client ID
-        billable:
-          type: boolean
-          description: Whether this matter is billable
-        maildrop_address:
-          type: string
-          description: A unique Maildrop email address for the matter
-        billing_method:
-          type: string
-          enum:
-          - flat
-          - contingency
-          - hourly
-          description: Billing method of this matter
-        open_date:
-          type: string
-          format: date
-          description: The date the matter was set to open (as a ISO-8601 date)
-        close_date:
-          type: string
-          format: date
-          description: The date the matter was set to closed (as a ISO-8601 date)
-        pending_date:
-          type: string
-          format: date
-          description: The date the matter was set to pending (as a ISO-8601 date)
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Matter* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Matter* was last updated (as a ISO-8601 timestamp)
-        shared:
-          type: boolean
-          description: Whether the matter is currently shared with Clio Connect
-        has_tasks:
-          type: boolean
-          description: Whether or not the matter has any tasks.
-        last_activity_date:
-          type: string
-          format: date
-          description: The greatest date out of all of the activities on the matter (as a ISO-8601 date)
-        matter_stage_updated_at:
-          type: string
-          format: date-time
-          description: The date the matter stage was last updated (as a ISO-8601 date)
     User_base:
       type: object
       properties:
@@ -901,6 +932,9 @@ components:
           type: string
           format: date-time
           description: The time the *User* was last updated (as a ISO-8601 timestamp)
+        locale:
+          type: string
+          description: The locale of the *User*
     Note:
       allOf:
       - $ref: '#/components/schemas/Note_base'
@@ -925,178 +959,13 @@ components:
             items:
               $ref: '#/components/schemas/NotificationEventSubscriber_base'
             description: NotificationEventSubscriber
-    Note_List:
+    Note_Show:
       type: object
       required:
       - data
       properties:
         data:
-          type: array
-          description: Note List Response
-          items:
-            $ref: '#/components/schemas/Note'
-    NotificationEventSubscriber_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *NotificationEventSubscriber*
-        etag:
-          type: string
-          description: ETag for the *NotificationEventSubscriber*
-        user_id:
-          type: integer
-          format: int64
-          description: The unique identifier for a User added as a notification event subscriber to the NotificationEventSubscriber
-        name:
-          type: string
-          description: The User name added as a notification event subscriber to the NotificationEventSubscriber
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *NotificationEventSubscriber* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *NotificationEventSubscriber* was last updated (as a ISO-8601 timestamp)
-    Activity_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Activity*
-        etag:
-          type: string
-          description: ETag for the *Activity*
-        type:
-          type: string
-          enum:
-          - TimeEntry
-          - ExpenseEntry
-          - HardCostEntry
-          - SoftCostEntry
-          description: The type of the *Activity*
-        date:
-          type: string
-          format: date
-          description: The date the *Activity* was performed (as a ISO-8601 date)
-        quantity_in_hours:
-          type: number
-          format: double
-          description: The number of hours the TimeEntry took.
-        rounded_quantity_in_hours:
-          type: number
-          format: double
-          description: 'The number of hours rounded accordingly to the billing settings.
-
-            The rounded value is used to calculate the total.
-
-            '
-        quantity:
-          type: number
-          format: double
-          description: 'The field is applicable to TimeEntry, ExpenseEntry, and SoftCostEntry.
-
-
-            **Version <= 4.0.3:**
-
-            The number of hours the TimeEntry took.
-
-
-            **Latest version:**
-
-            The number of seconds the TimeEntry took.
-
-            '
-        rounded_quantity:
-          type: number
-          format: double
-          description: 'The field is applicable to time entries only.
-
-
-            **Version <= 4.0.3:**
-
-            The number of hours rounded accordingly to the billing settings.
-
-            The rounded value is used to calculate the total.
-
-
-            **Latest version:**
-
-            The number of seconds rounded accordingly to the billing settings.
-
-            The rounded value is used to calculate the total.
-
-            '
-        quantity_redacted:
-          type: boolean
-          description: 'Is `true` if any of the following fields are redacted:
-
-            `quantity`, `rounded_quantity`, `rounded_quantity_in_hours`, `quantity_in_hours`, `total`, `non_billable_total`
-
-            '
-        price:
-          type: number
-          format: double
-          description: The hourly or flat rate of the *Activity*
-        note:
-          type: string
-          description: The details about the *Activity*
-        flat_rate:
-          type: boolean
-          description: Whether the *Activity* is a flat rate
-        billed:
-          type: boolean
-          description: Whether the *Activity* has been added to an active bill that is in the state of `awaiting_payment` or `paid`
-        on_bill:
-          type: boolean
-          description: Whether the *Activity* has been added to an active bill that is in the state of `draft`, `awaiting_approval`, `awaiting_payment` or `paid`
-        total:
-          type: number
-          format: double
-          description: The total cost of draft, billable and billed items in the *Activity*
-        contingency_fee:
-          type: boolean
-          description: Whether or not the *Activity* is a contingency fee
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Activity* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Activity* was last updated (as a ISO-8601 timestamp)
-        reference:
-          type: string
-          description: A check reference for a HardCostEntry.
-        non_billable:
-          type: boolean
-          description: Whether the *Activity* is non-billable
-        non_billable_total:
-          type: number
-          format: double
-          description: The total cost of non-billable items in the *Activity*
-        no_charge:
-          type: boolean
-          description: Whether the non-billable *Activity* is shown on the bill.
-        tax_setting:
-          type: string
-          enum:
-          - no_tax
-          - tax_1_only
-          - tax_2_only
-          - tax_1_and_tax_2
-          description: The option denoting whether primary tax, secondary tax, or both is applied to an expense entry.
-        tax_settings:
-          type: array
-          items:
-            type: object
-          description: Array of objects, with each object representing a tax setting that is applied to an expense entry with 'tax_rate_configuration_id', 'order', and 'rule' as the object properties.
-        currency:
-          type: object
-          description: The currency of the *Activity*
+          $ref: '#/components/schemas/Note'
     Contact_base:
       type: object
       properties:
@@ -1192,6 +1061,290 @@ components:
         currency:
           type: object
           description: Currency of the *Contact*
+        require_utbms_codes:
+          type: boolean
+          description: When true, new matters created for this client default to requiring UTBMS/LEDES codes on billable time and expense entries. Requires the firm to have mandatory LEDES billing enabled; otherwise the value is ignored.
+    Note_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: Note List Response
+          items:
+            $ref: '#/components/schemas/Note'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    Activity_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Activity*
+        etag:
+          type: string
+          description: ETag for the *Activity*
+        type:
+          type: string
+          enum:
+          - TimeEntry
+          - ExpenseEntry
+          - HardCostEntry
+          - SoftCostEntry
+          - FixedFee
+          description: The type of the *Activity*
+        date:
+          type: string
+          format: date
+          description: The date the *Activity* was performed (as a ISO-8601 date)
+        quantity_in_hours:
+          type: number
+          format: double
+          description: The number of hours the TimeEntry took.
+        rounded_quantity_in_hours:
+          type: number
+          format: double
+          description: 'The number of hours rounded accordingly to the billing settings.
+
+            The rounded value is used to calculate the total.
+
+            '
+        quantity:
+          type: number
+          format: double
+          description: 'The field is applicable to TimeEntry, ExpenseEntry, and SoftCostEntry.
+
+
+            **Version <= 4.0.3:**
+
+            The number of hours the TimeEntry took.
+
+
+            **Latest version:**
+
+            The number of seconds the TimeEntry took.
+
+            '
+        rounded_quantity:
+          type: number
+          format: double
+          description: 'The field is applicable to time entries only.
+
+
+            **Version <= 4.0.3:**
+
+            The number of hours rounded accordingly to the billing settings.
+
+            The rounded value is used to calculate the total.
+
+
+            **Latest version:**
+
+            The number of seconds rounded accordingly to the billing settings.
+
+            The rounded value is used to calculate the total.
+
+            '
+        quantity_redacted:
+          type: boolean
+          description: 'Is `true` if any of the following fields are redacted:
+
+            `quantity`, `rounded_quantity`, `rounded_quantity_in_hours`, `quantity_in_hours`, `total`, `non_billable_total`
+
+            '
+        price:
+          type: number
+          format: double
+          description: The hourly rate or fixed fee amount of the *Activity*
+        note:
+          type: string
+          description: The details about the *Activity*
+        flat_rate:
+          type: boolean
+          description: Whether the *Activity* is a fixed fee
+        billed:
+          type: boolean
+          description: Whether the *Activity* has been added to an active bill that is in the state of `awaiting_payment` or `paid`
+        on_bill:
+          type: boolean
+          description: Whether the *Activity* has been added to an active bill that is in the state of `draft`, `awaiting_approval`, `awaiting_payment` or `paid`
+        total:
+          type: number
+          format: double
+          description: The total cost of draft, billable and billed items in the *Activity*
+        contingency_fee:
+          type: boolean
+          description: Whether or not the *Activity* is a contingency fee
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Activity* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Activity* was last updated (as a ISO-8601 timestamp)
+        reference:
+          type: string
+          description: A check reference for a HardCostEntry.
+        non_billable:
+          type: boolean
+          description: Whether the *Activity* is non-billable
+        non_billable_total:
+          type: number
+          format: double
+          description: The total cost of non-billable items in the *Activity*
+        no_charge:
+          type: boolean
+          description: Whether the non-billable *Activity* is shown on the bill.
+        tax_setting:
+          type: string
+          enum:
+          - no_tax
+          - tax_1_only
+          - tax_2_only
+          - tax_1_and_tax_2
+          description: The option denoting whether primary tax, secondary tax, or both is applied to an expense entry.
+        tax_settings:
+          type: array
+          items:
+            type: object
+          description: Array of objects, with each object representing a tax setting that is applied to an expense entry with 'tax_rate_configuration_id', 'order', and 'rule' as the object properties.
+        input_tax_settings:
+          type: array
+          items:
+            type: object
+          description: Array of objects, with each object representing an input tax setting that can be applied to a hard cost expense entry with 'tax_rate_configuration_id', 'order', and 'rule' as the object properties.
+        currency:
+          type: object
+          description: The currency of the *Activity*
+        rate_table_lineage:
+          type: object
+          description: The rate table and category that priced a TimeEntry, as an object with `rate_table_name`, `rate_table_category_name`, `rate_table_deleted` (whether the table or category has since been deleted) and `rate_table_archived` (whether the table has since been archived). Only returned for a TimeEntry priced from a rate table.
+    Matter_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Matter*
+        etag:
+          type: string
+          description: ETag for the *Matter*
+        number:
+          type: integer
+          format: int32
+          description: The number given to the *Matter* within an account
+        display_number:
+          type: string
+          description: The reference and label of the *Matter*. Depending on the account's manual_matter_numbering setting, this is either read only (generated) or customizable.
+        custom_number:
+          type: string
+          description: User defined custom number of the *Matter*
+        currency:
+          type: object
+          description: Currency of the matter
+        description:
+          type: string
+          description: The detailed description of the *Matter*
+        status:
+          type: string
+          enum:
+          - Pending
+          - Open
+          - Closed
+          description: The current status of the *Matter*
+        location:
+          type: string
+          description: The location of the *Matter*
+        client_reference:
+          type: string
+          description: Client Reference string for external uses
+        client_id:
+          type: integer
+          format: int64
+          description: Client ID
+        billable:
+          type: boolean
+          description: Whether this matter is billable
+        require_utbms_codes:
+          type: boolean
+          description: When true, billable time and expense entries on this matter must include the required UTBMS/LEDES codes before they can be saved. Requires the firm to have mandatory LEDES billing enabled; otherwise the value is ignored.
+        maildrop_address:
+          type: string
+          description: A unique Maildrop email address for the matter
+        billing_method:
+          type: string
+          enum:
+          - flat
+          - contingency
+          - hourly
+          description: Billing method of this matter
+        open_date:
+          type: string
+          format: date
+          description: The date the matter was set to open (as a ISO-8601 date)
+        close_date:
+          type: string
+          format: date
+          description: The date the matter was set to closed (as a ISO-8601 date)
+        pending_date:
+          type: string
+          format: date
+          description: The date the matter was set to pending (as a ISO-8601 date)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Matter* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Matter* was last updated (as a ISO-8601 timestamp)
+        shared:
+          type: boolean
+          description: Whether the matter is currently shared with Clio Connect
+        has_tasks:
+          type: boolean
+          description: Whether or not the matter has any tasks.
+        last_activity_date:
+          type: string
+          format: date
+          description: The greatest date out of all of the activities on the matter (as a ISO-8601 date)
+        matter_stage_updated_at:
+          type: string
+          format: date-time
+          description: The date the matter stage was last updated (as a ISO-8601 date)
+    NotificationEventSubscriber_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *NotificationEventSubscriber*
+        etag:
+          type: string
+          description: ETag for the *NotificationEventSubscriber*
+        user_id:
+          type: integer
+          format: int64
+          description: The unique identifier for a User added as a notification event subscriber to the NotificationEventSubscriber
+        name:
+          type: string
+          description: The User name added as a notification event subscriber to the NotificationEventSubscriber
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *NotificationEventSubscriber* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *NotificationEventSubscriber* was last updated (as a ISO-8601 timestamp)
     Note_base:
       type: object
       properties:
@@ -1236,13 +1389,6 @@ components:
           type: integer
           format: int32
           description: The number of time_entries associated with the *Note*
-    Note_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Note'
 x-tagGroups:
 - name: Api
   tags:
@@ -1262,6 +1408,7 @@ x-tagGroups:
   - Bank Accounts
   - Bank Transactions
   - Bank Transfers
+  - Matter Transfers
 - name: Billing
   tags:
   - Bills
@@ -1271,6 +1418,11 @@ x-tagGroups:
   - Interest Charges
   - Line Items
   - Outstanding Client Balances
+  - Rate Tables
+  - Rate Table Categories
+  - Rate Table Timekeepers
+  - Rate Table Rates
+  - Rate Table Assignments
 - name: Calendars
   tags:
   - Calendars
@@ -1329,6 +1481,7 @@ x-tagGroups:
   - Practice Areas
   - Log Entries
   - Matter Stages
+  - Matter Protected Funds
   - Medical Records Details
   - Medical Records
   - Medical Bills
@@ -1372,3 +1525,8 @@ x-tagGroups:
   - Civil Certificated Rates
   - Criminal Controlled Rates
   - Expense Categories
+- name: General
+  tags:
+  - Safe Custody Packets
+  - Safe Custody Records
+  - Safe Custody Packet Locations

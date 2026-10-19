@@ -1,0 +1,969 @@
+openapi: 3.2.0
+info:
+  title: Clio API Documentation Webhooks API
+  contact:
+    name: Clio API Support
+    email: api@clio.com
+  description: '# Developer Support and Feedback
+
+    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.'
+  version: v4
+  x-logo:
+    url: https://www.clio.com/wp-content/uploads/2015/05/Container-5-Logo.png
+servers:
+- url: https://app.clio.com/api/v4
+  description: US region Production Server
+- url: https://eu.app.clio.com/api/v4
+  description: Europe region Production Server
+- url: https://ca.app.clio.com/api/v4
+  description: Canada region Production Server
+- url: https://au.app.clio.com/api/v4
+  description: Australia region Production Server
+tags:
+- name: Webhooks
+  description: Webhooks are a way of detecting events in Clio without the need for polling.
+paths:
+  /webhooks.json:
+    get:
+      tags:
+      - Webhooks
+      summary: Return the data for all Webhooks
+      operationId: Webhook#index
+      description: Outlines the parameters, optional and required, used when requesting the data for all Webhooks
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: created_since
+        in: query
+        description: Filter Webhook records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: ids[]
+        in: query
+        description: Filter Webhook records to those having the specified unique identifiers.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: 'A limit on the number of Webhook records to be returned. Limit can range between 1 and 200. Default: `200`.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: order
+        in: query
+        description: 'Orders the Webhook records by the given field. Default: `id(asc)`.'
+        required: false
+        schema:
+          type: string
+          enum:
+          - id(asc)
+          - id(desc)
+      - name: page_token
+        in: query
+        description: A token specifying which page to return.
+        required: false
+        schema:
+          type: string
+      - name: updated_since
+        in: query
+        description: Filter Webhook records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Webhook_List'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+      - Webhooks
+      summary: Create a new Webhook
+      operationId: Webhook#create
+      description: Outlines the parameters and data fields used when creating a new Webhook
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Webhook_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        description: Request Body for Webhooks
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    events:
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                        - created
+                        - updated
+                        - deleted
+                        - matter_opened
+                        - matter_pended
+                        - matter_closed
+                      description: The events your webhook is subscribed to.
+                    expires_at:
+                      type: string
+                      format: date-time
+                      description: The date and time when the Webhook will expire. (Expects an ISO-8601 timestamp).
+                    fields:
+                      type: string
+                      description: Fields to be included in the Webhook request.
+                    model:
+                      type: string
+                      enum:
+                      - activity
+                      - bill
+                      - calendar_entry
+                      - clio_payments_payment
+                      - communication
+                      - contact
+                      - document
+                      - folder
+                      - matter
+                      - task
+                      description: What model the Webhook is for. This field accepts either [the string identifier of the model or its ID](#section/Supported-Models)
+                    url:
+                      type: string
+                      description: The URL of where to POST the Webhook. Note that only URLs using the `https` protocol will be accepted.
+                  required:
+                  - url
+                  - model
+                  - fields
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    events:
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                        - created
+                        - updated
+                        - deleted
+                        - matter_opened
+                        - matter_pended
+                        - matter_closed
+                      description: The events your webhook is subscribed to.
+                    expires_at:
+                      type: string
+                      format: date-time
+                      description: The date and time when the Webhook will expire. (Expects an ISO-8601 timestamp).
+                    fields:
+                      type: string
+                      description: Fields to be included in the Webhook request.
+                    model:
+                      type: string
+                      enum:
+                      - activity
+                      - bill
+                      - calendar_entry
+                      - clio_payments_payment
+                      - communication
+                      - contact
+                      - document
+                      - folder
+                      - matter
+                      - task
+                      description: What model the Webhook is for. This field accepts either [the string identifier of the model or its ID](#section/Supported-Models)
+                    url:
+                      type: string
+                      description: The URL of where to POST the Webhook. Note that only URLs using the `https` protocol will be accepted.
+                  required:
+                  - url
+                  - model
+                  - fields
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    events:
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                        - created
+                        - updated
+                        - deleted
+                        - matter_opened
+                        - matter_pended
+                        - matter_closed
+                      description: The events your webhook is subscribed to.
+                    expires_at:
+                      type: string
+                      format: date-time
+                      description: The date and time when the Webhook will expire. (Expects an ISO-8601 timestamp).
+                    fields:
+                      type: string
+                      description: Fields to be included in the Webhook request.
+                    model:
+                      type: string
+                      enum:
+                      - activity
+                      - bill
+                      - calendar_entry
+                      - clio_payments_payment
+                      - communication
+                      - contact
+                      - document
+                      - folder
+                      - matter
+                      - task
+                      description: What model the Webhook is for. This field accepts either [the string identifier of the model or its ID](#section/Supported-Models)
+                    url:
+                      type: string
+                      description: The URL of where to POST the Webhook. Note that only URLs using the `https` protocol will be accepted.
+                  required:
+                  - url
+                  - model
+                  - fields
+        required: false
+  /webhooks/{id}.json:
+    get:
+      tags:
+      - Webhooks
+      summary: Return the data for a single Webhook
+      operationId: Webhook#show
+      description: Outlines the parameters, optional and required, used when requesting the data for a single Webhook
+      parameters:
+      - name: IF-MODIFIED-SINCE
+        in: header
+        description: The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: IF-NONE-MATCH
+        in: header
+        description: The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.
+        required: false
+        schema:
+          type: string
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The unique identifier for the Webhook.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Webhook_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '304':
+          description: Not Modified
+    patch:
+      tags:
+      - Webhooks
+      summary: Update a single Webhook
+      operationId: Webhook#update
+      description: Outlines the parameters and data fields used when updating a single Webhook
+      parameters:
+      - name: IF-MATCH
+        in: header
+        description: The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).
+        required: false
+        schema:
+          type: string
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The unique identifier for the Webhook.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Webhook_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '412':
+          description: Precondition Failed
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        description: Request Body for Webhooks
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    events:
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                        - created
+                        - updated
+                        - deleted
+                        - matter_opened
+                        - matter_pended
+                        - matter_closed
+                      description: The events your webhook is subscribed to.
+                    expires_at:
+                      type: string
+                      format: date-time
+                      description: The date and time when the Webhook will expire. (Expects an ISO-8601 timestamp).
+                    fields:
+                      type: string
+                      description: Fields to be included in the Webhook request.
+                    model:
+                      type: string
+                      enum:
+                      - activity
+                      - bill
+                      - calendar_entry
+                      - clio_payments_payment
+                      - communication
+                      - contact
+                      - document
+                      - folder
+                      - matter
+                      - task
+                      description: What model the Webhook is for. This field accepts either [the string identifier of the model or its ID](#section/Supported-Models)
+                    url:
+                      type: string
+                      description: The URL of where to POST the Webhook. Note that only URLs using the `https` protocol will be accepted.
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    events:
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                        - created
+                        - updated
+                        - deleted
+                        - matter_opened
+                        - matter_pended
+                        - matter_closed
+                      description: The events your webhook is subscribed to.
+                    expires_at:
+                      type: string
+                      format: date-time
+                      description: The date and time when the Webhook will expire. (Expects an ISO-8601 timestamp).
+                    fields:
+                      type: string
+                      description: Fields to be included in the Webhook request.
+                    model:
+                      type: string
+                      enum:
+                      - activity
+                      - bill
+                      - calendar_entry
+                      - clio_payments_payment
+                      - communication
+                      - contact
+                      - document
+                      - folder
+                      - matter
+                      - task
+                      description: What model the Webhook is for. This field accepts either [the string identifier of the model or its ID](#section/Supported-Models)
+                    url:
+                      type: string
+                      description: The URL of where to POST the Webhook. Note that only URLs using the `https` protocol will be accepted.
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    events:
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                        - created
+                        - updated
+                        - deleted
+                        - matter_opened
+                        - matter_pended
+                        - matter_closed
+                      description: The events your webhook is subscribed to.
+                    expires_at:
+                      type: string
+                      format: date-time
+                      description: The date and time when the Webhook will expire. (Expects an ISO-8601 timestamp).
+                    fields:
+                      type: string
+                      description: Fields to be included in the Webhook request.
+                    model:
+                      type: string
+                      enum:
+                      - activity
+                      - bill
+                      - calendar_entry
+                      - clio_payments_payment
+                      - communication
+                      - contact
+                      - document
+                      - folder
+                      - matter
+                      - task
+                      description: What model the Webhook is for. This field accepts either [the string identifier of the model or its ID](#section/Supported-Models)
+                    url:
+                      type: string
+                      description: The URL of where to POST the Webhook. Note that only URLs using the `https` protocol will be accepted.
+        required: false
+    delete:
+      tags:
+      - Webhooks
+      summary: Delete a single Webhook
+      operationId: Webhook#destroy
+      description: Outlines the parameters, optional and required, used when deleting the record for a single Webhook
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The unique identifier for the Webhook.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '204':
+          description: No Content
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    Webhook_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Webhook'
+    User_base:
+      type: object
+      properties:
+        account_owner:
+          type: boolean
+          description: Whether the *User* is the owner of the account
+        clio_connect:
+          type: boolean
+          description: Whether the *User* is a Clio Connect user
+        court_rules_default_attendee:
+          type: boolean
+          description: Whether the *User* is a default attendee for court rules events
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *User* was created (as a ISO-8601 timestamp)
+        default_calendar_id:
+          type: integer
+          format: int64
+          description: Default calendar id for *User*.
+        email:
+          type: string
+          description: The email of the *User*
+        enabled:
+          type: boolean
+          description: Whether the *User* is allowed to log in
+        etag:
+          type: string
+          description: ETag for the *User*
+        first_name:
+          type: string
+          description: The first name of the *User*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *User*
+        initials:
+          type: string
+          description: The initials of the *User*
+        last_name:
+          type: string
+          description: The last name of the *User*
+        name:
+          type: string
+          description: The full name of the *User*
+        phone_number:
+          type: string
+          description: The primary phone number for the *User*.
+        rate:
+          type: number
+          format: float
+          description: Default user activity rate for *User*.
+        roles:
+          type: array
+          items:
+            type: string
+          description: An array of roles assigned to this *User*
+        subscription_type:
+          type: string
+          enum:
+          - Attorney
+          - NonAttorney
+          description: The subscription type of the *User*
+        time_zone:
+          type: string
+          description: The selected time zone of the *User*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *User* was last updated (as a ISO-8601 timestamp)
+    Webhook:
+      allOf:
+      - $ref: '#/components/schemas/Webhook_base'
+      - type: object
+        properties:
+          user:
+            $ref: '#/components/schemas/User_base'
+            description: User
+    Webhook_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: Webhook List Response
+          items:
+            $ref: '#/components/schemas/Webhook'
+    Webhook_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Webhook*
+        etag:
+          type: string
+          description: ETag for the *Webhook*
+        url:
+          type: string
+          description: The `https` URL to send the data to when the events are triggered
+        fields:
+          type: string
+          description: Fields to be included in the webhook request
+        shared_secret:
+          type: string
+          description: A shared secret used to create a signature for the payload
+        model:
+          type: string
+          enum:
+          - activity
+          - bill
+          - calendar_entry
+          - clio_payments_payment
+          - communication
+          - contact
+          - document
+          - folder
+          - matter
+          - task
+          description: What kind of records the webhook is for
+        status:
+          type: string
+          enum:
+          - pending
+          - enabled
+          - suspended
+          description: The current status of the webhook.
+        events:
+          type: array
+          items:
+            type: string
+            enum:
+            - created
+            - updated
+            - deleted
+            - matter_opened
+            - matter_pended
+            - matter_closed
+          description: The events your webhook is subscribed to.
+        expires_at:
+          type: string
+          format: date-time
+          description: The time webhook will expire (as a ISO-8601 timestamp)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Webhook* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Webhook* was last updated (as a ISO-8601 timestamp)
+x-tagGroups:
+- name: Api
+  tags:
+  - Custom Actions
+  - Webhooks
+- name: Activities
+  tags:
+  - Activities
+  - Activity Descriptions
+  - Activity Rates
+  - Expense Categories
+  - Timers
+  - Utbms Codes
+  - Utbms Sets
+- name: Accounting
+  tags:
+  - Bank Accounts
+  - Bank Transactions
+  - Bank Transfers
+- name: Billing
+  tags:
+  - Bills
+  - Billable Clients
+  - Billable Matters
+  - Bill Themes
+  - Interest Charges
+  - Line Items
+  - Outstanding Client Balances
+- name: Calendars
+  tags:
+  - Calendars
+  - Calendar Entries
+  - Calendar Entry Event Types
+  - Calendar Visibilities
+  - Reminders
+- name: Clio Payments
+  tags:
+  - Clio Payments Links
+  - Clio Payments Payments
+- name: Communications
+  tags:
+  - Communications
+  - Conversations
+  - Conversation Messages
+- name: Contacts
+  tags:
+  - Contacts
+  - Email Addresses
+  - Phone Numbers
+  - Notes
+  - Log Entries
+- name: Court Rules
+  tags:
+  - Jurisdictions To Triggers
+  - Jurisdictions
+  - Matter Dockets
+  - Service Types
+- name: Custom Fields
+  tags:
+  - Custom Fields
+  - Custom Field Sets
+- name: Documents
+  tags:
+  - Documents
+  - Document Versions
+  - Folders
+  - Document Archives
+  - Document Automations
+  - Document Categories
+  - Document Templates
+  - Comments
+- name: In-app Notifications
+  tags:
+  - My Events
+  - Event Metrics
+- name: Matters
+  tags:
+  - Matters
+  - Relationships
+  - Clients
+  - Related Contacts
+  - Matter Contacts
+  - Notes
+  - Practice Areas
+  - Log Entries
+  - Matter Stages
+  - Medical Records Details
+  - Medical Records
+  - Medical Bills
+  - Damages
+- name: Payments
+  tags:
+  - Allocations
+  - Credit Memos
+- name: Reporting
+  tags:
+  - Reports
+  - Report Presets
+  - Report Schedules
+- name: Settings
+  tags:
+  - Text Snippets
+  - Billing Settings
+  - Currencies
+  - Tax Rate Configurations
+- name: Tasks
+  tags:
+  - Tasks
+  - Task Templates
+  - Task Template Lists
+  - Task Types
+- name: Trust
+  tags:
+  - Trust Line Items
+  - Trust Requests
+- name: Users
+  tags:
+  - Users
+  - Groups
+- name: Legal Aid US
+  tags:
+  - Grants
+  - Grant Funding Sources
+- name: Legal Aid England & Wales
+  tags:
+  - Civil Controlled Rates
+  - Civil Certificated Rates
+  - Criminal Controlled Rates
+  - Expense Categories

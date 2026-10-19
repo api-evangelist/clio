@@ -6,7 +6,135 @@ info:
     email: api@clio.com
   description: '# Developer Support and Feedback
 
-    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.'
+    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.
+
+    * For business and partnership inquiries, contact our API Partnerships team at api.partnerships@clio.com.
+
+    * For best practices and tips from the Clio development community, join the conversation in the Clio Developer Slack Channel.
+
+
+    A community-driven Clio Developers Stack Overflow Group also exists where you can connect and ask questions from other Clio API users.
+
+    # Getting Started
+
+    > **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).
+
+    >
+
+    > Likewise, the developer portal is available at region-specific links for the Australia, Canada, EU, and US regions.
+
+    >
+
+    > This document assumes the US region is being used (app.clio.com). If you''re building in one of the other regions, you should adapt the links and examples as necessary.
+
+
+    To start building on the Clio API, you’ll need a Clio account – you can review our Developer Handbook and follow the steps to sign up for an account.
+
+
+    Once you have an account, you can create a developer application from the Developer Portal and start building!
+
+    # Authorization with OAuth 2.0
+
+    See our Authorization documentation →
+
+    # Permissions
+
+    See our Permissions documentation →
+
+    # Fields
+
+    See our Fields documentation →
+
+    # Rate Limiting
+
+    See our Rate Limits documentation →
+
+    # Paging
+
+    See our Pagination documentation →
+
+    # ETags
+
+    See our ETags documentation →
+
+    # Minor Versions
+
+    API v4 supports multiple minor versions. Versions are of the form ''4.X.Y''. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you''re requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.
+
+
+    An `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.
+
+
+    You can find our API Versioning Policy and Guidelines in our documentation hub.
+
+
+    The API Changelog explains each version''s changes in further detail.
+
+    ### 4.0.4
+
+
+    * Update `quantity` field to return values in seconds rather than hours for Activities
+
+
+    ### 4.0.5
+
+
+    * Remove `matter_balances` field from Bills
+
+    * Standardize status/state enum values
+
+    * Add a Document association to completed DocumentAutomations
+
+    * Add rate visibility handling for Activity''s price and total
+
+
+    ### 4.0.6
+
+
+    * Remove `document_versions` collection field from Documents
+
+
+    ### 4.0.7
+
+
+    * Change secure link format
+
+
+    ### 4.0.8
+
+
+    * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user
+
+    * Add `quantity_redacted` field to activities
+
+
+    ### 4.0.9
+
+
+    * Contacts are filtered and redacted in the response based on the new ''Contacts Visibility'' user permission setting.
+
+
+    ### 4.0.10
+
+
+    * Fixed validation of `type` query parameter when querying Notes
+
+
+    ### 4.0.12
+
+
+    * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers
+
+
+    ### 4.0.13
+
+
+    **This is the default version**
+
+
+    * Add association limits to Contacts
+
+    * Returns 422 Unprocessable Entity when association limits are exceeded'
   version: v4
   x-logo:
     url: https://www.clio.com/wp-content/uploads/2015/05/Container-5-Logo.png
@@ -21,7 +149,59 @@ servers:
   description: Australia region Production Server
 tags:
 - name: Webhooks
-  description: Webhooks are a way of detecting events in Clio without the need for polling.
+  description: 'Webhooks are a way of detecting events in Clio without the need for polling. A webhook can be subscribed to a number of `events` on a model. Some events will be different depending on the chosen model, but (with one exception) *all* models support the following events:
+
+
+    * `created`
+
+    * `updated`
+
+    * `deleted`
+
+
+    To subscribe to any or all events for a model, create a webhook record with the URL that you want webhooks to be sent to, a model, and the list of `events` you care about. Whenever an event happens on that model in Clio that the user is authorized to see, an HTTP request will be made to the supplied URL with details about the event. A webhook will automatically expire after a set period of time. If no `expires_at` parameter is provided, the webhook will expire after 3 days. The maximum duration you can set a webhook to expire after is 31 days. If you require longer than that, you can manually extend it by updating the `expires_at` field. ## Supported Models
+
+
+    Your application needs to have the corresponding model OAuth scope when creating or updating a webhook. For example, when creating/updating a folder webhook you need the document Oauth Scope and the webhook Oauth Scope. The list of models supported by webhooks with their corresponding string identifier and ID is presented in the following table:
+
+
+    | Name | String Identifier | ID | Oauth Scope |
+
+    |-----------------------|-----------------------|:--:|----------------|
+
+    | Matter | matter | 1 | Matters |
+
+    | Activity | activity | 2 | Activities |
+
+    | Bill | bill | 3 | Billing |
+
+    | Calendar Entry | calendar_entry | 4 | Calendars |
+
+    | Communication | communication | 5 | Communications |
+
+    | Contact | contact | 6 | Contacts |
+
+    | Task | task | 7 | Tasks |
+
+    | Document | document | 8 | Documents |
+
+    | Folder | folder | 9 | Documents |
+
+    | Clio Payments payment | clio_payments_payment | 10 | Clio Payments |
+
+
+    ## HTTPS
+
+
+    Please note that all webhooks MUST be using a url with the `https` scheme. All other schemes, including `http`, will be rejected. ## Specifying Fields in Webhooks
+
+
+    When a webhook is sent, the payload will not include the entire object for the record. To select specific fields from the record, you can use the fields parameter when creating the webhook. For example: when creating a webhook listening for new Activity records being created, you can pass the value “id,etag,quantity,price” into the fields parameter. When an Activity is created, the id, etag, quantity, and price fields of the new Activity will be included in the webhook''s payload. For `update` webhooks, the fields parameter is also used to specify fields that will be “watched” by the webhook. Clio will only send a webhook when at least one of the selected fields has changed on a record. **An important note**
+
+    If you have never received a webhook for an object before, you will receive a webhook for that object if any fields have changed on that object, including fields you haven''t subscribed to. For example: if you create a webhook that subscribes to updates to Activities and provide "price" as the field parameter value, the first time an Activity is updated after the Webhook is live will trigger a webhook event – even if the price hasn''t changed. Subsequent webhook events for that Activity will only be sent when the price field changes. Note that there is a hard limit to the size of the `fields` parameter. Any request containing a `fields` size over 1000 characters will be rejected. Tip: Use the minimum set of fields to reduce how frequently your endpoint is called. ## Model Specific Events
+
+
+    As mentioned previously, almost all models support the created, updated, and deleted events. Some models also support events specific to their life cycle.'
 paths:
   /webhooks.json:
     get:
@@ -660,13 +840,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
     ErrorDetail:
       type: object
       required:
@@ -679,13 +852,6 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    Webhook_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Webhook'
     User_base:
       type: object
       properties:
@@ -756,6 +922,16 @@ components:
           type: string
           format: date-time
           description: The time the *User* was last updated (as a ISO-8601 timestamp)
+        locale:
+          type: string
+          description: The locale of the *User*
+    Webhook_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Webhook'
     Webhook:
       allOf:
       - $ref: '#/components/schemas/Webhook_base'
@@ -764,6 +940,13 @@ components:
           user:
             $ref: '#/components/schemas/User_base'
             description: User
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
     Webhook_List:
       type: object
       required:
@@ -857,6 +1040,7 @@ x-tagGroups:
   - Bank Accounts
   - Bank Transactions
   - Bank Transfers
+  - Matter Transfers
 - name: Billing
   tags:
   - Bills
@@ -866,6 +1050,11 @@ x-tagGroups:
   - Interest Charges
   - Line Items
   - Outstanding Client Balances
+  - Rate Tables
+  - Rate Table Categories
+  - Rate Table Timekeepers
+  - Rate Table Rates
+  - Rate Table Assignments
 - name: Calendars
   tags:
   - Calendars
@@ -924,6 +1113,7 @@ x-tagGroups:
   - Practice Areas
   - Log Entries
   - Matter Stages
+  - Matter Protected Funds
   - Medical Records Details
   - Medical Records
   - Medical Bills
@@ -967,3 +1157,8 @@ x-tagGroups:
   - Civil Certificated Rates
   - Criminal Controlled Rates
   - Expense Categories
+- name: General
+  tags:
+  - Safe Custody Packets
+  - Safe Custody Records
+  - Safe Custody Packet Locations

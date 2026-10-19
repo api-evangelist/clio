@@ -6,7 +6,135 @@ info:
     email: api@clio.com
   description: '# Developer Support and Feedback
 
-    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.'
+    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.
+
+    * For business and partnership inquiries, contact our API Partnerships team at api.partnerships@clio.com.
+
+    * For best practices and tips from the Clio development community, join the conversation in the Clio Developer Slack Channel.
+
+
+    A community-driven Clio Developers Stack Overflow Group also exists where you can connect and ask questions from other Clio API users.
+
+    # Getting Started
+
+    > **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).
+
+    >
+
+    > Likewise, the developer portal is available at region-specific links for the Australia, Canada, EU, and US regions.
+
+    >
+
+    > This document assumes the US region is being used (app.clio.com). If you''re building in one of the other regions, you should adapt the links and examples as necessary.
+
+
+    To start building on the Clio API, you’ll need a Clio account – you can review our Developer Handbook and follow the steps to sign up for an account.
+
+
+    Once you have an account, you can create a developer application from the Developer Portal and start building!
+
+    # Authorization with OAuth 2.0
+
+    See our Authorization documentation →
+
+    # Permissions
+
+    See our Permissions documentation →
+
+    # Fields
+
+    See our Fields documentation →
+
+    # Rate Limiting
+
+    See our Rate Limits documentation →
+
+    # Paging
+
+    See our Pagination documentation →
+
+    # ETags
+
+    See our ETags documentation →
+
+    # Minor Versions
+
+    API v4 supports multiple minor versions. Versions are of the form ''4.X.Y''. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you''re requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.
+
+
+    An `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.
+
+
+    You can find our API Versioning Policy and Guidelines in our documentation hub.
+
+
+    The API Changelog explains each version''s changes in further detail.
+
+    ### 4.0.4
+
+
+    * Update `quantity` field to return values in seconds rather than hours for Activities
+
+
+    ### 4.0.5
+
+
+    * Remove `matter_balances` field from Bills
+
+    * Standardize status/state enum values
+
+    * Add a Document association to completed DocumentAutomations
+
+    * Add rate visibility handling for Activity''s price and total
+
+
+    ### 4.0.6
+
+
+    * Remove `document_versions` collection field from Documents
+
+
+    ### 4.0.7
+
+
+    * Change secure link format
+
+
+    ### 4.0.8
+
+
+    * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user
+
+    * Add `quantity_redacted` field to activities
+
+
+    ### 4.0.9
+
+
+    * Contacts are filtered and redacted in the response based on the new ''Contacts Visibility'' user permission setting.
+
+
+    ### 4.0.10
+
+
+    * Fixed validation of `type` query parameter when querying Notes
+
+
+    ### 4.0.12
+
+
+    * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers
+
+
+    ### 4.0.13
+
+
+    **This is the default version**
+
+
+    * Add association limits to Contacts
+
+    * Returns 422 Unprocessable Entity when association limits are exceeded'
   version: v4
   x-logo:
     url: https://www.clio.com/wp-content/uploads/2015/05/Container-5-Logo.png
@@ -79,6 +207,62 @@ paths:
                 $ref: '#/components/schemas/Error'
         '429':
           description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /bills/{id}/mark_as_sent.json:
+    post:
+      tags:
+      - Bills
+      summary: Mark a Bill as sent
+      operationId: Bill#mark_as_sent
+      description: 'Records that a bill was sent to the client, either via LEDES eBilling, postal mail, manual email, or another method.
+
+        Marking a bill as sent again after it has already been sent adds another sent event rather than replacing the previous one.'
+      parameters:
+      - name: id
+        in: path
+        description: The unique identifier for the Bill.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: sent_method
+        in: query
+        description: How the Bill was sent. One of `ledes_ebilling`, `postal_mail`, `manual_email`, or `other`. If omitted, no send method is recorded.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Ok
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity
           content:
             application/json; charset=utf-8:
               schema:
@@ -887,544 +1071,30 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Bill_base:
+    Currency_base:
       type: object
       properties:
         id:
           type: integer
           format: int64
-          description: Unique identifier for the *Bill*
+          description: Unique identifier for the *Currency*
         etag:
           type: string
-          description: ETag for the *Bill*
-        number:
+          description: ETag for the *Currency*
+        code:
           type: string
-          description: The *Bill* identifier (not necessarily numeric)'
-        issued_at:
+          description: ISO 4217 code for the *Currency*
+        sign:
           type: string
-          format: date
-          description: The time the *Bill* was issued (as a ISO-8601 date)
+          description: Symbol used to denote monetary values using this *Currency*
         created_at:
           type: string
           format: date-time
-          description: The time the *Bill* was created (as a ISO-8601 timestamp)
-        due_at:
-          type: string
-          format: date
-          description: The date the *Bill* is due (as a ISO-8601 date)
-        tax_rate:
-          type: number
-          format: double
-          description: The tax rate to the *Bill*
-        secondary_tax_rate:
-          type: number
-          format: double
-          description: A secondary tax rate applied to the *Bill*
+          description: The time the *Currency* was created (as a ISO-8601 timestamp)
         updated_at:
           type: string
           format: date-time
-          description: The time the *Bill* was last updated (as a ISO-8601 timestamp)
-        subject:
-          type: string
-          description: The subject of the *Bill*
-        purchase_order:
-          type: string
-          description: The purchase order of the *Bill*
-        type:
-          type: string
-          enum:
-          - MatterBill
-          - ClientBill
-          description: The type of the *Bill*
-        memo:
-          type: string
-          description: A memo for the *Bill*
-        start_at:
-          type: string
-          format: date
-          description: The time the billing period starts (as a ISO-8601 date)
-        end_at:
-          type: string
-          format: date
-          description: The time the billing period ends (as a ISO-8601 date)
-        balance:
-          type: number
-          format: double
-          description: The outstanding balance of the *Bill*
-        state:
-          type: string
-          enum:
-          - draft
-          - awaiting_approval
-          - awaiting_payment
-          - paid
-          - void
-          - deleted
-          description: The billing state the *Bill* is in
-        kind:
-          type: string
-          enum:
-          - revenue_kind
-          - summary_kind
-          - trust_kind
-          - aggregate_all
-          - aggregate_split
-          - aggregate_services
-          - aggregate_expenses
-          description: The kind of the *Bill*
-        total:
-          type: number
-          format: double
-          description: The total with interest of the *Bill*
-        paid:
-          type: number
-          format: double
-          description: The total amount paid for the *Bill*
-        paid_at:
-          type: string
-          format: date-time
-          description: The date of the last payment on the *Bill*
-        pending:
-          type: number
-          format: double
-          description: The amount of pending credit card payments on the *Bill*
-        due:
-          type: number
-          format: double
-          description: The total amount of the *Bill* with interest and less discounts
-        discount_services_only:
-          type: string
-          description: The selected discount is applied to services only.
-        can_update:
-          type: boolean
-          description: This value indicates if your *Bill*'s line items and information can be updated.
-        credits_issued:
-          type: number
-          format: double
-          description: The total credits issued for the *Bill*
-        shared:
-          type: boolean
-          description: Whether the *Bill* is a shared
-        last_sent_at:
-          type: string
-          format: date-time
-          description: The last time the *Bill* was sent (as a ISO-8601 date)
-        services_secondary_tax:
-          type: number
-          format: double
-          description: The total secondary tax of the bill's line items of a service kind
-        services_sub_total:
-          type: number
-          format: double
-          description: The sub total of all the bill's line items of a service kind
-        services_tax:
-          type: number
-          format: double
-          description: The total tax of the bill's line items of a service kind
-        services_taxable_sub_total:
-          type: integer
-          format: int64
-          description: The services portion of the bill's primary tax
-        services_secondary_taxable_sub_total:
-          type: integer
-          format: int64
-          description: The services portion of the bill's secondary tax
-        taxable_sub_total:
-          type: integer
-          format: int64
-          description: The total taxable bill amount
-        secondary_taxable_sub_total:
-          type: integer
-          format: int64
-          description: The subtotal of the bill's secondary tax
-        sub_total:
-          type: number
-          format: double
-          description: Sub total for the *Bill*
-        tax_sum:
-          type: number
-          format: double
-          description: Sum of primary tax for the model
-        secondary_tax_sum:
-          type: number
-          format: double
-          description: Sum of secondary tax for the model
-        total_tax:
-          type: number
-          format: double
-          description: The total amount of tax for the bill.
-        available_state_transitions:
-          type: array
-          items:
-            type: string
-            enum:
-            - awaiting_approval
-            - awaiting_payment
-            - paid
-            - void
-            - deleted
-          description: The available *Bill* state transitions.
-    SplitInvoice_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *SplitInvoice*
-        bill_id:
-          type: integer
-          format: int64
-          description: The ID of the bill that was split.
-        linked_invoices_display_numbers:
-          type: array
-          items:
-            type: string
-          description: Display numbers of all invoices split with this one.
-        linked_invoices_ids:
-          type: array
-          items:
-            type: integer
-            format: int32
-          description: IDs of all invoices split with this one.
-        split_connection_id:
-          type: string
-          description: UUID to determine which invoices are split together.
-        split_portion:
-          type: number
-          format: double
-          description: The percentage of the bill that the payer is responsible for.
-        etag:
-          type: string
-          description: ETag for the *SplitInvoice*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *SplitInvoice* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *SplitInvoice* was last updated (as a ISO-8601 timestamp)
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    Matter_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Matter*
-        etag:
-          type: string
-          description: ETag for the *Matter*
-        number:
-          type: integer
-          format: int32
-          description: The number given to the *Matter* within an account
-        display_number:
-          type: string
-          description: The reference and label of the *Matter*. Depending on the account's manual_matter_numbering setting, this is either read only (generated) or customizable.
-        custom_number:
-          type: string
-          description: User defined custom number of the *Matter*
-        currency:
-          type: object
-          description: Currency of the matter
-        description:
-          type: string
-          description: The detailed description of the *Matter*
-        status:
-          type: string
-          enum:
-          - Pending
-          - Open
-          - Closed
-          description: The current status of the *Matter*
-        location:
-          type: string
-          description: The location of the *Matter*
-        client_reference:
-          type: string
-          description: Client Reference string for external uses
-        client_id:
-          type: integer
-          format: int64
-          description: Client ID
-        billable:
-          type: boolean
-          description: Whether this matter is billable
-        maildrop_address:
-          type: string
-          description: A unique Maildrop email address for the matter
-        billing_method:
-          type: string
-          enum:
-          - flat
-          - contingency
-          - hourly
-          description: Billing method of this matter
-        open_date:
-          type: string
-          format: date
-          description: The date the matter was set to open (as a ISO-8601 date)
-        close_date:
-          type: string
-          format: date
-          description: The date the matter was set to closed (as a ISO-8601 date)
-        pending_date:
-          type: string
-          format: date
-          description: The date the matter was set to pending (as a ISO-8601 date)
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Matter* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Matter* was last updated (as a ISO-8601 timestamp)
-        shared:
-          type: boolean
-          description: Whether the matter is currently shared with Clio Connect
-        has_tasks:
-          type: boolean
-          description: Whether or not the matter has any tasks.
-        last_activity_date:
-          type: string
-          format: date
-          description: The greatest date out of all of the activities on the matter (as a ISO-8601 date)
-        matter_stage_updated_at:
-          type: string
-          format: date-time
-          description: The date the matter stage was last updated (as a ISO-8601 date)
-    BillTheme_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *BillTheme*
-        etag:
-          type: string
-          description: ETag for the *BillTheme*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *BillTheme* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *BillTheme* was last updated (as a ISO-8601 timestamp)
-        account_id:
-          type: integer
-          format: int64
-          description: The account number the *BillTheme* belongs to
-        default:
-          type: boolean
-          description: Whether the *BillTheme* is the default for its account
-        name:
-          type: string
-          description: The name of the *BillTheme*
-        config:
-          type: string
-          description: The configuration of the *BillTheme*
-    Balance_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Balance*
-        amount:
-          type: number
-          format: double
-          description: The amount for this Balance.
-        type:
-          type: string
-          enum:
-          - Matter
-          - Client
-          description: The type of Balance this data is for.
-        interest_amount:
-          type: number
-          format: double
-          description: The interest amount for this Balance.
-        due:
-          type: number
-          format: double
-          description: The amount due for this Balance, factoring in applicable discounts.
-    User_base:
-      type: object
-      properties:
-        account_owner:
-          type: boolean
-          description: Whether the *User* is the owner of the account
-        clio_connect:
-          type: boolean
-          description: Whether the *User* is a Clio Connect user
-        court_rules_default_attendee:
-          type: boolean
-          description: Whether the *User* is a default attendee for court rules events
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *User* was created (as a ISO-8601 timestamp)
-        default_calendar_id:
-          type: integer
-          format: int64
-          description: Default calendar id for *User*.
-        email:
-          type: string
-          description: The email of the *User*
-        enabled:
-          type: boolean
-          description: Whether the *User* is allowed to log in
-        etag:
-          type: string
-          description: ETag for the *User*
-        first_name:
-          type: string
-          description: The first name of the *User*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *User*
-        initials:
-          type: string
-          description: The initials of the *User*
-        last_name:
-          type: string
-          description: The last name of the *User*
-        name:
-          type: string
-          description: The full name of the *User*
-        phone_number:
-          type: string
-          description: The primary phone number for the *User*.
-        rate:
-          type: number
-          format: float
-          description: Default user activity rate for *User*.
-        roles:
-          type: array
-          items:
-            type: string
-          description: An array of roles assigned to this *User*
-        subscription_type:
-          type: string
-          enum:
-          - Attorney
-          - NonAttorney
-          description: The subscription type of the *User*
-        time_zone:
-          type: string
-          description: The selected time zone of the *User*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *User* was last updated (as a ISO-8601 timestamp)
-    Bill_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Bill'
-    BillingSetting_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *BillingSetting*
-        etag:
-          type: string
-          description: ETag for the *BillingSetting*
-        rounded_duration:
-          type: number
-          format: float
-          description: Rounded equivalent of duration submitted
-        rounding:
-          type: integer
-          format: int32
-          description: Minute increment for time rounding
-        use_decimal_rounding:
-          type: boolean
-          description: Round time to two decimal places
-        currency:
-          type: string
-          description: Current user setting of currency
-        currency_sign:
-          type: string
-          description: The sign of the current currency
-        tax_rate:
-          type: number
-          format: double
-          description: Rate applied for primary tax on invoices using this BillingSetting
-        tax_name:
-          type: string
-          description: Name shown for primary tax on invoices using this BillingSetting
-        apply_tax_by_default:
-          type: boolean
-          description: Used to determine if primary tax should be applied to invoices by default
-        apply_secondary_tax_by_default:
-          type: boolean
-          description: Used to determine if secondary tax should be applied to invoices by default
-        time_on_flat_rate_contingency_matters_is_non_billable:
-          type: boolean
-          description: Used to determine if hourly time entries on flat rate or contingency fee matters should be non-billable by default
-        use_secondary_tax:
-          type: boolean
-          description: Used to determine if secondary tax applies to invoices using this BillingSetting
-        secondary_tax_rate:
-          type: number
-          format: double
-          description: Rate applied for secondary tax on invoices using this BillingSetting
-        secondary_tax_rule:
-          type: string
-          enum:
-          - Pre
-          - Post
-          description: Used to determine if secondary tax should be applied separately or additionally to primary tax
-        secondary_tax_name:
-          type: string
-          description: Name shown for secondary tax on invoices using this BillingSetting
-        notify_after_bill_created:
-          type: boolean
-          description: Flag to indicate if users should have the option to notify other users when generating a bill
-        use_utbms_codes:
-          type: boolean
-          description: Controls usage of UTBMS codes, allowing creation of coded time entries and expenses
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *BillingSetting* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *BillingSetting* was last updated (as a ISO-8601 timestamp)
-        multi_currency_billing:
-          type: boolean
-          description: Whether multi-currency billing is enabled
-        billing_currencies:
-          type: array
-          items:
-            type: object
-          description: The currencies that an account has available for billing, if multi-currency billing is enabled
-        tax_settings:
-          type: array
-          items:
-            type: object
-          description: Array of objects representing invoice tax defaults, with each object containing 'tax_rate_configuration_id', 'order', and 'rule'
+          description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
     Contact_base:
       type: object
       properties:
@@ -1520,34 +1190,393 @@ components:
         currency:
           type: object
           description: Currency of the *Contact*
-    Group_base:
+        require_utbms_codes:
+          type: boolean
+          description: When true, new matters created for this client default to requiring UTBMS/LEDES codes on billable time and expense entries. Requires the firm to have mandatory LEDES billing enabled; otherwise the value is ignored.
+    Address_base:
       type: object
       properties:
-        client_connect_user:
-          type: boolean
-          description: Whether or not the Group is a UserGroup for a Clio Connect User
-        etag:
-          type: string
-          description: ETag for the *Group*
         id:
           type: integer
           format: int64
-          description: Unique identifier for the *Group*
+          description: Unique identifier for the *Address*
+        etag:
+          type: string
+          description: ETag for the *Address*
+        street:
+          type: string
+          description: Street of the *Address*
+        city:
+          type: string
+          description: City of the *Address*
+        province:
+          type: string
+          description: Province or state of the *Address*
+        postal_code:
+          type: string
+          description: Postal code of the *Address*
+        country:
+          type: string
+          description: Country of the *Address*
         name:
           type: string
-          description: The name of the *Group*
-        type:
-          type: string
           enum:
-          - UserGroup
-          - AdhocGroup
-          - AccountGroup
-          - TeamGroup
-          description: The type of the *Group*
+          - Work
+          - Home
+          - Billing
+          - Other
+          description: The name of the *Address*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Address* was created (as a ISO-8601 timestamp)
         updated_at:
           type: string
           format: date-time
-          description: The time the *Group* was last updated (as a ISO-8601 timestamp)
+          description: The time the *Address* was last updated (as a ISO-8601 timestamp)
+        primary:
+          type: boolean
+          description: Whether it is the default for this contact
+    BillTemplate_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *BillTemplate*
+        etag:
+          type: string
+          description: ETag for the *BillTemplate*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *BillTemplate* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *BillTemplate* was last updated (as a ISO-8601 timestamp)
+        account_id:
+          type: integer
+          format: int64
+          description: The account number the *BillTemplate* belongs to
+        name:
+          type: string
+          description: The name of the *BillTemplate*
+        type:
+          type: string
+          enum:
+          - BillTemplate
+          - CoverTemplate
+          - TrustTemplate
+          - StatementTemplate
+          description: The type of the *BillTemplate* — BillTemplate for invoices, TrustTemplate for trust requests
+        default:
+          type: boolean
+          description: Whether the *BillTemplate* is the firm default for its template type
+        paper_size:
+          type: string
+          enum:
+          - letter
+          - a4
+          - legal
+          description: The paper size the *BillTemplate* renders at. Returns null when the *BillTemplate* inherits the account's page size
+    Bill_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Bill'
+    Bill_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Bill*
+        etag:
+          type: string
+          description: ETag for the *Bill*
+        number:
+          type: string
+          description: The *Bill* identifier (not necessarily numeric)'
+        issued_at:
+          type: string
+          format: date
+          description: The time the *Bill* was issued (as a ISO-8601 date)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Bill* was created (as a ISO-8601 timestamp)
+        due_at:
+          type: string
+          format: date
+          description: The date the *Bill* is due (as a ISO-8601 date)
+        tax_rate:
+          type: number
+          format: double
+          description: The tax rate to the *Bill*
+        secondary_tax_rate:
+          type: number
+          format: double
+          description: A secondary tax rate applied to the *Bill*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Bill* was last updated (as a ISO-8601 timestamp)
+        subject:
+          type: string
+          description: The subject of the *Bill*
+        purchase_order:
+          type: string
+          description: The purchase order of the *Bill*
+        type:
+          type: string
+          enum:
+          - MatterBill
+          - ClientBill
+          description: The type of the *Bill*
+        memo:
+          type: string
+          description: A memo for the *Bill*
+        start_at:
+          type: string
+          format: date
+          description: The time the billing period starts (as a ISO-8601 date)
+        end_at:
+          type: string
+          format: date
+          description: The time the billing period ends (as a ISO-8601 date)
+        balance:
+          type: number
+          format: double
+          description: The outstanding balance of the *Bill*
+        state:
+          type: string
+          enum:
+          - draft
+          - awaiting_approval
+          - awaiting_payment
+          - paid
+          - void
+          - deleted
+          description: The billing state the *Bill* is in
+        kind:
+          type: string
+          enum:
+          - revenue_kind
+          - summary_kind
+          - trust_kind
+          - aggregate_fixed_fees
+          - aggregate_all
+          - aggregate_split
+          - aggregate_services
+          - aggregate_expenses
+          description: The kind of the *Bill*
+        total:
+          type: number
+          format: double
+          description: The total with interest of the *Bill*
+        paid:
+          type: number
+          format: double
+          description: The total amount paid for the *Bill*
+        paid_at:
+          type: string
+          format: date-time
+          description: The date of the last payment on the *Bill*
+        pending:
+          type: number
+          format: double
+          description: The amount of pending credit card payments on the *Bill*
+        due:
+          type: number
+          format: double
+          description: The total amount of the *Bill* with interest and less discounts
+        discount_services_only:
+          type: boolean
+          description: The selected discount is applied to services only.
+        can_update:
+          type: boolean
+          description: This value indicates if your *Bill*'s line items and information can be updated.
+        credits_issued:
+          type: number
+          format: double
+          description: The total credits issued for the *Bill*
+        shared:
+          type: boolean
+          description: Whether the *Bill* is a shared
+        last_sent_at:
+          type: string
+          format: date-time
+          description: The last time the *Bill* was sent (as a ISO-8601 date)
+        services_secondary_tax:
+          type: number
+          format: double
+          description: The total secondary tax of the bill's line items of a service kind
+        services_sub_total:
+          type: number
+          format: double
+          description: The sub total of all the bill's line items of a service kind
+        services_tax:
+          type: number
+          format: double
+          description: The total tax of the bill's line items of a service kind
+        services_taxable_sub_total:
+          type: integer
+          format: int64
+          description: The services portion of the bill's primary tax
+        services_secondary_taxable_sub_total:
+          type: integer
+          format: int64
+          description: The services portion of the bill's secondary tax
+        taxable_sub_total:
+          type: integer
+          format: int64
+          description: The total taxable bill amount
+        secondary_taxable_sub_total:
+          type: integer
+          format: int64
+          description: The subtotal of the bill's secondary tax
+        sub_total:
+          type: number
+          format: double
+          description: Sub total for the *Bill*
+        tax_sum:
+          type: number
+          format: double
+          description: Sum of primary tax for the model
+        secondary_tax_sum:
+          type: number
+          format: double
+          description: Sum of secondary tax for the model
+        total_tax:
+          type: number
+          format: double
+          description: The total amount of tax for the bill.
+        available_state_transitions:
+          type: array
+          items:
+            type: string
+            enum:
+            - awaiting_approval
+            - awaiting_payment
+            - paid
+            - void
+            - deleted
+          description: The available *Bill* state transitions.
+        effective_bill_template_id:
+          type: integer
+          format: int64
+          description: The unique identifier of the Invoice Template the *Bill* renders with, resolved from the *Bill*'s own template or the default inherited from its matter, client, or firm. Returns null when the *Bill* renders with a bill theme instead
+    Balance_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Balance*
+        amount:
+          type: number
+          format: double
+          description: The amount for this Balance.
+        type:
+          type: string
+          enum:
+          - Matter
+          - Client
+          description: The type of Balance this data is for.
+        interest_amount:
+          type: number
+          format: double
+          description: The interest amount for this Balance.
+        due:
+          type: number
+          format: double
+          description: The amount due for this Balance, factoring in applicable discounts.
+    Bill_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: Bill List Response
+          items:
+            $ref: '#/components/schemas/Bill'
+    User_base:
+      type: object
+      properties:
+        account_owner:
+          type: boolean
+          description: Whether the *User* is the owner of the account
+        clio_connect:
+          type: boolean
+          description: Whether the *User* is a Clio Connect user
+        court_rules_default_attendee:
+          type: boolean
+          description: Whether the *User* is a default attendee for court rules events
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *User* was created (as a ISO-8601 timestamp)
+        default_calendar_id:
+          type: integer
+          format: int64
+          description: Default calendar id for *User*.
+        email:
+          type: string
+          description: The email of the *User*
+        enabled:
+          type: boolean
+          description: Whether the *User* is allowed to log in
+        etag:
+          type: string
+          description: ETag for the *User*
+        first_name:
+          type: string
+          description: The first name of the *User*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *User*
+        initials:
+          type: string
+          description: The initials of the *User*
+        last_name:
+          type: string
+          description: The last name of the *User*
+        name:
+          type: string
+          description: The full name of the *User*
+        phone_number:
+          type: string
+          description: The primary phone number for the *User*.
+        rate:
+          type: number
+          format: float
+          description: Default user activity rate for *User*.
+        roles:
+          type: array
+          items:
+            type: string
+          description: An array of roles assigned to this *User*
+        subscription_type:
+          type: string
+          enum:
+          - Attorney
+          - NonAttorney
+          description: The subscription type of the *User*
+        time_zone:
+          type: string
+          description: The selected time zone of the *User*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *User* was last updated (as a ISO-8601 timestamp)
+        locale:
+          type: string
+          description: The locale of the *User*
     LegalAidUkBill_base:
       type: object
       properties:
@@ -1711,169 +1740,58 @@ components:
           type: integer
           format: int32
           description: Waiting time
-    Currency_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Currency*
-        etag:
-          type: string
-          description: ETag for the *Currency*
-        code:
-          type: string
-          description: ISO 4217 code for the *Currency*
-        sign:
-          type: string
-          description: Symbol used to denote monetary values using this *Currency*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Currency* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
-    Address_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Address*
-        etag:
-          type: string
-          description: ETag for the *Address*
-        street:
-          type: string
-          description: Street of the *Address*
-        city:
-          type: string
-          description: City of the *Address*
-        province:
-          type: string
-          description: Province or state of the *Address*
-        postal_code:
-          type: string
-          description: Postal code of the *Address*
-        country:
-          type: string
-          description: Country of the *Address*
-        name:
-          type: string
-          enum:
-          - Work
-          - Home
-          - Billing
-          - Other
-          description: The name of the *Address*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Address* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Address* was last updated (as a ISO-8601 timestamp)
-        primary:
-          type: boolean
-          description: Whether it is the default for this contact
-    Bill_List:
+    ErrorDetail:
       type: object
       required:
-      - data
+      - type
+      - message
       properties:
-        data:
-          type: array
-          description: Bill List Response
-          items:
-            $ref: '#/components/schemas/Bill'
-    Bill:
-      allOf:
-      - $ref: '#/components/schemas/Bill_base'
-      - type: object
-        properties:
-          user:
-            $ref: '#/components/schemas/User_base'
-            description: User
-          client:
-            $ref: '#/components/schemas/Contact_base'
-            description: Contact
-          discount:
-            $ref: '#/components/schemas/Discount_base'
-            description: Discount
-          interest:
-            $ref: '#/components/schemas/Interest_base'
-            description: Interest
-          matters:
-            type: array
-            items:
-              $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          group:
-            $ref: '#/components/schemas/Group_base'
-            description: Group
-          bill_theme:
-            $ref: '#/components/schemas/BillTheme_base'
-            description: BillTheme
-          original_bill:
-            $ref: '#/components/schemas/Bill_base'
-            description: Bill
-          destination_account:
-            $ref: '#/components/schemas/BankAccount_base'
-            description: BankAccount
-          balances:
-            type: array
-            items:
-              $ref: '#/components/schemas/Balance_base'
-            description: Balance
-          matter_totals:
-            type: array
-            items:
-              $ref: '#/components/schemas/MatterBalance_base'
-            description: MatterBalance
-          currency:
-            $ref: '#/components/schemas/Currency_base'
-            description: Currency
-          billing_setting:
-            $ref: '#/components/schemas/BillingSetting_base'
-            description: BillingSetting
-          client_addresses:
-            type: array
-            items:
-              $ref: '#/components/schemas/Address_base'
-            description: Address
-          legal_aid_uk_bill:
-            $ref: '#/components/schemas/LegalAidUkBill_base'
-            description: LegalAidUkBill
-          split_invoice:
-            $ref: '#/components/schemas/SplitInvoice_base'
-            description: SplitInvoice
-    Discount_base:
-      type: object
-      properties:
-        rate:
-          type: number
-          format: double
-          description: The rate of the *Discount%*
         type:
           type: string
-          enum:
-          - percentage
-          - money
-          description: The type of *Discount* being applied in your *Discount* rate.
-        note:
+          description: Unique name for this error
+        message:
           type: string
-          description: A note for your *Discount*
-        early_payment_rate:
+          description: Detailed message about the error
+    SplitInvoice_base:
+      type: object
+      properties:
+        id:
           type: integer
-          format: int32
-          description: The % discount that will be applied if your *Discount* is paid within the early payment period.
-        early_payment_period:
+          format: int64
+          description: Unique identifier for the *SplitInvoice*
+        bill_id:
           type: integer
-          format: int32
-          description: The number of days for your *Discount* period. If your bill is paid within this time, apply your *Discount* rate to the bill.
+          format: int64
+          description: The ID of the bill that was split.
+        linked_invoices_display_numbers:
+          type: array
+          items:
+            type: string
+          description: Display numbers of all invoices split with this one.
+        linked_invoices_ids:
+          type: array
+          items:
+            type: integer
+            format: int32
+          description: IDs of all invoices split with this one.
+        split_connection_id:
+          type: string
+          description: UUID to determine which invoices are split together.
+        split_portion:
+          type: number
+          format: double
+          description: The percentage of the bill that the payer is responsible for.
+        etag:
+          type: string
+          description: ETag for the *SplitInvoice*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *SplitInvoice* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *SplitInvoice* was last updated (as a ISO-8601 timestamp)
     Interest_base:
       type: object
       properties:
@@ -1899,13 +1817,6 @@ components:
           - simple
           - compound
           description: Type of *Interest%* being applied
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
     BankAccount_base:
       type: object
       properties:
@@ -1929,6 +1840,25 @@ components:
         clio_payments_enabled:
           type: boolean
           description: Whether the bank account is connected to Clio Payments
+        compliance_region:
+          type: string
+          enum:
+          - no_region
+          - new_south_wales
+          - new_zealand
+          - united_kingdom
+          - au_victoria
+          - au_queensland
+          - au_western_australia
+          - au_south_australia
+          - au_tasmania
+          - au_australian_capital_territory
+          - au_northern_territory
+          - uk_northern_ireland
+          - uk_scotland
+          - spain
+          - singapore
+          description: The account-level trust accounting compliance region. Every bank account in a firm reports the same value.
         controlled_account:
           type: boolean
           description: Whether is a controlled account
@@ -1998,6 +1928,339 @@ components:
           type: number
           format: double
           description: The amount of balance of a matter.
+    Matter_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Matter*
+        etag:
+          type: string
+          description: ETag for the *Matter*
+        number:
+          type: integer
+          format: int32
+          description: The number given to the *Matter* within an account
+        display_number:
+          type: string
+          description: The reference and label of the *Matter*. Depending on the account's manual_matter_numbering setting, this is either read only (generated) or customizable.
+        custom_number:
+          type: string
+          description: User defined custom number of the *Matter*
+        currency:
+          type: object
+          description: Currency of the matter
+        description:
+          type: string
+          description: The detailed description of the *Matter*
+        status:
+          type: string
+          enum:
+          - Pending
+          - Open
+          - Closed
+          description: The current status of the *Matter*
+        location:
+          type: string
+          description: The location of the *Matter*
+        client_reference:
+          type: string
+          description: Client Reference string for external uses
+        client_id:
+          type: integer
+          format: int64
+          description: Client ID
+        billable:
+          type: boolean
+          description: Whether this matter is billable
+        require_utbms_codes:
+          type: boolean
+          description: When true, billable time and expense entries on this matter must include the required UTBMS/LEDES codes before they can be saved. Requires the firm to have mandatory LEDES billing enabled; otherwise the value is ignored.
+        maildrop_address:
+          type: string
+          description: A unique Maildrop email address for the matter
+        billing_method:
+          type: string
+          enum:
+          - flat
+          - contingency
+          - hourly
+          description: Billing method of this matter
+        open_date:
+          type: string
+          format: date
+          description: The date the matter was set to open (as a ISO-8601 date)
+        close_date:
+          type: string
+          format: date
+          description: The date the matter was set to closed (as a ISO-8601 date)
+        pending_date:
+          type: string
+          format: date
+          description: The date the matter was set to pending (as a ISO-8601 date)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Matter* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Matter* was last updated (as a ISO-8601 timestamp)
+        shared:
+          type: boolean
+          description: Whether the matter is currently shared with Clio Connect
+        has_tasks:
+          type: boolean
+          description: Whether or not the matter has any tasks.
+        last_activity_date:
+          type: string
+          format: date
+          description: The greatest date out of all of the activities on the matter (as a ISO-8601 date)
+        matter_stage_updated_at:
+          type: string
+          format: date-time
+          description: The date the matter stage was last updated (as a ISO-8601 date)
+    Discount_base:
+      type: object
+      properties:
+        rate:
+          type: number
+          format: double
+          description: The rate of the *Discount%*
+        type:
+          type: string
+          enum:
+          - percentage
+          - money
+          description: The type of *Discount* being applied in your *Discount* rate.
+        note:
+          type: string
+          description: A note for your *Discount*
+        early_payment_rate:
+          type: integer
+          format: int32
+          description: The % discount that will be applied if your *Discount* is paid within the early payment period.
+        early_payment_period:
+          type: integer
+          format: int32
+          description: The number of days for your *Discount* period. If your bill is paid within this time, apply your *Discount* rate to the bill.
+    Group_base:
+      type: object
+      properties:
+        client_connect_user:
+          type: boolean
+          description: Whether or not the Group is a UserGroup for a Clio Connect User
+        etag:
+          type: string
+          description: ETag for the *Group*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Group*
+        name:
+          type: string
+          description: The name of the *Group*
+        type:
+          type: string
+          enum:
+          - UserGroup
+          - AdhocGroup
+          - AccountGroup
+          - TeamGroup
+          description: The type of the *Group*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Group* was last updated (as a ISO-8601 timestamp)
+    BillTheme_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *BillTheme*
+        etag:
+          type: string
+          description: ETag for the *BillTheme*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *BillTheme* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *BillTheme* was last updated (as a ISO-8601 timestamp)
+        account_id:
+          type: integer
+          format: int64
+          description: The account number the *BillTheme* belongs to
+        default:
+          type: boolean
+          description: Whether the *BillTheme* is the default for its account
+        name:
+          type: string
+          description: The name of the *BillTheme*
+        config:
+          type: string
+          description: The configuration of the *BillTheme*
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    BillingSetting_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *BillingSetting*
+        etag:
+          type: string
+          description: ETag for the *BillingSetting*
+        rounded_duration:
+          type: number
+          format: float
+          description: Rounded equivalent of duration submitted
+        rounding:
+          type: integer
+          format: int32
+          description: Minute increment for time rounding
+        use_decimal_rounding:
+          type: boolean
+          description: Round time to two decimal places
+        currency:
+          type: string
+          description: Current user setting of currency
+        currency_sign:
+          type: string
+          description: The sign of the current currency
+        tax_rate:
+          type: number
+          format: double
+          description: Rate applied for primary tax on invoices using this BillingSetting
+        tax_name:
+          type: string
+          description: Name shown for primary tax on invoices using this BillingSetting
+        apply_tax_by_default:
+          type: boolean
+          description: Used to determine if primary tax should be applied to invoices by default
+        apply_secondary_tax_by_default:
+          type: boolean
+          description: Used to determine if secondary tax should be applied to invoices by default
+        time_on_flat_rate_contingency_matters_is_non_billable:
+          type: boolean
+          description: Used to determine if hourly time entries on fixed fee or contingency fee matters should be non-billable by default
+        use_secondary_tax:
+          type: boolean
+          description: Used to determine if secondary tax applies to invoices using this BillingSetting
+        secondary_tax_rate:
+          type: number
+          format: double
+          description: Rate applied for secondary tax on invoices using this BillingSetting
+        secondary_tax_rule:
+          type: string
+          enum:
+          - Pre
+          - Post
+          description: Used to determine if secondary tax should be applied separately or additionally to primary tax
+        secondary_tax_name:
+          type: string
+          description: Name shown for secondary tax on invoices using this BillingSetting
+        notify_after_bill_created:
+          type: boolean
+          description: Flag to indicate if users should have the option to notify other users when generating a bill
+        use_utbms_codes:
+          type: boolean
+          description: Controls usage of UTBMS codes, allowing creation of coded time entries and expenses
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *BillingSetting* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *BillingSetting* was last updated (as a ISO-8601 timestamp)
+        multi_currency_billing:
+          type: boolean
+          description: Whether multi-currency billing is enabled
+        billing_currencies:
+          type: array
+          items:
+            type: object
+          description: The currencies that an account has available for billing, if multi-currency billing is enabled
+        tax_settings:
+          type: array
+          items:
+            type: object
+          description: Array of objects representing invoice tax defaults, with each object containing 'tax_rate_configuration_id', 'order', and 'rule'
+    Bill:
+      allOf:
+      - $ref: '#/components/schemas/Bill_base'
+      - type: object
+        properties:
+          user:
+            $ref: '#/components/schemas/User_base'
+            description: User
+          client:
+            $ref: '#/components/schemas/Contact_base'
+            description: Contact
+          discount:
+            $ref: '#/components/schemas/Discount_base'
+            description: Discount
+          interest:
+            $ref: '#/components/schemas/Interest_base'
+            description: Interest
+          matters:
+            type: array
+            items:
+              $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          group:
+            $ref: '#/components/schemas/Group_base'
+            description: Group
+          bill_theme:
+            $ref: '#/components/schemas/BillTheme_base'
+            description: BillTheme
+          bill_template:
+            $ref: '#/components/schemas/BillTemplate_base'
+            description: BillTemplate
+          original_bill:
+            $ref: '#/components/schemas/Bill_base'
+            description: Bill
+          destination_account:
+            $ref: '#/components/schemas/BankAccount_base'
+            description: BankAccount
+          balances:
+            type: array
+            items:
+              $ref: '#/components/schemas/Balance_base'
+            description: Balance
+          matter_totals:
+            type: array
+            items:
+              $ref: '#/components/schemas/MatterBalance_base'
+            description: MatterBalance
+          currency:
+            $ref: '#/components/schemas/Currency_base'
+            description: Currency
+          billing_setting:
+            $ref: '#/components/schemas/BillingSetting_base'
+            description: BillingSetting
+          client_addresses:
+            type: array
+            items:
+              $ref: '#/components/schemas/Address_base'
+            description: Address
+          legal_aid_uk_bill:
+            $ref: '#/components/schemas/LegalAidUkBill_base'
+            description: LegalAidUkBill
+          split_invoice:
+            $ref: '#/components/schemas/SplitInvoice_base'
+            description: SplitInvoice
 x-tagGroups:
 - name: Api
   tags:
@@ -2017,6 +2280,7 @@ x-tagGroups:
   - Bank Accounts
   - Bank Transactions
   - Bank Transfers
+  - Matter Transfers
 - name: Billing
   tags:
   - Bills
@@ -2026,6 +2290,11 @@ x-tagGroups:
   - Interest Charges
   - Line Items
   - Outstanding Client Balances
+  - Rate Tables
+  - Rate Table Categories
+  - Rate Table Timekeepers
+  - Rate Table Rates
+  - Rate Table Assignments
 - name: Calendars
   tags:
   - Calendars
@@ -2084,6 +2353,7 @@ x-tagGroups:
   - Practice Areas
   - Log Entries
   - Matter Stages
+  - Matter Protected Funds
   - Medical Records Details
   - Medical Records
   - Medical Bills
@@ -2127,3 +2397,8 @@ x-tagGroups:
   - Civil Certificated Rates
   - Criminal Controlled Rates
   - Expense Categories
+- name: General
+  tags:
+  - Safe Custody Packets
+  - Safe Custody Records
+  - Safe Custody Packet Locations

@@ -6,7 +6,135 @@ info:
     email: api@clio.com
   description: '# Developer Support and Feedback
 
-    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.'
+    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.
+
+    * For business and partnership inquiries, contact our API Partnerships team at api.partnerships@clio.com.
+
+    * For best practices and tips from the Clio development community, join the conversation in the Clio Developer Slack Channel.
+
+
+    A community-driven Clio Developers Stack Overflow Group also exists where you can connect and ask questions from other Clio API users.
+
+    # Getting Started
+
+    > **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).
+
+    >
+
+    > Likewise, the developer portal is available at region-specific links for the Australia, Canada, EU, and US regions.
+
+    >
+
+    > This document assumes the US region is being used (app.clio.com). If you''re building in one of the other regions, you should adapt the links and examples as necessary.
+
+
+    To start building on the Clio API, you’ll need a Clio account – you can review our Developer Handbook and follow the steps to sign up for an account.
+
+
+    Once you have an account, you can create a developer application from the Developer Portal and start building!
+
+    # Authorization with OAuth 2.0
+
+    See our Authorization documentation →
+
+    # Permissions
+
+    See our Permissions documentation →
+
+    # Fields
+
+    See our Fields documentation →
+
+    # Rate Limiting
+
+    See our Rate Limits documentation →
+
+    # Paging
+
+    See our Pagination documentation →
+
+    # ETags
+
+    See our ETags documentation →
+
+    # Minor Versions
+
+    API v4 supports multiple minor versions. Versions are of the form ''4.X.Y''. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you''re requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.
+
+
+    An `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.
+
+
+    You can find our API Versioning Policy and Guidelines in our documentation hub.
+
+
+    The API Changelog explains each version''s changes in further detail.
+
+    ### 4.0.4
+
+
+    * Update `quantity` field to return values in seconds rather than hours for Activities
+
+
+    ### 4.0.5
+
+
+    * Remove `matter_balances` field from Bills
+
+    * Standardize status/state enum values
+
+    * Add a Document association to completed DocumentAutomations
+
+    * Add rate visibility handling for Activity''s price and total
+
+
+    ### 4.0.6
+
+
+    * Remove `document_versions` collection field from Documents
+
+
+    ### 4.0.7
+
+
+    * Change secure link format
+
+
+    ### 4.0.8
+
+
+    * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user
+
+    * Add `quantity_redacted` field to activities
+
+
+    ### 4.0.9
+
+
+    * Contacts are filtered and redacted in the response based on the new ''Contacts Visibility'' user permission setting.
+
+
+    ### 4.0.10
+
+
+    * Fixed validation of `type` query parameter when querying Notes
+
+
+    ### 4.0.12
+
+
+    * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers
+
+
+    ### 4.0.13
+
+
+    **This is the default version**
+
+
+    * Add association limits to Contacts
+
+    * Returns 422 Unprocessable Entity when association limits are exceeded'
   version: v4
   x-logo:
     url: https://www.clio.com/wp-content/uploads/2015/05/Container-5-Logo.png
@@ -21,7 +149,29 @@ servers:
   description: Australia region Production Server
 tags:
 - name: Calendar Entries
-  description: Calendar Entries are used to track appointments or deadlines.
+  description: 'Calendar Entries are used to track appointments or deadlines. Users can view Calendar Entries on any Calendar that they have “Viewer” or “Editor” permission for. Users can create Calendar Entries on any Calendar that they have “Editor” permission for.
+
+    ### Only supports dates on or after January 01 1900 00:00 UTC
+
+    * If you attempt to create a date before 1900, the year of that date will be pulled forward to 1900 before it''s persisted.
+
+
+    ### Calendar Update/Deletion Best Practices
+
+    * Prior to updating or deleting a calendar entry, check for recurrence.
+
+    * If the recurrence_rule parameter is not equal to `null`, offer the following 3 options for the update/deletion, as well as the note:
+
+    1. Only this instance: Update/Delete this event, but leave all future events unchanged.
+
+    2. All following: Updates/Deletes this event and all the future events.
+
+    3. All events in the series: Updates/Deletes all events in the series.
+
+    * Note: If you''ve modified any future events in this series, those edits will be lost once you make this change.
+
+
+    Support Link'
 paths:
   /calendar_entries.json:
     get:
@@ -37,6 +187,20 @@ paths:
         required: false
         schema:
           type: string
+      - name: calendar_entry_event_type_id
+        in: query
+        description: Filter CalendarEntry records to those having the specified calendar entry event type. Use the keyword `null` to match records with no event type. Records the requesting user only has limited view permission on are excluded.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: calendar_entry_event_type_ids[]
+        in: query
+        description: Filter CalendarEntry records to those having one of the specified calendar entry event types. Use the keyword `null` in the list to also match records with no event type. Records the requesting user only has limited view permission on are excluded.
+        required: false
+        schema:
+          type: integer
+          format: int64
       - name: calendar_id
         in: query
         description: The unique identifier for a single Calendar. The keyword `null` is not valid for this field. The list will be filtered to include only the CalendarEntry records with the matching property.
@@ -1082,6 +1246,86 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    ConferenceMeeting_base:
+      type: object
+      properties:
+        conference_id:
+          type: integer
+          format: int64
+          description: Third-party provider unique meeting ID
+        conference_password:
+          type: string
+          description: Third-party provider meeting password
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ConferenceMeeting* was created (as a ISO-8601 timestamp)
+        etag:
+          type: string
+          description: ETag for the *ConferenceMeeting*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ConferenceMeeting*
+        join_url:
+          type: string
+          description: URL for participants to join the video conference
+        type:
+          type: string
+          description: The type of video conference
+        source_id:
+          type: integer
+          format: int64
+          description: The external ID of the video conference meeting
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ConferenceMeeting* was last updated (as a ISO-8601 timestamp)
+    Attendee_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Attendee*
+        etag:
+          type: string
+          description: ETag for the *Attendee*
+        type:
+          type: string
+          enum:
+          - Contact
+          - Calendar
+          description: The class name of the *Attendee*
+        name:
+          type: string
+          description: The name of the *Attendee*
+        enabled:
+          type: boolean
+          description: If the Attendee is a user, represents whether the user is enabled or disabled. Returns null if attendee is a Contact.
+        email:
+          type: string
+          description: If the Attendee is a User, this is the User's email. If the Attendee is a contact, this is the Contact's primary email address.
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Attendee* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Attendee* was last updated (as a ISO-8601 timestamp)
     ExternalProperty_base:
       type: object
       properties:
@@ -1106,25 +1350,51 @@ components:
           type: string
           format: date-time
           description: The time the *ExternalProperty* was last updated (as a ISO-8601 timestamp)
-    Error:
+    CalendarEntryEventType_base:
       type: object
-      required:
-      - error
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *CalendarEntryEventType*
+        etag:
           type: string
-          description: Unique name for this error
-        message:
+          description: ETag for the *CalendarEntryEventType*
+        created_at:
           type: string
-          description: Detailed message about the error
+          format: date-time
+          description: The time the *CalendarEntryEventType* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *CalendarEntryEventType* was last updated (as a ISO-8601 timestamp)
+        color:
+          type: string
+          enum:
+          - '#367B9C'
+          - '#FFA5A4'
+          - '#83D17F'
+          - '#FFAC7B'
+          - '#8E3F64'
+          - '#C75300'
+          - '#009CEC'
+          - '#62D6B1'
+          - '#9EEDCB'
+          - '#F9A2C4'
+          - '#616161'
+          - '#BBDA81'
+          - '#DFD3F8'
+          - '#D6C4A5'
+          - '#FFD478'
+          - '#6AC9DE'
+          - '#EABBB0'
+          - '#BFC2E1'
+          - '#DADADA'
+          - '#CDE2F5'
+          description: The color describing the *CalendarEntryEventType*
+        name:
+          type: string
+          description: The name for the *CalendarEntryEventType*
     MatterDocket_base:
       type: object
       properties:
@@ -1161,6 +1431,273 @@ components:
           type: string
           format: date-time
           description: The time the *MatterDocket* was deleted (as a ISO-8601 timestamp)
+    CalendarEntry_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/CalendarEntry'
+    Calendar_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Calendar*
+        etag:
+          type: string
+          description: ETag for the *Calendar*
+        color:
+          type: string
+          enum:
+          - '#367B9C'
+          - '#FFA5A4'
+          - '#83D17F'
+          - '#FFAC7B'
+          - '#8E3F64'
+          - '#C75300'
+          - '#009CEC'
+          - '#62D6B1'
+          - '#9EEDCB'
+          - '#F9A2C4'
+          - '#616161'
+          - '#BBDA81'
+          - '#DFD3F8'
+          - '#D6C4A5'
+          - '#FFD478'
+          - '#6AC9DE'
+          - '#EABBB0'
+          - '#BFC2E1'
+          - '#DADADA'
+          - '#CDE2F5'
+          description: Color
+        light_color:
+          type: string
+          enum:
+          - '#5DA5C7'
+          - '#F95957'
+          - '#209412'
+          - '#FF7715'
+          - '#DE649D'
+          - '#FF6B02'
+          - '#56C4FC'
+          - '#00B177'
+          - '#50D19B'
+          - '#F14A8C'
+          - '#A3A2A2'
+          - '#84AB3B'
+          - '#B091EE'
+          - '#BD9E69'
+          - '#F2A000'
+          - '#00A5CA'
+          - '#CB5A3D'
+          - '#959CD0'
+          - '#B0B0B0'
+          - '#7BA6CD'
+          description: Accent color to complement the main calendar color.
+        court_rules_default_calendar:
+          type: boolean
+          description: Whether the calendar is default court rules calendar for current user
+        name:
+          type: string
+          description: The name of the *Calendar*
+        permission:
+          type: string
+          enum:
+          - owner
+          - editor
+          - viewer
+          - limited_viewer
+          - none
+          description: The user's permission to the *Calendar*
+        type:
+          type: string
+          enum:
+          - AccountCalendar
+          - AdhocCalendar
+          - UserCalendar
+          description: The type of the *Calendar*
+        visible:
+          type: boolean
+          description: Whether the *Calendar* will be shown by default in the Clio Web UI (assuming no source is provided).
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Calendar* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Calendar* was last updated (as a ISO-8601 timestamp)
+        source:
+          type: string
+          enum:
+          - web
+          - mobile
+          description: The source that visible applies to, by default the Clio Web UI (Expects 'mobile' or 'web').
+    CalendarEntry_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: CalendarEntry List Response
+          items:
+            $ref: '#/components/schemas/CalendarEntry'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    Activity_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Activity*
+        etag:
+          type: string
+          description: ETag for the *Activity*
+        type:
+          type: string
+          enum:
+          - TimeEntry
+          - ExpenseEntry
+          - HardCostEntry
+          - SoftCostEntry
+          - FixedFee
+          description: The type of the *Activity*
+        date:
+          type: string
+          format: date
+          description: The date the *Activity* was performed (as a ISO-8601 date)
+        quantity_in_hours:
+          type: number
+          format: double
+          description: The number of hours the TimeEntry took.
+        rounded_quantity_in_hours:
+          type: number
+          format: double
+          description: 'The number of hours rounded accordingly to the billing settings.
+
+            The rounded value is used to calculate the total.
+
+            '
+        quantity:
+          type: number
+          format: double
+          description: 'The field is applicable to TimeEntry, ExpenseEntry, and SoftCostEntry.
+
+
+            **Version <= 4.0.3:**
+
+            The number of hours the TimeEntry took.
+
+
+            **Latest version:**
+
+            The number of seconds the TimeEntry took.
+
+            '
+        rounded_quantity:
+          type: number
+          format: double
+          description: 'The field is applicable to time entries only.
+
+
+            **Version <= 4.0.3:**
+
+            The number of hours rounded accordingly to the billing settings.
+
+            The rounded value is used to calculate the total.
+
+
+            **Latest version:**
+
+            The number of seconds rounded accordingly to the billing settings.
+
+            The rounded value is used to calculate the total.
+
+            '
+        quantity_redacted:
+          type: boolean
+          description: 'Is `true` if any of the following fields are redacted:
+
+            `quantity`, `rounded_quantity`, `rounded_quantity_in_hours`, `quantity_in_hours`, `total`, `non_billable_total`
+
+            '
+        price:
+          type: number
+          format: double
+          description: The hourly rate or fixed fee amount of the *Activity*
+        note:
+          type: string
+          description: The details about the *Activity*
+        flat_rate:
+          type: boolean
+          description: Whether the *Activity* is a fixed fee
+        billed:
+          type: boolean
+          description: Whether the *Activity* has been added to an active bill that is in the state of `awaiting_payment` or `paid`
+        on_bill:
+          type: boolean
+          description: Whether the *Activity* has been added to an active bill that is in the state of `draft`, `awaiting_approval`, `awaiting_payment` or `paid`
+        total:
+          type: number
+          format: double
+          description: The total cost of draft, billable and billed items in the *Activity*
+        contingency_fee:
+          type: boolean
+          description: Whether or not the *Activity* is a contingency fee
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Activity* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Activity* was last updated (as a ISO-8601 timestamp)
+        reference:
+          type: string
+          description: A check reference for a HardCostEntry.
+        non_billable:
+          type: boolean
+          description: Whether the *Activity* is non-billable
+        non_billable_total:
+          type: number
+          format: double
+          description: The total cost of non-billable items in the *Activity*
+        no_charge:
+          type: boolean
+          description: Whether the non-billable *Activity* is shown on the bill.
+        tax_setting:
+          type: string
+          enum:
+          - no_tax
+          - tax_1_only
+          - tax_2_only
+          - tax_1_and_tax_2
+          description: The option denoting whether primary tax, secondary tax, or both is applied to an expense entry.
+        tax_settings:
+          type: array
+          items:
+            type: object
+          description: Array of objects, with each object representing a tax setting that is applied to an expense entry with 'tax_rate_configuration_id', 'order', and 'rule' as the object properties.
+        input_tax_settings:
+          type: array
+          items:
+            type: object
+          description: Array of objects, with each object representing an input tax setting that can be applied to a hard cost expense entry with 'tax_rate_configuration_id', 'order', and 'rule' as the object properties.
+        currency:
+          type: object
+          description: The currency of the *Activity*
+        rate_table_lineage:
+          type: object
+          description: The rate table and category that priced a TimeEntry, as an object with `rate_table_name`, `rate_table_category_name`, `rate_table_deleted` (whether the table or category has since been deleted) and `rate_table_archived` (whether the table has since been archived). Only returned for a TimeEntry priced from a rate table.
     Reminder_base:
       type: object
       properties:
@@ -1200,6 +1737,54 @@ components:
           type: string
           format: date-time
           description: The time the *Reminder* was last updated (as a ISO-8601 timestamp)
+    CalendarEntry:
+      allOf:
+      - $ref: '#/components/schemas/CalendarEntry_base'
+      - type: object
+        properties:
+          time_entries:
+            type: array
+            items:
+              $ref: '#/components/schemas/Activity_base'
+            description: Activity
+          conference_meeting:
+            $ref: '#/components/schemas/ConferenceMeeting_base'
+            description: ConferenceMeeting
+          matter:
+            $ref: '#/components/schemas/Matter_base'
+            description: Matter
+          matter_docket:
+            $ref: '#/components/schemas/MatterDocket_base'
+            description: MatterDocket
+          calendar_owner:
+            $ref: '#/components/schemas/Calendar_base'
+            description: Calendar
+          parent_calendar_entry:
+            $ref: '#/components/schemas/CalendarEntry_base'
+            description: CalendarEntry
+          calendar_entry_event_type:
+            $ref: '#/components/schemas/CalendarEntryEventType_base'
+            description: CalendarEntryEventType
+          attendees:
+            type: array
+            items:
+              $ref: '#/components/schemas/Attendee_base'
+            description: Attendee
+          calendars:
+            type: array
+            items:
+              $ref: '#/components/schemas/Calendar_base'
+            description: Calendar
+          reminders:
+            type: array
+            items:
+              $ref: '#/components/schemas/Reminder_base'
+            description: Reminder
+          external_properties:
+            type: array
+            items:
+              $ref: '#/components/schemas/ExternalProperty_base'
+            description: ExternalProperty
     Matter_base:
       type: object
       properties:
@@ -1246,6 +1831,9 @@ components:
         billable:
           type: boolean
           description: Whether this matter is billable
+        require_utbms_codes:
+          type: boolean
+          description: When true, billable time and expense entries on this matter must include the required UTBMS/LEDES codes before they can be saved. Requires the firm to have mandatory LEDES billing enabled; otherwise the value is ignored.
         maildrop_address:
           type: string
           description: A unique Maildrop email address for the matter
@@ -1365,418 +1953,6 @@ components:
           type: integer
           format: int32
           description: The number of `TimeEntry` activities associated with the *CalendarEntry*
-    Attendee_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Attendee*
-        etag:
-          type: string
-          description: ETag for the *Attendee*
-        type:
-          type: string
-          enum:
-          - Contact
-          - Calendar
-          description: The class name of the *Attendee*
-        name:
-          type: string
-          description: The name of the *Attendee*
-        enabled:
-          type: boolean
-          description: If the Attendee is a user, represents whether the user is enabled or disabled. Returns null if attendee is a Contact.
-        email:
-          type: string
-          description: If the Attendee is a User, this is the User's email. If the Attendee is a contact, this is the Contact's primary email address.
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Attendee* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Attendee* was last updated (as a ISO-8601 timestamp)
-    CalendarEntry_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: CalendarEntry List Response
-          items:
-            $ref: '#/components/schemas/CalendarEntry'
-    CalendarEntry:
-      allOf:
-      - $ref: '#/components/schemas/CalendarEntry_base'
-      - type: object
-        properties:
-          time_entries:
-            type: array
-            items:
-              $ref: '#/components/schemas/Activity_base'
-            description: Activity
-          conference_meeting:
-            $ref: '#/components/schemas/ConferenceMeeting_base'
-            description: ConferenceMeeting
-          matter:
-            $ref: '#/components/schemas/Matter_base'
-            description: Matter
-          matter_docket:
-            $ref: '#/components/schemas/MatterDocket_base'
-            description: MatterDocket
-          calendar_owner:
-            $ref: '#/components/schemas/Calendar_base'
-            description: Calendar
-          parent_calendar_entry:
-            $ref: '#/components/schemas/CalendarEntry_base'
-            description: CalendarEntry
-          calendar_entry_event_type:
-            $ref: '#/components/schemas/CalendarEntryEventType_base'
-            description: CalendarEntryEventType
-          attendees:
-            type: array
-            items:
-              $ref: '#/components/schemas/Attendee_base'
-            description: Attendee
-          calendars:
-            type: array
-            items:
-              $ref: '#/components/schemas/Calendar_base'
-            description: Calendar
-          reminders:
-            type: array
-            items:
-              $ref: '#/components/schemas/Reminder_base'
-            description: Reminder
-          external_properties:
-            type: array
-            items:
-              $ref: '#/components/schemas/ExternalProperty_base'
-            description: ExternalProperty
-    Activity_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Activity*
-        etag:
-          type: string
-          description: ETag for the *Activity*
-        type:
-          type: string
-          enum:
-          - TimeEntry
-          - ExpenseEntry
-          - HardCostEntry
-          - SoftCostEntry
-          description: The type of the *Activity*
-        date:
-          type: string
-          format: date
-          description: The date the *Activity* was performed (as a ISO-8601 date)
-        quantity_in_hours:
-          type: number
-          format: double
-          description: The number of hours the TimeEntry took.
-        rounded_quantity_in_hours:
-          type: number
-          format: double
-          description: 'The number of hours rounded accordingly to the billing settings.
-
-            The rounded value is used to calculate the total.
-
-            '
-        quantity:
-          type: number
-          format: double
-          description: 'The field is applicable to TimeEntry, ExpenseEntry, and SoftCostEntry.
-
-
-            **Version <= 4.0.3:**
-
-            The number of hours the TimeEntry took.
-
-
-            **Latest version:**
-
-            The number of seconds the TimeEntry took.
-
-            '
-        rounded_quantity:
-          type: number
-          format: double
-          description: 'The field is applicable to time entries only.
-
-
-            **Version <= 4.0.3:**
-
-            The number of hours rounded accordingly to the billing settings.
-
-            The rounded value is used to calculate the total.
-
-
-            **Latest version:**
-
-            The number of seconds rounded accordingly to the billing settings.
-
-            The rounded value is used to calculate the total.
-
-            '
-        quantity_redacted:
-          type: boolean
-          description: 'Is `true` if any of the following fields are redacted:
-
-            `quantity`, `rounded_quantity`, `rounded_quantity_in_hours`, `quantity_in_hours`, `total`, `non_billable_total`
-
-            '
-        price:
-          type: number
-          format: double
-          description: The hourly or flat rate of the *Activity*
-        note:
-          type: string
-          description: The details about the *Activity*
-        flat_rate:
-          type: boolean
-          description: Whether the *Activity* is a flat rate
-        billed:
-          type: boolean
-          description: Whether the *Activity* has been added to an active bill that is in the state of `awaiting_payment` or `paid`
-        on_bill:
-          type: boolean
-          description: Whether the *Activity* has been added to an active bill that is in the state of `draft`, `awaiting_approval`, `awaiting_payment` or `paid`
-        total:
-          type: number
-          format: double
-          description: The total cost of draft, billable and billed items in the *Activity*
-        contingency_fee:
-          type: boolean
-          description: Whether or not the *Activity* is a contingency fee
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Activity* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Activity* was last updated (as a ISO-8601 timestamp)
-        reference:
-          type: string
-          description: A check reference for a HardCostEntry.
-        non_billable:
-          type: boolean
-          description: Whether the *Activity* is non-billable
-        non_billable_total:
-          type: number
-          format: double
-          description: The total cost of non-billable items in the *Activity*
-        no_charge:
-          type: boolean
-          description: Whether the non-billable *Activity* is shown on the bill.
-        tax_setting:
-          type: string
-          enum:
-          - no_tax
-          - tax_1_only
-          - tax_2_only
-          - tax_1_and_tax_2
-          description: The option denoting whether primary tax, secondary tax, or both is applied to an expense entry.
-        tax_settings:
-          type: array
-          items:
-            type: object
-          description: Array of objects, with each object representing a tax setting that is applied to an expense entry with 'tax_rate_configuration_id', 'order', and 'rule' as the object properties.
-        currency:
-          type: object
-          description: The currency of the *Activity*
-    CalendarEntryEventType_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *CalendarEntryEventType*
-        etag:
-          type: string
-          description: ETag for the *CalendarEntryEventType*
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *CalendarEntryEventType* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *CalendarEntryEventType* was last updated (as a ISO-8601 timestamp)
-        color:
-          type: string
-          enum:
-          - '#367B9C'
-          - '#FFA5A4'
-          - '#83D17F'
-          - '#FFAC7B'
-          - '#8E3F64'
-          - '#C75300'
-          - '#009CEC'
-          - '#62D6B1'
-          - '#9EEDCB'
-          - '#F9A2C4'
-          - '#616161'
-          - '#BBDA81'
-          - '#DFD3F8'
-          - '#D6C4A5'
-          - '#FFD478'
-          - '#6AC9DE'
-          - '#EABBB0'
-          - '#BFC2E1'
-          - '#DADADA'
-          - '#CDE2F5'
-          description: The color describing the *CalendarEntryEventType*
-        name:
-          type: string
-          description: The name for the *CalendarEntryEventType*
-    Calendar_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Calendar*
-        etag:
-          type: string
-          description: ETag for the *Calendar*
-        color:
-          type: string
-          enum:
-          - '#367B9C'
-          - '#FFA5A4'
-          - '#83D17F'
-          - '#FFAC7B'
-          - '#8E3F64'
-          - '#C75300'
-          - '#009CEC'
-          - '#62D6B1'
-          - '#9EEDCB'
-          - '#F9A2C4'
-          - '#616161'
-          - '#BBDA81'
-          - '#DFD3F8'
-          - '#D6C4A5'
-          - '#FFD478'
-          - '#6AC9DE'
-          - '#EABBB0'
-          - '#BFC2E1'
-          - '#DADADA'
-          - '#CDE2F5'
-          description: Color
-        light_color:
-          type: string
-          enum:
-          - '#5DA5C7'
-          - '#F95957'
-          - '#209412'
-          - '#FF7715'
-          - '#DE649D'
-          - '#FF6B02'
-          - '#56C4FC'
-          - '#00B177'
-          - '#50D19B'
-          - '#F14A8C'
-          - '#A3A2A2'
-          - '#84AB3B'
-          - '#B091EE'
-          - '#BD9E69'
-          - '#F2A000'
-          - '#00A5CA'
-          - '#CB5A3D'
-          - '#959CD0'
-          - '#B0B0B0'
-          - '#7BA6CD'
-          description: Accent color to complement the main calendar color.
-        court_rules_default_calendar:
-          type: boolean
-          description: Whether the calendar is default court rules calendar for current user
-        name:
-          type: string
-          description: The name of the *Calendar*
-        permission:
-          type: string
-          enum:
-          - owner
-          - editor
-          - viewer
-          - limited_viewer
-          - none
-          description: The user's permission to the *Calendar*
-        type:
-          type: string
-          enum:
-          - AccountCalendar
-          - AdhocCalendar
-          - UserCalendar
-          description: The type of the *Calendar*
-        visible:
-          type: boolean
-          description: Whether the *Calendar* will be shown by default in the Clio Web UI (assuming no source is provided).
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Calendar* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Calendar* was last updated (as a ISO-8601 timestamp)
-        source:
-          type: string
-          enum:
-          - web
-          - mobile
-          description: The source that visible applies to, by default the Clio Web UI (Expects 'mobile' or 'web').
-    ConferenceMeeting_base:
-      type: object
-      properties:
-        conference_id:
-          type: integer
-          format: int64
-          description: Third-party provider unique meeting ID
-        conference_password:
-          type: string
-          description: Third-party provider meeting password
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ConferenceMeeting* was created (as a ISO-8601 timestamp)
-        etag:
-          type: string
-          description: ETag for the *ConferenceMeeting*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ConferenceMeeting*
-        join_url:
-          type: string
-          description: URL for participants to join the video conference
-        type:
-          type: string
-          description: The type of video conference
-        source_id:
-          type: integer
-          format: int64
-          description: The external ID of the video conference meeting
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ConferenceMeeting* was last updated (as a ISO-8601 timestamp)
-    CalendarEntry_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/CalendarEntry'
 x-tagGroups:
 - name: Api
   tags:
@@ -1796,6 +1972,7 @@ x-tagGroups:
   - Bank Accounts
   - Bank Transactions
   - Bank Transfers
+  - Matter Transfers
 - name: Billing
   tags:
   - Bills
@@ -1805,6 +1982,11 @@ x-tagGroups:
   - Interest Charges
   - Line Items
   - Outstanding Client Balances
+  - Rate Tables
+  - Rate Table Categories
+  - Rate Table Timekeepers
+  - Rate Table Rates
+  - Rate Table Assignments
 - name: Calendars
   tags:
   - Calendars
@@ -1863,6 +2045,7 @@ x-tagGroups:
   - Practice Areas
   - Log Entries
   - Matter Stages
+  - Matter Protected Funds
   - Medical Records Details
   - Medical Records
   - Medical Bills
@@ -1906,3 +2089,8 @@ x-tagGroups:
   - Civil Certificated Rates
   - Criminal Controlled Rates
   - Expense Categories
+- name: General
+  tags:
+  - Safe Custody Packets
+  - Safe Custody Records
+  - Safe Custody Packet Locations

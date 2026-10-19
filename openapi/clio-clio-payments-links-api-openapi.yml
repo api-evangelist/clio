@@ -6,7 +6,135 @@ info:
     email: api@clio.com
   description: '# Developer Support and Feedback
 
-    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.'
+    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.
+
+    * For business and partnership inquiries, contact our API Partnerships team at api.partnerships@clio.com.
+
+    * For best practices and tips from the Clio development community, join the conversation in the Clio Developer Slack Channel.
+
+
+    A community-driven Clio Developers Stack Overflow Group also exists where you can connect and ask questions from other Clio API users.
+
+    # Getting Started
+
+    > **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).
+
+    >
+
+    > Likewise, the developer portal is available at region-specific links for the Australia, Canada, EU, and US regions.
+
+    >
+
+    > This document assumes the US region is being used (app.clio.com). If you''re building in one of the other regions, you should adapt the links and examples as necessary.
+
+
+    To start building on the Clio API, you’ll need a Clio account – you can review our Developer Handbook and follow the steps to sign up for an account.
+
+
+    Once you have an account, you can create a developer application from the Developer Portal and start building!
+
+    # Authorization with OAuth 2.0
+
+    See our Authorization documentation →
+
+    # Permissions
+
+    See our Permissions documentation →
+
+    # Fields
+
+    See our Fields documentation →
+
+    # Rate Limiting
+
+    See our Rate Limits documentation →
+
+    # Paging
+
+    See our Pagination documentation →
+
+    # ETags
+
+    See our ETags documentation →
+
+    # Minor Versions
+
+    API v4 supports multiple minor versions. Versions are of the form ''4.X.Y''. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you''re requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.
+
+
+    An `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.
+
+
+    You can find our API Versioning Policy and Guidelines in our documentation hub.
+
+
+    The API Changelog explains each version''s changes in further detail.
+
+    ### 4.0.4
+
+
+    * Update `quantity` field to return values in seconds rather than hours for Activities
+
+
+    ### 4.0.5
+
+
+    * Remove `matter_balances` field from Bills
+
+    * Standardize status/state enum values
+
+    * Add a Document association to completed DocumentAutomations
+
+    * Add rate visibility handling for Activity''s price and total
+
+
+    ### 4.0.6
+
+
+    * Remove `document_versions` collection field from Documents
+
+
+    ### 4.0.7
+
+
+    * Change secure link format
+
+
+    ### 4.0.8
+
+
+    * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user
+
+    * Add `quantity_redacted` field to activities
+
+
+    ### 4.0.9
+
+
+    * Contacts are filtered and redacted in the response based on the new ''Contacts Visibility'' user permission setting.
+
+
+    ### 4.0.10
+
+
+    * Fixed validation of `type` query parameter when querying Notes
+
+
+    ### 4.0.12
+
+
+    * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers
+
+
+    ### 4.0.13
+
+
+    **This is the default version**
+
+
+    * Add association limits to Contacts
+
+    * Returns 422 Unprocessable Entity when association limits are exceeded'
   version: v4
   x-logo:
     url: https://www.clio.com/wp-content/uploads/2015/05/Container-5-Logo.png
@@ -223,7 +351,7 @@ paths:
                       description: Pre-fills the relevant field for the client when filling out their details in the payment link.
                     is_allocated_as_revenue:
                       type: boolean
-                      description: Only applicable for a direct payment. If true, the payment will be allocated as revenue. If false, the payment will be collected as an unallocated balance. Payments into trust can not be allocated as revenue. Defaults to false.
+                      description: Only applicable for a direct payment. If true, the payment will be allocated as revenue and cannot be later linked to a bill. If false, the payment will be collected as an unallocated balance. Payments into trust can not be allocated as revenue. Defaults to false.
                     subject:
                       type: object
                       properties:
@@ -302,7 +430,7 @@ paths:
                       description: Pre-fills the relevant field for the client when filling out their details in the payment link.
                     is_allocated_as_revenue:
                       type: boolean
-                      description: Only applicable for a direct payment. If true, the payment will be allocated as revenue. If false, the payment will be collected as an unallocated balance. Payments into trust can not be allocated as revenue. Defaults to false.
+                      description: Only applicable for a direct payment. If true, the payment will be allocated as revenue and cannot be later linked to a bill. If false, the payment will be collected as an unallocated balance. Payments into trust can not be allocated as revenue. Defaults to false.
                     subject:
                       type: object
                       properties:
@@ -381,7 +509,7 @@ paths:
                       description: Pre-fills the relevant field for the client when filling out their details in the payment link.
                     is_allocated_as_revenue:
                       type: boolean
-                      description: Only applicable for a direct payment. If true, the payment will be allocated as revenue. If false, the payment will be collected as an unallocated balance. Payments into trust can not be allocated as revenue. Defaults to false.
+                      description: Only applicable for a direct payment. If true, the payment will be allocated as revenue and cannot be later linked to a bill. If false, the payment will be collected as an unallocated balance. Payments into trust can not be allocated as revenue. Defaults to false.
                     subject:
                       type: object
                       properties:
@@ -619,200 +747,6 @@ paths:
         required: false
 components:
   schemas:
-    Bill_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *Bill*
-        etag:
-          type: string
-          description: ETag for the *Bill*
-        number:
-          type: string
-          description: The *Bill* identifier (not necessarily numeric)'
-        issued_at:
-          type: string
-          format: date
-          description: The time the *Bill* was issued (as a ISO-8601 date)
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *Bill* was created (as a ISO-8601 timestamp)
-        due_at:
-          type: string
-          format: date
-          description: The date the *Bill* is due (as a ISO-8601 date)
-        tax_rate:
-          type: number
-          format: double
-          description: The tax rate to the *Bill*
-        secondary_tax_rate:
-          type: number
-          format: double
-          description: A secondary tax rate applied to the *Bill*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *Bill* was last updated (as a ISO-8601 timestamp)
-        subject:
-          type: string
-          description: The subject of the *Bill*
-        purchase_order:
-          type: string
-          description: The purchase order of the *Bill*
-        type:
-          type: string
-          enum:
-          - MatterBill
-          - ClientBill
-          description: The type of the *Bill*
-        memo:
-          type: string
-          description: A memo for the *Bill*
-        start_at:
-          type: string
-          format: date
-          description: The time the billing period starts (as a ISO-8601 date)
-        end_at:
-          type: string
-          format: date
-          description: The time the billing period ends (as a ISO-8601 date)
-        balance:
-          type: number
-          format: double
-          description: The outstanding balance of the *Bill*
-        state:
-          type: string
-          enum:
-          - draft
-          - awaiting_approval
-          - awaiting_payment
-          - paid
-          - void
-          - deleted
-          description: The billing state the *Bill* is in
-        kind:
-          type: string
-          enum:
-          - revenue_kind
-          - summary_kind
-          - trust_kind
-          - aggregate_all
-          - aggregate_split
-          - aggregate_services
-          - aggregate_expenses
-          description: The kind of the *Bill*
-        total:
-          type: number
-          format: double
-          description: The total with interest of the *Bill*
-        paid:
-          type: number
-          format: double
-          description: The total amount paid for the *Bill*
-        paid_at:
-          type: string
-          format: date-time
-          description: The date of the last payment on the *Bill*
-        pending:
-          type: number
-          format: double
-          description: The amount of pending credit card payments on the *Bill*
-        due:
-          type: number
-          format: double
-          description: The total amount of the *Bill* with interest and less discounts
-        discount_services_only:
-          type: string
-          description: The selected discount is applied to services only.
-        can_update:
-          type: boolean
-          description: This value indicates if your *Bill*'s line items and information can be updated.
-        credits_issued:
-          type: number
-          format: double
-          description: The total credits issued for the *Bill*
-        shared:
-          type: boolean
-          description: Whether the *Bill* is a shared
-        last_sent_at:
-          type: string
-          format: date-time
-          description: The last time the *Bill* was sent (as a ISO-8601 date)
-        services_secondary_tax:
-          type: number
-          format: double
-          description: The total secondary tax of the bill's line items of a service kind
-        services_sub_total:
-          type: number
-          format: double
-          description: The sub total of all the bill's line items of a service kind
-        services_tax:
-          type: number
-          format: double
-          description: The total tax of the bill's line items of a service kind
-        services_taxable_sub_total:
-          type: integer
-          format: int64
-          description: The services portion of the bill's primary tax
-        services_secondary_taxable_sub_total:
-          type: integer
-          format: int64
-          description: The services portion of the bill's secondary tax
-        taxable_sub_total:
-          type: integer
-          format: int64
-          description: The total taxable bill amount
-        secondary_taxable_sub_total:
-          type: integer
-          format: int64
-          description: The subtotal of the bill's secondary tax
-        sub_total:
-          type: number
-          format: double
-          description: Sub total for the *Bill*
-        tax_sum:
-          type: number
-          format: double
-          description: Sum of primary tax for the model
-        secondary_tax_sum:
-          type: number
-          format: double
-          description: Sum of secondary tax for the model
-        total_tax:
-          type: number
-          format: double
-          description: The total amount of tax for the bill.
-        available_state_transitions:
-          type: array
-          items:
-            type: string
-            enum:
-            - awaiting_approval
-            - awaiting_payment
-            - paid
-            - void
-            - deleted
-          description: The available *Bill* state transitions.
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    ClioPaymentsLink_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: ClioPaymentsLink List Response
-          items:
-            $ref: '#/components/schemas/ClioPaymentsLink'
     ErrorDetail:
       type: object
       required:
@@ -825,117 +759,49 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    ClioPaymentsLink:
-      allOf:
-      - $ref: '#/components/schemas/ClioPaymentsLink_base'
-      - type: object
-        properties:
-          bank_account:
-            $ref: '#/components/schemas/BankAccount_base'
-            description: BankAccount
-          bill:
-            $ref: '#/components/schemas/Bill_base'
-            description: Bill
-          clio_payments_payment:
-            $ref: '#/components/schemas/ClioPaymentsPayment_base'
-            description: ClioPaymentsPayment
-          contact:
-            $ref: '#/components/schemas/Contact_base'
-            description: Contact
-          destination_account:
-            $ref: '#/components/schemas/BankAccount_base'
-            description: BankAccount
-          destination_contact:
-            $ref: '#/components/schemas/Contact_base'
-            description: Contact
-    ClioPaymentsLink_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/ClioPaymentsLink'
-    BankAccount_base:
+    ClioPaymentsLink_base:
       type: object
       properties:
-        account_number:
-          type: string
-          description: The account number for *BankAccount*
-        balance:
+        active:
+          type: boolean
+          description: Whether or not the payment link is active.
+        amount:
           type: number
           format: double
-          description: The current balance of the *BankAccount*
-        bank_transactions_count:
-          type: integer
-          format: int32
-          description: The number of bank transactions associated with the account.
-        clio_payment_page_link:
-          type: string
-          description: Link to Single Payment Page which allows to transfer funds without logging in.
-        clio_payment_page_qr_code:
-          type: string
-          description: A QR code that links to a Single Payment Page which allows to transfer funds without logging in.
-        clio_payments_enabled:
-          type: boolean
-          description: Whether the bank account is connected to Clio Payments
-        controlled_account:
-          type: boolean
-          description: Whether is a controlled account
+          description: The defined amount of the payment link, if set.
         created_at:
           type: string
           format: date-time
-          description: The time the *BankAccount* was created (as a ISO-8601 timestamp)
+          description: The time the *ClioPaymentsLink* was created (as a ISO-8601 timestamp)
         currency:
           type: string
-          description: The currency type of the *BankAccount*
-        currency_symbol:
+          description: The currency the payment link will collect.
+        description:
           type: string
-          description: The currency symbol of the *BankAccount*
-        currency_id:
-          type: number
-          format: double
-          description: The currency ID of the *BankAccount*
-        default_account:
-          type: boolean
-          description: Whether it is the default account
-        domicile_branch:
+          description: The defined description of the payment link, if set.
+        email_address:
           type: string
-          description: The name of the branch where the account was opened
+          description: The email address to pre-fill the field on the the payment link, if set.
         etag:
           type: string
-          description: ETag for the *BankAccount*
-        general_ledger_number:
+          description: ETag for the *ClioPaymentsLink*
+        expires_at:
           type: string
-          description: General ledger number
-        holder:
-          type: string
-          description: The name of the person or business that owns the *BankAccount*
+          format: date-time
+          description: The ISO 8601 date and time the payment link will expire.
         id:
           type: integer
           format: int64
-          description: Unique identifier for the *BankAccount*
-        institution:
+          description: Unique identifier for the *ClioPaymentsLink*
+        is_allocated_as_revenue:
+          type: boolean
+          description: Whether the payment link is allocated as revenue.
+        redirect_url:
           type: string
-          description: The financial institution where the *BankAccount* is registered
-        name:
+          description: The URL to redirect the client to after the payment has been made.
+        url:
           type: string
-          description: The name of the *BankAccount*
-        swift:
-          type: string
-          description: A unique identification code for the financial institution
-        transit_number:
-          type: string
-          description: Transit number for the bank account branch
-        type:
-          type: string
-          enum:
-          - Operating
-          - Trust
-          description: The type of the *BankAccount*
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *BankAccount* was last updated (as a ISO-8601 timestamp)
+          description: The URL of the payment link.
     ClioPaymentsPayment_base:
       type: object
       properties:
@@ -982,6 +848,39 @@ components:
           type: string
           format: date-time
           description: The time the *ClioPaymentsPayment* was last updated (as a ISO-8601 timestamp)
+    ClioPaymentsLink_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: ClioPaymentsLink List Response
+          items:
+            $ref: '#/components/schemas/ClioPaymentsLink'
+    ClioPaymentsLink:
+      allOf:
+      - $ref: '#/components/schemas/ClioPaymentsLink_base'
+      - type: object
+        properties:
+          bank_account:
+            $ref: '#/components/schemas/BankAccount_base'
+            description: BankAccount
+          bill:
+            $ref: '#/components/schemas/Bill_base'
+            description: Bill
+          clio_payments_payment:
+            $ref: '#/components/schemas/ClioPaymentsPayment_base'
+            description: ClioPaymentsPayment
+          contact:
+            $ref: '#/components/schemas/Contact_base'
+            description: Contact
+          destination_account:
+            $ref: '#/components/schemas/BankAccount_base'
+            description: BankAccount
+          destination_contact:
+            $ref: '#/components/schemas/Contact_base'
+            description: Contact
     Contact_base:
       type: object
       properties:
@@ -1077,49 +976,305 @@ components:
         currency:
           type: object
           description: Currency of the *Contact*
-    ClioPaymentsLink_base:
+        require_utbms_codes:
+          type: boolean
+          description: When true, new matters created for this client default to requiring UTBMS/LEDES codes on billable time and expense entries. Requires the firm to have mandatory LEDES billing enabled; otherwise the value is ignored.
+    BankAccount_base:
       type: object
       properties:
-        active:
-          type: boolean
-          description: Whether or not the payment link is active.
-        amount:
+        account_number:
+          type: string
+          description: The account number for *BankAccount*
+        balance:
           type: number
           format: double
-          description: The defined amount of the payment link, if set.
+          description: The current balance of the *BankAccount*
+        bank_transactions_count:
+          type: integer
+          format: int32
+          description: The number of bank transactions associated with the account.
+        clio_payment_page_link:
+          type: string
+          description: Link to Single Payment Page which allows to transfer funds without logging in.
+        clio_payment_page_qr_code:
+          type: string
+          description: A QR code that links to a Single Payment Page which allows to transfer funds without logging in.
+        clio_payments_enabled:
+          type: boolean
+          description: Whether the bank account is connected to Clio Payments
+        compliance_region:
+          type: string
+          enum:
+          - no_region
+          - new_south_wales
+          - new_zealand
+          - united_kingdom
+          - au_victoria
+          - au_queensland
+          - au_western_australia
+          - au_south_australia
+          - au_tasmania
+          - au_australian_capital_territory
+          - au_northern_territory
+          - uk_northern_ireland
+          - uk_scotland
+          - spain
+          - singapore
+          description: The account-level trust accounting compliance region. Every bank account in a firm reports the same value.
+        controlled_account:
+          type: boolean
+          description: Whether is a controlled account
         created_at:
           type: string
           format: date-time
-          description: The time the *ClioPaymentsLink* was created (as a ISO-8601 timestamp)
+          description: The time the *BankAccount* was created (as a ISO-8601 timestamp)
         currency:
           type: string
-          description: The currency the payment link will collect.
-        description:
+          description: The currency type of the *BankAccount*
+        currency_symbol:
           type: string
-          description: The defined description of the payment link, if set.
-        email_address:
+          description: The currency symbol of the *BankAccount*
+        currency_id:
+          type: number
+          format: double
+          description: The currency ID of the *BankAccount*
+        default_account:
+          type: boolean
+          description: Whether it is the default account
+        domicile_branch:
           type: string
-          description: The email address to pre-fill the field on the the payment link, if set.
+          description: The name of the branch where the account was opened
         etag:
           type: string
-          description: ETag for the *ClioPaymentsLink*
-        expires_at:
+          description: ETag for the *BankAccount*
+        general_ledger_number:
           type: string
-          format: date-time
-          description: The ISO 8601 date and time the payment link will expire.
+          description: General ledger number
+        holder:
+          type: string
+          description: The name of the person or business that owns the *BankAccount*
         id:
           type: integer
           format: int64
-          description: Unique identifier for the *ClioPaymentsLink*
-        is_allocated_as_revenue:
+          description: Unique identifier for the *BankAccount*
+        institution:
+          type: string
+          description: The financial institution where the *BankAccount* is registered
+        name:
+          type: string
+          description: The name of the *BankAccount*
+        swift:
+          type: string
+          description: A unique identification code for the financial institution
+        transit_number:
+          type: string
+          description: Transit number for the bank account branch
+        type:
+          type: string
+          enum:
+          - Operating
+          - Trust
+          description: The type of the *BankAccount*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *BankAccount* was last updated (as a ISO-8601 timestamp)
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    ClioPaymentsLink_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ClioPaymentsLink'
+    Bill_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *Bill*
+        etag:
+          type: string
+          description: ETag for the *Bill*
+        number:
+          type: string
+          description: The *Bill* identifier (not necessarily numeric)'
+        issued_at:
+          type: string
+          format: date
+          description: The time the *Bill* was issued (as a ISO-8601 date)
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *Bill* was created (as a ISO-8601 timestamp)
+        due_at:
+          type: string
+          format: date
+          description: The date the *Bill* is due (as a ISO-8601 date)
+        tax_rate:
+          type: number
+          format: double
+          description: The tax rate to the *Bill*
+        secondary_tax_rate:
+          type: number
+          format: double
+          description: A secondary tax rate applied to the *Bill*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *Bill* was last updated (as a ISO-8601 timestamp)
+        subject:
+          type: string
+          description: The subject of the *Bill*
+        purchase_order:
+          type: string
+          description: The purchase order of the *Bill*
+        type:
+          type: string
+          enum:
+          - MatterBill
+          - ClientBill
+          description: The type of the *Bill*
+        memo:
+          type: string
+          description: A memo for the *Bill*
+        start_at:
+          type: string
+          format: date
+          description: The time the billing period starts (as a ISO-8601 date)
+        end_at:
+          type: string
+          format: date
+          description: The time the billing period ends (as a ISO-8601 date)
+        balance:
+          type: number
+          format: double
+          description: The outstanding balance of the *Bill*
+        state:
+          type: string
+          enum:
+          - draft
+          - awaiting_approval
+          - awaiting_payment
+          - paid
+          - void
+          - deleted
+          description: The billing state the *Bill* is in
+        kind:
+          type: string
+          enum:
+          - revenue_kind
+          - summary_kind
+          - trust_kind
+          - aggregate_fixed_fees
+          - aggregate_all
+          - aggregate_split
+          - aggregate_services
+          - aggregate_expenses
+          description: The kind of the *Bill*
+        total:
+          type: number
+          format: double
+          description: The total with interest of the *Bill*
+        paid:
+          type: number
+          format: double
+          description: The total amount paid for the *Bill*
+        paid_at:
+          type: string
+          format: date-time
+          description: The date of the last payment on the *Bill*
+        pending:
+          type: number
+          format: double
+          description: The amount of pending credit card payments on the *Bill*
+        due:
+          type: number
+          format: double
+          description: The total amount of the *Bill* with interest and less discounts
+        discount_services_only:
           type: boolean
-          description: Whether the payment link is allocated as revenue.
-        redirect_url:
+          description: The selected discount is applied to services only.
+        can_update:
+          type: boolean
+          description: This value indicates if your *Bill*'s line items and information can be updated.
+        credits_issued:
+          type: number
+          format: double
+          description: The total credits issued for the *Bill*
+        shared:
+          type: boolean
+          description: Whether the *Bill* is a shared
+        last_sent_at:
           type: string
-          description: The URL to redirect the client to after the payment has been made.
-        url:
-          type: string
-          description: The URL of the payment link.
+          format: date-time
+          description: The last time the *Bill* was sent (as a ISO-8601 date)
+        services_secondary_tax:
+          type: number
+          format: double
+          description: The total secondary tax of the bill's line items of a service kind
+        services_sub_total:
+          type: number
+          format: double
+          description: The sub total of all the bill's line items of a service kind
+        services_tax:
+          type: number
+          format: double
+          description: The total tax of the bill's line items of a service kind
+        services_taxable_sub_total:
+          type: integer
+          format: int64
+          description: The services portion of the bill's primary tax
+        services_secondary_taxable_sub_total:
+          type: integer
+          format: int64
+          description: The services portion of the bill's secondary tax
+        taxable_sub_total:
+          type: integer
+          format: int64
+          description: The total taxable bill amount
+        secondary_taxable_sub_total:
+          type: integer
+          format: int64
+          description: The subtotal of the bill's secondary tax
+        sub_total:
+          type: number
+          format: double
+          description: Sub total for the *Bill*
+        tax_sum:
+          type: number
+          format: double
+          description: Sum of primary tax for the model
+        secondary_tax_sum:
+          type: number
+          format: double
+          description: Sum of secondary tax for the model
+        total_tax:
+          type: number
+          format: double
+          description: The total amount of tax for the bill.
+        available_state_transitions:
+          type: array
+          items:
+            type: string
+            enum:
+            - awaiting_approval
+            - awaiting_payment
+            - paid
+            - void
+            - deleted
+          description: The available *Bill* state transitions.
+        effective_bill_template_id:
+          type: integer
+          format: int64
+          description: The unique identifier of the Invoice Template the *Bill* renders with, resolved from the *Bill*'s own template or the default inherited from its matter, client, or firm. Returns null when the *Bill* renders with a bill theme instead
 x-tagGroups:
 - name: Api
   tags:
@@ -1139,6 +1294,7 @@ x-tagGroups:
   - Bank Accounts
   - Bank Transactions
   - Bank Transfers
+  - Matter Transfers
 - name: Billing
   tags:
   - Bills
@@ -1148,6 +1304,11 @@ x-tagGroups:
   - Interest Charges
   - Line Items
   - Outstanding Client Balances
+  - Rate Tables
+  - Rate Table Categories
+  - Rate Table Timekeepers
+  - Rate Table Rates
+  - Rate Table Assignments
 - name: Calendars
   tags:
   - Calendars
@@ -1206,6 +1367,7 @@ x-tagGroups:
   - Practice Areas
   - Log Entries
   - Matter Stages
+  - Matter Protected Funds
   - Medical Records Details
   - Medical Records
   - Medical Bills
@@ -1249,3 +1411,8 @@ x-tagGroups:
   - Civil Certificated Rates
   - Criminal Controlled Rates
   - Expense Categories
+- name: General
+  tags:
+  - Safe Custody Packets
+  - Safe Custody Records
+  - Safe Custody Packet Locations

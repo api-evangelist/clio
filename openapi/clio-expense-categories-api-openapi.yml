@@ -6,7 +6,135 @@ info:
     email: api@clio.com
   description: '# Developer Support and Feedback
 
-    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.'
+    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.
+
+    * For business and partnership inquiries, contact our API Partnerships team at api.partnerships@clio.com.
+
+    * For best practices and tips from the Clio development community, join the conversation in the Clio Developer Slack Channel.
+
+
+    A community-driven Clio Developers Stack Overflow Group also exists where you can connect and ask questions from other Clio API users.
+
+    # Getting Started
+
+    > **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).
+
+    >
+
+    > Likewise, the developer portal is available at region-specific links for the Australia, Canada, EU, and US regions.
+
+    >
+
+    > This document assumes the US region is being used (app.clio.com). If you''re building in one of the other regions, you should adapt the links and examples as necessary.
+
+
+    To start building on the Clio API, you’ll need a Clio account – you can review our Developer Handbook and follow the steps to sign up for an account.
+
+
+    Once you have an account, you can create a developer application from the Developer Portal and start building!
+
+    # Authorization with OAuth 2.0
+
+    See our Authorization documentation →
+
+    # Permissions
+
+    See our Permissions documentation →
+
+    # Fields
+
+    See our Fields documentation →
+
+    # Rate Limiting
+
+    See our Rate Limits documentation →
+
+    # Paging
+
+    See our Pagination documentation →
+
+    # ETags
+
+    See our ETags documentation →
+
+    # Minor Versions
+
+    API v4 supports multiple minor versions. Versions are of the form ''4.X.Y''. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you''re requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.
+
+
+    An `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.
+
+
+    You can find our API Versioning Policy and Guidelines in our documentation hub.
+
+
+    The API Changelog explains each version''s changes in further detail.
+
+    ### 4.0.4
+
+
+    * Update `quantity` field to return values in seconds rather than hours for Activities
+
+
+    ### 4.0.5
+
+
+    * Remove `matter_balances` field from Bills
+
+    * Standardize status/state enum values
+
+    * Add a Document association to completed DocumentAutomations
+
+    * Add rate visibility handling for Activity''s price and total
+
+
+    ### 4.0.6
+
+
+    * Remove `document_versions` collection field from Documents
+
+
+    ### 4.0.7
+
+
+    * Change secure link format
+
+
+    ### 4.0.8
+
+
+    * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user
+
+    * Add `quantity_redacted` field to activities
+
+
+    ### 4.0.9
+
+
+    * Contacts are filtered and redacted in the response based on the new ''Contacts Visibility'' user permission setting.
+
+
+    ### 4.0.10
+
+
+    * Fixed validation of `type` query parameter when querying Notes
+
+
+    ### 4.0.12
+
+
+    * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers
+
+
+    ### 4.0.13
+
+
+    **This is the default version**
+
+
+    * Add association limits to Contacts
+
+    * Returns 422 Unprocessable Entity when association limits are exceeded'
   version: v4
   x-logo:
     url: https://www.clio.com/wp-content/uploads/2015/05/Container-5-Logo.png
@@ -212,6 +340,9 @@ paths:
                     currency:
                       type: object
                       description: Currency of the Expense Category.
+                    description:
+                      type: string
+                      description: A predefined description that pre-fills the note when this Expense Category is selected on an expense entry.
                     entry_type:
                       type: string
                       enum:
@@ -231,6 +362,29 @@ paths:
                           _deleted:
                             type: boolean
                             description: A flag to determine if this Group should lose access to this ExpenseCategory.
+                    input_tax_settings:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          tax_rate_configuration_id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier of the tax rate configuration associated with the input tax setting.
+                          order:
+                            type: integer
+                            format: int32
+                            description: The order in which the input tax is applied. Up to two input taxes can be configured — order 1 is applied first, order 2 second. Whether the second compounds on the first depends on its 'rule'.
+                          rule:
+                            type: string
+                            enum:
+                            - Pre
+                            - Post
+                            description: Controls how the input tax is applied. 'Pre' calculates it on the base amount; 'Post' compounds it on top of the preceding tax. The input tax with order 1 is always 'Pre'.
+                        required:
+                        - tax_rate_configuration_id
+                        - order
+                      description: Array of objects, with each object representing an input tax setting that can be applied to a hard cost expense category with 'tax_rate_configuration_id', 'order', and 'rule' as the object properties.
                     name:
                       type: string
                       description: Name of the Expense Category.
@@ -282,6 +436,9 @@ paths:
                     currency:
                       type: object
                       description: Currency of the Expense Category.
+                    description:
+                      type: string
+                      description: A predefined description that pre-fills the note when this Expense Category is selected on an expense entry.
                     entry_type:
                       type: string
                       enum:
@@ -301,6 +458,29 @@ paths:
                           _deleted:
                             type: boolean
                             description: A flag to determine if this Group should lose access to this ExpenseCategory.
+                    input_tax_settings:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          tax_rate_configuration_id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier of the tax rate configuration associated with the input tax setting.
+                          order:
+                            type: integer
+                            format: int32
+                            description: The order in which the input tax is applied. Up to two input taxes can be configured — order 1 is applied first, order 2 second. Whether the second compounds on the first depends on its 'rule'.
+                          rule:
+                            type: string
+                            enum:
+                            - Pre
+                            - Post
+                            description: Controls how the input tax is applied. 'Pre' calculates it on the base amount; 'Post' compounds it on top of the preceding tax. The input tax with order 1 is always 'Pre'.
+                        required:
+                        - tax_rate_configuration_id
+                        - order
+                      description: Array of objects, with each object representing an input tax setting that can be applied to a hard cost expense category with 'tax_rate_configuration_id', 'order', and 'rule' as the object properties.
                     name:
                       type: string
                       description: Name of the Expense Category.
@@ -352,6 +532,9 @@ paths:
                     currency:
                       type: object
                       description: Currency of the Expense Category.
+                    description:
+                      type: string
+                      description: A predefined description that pre-fills the note when this Expense Category is selected on an expense entry.
                     entry_type:
                       type: string
                       enum:
@@ -371,6 +554,29 @@ paths:
                           _deleted:
                             type: boolean
                             description: A flag to determine if this Group should lose access to this ExpenseCategory.
+                    input_tax_settings:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          tax_rate_configuration_id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier of the tax rate configuration associated with the input tax setting.
+                          order:
+                            type: integer
+                            format: int32
+                            description: The order in which the input tax is applied. Up to two input taxes can be configured — order 1 is applied first, order 2 second. Whether the second compounds on the first depends on its 'rule'.
+                          rule:
+                            type: string
+                            enum:
+                            - Pre
+                            - Post
+                            description: Controls how the input tax is applied. 'Pre' calculates it on the base amount; 'Post' compounds it on top of the preceding tax. The input tax with order 1 is always 'Pre'.
+                        required:
+                        - tax_rate_configuration_id
+                        - order
+                      description: Array of objects, with each object representing an input tax setting that can be applied to a hard cost expense category with 'tax_rate_configuration_id', 'order', and 'rule' as the object properties.
                     name:
                       type: string
                       description: Name of the Expense Category.
@@ -586,6 +792,9 @@ paths:
                     currency:
                       type: object
                       description: Currency of the Expense Category.
+                    description:
+                      type: string
+                      description: A predefined description that pre-fills the note when this Expense Category is selected on an expense entry.
                     entry_type:
                       type: string
                       enum:
@@ -605,6 +814,26 @@ paths:
                           _deleted:
                             type: boolean
                             description: A flag to determine if this Group should lose access to this ExpenseCategory.
+                    input_tax_settings:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          tax_rate_configuration_id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier of the tax rate configuration associated with the input tax setting.
+                          order:
+                            type: integer
+                            format: int32
+                            description: The order in which the input tax is applied. Up to two input taxes can be configured — order 1 is applied first, order 2 second. Whether the second compounds on the first depends on its 'rule'.
+                          rule:
+                            type: string
+                            enum:
+                            - Pre
+                            - Post
+                            description: Controls how the input tax is applied. 'Pre' calculates it on the base amount; 'Post' compounds it on top of the preceding tax. The input tax with order 1 is always 'Pre'.
+                      description: Array of objects, with each object representing an input tax setting that can be applied to a hard cost expense category with 'tax_rate_configuration_id', 'order', and 'rule' as the object properties.
                     name:
                       type: string
                       description: Name of the Expense Category.
@@ -651,6 +880,9 @@ paths:
                     currency:
                       type: object
                       description: Currency of the Expense Category.
+                    description:
+                      type: string
+                      description: A predefined description that pre-fills the note when this Expense Category is selected on an expense entry.
                     entry_type:
                       type: string
                       enum:
@@ -670,6 +902,26 @@ paths:
                           _deleted:
                             type: boolean
                             description: A flag to determine if this Group should lose access to this ExpenseCategory.
+                    input_tax_settings:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          tax_rate_configuration_id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier of the tax rate configuration associated with the input tax setting.
+                          order:
+                            type: integer
+                            format: int32
+                            description: The order in which the input tax is applied. Up to two input taxes can be configured — order 1 is applied first, order 2 second. Whether the second compounds on the first depends on its 'rule'.
+                          rule:
+                            type: string
+                            enum:
+                            - Pre
+                            - Post
+                            description: Controls how the input tax is applied. 'Pre' calculates it on the base amount; 'Post' compounds it on top of the preceding tax. The input tax with order 1 is always 'Pre'.
+                      description: Array of objects, with each object representing an input tax setting that can be applied to a hard cost expense category with 'tax_rate_configuration_id', 'order', and 'rule' as the object properties.
                     name:
                       type: string
                       description: Name of the Expense Category.
@@ -716,6 +968,9 @@ paths:
                     currency:
                       type: object
                       description: Currency of the Expense Category.
+                    description:
+                      type: string
+                      description: A predefined description that pre-fills the note when this Expense Category is selected on an expense entry.
                     entry_type:
                       type: string
                       enum:
@@ -735,6 +990,26 @@ paths:
                           _deleted:
                             type: boolean
                             description: A flag to determine if this Group should lose access to this ExpenseCategory.
+                    input_tax_settings:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          tax_rate_configuration_id:
+                            type: integer
+                            format: int64
+                            description: The unique identifier of the tax rate configuration associated with the input tax setting.
+                          order:
+                            type: integer
+                            format: int32
+                            description: The order in which the input tax is applied. Up to two input taxes can be configured — order 1 is applied first, order 2 second. Whether the second compounds on the first depends on its 'rule'.
+                          rule:
+                            type: string
+                            enum:
+                            - Pre
+                            - Post
+                            description: Controls how the input tax is applied. 'Pre' calculates it on the base amount; 'Post' compounds it on top of the preceding tax. The input tax with order 1 is always 'Pre'.
+                      description: Array of objects, with each object representing an input tax setting that can be applied to a hard cost expense category with 'tax_rate_configuration_id', 'order', and 'rule' as the object properties.
                     name:
                       type: string
                       description: Name of the Expense Category.
@@ -889,51 +1164,80 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    TaxSetting_base:
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    ExpenseCategory_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: ExpenseCategory List Response
+          items:
+            $ref: '#/components/schemas/ExpenseCategory'
+    LaukExpenseCategory:
+      allOf:
+      - $ref: '#/components/schemas/LaukExpenseCategory_base'
+      - type: object
+        properties: {}
+    LaukExpenseCategory_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: LaukExpenseCategory List Response
+          items:
+            $ref: '#/components/schemas/LaukExpenseCategory'
+    LaukExpenseCategory_base:
       type: object
       properties:
-        tax_rate_configuration_id:
+        certificated:
+          type: boolean
+          description: Certificated boolean identifier for expense
+        civil:
+          type: boolean
+          description: Civil boolean identifier for expense
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *LaukExpenseCategory* was created (as a ISO-8601 timestamp)
+        criminal:
+          type: boolean
+          description: Criminal boolean identifier for expense
+        etag:
+          type: string
+          description: ETag for the *LaukExpenseCategory*
+        id:
           type: integer
           format: int64
-          description: The unique identifier of the tax rate configuration associated with the tax setting
-        tax_rate_configuration_name:
+          description: Unique identifier for the *LaukExpenseCategory*
+        key:
           type: string
-          description: The name of the tax rate configuration
-        tax_rate_configuration_rate:
+          description: Unique key
+        name:
+          type: string
+          description: Expense name
+        rate:
           type: number
           format: decimal
-          description: The rate of the tax rate configuration
-        tax_rate_configuration_formatted_rate:
+          description: Determines rate based on region param
+        updated_at:
           type: string
-          description: The formatted rate of the tax rate configuration as a percentage
-        order:
-          type: integer
-          format: int32
-          description: The order in which this tax setting should be applied
-        rule:
-          type: string
-          description: The rule that the tax setting should be applied in
-    ExpenseCategory:
-      allOf:
-      - $ref: '#/components/schemas/ExpenseCategory_base'
-      - type: object
-        properties:
-          groups:
-            type: array
-            items:
-              $ref: '#/components/schemas/Group_base'
-            description: Group
-          utbms_code:
-            $ref: '#/components/schemas/UtbmsCode_base'
-            description: UtbmsCode
-          currency:
-            $ref: '#/components/schemas/Currency_base'
-            description: Currency
-          tax_settings:
-            type: array
-            items:
-              $ref: '#/components/schemas/TaxSetting_base'
-            description: TaxSetting
+          format: date-time
+          description: The time the *LaukExpenseCategory* was last updated (as a ISO-8601 timestamp)
     Currency_base:
       type: object
       properties:
@@ -958,6 +1262,66 @@ components:
           type: string
           format: date-time
           description: The time the *Currency* was last updated (as a ISO-8601 timestamp)
+    ExpenseCategory_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ExpenseCategory*
+        etag:
+          type: string
+          description: ETag for the *ExpenseCategory*
+        name:
+          type: string
+          description: The name of the expense category
+        description:
+          type: string
+          description: A predefined description that pre-fills the note when this expense category is selected on an expense entry
+        rate:
+          type: integer
+          format: int32
+          description: The price charged per unit cost
+        entry_type:
+          type: string
+          description: The type of expense entry the category is associated to. Can be either "hard_cost", "soft_cost" or "unassociated"
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ExpenseCategory* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ExpenseCategory* was last updated (as a ISO-8601 timestamp)
+        xero_expense_code:
+          type: string
+          description: Custom Xero expense code for an expense category
+        accessible_to_user:
+          type: boolean
+          description: Determines if expense category is accessible to user
+        currency:
+          type: object
+          description: The currency details for the expense category
+        tax_setting:
+          type: string
+          description: The type of tax rate applied to the expense category.
+        tax_settings:
+          type: array
+          items:
+            type: object
+          description: Array of objects, with each object representing a tax setting.
+        input_tax_settings:
+          type: array
+          items:
+            type: object
+          description: Array of objects, with each object representing an input tax setting that can be applied to a hard cost expense category with 'tax_rate_configuration_id', 'order', and 'rule' as the object properties.
+    ExpenseCategory_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ExpenseCategory'
     Error:
       type: object
       required:
@@ -965,23 +1329,56 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetail'
-    ErrorDetail:
-      type: object
-      required:
-      - type
-      - message
-      properties:
-        type:
-          type: string
-          description: Unique name for this error
-        message:
-          type: string
-          description: Detailed message about the error
-    LaukExpenseCategory:
+    ExpenseCategory:
       allOf:
-      - $ref: '#/components/schemas/LaukExpenseCategory_base'
+      - $ref: '#/components/schemas/ExpenseCategory_base'
       - type: object
-        properties: {}
+        properties:
+          groups:
+            type: array
+            items:
+              $ref: '#/components/schemas/Group_base'
+            description: Group
+          utbms_code:
+            $ref: '#/components/schemas/UtbmsCode_base'
+            description: UtbmsCode
+          currency:
+            $ref: '#/components/schemas/Currency_base'
+            description: Currency
+          tax_settings:
+            type: array
+            items:
+              $ref: '#/components/schemas/TaxSetting_base'
+            description: TaxSetting
+          input_tax_settings:
+            type: array
+            items:
+              $ref: '#/components/schemas/TaxSetting_base'
+            description: TaxSetting
+    TaxSetting_base:
+      type: object
+      properties:
+        tax_rate_configuration_id:
+          type: integer
+          format: int64
+          description: The unique identifier of the tax rate configuration associated with the tax setting
+        tax_rate_configuration_name:
+          type: string
+          description: The name of the tax rate configuration
+        tax_rate_configuration_rate:
+          type: number
+          format: decimal
+          description: The rate of the tax rate configuration
+        tax_rate_configuration_formatted_rate:
+          type: string
+          description: The formatted rate of the tax rate configuration as a percentage
+        order:
+          type: integer
+          format: int32
+          description: The order in which this tax setting should be applied
+        rule:
+          type: string
+          description: The rule that the tax setting should be applied in
     UtbmsCode_base:
       type: object
       properties:
@@ -1020,98 +1417,6 @@ components:
           type: string
           format: date-time
           description: The time the *UtbmsCode* was last updated (as a ISO-8601 timestamp)
-    ExpenseCategory_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ExpenseCategory*
-        etag:
-          type: string
-          description: ETag for the *ExpenseCategory*
-        name:
-          type: string
-          description: The name of the expense category
-        rate:
-          type: integer
-          format: int32
-          description: The price charged per unit cost
-        entry_type:
-          type: string
-          description: The type of expense entry the category is associated to. Can be either "hard_cost", "soft_cost" or "unassociated"
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ExpenseCategory* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ExpenseCategory* was last updated (as a ISO-8601 timestamp)
-        xero_expense_code:
-          type: string
-          description: Custom Xero expense code for an expense category
-        accessible_to_user:
-          type: boolean
-          description: Determines if expense category is accessible to user
-        currency:
-          type: object
-          description: The currency details for the expense category
-        tax_setting:
-          type: string
-          description: The type of tax rate applied to the expense category.
-        tax_settings:
-          type: array
-          items:
-            type: object
-          description: Array of objects, with each object representing a tax setting.
-    LaukExpenseCategory_base:
-      type: object
-      properties:
-        certificated:
-          type: boolean
-          description: Certificated boolean identifier for expense
-        civil:
-          type: boolean
-          description: Civil boolean identifier for expense
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *LaukExpenseCategory* was created (as a ISO-8601 timestamp)
-        criminal:
-          type: boolean
-          description: Criminal boolean identifier for expense
-        etag:
-          type: string
-          description: ETag for the *LaukExpenseCategory*
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *LaukExpenseCategory*
-        key:
-          type: string
-          description: Unique key
-        name:
-          type: string
-          description: Expense name
-        rate:
-          type: number
-          format: decimal
-          description: Determines rate based on region param
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *LaukExpenseCategory* was last updated (as a ISO-8601 timestamp)
-    LaukExpenseCategory_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: LaukExpenseCategory List Response
-          items:
-            $ref: '#/components/schemas/LaukExpenseCategory'
     Group_base:
       type: object
       properties:
@@ -1140,23 +1445,6 @@ components:
           type: string
           format: date-time
           description: The time the *Group* was last updated (as a ISO-8601 timestamp)
-    ExpenseCategory_List:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          description: ExpenseCategory List Response
-          items:
-            $ref: '#/components/schemas/ExpenseCategory'
-    ExpenseCategory_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/ExpenseCategory'
 x-tagGroups:
 - name: Api
   tags:
@@ -1176,6 +1464,7 @@ x-tagGroups:
   - Bank Accounts
   - Bank Transactions
   - Bank Transfers
+  - Matter Transfers
 - name: Billing
   tags:
   - Bills
@@ -1185,6 +1474,11 @@ x-tagGroups:
   - Interest Charges
   - Line Items
   - Outstanding Client Balances
+  - Rate Tables
+  - Rate Table Categories
+  - Rate Table Timekeepers
+  - Rate Table Rates
+  - Rate Table Assignments
 - name: Calendars
   tags:
   - Calendars
@@ -1243,6 +1537,7 @@ x-tagGroups:
   - Practice Areas
   - Log Entries
   - Matter Stages
+  - Matter Protected Funds
   - Medical Records Details
   - Medical Records
   - Medical Bills
@@ -1286,3 +1581,8 @@ x-tagGroups:
   - Civil Certificated Rates
   - Criminal Controlled Rates
   - Expense Categories
+- name: General
+  tags:
+  - Safe Custody Packets
+  - Safe Custody Records
+  - Safe Custody Packet Locations

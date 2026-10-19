@@ -1,0 +1,464 @@
+openapi: 3.2.0
+info:
+  title: Clio API Documentation Trust Requests API
+  contact:
+    name: Clio API Support
+    email: api@clio.com
+  description: '# Developer Support and Feedback
+
+    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.'
+  version: v4
+  x-logo:
+    url: https://www.clio.com/wp-content/uploads/2015/05/Container-5-Logo.png
+servers:
+- url: https://app.clio.com/api/v4
+  description: US region Production Server
+- url: https://eu.app.clio.com/api/v4
+  description: Europe region Production Server
+- url: https://ca.app.clio.com/api/v4
+  description: Canada region Production Server
+- url: https://au.app.clio.com/api/v4
+  description: Australia region Production Server
+tags:
+- name: Trust Requests
+  description: ''
+paths:
+  /trust_requests.json:
+    post:
+      tags:
+      - Trust Requests
+      summary: Create a new TrustRequest
+      operationId: TrustRequest#create
+      description: Outlines the parameters and data fields used when creating a new TrustRequest
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/TrustRequest_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        description: Request Body for Trust Requests
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    approved:
+                      type: boolean
+                      description: Whether or not the TrustRequest should be automatically approved.
+                    client_id:
+                      type: integer
+                      format: int64
+                      description: The client_id associated to the TrustRequest
+                    currency_id:
+                      type: integer
+                      format: int64
+                      description: The currency_id associated to the TrustRequest
+                    due_date:
+                      type: string
+                      format: date
+                      description: The date the TrustRequest is due (Expects an ISO-8601 date).
+                    issue_date:
+                      type: string
+                      format: date
+                      description: The date the TrustRequest is issued (Expects an ISO-8601 date).
+                    matter:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            format: int64
+                            description: The matter id associated to the TrustRequest
+                          trust_amount:
+                            type: integer
+                            format: int32
+                            description: The matter level TrustRequest's amount
+                          note:
+                            type: string
+                            description: The client level TrustRequest note
+                    note:
+                      type: string
+                      description: The client level TrustRequest note
+                    trust_amount:
+                      type: number
+                      format: double
+                      description: The TrustRequest's amount
+                    trust_type:
+                      type: string
+                      enum:
+                      - client
+                      - matter
+                      description: The type of TrustRequest
+                  required:
+                  - trust_type
+                  - client_id
+                  - issue_date
+                  - due_date
+                  - approved
+                  - trust_amount
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    approved:
+                      type: boolean
+                      description: Whether or not the TrustRequest should be automatically approved.
+                    client_id:
+                      type: integer
+                      format: int64
+                      description: The client_id associated to the TrustRequest
+                    currency_id:
+                      type: integer
+                      format: int64
+                      description: The currency_id associated to the TrustRequest
+                    due_date:
+                      type: string
+                      format: date
+                      description: The date the TrustRequest is due (Expects an ISO-8601 date).
+                    issue_date:
+                      type: string
+                      format: date
+                      description: The date the TrustRequest is issued (Expects an ISO-8601 date).
+                    matter:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            format: int64
+                            description: The matter id associated to the TrustRequest
+                          trust_amount:
+                            type: integer
+                            format: int32
+                            description: The matter level TrustRequest's amount
+                          note:
+                            type: string
+                            description: The client level TrustRequest note
+                    note:
+                      type: string
+                      description: The client level TrustRequest note
+                    trust_amount:
+                      type: number
+                      format: double
+                      description: The TrustRequest's amount
+                    trust_type:
+                      type: string
+                      enum:
+                      - client
+                      - matter
+                      description: The type of TrustRequest
+                  required:
+                  - trust_type
+                  - client_id
+                  - issue_date
+                  - due_date
+                  - approved
+                  - trust_amount
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    approved:
+                      type: boolean
+                      description: Whether or not the TrustRequest should be automatically approved.
+                    client_id:
+                      type: integer
+                      format: int64
+                      description: The client_id associated to the TrustRequest
+                    currency_id:
+                      type: integer
+                      format: int64
+                      description: The currency_id associated to the TrustRequest
+                    due_date:
+                      type: string
+                      format: date
+                      description: The date the TrustRequest is due (Expects an ISO-8601 date).
+                    issue_date:
+                      type: string
+                      format: date
+                      description: The date the TrustRequest is issued (Expects an ISO-8601 date).
+                    matter:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            format: int64
+                            description: The matter id associated to the TrustRequest
+                          trust_amount:
+                            type: integer
+                            format: int32
+                            description: The matter level TrustRequest's amount
+                          note:
+                            type: string
+                            description: The client level TrustRequest note
+                    note:
+                      type: string
+                      description: The client level TrustRequest note
+                    trust_amount:
+                      type: number
+                      format: double
+                      description: The TrustRequest's amount
+                    trust_type:
+                      type: string
+                      enum:
+                      - client
+                      - matter
+                      description: The type of TrustRequest
+                  required:
+                  - trust_type
+                  - client_id
+                  - issue_date
+                  - due_date
+                  - approved
+                  - trust_amount
+        required: false
+components:
+  schemas:
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    TrustRequest:
+      allOf:
+      - $ref: '#/components/schemas/TrustRequest_base'
+      - type: object
+        properties: {}
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    TrustRequest_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/TrustRequest'
+    TrustRequest_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *TrustRequest*
+        etag:
+          type: string
+          description: ETag for the *TrustRequest*
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *TrustRequest* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *TrustRequest* was last updated (as a ISO-8601 timestamp)
+x-tagGroups:
+- name: Api
+  tags:
+  - Custom Actions
+  - Webhooks
+- name: Activities
+  tags:
+  - Activities
+  - Activity Descriptions
+  - Activity Rates
+  - Expense Categories
+  - Timers
+  - Utbms Codes
+  - Utbms Sets
+- name: Accounting
+  tags:
+  - Bank Accounts
+  - Bank Transactions
+  - Bank Transfers
+- name: Billing
+  tags:
+  - Bills
+  - Billable Clients
+  - Billable Matters
+  - Bill Themes
+  - Interest Charges
+  - Line Items
+  - Outstanding Client Balances
+- name: Calendars
+  tags:
+  - Calendars
+  - Calendar Entries
+  - Calendar Entry Event Types
+  - Calendar Visibilities
+  - Reminders
+- name: Clio Payments
+  tags:
+  - Clio Payments Links
+  - Clio Payments Payments
+- name: Communications
+  tags:
+  - Communications
+  - Conversations
+  - Conversation Messages
+- name: Contacts
+  tags:
+  - Contacts
+  - Email Addresses
+  - Phone Numbers
+  - Notes
+  - Log Entries
+- name: Court Rules
+  tags:
+  - Jurisdictions To Triggers
+  - Jurisdictions
+  - Matter Dockets
+  - Service Types
+- name: Custom Fields
+  tags:
+  - Custom Fields
+  - Custom Field Sets
+- name: Documents
+  tags:
+  - Documents
+  - Document Versions
+  - Folders
+  - Document Archives
+  - Document Automations
+  - Document Categories
+  - Document Templates
+  - Comments
+- name: In-app Notifications
+  tags:
+  - My Events
+  - Event Metrics
+- name: Matters
+  tags:
+  - Matters
+  - Relationships
+  - Clients
+  - Related Contacts
+  - Matter Contacts
+  - Notes
+  - Practice Areas
+  - Log Entries
+  - Matter Stages
+  - Medical Records Details
+  - Medical Records
+  - Medical Bills
+  - Damages
+- name: Payments
+  tags:
+  - Allocations
+  - Credit Memos
+- name: Reporting
+  tags:
+  - Reports
+  - Report Presets
+  - Report Schedules
+- name: Settings
+  tags:
+  - Text Snippets
+  - Billing Settings
+  - Currencies
+  - Tax Rate Configurations
+- name: Tasks
+  tags:
+  - Tasks
+  - Task Templates
+  - Task Template Lists
+  - Task Types
+- name: Trust
+  tags:
+  - Trust Line Items
+  - Trust Requests
+- name: Users
+  tags:
+  - Users
+  - Groups
+- name: Legal Aid US
+  tags:
+  - Grants
+  - Grant Funding Sources
+- name: Legal Aid England & Wales
+  tags:
+  - Civil Controlled Rates
+  - Civil Certificated Rates
+  - Criminal Controlled Rates
+  - Expense Categories

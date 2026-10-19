@@ -1,0 +1,1519 @@
+openapi: 3.2.0
+info:
+  title: Clio API Documentation Safe Custody Records API
+  contact:
+    name: Clio API Support
+    email: api@clio.com
+  description: '# Developer Support and Feedback
+
+    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.
+
+    * For business and partnership inquiries, contact our API Partnerships team at api.partnerships@clio.com.
+
+    * For best practices and tips from the Clio development community, join the conversation in the Clio Developer Slack Channel.
+
+
+    A community-driven Clio Developers Stack Overflow Group also exists where you can connect and ask questions from other Clio API users.
+
+    # Getting Started
+
+    > **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).
+
+    >
+
+    > Likewise, the developer portal is available at region-specific links for the Australia, Canada, EU, and US regions.
+
+    >
+
+    > This document assumes the US region is being used (app.clio.com). If you''re building in one of the other regions, you should adapt the links and examples as necessary.
+
+
+    To start building on the Clio API, you’ll need a Clio account – you can review our Developer Handbook and follow the steps to sign up for an account.
+
+
+    Once you have an account, you can create a developer application from the Developer Portal and start building!
+
+    # Authorization with OAuth 2.0
+
+    See our Authorization documentation →
+
+    # Permissions
+
+    See our Permissions documentation →
+
+    # Fields
+
+    See our Fields documentation →
+
+    # Rate Limiting
+
+    See our Rate Limits documentation →
+
+    # Paging
+
+    See our Pagination documentation →
+
+    # ETags
+
+    See our ETags documentation →
+
+    # Minor Versions
+
+    API v4 supports multiple minor versions. Versions are of the form ''4.X.Y''. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you''re requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.
+
+
+    An `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.
+
+
+    You can find our API Versioning Policy and Guidelines in our documentation hub.
+
+
+    The API Changelog explains each version''s changes in further detail.
+
+    ### 4.0.4
+
+
+    * Update `quantity` field to return values in seconds rather than hours for Activities
+
+
+    ### 4.0.5
+
+
+    * Remove `matter_balances` field from Bills
+
+    * Standardize status/state enum values
+
+    * Add a Document association to completed DocumentAutomations
+
+    * Add rate visibility handling for Activity''s price and total
+
+
+    ### 4.0.6
+
+
+    * Remove `document_versions` collection field from Documents
+
+
+    ### 4.0.7
+
+
+    * Change secure link format
+
+
+    ### 4.0.8
+
+
+    * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user
+
+    * Add `quantity_redacted` field to activities
+
+
+    ### 4.0.9
+
+
+    * Contacts are filtered and redacted in the response based on the new ''Contacts Visibility'' user permission setting.
+
+
+    ### 4.0.10
+
+
+    * Fixed validation of `type` query parameter when querying Notes
+
+
+    ### 4.0.12
+
+
+    * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers
+
+
+    ### 4.0.13
+
+
+    **This is the default version**
+
+
+    * Add association limits to Contacts
+
+    * Returns 422 Unprocessable Entity when association limits are exceeded'
+  version: v4
+  x-logo:
+    url: https://www.clio.com/wp-content/uploads/2015/05/Container-5-Logo.png
+servers:
+- url: https://app.clio.com/api/v4
+  description: US region Production Server
+- url: https://eu.app.clio.com/api/v4
+  description: Europe region Production Server
+- url: https://ca.app.clio.com/api/v4
+  description: Canada region Production Server
+- url: https://au.app.clio.com/api/v4
+  description: Australia region Production Server
+tags:
+- name: Safe Custody Records
+  description: ''
+paths:
+  /safe_custody/records/{id}/state_changes.json:
+    post:
+      tags:
+      - Safe Custody Records
+      summary: Transition the custody state of a SafeCustodyRecord
+      operationId: SafeCustodyRecord#state_changes
+      description: 'Records a custody state transition for the record (`held`, `temporarily_removed` or `removed`) as a new SafeCustodyRecordState.
+
+        Transitions are validated against the record''s state machine; an unsupported transition returns `422`.
+
+        Records cannot be moved between packets.'
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The unique identifier for the SafeCustodyRecord.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SafeCustodyRecordState_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        description: Request Body for Records
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    actor_id:
+                      type: integer
+                      format: int64
+                      description: The unique identifier of the actor (a user or contact) associated with the state change.
+                    actor_type:
+                      type: integer
+                      format: int32
+                      enum:
+                      - 1
+                      - 2
+                      description: 'The type of actor: 1 for a user, 2 for a contact.'
+                    date:
+                      type: string
+                      format: date
+                      description: The date of the state change (ISO-8601). Defaults to the record's stored_on date.
+                    reason:
+                      type: string
+                      description: The reason for the state change.
+                    state:
+                      type: string
+                      enum:
+                      - held
+                      - temporarily_removed
+                      - removed
+                      description: The custody state to transition to.
+                  required:
+                  - state
+                  - actor_id
+                  - actor_type
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    actor_id:
+                      type: integer
+                      format: int64
+                      description: The unique identifier of the actor (a user or contact) associated with the state change.
+                    actor_type:
+                      type: integer
+                      format: int32
+                      enum:
+                      - 1
+                      - 2
+                      description: 'The type of actor: 1 for a user, 2 for a contact.'
+                    date:
+                      type: string
+                      format: date
+                      description: The date of the state change (ISO-8601). Defaults to the record's stored_on date.
+                    reason:
+                      type: string
+                      description: The reason for the state change.
+                    state:
+                      type: string
+                      enum:
+                      - held
+                      - temporarily_removed
+                      - removed
+                      description: The custody state to transition to.
+                  required:
+                  - state
+                  - actor_id
+                  - actor_type
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    actor_id:
+                      type: integer
+                      format: int64
+                      description: The unique identifier of the actor (a user or contact) associated with the state change.
+                    actor_type:
+                      type: integer
+                      format: int32
+                      enum:
+                      - 1
+                      - 2
+                      description: 'The type of actor: 1 for a user, 2 for a contact.'
+                    date:
+                      type: string
+                      format: date
+                      description: The date of the state change (ISO-8601). Defaults to the record's stored_on date.
+                    reason:
+                      type: string
+                      description: The reason for the state change.
+                    state:
+                      type: string
+                      enum:
+                      - held
+                      - temporarily_removed
+                      - removed
+                      description: The custody state to transition to.
+                  required:
+                  - state
+                  - actor_id
+                  - actor_type
+        required: false
+  /safe_custody/records.json:
+    get:
+      tags:
+      - Safe Custody Records
+      summary: Return the data for all SafeCustodyRecords
+      operationId: SafeCustodyRecord#index
+      description: Outlines the parameters, optional and required, used when requesting the data for all SafeCustodyRecords
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: created_since
+        in: query
+        description: Filter SafeCustodyRecord records to those having the `created_at` field after a specific time. (Expects an ISO-8601 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: ids[]
+        in: query
+        description: Filter SafeCustodyRecord records to those having the specified unique identifiers.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: 'A limit on the number of SafeCustodyRecord records to be returned. Limit can range between 1 and 200. Default: `200`.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: packet_id
+        in: query
+        description: Filter SafeCustodyRecord records to those belonging to the packet with the given ID.
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: page_token
+        in: query
+        description: A token specifying which page to return.
+        required: false
+        schema:
+          type: string
+      - name: state
+        in: query
+        description: Filter SafeCustodyRecord records by custody state (`held`, `temporarily_removed` or `removed`). Use `all` to include every state.
+        required: false
+        schema:
+          type: string
+          enum:
+          - held
+          - temporarily_removed
+          - removed
+      - name: updated_since
+        in: query
+        description: Filter SafeCustodyRecord records to those having the `updated_at` field after a specific time. (Expects an ISO-8601 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SafeCustodyRecord_List'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+      - Safe Custody Records
+      summary: Create a new SafeCustodyRecord
+      operationId: SafeCustodyRecord#create
+      description: Outlines the parameters and data fields used when creating a new SafeCustodyRecord
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SafeCustodyRecord_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        description: Request Body for Records
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    date:
+                      type: string
+                      format: date
+                      description: The date shown on the physical document itself (ISO-8601).
+                    description:
+                      type: string
+                      description: Free-text description of the record.
+                    document_type:
+                      type: string
+                      enum:
+                      - abn_registration_confirmations
+                      - acknowledgement
+                      - agreement
+                      - agreement_for_sale
+                      - appointment_of_enduring_guardianship
+                      - birth_death_marriage_certificate
+                      - boe
+                      - building_certificate
+                      - care_registration_papers
+                      - certificate_of_title
+                      - client_instructions
+                      - common_seal
+                      - conveyance
+                      - crop_lien
+                      - crown_land_lease
+                      - death_certificate
+                      - deed
+                      - deed_of_family_arrangement
+                      - deep_poll
+                      - divorce_order
+                      - email
+                      - file_note
+                      - grant_of_probate
+                      - guarantee
+                      - guardianship_appointment
+                      - insurance_policy
+                      - lease
+                      - letter_sealed_envelope
+                      - medical_authority
+                      - memo_articles_of_association
+                      - minutes
+                      - miscellaneous
+                      - mortgage_bill_of_sale
+                      - other
+                      - partnership_agreement
+                      - photographs
+                      - power_of_attorney
+                      - power_of_enduring_guardianship
+                      - probate
+                      - registration_of_business_name
+                      - search
+                      - share_certificate
+                      - sharefarming_agreement
+                      - statutory_declaration
+                      - survey_certificate
+                      - tenancy_agreement
+                      - transfer
+                      - transfer_of_legal_file_authority
+                      - transfer_returned
+                      - trust_deed
+                      - valuation
+                      - water_licence
+                      - will
+                      - will_codicil_poa_peg
+                      - xref
+                      - verification_of_identity
+                      - certificate
+                      - letter
+                      - affidavit
+                      - settlement
+                      description: The type of physical document (e.g. will, deed, certificate_of_title). Defaults to other.
+                    reason:
+                      type: string
+                      description: The reason recorded against the record's initial custody state. Only used on creation.
+                    safe_custody_packet_id:
+                      type: integer
+                      format: int64
+                      description: The unique identifier of the packet this record belongs to. Records cannot be moved between packets once created.
+                    state:
+                      type: string
+                      enum:
+                      - held
+                      - temporarily_removed
+                      - removed
+                      description: The initial custody state of the record. Defaults to held. Only used on creation.
+                    stored_on:
+                      type: string
+                      format: date
+                      description: The date the document was received/stored (ISO-8601). Defaults to the current date.
+                    title:
+                      type: string
+                      description: The title of the record.
+                  required:
+                  - safe_custody_packet_id
+                  - title
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    date:
+                      type: string
+                      format: date
+                      description: The date shown on the physical document itself (ISO-8601).
+                    description:
+                      type: string
+                      description: Free-text description of the record.
+                    document_type:
+                      type: string
+                      enum:
+                      - abn_registration_confirmations
+                      - acknowledgement
+                      - agreement
+                      - agreement_for_sale
+                      - appointment_of_enduring_guardianship
+                      - birth_death_marriage_certificate
+                      - boe
+                      - building_certificate
+                      - care_registration_papers
+                      - certificate_of_title
+                      - client_instructions
+                      - common_seal
+                      - conveyance
+                      - crop_lien
+                      - crown_land_lease
+                      - death_certificate
+                      - deed
+                      - deed_of_family_arrangement
+                      - deep_poll
+                      - divorce_order
+                      - email
+                      - file_note
+                      - grant_of_probate
+                      - guarantee
+                      - guardianship_appointment
+                      - insurance_policy
+                      - lease
+                      - letter_sealed_envelope
+                      - medical_authority
+                      - memo_articles_of_association
+                      - minutes
+                      - miscellaneous
+                      - mortgage_bill_of_sale
+                      - other
+                      - partnership_agreement
+                      - photographs
+                      - power_of_attorney
+                      - power_of_enduring_guardianship
+                      - probate
+                      - registration_of_business_name
+                      - search
+                      - share_certificate
+                      - sharefarming_agreement
+                      - statutory_declaration
+                      - survey_certificate
+                      - tenancy_agreement
+                      - transfer
+                      - transfer_of_legal_file_authority
+                      - transfer_returned
+                      - trust_deed
+                      - valuation
+                      - water_licence
+                      - will
+                      - will_codicil_poa_peg
+                      - xref
+                      - verification_of_identity
+                      - certificate
+                      - letter
+                      - affidavit
+                      - settlement
+                      description: The type of physical document (e.g. will, deed, certificate_of_title). Defaults to other.
+                    reason:
+                      type: string
+                      description: The reason recorded against the record's initial custody state. Only used on creation.
+                    safe_custody_packet_id:
+                      type: integer
+                      format: int64
+                      description: The unique identifier of the packet this record belongs to. Records cannot be moved between packets once created.
+                    state:
+                      type: string
+                      enum:
+                      - held
+                      - temporarily_removed
+                      - removed
+                      description: The initial custody state of the record. Defaults to held. Only used on creation.
+                    stored_on:
+                      type: string
+                      format: date
+                      description: The date the document was received/stored (ISO-8601). Defaults to the current date.
+                    title:
+                      type: string
+                      description: The title of the record.
+                  required:
+                  - safe_custody_packet_id
+                  - title
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    date:
+                      type: string
+                      format: date
+                      description: The date shown on the physical document itself (ISO-8601).
+                    description:
+                      type: string
+                      description: Free-text description of the record.
+                    document_type:
+                      type: string
+                      enum:
+                      - abn_registration_confirmations
+                      - acknowledgement
+                      - agreement
+                      - agreement_for_sale
+                      - appointment_of_enduring_guardianship
+                      - birth_death_marriage_certificate
+                      - boe
+                      - building_certificate
+                      - care_registration_papers
+                      - certificate_of_title
+                      - client_instructions
+                      - common_seal
+                      - conveyance
+                      - crop_lien
+                      - crown_land_lease
+                      - death_certificate
+                      - deed
+                      - deed_of_family_arrangement
+                      - deep_poll
+                      - divorce_order
+                      - email
+                      - file_note
+                      - grant_of_probate
+                      - guarantee
+                      - guardianship_appointment
+                      - insurance_policy
+                      - lease
+                      - letter_sealed_envelope
+                      - medical_authority
+                      - memo_articles_of_association
+                      - minutes
+                      - miscellaneous
+                      - mortgage_bill_of_sale
+                      - other
+                      - partnership_agreement
+                      - photographs
+                      - power_of_attorney
+                      - power_of_enduring_guardianship
+                      - probate
+                      - registration_of_business_name
+                      - search
+                      - share_certificate
+                      - sharefarming_agreement
+                      - statutory_declaration
+                      - survey_certificate
+                      - tenancy_agreement
+                      - transfer
+                      - transfer_of_legal_file_authority
+                      - transfer_returned
+                      - trust_deed
+                      - valuation
+                      - water_licence
+                      - will
+                      - will_codicil_poa_peg
+                      - xref
+                      - verification_of_identity
+                      - certificate
+                      - letter
+                      - affidavit
+                      - settlement
+                      description: The type of physical document (e.g. will, deed, certificate_of_title). Defaults to other.
+                    reason:
+                      type: string
+                      description: The reason recorded against the record's initial custody state. Only used on creation.
+                    safe_custody_packet_id:
+                      type: integer
+                      format: int64
+                      description: The unique identifier of the packet this record belongs to. Records cannot be moved between packets once created.
+                    state:
+                      type: string
+                      enum:
+                      - held
+                      - temporarily_removed
+                      - removed
+                      description: The initial custody state of the record. Defaults to held. Only used on creation.
+                    stored_on:
+                      type: string
+                      format: date
+                      description: The date the document was received/stored (ISO-8601). Defaults to the current date.
+                    title:
+                      type: string
+                      description: The title of the record.
+                  required:
+                  - safe_custody_packet_id
+                  - title
+        required: false
+  /safe_custody/records/{id}.json:
+    get:
+      tags:
+      - Safe Custody Records
+      summary: Return the data for a single SafeCustodyRecord
+      operationId: SafeCustodyRecord#show
+      description: Outlines the parameters, optional and required, used when requesting the data for a single SafeCustodyRecord
+      parameters:
+      - name: IF-MODIFIED-SINCE
+        in: header
+        description: The server will send the requested resource with a 200 status, but only if it has been modified after the given date. (Expects an RFC 2822 timestamp).
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: IF-NONE-MATCH
+        in: header
+        description: The server will send the requested resource with a 200 status, but only if the existing resource's [ETag](#section/ETags) doesn't match any of the values listed.
+        required: false
+        schema:
+          type: string
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The unique identifier for the SafeCustodyRecord.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SafeCustodyRecord_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '304':
+          description: Not Modified
+    patch:
+      tags:
+      - Safe Custody Records
+      summary: Update a single SafeCustodyRecord
+      operationId: SafeCustodyRecord#update
+      description: Outlines the parameters and data fields used when updating a single SafeCustodyRecord
+      parameters:
+      - name: IF-MATCH
+        in: header
+        description: The server will update the requested resource and send back a 200 status, but only if value in the header matches the existing resource's [ETag](#section/ETags).
+        required: false
+        schema:
+          type: string
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The unique identifier for the SafeCustodyRecord.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SafeCustodyRecord_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '412':
+          description: Precondition Failed
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        description: Request Body for Records
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    date:
+                      type: string
+                      format: date
+                      description: The date shown on the physical document itself (ISO-8601).
+                    description:
+                      type: string
+                      description: Free-text description of the record.
+                    document_type:
+                      type: string
+                      enum:
+                      - abn_registration_confirmations
+                      - acknowledgement
+                      - agreement
+                      - agreement_for_sale
+                      - appointment_of_enduring_guardianship
+                      - birth_death_marriage_certificate
+                      - boe
+                      - building_certificate
+                      - care_registration_papers
+                      - certificate_of_title
+                      - client_instructions
+                      - common_seal
+                      - conveyance
+                      - crop_lien
+                      - crown_land_lease
+                      - death_certificate
+                      - deed
+                      - deed_of_family_arrangement
+                      - deep_poll
+                      - divorce_order
+                      - email
+                      - file_note
+                      - grant_of_probate
+                      - guarantee
+                      - guardianship_appointment
+                      - insurance_policy
+                      - lease
+                      - letter_sealed_envelope
+                      - medical_authority
+                      - memo_articles_of_association
+                      - minutes
+                      - miscellaneous
+                      - mortgage_bill_of_sale
+                      - other
+                      - partnership_agreement
+                      - photographs
+                      - power_of_attorney
+                      - power_of_enduring_guardianship
+                      - probate
+                      - registration_of_business_name
+                      - search
+                      - share_certificate
+                      - sharefarming_agreement
+                      - statutory_declaration
+                      - survey_certificate
+                      - tenancy_agreement
+                      - transfer
+                      - transfer_of_legal_file_authority
+                      - transfer_returned
+                      - trust_deed
+                      - valuation
+                      - water_licence
+                      - will
+                      - will_codicil_poa_peg
+                      - xref
+                      - verification_of_identity
+                      - certificate
+                      - letter
+                      - affidavit
+                      - settlement
+                      description: The type of physical document (e.g. will, deed, certificate_of_title). Defaults to other.
+                    stored_on:
+                      type: string
+                      format: date
+                      description: The date the document was received/stored (ISO-8601). Defaults to the current date.
+                    title:
+                      type: string
+                      description: The title of the record.
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    date:
+                      type: string
+                      format: date
+                      description: The date shown on the physical document itself (ISO-8601).
+                    description:
+                      type: string
+                      description: Free-text description of the record.
+                    document_type:
+                      type: string
+                      enum:
+                      - abn_registration_confirmations
+                      - acknowledgement
+                      - agreement
+                      - agreement_for_sale
+                      - appointment_of_enduring_guardianship
+                      - birth_death_marriage_certificate
+                      - boe
+                      - building_certificate
+                      - care_registration_papers
+                      - certificate_of_title
+                      - client_instructions
+                      - common_seal
+                      - conveyance
+                      - crop_lien
+                      - crown_land_lease
+                      - death_certificate
+                      - deed
+                      - deed_of_family_arrangement
+                      - deep_poll
+                      - divorce_order
+                      - email
+                      - file_note
+                      - grant_of_probate
+                      - guarantee
+                      - guardianship_appointment
+                      - insurance_policy
+                      - lease
+                      - letter_sealed_envelope
+                      - medical_authority
+                      - memo_articles_of_association
+                      - minutes
+                      - miscellaneous
+                      - mortgage_bill_of_sale
+                      - other
+                      - partnership_agreement
+                      - photographs
+                      - power_of_attorney
+                      - power_of_enduring_guardianship
+                      - probate
+                      - registration_of_business_name
+                      - search
+                      - share_certificate
+                      - sharefarming_agreement
+                      - statutory_declaration
+                      - survey_certificate
+                      - tenancy_agreement
+                      - transfer
+                      - transfer_of_legal_file_authority
+                      - transfer_returned
+                      - trust_deed
+                      - valuation
+                      - water_licence
+                      - will
+                      - will_codicil_poa_peg
+                      - xref
+                      - verification_of_identity
+                      - certificate
+                      - letter
+                      - affidavit
+                      - settlement
+                      description: The type of physical document (e.g. will, deed, certificate_of_title). Defaults to other.
+                    stored_on:
+                      type: string
+                      format: date
+                      description: The date the document was received/stored (ISO-8601). Defaults to the current date.
+                    title:
+                      type: string
+                      description: The title of the record.
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    date:
+                      type: string
+                      format: date
+                      description: The date shown on the physical document itself (ISO-8601).
+                    description:
+                      type: string
+                      description: Free-text description of the record.
+                    document_type:
+                      type: string
+                      enum:
+                      - abn_registration_confirmations
+                      - acknowledgement
+                      - agreement
+                      - agreement_for_sale
+                      - appointment_of_enduring_guardianship
+                      - birth_death_marriage_certificate
+                      - boe
+                      - building_certificate
+                      - care_registration_papers
+                      - certificate_of_title
+                      - client_instructions
+                      - common_seal
+                      - conveyance
+                      - crop_lien
+                      - crown_land_lease
+                      - death_certificate
+                      - deed
+                      - deed_of_family_arrangement
+                      - deep_poll
+                      - divorce_order
+                      - email
+                      - file_note
+                      - grant_of_probate
+                      - guarantee
+                      - guardianship_appointment
+                      - insurance_policy
+                      - lease
+                      - letter_sealed_envelope
+                      - medical_authority
+                      - memo_articles_of_association
+                      - minutes
+                      - miscellaneous
+                      - mortgage_bill_of_sale
+                      - other
+                      - partnership_agreement
+                      - photographs
+                      - power_of_attorney
+                      - power_of_enduring_guardianship
+                      - probate
+                      - registration_of_business_name
+                      - search
+                      - share_certificate
+                      - sharefarming_agreement
+                      - statutory_declaration
+                      - survey_certificate
+                      - tenancy_agreement
+                      - transfer
+                      - transfer_of_legal_file_authority
+                      - transfer_returned
+                      - trust_deed
+                      - valuation
+                      - water_licence
+                      - will
+                      - will_codicil_poa_peg
+                      - xref
+                      - verification_of_identity
+                      - certificate
+                      - letter
+                      - affidavit
+                      - settlement
+                      description: The type of physical document (e.g. will, deed, certificate_of_title). Defaults to other.
+                    stored_on:
+                      type: string
+                      format: date
+                      description: The date the document was received/stored (ISO-8601). Defaults to the current date.
+                    title:
+                      type: string
+                      description: The title of the record.
+        required: false
+components:
+  schemas:
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    SafeCustodyRecord_base:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *SafeCustodyRecord* was created (as a ISO-8601 timestamp)
+        date:
+          type: string
+          format: date
+          description: The date shown on the physical document itself (as an ISO-8601 date)
+        description:
+          type: string
+          description: Free-text description of the *SafeCustodyRecord*
+        document_type_name:
+          type: string
+          description: The human-readable type of the physical document
+        etag:
+          type: string
+          description: ETag for the *SafeCustodyRecord*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *SafeCustodyRecord*
+        stored_on:
+          type: string
+          format: date
+          description: The date the document was received or stored (as an ISO-8601 date)
+        title:
+          type: string
+          description: The title of the *SafeCustodyRecord*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *SafeCustodyRecord* was last updated (as a ISO-8601 timestamp)
+    SafeCustodyRecord:
+      allOf:
+      - $ref: '#/components/schemas/SafeCustodyRecord_base'
+      - type: object
+        properties:
+          packet:
+            $ref: '#/components/schemas/SafeCustodyRecord_SafeCustodyPacket_base'
+            description: SafeCustodyPacket
+    SafeCustodyRecord_SafeCustodyPacket_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *SafeCustodyPacket*
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    SafeCustodyRecordState_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/SafeCustodyRecordState'
+    SafeCustodyRecord_List:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          description: SafeCustodyRecord List Response
+          items:
+            $ref: '#/components/schemas/SafeCustodyRecord'
+    SafeCustodyRecordState_base:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *SafeCustodyRecordState* was created (as a ISO-8601 timestamp)
+        date:
+          type: string
+          format: date
+          description: The date shown on the physical document itself (as an ISO-8601 date)
+        etag:
+          type: string
+          description: ETag for the *SafeCustodyRecordState*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *SafeCustodyRecordState*
+        reason:
+          type: string
+          description: The reason recorded against the custody state change
+        state:
+          type: string
+          description: The current custody state of the record (held, temporarily_removed or removed)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *SafeCustodyRecordState* was last updated (as a ISO-8601 timestamp)
+    SafeCustodyRecord_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/SafeCustodyRecord'
+    SafeCustodyRecordState:
+      allOf:
+      - $ref: '#/components/schemas/SafeCustodyRecordState_base'
+      - type: object
+        properties: {}
+x-tagGroups:
+- name: Api
+  tags:
+  - Custom Actions
+  - Webhooks
+- name: Activities
+  tags:
+  - Activities
+  - Activity Descriptions
+  - Activity Rates
+  - Expense Categories
+  - Timers
+  - Utbms Codes
+  - Utbms Sets
+- name: Accounting
+  tags:
+  - Bank Accounts
+  - Bank Transactions
+  - Bank Transfers
+  - Matter Transfers
+- name: Billing
+  tags:
+  - Bills
+  - Billable Clients
+  - Billable Matters
+  - Bill Themes
+  - Interest Charges
+  - Line Items
+  - Outstanding Client Balances
+  - Rate Tables
+  - Rate Table Categories
+  - Rate Table Timekeepers
+  - Rate Table Rates
+  - Rate Table Assignments
+- name: Calendars
+  tags:
+  - Calendars
+  - Calendar Entries
+  - Calendar Entry Event Types
+  - Calendar Visibilities
+  - Reminders
+- name: Clio Payments
+  tags:
+  - Clio Payments Links
+  - Clio Payments Payments
+- name: Communications
+  tags:
+  - Communications
+  - Conversations
+  - Conversation Messages
+- name: Contacts
+  tags:
+  - Contacts
+  - Email Addresses
+  - Phone Numbers
+  - Notes
+  - Log Entries
+- name: Court Rules
+  tags:
+  - Jurisdictions To Triggers
+  - Jurisdictions
+  - Matter Dockets
+  - Service Types
+- name: Custom Fields
+  tags:
+  - Custom Fields
+  - Custom Field Sets
+- name: Documents
+  tags:
+  - Documents
+  - Document Versions
+  - Folders
+  - Document Archives
+  - Document Automations
+  - Document Categories
+  - Document Templates
+  - Comments
+- name: In-app Notifications
+  tags:
+  - My Events
+  - Event Metrics
+- name: Matters
+  tags:
+  - Matters
+  - Relationships
+  - Clients
+  - Related Contacts
+  - Matter Contacts
+  - Notes
+  - Practice Areas
+  - Log Entries
+  - Matter Stages
+  - Matter Protected Funds
+  - Medical Records Details
+  - Medical Records
+  - Medical Bills
+  - Damages
+- name: Payments
+  tags:
+  - Allocations
+  - Credit Memos
+- name: Reporting
+  tags:
+  - Reports
+  - Report Presets
+  - Report Schedules
+- name: Settings
+  tags:
+  - Text Snippets
+  - Billing Settings
+  - Currencies
+  - Tax Rate Configurations
+- name: Tasks
+  tags:
+  - Tasks
+  - Task Templates
+  - Task Template Lists
+  - Task Types
+- name: Trust
+  tags:
+  - Trust Line Items
+  - Trust Requests
+- name: Users
+  tags:
+  - Users
+  - Groups
+- name: Legal Aid US
+  tags:
+  - Grants
+  - Grant Funding Sources
+- name: Legal Aid England & Wales
+  tags:
+  - Civil Controlled Rates
+  - Civil Certificated Rates
+  - Criminal Controlled Rates
+  - Expense Categories
+- name: General
+  tags:
+  - Safe Custody Packets
+  - Safe Custody Records
+  - Safe Custody Packet Locations

@@ -1,0 +1,715 @@
+openapi: 3.2.0
+info:
+  title: Clio API Documentation Rate Table Rates API
+  contact:
+    name: Clio API Support
+    email: api@clio.com
+  description: '# Developer Support and Feedback
+
+    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.
+
+    * For business and partnership inquiries, contact our API Partnerships team at api.partnerships@clio.com.
+
+    * For best practices and tips from the Clio development community, join the conversation in the Clio Developer Slack Channel.
+
+
+    A community-driven Clio Developers Stack Overflow Group also exists where you can connect and ask questions from other Clio API users.
+
+    # Getting Started
+
+    > **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).
+
+    >
+
+    > Likewise, the developer portal is available at region-specific links for the Australia, Canada, EU, and US regions.
+
+    >
+
+    > This document assumes the US region is being used (app.clio.com). If you''re building in one of the other regions, you should adapt the links and examples as necessary.
+
+
+    To start building on the Clio API, you’ll need a Clio account – you can review our Developer Handbook and follow the steps to sign up for an account.
+
+
+    Once you have an account, you can create a developer application from the Developer Portal and start building!
+
+    # Authorization with OAuth 2.0
+
+    See our Authorization documentation →
+
+    # Permissions
+
+    See our Permissions documentation →
+
+    # Fields
+
+    See our Fields documentation →
+
+    # Rate Limiting
+
+    See our Rate Limits documentation →
+
+    # Paging
+
+    See our Pagination documentation →
+
+    # ETags
+
+    See our ETags documentation →
+
+    # Minor Versions
+
+    API v4 supports multiple minor versions. Versions are of the form ''4.X.Y''. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you''re requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.
+
+
+    An `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.
+
+
+    You can find our API Versioning Policy and Guidelines in our documentation hub.
+
+
+    The API Changelog explains each version''s changes in further detail.
+
+    ### 4.0.4
+
+
+    * Update `quantity` field to return values in seconds rather than hours for Activities
+
+
+    ### 4.0.5
+
+
+    * Remove `matter_balances` field from Bills
+
+    * Standardize status/state enum values
+
+    * Add a Document association to completed DocumentAutomations
+
+    * Add rate visibility handling for Activity''s price and total
+
+
+    ### 4.0.6
+
+
+    * Remove `document_versions` collection field from Documents
+
+
+    ### 4.0.7
+
+
+    * Change secure link format
+
+
+    ### 4.0.8
+
+
+    * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user
+
+    * Add `quantity_redacted` field to activities
+
+
+    ### 4.0.9
+
+
+    * Contacts are filtered and redacted in the response based on the new ''Contacts Visibility'' user permission setting.
+
+
+    ### 4.0.10
+
+
+    * Fixed validation of `type` query parameter when querying Notes
+
+
+    ### 4.0.12
+
+
+    * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers
+
+
+    ### 4.0.13
+
+
+    **This is the default version**
+
+
+    * Add association limits to Contacts
+
+    * Returns 422 Unprocessable Entity when association limits are exceeded'
+  version: v4
+  x-logo:
+    url: https://www.clio.com/wp-content/uploads/2015/05/Container-5-Logo.png
+servers:
+- url: https://app.clio.com/api/v4
+  description: US region Production Server
+- url: https://eu.app.clio.com/api/v4
+  description: Europe region Production Server
+- url: https://ca.app.clio.com/api/v4
+  description: Canada region Production Server
+- url: https://au.app.clio.com/api/v4
+  description: Australia region Production Server
+tags:
+- name: Rate Table Rates
+  description: A rate is what a timekeeper bills for one rate table category, from a date. This endpoint sets a timekeeper's rate in a category from today or a future date, one at a time or up to 200 at once with `X-BULK`. Scheduling a later rate ends the current one the day before. List the timekeepers who can be given rates with the Rate Table Timekeepers endpoints.
+paths:
+  /rate_table_rates.json:
+    post:
+      tags:
+      - Rate Table Rates
+      summary: Set a timekeeper's rate in a rate table category from a date
+      operationId: RateTableRate#create
+      description: 'Sets a timekeeper''s rate in a Rate Table category from `effective_from`. `rate_table_category` must be a category on `rate_table`. If a rate already starts on that date it''s replaced; otherwise a new rate is added, the rate before it now ends the day before, and the new rate runs until the next rate starts. A scheduled removal of the timekeeper from the table is kept. `effective_from` defaults to today and can''t be in the past, and an existing rate''s date can''t be moved: set a rate on the new date instead. `rate` is required; `null` clears the timekeeper''s rate from that date, so billing falls back to the next rate source. `effective_until` is worked out from the timeline and can''t be set; it''s ignored if sent. The timekeeper must already be on the Rate Table on `effective_from`; add them with the Rate Table Timekeepers endpoint first.
+
+
+        Send up to 200 rates at once as an array with the `X-BULK: true` header. The whole payload is checked first: if any item is invalid, nothing is saved and the `422` response lists each bad item by its position in `data`. Otherwise the response is `202 Accepted` and the rates are saved in the background; items sent without `effective_from` all start on the date they were checked against. Poll the bulk action, whose id is in the `X-Bulk-Action` header, for the results, which hold one result per item, in request order. The table can change between the check and the save, so a completed bulk action can still contain failed items: check each item''s `status`.'
+      parameters:
+      - name: X-API-VERSION
+        in: header
+        description: 'The [API minor version](#section/Minor-Versions). Default: latest version.'
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: The fields to be returned. See response samples for what fields are available. For more information see the [fields section](#section/Fields).
+        required: false
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/RateTableRate_Show'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        description: Request Body for Rate Table Rates
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    effective_from:
+                      type: string
+                      format: date
+                      description: 'The date the rate starts, in YYYY-MM-DD format. Can''t be in the past. If a rate already starts on this date it''s replaced. Default: today.'
+                    rate:
+                      type: number
+                      format: decimal
+                      description: The hourly rate, in the Rate Table's currency. Required. Use `null` to clear the timekeeper's rate from `effective_from`, so billing falls back to the next rate source.
+                    rate_table:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single RateTable associated with the RateTableRate. The keyword `null` is not valid for this field.
+                      required:
+                      - id
+                    rate_table_category:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single RateTableCategory associated with the RateTableRate. The keyword `null` is not valid for this field.
+                      required:
+                      - id
+                    timekeeper:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single User associated with the RateTableRate. The keyword `null` is not valid for this field.
+                      required:
+                      - id
+                  required:
+                  - rate_table
+                  - rate_table_category
+                  - timekeeper
+                  - rate
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    effective_from:
+                      type: string
+                      format: date
+                      description: 'The date the rate starts, in YYYY-MM-DD format. Can''t be in the past. If a rate already starts on this date it''s replaced. Default: today.'
+                    rate:
+                      type: number
+                      format: decimal
+                      description: The hourly rate, in the Rate Table's currency. Required. Use `null` to clear the timekeeper's rate from `effective_from`, so billing falls back to the next rate source.
+                    rate_table:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single RateTable associated with the RateTableRate. The keyword `null` is not valid for this field.
+                      required:
+                      - id
+                    rate_table_category:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single RateTableCategory associated with the RateTableRate. The keyword `null` is not valid for this field.
+                      required:
+                      - id
+                    timekeeper:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single User associated with the RateTableRate. The keyword `null` is not valid for this field.
+                      required:
+                      - id
+                  required:
+                  - rate_table
+                  - rate_table_category
+                  - timekeeper
+                  - rate
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  properties:
+                    effective_from:
+                      type: string
+                      format: date
+                      description: 'The date the rate starts, in YYYY-MM-DD format. Can''t be in the past. If a rate already starts on this date it''s replaced. Default: today.'
+                    rate:
+                      type: number
+                      format: decimal
+                      description: The hourly rate, in the Rate Table's currency. Required. Use `null` to clear the timekeeper's rate from `effective_from`, so billing falls back to the next rate source.
+                    rate_table:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single RateTable associated with the RateTableRate. The keyword `null` is not valid for this field.
+                      required:
+                      - id
+                    rate_table_category:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single RateTableCategory associated with the RateTableRate. The keyword `null` is not valid for this field.
+                      required:
+                      - id
+                    timekeeper:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                          description: The unique identifier for a single User associated with the RateTableRate. The keyword `null` is not valid for this field.
+                      required:
+                      - id
+                  required:
+                  - rate_table
+                  - rate_table_category
+                  - timekeeper
+                  - rate
+        required: false
+components:
+  schemas:
+    ErrorDetail:
+      type: object
+      required:
+      - type
+      - message
+      properties:
+        type:
+          type: string
+          description: Unique name for this error
+        message:
+          type: string
+          description: Detailed message about the error
+    RateTableRate_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *RateTableRate*
+        etag:
+          type: string
+          description: ETag for the *RateTableRate*
+        rate:
+          type: number
+          format: decimal
+          description: The hourly rate, in the rate table's currency. Null when the timekeeper has no rate set on the table from this date
+        effective_from:
+          type: string
+          format: date
+          description: The date the rate starts
+        effective_until:
+          type: string
+          format: date
+          description: The last date the rate applies, the day before the next rate starts or the date the timekeeper leaves the table. Null when the rate has no end date
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *RateTableRate* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *RateTableRate* was last updated (as a ISO-8601 timestamp)
+    RateTableRate:
+      allOf:
+      - $ref: '#/components/schemas/RateTableRate_base'
+      - type: object
+        properties:
+          rate_table:
+            $ref: '#/components/schemas/RateTable_base'
+            description: RateTable
+          rate_table_category:
+            $ref: '#/components/schemas/RateTableCategory_base'
+            description: RateTableCategory
+          timekeeper:
+            $ref: '#/components/schemas/User_base'
+            description: User
+          created_by_user:
+            $ref: '#/components/schemas/User_base'
+            description: User
+    User_base:
+      type: object
+      properties:
+        account_owner:
+          type: boolean
+          description: Whether the *User* is the owner of the account
+        clio_connect:
+          type: boolean
+          description: Whether the *User* is a Clio Connect user
+        court_rules_default_attendee:
+          type: boolean
+          description: Whether the *User* is a default attendee for court rules events
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *User* was created (as a ISO-8601 timestamp)
+        default_calendar_id:
+          type: integer
+          format: int64
+          description: Default calendar id for *User*.
+        email:
+          type: string
+          description: The email of the *User*
+        enabled:
+          type: boolean
+          description: Whether the *User* is allowed to log in
+        etag:
+          type: string
+          description: ETag for the *User*
+        first_name:
+          type: string
+          description: The first name of the *User*
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *User*
+        initials:
+          type: string
+          description: The initials of the *User*
+        last_name:
+          type: string
+          description: The last name of the *User*
+        name:
+          type: string
+          description: The full name of the *User*
+        phone_number:
+          type: string
+          description: The primary phone number for the *User*.
+        rate:
+          type: number
+          format: float
+          description: Default user activity rate for *User*.
+        roles:
+          type: array
+          items:
+            type: string
+          description: An array of roles assigned to this *User*
+        subscription_type:
+          type: string
+          enum:
+          - Attorney
+          - NonAttorney
+          description: The subscription type of the *User*
+        time_zone:
+          type: string
+          description: The selected time zone of the *User*
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *User* was last updated (as a ISO-8601 timestamp)
+        locale:
+          type: string
+          description: The locale of the *User*
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    RateTable_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *RateTable*
+        etag:
+          type: string
+          description: ETag for the *RateTable*
+        name:
+          type: string
+          description: The name of the rate table
+        description:
+          type: string
+          description: A detailed description of the rate table
+        currency_id:
+          type: integer
+          format: int64
+          description: The ID of the currency the rate table's rates are denominated in
+        status:
+          type: string
+          description: The status of the rate table. Can be either "active" or "archived"
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *RateTable* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *RateTable* was last updated (as a ISO-8601 timestamp)
+    RateTableCategory_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *RateTableCategory*
+        etag:
+          type: string
+          description: ETag for the *RateTableCategory*
+        name:
+          type: string
+          description: The name of the rate table category
+        position:
+          type: integer
+          format: int64
+          description: The position of the category within its rate table, used for display ordering
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *RateTableCategory* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *RateTableCategory* was last updated (as a ISO-8601 timestamp)
+    RateTableRate_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/RateTableRate'
+x-tagGroups:
+- name: Api
+  tags:
+  - Custom Actions
+  - Webhooks
+- name: Activities
+  tags:
+  - Activities
+  - Activity Descriptions
+  - Activity Rates
+  - Expense Categories
+  - Timers
+  - Utbms Codes
+  - Utbms Sets
+- name: Accounting
+  tags:
+  - Bank Accounts
+  - Bank Transactions
+  - Bank Transfers
+  - Matter Transfers
+- name: Billing
+  tags:
+  - Bills
+  - Billable Clients
+  - Billable Matters
+  - Bill Themes
+  - Interest Charges
+  - Line Items
+  - Outstanding Client Balances
+  - Rate Tables
+  - Rate Table Categories
+  - Rate Table Timekeepers
+  - Rate Table Rates
+  - Rate Table Assignments
+- name: Calendars
+  tags:
+  - Calendars
+  - Calendar Entries
+  - Calendar Entry Event Types
+  - Calendar Visibilities
+  - Reminders
+- name: Clio Payments
+  tags:
+  - Clio Payments Links
+  - Clio Payments Payments
+- name: Communications
+  tags:
+  - Communications
+  - Conversations
+  - Conversation Messages
+- name: Contacts
+  tags:
+  - Contacts
+  - Email Addresses
+  - Phone Numbers
+  - Notes
+  - Log Entries
+- name: Court Rules
+  tags:
+  - Jurisdictions To Triggers
+  - Jurisdictions
+  - Matter Dockets
+  - Service Types
+- name: Custom Fields
+  tags:
+  - Custom Fields
+  - Custom Field Sets
+- name: Documents
+  tags:
+  - Documents
+  - Document Versions
+  - Folders
+  - Document Archives
+  - Document Automations
+  - Document Categories
+  - Document Templates
+  - Comments
+- name: In-app Notifications
+  tags:
+  - My Events
+  - Event Metrics
+- name: Matters
+  tags:
+  - Matters
+  - Relationships
+  - Clients
+  - Related Contacts
+  - Matter Contacts
+  - Notes
+  - Practice Areas
+  - Log Entries
+  - Matter Stages
+  - Matter Protected Funds
+  - Medical Records Details
+  - Medical Records
+  - Medical Bills
+  - Damages
+- name: Payments
+  tags:
+  - Allocations
+  - Credit Memos
+- name: Reporting
+  tags:
+  - Reports
+  - Report Presets
+  - Report Schedules
+- name: Settings
+  tags:
+  - Text Snippets
+  - Billing Settings
+  - Currencies
+  - Tax Rate Configurations
+- name: Tasks
+  tags:
+  - Tasks
+  - Task Templates
+  - Task Template Lists
+  - Task Types
+- name: Trust
+  tags:
+  - Trust Line Items
+  - Trust Requests
+- name: Users
+  tags:
+  - Users
+  - Groups
+- name: Legal Aid US
+  tags:
+  - Grants
+  - Grant Funding Sources
+- name: Legal Aid England & Wales
+  tags:
+  - Civil Controlled Rates
+  - Civil Certificated Rates
+  - Criminal Controlled Rates
+  - Expense Categories
+- name: General
+  tags:
+  - Safe Custody Packets
+  - Safe Custody Records
+  - Safe Custody Packet Locations

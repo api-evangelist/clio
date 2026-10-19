@@ -6,7 +6,135 @@ info:
     email: api@clio.com
   description: '# Developer Support and Feedback
 
-    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.'
+    * Clio takes the availability and stability of our API seriously; please report any **degradations** or **breakages** to Clio''s API Support team at api@clio.com.
+
+    * For business and partnership inquiries, contact our API Partnerships team at api.partnerships@clio.com.
+
+    * For best practices and tips from the Clio development community, join the conversation in the Clio Developer Slack Channel.
+
+
+    A community-driven Clio Developers Stack Overflow Group also exists where you can connect and ask questions from other Clio API users.
+
+    # Getting Started
+
+    > **Note:** The API is available in four distinct data regions: Australia (au.app.clio.com), Canada (ca.app.clio.com), EU (eu.app.clio.com) and US (app.clio.com).
+
+    >
+
+    > Likewise, the developer portal is available at region-specific links for the Australia, Canada, EU, and US regions.
+
+    >
+
+    > This document assumes the US region is being used (app.clio.com). If you''re building in one of the other regions, you should adapt the links and examples as necessary.
+
+
+    To start building on the Clio API, you’ll need a Clio account – you can review our Developer Handbook and follow the steps to sign up for an account.
+
+
+    Once you have an account, you can create a developer application from the Developer Portal and start building!
+
+    # Authorization with OAuth 2.0
+
+    See our Authorization documentation →
+
+    # Permissions
+
+    See our Permissions documentation →
+
+    # Fields
+
+    See our Fields documentation →
+
+    # Rate Limiting
+
+    See our Rate Limits documentation →
+
+    # Paging
+
+    See our Pagination documentation →
+
+    # ETags
+
+    See our ETags documentation →
+
+    # Minor Versions
+
+    API v4 supports multiple minor versions. Versions are of the form ''4.X.Y''. To request a specific version, you can use an `X-API-VERSION` header in your request, with the header value set to the API version you''re requesting. If this header is omitted, it will be treated as a request for the default API version. If the header is present but invalid, it will return a `410 Gone` response. If the header is present and valid, but it is no longer supported, it will return a `410 Gone` response.
+
+
+    An `X-API-VERSION` will be included in all successful responses, with the value being set to the API version used.
+
+
+    You can find our API Versioning Policy and Guidelines in our documentation hub.
+
+
+    The API Changelog explains each version''s changes in further detail.
+
+    ### 4.0.4
+
+
+    * Update `quantity` field to return values in seconds rather than hours for Activities
+
+
+    ### 4.0.5
+
+
+    * Remove `matter_balances` field from Bills
+
+    * Standardize status/state enum values
+
+    * Add a Document association to completed DocumentAutomations
+
+    * Add rate visibility handling for Activity''s price and total
+
+
+    ### 4.0.6
+
+
+    * Remove `document_versions` collection field from Documents
+
+
+    ### 4.0.7
+
+
+    * Change secure link format
+
+
+    ### 4.0.8
+
+
+    * `Activity` hours are redacted in the response based on the activity hours visibility setting for the user
+
+    * Add `quantity_redacted` field to activities
+
+
+    ### 4.0.9
+
+
+    * Contacts are filtered and redacted in the response based on the new ''Contacts Visibility'' user permission setting.
+
+
+    ### 4.0.10
+
+
+    * Fixed validation of `type` query parameter when querying Notes
+
+
+    ### 4.0.12
+
+
+    * Restrict fields for CalendarEntry that should only be visible to event owners, editors, and viewers
+
+
+    ### 4.0.13
+
+
+    **This is the default version**
+
+
+    * Add association limits to Contacts
+
+    * Returns 422 Unprocessable Entity when association limits are exceeded'
   version: v4
   x-logo:
     url: https://www.clio.com/wp-content/uploads/2015/05/Container-5-Logo.png
@@ -21,7 +149,59 @@ servers:
   description: Australia region Production Server
 tags:
 - name: Report Presets
-  description: Report Presets can be created to streamline report generation workflow by saving report option parameters as a Preset.
+  description: 'Report Presets can be created to streamline report generation workflow by saving report option parameters as a Preset.
+
+
+    Support Link
+
+
+    ## Creating a Report Preset
+
+    ### Options
+
+    When creating a Report Preset, the options sent in the request body is dependent on the report kind.
+
+
+    Check out the sample request to create a Report Preset for the Billing History web report for the current year and grouped by client.
+
+
+    ```
+
+    Request
+
+    POST /api/v4/report_presets.json
+
+    {
+
+    data:
+
+    { name: "Current Yr Billing",
+
+    kind: "billing_history",
+
+    options: {
+
+    date_range: "year",
+
+    format: "html",
+
+    group_by: "client",
+
+    start_date: null,
+
+    end_date: null,
+
+    kind: "billing_history"
+
+    },
+
+    format: "html"
+
+    }
+
+    }
+
+    ```'
 paths:
   /report_presets/{id}/generate_report.json:
     post:
@@ -1033,91 +1213,6 @@ components:
           - presets
           - scheduled
           description: The source of the report
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-    ReportSchedule_base:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique identifier for the *ReportSchedule*
-        etag:
-          type: string
-          description: ETag for the *ReportSchedule*
-        time_of_day:
-          type: string
-          format: date-time
-          description: What time the Report Schedule is run
-        frequency:
-          type: string
-          enum:
-          - daily
-          - weekly
-          - monthly
-          description: How often the Report Schedule is run
-        days_of_week:
-          type: array
-          items:
-            type: integer
-            format: int32
-          description: If the frequency is weekly, which days of the week the Report Schedule is run. Values are 0 to 6, representing Sunday to Saturday.
-        day_of_month:
-          type: integer
-          format: int32
-          description: If the frequency is monthly, which day of the month the Report Schedule is run. 32 is used to represent the last day of the month.
-        status:
-          type: string
-          enum:
-          - initial
-          - queued
-          - processing
-          - failed
-          - completed
-          description: The status of the Report Schedule
-        status_updated_at:
-          type: string
-          format: date-time
-          description: When the status of the Report Schedule was last updated
-        next_scheduled_date:
-          type: string
-          format: date-time
-          description: The next time the Report Schedule should run
-        time_zone:
-          type: string
-          description: Used in conjunction with `time_of_day` to determine when the Report Schedule should run
-        report_preset_id:
-          type: integer
-          format: int64
-          description: The unique identifier of the Report Preset to use when generating the scheduled report
-        created_at:
-          type: string
-          format: date-time
-          description: The time the *ReportSchedule* was created (as a ISO-8601 timestamp)
-        updated_at:
-          type: string
-          format: date-time
-          description: The time the *ReportSchedule* was last updated (as a ISO-8601 timestamp)
-        every_no_of_months:
-          type: integer
-          format: int32
-          description: If the frequency is monthly, how many months between each run of the Report Schedule
-        effective_from:
-          type: string
-          format: date
-          description: The date the Report Schedule will become enabled (a ISO-8601 date)
-    ReportPreset_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/ReportPreset'
     ErrorDetail:
       type: object
       required:
@@ -1130,21 +1225,6 @@ components:
         message:
           type: string
           description: Detailed message about the error
-    Report_Show:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          $ref: '#/components/schemas/Report'
-    ReportPreset:
-      allOf:
-      - $ref: '#/components/schemas/ReportPreset_base'
-      - type: object
-        properties:
-          report_schedule:
-            $ref: '#/components/schemas/ReportSchedule_base'
-            description: ReportSchedule
     ReportPreset_base:
       type: object
       properties:
@@ -1242,6 +1322,41 @@ components:
         options:
           type: string
           description: The report options parameters
+        disabled:
+          type: boolean
+          description: Whether the preset is currently disabled for the account (true when the preset's report kind is no longer available, e.g. after the trust compliance migration)
+        disabled_reason:
+          type: string
+          description: A token indicating why the preset is disabled, or null when the preset is available. Possible values are "trust_compliance_enabled" (post-trust-compliance migration) and "legal_aid_account" (US legal-aid accounts).
+    ReportPreset_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ReportPreset'
+    Report_Show:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Report'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    ReportPreset:
+      allOf:
+      - $ref: '#/components/schemas/ReportPreset_base'
+      - type: object
+        properties:
+          report_schedule:
+            $ref: '#/components/schemas/ReportSchedule_base'
+            description: ReportSchedule
     ReportPreset_List:
       type: object
       required:
@@ -1252,6 +1367,77 @@ components:
           description: ReportPreset List Response
           items:
             $ref: '#/components/schemas/ReportPreset'
+    ReportSchedule_base:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the *ReportSchedule*
+        etag:
+          type: string
+          description: ETag for the *ReportSchedule*
+        time_of_day:
+          type: string
+          format: date-time
+          description: What time the Report Schedule is run
+        frequency:
+          type: string
+          enum:
+          - daily
+          - weekly
+          - monthly
+          description: How often the Report Schedule is run
+        days_of_week:
+          type: array
+          items:
+            type: integer
+            format: int32
+          description: If the frequency is weekly, which days of the week the Report Schedule is run. Values are 0 to 6, representing Sunday to Saturday.
+        day_of_month:
+          type: integer
+          format: int32
+          description: If the frequency is monthly, which day of the month the Report Schedule is run. 32 is used to represent the last day of the month.
+        status:
+          type: string
+          enum:
+          - initial
+          - queued
+          - processing
+          - failed
+          - completed
+          description: The status of the Report Schedule
+        status_updated_at:
+          type: string
+          format: date-time
+          description: When the status of the Report Schedule was last updated
+        next_scheduled_date:
+          type: string
+          format: date-time
+          description: The next time the Report Schedule should run
+        time_zone:
+          type: string
+          description: Used in conjunction with `time_of_day` to determine when the Report Schedule should run
+        report_preset_id:
+          type: integer
+          format: int64
+          description: The unique identifier of the Report Preset to use when generating the scheduled report
+        created_at:
+          type: string
+          format: date-time
+          description: The time the *ReportSchedule* was created (as a ISO-8601 timestamp)
+        updated_at:
+          type: string
+          format: date-time
+          description: The time the *ReportSchedule* was last updated (as a ISO-8601 timestamp)
+        every_no_of_months:
+          type: integer
+          format: int32
+          description: If the frequency is monthly, how many months between each run of the Report Schedule
+        effective_from:
+          type: string
+          format: date
+          description: The date the Report Schedule will become enabled (a ISO-8601 date)
     Report:
       allOf:
       - $ref: '#/components/schemas/Report_base'
@@ -1276,6 +1462,7 @@ x-tagGroups:
   - Bank Accounts
   - Bank Transactions
   - Bank Transfers
+  - Matter Transfers
 - name: Billing
   tags:
   - Bills
@@ -1285,6 +1472,11 @@ x-tagGroups:
   - Interest Charges
   - Line Items
   - Outstanding Client Balances
+  - Rate Tables
+  - Rate Table Categories
+  - Rate Table Timekeepers
+  - Rate Table Rates
+  - Rate Table Assignments
 - name: Calendars
   tags:
   - Calendars
@@ -1343,6 +1535,7 @@ x-tagGroups:
   - Practice Areas
   - Log Entries
   - Matter Stages
+  - Matter Protected Funds
   - Medical Records Details
   - Medical Records
   - Medical Bills
@@ -1386,3 +1579,8 @@ x-tagGroups:
   - Civil Certificated Rates
   - Criminal Controlled Rates
   - Expense Categories
+- name: General
+  tags:
+  - Safe Custody Packets
+  - Safe Custody Records
+  - Safe Custody Packet Locations
