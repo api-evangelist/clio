@@ -1,4 +1,4 @@
-# Clio (clio)
+# Clio
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,115 +66,244 @@
 
 Clio is a cloud-based legal practice management platform used by law firms for matter management, contacts, calendaring, time and billing, trust accounting, document management, tasks, and client communications. The Clio Manage API is a REST/JSON API at app.clio.com/api/v4 that uses OAuth 2.0 (authorization code flow) for authentication and exposes the full data model behind Clio Manage, with regional endpoints for the U.S., Canada, EU/UK, and Australia. Webhooks deliver near real-time event notifications, and the Clio App Directory hosts certified third-party integrations.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/clio/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/clio/refs/heads/main/apis.yml)
+**Areas:** Billing · Calendaring · Document Management · Law Firms · Legal · Matter Management · Authentication · Practice Management · Time Tracking · Trust Accounting · Canada
 
-## Scope
+## Clio on APIs.io
 
-- **Type:** Index
+Everything profiled for Clio is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/clio/](https://apis.io/providers/clio/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (85)
 
-- Billing
-- Calendaring
-- Document Management
-- Law Firms
-- Legal
-- Matter Management
-- OAuth 2.0
-- Practice Management
-- Time Tracking
-- Trust Accounting
+- [Clio Webhooks](https://apis.io/apis/clio/webhooks/) — Clio Webhooks deliver near real-time notifications when matters, contacts, activities, tasks, calendar entries, bills, and other Clio resources are created,…
+- [Clio App Directory](https://apis.io/apis/clio/app-directory/) — The Clio App Directory is the integration marketplace for certified third-party apps that connect to Clio Manage. Apps listed in the directory are reviewed…
+- [Clio Activities API](https://apis.io/apis/clio/clio-activities-api/) — Activities (Time Entries and Expense Entries) track work done at a firm. Activities are recorded in Clio and then posted on bills to clients. Time Entries…
+- [Clio Activity Descriptions API](https://apis.io/apis/clio/clio-activity-descriptions-api/) — Activity Descriptions are custom Time Entry templates. Activity Descriptions help firms expedite their process for recording Time Entries, and ensure that…
+- [Clio Activity Rates API](https://apis.io/apis/clio/clio-activity-rates-api/) — The Activity Rates API from Clio — 2 operation(s) for activity rates.
+- [Clio Allocations API](https://apis.io/apis/clio/clio-allocations-api/) — Once a [Payment](https://help.clio.com/hc/articles/9285641955355-Record-Edit-and-Delete-Payments) or [Credit…
+- [Clio Bank Accounts API](https://apis.io/apis/clio/clio-bank-accounts-api/) — These accounts are meant to mirror the firm’s accounts at their financial institution. Users can add a bank account to Clio to use with [Clio…
+- [Clio Bank Transactions API](https://apis.io/apis/clio/clio-bank-transactions-api/) — The Bank Transactions API from Clio — 2 operation(s) for bank transactions.
+- [Clio Bank Transfers API](https://apis.io/apis/clio/clio-bank-transfers-api/) — The Bank Transfers API from Clio — 1 operation(s) for bank transfers.
+- [Clio Bill Themes API](https://apis.io/apis/clio/clio-bill-themes-api/) — The Bill Themes API from Clio — 2 operation(s) for bill themes.
+- [Clio Billable Clients API](https://apis.io/apis/clio/clio-billable-clients-api/) — Users can view all Billable Clients, or clients with outstanding [Bills](https://help.clio.com/hc/en-us/articles/9285169278747-Generate-Bills), on the…
+- [Clio Billable Matters API](https://apis.io/apis/clio/clio-billable-matters-api/) — Users can see all [Matters with outstanding bills](https://help.clio.com/hc/en-us/articles/9286116462747#filter-matters-clio-manage-0-0) attached to them by…
+- [Clio Billing Settings API](https://apis.io/apis/clio/clio-billing-settings-api/) — The Billing Settings API from Clio — 1 operation(s) for billing settings.
+- [Clio Bills API](https://apis.io/apis/clio/clio-bills-api/) — Bills are statements of what a user’s client owes for their services over a particular billing period, including legal fees, expenses, and taxes. Users…
+- [Clio Calendar Entries API](https://apis.io/apis/clio/clio-calendar-entries-api/) — Calendar Entries are used to track appointments or deadlines. Users can view Calendar Entries on any Calendar that they have “Viewer” or “Editor” permission…
+- [Clio Calendar Entry Event Types API](https://apis.io/apis/clio/clio-calendar-entry-event-types-api/) — The Calendar Entry Event Types API from Clio — 2 operation(s) for calendar entry event types.
+- [Clio Calendar Visibilities API](https://apis.io/apis/clio/clio-calendar-visibilities-api/) — The Calendar Visibilities API from Clio — 2 operation(s) for calendar visibilities.
+- [Clio Calendars API](https://apis.io/apis/clio/clio-calendars-api/) — Calendars contain Calendar Entries. All Clio accounts contain one firm Calendar ("AccountCalendar"), personal Calendars for each user ("UserCalendar"), and…
+- [Clio Civil Certificated Rates API](https://apis.io/apis/clio/clio-civil-certificated-rates-api/) — This endpoint provides the Legal Aid civil certificated rates, which are the prescribed reimbursement rates for legal services provided under the Legal Aid…
+- [Clio Civil Controlled Rates API](https://apis.io/apis/clio/clio-civil-controlled-rates-api/) — This endpoint provides the Legal Aid civil controlled rates, which are the prescribed reimbursement rates for legal services provided under the Legal Aid…
+- [Clio Clients API](https://apis.io/apis/clio/clio-clients-api/) — The Clients API from Clio — 1 operation(s) for clients.
+- [Clio Payments Links API](https://apis.io/apis/clio/clio-clio-payments-links-api/) — The Clio Payments Links API from Clio — 2 operation(s) for clio payments links.
+- [Clio Payments API](https://apis.io/apis/clio/clio-clio-payments-payments-api/) — Payments allow users to record that funds (from checks, cash, credit cards, etc.) have been transferred from a client to the firm. In order to pay Bills,…
+- [Clio Comments API](https://apis.io/apis/clio/clio-comments-api/) — Comments are short text messages which can be associated with either Documents or Folders. If the Comment is created in association with a Document, it will…
+- [Clio Communications API](https://apis.io/apis/clio/clio-communications-api/) — Users can view all logged phone calls and emails under the Communications tab in Clio. This is also where they can use [Clio internal…
+- [Clio Contacts API](https://apis.io/apis/clio/clio-contacts-api/) — All clients, prospective clients, companies, and external co-counsels can be viewed as Contacts under the Contacts tab in Clio Manage. [Support…
+- [Clio Conversation Messages API](https://apis.io/apis/clio/clio-conversation-messages-api/) — The Conversation Messages API from Clio — 2 operation(s) for conversation messages.
+- [Clio Conversations API](https://apis.io/apis/clio/clio-conversations-api/) — The Conversations API from Clio — 2 operation(s) for conversations.
+- [Clio Credit Memos API](https://apis.io/apis/clio/clio-credit-memos-api/) — Credit Memos allow users to write off amounts that clients owe on approved Bills. They can be added in two "ways": when viewing a Bill, or when making a…
+- [Clio Criminal Controlled Rates API](https://apis.io/apis/clio/clio-criminal-controlled-rates-api/) — This endpoint provides the Legal Aid criminal controlled rates, which are the prescribed reimbursement rates for legal services provided under the Legal Aid…
+- [Clio Currencies API](https://apis.io/apis/clio/clio-currencies-api/) — The Currencies API from Clio — 1 operation(s) for currencies.
+- [Clio Custom Actions API](https://apis.io/apis/clio/clio-custom-actions-api/) — In Clio, applications can create custom actions in our interface. Links are unique across an application, user, location in the UI (`ui_reference`) and…
+- [Clio Custom Field Sets API](https://apis.io/apis/clio/clio-custom-field-sets-api/) — The Custom Field Sets API from Clio — 2 operation(s) for custom field sets.
+- [Clio Custom Fields API](https://apis.io/apis/clio/clio-custom-fields-api/) — The Custom Fields API from Clio — 2 operation(s) for custom fields.
+- [Clio Damages API](https://apis.io/apis/clio/clio-damages-api/) — The Damages API from Clio — 2 operation(s) for damages.
+- [Clio Document Archives API](https://apis.io/apis/clio/clio-document-archives-api/) — The Document Archives API from Clio — 3 operation(s) for document archives.
+- [Clio Document Automations API](https://apis.io/apis/clio/clio-document-automations-api/) — Document Automation uses Document Templates to create standardized documents. Users select a Document Template (that they have created and uploaded) and a…
+- [Clio Document Categories API](https://apis.io/apis/clio/clio-document-categories-api/) — Clio users can add Document Categories to their account to help organize their Documents. When a Document is uploaded or edited, a Document Category can be…
+- [Clio Document Templates API](https://apis.io/apis/clio/clio-document-templates-api/) — Document Templates are files used to create standardized documents using Clio’s Document Automation feature. Document Templates contain merge fields, which…
+- [Clio Document Versions API](https://apis.io/apis/clio/clio-document-versions-api/) — Versions contain information about the version history of a document. Versioning allows users to track changes made to a document over time. [Support…
+- [Clio Documents API](https://apis.io/apis/clio/clio-documents-api/) — Clio Documents are files uploaded to Clio. Files uploaded to Clio’s document integrations (e.g. Google Drive and Office365) are inaccessible through the…
+- [Clio Email Addresses API](https://apis.io/apis/clio/clio-email-addresses-api/) — Email Addresses are email addresses associated with a Contact. This endpoint returns all email addresses associated with a Contact.
+- [Clio Event Metrics API](https://apis.io/apis/clio/clio-event-metrics-api/) — Event metrics keep track of firm users' unread web and mobile [In-app…
+- [Clio Expense Categories API](https://apis.io/apis/clio/clio-expense-categories-api/) — This endpoint provides the Legal Aid expense category rates, which are the prescribed reimbursement rates for legal services provided under the Legal Aid…
+- [Clio Folders API](https://apis.io/apis/clio/clio-folders-api/) — Files stored in Clio’s Documents section are organized in folders. Folders are automatically generated for new Contacts and Matters. Folders can also be…
+- [Clio Grant Funding Sources API](https://apis.io/apis/clio/clio-grant-funding-sources-api/) — The Grant Funding Sources API from Clio — 2 operation(s) for grant funding sources.
+- [Clio Grants API](https://apis.io/apis/clio/clio-grants-api/) — The Grants API from Clio — 2 operation(s) for grants.
+- [Clio Groups API](https://apis.io/apis/clio/clio-groups-api/) — In Clio, [permission levels](https://help.clio.com/hc/en-us/articles/9200279456667-Account-Users-and-Permissions#user-permissions-clio-manage--0-2) and…
+- [Clio Interest Charges API](https://apis.io/apis/clio/clio-interest-charges-api/) — The Interest Charges API from Clio — 2 operation(s) for interest charges.
+- [Clio Jurisdictions API](https://apis.io/apis/clio/clio-jurisdictions-api/) — There are over 1000 jurisdictions available to choose from when using Court Rules. These jurisdictions contain state, federal, appellate, and bankruptcy…
+- [Clio Jurisdictions To Triggers API](https://apis.io/apis/clio/clio-jurisdictions-to-triggers-api/) — Jurisdictions-to-Triggers calculates the effective dates of related court and agency rules that a lawyer must do for a Trigger. A Trigger is an activity or…
+- [Clio Line Items API](https://apis.io/apis/clio/clio-line-items-api/) — The Line Items API from Clio — 2 operation(s) for line items.
+- [Clio Log Entries API](https://apis.io/apis/clio/clio-log-entries-api/) — Log Entries populate the “Recents” dropdown in the header. The “Recent” section displays the ten Matters and Contacts that the user most recently accessed.…
+- [Clio Matter Contacts API](https://apis.io/apis/clio/clio-matter-contacts-api/) — All clients, prospective clients, companies, and external co-counsels can be viewed as Contacts under the Contacts tab in Clio Manage. [Support…
+- [Clio Matter Dockets API](https://apis.io/apis/clio/clio-matter-dockets-api/) — A Matter Docket connects a Matter with a Court Rule (and all of the Calendar Entries associated with the Court Rule). Matter Dockets are viewable on the…
+- [Clio Matter Stages API](https://apis.io/apis/clio/clio-matter-stages-api/) — The Matter Stages API from Clio — 1 operation(s) for matter stages.
+- [Clio Matters API](https://apis.io/apis/clio/clio-matters-api/) — [Matters](https://help.clio.com/hc/en-us/articles/9285920226075-Clio-Manage-Matters-Overview) in Clio represent a firm’s cases. All relevant…
+- [Clio Medical Bills API](https://apis.io/apis/clio/clio-medical-bills-api/) — Medical Bills are a subset of Medical Records Details and can be used to keep track of documents, bill dates, and liens. Note that these endpoints only…
+- [Clio Medical Records API](https://apis.io/apis/clio/clio-medical-records-api/) — Medical Records are a subset of Medical Records Details and can be used to keep track of documents, start dates, and end dates. Note that these endpoints…
+- [Clio Medical Records Details API](https://apis.io/apis/clio/clio-medical-records-details-api/) — Medical Records Details allow you to track requests for medical records and medical bills, track treatment dates, follow up on requests, upload medical…
+- [Clio My Events API](https://apis.io/apis/clio/clio-my-events-api/) — In-app notifications are used to notify firm users of important events or changes in Clio, initiated by other firm users. These events are displayed in the…
+- [Clio Notes API](https://apis.io/apis/clio/clio-notes-api/) — Notes can be added to Matters or Contacts in Clio to record meeting notes, research, or anything else a user might want. The field can hold hundreds of…
+- [Clio Outstanding Client Balances API](https://apis.io/apis/clio/clio-outstanding-client-balances-api/) — The Outstanding Client Balances API from Clio — 1 operation(s) for outstanding client balances.
+- [Clio Phone Numbers API](https://apis.io/apis/clio/clio-phone-numbers-api/) — Phone Numbers are phone numbers associated with a Contact. This endpoint returns all phone numbers associated with a Contact.
+- [Clio Practice Areas API](https://apis.io/apis/clio/clio-practice-areas-api/) — The practice area field can be added to Matters and used for filtering purposes, or just for reference. Users can create their own practice areas in their…
+- [Clio Related Contacts API](https://apis.io/apis/clio/clio-related-contacts-api/) — The Related Contacts API from Clio — 1 operation(s) for related contacts.
+- [Clio Relationships API](https://apis.io/apis/clio/clio-relationships-api/) — Relationships are used on a Matter to track Contacts related to the Matter. Relationships are can be found on the Contacts sub tab of a Matter. [Support…
+- [Clio Reminders API](https://apis.io/apis/clio/clio-reminders-api/) — Reminders can be added to Tasks or Calendar Entries. Reminder emails can be sent by a User to themselves, other Users, Clio For Co-Counsel/Clio Connect…
+- [Clio Report Presets API](https://apis.io/apis/clio/clio-report-presets-api/) — Report Presets can be created to streamline report generation workflow by saving report option parameters as a Preset. [Support…
+- [Clio Report Schedules API](https://apis.io/apis/clio/clio-report-schedules-api/) — Schedule report generation for an existing Report Preset using Report Schedules. A Report Schedule will generate reports from the specified Preset's report…
+- [Clio Reports API](https://apis.io/apis/clio/clio-reports-api/) — The Reports API from Clio — 3 operation(s) for reports.
+- [Clio Service Types API](https://apis.io/apis/clio/clio-service-types-api/) — Service Types are used when creating new Court Rules involving the delivery of documents. In order to calculate the correct deadline to send the document,…
+- [Clio Task Template Lists API](https://apis.io/apis/clio/clio-task-template-lists-api/) — With Task Template Lists, users can create groups of [Task Templates](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Task-Templates) for…
+- [Clio Task Templates API](https://apis.io/apis/clio/clio-task-templates-api/) — Task Templates are the individual [Tasks](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Tasks) which comprise a [Task Template…
+- [Clio Task Types API](https://apis.io/apis/clio/clio-task-types-api/) — Task Types are used to better categorize and filter tasks. This is a simple text field which is limited to 50 characters. Task Types are part of the…
+- [Clio Tasks API](https://apis.io/apis/clio/clio-tasks-api/) — Tasks are used to assign and track work. Users can set priorities, due dates, and add reminders. Tasks can be assigned to firm users as well as Contacts…
+- [Clio Tax Rate Configurations API](https://apis.io/apis/clio/clio-tax-rate-configurations-api/) — The Tax Rate Configurations API from Clio — 2 operation(s) for tax rate configurations.
+- [Clio Text Snippets API](https://apis.io/apis/clio/clio-text-snippets-api/) — Clio's Text Snippets feature allows users to create a list of predefined abbreviations for commonly used phrases. For example, a user could configure their…
+- [Clio Timers API](https://apis.io/apis/clio/clio-timers-api/) — Timers are used to track time spent on billable work. They are used with hourly-billable [Time…
+- [Clio Trust Line Items API](https://apis.io/apis/clio/clio-trust-line-items-api/) — The Trust Line Items API from Clio — 2 operation(s) for trust line items.
+- [Clio Trust Requests API](https://apis.io/apis/clio/clio-trust-requests-api/) — The Trust Requests API from Clio — 1 operation(s) for trust requests.
+- [Clio Users API](https://apis.io/apis/clio/clio-users-api/) — A User is anyone with the ability to log in to Clio. This does not include Clio for Co-Counsel/Clio Connect users. [Support…
+- [Clio Utbms Codes API](https://apis.io/apis/clio/clio-utbms-codes-api/) — [UTBMS codes](http://utbms.com/) standardize Time and Expense entries across the legal profession. Clio users can enter their Activities using UTBMS codes…
+- [Clio Utbms Sets API](https://apis.io/apis/clio/clio-utbms-sets-api/) — [UTBMS codes](https://docs.developers.clio.com/clio-manage/api-reference/#tag/Utbms-Codes) are divided into code sets. Each set includes Activities relevant…
+- [Clio Webhooks API](https://apis.io/apis/clio/clio-webhooks-api/) — Webhooks are a way of detecting events in Clio without the need for polling. A webhook can be subscribed to a number of `events` on a model. Some events…
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-11
-- **Modified:** 2026-05-11
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### GraphQL (1)
 
-### Clio Manage API v4
+GraphQL schemas.
 
-The Clio Manage API v4 is a JSON REST API that gives developers programmatic access to Clio's legal practice management data model — matters, contacts, activities, bills, trust accounts, documents, tasks, calendar entries, custom fields, and users. Authentication is OAuth 2.0 (authorization code flow). Regional endpoints exist for the U.S. (app.clio.com), Canada (ca.app.clio.com), EU/UK (eu.app.clio.com), and Australia (au.app.clio.com). Standard pagination, filtering, sparse fieldsets, and ETag-based caching are supported.
+- [Moved to /providers/clio/](https://apis.io/graphqls/clio/clio-graphql/)
 
-- **Human URL:** [https://docs.developers.clio.com/](https://docs.developers.clio.com/)
-- **Base URL:** `https://app.clio.com/api/v4`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Legal
-- Matter Management
-- OAuth 2.0
-- Practice Management
-- REST
+- [Clio Agentic Access](https://apis.io/agentic-access/clio/clio-agentic-access/)
 
-#### Properties
+#### JSON-LD (1)
 
-- [Documentation](https://docs.developers.clio.com/)
-- [Reference](https://docs.developers.clio.com/api-docs/)
-- [Authentication](https://app.clio.com/oauth/authorize)
-- [OpenAPI](openapi/clio-manage-api-v4-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+Linked-data contexts for the provider's vocabulary.
 
-### Clio Webhooks
+- [Clio Context](https://apis.io/jsonld/clio/clio-context/)
 
-Clio Webhooks deliver near real-time notifications when matters, contacts, activities, tasks, calendar entries, bills, and other Clio resources are created, updated, or deleted. Subscriptions are managed through the Webhooks endpoints in the Manage API and payloads are delivered to the integrator's HTTPS endpoint with an X-API-V4-Signature header for verification.
+#### Collections (84)
 
-- **Human URL:** [https://docs.developers.clio.com/api-docs/webhooks/](https://docs.developers.clio.com/api-docs/webhooks/)
+Postman and Open Collection request collections.
 
-#### Tags
+- [Clio API Documentation](https://apis.io/collections/clio/open-clio/)
+- [Clio API Documentation Activities API](https://apis.io/collections/clio/open-clio-activities-api/)
+- [Clio API Documentation Activities Activity Descriptions API](https://apis.io/collections/clio/open-clio-activity-descriptions-api/)
+- [Clio API Documentation Activities Activity Rates API](https://apis.io/collections/clio/open-clio-activity-rates-api/)
+- [Clio API Documentation Activities Allocations API](https://apis.io/collections/clio/open-clio-allocations-api/)
+- [Clio API Documentation Activities Bank Accounts API](https://apis.io/collections/clio/open-clio-bank-accounts-api/)
+- [Clio API Documentation Activities Bank Transactions API](https://apis.io/collections/clio/open-clio-bank-transactions-api/)
+- [Clio API Documentation Activities Bank Transfers API](https://apis.io/collections/clio/open-clio-bank-transfers-api/)
+- [Clio API Documentation Activities Bill Themes API](https://apis.io/collections/clio/open-clio-bill-themes-api/)
+- [Clio API Documentation Activities Billable Clients API](https://apis.io/collections/clio/open-clio-billable-clients-api/)
+- [Clio API Documentation Activities Billable Matters API](https://apis.io/collections/clio/open-clio-billable-matters-api/)
+- [Clio API Documentation Activities Billing Settings API](https://apis.io/collections/clio/open-clio-billing-settings-api/)
+- [Clio API Documentation Activities Bills API](https://apis.io/collections/clio/open-clio-bills-api/)
+- [Clio API Documentation Activities Calendar Entries API](https://apis.io/collections/clio/open-clio-calendar-entries-api/)
+- [Clio API Documentation Activities Calendar Entry Event Types API](https://apis.io/collections/clio/open-clio-calendar-entry-event-types-api/)
+- [Clio API Documentation Activities Calendar Visibilities API](https://apis.io/collections/clio/open-clio-calendar-visibilities-api/)
+- [Clio API Documentation Activities Calendars API](https://apis.io/collections/clio/open-clio-calendars-api/)
+- [Clio API Documentation Activities Civil Certificated Rates API](https://apis.io/collections/clio/open-clio-civil-certificated-rates-api/)
+- [Clio API Documentation Activities Civil Controlled Rates API](https://apis.io/collections/clio/open-clio-civil-controlled-rates-api/)
+- [Clio API Documentation Activities Clients API](https://apis.io/collections/clio/open-clio-clients-api/)
+- [Clio API Documentation Activities Clio Payments Links API](https://apis.io/collections/clio/open-clio-clio-payments-links-api/)
+- [Clio API Documentation Activities Clio Payments Payments API](https://apis.io/collections/clio/open-clio-clio-payments-payments-api/)
+- [Clio API Documentation Activities Comments API](https://apis.io/collections/clio/open-clio-comments-api/)
+- [Clio API Documentation Activities Communications API](https://apis.io/collections/clio/open-clio-communications-api/)
+- [Clio API Documentation Activities Contacts API](https://apis.io/collections/clio/open-clio-contacts-api/)
+- …and 59 more published on APIs.io
 
-- Events
-- Legal
-- Notifications
-- Webhooks
+#### Governance rules (1)
 
-#### Properties
+Spectral rulesets for the provider's contracts.
 
-- [Documentation](https://docs.developers.clio.com/api-docs/webhooks/)
-- [AsyncAPI](asyncapi/clio-webhooks-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/clio.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/clio.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Clio API Rules](https://apis.io/rules/clio/clio-rules/)
 
-### Clio App Directory
+#### Security (3)
 
-The Clio App Directory is the integration marketplace for certified third-party apps that connect to Clio Manage. Apps listed in the directory are reviewed by Clio's developer partnerships team and made discoverable to Clio's customer base.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://app.clio.com/companion](https://app.clio.com/companion)
+- [Clio Domain Security](https://apis.io/security/clio/clio-domain-security/)
+- [Clio Trust Center](https://apis.io/security/clio/clio-trust-center/)
+- [Clio Vulnerability Disclosure](https://apis.io/security/clio/clio-vulnerability-disclosure/)
 
-#### Tags
+#### Plans and pricing (2)
 
-- Integrations
-- Marketplace
-- Partners
+Published plans, tiers and prices.
 
-#### Properties
+- [Clio Plans Pricing](https://apis.io/plans/clio/clio-plans-pricing/)
+- [Clio Price Estimates](https://apis.io/plans/clio/clio-price-estimates/)
 
-- [Marketplace](https://app.clio.com/companion)
-- [Listing  Guide](https://docs.developers.clio.com/getting-started/listing-your-app/)
-- [Postman Collection](collections/clio.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/clio.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-## Common Properties
+Published request limits.
 
-- [LinkedIn](https://www.linkedin.com/company/clio---cloud-based-legal-technology)
+- [Clio Rate Limits](https://apis.io/rate-limits/clio/clio-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.clio.com/)
 - [Documentation](https://docs.developers.clio.com/)
 - [Pricing](https://www.clio.com/pricing/)
-- [Sign Up](https://app.clio.com/sign-up)
-- [Portal](https://docs.developers.clio.com/)
-- [Reference](https://docs.developers.clio.com/api-docs/)
-- [Authentication](https://docs.developers.clio.com/api-docs/authorization/)
-- [Login](https://app.clio.com/login)
 - [Support](https://support.clio.com/)
-- [Status Page](https://status.clio.com/)
 - [Blog](https://www.clio.com/blog/)
-- [Privacy Policy](https://www.clio.com/privacy/)
-- [Terms of Service](https://www.clio.com/terms/)
-- [App  Directory](https://app.clio.com/companion)
-- [Git Hub](https://github.com/clio)
-- [JSON-LD](json-ld/clio-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Spectral Rules](rules/clio-rules.yml) — [Spectral](https://docs.stoplight.io/docs/spectral)
+- [Terms of service](https://www.clio.com/terms/)
+- [Privacy policy](https://www.clio.com/privacy/)
+- [Status](https://status.clio.com/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 51.0** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 54.4 |
+| Contract governance | 13.6 |
+| Operational transparency | 52.6 |
+| Developer ergonomics | 40.5 |
+| Access clarity | 67.1 |
+
+**Agent readiness 33.7** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | verified |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | paginated |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 31.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/clio/](https://apis.io/providers/clio/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Clio: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/clio/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
